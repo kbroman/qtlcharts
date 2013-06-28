@@ -1,0 +1,5 @@
+*.js
+*.json
+*.Rout
+.RData
+.Rhistory

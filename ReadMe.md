@@ -1,5 +1,4 @@
-### qtlchart: Reusuable [D3](http://d3js.org)-based charts aimed at
-QTL (and xQTL) analyses
+### qtlchart: Reusuable [D3](http://d3js.org)-based charts for xQTL analyses
 
 Karl W Broman,
 [http://www.biostat.wisc.edu/~kbroman](http://www.biostat.wisc.edu/~kbroman)

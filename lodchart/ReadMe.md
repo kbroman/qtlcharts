@@ -1,6 +1,6 @@
 ### Reusable LOD score chart
 
-Here, I'm trying to create a reusable chart for plotting LOD curves
+A reusable chart for plotting LOD curves
 across a genome, following
 [Mike Bostock](http://bost.ocks.org/mike)'s
 [Towards Reuseable Charts](http://bost.ocks.org/mike/chart/).

@@ -200,104 +200,87 @@ lodchart = () ->
 
   ## configuration parameters
   chart.width = (value) ->
-    if !arguments.length
-      return width
+    return width if !arguments.length
     width = value
     chart
 
   chart.height = (value) ->
-    if !arguments.length
-      return height
+    return height if !arguments.length
     height = value
     chart
 
   chart.margin = (value) ->
-    if !arguments.length
-      return margin
+    return margin if !arguments.length
     margin = value
     chart
 
   chart.axispos = (value) ->
-    if !arguments.length
-      return axispos
+    return axispos if !arguments.length
     axispos = value
     chart
 
   chart.ylim = (value) ->
-    if !arguments.length
-      return ylim
+    return ylim if !arguments.length
     ylim = value
     chart
 
   chart.nyticks = (value) ->
-    if !arguments.length
-      return nyticks
+    return nyticks if !arguments.length
     nyticks = value
     chart
 
   chart.yticks = (value) ->
-    if !arguments.length
-      return yticks
+    return yticks if !arguments.length
     yticks = value
     chart
 
   chart.chrGap = (value) ->
-    if !arguments.length
-      return chrGap
+    return chrGap if !arguments.length
     chrGap = value
     chart
 
   chart.darkrect = (value) ->
-    if !arguments.length
-      return darkrect
+    return darkrect if !arguments.length
     darkrect = value
     chart
 
   chart.lightrect = (value) ->
-    if !arguments.length
-      return lightrect
+    return lightrect if !arguments.length
     lightrect = value
     chart
 
   chart.linecolor = (value) ->
-    if !arguments.length
-      return linecolor
+    return linecolor if !arguments.length
     linecolor = value
     chart
 
   chart.linewidth = (value) ->
-    if !arguments.length
-      return linewidth
+    return linewidth if !arguments.length
     linewidth = value
     chart
 
   chart.pointcolor = (value) ->
-    if !arguments.length
-      return pointcolor
+    return pointcolor if !arguments.length
     pointcolor = value
     chart
 
   chart.pointsize = (value) ->
-    if !arguments.length
-      return pointsize
+    return pointsize if !arguments.length
     pointsize = value
     chart
 
   chart.xlab = (value) ->
-    if !arguments.length
-      return xlab
+    return xlab if !arguments.length
     xlab = value
     chart
 
   chart.ylab = (value) ->
-    if !arguments.length
-      return ylab
+    return ylab if !arguments.length
     ylab = value
     chart
 
   chart.lodvarname = (value) ->
-    if !arguments.length
-      return lodvarname
+    return lodvarname if !arguments.length
     lodvarname = value
     chart
 

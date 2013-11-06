@@ -116,7 +116,6 @@ scatterplot = () ->
            .text(ylab)
            .attr("transform", "rotate(270,#{-axispos.ytitle},#{height/2})")
 
-      # these hidden points are what gets selected...a bit larger
       points = g.append("g").attr("id", "points")
       pointsSelect =
         points.selectAll("empty")

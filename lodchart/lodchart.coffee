@@ -27,8 +27,7 @@ lodchart = () ->
   ## the main function
   chart = (selection) ->
     selection.each (data) ->
-      if !(ylim?)
-        ylim = [0, d3.max(data[lodvarname])]
+      ylim = [0, d3.max(data[lodvarname])] if !(ylim?)
 
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])
@@ -57,8 +56,7 @@ lodchart = () ->
             .range([height, margin.inner])
 
       # if yticks not provided, use nyticks to choose pretty ones
-      if yticks == null
-        yticks = yscale.ticks(nyticks)
+      yticks = yscale.ticks(nyticks) if !(yticks?)
 
       # reorganize lod,pos by chromosomes
       data = reorgData(data, lodvarname)

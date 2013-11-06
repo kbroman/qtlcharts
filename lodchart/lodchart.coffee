@@ -60,7 +60,7 @@ lodchart = () ->
 
       # reorganize lod,pos by chromosomes
       data = reorgData(data, lodvarname)
-      
+
       # add chromosome scales (for x-axis)
       data = chrscales(data, width, chrGap)
       xscale = data.xscale
@@ -300,7 +300,7 @@ lodchart = () ->
     return chrSelect
 
   # return the chart function
-  chart            
+  chart
 
 # function to determine rounding of axis labels
 formatAxis = (d) ->
@@ -323,7 +323,7 @@ reorgData = (data, lodvarname) ->
   data.markers = []
   for marker,i in data.markernames
     if marker != ""
-      data.markers.push({name:marker, chr:data.chr[i], pos:data.pos[i], lod:data[lodvarname][i]}) 
+      data.markers.push({name:marker, chr:data.chr[i], pos:data.pos[i], lod:data[lodvarname][i]})
   data
 
 # calculate chromosome start/end + scales

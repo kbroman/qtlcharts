@@ -31,7 +31,7 @@ Here are all of the options:
                            .xNA({handle:true, force:false, width:15, gap:10})       # treatment of missing x values
                            .yNA({handle:true, force:false, width:15, gap:10})       # treatment of missing y values
 
-Treatment of missing values through `xNA` and `yNA`
+Treatment of missing values through `xNA` and `yNA`:
 
     handle: if true, plot missing values in separated area; if false, omit missing values
     force:  force handle==true (with separate area for missing values) even if there are no missing values

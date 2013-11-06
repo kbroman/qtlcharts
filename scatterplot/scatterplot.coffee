@@ -57,47 +57,45 @@ scatterplot = () ->
       svg.attr("width", width+margin.left+margin.right)
          .attr("height", height+margin.top+margin.bottom);
 
-      # Update the inner dimensions.
       g = svg.select("g")
-          .attr("transform", "translate(#{margin.left},#{margin.top})")
 
       # box
       g.append("rect")
-       .attr("x", paneloffset)
-       .attr("y", 0)
+       .attr("x", paneloffset+margin.left)
+       .attr("y", margin.top)
        .attr("height", panelheight)
        .attr("width", panelwidth)
        .attr("fill", rectcolor)
        .attr("stroke", "none")
       if xNA.handle
         g.append("rect")
-         .attr("x", 0)
-         .attr("y", 0)
+         .attr("x", margin.left)
+         .attr("y", margin.top)
          .attr("height", panelheight)
          .attr("width", xNA.width)
          .attr("fill", rectcolor)
          .attr("stroke", "none")
       if xNA.handle and yNA.handle
         g.append("rect")
-         .attr("x", 0)
-         .attr("y", height - yNA.width)
+         .attr("x", margin.left)
+         .attr("y", margin.top+height - yNA.width)
          .attr("height", yNA.width)
          .attr("width", xNA.width)
          .attr("fill", rectcolor)
          .attr("stroke", "none")
       if yNA.handle
         g.append("rect")
-         .attr("x", paneloffset)
-         .attr("y", height-yNA.width)
+         .attr("x", margin.left+paneloffset)
+         .attr("y", margin.top+height-yNA.width)
          .attr("height", yNA.width)
          .attr("width", panelwidth)
          .attr("fill", rectcolor)
          .attr("stroke", "none")
 
       xscale.domain(xlim)
-            .range([paneloffset+margin.inner, paneloffset+panelwidth-margin.inner])
+            .range([margin.left+paneloffset+margin.inner, margin.left+paneloffset+panelwidth-margin.inner])
       yscale.domain(ylim)
-            .range([panelheight-margin.inner, margin.inner])
+            .range([margin.top+panelheight-margin.inner, margin.top+margin.inner])
 
       # if yticks not provided, use nyticks to choose pretty ones
       yticks = yscale.ticks(nyticks) if !(yticks?)
@@ -111,8 +109,8 @@ scatterplot = () ->
            .append("line")
            .attr("x1", (d) -> xscale(d))
            .attr("x2", (d) -> xscale(d))
-           .attr("y1", 0)
-           .attr("y2", height)
+           .attr("y1", margin.top)
+           .attr("y2", margin.top+height)
            .attr("fill", "none")
            .attr("stroke", "white")
            .attr("stroke-width", 1)
@@ -122,16 +120,16 @@ scatterplot = () ->
            .enter()
            .append("text")
            .attr("x", (d) -> xscale(d))
-           .attr("y", height+axispos.xlabel)
+           .attr("y", margin.top+height+axispos.xlabel)
            .text((d) -> formatAxis(xticks)(d))
       xaxis.append("text").attr("class", "title")
-           .attr("x", width/2)
-           .attr("y", height+axispos.xtitle)
+           .attr("x", margin.left+width/2)
+           .attr("y", margin.top+height+axispos.xtitle)
            .text(xlab)
       if xNA.handle
         xaxis.append("text")
-            .attr("x", xNA.width/2)
-            .attr("y", height+axispos.xlabel)
+            .attr("x", margin.left+xNA.width/2)
+            .attr("y", margin.top+height+axispos.xlabel)
             .text("N/A")
 
       # y-axis
@@ -142,8 +140,8 @@ scatterplot = () ->
            .append("line")
            .attr("y1", (d) -> yscale(d))
            .attr("y2", (d) -> yscale(d))
-           .attr("x1", 0)
-           .attr("x2", width)
+           .attr("x1", margin.left)
+           .attr("x2", margin.left+width)
            .attr("fill", "none")
            .attr("stroke", "white")
            .attr("stroke-width", 1)
@@ -153,31 +151,31 @@ scatterplot = () ->
            .enter()
            .append("text")
            .attr("y", (d) -> yscale(d))
-           .attr("x", -axispos.ylabel)
+           .attr("x", margin.left-axispos.ylabel)
            .text((d) -> formatAxis(yticks)(d))
       yaxis.append("text").attr("class", "title")
-           .attr("y", height/2)
-           .attr("x", -axispos.ytitle)
+           .attr("y", margin.top+height/2)
+           .attr("x", margin.left-axispos.ytitle)
            .text(ylab)
-           .attr("transform", "rotate(270,#{-axispos.ytitle},#{height/2})")
+           .attr("transform", "rotate(270,#{margin.left-axispos.ytitle},#{margin.top+height/2})")
       if yNA.handle
         yaxis.append("text")
-            .attr("x", -axispos.ylabel)
-            .attr("y", height-yNA.width/2)
+            .attr("x", margin.left-axispos.ylabel)
+            .attr("y", margin.top+height-yNA.width/2)
             .text("N/A")
 
       # scales to handle missing data
       if xNA.handle
         xs = (x) ->
           return xscale(x) if x?
-          xNA.width/2
+          margin.left+xNA.width/2
       else
         xs = xscale
 
       if yNA.handle
         ys = (y) ->
           return yscale(y) if y?
-          height - yNA.width/2
+          margin.top+height - yNA.width/2
       else
         ys = yscale
 
@@ -194,11 +192,14 @@ scatterplot = () ->
               .attr("fill", pointcolor)
               .attr("stroke", "black")
               .attr("stroke-width", "1")
+              .attr("opacity", (d,i) ->
+                   return 1 if (x[i]? or xNA.handle) and (y[i]? or yNA.handle)
+                   return 0)
 
       # box
       g.append("rect")
-             .attr("x", paneloffset)
-             .attr("y", 0)
+             .attr("x", margin.left+paneloffset)
+             .attr("y", margin.top)
              .attr("height", panelheight)
              .attr("width", panelwidth)
              .attr("fill", "none")
@@ -206,8 +207,8 @@ scatterplot = () ->
              .attr("stroke-width", "none")
       if xNA.handle
         g.append("rect")
-         .attr("x", 0)
-         .attr("y", 0)
+         .attr("x", margin.left)
+         .attr("y", margin.top)
          .attr("height", panelheight)
          .attr("width", xNA.width)
          .attr("fill", "none")
@@ -215,8 +216,8 @@ scatterplot = () ->
          .attr("stroke-width", "none")
       if xNA.handle and yNA.handle
         g.append("rect")
-         .attr("x", 0)
-         .attr("y", height - yNA.width)
+         .attr("x", margin.left)
+         .attr("y", margin.top+height - yNA.width)
          .attr("height", yNA.width)
          .attr("width", xNA.width)
          .attr("fill", "none")
@@ -224,8 +225,8 @@ scatterplot = () ->
          .attr("stroke-width", "none")
       if yNA.handle
         g.append("rect")
-         .attr("x", paneloffset)
-         .attr("y", height-yNA.width)
+         .attr("x", margin.left+paneloffset)
+         .attr("y", margin.top+height-yNA.width)
          .attr("height", yNA.width)
          .attr("width", panelwidth)
          .attr("fill", "none")

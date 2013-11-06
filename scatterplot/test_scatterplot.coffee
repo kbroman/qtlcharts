@@ -112,7 +112,7 @@ d3.json "data.json", (data) ->
                            .margin(margin)
                            .xlab("X3")
                            .ylab("X2")
-                           .yNA({handle:false, force:false, width:15, gap:10})
+                           .xNA({handle:false, force:false, width:15, gap:10})
 
   svg = d3.select("div#bottomchart")
           .append("svg")

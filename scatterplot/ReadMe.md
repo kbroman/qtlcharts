@@ -11,14 +11,17 @@ Add see it in action [here](http://www.biostat.wisc.edu/~kbroman/D3/scatterplot)
 
 Here are all of the options:
 
-    mychart = scatterplot().xvarname("x")                                           # variable containing x-coordinate
-                           .yvarname("y")                                           # variable containing y-coordinate
+    mychart = scatterplot().xvar("x")                                               # variable containing x-coordinate
+                           .yvar("y")                                               # variable containing y-coordinate
                            .width(800)                                              # internal width of chart
                            .height(500)                                             # internal height
                            .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
                            .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
+                           .xlim(null)                                              # x-axis limits
                            .ylim(null)                                              # y-axis limits
+                           .nxticks(5)                                              # no. x-axis ticks
                            .nyticks(5)                                              # no. y-axis ticks
+                           .xticks(null)                                            # locations of x-axis ticks
                            .yticks(null)                                            # locations of y-axis ticks
                            .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
                            .pointcolor("darkslateblue")                             # color for points

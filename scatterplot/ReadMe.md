@@ -28,7 +28,16 @@ Here are all of the options:
                            .pointsize(3)                                            # radius of points at markers
                            .xlab("X")                                               # x-axis label
                            .ylab("Y")                                               # y-axis label
+                           .xNA({handle:true, force:false, width:15, gap:10})       # treatment of missing x values
+                           .yNA({handle:true, force:false, width:15, gap:10})       # treatment of missing y values
 
+Treatment of missing values through `xNA` and `yNA`
+
+    handle: if true, plot missing values in separated area; if false, omit missing values
+    force:  force handle==true (with separate area for missing values) even if there are no missing values
+    width:  width of space reserved for missing values
+    gap:    gap between space for missing values and the main panel
+ 
 Additional accessors:
 
     # x-axis scale

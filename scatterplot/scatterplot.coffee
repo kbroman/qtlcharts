@@ -177,7 +177,7 @@ scatterplot = () ->
       if yNA.handle
         ys = (y) ->
           return yscale(y) if y?
-          yNA.width/2
+          height - yNA.width/2
       else
         ys = yscale
 

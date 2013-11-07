@@ -15,6 +15,7 @@ scatterplot = () ->
   yticks = null
   rectcolor = d3.rgb(230, 230, 230)
   pointcolor = "slateblue"
+  pointstroke = "black"
   pointsize = 3 # default = no visible points at markers
   xlab = "X"
   ylab = "Y score"
@@ -190,6 +191,7 @@ scatterplot = () ->
               .attr("class", (d,i) -> "pt#{i}")
               .attr("r", pointsize)
               .attr("fill", pointcolor)
+              .attr("stroke", pointstroke)
               .attr("stroke", "black")
               .attr("stroke-width", "1")
               .attr("opacity", (d,i) ->
@@ -297,6 +299,11 @@ scatterplot = () ->
   chart.pointsize = (value) ->
     return pointsize if !arguments.length
     pointsize = value
+    chart
+
+  chart.pointstroke = (value) ->
+    return pointstroke if !arguments.length
+    pointstroke = value
     chart
 
   chart.xlab = (value) ->

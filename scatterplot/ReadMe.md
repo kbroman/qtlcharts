@@ -27,6 +27,7 @@ Here are all of the options:
                            .yticks(null)                                            # locations of y-axis ticks
                            .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
                            .pointcolor("darkslateblue")                             # color for points
+                           .pointstroke("black")                                    # stroke color for points
                            .pointsize(3)                                            # radius of points at markers
                            .xlab("X")                                               # x-axis label
                            .ylab("Y")                                               # y-axis label
@@ -39,7 +40,7 @@ Treatment of missing values through `xNA` and `yNA`:
     force:  force handle==true (with separate area for missing values) even if there are no missing values
     width:  width of space reserved for missing values
     gap:    gap between space for missing values and the main panel
- 
+
 Additional accessors:
 
     # x-axis scale

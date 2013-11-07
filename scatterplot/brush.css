@@ -1,0 +1,9 @@
+.extent {
+  fill: #cbc;
+  opacity: 0.2;
+}
+
+circle.selected {
+  fill: hotpink;
+  opacity: 1;
+}

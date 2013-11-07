@@ -8,7 +8,7 @@ totalh = halfh*2
 halfw = (w+margin.left+margin.right)
 totalw = halfw*2
 
-# simplest use
+# Example 1: simplest use
 d3.json "data.json", (data) ->
   mychart = scatterplot().xvar(0)
                          .yvar(1)
@@ -18,7 +18,7 @@ d3.json "data.json", (data) ->
                          .width(w)
                          .margin(margin)
 
-  d3.select("div#topchart")
+  d3.select("div#chart1")
     .datum(data)
     .call(mychart)
 
@@ -31,7 +31,7 @@ d3.json "data.json", (data) ->
             .on "mouseout", (d) -> d3.select(this).attr("fill", mychart.pointcolor()).attr("r", mychart.pointsize())
 
 
-# three scatterplots within one SVG
+# Example 2: three scatterplots within one SVG
 d3.json "data.json", (data) ->
   mychart01 = scatterplot().xvar(1)
                            .yvar(0)
@@ -55,7 +55,7 @@ d3.json "data.json", (data) ->
                            .xlab("X3")
                            .ylab("X2")
 
-  svg = d3.select("div#middlechart")
+  svg = d3.select("div#chart2")
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)
@@ -86,7 +86,7 @@ d3.json "data.json", (data) ->
 
 
 
-# three scatterplots within one SVG
+# Example 3: different options regarding treatment of missing values
 d3.json "data.json", (data) ->
   mychart01 = scatterplot().xvar(1)
                            .yvar(0)
@@ -114,7 +114,7 @@ d3.json "data.json", (data) ->
                            .ylab("X2")
                            .xNA({handle:false, force:false, width:15, gap:10})
 
-  svg = d3.select("div#bottomchart")
+  svg = d3.select("div#chart3")
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)
@@ -142,4 +142,6 @@ d3.json "data.json", (data) ->
                 svg.selectAll("circle.pt#{i}").attr("r", chart.pointsize()*3).attr("fill", "Orchid")
              .on "mouseout", (d,i) ->
                 svg.selectAll("circle.pt#{i}").attr("r", chart.pointsize()).attr("fill", chart.pointcolor())
+
+
 

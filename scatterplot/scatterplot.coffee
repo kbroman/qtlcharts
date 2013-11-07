@@ -48,6 +48,9 @@ scatterplot = () ->
       xlim = [d3.min(x), d3.max(x)] if !(xlim?)
       ylim = [d3.min(y), d3.max(y)] if !(ylim?)
 
+      # I'll replace missing values something smaller than what's observed
+      na_value = d3.min(x.concat y) - 100
+
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])
 
@@ -93,14 +96,28 @@ scatterplot = () ->
          .attr("fill", rectcolor)
          .attr("stroke", "none")
 
-      xscale.domain(xlim)
-            .range([margin.left+paneloffset+margin.inner, margin.left+paneloffset+panelwidth-margin.inner])
-      yscale.domain(ylim)
-            .range([margin.top+panelheight-margin.inner, margin.top+margin.inner])
+      # simple scales (ignore NA business)
+      xrange = [margin.left+paneloffset+margin.inner, margin.left+paneloffset+panelwidth-margin.inner]
+      yrange = [margin.top+panelheight-margin.inner, margin.top+margin.inner]
+      xscale.domain(xlim).range(xrange)
+      yscale.domain(ylim).range(yrange)
+      xs = d3.scale.linear().domain(xlim).range(xrange)
+      ys = d3.scale.linear().domain(ylim).range(yrange)
+
+      # "polylinear" scales to handle missing values
+      if xNA.handle
+        xscale.domain([na_value].concat xlim) 
+              .range([margin.left + xNA.width/2].concat xrange)
+        x = x.map (e) -> if e? then e else na_value
+      if yNA.handle
+        yscale.domain([na_value].concat ylim)
+              .range([height+margin.top+yNA.width/2].concat yrange)
+        y = y.map (e) -> if e? then e else na_value
 
       # if yticks not provided, use nyticks to choose pretty ones
-      yticks = yscale.ticks(nyticks) if !(yticks?)
-      xticks = xscale.ticks(nxticks) if !(xticks?)
+      yticks = ys.ticks(nyticks) if !(yticks?)
+      xticks = xs.ticks(nxticks) if !(xticks?)
+      console.log(xscale.domain().join(" "), xscale.range().join(" "), xscale.domain().map(xscale).join(), xscale(null))
 
       # x-axis
       xaxis = g.append("g").attr("class", "x axis")
@@ -165,34 +182,18 @@ scatterplot = () ->
             .attr("y", margin.top+height-yNA.width/2)
             .text("N/A")
 
-      # scales to handle missing data
-      if xNA.handle
-        xs = (x) ->
-          return xscale(x) if x?
-          margin.left+xNA.width/2
-      else
-        xs = xscale
-
-      if yNA.handle
-        ys = (y) ->
-          return yscale(y) if y?
-          margin.top+height - yNA.width/2
-      else
-        ys = yscale
-
       points = g.append("g").attr("id", "points")
       pointsSelect =
         points.selectAll("empty")
               .data(data)
               .enter()
               .append("circle")
-              .attr("cx", (d,i) -> xs(x[i]))
-              .attr("cy", (d,i) -> ys(y[i]))
+              .attr("cx", (d,i) -> xscale(x[i]))
+              .attr("cy", (d,i) -> yscale(y[i]))
               .attr("class", (d,i) -> "pt#{i}")
               .attr("r", pointsize)
               .attr("fill", pointcolor)
               .attr("stroke", pointstroke)
-              .attr("stroke", "black")
               .attr("stroke-width", "1")
               .attr("opacity", (d,i) ->
                    return 1 if (x[i]? or xNA.handle) and (y[i]? or yNA.handle)

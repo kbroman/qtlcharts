@@ -111,7 +111,7 @@ scatterplot = () ->
         x = x.map (e) -> if e? then e else na_value
       if yNA.handle
         yscale.domain([na_value].concat ylim)
-              .range([height+margin.top+yNA.width/2].concat yrange)
+              .range([height+margin.top-yNA.width/2].concat yrange)
         y = y.map (e) -> if e? then e else na_value
 
       # if yticks not provided, use nyticks to choose pretty ones

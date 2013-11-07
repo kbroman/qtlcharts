@@ -3,9 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>Test of reusable scatterplot</title>
-    <link rel=stylesheet type="text/css" href="scatterplot.css">
     <script charset="utf-8" type="text/javascript" src="d3.js"></script>
+
     <script type="text/javascript" src="scatterplot.js"></script>
+    <link rel=stylesheet type="text/css" href="scatterplot.css">
+
+    <link rel=stylesheet type="text/css" href="test_scatterplot.css">
 </head>
 
 <body>
@@ -14,16 +17,19 @@
 <h4>Example 1</h4>
 <div id="chart1"></div>
 
-<p style="margin-left:25px;">Hover over points to have them change
+<p class="legend">Hover over points to have them change
 size; click to change color</p>
 
 <hr/>
 
-<h4>Example 2, with panels</h4>
+<h4>Example 2, with panels and brushing</h4>
 <div id="chart2"></div>
 
-<p style="margin-left:25px;">Hover over points to have them
-highlighted in all plots.</p>
+<p class="legend">Select a rectangle region in any panel by
+clicking and dragging; points in the selected region are highlighted
+in all three panels. The selected region can be resized and dragged
+about.</p>
+
 
 
 <hr/>
@@ -31,15 +37,9 @@ highlighted in all plots.</p>
 <h4>Chart 3, different treatment of missing values</h4>
 <div id="chart3"></div>
 
-<p style="margin-left:25px;">Hover over points to have them
+<p class="legend">Hover over points to have them
 highlighted in all plots.</p>
 
-<hr/>
-
-<h4>Chart 4, with brushing</h4>
-<div id="chart4"></div>
-
-<p style="margin-left:25px;">Select a rectangular region.</p>
 
 <hr/>
 

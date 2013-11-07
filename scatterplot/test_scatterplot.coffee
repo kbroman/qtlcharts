@@ -31,58 +31,69 @@ d3.json "data.json", (data) ->
             .on "mouseout", (d) -> d3.select(this).attr("fill", mychart.pointcolor()).attr("r", mychart.pointsize())
 
 
-# Example 2: three scatterplots within one SVG
+# Example 2: three scatterplots within one SVG, with brushing
 d3.json "data.json", (data) ->
-  mychart01 = scatterplot().xvar(1)
-                           .yvar(0)
-                           .height(h)
-                           .width(w)
-                           .margin(margin)
-                           .xlab("X2")
-                           .ylab("X1")
-  mychart02 = scatterplot().xvar(2)
-                           .yvar(0)
-                           .height(h)
-                           .width(w)
-                           .margin(margin)
-                           .xlab("X3")
-                           .ylab("X1")
-  mychart12 = scatterplot().xvar(2)
-                           .yvar(1)
-                           .height(h)
-                           .width(w)
-                           .margin(margin)
-                           .xlab("X3")
-                           .ylab("X2")
+  xvar = [1, 2, 2]
+  yvar = [0, 0, 1]
+  xshift = [0, halfw, halfw]
+  yshift = [0, 0, halfh]
 
   svg = d3.select("div#chart2")
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)
 
-  chart01 = svg.append("g").attr("id", "chart01")
+  mychart = []
+  chart = []
+  for i in [0..2]
+    mychart[i] = scatterplot().xvar(xvar[i])
+                              .yvar(yvar[i])
+                              .nxticks(6)
+                              .height(h)
+                              .width(w)
+                              .margin(margin)
+                              .pointsize(4)
+                              .xlab("X#{xvar[i]+1}")
+                              .ylab("X#{yvar[i]+1}")
 
-  chart02 = svg.append("g").attr("id", "chart02")
-               .attr("transform", "translate(#{halfw}, 0)")
+    chart[i] = svg.append("g").attr("id", "chart#{i}")
+                  .attr("transform", "translate(#{xshift[i]},#{yshift[i]})")
+    chart[i].datum(data).call(mychart[i])
 
-  chart12 = svg.append("g").attr("id", "chart12")
-               .attr("transform", "translate(#{halfw}, #{halfh})")
+  brush = []
+  brushstart = (i) ->
+    () ->
+     for j in [0..2]
+       chart[j].call(brush[j].clear()) if j != i
+     d3.selectAll("circle").attr("opacity", 0.6).classed("selected", false)
 
-  chart01.datum(data)
-    .call(mychart01)
+  brushmove = (i) ->
+    () ->
+      d3.selectAll("circle").classed("selected", false)
+      e = brush[i].extent()
+      chart[i].selectAll("circle")
+         .classed("selected", (d,j) ->
+                            circ = d3.select(this)
+                            cx = circ.attr("cx")
+                            cy = circ.attr("cy")
+                            selected =   e[0][0] <= cx and cx <= e[1][0] and
+                                         e[0][1] <= cy and cy <= e[1][1]
+                            svg.selectAll("circle.pt#{j}").classed("selected", true) if selected
+                            selected)
 
-  chart02.datum(data)
-    .call(mychart02)
+  brushend = () ->
+    svg.selectAll("circle").attr("opacity", 1)
 
-  chart12.datum(data)
-    .call(mychart12)
+  xscale = d3.scale.linear().domain([margin.left,margin.left+w]).range([margin.left,margin.left+w])
+  yscale = d3.scale.linear().domain([margin.top,margin.top+h]).range([margin.top,margin.top+h])
 
-  [mychart01, mychart02, mychart12].forEach (chart) ->
-    chart.pointsSelect()
-             .on "mouseover", (d,i) ->
-                svg.selectAll("circle.pt#{i}").attr("r", chart.pointsize()*3).attr("fill", "Orchid")
-             .on "mouseout", (d,i) ->
-                svg.selectAll("circle.pt#{i}").attr("r", chart.pointsize()).attr("fill", chart.pointcolor())
+  for i in [0..2]
+    brush[i] = d3.svg.brush().x(xscale).y(yscale)
+                    .on("brushstart", brushstart(i))
+                    .on("brush", brushmove(i))
+                    .on("brushend", brushend)
+
+    chart[i].call(brush[i])
 
 
 

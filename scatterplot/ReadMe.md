@@ -7,7 +7,9 @@ following
 
 For an illustration of its use, see [test_scatterplot.coffee](https://github.com/kbroman/qtlcharts/blob/master/scatterplot/test_scatterplot.coffee).
 
-Add see it in action [here](http://www.biostat.wisc.edu/~kbroman/D3/scatterplot).
+Add see it in action
+[here](http://www.biostat.wisc.edu/~kbroman/D3/scatterplot),
+including an [example with brushing](http://www.biostat.wisc.edu/~kbroman/D3/scatterplot/index.html#ex2).
 
 Here are all of the options:
 

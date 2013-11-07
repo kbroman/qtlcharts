@@ -13,4 +13,4 @@ data.json: create_test_data.R
 	R CMD BATCH create_test_data.R
 
 web: all
-	scp index.html scatterplot.* *.json test_scatterplot.* broman-2:public_html/D3/scatterplot/
+	scp index*.html scatterplot.* *.json test_scatterplot*.* brush.css broman-2:public_html/D3/scatterplot/

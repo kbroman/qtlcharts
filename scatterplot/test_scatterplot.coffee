@@ -1,7 +1,7 @@
 # illustration of use of the scatterplot function
 
 h = 300
-w = 600
+w = 400
 margin = {left:60, top:40, right:40, bottom: 40, inner:5}
 halfh = (h+margin.top+margin.bottom)
 totalh = halfh*2

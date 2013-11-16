@@ -65,11 +65,11 @@ d3.json "data.json", (data) ->
     () ->
      for j in [0..2]
        chart[j].call(brush[j].clear()) if j != i
-     d3.selectAll("circle").attr("opacity", 0.6).classed("selected", false)
+     svg.selectAll("circle").attr("opacity", 0.6).classed("selected", false)
 
   brushmove = (i) ->
     () ->
-      d3.selectAll("circle").classed("selected", false)
+      svg.selectAll("circle").classed("selected", false)
       e = brush[i].extent()
       chart[i].selectAll("circle")
          .classed("selected", (d,j) ->

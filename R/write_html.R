@@ -30,8 +30,8 @@ function(file=tempfile(tmpdir=tempdir(), fileext=".html"), title="qtlcharts char
 append_html_csslink <-
 function(file, cssfile)    
 {
-  cat('    <link rel=stylesheet type="text/css" href="', file=file, append=TRUE)
-  cat(cssfile, file=file, append=TRUE)
+  cat('    <link rel=stylesheet type="text/css" ', file=file, append=TRUE)
+  cat('src="', cssfile, '">', file=file, append=TRUE, sep='')
   cat('</link>\n', file=file, append=TRUE)
 
   invisible(NULL)
@@ -51,8 +51,8 @@ function(file, jsfile, charset)
 {
   cat('    <script ', file=file, append=TRUE)
   if(!missing(charset))
-    cat('charset="', charset, '" ', file=file, append=TRUE)
-  cat('type="text/javascript" src="', jsfile, "></script>\n", file=file, append=TRUE)
+    cat('charset="', charset, '" ', file=file, append=TRUE, sep='')
+  cat('type="text/javascript" src="', jsfile, "></script>\n", file=file, append=TRUE, sep='')
 
   invisible(NULL)
 }
@@ -68,6 +68,27 @@ append_html_bottom <-
 function(file)
 {
   cat('</body>\n</html>\n', file=file, append=TRUE)
+
+  invisible(NULL)
+}
+
+# Append middle part of an html file
+#
+# @param file File name
+# @param title Optional h3 title
+# @param div Optional id for a div following the title
+# @return None (invisible NULL)
+# @keywords IO
+# \examples
+# \dontrun{append_html_middle("index.html", "QTL chart", "chart")}
+append_html_middle <-
+function(file, title, div)
+{
+  cat('</head>\n\n<body>\n', file=file, append=TRUE)
+  if(!missing(title))
+    cat('<h3>', title, '</h3>\n\n', file=file, append=TRUE, sep='')
+  if(!missing(div))
+    cat('<div id="', div, '></div>\n\n', file=file, append=TRUE, sep='')
 
   invisible(NULL)
 }

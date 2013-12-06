@@ -7,16 +7,7 @@ Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 Description: Web-based interactive charts (using D3.js) for the analysis of
     experimental crosses to identify genetic loci (quantitative trait loci,
     QTL) contributing to variation in quantitative traits.
-Depends:
-    R (>= 2.14.0),
-    qtl,
-    RJSONIO,
-    graphics,
-    stats,
-    utils,
-    devtools,
-    roxygen2
+Depends: R (>= 2.14.0), qtl, RJSONIO, graphics, stats, utils
+Suggests: devtools, roxygen2
 License: MIT + file LICENSE
 URL: http://www.rqtl.org
-Collate:
-    'scanone2json.R'

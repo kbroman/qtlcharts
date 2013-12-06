@@ -8,7 +8,7 @@ have made a branch!)
 
 This is an [R](http://www.r-project.org) package to create
 [D3](http://d3js.org)-based interactive charts for xQTL data, for use
-with the [R/qtl](http://www.rqtl.org).
+with the [R/qtl](http://www.rqtl.org) package.
 
 It is built on the following reuseable components:
 - [lodchart](inst/charts/lodchart): LOD curve panel

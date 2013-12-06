@@ -23,7 +23,7 @@ ${SCATTERPLOT_DIR}/scatterplot.js: ${SCATTERPLOT_DIR}/scatterplot.coffee
 ${SCATTERPLOT_DIR}/test_scatterplot.js: ${SCATTERPLOT_DIR}/test_scatterplot.coffee
 	coffee -c $^
 
-${LODCHART_DIR}/scanone.json: ${LODCHART_DIR}/scanone2json.R ${LODCHART_DIR}/create_test_data.R
+${LODCHART_DIR}/scanone.json: ${LODCHART_DIR}/create_test_data.R
 	cd ${LODCHART_DIR};R CMD BATCH create_test_data.R
 
 ${SCATTERPLOT_DIR}/data.json: ${SCATTERPLOT_DIR}/create_test_data.R

@@ -1,3 +1,6 @@
+## scanone2json
+## Karl W Broman
+
 #' Convert scanone output to json format
 #'
 #' @param output An object of class \code{"scanone"}, as output by \code{\link[qtl]{scanone}}.

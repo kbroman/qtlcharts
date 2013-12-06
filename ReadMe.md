@@ -18,4 +18,4 @@ It makes use of the [D3](http://d3js.org) library;
 [see the license for D3](inst/d3/LICENSE).
 
 <hr/>
-Licensed under the [MIT license](License.txt). ([More information](http://en.wikipedia.org/wiki/MIT_License))
+Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License))

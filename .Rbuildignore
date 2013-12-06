@@ -1,5 +1,8 @@
 \.git
-^\.RData$
-^\.Rhistory$
-^\.Rprofile$
-^README.md$
+\.RData$
+\.Rhistory$
+\.Rprofile$
+^ReadMe\.md$
+^Makefile$
+^notes\.txt$
+^License\.txt$

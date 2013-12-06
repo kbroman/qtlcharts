@@ -1,10 +1,10 @@
 all: js json
 
-CHART_DIR = inst/charats
+CHART_DIR = inst/charts
 LODCHART_DIR = ${CHART_DIR}/lodchart
 SCATTERPLOT_DIR = ${CHART_DIR}/scatterplot
 
-js: ${LODCHART_DIR}/*.js ${CHART_DIR}/*.js
+js: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${LODCHART_DIR}/test_lodchart.js ${SCATTERPLOT_DIR}/test_scatterplot.js
 
 json: inst/charts/lodchart/scanone.json inst/charts/scatterplot/data.json
 
@@ -20,9 +20,9 @@ ${SCATTERPLOT_DIR}/scatterplot.js: ${SCATTERPLOT_DIR}/scatterplot.coffee
 ${SCATTERPLOT_DIR}/test_scatterplot.js: ${SCATTERPLOT_DIR}/test_scatterplot.coffee
 	coffee -c $^
 
-${LODCHART_DIR}/scanone.json: ${LODCHART_DIR}/scanone2json.R ${LODCHART_DIR}:create_test_data.R
+${LODCHART_DIR}/scanone.json: ${LODCHART_DIR}/scanone2json.R ${LODCHART_DIR}/create_test_data.R
 	cd ${LODCHART_DIR};R CMD BATCH create_test_data.R
 
-${SCATTERPLOT_DIR}/data.json: ${SCATTERPLOT_DIR}:create_test_data.R
+${SCATTERPLOT_DIR}/data.json: ${SCATTERPLOT_DIR}/create_test_data.R
 	cd ${SCATTERPLOT_DIR};R CMD BATCH create_test_data.R
 

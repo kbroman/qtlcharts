@@ -9,10 +9,10 @@ doc:
 
 js: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${LODCHART_DIR}/test_lodchart.js ${SCATTERPLOT_DIR}/test_scatterplot.js
 
-json: inst/charts/lodchart/scanone.json inst/charts/scatterplot/data.json
+json: ${LODCHART_DIR}/scanone.json ${SCATTERPLOT_DIR}/data.json
 
 ${LODCHART_DIR}/lodchart.js: ${LODCHART_DIR}/lodchart.coffee
-	coffee -c $^
+	coffee -bc $^
 
 ${LODCHART_DIR}/test_lodchart.js: ${LODCHART_DIR}/test_lodchart.coffee
 	coffee -c $^
@@ -28,4 +28,8 @@ ${LODCHART_DIR}/scanone.json: ${LODCHART_DIR}/create_test_data.R
 
 ${SCATTERPLOT_DIR}/data.json: ${SCATTERPLOT_DIR}/create_test_data.R
 	cd ${SCATTERPLOT_DIR};R CMD BATCH create_test_data.R
+
+
+clean:
+	rm ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${LODCHART_DIR}/test_lodchart.js ${SCATTERPLOT_DIR}/test_scatterplot.js
 

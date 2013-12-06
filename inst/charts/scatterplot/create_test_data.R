@@ -9,5 +9,5 @@ dat <- rmvn(200, c(2, 5, 10),
 dat[1:4,3] <- NA
 dat[4:9,2] <- NA
 
-library(rjson)
-cat(toJSON(dat), file="data.json")
+library(RJSONIO)
+cat(RJSONIO::toJSON(dat), file="data.json")

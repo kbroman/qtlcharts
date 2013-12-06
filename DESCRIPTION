@@ -10,7 +10,7 @@ Description: Web-based interactive charts (using D3.js) for the analysis of
 Depends:
     R (>= 2.14.0),
     qtl,
-    rjson,
+    RJSONIO,
     graphics,
     stats,
     utils,

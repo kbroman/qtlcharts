@@ -1,5 +1,5 @@
-*.js
-*.json
 *.Rout
 .RData
 .Rhistory
+d3.min.js
+scanone.json

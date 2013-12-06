@@ -5,7 +5,7 @@ LODCHART_DIR = ${CHART_DIR}/lodchart
 SCATTERPLOT_DIR = ${CHART_DIR}/scatterplot
 
 doc:
-	R -e 'library(devtools);document()'
+	R -e 'library(devtools);document(roclets=c("namespace", "rd"))'
 
 js: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${LODCHART_DIR}/test_lodchart.js ${SCATTERPLOT_DIR}/test_scatterplot.js
 

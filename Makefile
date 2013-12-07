@@ -1,10 +1,10 @@
 all: js json doc
 
-CHART_DIR = inst/charts
-LODCHART_DIR = ${CHART_DIR}/lodchart
-SCATTERPLOT_DIR = ${CHART_DIR}/scatterplot
-LODCHART_TESTDIR = ${CHART_DIR}/lodchart/test
-SCATTERPLOT_TESTDIR = ${CHART_DIR}/scatterplot/test
+PANEL_DIR = inst/panels
+LODCHART_DIR = ${PANEL_DIR}/lodchart
+SCATTERPLOT_DIR = ${PANEL_DIR}/scatterplot
+LODCHART_TESTDIR = ${LODCHART_DIR}/test
+SCATTERPLOT_TESTDIR = ${SCATTERPLOT_DIR}/test
 
 doc:
 	R -e 'library(devtools);document(roclets=c("namespace", "rd"))'

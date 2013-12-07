@@ -18,7 +18,7 @@ scatterplot = () ->
   pointstroke = "black"
   pointsize = 3 # default = no visible points at markers
   xlab = "X"
-  ylab = "Y score"
+  ylab = "Y"
   yscale = d3.scale.linear()
   xscale = d3.scale.linear()
   xvar = 0

@@ -12,10 +12,10 @@
 write_html_top <-
 function(file=tempfile(tmpdir=tempdir(), fileext=".html"), title="qtlcharts chart")
 {
-  cat('<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="utf-8">\n',
-      file=file)
+  text <- c('<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="utf-8">\n',
+            '    <title>', title, '</title>\n')
 
-  cat('    <title>', title, '</title>\n', file=file, append=TRUE)
+  cat(text, file=file, sep='')
 
   # return file name invisibly
   invisible(file)
@@ -30,9 +30,10 @@ function(file=tempfile(tmpdir=tempdir(), fileext=".html"), title="qtlcharts char
 append_html_csslink <-
 function(file, cssfile)    
 {
-  cat('    <link rel=stylesheet type="text/css" ', file=file, append=TRUE)
-  cat('src="', cssfile, '">', file=file, append=TRUE, sep='')
-  cat('</link>\n', file=file, append=TRUE)
+  text <- c('    <link rel=stylesheet type="text/css" ',
+            'src="', cssfile, '">',
+            '</link>\n')
+  cat(text, file=file, append=TRUE, sep='')
 
   invisible(NULL)
 }
@@ -49,10 +50,11 @@ function(file, cssfile)
 append_html_jslink <-
 function(file, jsfile, charset)
 {
-  cat('    <script ', file=file, append=TRUE)
-  if(!missing(charset))
-    cat('charset="', charset, '" ', file=file, append=TRUE, sep='')
-  cat('type="text/javascript" src="', jsfile, "></script>\n", file=file, append=TRUE, sep='')
+  text <- '    <script '
+  if(!missing(charset)) text <- c(text, 'charset="', charset, '" ')
+  text <- c(text, 'type="text/javascript" src="', jsfile, '></script>\n') 
+
+  cat(text, file=file, append=TRUE, sep='')
 
   invisible(NULL)
 }
@@ -69,11 +71,11 @@ function(file, jsfile, charset)
 append_html_middle <-
 function(file, title, div)
 {
-  cat('</head>\n\n<body>\n', file=file, append=TRUE)
-  if(!missing(title))
-    cat('<h3>', title, '</h3>\n\n', file=file, append=TRUE, sep='')
-  if(!missing(div))
-    cat('<div id="', div, '></div>\n\n', file=file, append=TRUE, sep='')
+  text <- '</head>\n\n<body>\n'
+  if(!missing(title)) text <- c(text, '<h3>', title, '</h3>\n\n')
+  if(!missing(div)) text <- c(text, '<div id="', div, '></div>\n\n')
+
+  cat(text, file=file, append=TRUE, sep='')
 
   invisible(NULL)
 }

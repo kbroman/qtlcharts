@@ -48,5 +48,5 @@ There aren't many functions available yet, but you can try this:
 
 Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License).)
 
-It makes use of the [D3](http://d3js.org) library;
+R/qtlcharts makes use of the [D3](http://d3js.org) library;
 [see the license for D3](inst/d3/LICENSE).

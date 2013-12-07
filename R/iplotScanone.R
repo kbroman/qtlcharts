@@ -22,18 +22,30 @@ function(output, lodcolumn=1, file, onefile=FALSE, openfile=TRUE,
          title="LOD curve")
 {    
   if(missing(file))
-    file <- tempfile(tmpdir=tempdir(), fileext=".html")
+    file <- tempfile(tmpdir=tempdir(), fileext='.html')
+
+  if(file.exists(file))
+    stop('The file already exists; please remove it first: ', file)
+
+  if(!any(class(output) == "scanone"))
+    stop('Input should have class "scanone".')
+
+  if(lodcolumn < 1 || lodcolumn > ncol(output)-2)
+    stop('lodcolumn must be between 1 and ', ncol(output)-2)
+
+  output <- output[,c(1,2,lodcolumn+2), drop=FALSE]
+  colnames(output)[3] <- 'lod'
 
   write_html_top(file, title=title)
 
-  # append csslink
-  # append d3 link
-  # append lodchart link
+  append_html_csslink(file, system.file('panels', 'lodchart', 'lodchart.css', package='qtlcharts'))
+  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8')
+  append_html_jslink(file, system.file('panels', 'lodchart', 'lodchart.js', package='qtlcharts'))
+  append_html_jslink(file, system.file('charts', 'iplotScanone.js', package='qtlcharts'))
 
-  append_html_middle(file, title, "chart")
+  append_html_middle(file, title, 'chart')
   
-  # append iplotScanone script
-  # append data
+  append_html_jscode(file, 'data = ', scanone2json(output), ';\n\n', 'iplotScanone(data);')
 
   append_html_bottom(file)
 

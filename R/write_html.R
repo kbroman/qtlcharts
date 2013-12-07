@@ -30,9 +30,8 @@ function(file=tempfile(tmpdir=tempdir(), fileext=".html"), title="qtlcharts char
 append_html_csslink <-
 function(file, cssfile)    
 {
-  text <- c('    <link rel=stylesheet type="text/css" ',
-            'src="', cssfile, '">',
-            '</link>\n')
+  text <- c('    <link rel="stylesheet" type="text/css" ',
+            'href="', cssfile, '">\n')
   cat(text, file=file, append=TRUE, sep='')
 
   invisible(NULL)
@@ -52,9 +51,26 @@ function(file, jsfile, charset)
 {
   text <- '    <script '
   if(!missing(charset)) text <- c(text, 'charset="', charset, '" ')
-  text <- c(text, 'type="text/javascript" src="', jsfile, '></script>\n') 
+  text <- c(text, 'type="text/javascript" src="', jsfile, '"></script>\n') 
 
   cat(text, file=file, append=TRUE, sep='')
+
+  invisible(NULL)
+}
+
+# Append javascript code to an html file
+#
+# @param file File to which the code will be written
+# @return None (invisible NULL)
+# @keywords IO
+# @examples
+# \dontrun{append_html_jscode("index.html", "d3.min.js", "utf-8")}
+append_html_jscode <-
+function(file, ...)
+{
+  cat('\n<script type="text/javascript">\n', file=file, append=TRUE)
+  cat(..., file=file, append=TRUE, sep='')
+  cat('\n</script>\n', file=file, append=TRUE)
 
   invisible(NULL)
 }
@@ -73,7 +89,7 @@ function(file, title, div)
 {
   text <- '</head>\n\n<body>\n'
   if(!missing(title)) text <- c(text, '<h3>', title, '</h3>\n\n')
-  if(!missing(div)) text <- c(text, '<div id="', div, '></div>\n\n')
+  if(!missing(div)) text <- c(text, '<div id="', div, '"></div>\n\n')
 
   cat(text, file=file, append=TRUE, sep='')
 

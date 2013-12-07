@@ -110,3 +110,28 @@ function(file)
 
   invisible(NULL)
 }
+
+# Append a paragraph to an html file
+#
+# @param file File to which to write
+# @param \dots The text to put within the paragraph
+# @param tag The type of object to add
+# @param id Optional id
+# @param class Optional class
+# @return None (invisible NULL)
+# @keywords IO
+# @examples
+# \dontrun{append_html_p("index.html", "Some text.")}
+append_html_p <-
+function(file, ..., tag="p", id, class)
+{
+  text <- c('<', tag)
+  if(!missing(id)) text <- c(text, ' id="', id, '"')
+  if(!missing(class)) text <- c(text, ' class="', class, '"')
+  text <- c(text, '>')
+  cat(text, file=file, append=TRUE, sep='')
+  cat(..., file=file, append=TRUE, sep='')
+  cat('</', tag, '>\n', file=file, append=TRUE, sep='')
+
+  invisible(NULL)
+}

@@ -20,20 +20,9 @@ totalh = halfh * 2;
 totalw = w + margin.left + margin.right;
 
 iplotScanone = function(data) {
-  var chrrect, mychart;
+  var mychart;
   mychart = lodchart().lodvarname("lod").height(h).width(w).margin(margin);
   d3.select("div#chart").datum(data).call(mychart);
-  chrrect = mychart.chrSelect();
-  chrrect.on("mouseover", function() {
-    return d3.select(this).attr("fill", "#E9CFEC");
-  }).on("mouseout", function(d, i) {
-    return d3.select(this).attr("fill", function() {
-      if (i % 2) {
-        return d3.rgb(200, 200, 200);
-      }
-      return d3.rgb(230, 230, 230);
-    });
-  });
   return mychart.markerSelect().on("click", function(d) {
     var r;
     r = d3.select(this).attr("r");

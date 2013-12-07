@@ -18,15 +18,6 @@ iplotScanone = (data) ->
     .datum(data)
     .call(mychart)
 
-  # grab chromosome rectangles; color pink on hover
-  chrrect = mychart.chrSelect()
-  chrrect.on "mouseover", ->
-              d3.select(this).attr("fill", "#E9CFEC")
-         .on "mouseout", (d,i) ->
-              d3.select(this).attr("fill", ->
-                    return d3.rgb(200,200,200) if i % 2
-                    d3.rgb(230,230,230))
-
   # animate points at markers on click
   mychart.markerSelect()
             .on "click", (d) ->

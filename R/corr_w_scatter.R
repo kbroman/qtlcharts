@@ -45,8 +45,8 @@ function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
 
   append_html_middle(file, title, 'chart')
 
-  append_html_p(file, 'The left panel is an image of a correlation matrix, with blue = -1 and red = +1.',
-                'Hover over pixels in the correlation matrix on the left to see the',
+  append_html_p(file, 'The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
+                'Hover over pixels in the correlation matrix on the left to see the ',
                 'values; click to see the corresponding scatterplot on the right.',
                 tag="div", class="legend", id="legend", style="opacity:0;")
 

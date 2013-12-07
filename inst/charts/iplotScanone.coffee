@@ -1,14 +1,15 @@
 # iplotScanone
 # Karl W Broman
 
-h = 450
-w = 900
-margin = {left:60, top:40, right:40, bottom: 40, inner:5}
-halfh = (h+margin.top+margin.bottom)
-totalh = halfh*2
-totalw = (w+margin.left+margin.right)
-
 iplotScanone = (data) ->
+
+  h = 450
+  w = 900
+  margin = {left:60, top:40, right:40, bottom: 40, inner:5}
+  halfh = (h+margin.top+margin.bottom)
+  totalh = halfh*2
+  totalw = (w+margin.left+margin.right)
+
   mychart = lodchart().lodvarname("lod")
                       .height(h)
                       .width(w)

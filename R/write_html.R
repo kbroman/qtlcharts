@@ -57,21 +57,6 @@ function(file, jsfile, charset)
   invisible(NULL)
 }
 
-# Append the bottom bit of an html file
-#
-# @param file File to which to write
-# @return None (invisible NULL)
-# @keywords IO
-# @examples
-# \dontrun{append_html_bottom("index.html")}
-append_html_bottom <-
-function(file)
-{
-  cat('</body>\n</html>\n', file=file, append=TRUE)
-
-  invisible(NULL)
-}
-
 # Append middle part of an html file
 #
 # @param file File name
@@ -89,6 +74,21 @@ function(file, title, div)
     cat('<h3>', title, '</h3>\n\n', file=file, append=TRUE, sep='')
   if(!missing(div))
     cat('<div id="', div, '></div>\n\n', file=file, append=TRUE, sep='')
+
+  invisible(NULL)
+}
+
+# Append the bottom bit of an html file
+#
+# @param file File to which to write
+# @return None (invisible NULL)
+# @keywords IO
+# @examples
+# \dontrun{append_html_bottom("index.html")}
+append_html_bottom <-
+function(file)
+{
+  cat('</body>\n</html>\n', file=file, append=TRUE)
 
   invisible(NULL)
 }

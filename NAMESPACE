@@ -1,3 +1,4 @@
+export(corr_w_scatter)
 export(iplotScanone)
 export(qtlchartsversion)
 export(scanone2json)

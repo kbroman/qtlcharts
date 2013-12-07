@@ -35,9 +35,12 @@ ${SCATTERPLOT_TESTDIR}/data.json: ${SCATTERPLOT_TESTDIR}/create_test_data.R
 	cd ${SCATTERPLOT_TESTDIR};R CMD BATCH create_test_data.R
 
 # javascript for the real charts
-jscharts: ${CHART_DIR}/iplotScanone.js
+jscharts: ${CHART_DIR}/iplotScanone.js ${CHART_DIR}/corr_w_scatter.js
 
 ${CHART_DIR}/iplotScanone.js: ${CHART_DIR}/iplotScanone.coffee
+	coffee -bc $^
+
+${CHART_DIR}/corr_w_scatter.js: ${CHART_DIR}/corr_w_scatter.coffee
 	coffee -bc $^
 
 # remove all data files and javascript files

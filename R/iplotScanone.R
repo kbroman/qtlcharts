@@ -24,6 +24,9 @@ function(output, lodcolumn=1, file, onefile=FALSE, openfile=TRUE,
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
 
+  if(onefile)
+    warning("The onefile argument hasn't been implemented yet.")
+
   if(file.exists(file))
     stop('The file already exists; please remove it first: ', file)
 

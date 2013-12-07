@@ -11,8 +11,8 @@ This is an [R](http://www.r-project.org) package to create
 with the [R/qtl](http://www.rqtl.org) package.
 
 It is built on the following reuseable components:
-- [lodchart](inst/charts/lodchart): LOD curve panel
-- [scatterplot](inst/charts/scatterplot): scatter plot panel
+- [lodchart](inst/panels/lodchart): LOD curve panel
+- [scatterplot](inst/panels/scatterplot): scatter plot panel
 
 It makes use of the [D3](http://d3js.org) library;
 [see the license for D3](inst/d3/LICENSE).

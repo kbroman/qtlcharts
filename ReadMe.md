@@ -1,10 +1,7 @@
-### qtlcharts: Interactive graphics for QTL experiments
+### R/qtlcharts: Interactive graphics for QTL experiments
 
 Karl W Broman,
 [http://www.biostat.wisc.edu/~kbroman](http://www.biostat.wisc.edu/~kbroman)
-
-I'm in the process of turning this code into an R package. (I should
-have made a branch!)
 
 This is an [R](http://www.r-project.org) package to create
 [D3](http://d3js.org)-based interactive charts for xQTL data, for use
@@ -14,8 +11,42 @@ It is built on the following reuseable components:
 - [lodchart](inst/panels/lodchart): LOD curve panel
 - [scatterplot](inst/panels/scatterplot): scatter plot panel
 
+
+#### Installation
+
+You first need to install [R/qtl](http://www.rqtl.org) and the
+[RJSONIO](http://cran.r-project.org/web/packages/RJSONIO/index.html)
+package:
+
+    install.packages("qtl")
+    install.packages("RJSONIO")
+
+You also need the `install_github` function in
+[Hadley Wickham](http://had.co.nz/)'s [devtools]() package. So install
+and load devtools:
+
+    install.packages("devtools")
+    library(devtools)
+
+Finally, use `install_github` function to install R/qtlcharts:
+
+    install_github("kbroman/qtlcharts")
+
+
+#### Example use
+
+There aren't many functions available yet, but you can try this:
+
+    library(qtlcharts)
+    data(hyper)
+    hyper <- calc.genoprob(hyper, step=1)
+    out <- scanone(hyper)
+    iplotScanone(out)
+
+
+#### Licenses
+
+Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License).)
+
 It makes use of the [D3](http://d3js.org) library;
 [see the license for D3](inst/d3/LICENSE).
-
-<hr/>
-Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License))

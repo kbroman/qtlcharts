@@ -118,12 +118,13 @@ function(file)
 # @param tag The type of object to add
 # @param id Optional id
 # @param class Optional class
+# @param style Optional style
 # @return None (invisible NULL)
 # @keywords IO
 # @examples
 # \dontrun{append_html_p("index.html", "Some text.")}
 append_html_p <-
-function(file, ..., tag="p", id, class)
+function(file, ..., tag="p", id, class, style)
 {
   text <- c('<', tag)
   if(!missing(id)) text <- c(text, ' id="', id, '"')

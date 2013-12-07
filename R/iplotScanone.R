@@ -24,9 +24,6 @@ function(output, lodcolumn=1, file, onefile=FALSE, openfile=TRUE,
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
 
-  if(onefile)
-    warning("The onefile argument hasn't been implemented yet.")
-
   if(file.exists(file))
     stop('The file already exists; please remove it first: ', file)
 
@@ -41,10 +38,10 @@ function(output, lodcolumn=1, file, onefile=FALSE, openfile=TRUE,
 
   write_html_top(file, title=title)
 
-  append_html_csslink(file, system.file('panels', 'lodchart', 'lodchart.css', package='qtlcharts'))
-  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8')
-  append_html_jslink(file, system.file('panels', 'lodchart', 'lodchart.js', package='qtlcharts'))
-  append_html_jslink(file, system.file('charts', 'iplotScanone.js', package='qtlcharts'))
+  append_html_csslink(file, system.file('panels', 'lodchart', 'lodchart.css', package='qtlcharts'), onefile=onefile)
+  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8', onefile=onefile)
+  append_html_jslink(file, system.file('panels', 'lodchart', 'lodchart.js', package='qtlcharts'), onefile=onefile)
+  append_html_jslink(file, system.file('charts', 'iplotScanone.js', package='qtlcharts'), onefile=onefile)
 
   append_html_middle(file, title, 'chart')
   

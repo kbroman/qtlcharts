@@ -26,9 +26,6 @@ function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
 
-  if(onefile)
-    warning("The onefile argument hasn't been implemented yet.")
-    
   if(file.exists(file))
     stop('The file already exists; please remove it first: ', file)
 
@@ -39,9 +36,9 @@ function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
   # start writing
   write_html_top(file, title=title)
 
-  append_html_csslink(file, system.file('charts', 'corr_w_scatter.css', package='qtlcharts'))
-  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8')
-  append_html_jslink(file, system.file('charts', 'corr_w_scatter.js', package='qtlcharts'))
+  append_html_csslink(file, system.file('charts', 'corr_w_scatter.css', package='qtlcharts'), onefile=onefile)
+  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8', onefile=onefile)
+  append_html_jslink(file, system.file('charts', 'corr_w_scatter.js', package='qtlcharts'), onefile=onefile)
 
   append_html_middle(file, title, 'chart')
 

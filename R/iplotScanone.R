@@ -48,7 +48,7 @@ function(output, lodcolumn=1, file, onefile=FALSE, openfile=TRUE,
   append_html_jscode(file, 'data = ', scanone2json(output), ';\n\n', 'iplotScanone(data);')
 
   append_html_p(file, 'Hover over marker positions on the LOD curve to see the marker names. ',
-                'Click on a marker for a bit of animation.', class='legend')
+                'Click on a marker for a bit of gratuitous animation.', class='legend')
 
   append_html_bottom(file)
 

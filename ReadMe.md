@@ -43,6 +43,14 @@ There aren't many functions available yet, but you can try this:
     out <- scanone(hyper)
     iplotScanone(out)
 
+Also try `corr_w_scatter`, an image of a correlation matrix (for the
+gene expression of a set of 100 genes) linked to the underlying
+scatterplots, with the points in the scatterplot colored by their
+genotype at a QTL:
+
+    library(qtlcharts)
+    data(geneExpr)
+    corr_w_scatter(geneExpr$expr, geneExpr$genotype)
 
 #### Licenses
 

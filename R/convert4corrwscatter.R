@@ -35,7 +35,7 @@ function(dat, group, reorder=TRUE, corr)
     stop("corr matrix should be ", ncol(dat), " x ", ncol(dat))
 
   if(reorder) {
-    ord <- hclust(dist(t(dat)), method="ward")$order
+    ord <- hclust(dist(corr), method="ward")$order
     variables <- variables[ord]
     dat <- dat[,ord]
 

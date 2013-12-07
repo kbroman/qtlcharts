@@ -3,7 +3,7 @@
 \title{Interactive LOD curve}
 \usage{
   iplotScanone(output, lodcolumn = 1, file,
-    onefile = FALSE, openfile = TRUE, title = "LOD curve")
+    onefile = FALSE, openfile = TRUE, title = "LOD curves")
 }
 \arguments{
   \item{output}{Object of class \code{"scanone"}, as output

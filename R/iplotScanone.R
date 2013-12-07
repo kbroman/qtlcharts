@@ -19,7 +19,7 @@
 #' \dontshow{iplotScanone(out, openfile=FALSE)}
 iplotScanone <-
 function(output, lodcolumn=1, file, onefile=FALSE, openfile=TRUE,
-         title="LOD curve")
+         title="LOD curves")
 {    
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')

@@ -5,7 +5,7 @@ following
 [Mike Bostock](http://bost.ocks.org/mike)'s
 [Towards Reuseable Charts](http://bost.ocks.org/mike/chart/).
 
-For an illustration of its use, see [test_scatterplot.coffee](https://github.com/kbroman/qtlcharts/blob/master/scatterplot/test_scatterplot.coffee).
+For an illustration of its use, see [test_scatterplot.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/charts/scatterplot/test/test_scatterplot.coffee).
 
 Add see it in action
 [here](http://www.biostat.wisc.edu/~kbroman/D3/scatterplot),

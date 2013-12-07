@@ -5,7 +5,7 @@ across a genome, following
 [Mike Bostock](http://bost.ocks.org/mike)'s
 [Towards Reuseable Charts](http://bost.ocks.org/mike/chart/).
 
-For an illustration of its use, see [test_lodchart.coffee](https://github.com/kbroman/qtlcharts/blob/master/lodchart/test_lodchart.coffee).
+For an illustration of its use, see [test_lodchart.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/charts/lodchart/test/test_lodchart.coffee).
 
 Add see it in action [here](http://www.biostat.wisc.edu/~kbroman/D3/lodchart).
 

@@ -7,6 +7,7 @@ dotchart = () ->
   axispos = {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
   xcategories = null
   xcatlabels = null
+  xjitter = null
   yNA = {handle:true, force:false, width:15, gap:10}
   ylim = null
   nyticks = 5
@@ -77,6 +78,17 @@ dotchart = () ->
       # simple scales (ignore NA business)
       xrange = [margin.left+margin.inner, margin.left+width-margin.inner]
       xscale.domain(xcategories).rangePoints(xrange, 1)
+  
+      # jitter x-axis
+      if xjitter == null
+        w = (xrange[1]-xrange[0])/xcategories.length
+        xjitter = ((Math.random()-0.5)*w*0.2 for v in d3.range(x.length))
+      else
+        xjitter = [xjitter] if typeof(xjitter) == 'number'
+        xjitter = (xjitter[0] for v in d3.range(x.length)) if xjitter.length == 1
+        
+      if xjitter.length != x.length
+        throw "xjitter.length != x.length"
 
       yrange = [margin.top+panelheight-margin.inner, margin.top+margin.inner]
       yscale.domain(ylim).range(yrange)
@@ -155,7 +167,7 @@ dotchart = () ->
               .data(data)
               .enter()
               .append("circle")
-              .attr("cx", (d,i) -> xscale(x[i]))
+              .attr("cx", (d,i) -> xscale(x[i])+xjitter[i])
               .attr("cy", (d,i) -> yscale(y[i]))
               .attr("class", (d,i) -> "pt#{i}")
               .attr("r", pointsize)
@@ -214,6 +226,11 @@ dotchart = () ->
   chart.xcatlabels = (value) ->
     return xcatlabels if !arguments.length
     xcatlabels = value
+    chart
+
+  chart.xjitter = (value) ->
+    return xjitter if !arguments.length
+    xjitter = value
     chart
 
   chart.ylim = (value) ->

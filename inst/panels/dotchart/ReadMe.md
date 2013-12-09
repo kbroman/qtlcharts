@@ -18,6 +18,7 @@ Here are all of the options:
                         .height(500)                                             # internal height
                         .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
                         .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
+                        .xjitter(null)                                           # horizontal jittering
                         .xcategories(null)                                       # ordered categories for X variable
                         .xcatlabels(null)                                        # labels for x-axis categories
                         .ylim(null)                                              # y-axis limits
@@ -37,6 +38,12 @@ Treatment of missing values through `yNA`:
     force:  force handle==true (with separate area for missing values) even if there are no missing values
     width:  width of space reserved for missing values
     gap:    gap between space for missing values and the main panel
+
+Treatment of horizontal jittering (move points horizontally to avoid overlap):
+
+    xjitter(null):   (Default) results in random horizontal jittering
+    xjitter(0):      No jittering
+    xjitter(vector): vector must be numeric with same length as data, then these are used for the jittering
 
 Additional accessors:
 

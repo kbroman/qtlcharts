@@ -155,4 +155,25 @@ d3.json "data.json", (data) ->
                 svg.selectAll("circle.pt#{i}").attr("r", chart.pointsize()).attr("fill", chart.pointcolor())
 
 
+# Example 4: simplest use
+d3.json "data.json", (data) ->
+  mychart = scatterplot().height(h)
+                         .width(w)
+                         .margin(margin)
+                         .dataByInd(false)
+
+  data2 = [(x[0] for x in data), (x[1] for x in data)]
+
+  d3.select("div#chart4")
+    .datum(data2)
+    .call(mychart)
+
+  # animate points
+  mychart.pointsSelect()
+            .on "mouseover", (d) ->
+               d3.select(this).attr("r", mychart.pointsize()*3).on "click", (d) ->
+                  d3.select(this).attr("fill", "Orchid").on "mouseout", (d) ->
+                    d3.select(this).attr("fill", mychart.pointcolor()).attr("r", mychart.pointsize())
+            .on "mouseout", (d) -> d3.select(this).attr("fill", mychart.pointcolor()).attr("r", mychart.pointsize())
+
 

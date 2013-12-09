@@ -2,7 +2,7 @@
 var formatAxis, scatterplot;
 
 scatterplot = function() {
-  var axispos, chart, height, margin, nxticks, nyticks, pointcolor, pointsSelect, pointsize, pointstroke, rectcolor, width, xNA, xlab, xlim, xscale, xticks, xvar, yNA, ylab, ylim, yscale, yticks, yvar;
+  var axispos, chart, dataByInd, height, margin, nxticks, nyticks, pointcolor, pointsSelect, pointsize, pointstroke, rectcolor, width, xNA, xlab, xlim, xscale, xticks, xvar, yNA, ylab, ylim, yscale, yticks, yvar;
   width = 800;
   height = 500;
   margin = {
@@ -47,15 +47,29 @@ scatterplot = function() {
   xvar = 0;
   yvar = 1;
   pointsSelect = null;
+  dataByInd = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var g, gEnter, na_value, panelheight, paneloffset, panelwidth, points, svg, x, xaxis, xrange, xs, y, yaxis, yrange, ys;
-      x = data.map(function(d) {
-        return d[xvar];
-      });
-      y = data.map(function(d) {
-        return d[yvar];
-      });
+      var g, gEnter, i, na_value, panelheight, paneloffset, panelwidth, points, svg, x, xaxis, xrange, xs, y, yaxis, yrange, ys;
+      if (dataByInd) {
+        x = data.map(function(d) {
+          return d[xvar];
+        });
+        y = data.map(function(d) {
+          return d[yvar];
+        });
+      } else {
+        x = data[xvar];
+        y = data[yvar];
+        data = (function() {
+          var _results;
+          _results = [];
+          for (i in x) {
+            _results.push([x[i], y[i]]);
+          }
+          return _results;
+        })();
+      }
       if (x.every(function(v) {
         return (v != null) && !xNA.force;
       })) {
@@ -283,6 +297,13 @@ scatterplot = function() {
       return pointstroke;
     }
     pointstroke = value;
+    return chart;
+  };
+  chart.dataByInd = function(value) {
+    if (!arguments.length) {
+      return dataByInd;
+    }
+    dataByInd = value;
     return chart;
   };
   chart.xlab = function(value) {

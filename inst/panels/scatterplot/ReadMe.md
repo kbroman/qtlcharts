@@ -33,6 +33,7 @@ Here are all of the options:
                            .ylab("Y")                                               # y-axis label
                            .xNA({handle:true, force:false, width:15, gap:10})       # treatment of missing x values
                            .yNA({handle:true, force:false, width:15, gap:10})       # treatment of missing y values
+                           .dataByInd(true)                                         # is data organized by individual?
 
 Treatment of missing values through `xNA` and `yNA`:
 
@@ -40,6 +41,12 @@ Treatment of missing values through `xNA` and `yNA`:
     force:  force handle==true (with separate area for missing values) even if there are no missing values
     width:  width of space reserved for missing values
     gap:    gap between space for missing values and the main panel
+
+Organization of data:
+
+  If `dataByInd == true` (the default), we expect the data to be like `[[x1,y1], [x2,y2], ..., [xn,yn]]`
+
+  Alternatively, if `dataByInd == false` we expect the data to be like `[[x1,x2, ..., xn], [y1,y2, ..., yn]]`
 
 Additional accessors:
 

@@ -10,6 +10,7 @@ with the [R/qtl](http://www.rqtl.org) package.
 It is built on the following reuseable components:
 - [lodchart](inst/panels/lodchart): LOD curve panel
 - [scatterplot](inst/panels/scatterplot): scatter plot panel
+- [dotchart](inst/panels/dotchart): dot plot panel
 
 
 #### Installation

@@ -23,12 +23,20 @@ dotchart = () ->
   xvar = 0
   yvar = 1
   pointsSelect = null
+  dataByInd = true
 
   ## the main function
   chart = (selection) ->
     selection.each (data) ->
-      x = data.map (d) -> d[xvar]
-      y = data.map (d) -> d[yvar]
+
+      if dataByInd
+        x = data.map (d) -> d[xvar]
+        y = data.map (d) -> d[yvar]
+      else # reorganize data
+        x = data[xvar]
+        y = data[yvar]
+        data = ([x[i],y[i]] for i of x)
+
 
       # if all y not null
       yNA.handle = false if y.every (v) -> (v?) and !yNA.force
@@ -266,6 +274,11 @@ dotchart = () ->
   chart.pointstroke = (value) ->
     return pointstroke if !arguments.length
     pointstroke = value
+    chart
+
+  chart.dataByInd = (value) ->
+    return dataByInd if !arguments.length
+    dataByInd = value
     chart
 
   chart.xlab = (value) ->

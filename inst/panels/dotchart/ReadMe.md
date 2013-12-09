@@ -31,6 +31,7 @@ Here are all of the options:
                         .xlab("X")                                               # x-axis label
                         .ylab("Y")                                               # y-axis label
                         .yNA({handle:true, force:false, width:15, gap:10})       # treatment of missing y values
+                        .dataByInd(true)                                         # is data organized by individual?
 
 Treatment of missing values through `yNA`:
 
@@ -45,6 +46,12 @@ Treatment of horizontal jittering (move points horizontally to avoid overlap):
     xjitter(0):      No jittering
     xjitter(vector): vector must be numeric with same length as data; these values (in pixels)
                      are used for the jittering
+
+Organization of data:
+
+  If `dataByInd == true` (the default), we expect the data to be like `[[x1,y1], [x2,y2], ..., [xn,yn]]`
+
+  Alternatively, if `dataByInd == false` we expect the data to be like `[[x1,x2, ..., xn], [y1,y2, ..., yn]]`
 
 Additional accessors:
 

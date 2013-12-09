@@ -52,4 +52,39 @@
     });
   });
 
+  d3.json("data.json", function(data) {
+    var data2, mychart, x;
+    mychart = dotchart().height(h).width(w).margin(margin).dataByInd(false);
+    data2 = [
+      (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = data.length; _i < _len; _i++) {
+          x = data[_i];
+          _results.push(x[0]);
+        }
+        return _results;
+      })(), (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = data.length; _i < _len; _i++) {
+          x = data[_i];
+          _results.push(x[1]);
+        }
+        return _results;
+      })()
+    ];
+    console.log(data2);
+    d3.select("div#chart3").datum(data2).call(mychart);
+    return mychart.pointsSelect().on("mouseover", function(d) {
+      return d3.select(this).attr("r", mychart.pointsize() * 3).on("click", function(d) {
+        return d3.select(this).attr("fill", "Orchid").on("mouseout", function(d) {
+          return d3.select(this).attr("fill", mychart.pointcolor()).attr("r", mychart.pointsize());
+        });
+      });
+    }).on("mouseout", function(d) {
+      return d3.select(this).attr("fill", mychart.pointcolor()).attr("r", mychart.pointsize());
+    });
+  });
+
 }).call(this);

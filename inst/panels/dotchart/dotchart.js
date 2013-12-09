@@ -2,7 +2,7 @@
 var dotchart, formatAxis, unique;
 
 dotchart = function() {
-  var axispos, chart, height, margin, nyticks, pointcolor, pointsSelect, pointsize, pointstroke, rectcolor, width, xcategories, xcatlabels, xjitter, xlab, xscale, xvar, yNA, ylab, ylim, yscale, yticks, yvar;
+  var axispos, chart, dataByInd, height, margin, nyticks, pointcolor, pointsSelect, pointsize, pointstroke, rectcolor, width, xcategories, xcatlabels, xjitter, xlab, xscale, xvar, yNA, ylab, ylim, yscale, yticks, yvar;
   width = 800;
   height = 500;
   margin = {
@@ -41,15 +41,29 @@ dotchart = function() {
   xvar = 0;
   yvar = 1;
   pointsSelect = null;
+  dataByInd = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var g, gEnter, na_value, panelheight, points, svg, v, w, x, xaxis, xrange, y, yaxis, yrange, ys;
-      x = data.map(function(d) {
-        return d[xvar];
-      });
-      y = data.map(function(d) {
-        return d[yvar];
-      });
+      var g, gEnter, i, na_value, panelheight, points, svg, v, w, x, xaxis, xrange, y, yaxis, yrange, ys;
+      if (dataByInd) {
+        x = data.map(function(d) {
+          return d[xvar];
+        });
+        y = data.map(function(d) {
+          return d[yvar];
+        });
+      } else {
+        x = data[xvar];
+        y = data[yvar];
+        data = (function() {
+          var _results;
+          _results = [];
+          for (i in x) {
+            _results.push([x[i], y[i]]);
+          }
+          return _results;
+        })();
+      }
       if (y.every(function(v) {
         return (v != null) && !yNA.force;
       })) {
@@ -273,6 +287,13 @@ dotchart = function() {
       return pointstroke;
     }
     pointstroke = value;
+    return chart;
+  };
+  chart.dataByInd = function(value) {
+    if (!arguments.length) {
+      return dataByInd;
+    }
+    dataByInd = value;
     return chart;
   };
   chart.xlab = function(value) {

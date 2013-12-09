@@ -43,7 +43,8 @@ Treatment of horizontal jittering (move points horizontally to avoid overlap):
 
     xjitter(null):   (Default) results in random horizontal jittering
     xjitter(0):      No jittering
-    xjitter(vector): vector must be numeric with same length as data, then these are used for the jittering
+    xjitter(vector): vector must be numeric with same length as data; these values (in pixels)
+                     are used for the jittering
 
 Additional accessors:
 

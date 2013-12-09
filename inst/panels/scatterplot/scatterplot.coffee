@@ -124,7 +124,6 @@ scatterplot = () ->
       # if yticks not provided, use nyticks to choose pretty ones
       yticks = ys.ticks(nyticks) if !(yticks?)
       xticks = xs.ticks(nxticks) if !(xticks?)
-      console.log(xscale.domain().join(" "), xscale.range().join(" "), xscale.domain().map(xscale).join(), xscale(null))
 
       # x-axis
       xaxis = g.append("g").attr("class", "x axis")

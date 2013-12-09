@@ -145,7 +145,6 @@ scatterplot = function() {
       if (!(xticks != null)) {
         xticks = xs.ticks(nxticks);
       }
-      console.log(xscale.domain().join(" "), xscale.range().join(" "), xscale.domain().map(xscale).join(), xscale(null));
       xaxis = g.append("g").attr("class", "x axis");
       xaxis.selectAll("empty").data(xticks).enter().append("line").attr("x1", function(d) {
         return xscale(d);

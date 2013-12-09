@@ -62,7 +62,6 @@ d3.json "data.json", (data) ->
                       .dataByInd(false)
 
   data2 = [(x[0] for x in data), (x[1] for x in data)]
-  console.log(data2)
 
   d3.select("div#chart3")
     .datum(data2)

@@ -74,7 +74,6 @@
         return _results;
       })()
     ];
-    console.log(data2);
     d3.select("div#chart3").datum(data2).call(mychart);
     return mychart.pointsSelect().on("mouseover", function(d) {
       return d3.select(this).attr("r", mychart.pointsize() * 3).on("click", function(d) {

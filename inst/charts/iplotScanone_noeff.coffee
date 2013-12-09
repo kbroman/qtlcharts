@@ -1,7 +1,7 @@
 # iplotScanone
 # Karl W Broman
 
-iplotScanone = (data) ->
+iplotScanone_noeff = (data) ->
 
   h = 450
   w = 900

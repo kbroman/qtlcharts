@@ -37,9 +37,10 @@ function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
   # start writing
   write_html_top(file, title=title)
 
-  append_html_csslink(file, system.file('charts', 'corr_w_scatter.css', package='qtlcharts'), onefile=onefile)
-  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8', onefile=onefile)
-  append_html_jslink(file, system.file('charts', 'corr_w_scatter.js', package='qtlcharts'), onefile=onefile)
+
+  link_d3(file, onefile=onefile)
+  link_chart('corr_w_scatter', file, onefile=onefile)
+  link_chart('iplotPXG', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')
 
@@ -48,7 +49,8 @@ function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
                 'values; click to see the corresponding scatterplot on the right.',
                 tag="div", class="legend", id="legend", style="opacity:0;")
 
-  append_html_jscode(file, 'data = ', json, ';\n\n', 'corr_w_scatter(data);')
+  append_html_jscode(file, 'data = ', json, ';')
+  append_html_jscode(file, 'corr_w_scatter(data);')
 
   append_html_bottom(file)
 

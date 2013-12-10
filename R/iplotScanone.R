@@ -75,14 +75,14 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title, ...)
 {    
   write_html_top(file, title=title)
 
-  append_html_csslink(file, system.file('panels', 'lodchart', 'lodchart.css', package='qtlcharts'), onefile=onefile)
-  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8', onefile=onefile)
-  append_html_jslink(file, system.file('panels', 'lodchart', 'lodchart.js', package='qtlcharts'), onefile=onefile)
-  append_html_jslink(file, system.file('charts', 'iplotScanone_noeff.js', package='qtlcharts'), onefile=onefile)
+  link_d3(file, onefile=onefile)
+  link_panel('lodchart', file, onefile=onefile)
+  link_chart('iplotScanone_noeff', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')
   
-  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, ...), ';\n\n', 'iplotScanone_noeff(data);')
+  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, ...), ';')
+  append_html_jscode(file, 'iplotScanone_noeff(data);')
 
   append_html_p(file, 'Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker for a bit of gratuitous animation.', class='legend')
@@ -108,20 +108,16 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
 
   write_html_top(file, title=title)
 
-  append_html_csslink(file, system.file('panels', 'lodchart', 'lodchart.css', package='qtlcharts'),
-                      onefile=onefile)
-  append_html_csslink(file, system.file('panels', 'dotchart', 'dotchart.css', package='qtlcharts'),
-                      onefile=onefile)
-  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8', onefile=onefile)
-  append_html_jslink(file, system.file('panels', 'lodchart', 'lodchart.js', package='qtlcharts'), onefile=onefile)
-  append_html_jslink(file, system.file('panels', 'dotchart', 'dotchart.js', package='qtlcharts'), onefile=onefile)
-  append_html_jslink(file, system.file('charts', 'iplotScanone_pxg.js', package='qtlcharts'), onefile=onefile)
+  link_d3(file, onefile=onefile)
+  link_panel('lodchart', file, onefile=onefile)
+  link_panel('dotchart', file, onefile=onefile)
+  link_chart('iplotScanone_pxg', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')
   
-  append_html_jscode(file, 'scanoneData = ', scanone_json, ';\n')
-  append_html_jscode(file, 'pxgData = ', pxg_json, ';\n')
-  append_html_jscode(file, 'iplotScanone_pxg(scanoneData, pxgData);\n')
+  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
+  append_html_jscode(file, 'pxgData = ', pxg_json, ';')
+  append_html_jscode(file, 'iplotScanone_pxg(scanoneData, pxgData);')
 
   append_html_p(file, 'Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker to view the phenotype x genotype plot on the right.', class='legend')

@@ -177,3 +177,35 @@ function(file, jsOpts)
   invisible(NULL)
 }
       
+# 
+link_d3 <-
+function(file, onefile=FALSE)
+{
+  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'),
+                     charset='utf-8', onefile=onefile)
+}
+
+link_panel <-
+function(panel, file, onefile=FALSE)
+{
+  cssfile <- system.file('panels', panel, paste0(panel, '.css'), package='qtlcharts') 
+  if(file.exists(cssfile))
+    append_html_csslink(file, cssfile, onefile=onefile)
+
+  jsfile <- system.file('panels', panel, paste0(panel, '.js'), package='qtlcharts') 
+  if(file.exists(jsfile))
+    append_html_jslink(file, jsfile, onefile=onefile)
+}
+
+link_chart <-
+function(chart, file, onefile=FALSE)
+{
+  cssfile <- system.file('charts', paste0(chart, '.css'), package='qtlcharts') 
+  if(file.exists(cssfile))
+    append_html_csslink(file, cssfile, onefile=onefile)
+
+  jsfile <- system.file('charts', paste0(chart, '.js'), package='qtlcharts') 
+  if(file.exists(jsfile))
+    append_html_jslink(file, jsfile, onefile=onefile)
+}
+

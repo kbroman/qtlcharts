@@ -49,10 +49,9 @@ function(cross, marker, pheno.col=1,
   
   write_html_top(file, title=title)
 
-  append_html_csslink(file, system.file('panels', 'dotchart', 'dotchart.css', package='qtlcharts'), onefile=onefile)
-  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8', onefile=onefile)
-  append_html_jslink(file, system.file('panels', 'dotchart', 'dotchart.js', package='qtlcharts'), onefile=onefile)
-  append_html_jslink(file, system.file('charts', 'iplotPXG.js', package='qtlcharts'), onefile=onefile)
+  link_d3(file, onefile=onefile)
+  link_panel('dotchart', file, onefile=onefile)
+  link_chart('iplotPXG', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')
   

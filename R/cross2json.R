@@ -1,21 +1,25 @@
 ## cross2json
 ## Karl W Broman
 
-#' Convert genotypes and a single phenotype to JSON format
-#'
-#' @param cross An object of class \code{"cross"}; see \code{\link[qtl]{read.cross}}.
-#' @param pheno.col Phenotype column
-#' @param method Method for imputing missing genotypes
-#' @param error.prob Genotyping error probability used in imputing missing genotypes
-#' @param map.function Map function used in imputing missing genotypes
-#' @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
-#' @return A character string with the input in JSON format.
-#' @details Genotypes are encoded as integers; negative integers are used to indicate imputed values.
-#' @keywords interface
-#' @export
-#' @examples
-#' data(hyper)
-#' pxg_as_json <- pxg2json(hyper)
+# Convert genotypes and a single phenotype to JSON format
+#
+# Convert the genotype and phenotype data in a cross to JSON format,
+# for use with interative graphics, such as \code{\link{iplotScanone}}.
+# (Largely for internal use.)
+#
+# @param cross An object of class \code{"cross"}; see \code{\link[qtl]{read.cross}}.
+# @param pheno.col Phenotype column
+# @param method Method for imputing missing genotypes
+# @param error.prob Genotyping error probability used in imputing missing genotypes
+# @param map.function Map function used in imputing missing genotypes
+# @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
+# @return A character string with the input in JSON format.
+# @details Genotypes are encoded as integers; negative integers are used to indicate imputed values.
+# @keywords interface
+# @examples
+# data(hyper)
+# pxg_as_json <- pxg2json(hyper)
+# @seealso \code{\link{scanone2json}}
 pxg2json <-
 function(cross, pheno.col=1, method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
          map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)

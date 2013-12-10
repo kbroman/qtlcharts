@@ -1,6 +1,4 @@
 export(corr_w_scatter)
 export(iplotPXG)
 export(iplotScanone)
-export(pxg2json)
 export(qtlchartsversion)
-export(scanone2json)

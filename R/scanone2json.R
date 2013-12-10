@@ -1,18 +1,23 @@
 ## scanone2json
 ## Karl W Broman
 
-#' Convert scanone output to json format
-#'
-#' @param output An object of class \code{"scanone"}, as output by \code{\link[qtl]{scanone}}.
-#' @param \dots Additional arguments passed to \code{\link[RJSONIO]{toJSON}}.
-#' @return A character string with the input in JSON format.
-#' @keywords interface
-#' @export
-#' @examples
-#' data(hyper)
-#' hyper <- calc.genoprob(hyper)
-#' out <- scanone(hyper, method="hk")
-#' out_as_json <- scanone2json(out)
+# Convert scanone output to json format
+#
+# Convert the results of a single-QTL genome scan, as output by
+# \code{\link[qtl]{scanone}}, to JSON format, for use with
+# interactive graphics, such as \code{\link{iplotScanone}}.
+# (Largely for internal use.)
+#
+# @param output An object of class \code{"scanone"}, as output by \code{\link[qtl]{scanone}}.
+# @param \dots Additional arguments passed to \code{\link[RJSONIO]{toJSON}}.
+# @return A character string with the input in JSON format.
+# @keywords interface
+#  @examples
+# data(hyper)
+# hyper <- calc.genoprob(hyper)
+# out <- scanone(hyper, method="hk")
+# out_as_json <- scanone2json(out)
+# @seealso \code{\link{pxg2json}}
 scanone2json <-
 function(output, ...)
 {

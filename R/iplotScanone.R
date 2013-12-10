@@ -4,8 +4,8 @@
 #' Interactive LOD curve
 #
 #' @param scanoneOutput Object of class \code{"scanone"}, as output from \code{\link[qtl]{scanone}}.
-#' @param lodcolumn Numeric value indicating LOD score column to plot.
 #' @param cross (Optional) Object of class \code{"cross"}, see \code{\link[qtl]{read.cross}}.
+#' @param lodcolumn Numeric value indicating LOD score column to plot.
 #' @param pheno.col (Optional) Phenotype column in cross object.
 #' @param file Optional character vector with file to contain the output
 #' @param onefile If TRUE, have output file contain all necessary javascript/css code
@@ -22,10 +22,9 @@
 #' hyper <- calc.genoprob(hyper)
 #' out <- scanone(hyper, method="hk")
 #' \dontrun{iplotScanone(out)}
-#' \dontshow{iplotScanone(out, openfile=FALSE)}
-#' \dontrun{iplotScanone(out, cross=hyper)}
+#' \dontrun{iplotScanone(out, hyper)}
 iplotScanone <-
-function(scanoneOutput, lodcolumn=1, cross, pheno.col=1, 
+function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, 
          file, onefile=FALSE, openfile=TRUE, title="",
          method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
          map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)

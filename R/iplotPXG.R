@@ -27,6 +27,7 @@ function(cross, marker, pheno.col=1,
 {    
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
+  else file <- path.expand(file)
 
   if(file.exists(file))
     stop('The file already exists; please remove it first: ', file)

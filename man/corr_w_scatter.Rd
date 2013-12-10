@@ -2,10 +2,9 @@
 \alias{corr_w_scatter}
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
-  corr_w_scatter(dat, group, reorder = TRUE,
-    corr = cor(dat, use = "pairwise.complete.obs"), file,
-    onefile = FALSE, openfile = TRUE,
-    title = "Correlation matrix with linked scatterplot")
+corr_w_scatter(dat, group, reorder = TRUE, corr = cor(dat, use =
+  "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
+  title = "Correlation matrix with linked scatterplot")
 }
 \arguments{
   \item{dat}{Data matrix (individuals x variables)}
@@ -30,10 +29,10 @@
   \item{title}{Character string with title for plot}
 }
 \value{
-  Character string with the name of the file created
+Character string with the name of the file created
 }
 \description{
-  Image of correlation matrix with linked scatterplot
+Image of correlation matrix with linked scatterplot
 }
 \examples{
 \dontrun{

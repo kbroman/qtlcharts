@@ -2,12 +2,10 @@
 \alias{iplotPXG}
 \title{Interactive phenotype x genotype plot}
 \usage{
-  iplotPXG(cross, marker, pheno.col = 1, file,
-    onefile = FALSE, openfile = TRUE, title = "",
-    method = c("imp", "argmax", "no_dbl_XO"),
-    error.prob = 0.0001,
-    map.function = c("haldane", "kosambi", "c-f", "morgan"),
-    ...)
+iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
+  openfile = TRUE, title = "", method = c("imp", "argmax", "no_dbl_XO"),
+  error.prob = 0.0001, map.function = c("haldane", "kosambi", "c-f",
+  "morgan"), ...)
 }
 \arguments{
   \item{cross}{(Optional) Object of class \code{"cross"},
@@ -36,12 +34,14 @@
 
   \item{map.function}{Map function used in imputing missing
   genotypes}
+
+  \item{\dots}{Passed to \cite{\link[RJSONIO]{toJSON}}}
 }
 \value{
-  Character string with the name of the file created
+Character string with the name of the file created
 }
 \description{
-  Interactive phenotype x genotype plot
+Interactive phenotype x genotype plot
 }
 \examples{
 data(hyper)

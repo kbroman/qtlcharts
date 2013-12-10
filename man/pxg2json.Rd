@@ -2,11 +2,9 @@
 \alias{pxg2json}
 \title{Convert genotypes and a single phenotype to JSON format}
 \usage{
-  pxg2json(cross, pheno.col = 1,
-    method = c("imp", "argmax", "no_dbl_XO"),
-    error.prob = 0.0001,
-    map.function = c("haldane", "kosambi", "c-f", "morgan"),
-    ...)
+pxg2json(cross, pheno.col = 1, method = c("imp", "argmax", "no_dbl_XO"),
+  error.prob = 0.0001, map.function = c("haldane", "kosambi", "c-f",
+  "morgan"), ...)
 }
 \arguments{
   \item{cross}{An object of class \code{"cross"}; see
@@ -26,14 +24,14 @@
   \code{\link[RJSONIO]{toJSON}} function}
 }
 \value{
-  A character string with the input in JSON format.
+A character string with the input in JSON format.
 }
 \description{
-  Convert genotypes and a single phenotype to JSON format
+Convert genotypes and a single phenotype to JSON format
 }
 \details{
-  Genotypes are encoded as integers; negative integers are
-  used to indicate imputed values.
+Genotypes are encoded as integers; negative integers are
+used to indicate imputed values.
 }
 \examples{
 data(hyper)

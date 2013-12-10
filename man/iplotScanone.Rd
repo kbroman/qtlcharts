@@ -2,9 +2,10 @@
 \alias{iplotScanone}
 \title{Interactive LOD curve}
 \usage{
-  iplotScanone(scanoneOutput, lodcolumn = 1, cross,
-    pheno.col = 1, file, onefile = FALSE, openfile = TRUE,
-    title = "")
+iplotScanone(scanoneOutput, lodcolumn = 1, cross, pheno.col = 1, file,
+  onefile = FALSE, openfile = TRUE, title = "", method = c("imp",
+  "argmax", "no_dbl_XO"), error.prob = 0.0001, map.function = c("haldane",
+  "kosambi", "c-f", "morgan"), ...)
 }
 \arguments{
   \item{scanoneOutput}{Object of class \code{"scanone"}, as
@@ -29,12 +30,25 @@
   browser}
 
   \item{title}{Character string with title for plot}
+
+  \item{method}{Method for imputing missing genotypes, if
+  \code{\link[qtl]{fill.geno}} is needed.}
+
+  \item{error.prob}{Genotyping error probability used in
+  imputing missing genotypes, if
+  \code{\link[qtl]{fill.geno}} is needed.}
+
+  \item{map.function}{Map function used in imputing missing
+  genotypes, if \code{\link[qtl]{fill.geno}} is needed.}
+
+  \item{\dots}{Additional arguments passed to the
+  \code{\link[RJSONIO]{toJSON}} function #'}
 }
 \value{
-  Character string with the name of the file created
+Character string with the name of the file created
 }
 \description{
-  Interactive LOD curve
+Interactive LOD curve
 }
 \examples{
 data(hyper)

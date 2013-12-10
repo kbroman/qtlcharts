@@ -2,20 +2,20 @@
 \alias{scanone2json}
 \title{Convert scanone output to json format}
 \usage{
-  scanone2json(output, ...)
+scanone2json(output, ...)
 }
 \arguments{
   \item{output}{An object of class \code{"scanone"}, as
   output by \code{\link[qtl]{scanone}}.}
 
-  \item{\dots}{Additional arguments passed to the
-  \code{\link[RJSONIO]{toJSON}} function}
+  \item{\dots}{Additional arguments passed to
+  \code{\link[RJSONIO]{toJSON}}.}
 }
 \value{
-  A character string with the input in JSON format.
+A character string with the input in JSON format.
 }
 \description{
-  Convert scanone output to json format
+Convert scanone output to json format
 }
 \examples{
 data(hyper)

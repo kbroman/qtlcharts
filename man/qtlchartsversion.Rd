@@ -2,13 +2,13 @@
 \alias{qtlchartsversion}
 \title{print the installed version of R/qtlcharts}
 \usage{
-  qtlchartsversion()
+qtlchartsversion()
 }
 \value{
-  Character string with version number
+Character string with version number
 }
 \description{
-  print the installed version of R/qtlcharts
+print the installed version of R/qtlcharts
 }
 \examples{
 qtlchartsversion()

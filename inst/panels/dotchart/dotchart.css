@@ -1,11 +1,11 @@
 
 body {
- font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 text {
- font-family: sans-serif;
- font-size: 11pt;
+  font-family: sans-serif;
+  font-size: 11pt;
 }
 
 .title text {
@@ -32,4 +32,3 @@ text {
 .x.axis text.title {
   fill: blue;
 }
-

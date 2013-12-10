@@ -44,7 +44,9 @@ Character string with the name of the file created
 Interactive phenotype x genotype plot
 }
 \examples{
+\dontrun{
 data(hyper)
-\dontrun{iplotPXG(hyper)}
+iplotPXG(hyper)
+}
 }
 

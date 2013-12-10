@@ -17,8 +17,10 @@
 #' @return Character string with the name of the file created
 #' @export
 #' @examples
+#' \dontrun{
 #' data(hyper)
-#' \dontrun{iplotPXG(hyper)}
+#' iplotPXG(hyper)
+#' }
 iplotPXG <-
 function(cross, marker, pheno.col=1,
          file, onefile=FALSE, openfile=TRUE, title="",

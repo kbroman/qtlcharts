@@ -10,10 +10,13 @@ totalw = halfw*2
 
 # Example 1: simplest use
 d3.json "data.json", (data) ->
+  console.log(data)
+
   mychart = dotchart().xvar(0)
                       .yvar(1)
-                      .xlab("X1")
-                      .ylab("X2")
+                      .xlab("X")
+                      .ylab("Y")
+                      .title("Jittered (default)") 
                       .height(h)
                       .width(w)
                       .margin(margin)
@@ -34,8 +37,9 @@ d3.json "data.json", (data) ->
 d3.json "data.json", (data) ->
   mychart = dotchart().xvar(0)
                       .yvar(1)
-                      .xlab("X1")
-                      .ylab("X2")
+                      .xlab("X")
+                      .ylab("Y")
+                      .title("No jittering") 
                       .height(h)
                       .width(w)
                       .margin(margin)

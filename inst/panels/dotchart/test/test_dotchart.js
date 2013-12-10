@@ -24,7 +24,8 @@
 
   d3.json("data.json", function(data) {
     var mychart;
-    mychart = dotchart().xvar(0).yvar(1).xlab("X1").ylab("X2").height(h).width(w).margin(margin);
+    console.log(data);
+    mychart = dotchart().xvar(0).yvar(1).xlab("X").ylab("Y").title("Jittered (default)").height(h).width(w).margin(margin);
     d3.select("div#chart1").datum(data).call(mychart);
     return mychart.pointsSelect().on("mouseover", function(d) {
       return d3.select(this).attr("r", mychart.pointsize() * 3).on("click", function(d) {
@@ -39,7 +40,7 @@
 
   d3.json("data.json", function(data) {
     var mychart;
-    mychart = dotchart().xvar(0).yvar(1).xlab("X1").ylab("X2").height(h).width(w).margin(margin).xjitter(0);
+    mychart = dotchart().xvar(0).yvar(1).xlab("X").ylab("Y").title("No jittering").height(h).width(w).margin(margin).xjitter(0);
     d3.select("div#chart2").datum(data).call(mychart);
     return mychart.pointsSelect().on("mouseover", function(d) {
       return d3.select(this).attr("r", mychart.pointsize() * 3).on("click", function(d) {

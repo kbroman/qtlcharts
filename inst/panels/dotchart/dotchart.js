@@ -3,8 +3,8 @@ var dotchart, formatAxis, unique,
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
 dotchart = function() {
-  var axispos, chart, dataByInd, height, margin, nyticks, pointcolor, pointsSelect, pointsize, pointstroke, rectcolor, width, xcategories, xcatlabels, xjitter, xlab, xscale, xvar, yNA, ylab, ylim, yscale, yticks, yvar;
-  width = 800;
+  var axispos, chart, dataByInd, height, margin, nyticks, pointcolor, pointsSelect, pointsize, pointstroke, rectcolor, title, titlepos, width, xcategories, xcatlabels, xjitter, xlab, xscale, xvar, yNA, ylab, ylim, yscale, yticks, yvar;
+  width = 400;
   height = 500;
   margin = {
     left: 60,
@@ -19,6 +19,7 @@ dotchart = function() {
     xlabel: 5,
     ylabel: 5
   };
+  titlepos = 20;
   xcategories = null;
   xcatlabels = null;
   xjitter = null;
@@ -36,16 +37,17 @@ dotchart = function() {
   pointstroke = "black";
   pointsize = 3;
   xlab = "Group";
-  ylab = "Y";
+  ylab = "Response";
   xscale = d3.scale.ordinal();
   yscale = d3.scale.linear();
   xvar = 0;
   yvar = 1;
+  title = "";
   pointsSelect = null;
   dataByInd = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var g, gEnter, i, na_value, panelheight, points, svg, v, w, x, xaxis, xrange, y, yaxis, yrange, ys;
+      var g, gEnter, i, na_value, panelheight, points, svg, titlegrp, v, w, x, xaxis, xrange, y, yaxis, yrange, ys;
       if (dataByInd) {
         x = data.map(function(d) {
           return d[xvar];
@@ -146,6 +148,7 @@ dotchart = function() {
       if (!(yticks != null)) {
         yticks = ys.ticks(nyticks);
       }
+      titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + width / 2).attr("y", margin.top - titlepos).text(title);
       xaxis = g.append("g").attr("class", "x axis");
       xaxis.selectAll("empty").data(xcategories).enter().append("line").attr("x1", function(d) {
         return xscale(d);
@@ -173,6 +176,8 @@ dotchart = function() {
       if (yNA.handle) {
         yaxis.append("text").attr("x", margin.left - axispos.ylabel).attr("y", margin.top + height - yNA.width / 2).text("N/A");
       }
+      console.log(x);
+      console.log(xcategories);
       points = g.append("g").attr("id", "points");
       pointsSelect = points.selectAll("empty").data(data).enter().append("circle").attr("cx", function(d, i) {
         return xscale(x[i]) + xjitter[i];
@@ -219,6 +224,13 @@ dotchart = function() {
       return axispos;
     }
     axispos = value;
+    return chart;
+  };
+  chart.titlepos = function(value) {
+    if (!arguments.length) {
+      return titlepos;
+    }
+    titlepos;
     return chart;
   };
   chart.xcategories = function(value) {
@@ -298,6 +310,13 @@ dotchart = function() {
     dataByInd = value;
     return chart;
   };
+  chart.title = function(value) {
+    if (!arguments.length) {
+      return title;
+    }
+    title = value;
+    return chart;
+  };
   chart.xlab = function(value) {
     if (!arguments.length) {
       return xlab;
@@ -367,7 +386,7 @@ unique = function(x) {
   }
   _results = [];
   for (v in output) {
-    _results.push(v);
+    _results.push(output[v]);
   }
   return _results;
 };

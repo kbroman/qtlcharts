@@ -14,10 +14,11 @@ Here are all of the options:
 
     mychart = dotchart().xvar("x")                                               # variable containing x-coordinate
                         .yvar("y")                                               # variable containing y-coordinate
-                        .width(800)                                              # internal width of chart
+                        .width(400)                                              # internal width of chart
                         .height(500)                                             # internal height
                         .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
                         .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
+                        .titlepos(20)                                            # spacing for panel title
                         .xjitter(null)                                           # horizontal jittering
                         .xcategories(null)                                       # ordered categories for X variable
                         .xcatlabels(null)                                        # labels for x-axis categories
@@ -28,8 +29,9 @@ Here are all of the options:
                         .pointcolor("darkslateblue")                             # color for points
                         .pointstroke("black")                                    # stroke color for points
                         .pointsize(3)                                            # radius of points at markers
-                        .xlab("X")                                               # x-axis label
-                        .ylab("Y")                                               # y-axis label
+                        .title("")                                               # panel title
+                        .xlab("Group")                                           # x-axis label
+                        .ylab("Response")                                        # y-axis label
                         .yNA({handle:true, force:false, width:15, gap:10})       # treatment of missing y values
                         .dataByInd(true)                                         # is data organized by individual?
 

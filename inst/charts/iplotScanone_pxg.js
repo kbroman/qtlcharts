@@ -30,7 +30,6 @@ iplotScanone_pxg = function(lod_data, pxg_data) {
   plotPXG = function(markername, markerindex) {
     var chr, chrtype, g, gabs, genonames, inferred, mypxgchart, _i, _ref, _results;
     svg.select("g#pxgchart").remove();
-    console.log(markername, markerindex);
     g = pxg_data.geno[markerindex];
     gabs = (function() {
       var _i, _len, _results;
@@ -50,7 +49,6 @@ iplotScanone_pxg = function(lod_data, pxg_data) {
       }
       return _results;
     })();
-    console.log([g, gabs, inferred, pxg_data.pheno]);
     chr = pxg_data.chrByMarkers[markername];
     chrtype = pxg_data.chrtype[chr];
     genonames = pxg_data.genonames[chrtype];

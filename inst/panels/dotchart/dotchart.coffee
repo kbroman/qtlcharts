@@ -178,9 +178,6 @@ dotchart = () ->
             .attr("y", margin.top+height-yNA.width/2)
             .text("N/A")
 
-      console.log(x)
-      console.log(xcategories)
-
       points = g.append("g").attr("id", "points")
       pointsSelect =
         points.selectAll("empty")

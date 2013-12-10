@@ -176,8 +176,6 @@ dotchart = function() {
       if (yNA.handle) {
         yaxis.append("text").attr("x", margin.left - axispos.ylabel).attr("y", margin.top + height - yNA.width / 2).text("N/A");
       }
-      console.log(x);
-      console.log(xcategories);
       points = g.append("g").attr("id", "points");
       pointsSelect = points.selectAll("empty").data(data).enter().append("circle").attr("cx", function(d, i) {
         return xscale(x[i]) + xjitter[i];

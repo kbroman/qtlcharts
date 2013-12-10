@@ -37,12 +37,10 @@ iplotScanone_pxg = (lod_data, pxg_data) ->
   plotPXG = (markername, markerindex) ->
     svg.select("g#pxgchart").remove()
     
-
-    console.log(markername, markerindex)
     g = pxg_data.geno[markerindex]
     gabs = (Math.abs(x) for x in g)
     inferred = (x < 0 for x in g)
-    console.log([g, gabs, inferred, pxg_data.pheno])
+
     chr = pxg_data.chrByMarkers[markername]
     chrtype = pxg_data.chrtype[chr]
     genonames = pxg_data.genonames[chrtype]

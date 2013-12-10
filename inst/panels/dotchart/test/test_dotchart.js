@@ -24,7 +24,6 @@
 
   d3.json("data.json", function(data) {
     var mychart;
-    console.log(data);
     mychart = dotchart().xvar(0).yvar(1).xlab("X").ylab("Y").title("Jittered (default)").height(h).width(w).margin(margin);
     d3.select("div#chart1").datum(data).call(mychart);
     return mychart.pointsSelect().on("mouseover", function(d) {

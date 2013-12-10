@@ -10,8 +10,6 @@ totalw = halfw*2
 
 # Example 1: simplest use
 d3.json "data.json", (data) ->
-  console.log(data)
-
   mychart = dotchart().xvar(0)
                       .yvar(1)
                       .xlab("X")

@@ -1,16 +1,20 @@
-# iplotPXG
+# iplotPXG: (just barely) interactive plot of phenotype vs genotype
 # Karl W Broman
 
-iplotPXG = (data) ->
+iplotPXG = (data, jsOpts) ->
 
   gen = (Math.abs(x) for x in data.geno[0])
   inferred = (x < 0 for x in data.geno[0])
   phe = data.pheno
   gnames = (data.genonames[y] for y of data.genonames)[0]
 
-  h = 450
-  w = 300
-  margin = {left:60, top:40, right:40, bottom: 40, inner:5}
+  # handle possible options
+  h = jsOpts?.height ? 450
+  w = jsOpts?.width ? 300
+  title = jsOpts?.title ? ""
+  margin = jsOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5}
+  xlab = jsOpts?.xlab ? "Genotype"
+  ylab = jsOpts?.ylab ? "Phenotype"
 
   mychart = dotchart().height(h)
                       .width(w)
@@ -18,8 +22,9 @@ iplotPXG = (data) ->
                       .xcategories([1..gnames.length])
                       .xcatlabels(gnames)
                       .dataByInd(false)
-                      .xlab("Genotype")
-                      .ylab("Phenotype")
+                      .xlab(xlab)
+                      .ylab(ylab)
+                      .title(title)
 
   d3.select("div#chart")
     .datum([gen, phe])

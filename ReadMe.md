@@ -42,7 +42,7 @@ There aren't many functions available yet, but you can try this:
     data(hyper)
     hyper <- calc.genoprob(hyper, step=1)
     out <- scanone(hyper)
-    iplotScanone(out)
+    iplotScanone(out, hyper)
 
 Also try `corr_w_scatter`, an image of a correlation matrix (for the
 gene expression of a set of 100 genes) linked to the underlying

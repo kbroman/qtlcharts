@@ -57,9 +57,8 @@ genotype plot.
 }
 \examples{
 data(hyper)
-hyper <- calc.genoprob(hyper)
-out <- scanone(hyper, method="hk")
-iplotScanone(out)
+hyper <- calc.genoprob(hyper, step=1)
+out <- scanone(hyper)
 iplotScanone(out, hyper)
 }
 \seealso{

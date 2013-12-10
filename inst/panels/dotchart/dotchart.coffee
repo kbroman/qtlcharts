@@ -183,7 +183,7 @@ dotchart = () ->
               .attr("stroke", pointstroke)
               .attr("stroke-width", "1")
               .attr("opacity", (d,i) ->
-                   return 1 if (y[i]? or yNA.handle)
+                   return 1 if (y[i]? or yNA.handle) and x[i] in xcategories
                    return 0)
 
       # box

@@ -47,7 +47,8 @@ a marker.
 \examples{
 \dontrun{
 data(hyper)
-iplotPXG(hyper)
+marker <- sample(markernames(hyper), 1)
+iplotPXG(hyper, marker)
 }
 }
 \seealso{

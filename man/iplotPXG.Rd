@@ -38,7 +38,7 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
   \item{\dots}{Passed to \cite{\link[RJSONIO]{toJSON}}}
 }
 \value{
-Character string with the name of the file created
+Character string with the name of the file created.
 }
 \description{
 Creates an interactive graph of phenotypes vs genotypes at

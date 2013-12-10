@@ -14,7 +14,7 @@
 #' @param onefile If TRUE, have output file contain all necessary javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
-#' @return Character string with the name of the file created
+#' @return Character string with the name of the file created.
 #' @export
 #' @examples
 #' \dontrun{

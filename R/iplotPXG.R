@@ -16,7 +16,7 @@
 #' @param error.prob Genotyping error probability used in imputing missing genotypes
 #' @param map.function Map function used in imputing missing genotypes
 #' @param \dots Passed to \cite{\link[RJSONIO]{toJSON}}
-#' @return Character string with the name of the file created
+#' @return Character string with the name of the file created.
 #' @export
 #' @examples
 #' \dontrun{

@@ -42,10 +42,10 @@ iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, file,
   genotypes, if \code{\link[qtl]{fill.geno}} is needed.}
 
   \item{\dots}{Additional arguments passed to the
-  \code{\link[RJSONIO]{toJSON}} function #'}
+  \code{\link[RJSONIO]{toJSON}} function}
 }
 \value{
-Character string with the name of the file created
+Character string with the name of the file created.
 }
 \description{
 Creates an interactive graph of a single-QTL genome scan,

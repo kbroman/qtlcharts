@@ -21,7 +21,7 @@
 #' @param error.prob Genotyping error probability used in imputing missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
 #' @param map.function Map function used in imputing missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
 #' @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
-#' #' @return Character string with the name of the file created
+#' @return Character string with the name of the file created.
 #' @export
 #' @examples
 #' data(hyper)

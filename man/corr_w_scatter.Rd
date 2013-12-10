@@ -29,7 +29,7 @@ corr_w_scatter(dat, group, reorder = TRUE, corr = cor(dat, use =
   \item{title}{Character string with title for plot}
 }
 \value{
-Character string with the name of the file created
+Character string with the name of the file created.
 }
 \description{
 Creates an interactive graph with an image of a correlation

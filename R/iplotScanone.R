@@ -115,7 +115,7 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
   
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';\n')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';\n')
-  append_html_jscode(file, 'iplotScanone_pxg(scanone_json, pxg_json);\n')
+  append_html_jscode(file, 'iplotScanone_pxg(scanoneData, pxgData);\n')
 
   append_html_p(file, 'Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker to view the phenotype x genotype plot on the right.', class='legend')

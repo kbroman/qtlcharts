@@ -84,7 +84,6 @@ function(cross, method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
   chrtype <- sapply(cross$geno, class)
   sexpgm <- qtl::getsex(cross)
   if(any(chrtype == "X")) {
-    cat("fix X\n")
     for(i in chr[chrtype=="X"]) {
       geno_X <- qtl::reviseXdata(class(cross)[1], "full", sexpgm, geno=qtl::pull.geno(cross, chr=i),
                                  cross.attr=attributes(cross))

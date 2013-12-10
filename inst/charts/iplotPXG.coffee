@@ -9,7 +9,7 @@ iplotPXG = (data) ->
   gnames = (data.genonames[y] for y of data.genonames)[0]
 
   h = 450
-  w = 900
+  w = 300
   margin = {left:60, top:40, right:40, bottom: 40, inner:5}
 
   mychart = dotchart().height(h)

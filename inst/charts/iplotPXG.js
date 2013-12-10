@@ -33,7 +33,7 @@ iplotPXG = function(data) {
     return _results;
   })())[0];
   h = 450;
-  w = 900;
+  w = 300;
   margin = {
     left: 60,
     top: 40,

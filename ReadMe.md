@@ -33,6 +33,10 @@ Finally, use `install_github` function to install R/qtlcharts:
 
     install_github("kbroman/qtlcharts")
 
+If that doesn't work, you might have an older version of devtools, so try:
+
+    install_github("qtlcharts", "kbroman")
+
 
 #### Example use
 

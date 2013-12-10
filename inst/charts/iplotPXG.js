@@ -45,7 +45,7 @@ iplotPXG = function(data) {
     _results = [];
     for (var _i = 1, _ref = gnames.length; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--){ _results.push(_i); }
     return _results;
-  }).apply(this)).xcatlabels(gnames).dataByInd(false);
+  }).apply(this)).xcatlabels(gnames).dataByInd(false).xlab("Genotype").ylab("Phenotype");
   d3.select("div#chart").datum([gen, phe]).call(mychart);
   return mychart.pointsSelect().attr("fill", function(d, i) {
     if (inferred[i]) {

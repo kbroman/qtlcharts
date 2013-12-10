@@ -18,6 +18,8 @@ iplotPXG = (data) ->
                       .xcategories([1..gnames.length])
                       .xcatlabels(gnames)
                       .dataByInd(false)
+                      .xlab("Genotype")
+                      .ylab("Phenotype")
 
   d3.select("div#chart")
     .datum([gen, phe])

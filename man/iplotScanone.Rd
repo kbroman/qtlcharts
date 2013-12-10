@@ -59,8 +59,8 @@ genotype plot.
 data(hyper)
 hyper <- calc.genoprob(hyper)
 out <- scanone(hyper, method="hk")
-\dontrun{iplotScanone(out)}
-\dontrun{iplotScanone(out, hyper)}
+iplotScanone(out)
+iplotScanone(out, hyper)
 }
 \seealso{
 \code{\link{iplotPXG}}

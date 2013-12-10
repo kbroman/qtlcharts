@@ -17,10 +17,8 @@
 #' @return Character string with the name of the file created.
 #' @export
 #' @examples
-#' \dontrun{
 #' data(geneExpr)
 #' corr_w_scatter(geneExpr$expr, geneExpr$genotype)
-#' }
 corr_w_scatter <-
 function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
          file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot")

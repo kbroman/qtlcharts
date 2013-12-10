@@ -36,9 +36,7 @@ Creates an interactive graph with an image of a correlation
 matrix linked to underlying scatterplots.
 }
 \examples{
-\dontrun{
 data(geneExpr)
 corr_w_scatter(geneExpr$expr, geneExpr$genotype)
-}
 }
 

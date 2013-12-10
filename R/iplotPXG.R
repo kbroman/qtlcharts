@@ -19,11 +19,9 @@
 #' @return Character string with the name of the file created.
 #' @export
 #' @examples
-#' \dontrun{
 #' data(hyper)
 #' marker <- sample(markernames(hyper), 1)
 #' iplotPXG(hyper, marker)
-#' }
 #' @seealso \code{\link{iplotScanone}}
 iplotPXG <-
 function(cross, marker, pheno.col=1,

@@ -4,7 +4,7 @@
 #' Convert scanone output to json format
 #'
 #' @param output An object of class \code{"scanone"}, as output by \code{\link[qtl]{scanone}}.
-#' @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
+#' @param \dots Additional arguments passed to \code{\link[RJSONIO]{toJSON}}.
 #' @return A character string with the input in JSON format.
 #' @keywords interface
 #' @export

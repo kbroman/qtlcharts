@@ -59,9 +59,12 @@ ${DOTCHART_TESTDIR}/data.json: ${DOTCHART_TESTDIR}/create_test_data.R
 
 
 # javascript for the real charts
-jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/corr_w_scatter.js
+jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/corr_w_scatter.js
 
 ${CHART_DIR}/iplotScanone_noeff.js: ${CHART_DIR}/iplotScanone_noeff.coffee
+	coffee -bc $^
+
+${CHART_DIR}/iplotScanone_pxg.js: ${CHART_DIR}/iplotScanone_pxg.coffee
 	coffee -bc $^
 
 ${CHART_DIR}/iplotPXG.js: ${CHART_DIR}/iplotPXG.coffee

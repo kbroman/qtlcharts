@@ -11,7 +11,11 @@
 #' @param onefile If TRUE, have output file contain all necessary javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
-#' @return Character string with the name of the file created
+#' @param method Method for imputing missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
+#' @param error.prob Genotyping error probability used in imputing missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
+#' @param map.function Map function used in imputing missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
+#' @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
+#' #' @return Character string with the name of the file created
 #' @export
 #' @examples
 #' data(hyper)
@@ -22,7 +26,9 @@
 #' \dontrun{iplotScanone(out, cross=hyper)}
 iplotScanone <-
 function(scanoneOutput, lodcolumn=1, cross, pheno.col=1, 
-         file, onefile=FALSE, openfile=TRUE, title="")
+         file, onefile=FALSE, openfile=TRUE, title="",
+         method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
+         map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)
 {    
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -41,21 +47,24 @@ function(scanoneOutput, lodcolumn=1, cross, pheno.col=1,
 
   if(missing(cross))
     return(iplotScanone_noeff(scanoneOutput=scanoneOutput, file=file, onefile=onefile,
-                              openfile=openfile, title=title))
+                              openfile=openfile, title=title, ...))
 
   if(class(cross)[2] != "cross")
     stop('"cross" should have class "cross".')
   
+  method <- match.arg(method)
+  map.function <- match.arg(map.function)
   iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
-                   file=file, onefile=onefile, openfile=openfile, title=title)
+                   file=file, onefile=onefile, openfile=openfile, title=title, 
+                   method=method, error.prob=error.prob, map.function=map.function, ...)
 
   invisible(file)
 }
 
 
-# iplotScanone, with just the LOD curve
+# iplotScanone: LOD curves with nothing else
 iplotScanone_noeff <-
-function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title)
+function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title, ...)
 {    
   write_html_top(file, title=title)
 
@@ -66,7 +75,7 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title)
 
   append_html_middle(file, title, 'chart')
   
-  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput), ';\n\n', 'iplotScanone_noeff(data);')
+  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, ...), ';\n\n', 'iplotScanone_noeff(data);')
 
   append_html_p(file, 'Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker for a bit of gratuitous animation.', class='legend')
@@ -79,23 +88,36 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title)
 }
 
 
-# iplotScanone, with LOD curve and phe x gen
+# iplotScanone_pxg: LOD curves with linked phe x gen plot
 iplotScanone_pxg <-
-function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, title)
+function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, title,
+         method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
+         map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)
 {    
+  scanone_json = scanone2json(scanoneOutput, ...)
+  method <- match.arg(method)
+  map.function <- match.arg(map.function)
+  pxg_json = pxg2json(cross, pheno.col, method=method, error.prob=error.prob, map.function=map.function, ...)
+
   write_html_top(file, title=title)
 
-  append_html_csslink(file, system.file('panels', 'lodchart', 'lodchart.css', package='qtlcharts'), onefile=onefile)
+  append_html_csslink(file, system.file('panels', 'lodchart', 'lodchart.css', package='qtlcharts'),
+                      onefile=onefile)
+  append_html_csslink(file, system.file('panels', 'dotchart', 'dotchart.css', package='qtlcharts'),
+                      onefile=onefile)
   append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8', onefile=onefile)
   append_html_jslink(file, system.file('panels', 'lodchart', 'lodchart.js', package='qtlcharts'), onefile=onefile)
-  append_html_jslink(file, system.file('charts', 'iplotScanone_noeff.js', package='qtlcharts'), onefile=onefile)
+  append_html_jslink(file, system.file('panels', 'dotchart', 'dotchart.js', package='qtlcharts'), onefile=onefile)
+  append_html_jslink(file, system.file('charts', 'iplotScanone_pxg.js', package='qtlcharts'), onefile=onefile)
 
   append_html_middle(file, title, 'chart')
   
-  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput), ';\n\n', 'iplotScanone_noeff(data);')
+  append_html_jscode(file, 'scanoneData = ', scanone_json, ';\n')
+  append_html_jscode(file, 'pxgData = ', pxg_json, ';\n')
+  append_html_jscode(file, 'iplotScanone_pxg(scanone_json, pxg_json);\n')
 
   append_html_p(file, 'Hover over marker positions on the LOD curve to see the marker names. ',
-                'Click on a marker for a bit of gratuitous animation.', class='legend')
+                'Click on a marker to view the phenotype x genotype plot on the right.', class='legend')
 
   append_html_bottom(file)
 

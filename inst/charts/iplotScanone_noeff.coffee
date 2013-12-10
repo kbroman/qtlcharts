@@ -1,4 +1,4 @@
-# iplotScanone
+# iplotScanone_noeff: LOD curves (nothing else)
 # Karl W Broman
 
 iplotScanone_noeff = (data) ->

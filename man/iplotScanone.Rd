@@ -48,7 +48,12 @@ iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, file,
 Character string with the name of the file created
 }
 \description{
-Interactive LOD curve
+Creates an interactive graph of a single-QTL genome scan,
+as calculated by \code{\link[qtl]{scanone}}. If
+\code{cross} is provided, the LOD curves are linked to a
+phenotype x genotype plot for a marker: Click on a marker
+on the LOD curve and see the corresponding phenotype x
+genotype plot.
 }
 \examples{
 data(hyper)
@@ -56,5 +61,8 @@ hyper <- calc.genoprob(hyper)
 out <- scanone(hyper, method="hk")
 \dontrun{iplotScanone(out)}
 \dontrun{iplotScanone(out, hyper)}
+}
+\seealso{
+\code{\link{iplotPXG}}
 }
 

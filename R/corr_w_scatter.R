@@ -2,7 +2,10 @@
 # Karl W Broman
 
 #' Image of correlation matrix with linked scatterplot
-#
+#'
+#' Creates an interactive graph with an image of a
+#' correlation matrix linked to underlying scatterplots.
+#'
 #' @param dat Data matrix (individuals x variables)
 #' @param group Option vector of groups of individuals (e.g., a genotype)
 #' @param reorder If TRUE, reorder the variables by clustering
@@ -18,7 +21,6 @@
 #' data(geneExpr)
 #' corr_w_scatter(geneExpr$expr, geneExpr$genotype)
 #' }
-
 corr_w_scatter <-
 function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
          file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot")

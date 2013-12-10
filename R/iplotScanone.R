@@ -2,7 +2,13 @@
 # Karl W Broman
 
 #' Interactive LOD curve
-#
+#'
+#' Creates an interactive graph of a single-QTL genome scan, as
+#' calculated by \code{\link[qtl]{scanone}}. If \code{cross} is
+#' provided, the LOD curves are linked to a phenotype x genotype plot
+#' for a marker: Click on a marker on the LOD curve and see the
+#' corresponding phenotype x genotype plot.
+#' 
 #' @param scanoneOutput Object of class \code{"scanone"}, as output from \code{\link[qtl]{scanone}}.
 #' @param cross (Optional) Object of class \code{"cross"}, see \code{\link[qtl]{read.cross}}.
 #' @param lodcolumn Numeric value indicating LOD score column to plot.
@@ -23,6 +29,7 @@
 #' out <- scanone(hyper, method="hk")
 #' \dontrun{iplotScanone(out)}
 #' \dontrun{iplotScanone(out, hyper)}
+#' @seealso \code{\link{iplotPXG}}
 iplotScanone <-
 function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, 
          file, onefile=FALSE, openfile=TRUE, title="",

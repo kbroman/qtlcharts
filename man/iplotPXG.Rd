@@ -41,12 +41,16 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
 Character string with the name of the file created
 }
 \description{
-Interactive phenotype x genotype plot
+Creates an interactive graph of phenotypes vs genotypes at
+a marker.
 }
 \examples{
 \dontrun{
 data(hyper)
 iplotPXG(hyper)
 }
+}
+\seealso{
+\code{\link{iplotScanone}}
 }
 

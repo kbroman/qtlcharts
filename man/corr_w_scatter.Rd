@@ -32,7 +32,8 @@ corr_w_scatter(dat, group, reorder = TRUE, corr = cor(dat, use =
 Character string with the name of the file created
 }
 \description{
-Image of correlation matrix with linked scatterplot
+Creates an interactive graph with an image of a correlation
+matrix linked to underlying scatterplots.
 }
 \examples{
 \dontrun{

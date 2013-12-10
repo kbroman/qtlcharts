@@ -9,12 +9,12 @@
 # @param corr Correlation matrix
 # @return Character string with the input data in JSON format
 # @seealso \code{\link{corr_w_scatter}}
+# @keywords interface
 # @examples
 # \dontrun{
 # data(geneExpr)
 # geneExpr_as_json <- convert4corrwscatter(geneExpr$expr, geneExpr$genotype)
 # }
-
 convert4corrwscatter <-
 function(dat, group, reorder=TRUE, corr)
 {

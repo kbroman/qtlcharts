@@ -2,7 +2,9 @@
 # Karl W Broman
 
 #' Interactive phenotype x genotype plot
-#
+#'
+#' Creates an interactive graph of phenotypes vs genotypes at a marker.
+#'
 #' @param cross (Optional) Object of class \code{"cross"}, see \code{\link[qtl]{read.cross}}.
 #' @param marker Character string with marker name
 #' @param pheno.col (Optional) Phenotype column in cross object.
@@ -21,6 +23,7 @@
 #' data(hyper)
 #' iplotPXG(hyper)
 #' }
+#' @seealso \code{\link{iplotScanone}}
 iplotPXG <-
 function(cross, marker, pheno.col=1,
          file, onefile=FALSE, openfile=TRUE, title="",
@@ -52,32 +55,6 @@ function(cross, marker, pheno.col=1,
   append_html_jscode(file, 'data = ', json, ';\n\n', 'iplotPXG(data);')
 
   append_html_p(file, 'Click on a point for a bit of gratuitous animation.', class='legend')
-
-  append_html_bottom(file)
-
-  if(openfile) browseURL(file)
-
-  invisible(file)
-}
-
-
-# iplotScanone, with LOD curve and phe x gen
-iplotScanone_pxg <-
-function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, title)
-{    
-  write_html_top(file, title=title)
-
-  append_html_csslink(file, system.file('panels', 'lodchart', 'lodchart.css', package='qtlcharts'), onefile=onefile)
-  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'), 'utf-8', onefile=onefile)
-  append_html_jslink(file, system.file('panels', 'lodchart', 'lodchart.js', package='qtlcharts'), onefile=onefile)
-  append_html_jslink(file, system.file('charts', 'iplotScanone_noeff.js', package='qtlcharts'), onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
-  
-  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput), ';\n\n', 'iplotScanone_noeff(data);')
-
-  append_html_p(file, 'Hover over marker positions on the LOD curve to see the marker names. ',
-                'Click on a marker for a bit of gratuitous animation.', class='legend')
 
   append_html_bottom(file)
 

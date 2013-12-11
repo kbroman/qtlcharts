@@ -62,7 +62,7 @@ genotype at a QTL:
 Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License).)
 
 R/qtlcharts makes use of the [D3](http://d3js.org) library
-([see its license](inst/d3/LICENSE)) and the
-[d3-tip](http://github.com/Caged/d3-tip) library
+([see its license](inst/d3/LICENSE)) and
+[d3.tip](http://github.com/Caged/d3-tip)
 ([see its license](inst/d3-tip/LICENSE)).
 

@@ -96,7 +96,8 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title, ...)
   append_html_jscode(file, 'iplotScanone_noeff(data);')
 
   append_html_p(file, 'Hover over marker positions on the LOD curve to see the marker names. ',
-                'Click on a marker for a bit of gratuitous animation.', class='legend', id='legend')
+                'Click on a marker for a bit of gratuitous animation.',
+                tag='div', class='legend', id='legend')
 
   append_html_bottom(file)
 
@@ -132,7 +133,7 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
 
   append_html_p(file, 'Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker to view the phenotype x genotype plot on the right.',
-                class='legend', id='legend')
+                tag='div', class='legend', id='legend')
 
   append_html_bottom(file)
 

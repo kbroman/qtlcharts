@@ -1,4 +1,4 @@
-all: jspanels jspaneltests jscharts json doc
+all: jspanels jspaneltests jscharts json d3 doc
 
 PANEL_DIR = inst/panels
 LODCHART_DIR = ${PANEL_DIR}/lodchart
@@ -36,6 +36,15 @@ json: ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_
 
 ${PANEL_DIR}/*/test/data.json: ${PANEL_DIR}/*/test/create_test_data.R
 	cd $(@D);R CMD BATCH $(<F)
+
+#------------------------------------------------------------
+
+# links to d3 for the test files
+
+d3: ${LODCHART_TESTDIR}/d3.min.js ${SCATTERPLOT_TESTDIR}/d3.min.js ${DOTCHART_TESTDIR}/d3.min.js
+
+${PANEL_DIR}/*/test/d3.min.js: inst/d3/d3.min.js
+	ln -s ../../../d3/d3.min.js $@
 
 #------------------------------------------------------------
 

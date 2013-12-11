@@ -9,6 +9,8 @@ SCATTERPLOT_TESTDIR = ${SCATTERPLOT_DIR}/test
 DOTCHART_TESTDIR = ${DOTCHART_DIR}/test
 CHART_DIR = inst/charts
 
+COFFEE_ARGS = -c # use -cm for debugging
+
 # build package documentation
 doc:
 	R -e 'library(devtools);document(roclets=c("namespace", "rd"))'
@@ -19,7 +21,7 @@ doc:
 jspaneltests: ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js ${DOTCHART_TESTDIR}/test_dotchart.js
 
 ${PANEL_DIR}/*/test/%.js: ${PANEL_DIR}/*/test/%.coffee
-	coffee -c $^
+	coffee ${COFFEE_ARGS} $^
 
 #------------------------------------------------------------
 
@@ -27,7 +29,7 @@ ${PANEL_DIR}/*/test/%.js: ${PANEL_DIR}/*/test/%.coffee
 jspanels: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${DOTCHART_DIR}/dotchart.js
 
 ${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
-	coffee -bc $^
+	coffee ${COFFEE_ARGS} -b $^
 
 #------------------------------------------------------------
 
@@ -43,7 +45,7 @@ ${PANEL_DIR}/*/test/data.json: ${PANEL_DIR}/*/test/create_test_data.R
 
 d3: ${LODCHART_TESTDIR}/d3.min.js ${SCATTERPLOT_TESTDIR}/d3.min.js ${DOTCHART_TESTDIR}/d3.min.js
 
-${PANEL_DIR}/*/test/d3.min.js: inst/d3/
+${PANEL_DIR}/*/test/d3.min.js: inst/d3/d3.min.js
 	ln -s ../../../d3/d3.min.js $@
 
 #------------------------------------------------------------
@@ -52,7 +54,7 @@ ${PANEL_DIR}/*/test/d3.min.js: inst/d3/
 
 d3-tip: ${LODCHART_TESTDIR}/d3-tip.js ${SCATTERPLOT_TESTDIR}/d3-tip.js ${DOTCHART_TESTDIR}/d3-tip.js
 
-${PANEL_DIR}/*/test/d3-tip.js: inst/d3-tip/
+${PANEL_DIR}/*/test/d3-tip.js: inst/d3-tip/d3-tip.js
 	ln -s ../../../d3-tip/d3-tip.js $@
 
 #------------------------------------------------------------
@@ -61,7 +63,7 @@ ${PANEL_DIR}/*/test/d3-tip.js: inst/d3-tip/
 jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/corr_w_scatter.js
 
 ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
-	coffee -bc $^
+	coffee ${COFFEE_ARGS} -b $^
 
 #------------------------------------------------------------
 

@@ -40,11 +40,7 @@ lodchart = function() {
   chrSelect = null;
   chart = function(selection) {
     return selection.each(function(data) {
-<<<<<<< HEAD
-      var chr, curves, g, gEnter, hiddenpoints, markerpoints, markertip, svg, xaxis, yaxis, _i, _len, _ref;
-=======
-      var chr, curves, g, gEnter, hiddenpoints, markerpoints, svg, titlegrp, xaxis, yaxis, _i, _len, _ref;
->>>>>>> devel
+      var chr, curves, g, gEnter, hiddenpoints, markerpoints, markertip, svg, titlegrp, xaxis, yaxis, _i, _len, _ref;
       if (!(ylim != null)) {
         ylim = [0, d3.max(data[lodvarname])];
       }

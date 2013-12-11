@@ -62,7 +62,7 @@ function(cross, marker, pheno.col=1,
   append_html_jsopts(file, jsOpts)
   append_html_jscode(file, 'iplotPXG(data,jsOpts);')
 
-  append_html_p(file, 'Click on a point for a bit of gratuitous animation.', class='legend')
+  append_html_p(file, 'Click on a point for a bit of gratuitous animation.', class='legend', id='legend')
 
   append_html_bottom(file)
 

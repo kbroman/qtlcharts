@@ -1,4 +1,4 @@
-all: jspanels jspaneltests jscharts json d3 doc
+all: jspanels jspaneltests jscharts json d3 d3-tip doc
 
 PANEL_DIR = inst/panels
 LODCHART_DIR = ${PANEL_DIR}/lodchart
@@ -43,8 +43,17 @@ ${PANEL_DIR}/*/test/data.json: ${PANEL_DIR}/*/test/create_test_data.R
 
 d3: ${LODCHART_TESTDIR}/d3.min.js ${SCATTERPLOT_TESTDIR}/d3.min.js ${DOTCHART_TESTDIR}/d3.min.js
 
-${PANEL_DIR}/*/test/d3.min.js: inst/d3/d3.min.js
+${PANEL_DIR}/*/test/d3.min.js: inst/d3/
 	ln -s ../../../d3/d3.min.js $@
+
+#------------------------------------------------------------
+
+# links to d3-tip for the test files
+
+d3-tip: ${LODCHART_TESTDIR}/d3-tip.js ${SCATTERPLOT_TESTDIR}/d3-tip.js ${DOTCHART_TESTDIR}/d3-tip.js
+
+${PANEL_DIR}/*/test/d3-tip.js: inst/d3-tip/
+	ln -s ../../../d3-tip/d3-tip.js $@
 
 #------------------------------------------------------------
 

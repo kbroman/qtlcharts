@@ -29,12 +29,7 @@ function(cross, pheno.col=1, method=c("imp", "argmax", "no_dbl_XO"), error.prob=
     
   geno_filled <- getImputedGenotypes(cross, method, error.prob, map.function, imputed_negative=TRUE)
 
-  # phenotype
-  if(qtl:::LikePheVector(pheno.col, qtl::nind(cross), qtl::nphe(cross))) {
-    cross$pheno <- cbind(pheno.col, cross$pheno)
-    pheno.col <- 1
-  }
-  phe <- as.numeric(unlist(qtl::checkcovar(cross, pheno.col, NULL, NULL, FALSE, NULL, NULL, TRUE)[[2]]))
+  phe <- qtl::pull.pheno(cross, pheno.col)
 
   # marker names
   markers <- markernames(cross)

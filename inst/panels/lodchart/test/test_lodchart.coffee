@@ -44,6 +44,7 @@ d3.json "data.json", (data) ->
                          .ylab("LOD score (by EM)")
                          .pointsize(1)
                          .nyticks(9)
+                         .title("Standard interval mapping")
   mychart_hk = lodchart().lodvarname("lod.hk")
                          .height(h)
                          .width(w)
@@ -51,6 +52,7 @@ d3.json "data.json", (data) ->
                          .ylab("LOD score (by H-K)")
                          .linecolor("Crimson")
                          .yticks([0, 1, 2, 4, 6, 8])
+                         .title("Haley-Knott regression")
 
   svg = d3.select("div#bottomchart")
           .append("svg")

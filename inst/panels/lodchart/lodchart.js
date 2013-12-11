@@ -2,7 +2,7 @@
 var chrscales, formatAxis, lodchart, reorgData;
 
 lodchart = function() {
-  var axispos, chart, chrGap, chrSelect, darkrect, height, lightrect, linecolor, linewidth, lodcurve, lodvarname, margin, markerSelect, nyticks, pointcolor, pointsize, width, xlab, xscale, ylab, ylim, yscale, yticks;
+  var axispos, chart, chrGap, chrSelect, darkrect, height, lightrect, linecolor, linewidth, lodcurve, lodvarname, margin, markerSelect, nyticks, pointcolor, pointsize, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
   width = 800;
   height = 500;
   margin = {
@@ -18,6 +18,7 @@ lodchart = function() {
     xlabel: 5,
     ylabel: 5
   };
+  titlepos = 20;
   ylim = null;
   nyticks = 5;
   yticks = null;
@@ -28,6 +29,7 @@ lodchart = function() {
   linewidth = 2;
   pointcolor = "#E9CFEC";
   pointsize = 0;
+  title = "";
   xlab = "Chromosome";
   ylab = "LOD score";
   yscale = d3.scale.linear();
@@ -38,7 +40,7 @@ lodchart = function() {
   chrSelect = null;
   chart = function(selection) {
     return selection.each(function(data) {
-      var chr, curves, g, gEnter, hiddenpoints, markerpoints, svg, xaxis, yaxis, _i, _len, _ref;
+      var chr, curves, g, gEnter, hiddenpoints, markerpoints, svg, titlegrp, xaxis, yaxis, _i, _len, _ref;
       if (!(ylim != null)) {
         ylim = [0, d3.max(data[lodvarname])];
       }
@@ -129,6 +131,7 @@ lodchart = function() {
         d3.select(this).attr("opacity", 0);
         return g.select("#markerbox").remove();
       });
+      titlegrp = g.append("g").attr("class", "title").append("text").attr("x", width / 2).attr("y", -titlepos).text(title);
       return g.append("rect").attr("x", 0).attr("y", 0).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });
   };
@@ -151,6 +154,13 @@ lodchart = function() {
       return margin;
     }
     margin = value;
+    return chart;
+  };
+  chart.titlepos = function(value) {
+    if (!arguments.length) {
+      return titlepos;
+    }
+    titlepos;
     return chart;
   };
   chart.axispos = function(value) {
@@ -228,6 +238,13 @@ lodchart = function() {
       return pointsize;
     }
     pointsize = value;
+    return chart;
+  };
+  chart.title = function(value) {
+    if (!arguments.length) {
+      return title;
+    }
+    title = value;
     return chart;
   };
   chart.xlab = function(value) {

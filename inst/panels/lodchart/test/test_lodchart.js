@@ -44,8 +44,8 @@
 
   d3.json("data.json", function(data) {
     var chart1, chart2, mychart_em, mychart_hk, svg;
-    mychart_em = lodchart().lodvarname("lod.em").height(h).width(w).margin(margin).ylab("LOD score (by EM)").pointsize(1).nyticks(9);
-    mychart_hk = lodchart().lodvarname("lod.hk").height(h).width(w).margin(margin).ylab("LOD score (by H-K)").linecolor("Crimson").yticks([0, 1, 2, 4, 6, 8]);
+    mychart_em = lodchart().lodvarname("lod.em").height(h).width(w).margin(margin).ylab("LOD score (by EM)").pointsize(1).nyticks(9).title("Standard interval mapping");
+    mychart_hk = lodchart().lodvarname("lod.hk").height(h).width(w).margin(margin).ylab("LOD score (by H-K)").linecolor("Crimson").yticks([0, 1, 2, 4, 6, 8]).title("Haley-Knott regression");
     svg = d3.select("div#bottomchart").append("svg").attr("height", totalh).attr("width", totalw);
     chart1 = svg.append("g").attr("id", "chart1");
     chart2 = svg.append("g").attr("id", "chart2").attr("transform", "translate(0, " + halfh + ")");

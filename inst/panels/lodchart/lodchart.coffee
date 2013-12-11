@@ -5,6 +5,7 @@ lodchart = () ->
   height = 500
   margin = {left:60, top:40, right:40, bottom: 40, inner:5}
   axispos = {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
+  titlepos = 20
   ylim = null
   nyticks = 5
   yticks = null
@@ -15,6 +16,7 @@ lodchart = () ->
   linewidth = 2
   pointcolor = "#E9CFEC" # pink
   pointsize = 0 # default = no visible points at markers
+  title = ""
   xlab = "Chromosome"
   ylab = "LOD score"
   yscale = d3.scale.linear()
@@ -188,6 +190,13 @@ lodchart = () ->
                      d3.select(this).attr("opacity", 0)
                      g.select("#markerbox").remove()
 
+      # title
+      titlegrp = g.append("g").attr("class", "title")
+       .append("text")
+       .attr("x", width/2)
+       .attr("y", -titlepos)
+       .text(title)
+
       # another box around edge
       g.append("rect")
        .attr("x", 0)
@@ -212,6 +221,11 @@ lodchart = () ->
   chart.margin = (value) ->
     return margin if !arguments.length
     margin = value
+    chart
+
+  chart.titlepos = (value) ->
+    return titlepos if !arguments.length
+    titlepos
     chart
 
   chart.axispos = (value) ->
@@ -267,6 +281,11 @@ lodchart = () ->
   chart.pointsize = (value) ->
     return pointsize if !arguments.length
     pointsize = value
+    chart
+
+  chart.title = (value) ->
+    return title if !arguments.length
+    title = value
     chart
 
   chart.xlab = (value) ->

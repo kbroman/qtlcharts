@@ -17,13 +17,13 @@ dotchart = () ->
   pointcolor = "slateblue"
   pointstroke = "black"
   pointsize = 3 # default = no visible points at markers
+  title = ""
   xlab = "Group"
   ylab = "Response"
   xscale = d3.scale.ordinal()
   yscale = d3.scale.linear()
   xvar = 0
   yvar = 1
-  title = ""
   pointsSelect = null
   dataByInd = true
 

@@ -1,4 +1,4 @@
-all: jspanels jscharts json doc
+all: jspanels jspaneltests jscharts json doc
 
 PANEL_DIR = inst/panels
 LODCHART_DIR = ${PANEL_DIR}/lodchart
@@ -9,39 +9,27 @@ SCATTERPLOT_TESTDIR = ${SCATTERPLOT_DIR}/test
 DOTCHART_TESTDIR = ${DOTCHART_DIR}/test
 CHART_DIR = inst/charts
 
-
-
-
 # build package documentation
 doc:
 	R -e 'library(devtools);document(roclets=c("namespace", "rd"))'
 
+#------------------------------------------------------------
 
+# javascript of panel tests
+jspaneltests: ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js ${DOTCHART_TESTDIR}/test_dotchart.js
 
-
-# javascript of panels and their tests
-jspanels: ${LODCHART_DIR}/lodchart.js ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js ${DOTCHART_DIR}/dotchart.js ${DOTCHART_TESTDIR}/test_dotchart.js
-
-${LODCHART_DIR}/lodchart.js: ${LODCHART_DIR}/lodchart.coffee
-	coffee -bc $^
-
-${LODCHART_TESTDIR}/test_lodchart.js: ${LODCHART_TESTDIR}/test_lodchart.coffee
+${PANEL_DIR}/*/test/%.js: ${PANEL_DIR}/*/test/%.coffee
 	coffee -c $^
 
-${SCATTERPLOT_DIR}/scatterplot.js: ${SCATTERPLOT_DIR}/scatterplot.coffee
+#------------------------------------------------------------
+
+# javascript of panels
+jspanels: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${DOTCHART_DIR}/dotchart.js
+
+${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
 	coffee -bc $^
 
-${SCATTERPLOT_TESTDIR}/test_scatterplot.js: ${SCATTERPLOT_TESTDIR}/test_scatterplot.coffee
-	coffee -c $^
-
-${DOTCHART_DIR}/dotchart.js: ${DOTCHART_DIR}/dotchart.coffee
-	coffee -bc $^
-
-${DOTCHART_TESTDIR}/test_dotchart.js: ${DOTCHART_TESTDIR}/test_dotchart.coffee
-	coffee -c $^
-
-
-
+#------------------------------------------------------------
 
 # test data files
 json: ${LODCHART_TESTDIR}/scanone.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_TESTDIR}/data.json
@@ -55,8 +43,7 @@ ${SCATTERPLOT_TESTDIR}/data.json: ${SCATTERPLOT_TESTDIR}/create_test_data.R
 ${DOTCHART_TESTDIR}/data.json: ${DOTCHART_TESTDIR}/create_test_data.R
 	cd ${DOTCHART_TESTDIR};R CMD BATCH create_test_data.R
 
-
-
+#------------------------------------------------------------
 
 # javascript for the real charts
 jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/corr_w_scatter.js
@@ -64,13 +51,13 @@ jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${
 ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
 	coffee -bc $^
 
-
-
+#------------------------------------------------------------
 
 # remove all data files and javascript files
 clean:
-	rm ${LODCHART_DIR}/lodchart.js ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js ${DOTCHART_DIR}/dotchart.js ${DOTCHART_TESTDIR}/test_dotchart.js ${PANEL_DIR}/*/*.json ${CHART_DIR}/*.js
+	rm ${PANEL_DIR}/*/*.js ${PANEL_DIR}/*/test/*.js  ${PANEL_DIR}/*/test/*.json ${CHART_DIR}/*.js
 
+#------------------------------------------------------------
 
 web:
 	scp ${LODCHART_DIR}/lodchart.* broman-2:public_html/D3/lodchart/

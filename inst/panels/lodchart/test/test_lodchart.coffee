@@ -8,7 +8,7 @@ totalh = halfh*2
 totalw = (w+margin.left+margin.right)
 
 # simplest use
-d3.json "scanone.json", (data) ->
+d3.json "data.json", (data) ->
   mychart = lodchart().lodvarname("lod.em")
                       .height(h)
                       .width(w)
@@ -36,7 +36,7 @@ d3.json "scanone.json", (data) ->
                     .transition().duration(500).attr("r", r)
 
 # two LOD charts within one SVG
-d3.json "scanone.json", (data) ->
+d3.json "data.json", (data) ->
   mychart_em = lodchart().lodvarname("lod.em")
                          .height(h)
                          .width(w)

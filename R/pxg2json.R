@@ -1,4 +1,4 @@
-## cross2json
+## pxg2json
 ## Karl W Broman
 
 # Convert genotypes and a single phenotype to JSON format

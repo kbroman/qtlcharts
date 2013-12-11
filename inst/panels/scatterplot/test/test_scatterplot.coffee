@@ -55,6 +55,7 @@ d3.json "data.json", (data) ->
                               .pointsize(4)
                               .xlab("X#{xvar[i]+1}")
                               .ylab("X#{yvar[i]+1}")
+                              .title("X#{yvar[i]+1} vs. X#{xvar[i]+1}")
 
     chart[i] = svg.append("g").attr("id", "chart#{i}")
                   .attr("transform", "translate(#{xshift[i]},#{yshift[i]})")
@@ -108,6 +109,8 @@ d3.json "data.json", (data) ->
                            .ylab("X1")
                            .xNA({handle:true, force:true, width:15, gap:10})
                            .yNA({handle:true, force:true, width:15, gap:10})
+                           .title("X1 vs X2")
+
   mychart02 = scatterplot().xvar(2)
                            .yvar(0)
                            .height(h)
@@ -116,6 +119,7 @@ d3.json "data.json", (data) ->
                            .xlab("X3")
                            .ylab("X1")
                            .yNA({handle:true, force:true, width:15, gap:10})
+                           .title("X1 vs X3")
   mychart12 = scatterplot().xvar(2)
                            .yvar(1)
                            .height(h)
@@ -124,6 +128,7 @@ d3.json "data.json", (data) ->
                            .xlab("X3")
                            .ylab("X2")
                            .xNA({handle:false, force:false, width:15, gap:10})
+                           .title("X2 vs X3")
 
   svg = d3.select("div#chart3")
           .append("svg")

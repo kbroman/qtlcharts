@@ -2,7 +2,7 @@
 var formatAxis, scatterplot;
 
 scatterplot = function() {
-  var axispos, chart, dataByInd, height, margin, nxticks, nyticks, pointcolor, pointsSelect, pointsize, pointstroke, rectcolor, width, xNA, xlab, xlim, xscale, xticks, xvar, yNA, ylab, ylim, yscale, yticks, yvar;
+  var axispos, chart, dataByInd, height, margin, nxticks, nyticks, pointcolor, pointsSelect, pointsize, pointstroke, rectcolor, title, titlepos, width, xNA, xlab, xlim, xscale, xticks, xvar, yNA, ylab, ylim, yscale, yticks, yvar;
   width = 800;
   height = 500;
   margin = {
@@ -18,6 +18,7 @@ scatterplot = function() {
     xlabel: 5,
     ylabel: 5
   };
+  titlepos = 20;
   xNA = {
     handle: true,
     force: false,
@@ -40,6 +41,7 @@ scatterplot = function() {
   pointcolor = "slateblue";
   pointstroke = "black";
   pointsize = 3;
+  title = "";
   xlab = "X";
   ylab = "Y";
   yscale = d3.scale.linear();
@@ -50,7 +52,7 @@ scatterplot = function() {
   dataByInd = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var g, gEnter, i, na_value, panelheight, paneloffset, panelwidth, points, svg, x, xaxis, xrange, xs, y, yaxis, yrange, ys;
+      var g, gEnter, i, na_value, panelheight, paneloffset, panelwidth, points, svg, titlegrp, x, xaxis, xrange, xs, y, yaxis, yrange, ys;
       if (dataByInd) {
         x = data.map(function(d) {
           return d[xvar];
@@ -145,6 +147,7 @@ scatterplot = function() {
       if (!(xticks != null)) {
         xticks = xs.ticks(nxticks);
       }
+      titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + width / 2).attr("y", margin.top - titlepos).text(title);
       xaxis = g.append("g").attr("class", "x axis");
       xaxis.selectAll("empty").data(xticks).enter().append("line").attr("x1", function(d) {
         return xscale(d);
@@ -228,6 +231,13 @@ scatterplot = function() {
     axispos = value;
     return chart;
   };
+  chart.titlepos = function(value) {
+    if (!arguments.length) {
+      return titlepos;
+    }
+    titlepos;
+    return chart;
+  };
   chart.xlim = function(value) {
     if (!arguments.length) {
       return xlim;
@@ -303,6 +313,13 @@ scatterplot = function() {
       return dataByInd;
     }
     dataByInd = value;
+    return chart;
+  };
+  chart.title = function(value) {
+    if (!arguments.length) {
+      return title;
+    }
+    title = value;
     return chart;
   };
   chart.xlab = function(value) {

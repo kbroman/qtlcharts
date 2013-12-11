@@ -47,7 +47,7 @@
     mychart = [];
     chart = [];
     for (i = _i = 0; _i <= 2; i = ++_i) {
-      mychart[i] = scatterplot().xvar(xvar[i]).yvar(yvar[i]).nxticks(6).height(h).width(w).margin(margin).pointsize(4).xlab("X" + (xvar[i] + 1)).ylab("X" + (yvar[i] + 1));
+      mychart[i] = scatterplot().xvar(xvar[i]).yvar(yvar[i]).nxticks(6).height(h).width(w).margin(margin).pointsize(4).xlab("X" + (xvar[i] + 1)).ylab("X" + (yvar[i] + 1)).title("X" + (yvar[i] + 1) + " vs. X" + (xvar[i] + 1));
       chart[i] = svg.append("g").attr("id", "chart" + i).attr("transform", "translate(" + xshift[i] + "," + yshift[i] + ")");
       chart[i].datum(data).call(mychart[i]);
     }
@@ -106,19 +106,19 @@
       force: true,
       width: 15,
       gap: 10
-    });
+    }).title("X1 vs X2");
     mychart02 = scatterplot().xvar(2).yvar(0).height(h).width(w).margin(margin).xlab("X3").ylab("X1").yNA({
       handle: true,
       force: true,
       width: 15,
       gap: 10
-    });
+    }).title("X1 vs X3");
     mychart12 = scatterplot().xvar(2).yvar(1).height(h).width(w).margin(margin).xlab("X3").ylab("X2").xNA({
       handle: false,
       force: false,
       width: 15,
       gap: 10
-    });
+    }).title("X2 vs X3");
     svg = d3.select("div#chart3").append("svg").attr("height", totalh).attr("width", totalw);
     chart01 = svg.append("g").attr("id", "chart01");
     chart02 = svg.append("g").attr("id", "chart02").attr("transform", "translate(" + halfw + ", 0)");

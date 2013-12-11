@@ -19,6 +19,7 @@ Here are all of the options:
                            .height(500)                                             # internal height
                            .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
                            .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
+                           .titlepos(20)                                            # spacing for panel title
                            .xlim(null)                                              # x-axis limits
                            .ylim(null)                                              # y-axis limits
                            .nxticks(5)                                              # no. x-axis ticks
@@ -29,6 +30,7 @@ Here are all of the options:
                            .pointcolor("darkslateblue")                             # color for points
                            .pointstroke("black")                                    # stroke color for points
                            .pointsize(3)                                            # radius of points at markers
+                           .title("")                                               # panel title
                            .xlab("X")                                               # x-axis label
                            .ylab("Y")                                               # y-axis label
                            .xNA({handle:true, force:false, width:15, gap:10})       # treatment of missing x values

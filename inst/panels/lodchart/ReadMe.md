@@ -16,6 +16,7 @@ Here are all of the options:
                         .height(500)                                             # internal height
                         .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
                         .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
+                        .titlepos(20)                                            # spacing for panel title
                         .ylim(null)                                              # y-axis limits
                         .nyticks(5)                                              # no. y-axis ticks
                         .yticks(null)                                            # locations of y-axis ticks
@@ -26,6 +27,7 @@ Here are all of the options:
                         .linewidth(2)                                            # width of LOD curves
                         .pointcolor("#E9CFEC")                                   # color of points a markers
                         .pointsize(0)                                            # radius of points at markers (0=hidden)
+                        .title("")                                               # panel title
                         .xlab("Chromosome")                                      # x-axis label
                         .ylab("LOD score")                                       # y-axis label
 

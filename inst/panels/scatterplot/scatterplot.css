@@ -8,6 +8,12 @@ text {
   font-size: 11pt;
 }
 
+.title text {
+  dominant-baseline: middle;
+  fill: blue;
+  text-anchor: middle;
+}
+
 .y.axis text {
   dominant-baseline: middle;
   text-anchor: end;

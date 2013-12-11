@@ -154,6 +154,16 @@ lodchart = () ->
                     .attr("pointer-events", "hidden")
       # these hidden points are what gets selected...a bit larger
       hiddenpoints = g.append("g").attr("id", "markerpoints_hidden")
+
+      markertip = d3.tip()
+                    .attr('class', 'd3-tip')
+                    .html((d) ->
+                      [d.name, " LOD = #{d3.format('.2f')(d.lod)}"])
+                    .direction("e")
+                    .offset([0,10])
+
+      svg.call(markertip)
+
       markerSelect =
         hiddenpoints.selectAll("empty")
                   .data(data.markers)
@@ -169,24 +179,10 @@ lodchart = () ->
                   .attr("stroke-width", "1")
                   .on "mouseover", (d) ->
                      d3.select(this).attr("opacity", 1)
-                     xpos = xscale[d.chr](d.pos)
-                     if xpos < width/2
-                       xpos += 15
-                       anchor = "start"
-                     else
-                       xpos -= 10
-                       anchor = "end"
-                     g.append("text")
-                      .attr("x", xpos)
-                      .attr("y", yscale(d.lod))
-                      .text(d.name)
-                      .attr("id", "markerbox")
-                      .style("pointer-events", "none")
-                      .attr("text-anchor", anchor)
-                      .attr("dominant-baseline", "middle")
+                     markertip.show(d)
                   .on "mouseout", ->
                      d3.select(this).attr("opacity", 0)
-                     g.select("#markerbox").remove()
+                     .call(markertip.hide)
 
       # another box around edge
       g.append("rect")

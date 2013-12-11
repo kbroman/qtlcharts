@@ -185,6 +185,15 @@ function(file, onefile=FALSE)
                      charset='utf-8', onefile=onefile)
 }
 
+link_d3tip <-
+function(file, onefile=FALSE)
+{
+  append_html_csslink(file, system.file('d3-tip', 'd3-tip.css', package='qtlcharts'),
+                     onefile=onefile)
+  append_html_jslink(file, system.file('d3-tip', 'd3-tip.js', package='qtlcharts'),
+                     onefile=onefile)
+}
+
 link_panel <-
 function(panel, file, onefile=FALSE)
 {

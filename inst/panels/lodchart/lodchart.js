@@ -38,7 +38,7 @@ lodchart = function() {
   chrSelect = null;
   chart = function(selection) {
     return selection.each(function(data) {
-      var chr, curves, g, gEnter, hiddenpoints, markerpoints, svg, xaxis, yaxis, _i, _len, _ref;
+      var chr, curves, g, gEnter, hiddenpoints, markerpoints, markertip, svg, xaxis, yaxis, _i, _len, _ref;
       if (!(ylim != null)) {
         ylim = [0, d3.max(data[lodvarname])];
       }
@@ -107,6 +107,10 @@ lodchart = function() {
         }).attr("r", pointsize).attr("fill", pointcolor).attr("pointer-events", "hidden");
       }
       hiddenpoints = g.append("g").attr("id", "markerpoints_hidden");
+      markertip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+        return [d.name, " LOD = " + (d3.format('.2f')(d.lod))];
+      }).direction("e").offset([0, 10]);
+      svg.call(markertip);
       markerSelect = hiddenpoints.selectAll("empty").data(data.markers).enter().append("circle").attr("cx", function(d) {
         return xscale[d.chr](d.pos);
       }).attr("cy", function(d) {
@@ -114,20 +118,10 @@ lodchart = function() {
       }).attr("id", function(d) {
         return d.name;
       }).attr("r", d3.max([pointsize * 2, 3])).attr("opacity", 0).attr("fill", pointcolor).attr("stroke", "black").attr("stroke-width", "1").on("mouseover", function(d) {
-        var anchor, xpos;
         d3.select(this).attr("opacity", 1);
-        xpos = xscale[d.chr](d.pos);
-        if (xpos < width / 2) {
-          xpos += 15;
-          anchor = "start";
-        } else {
-          xpos -= 10;
-          anchor = "end";
-        }
-        return g.append("text").attr("x", xpos).attr("y", yscale(d.lod)).text(d.name).attr("id", "markerbox").style("pointer-events", "none").attr("text-anchor", anchor).attr("dominant-baseline", "middle");
+        return markertip.show(d);
       }).on("mouseout", function() {
-        d3.select(this).attr("opacity", 0);
-        return g.select("#markerbox").remove();
+        return d3.select(this).attr("opacity", 0).call(markertip.hide);
       });
       return g.append("rect").attr("x", 0).attr("y", 0).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });

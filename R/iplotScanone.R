@@ -87,6 +87,7 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title, ...)
   write_html_top(file, title=title)
 
   link_d3(file, onefile=onefile)
+  link_d3tip(file, onefile=onefile)
   link_panel('lodchart', file, onefile=onefile)
   link_chart('iplotScanone_noeff', file, onefile=onefile)
 
@@ -121,6 +122,7 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
   write_html_top(file, title=title)
 
   link_d3(file, onefile=onefile)
+  link_d3tip(file, onefile=onefile)
   link_panel('lodchart', file, onefile=onefile)
   link_panel('dotchart', file, onefile=onefile)
   link_chart('iplotScanone_pxg', file, onefile=onefile)

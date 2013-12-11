@@ -177,7 +177,7 @@ function(file, jsOpts)
   invisible(NULL)
 }
       
-# 
+# functions to simplify linking/incorporating js/css code
 link_d3 <-
 function(file, onefile=FALSE)
 {
@@ -200,6 +200,10 @@ function(panel, file, onefile=FALSE)
 link_chart <-
 function(chart, file, onefile=FALSE)
 {
+  cssfile <- system.file('charts', 'charts.css', package='qtlcharts') 
+  if(file.exists(cssfile))
+    append_html_csslink(file, cssfile, onefile=onefile)
+
   cssfile <- system.file('charts', paste0(chart, '.css'), package='qtlcharts') 
   if(file.exists(cssfile))
     append_html_csslink(file, cssfile, onefile=onefile)

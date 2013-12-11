@@ -61,5 +61,5 @@ genotype at a QTL:
 
 Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License).)
 
-R/qtlcharts makes use of the [D3](http://d3js.org) library;
-[see the license for D3](inst/d3/LICENSE).
+R/qtlcharts incorporates [D3.js](http://d3js.org)
+([see its license](inst/d3/LICENSE)).

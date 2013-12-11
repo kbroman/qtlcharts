@@ -32,16 +32,10 @@ ${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
 #------------------------------------------------------------
 
 # test data files
-json: ${LODCHART_TESTDIR}/scanone.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_TESTDIR}/data.json
+json: ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_TESTDIR}/data.json
 
-${LODCHART_TESTDIR}/scanone.json: ${LODCHART_TESTDIR}/create_test_data.R
-	cd ${LODCHART_TESTDIR};R CMD BATCH create_test_data.R
-
-${SCATTERPLOT_TESTDIR}/data.json: ${SCATTERPLOT_TESTDIR}/create_test_data.R
-	cd ${SCATTERPLOT_TESTDIR};R CMD BATCH create_test_data.R
-
-${DOTCHART_TESTDIR}/data.json: ${DOTCHART_TESTDIR}/create_test_data.R
-	cd ${DOTCHART_TESTDIR};R CMD BATCH create_test_data.R
+${PANEL_DIR}/*/test/data.json: ${PANEL_DIR}/*/test/create_test_data.R
+	cd $(@D);R CMD BATCH $(<F)
 
 #------------------------------------------------------------
 

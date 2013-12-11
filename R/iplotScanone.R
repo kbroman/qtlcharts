@@ -13,12 +13,19 @@
 #' @param cross (Optional) Object of class \code{"cross"}, see \code{\link[qtl]{read.cross}}.
 #' @param lodcolumn Numeric value indicating LOD score column to plot.
 #' @param pheno.col (Optional) Phenotype column in cross object.
+#' @param chr (Optional) Optional vector indicating the chromosomes
+#'            for which LOD scores should be calculated. This should be a vector
+#'            of character strings referring to chromosomes by name; numeric
+#'            values are converted to strings. Refer to chromosomes with a
+#'            preceding - to have all chromosomes but those considered. A logical
+#'            (TRUE/FALSE) vector may also be used.
 #' @param file Optional character vector with file to contain the output
 #' @param onefile If TRUE, have output file contain all necessary javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
 #' @param method Method for imputing missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
-#' @param error.prob Genotyping error probability used in imputing missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
+#' @param error.prob Genotyping error probability used in imputing
+#'        missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
 #' @param map.function Map function used in imputing missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
 #' @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
 #' @return Character string with the name of the file created.
@@ -30,7 +37,7 @@
 #' iplotScanone(out, hyper)
 #' @seealso \code{\link{iplotPXG}}
 iplotScanone <-
-function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, 
+function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
          file, onefile=FALSE, openfile=TRUE, title="",
          method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
          map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)
@@ -50,6 +57,11 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1,
 
   scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2), drop=FALSE]
   colnames(scanoneOutput)[3] <- 'lod'
+
+  if(!missing(chr)) {
+     scanoneOutput <- subset(scanoneOutput, chr=chr)
+    if(!missing(cross)) cross <- subset(cross, chr=chr)
+   }
 
   if(missing(cross))
     return(iplotScanone_noeff(scanoneOutput=scanoneOutput, file=file, onefile=onefile,

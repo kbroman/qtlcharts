@@ -2,7 +2,7 @@
 \alias{iplotScanone}
 \title{Interactive LOD curve}
 \usage{
-iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, file,
+iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr, file,
   onefile = FALSE, openfile = TRUE, title = "", method = c("imp",
   "argmax", "no_dbl_XO"), error.prob = 0.0001, map.function = c("haldane",
   "kosambi", "c-f", "morgan"), ...)
@@ -19,6 +19,14 @@ iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, file,
 
   \item{pheno.col}{(Optional) Phenotype column in cross
   object.}
+
+  \item{chr}{(Optional) Optional vector indicating the
+  chromosomes for which LOD scores should be calculated.
+  This should be a vector of character strings referring to
+  chromosomes by name; numeric values are converted to
+  strings. Refer to chromosomes with a preceding - to have
+  all chromosomes but those considered. A logical
+  (TRUE/FALSE) vector may also be used.}
 
   \item{file}{Optional character vector with file to
   contain the output}

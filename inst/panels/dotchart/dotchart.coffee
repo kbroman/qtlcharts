@@ -42,8 +42,8 @@ dotchart = () ->
         y = data[yvar]
         data = ([x[i],y[i]] for i of x)
 
-      # if no indID, create one
-      indID = indID ? [1..x.length]
+      # if no indID, create a vector of them
+      indID = indID ? [1..x.length].map (d) -> "ind #{d}"
 
       # if all y not null
       yNA.handle = false if y.every (v) -> (v?) and !yNA.force
@@ -52,11 +52,11 @@ dotchart = () ->
       else
         panelheight = height
 
-      xcategories = unique(x) if !xcategories
-      xcatlabels = xcategories if !xcatlabels
+      xcategories = xcategories ? unique(x)
+      xcatlabels = xcatlabels ? xcategories
       throw "xcatlabels.length != xcategories.length" if xcatlabels.length != xcategories.length
 
-      ylim = [d3.min(y), d3.max(y)] if !(ylim?)
+      ylim = ylim ? [d3.min(y), d3.max(y)]
 
       # I'll replace missing values something smaller than what's observed
       na_value = d3.min(y) - 100
@@ -206,8 +206,8 @@ dotchart = () ->
               .attr("opacity", (d,i) ->
                    return 1 if (y[i]? or yNA.handle) and x[i] in xcategories
                    return 0)
-              .on("mouseover", indtip.show)
-              .on("mouseout", indtip.hide)
+              .on("mouseover.tip", indtip.show)
+              .on("mouseout.tip", indtip.hide)
 
       # box
       g.append("rect")

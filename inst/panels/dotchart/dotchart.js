@@ -72,7 +72,9 @@ dotchart = function() {
         _results = [];
         for (var _i = 1, _ref1 = x.length; 1 <= _ref1 ? _i <= _ref1 : _i >= _ref1; 1 <= _ref1 ? _i++ : _i--){ _results.push(_i); }
         return _results;
-      }).apply(this);
+      }).apply(this).map(function(d) {
+        return "ind " + d;
+      });
       if (y.every(function(v) {
         return (v != null) && !yNA.force;
       })) {
@@ -83,18 +85,12 @@ dotchart = function() {
       } else {
         panelheight = height;
       }
-      if (!xcategories) {
-        xcategories = unique(x);
-      }
-      if (!xcatlabels) {
-        xcatlabels = xcategories;
-      }
+      xcategories = xcategories != null ? xcategories : unique(x);
+      xcatlabels = xcatlabels != null ? xcatlabels : xcategories;
       if (xcatlabels.length !== xcategories.length) {
         throw "xcatlabels.length != xcategories.length";
       }
-      if (!(ylim != null)) {
-        ylim = [d3.min(y), d3.max(y)];
-      }
+      ylim = ylim != null ? ylim : [d3.min(y), d3.max(y)];
       na_value = d3.min(y) - 100;
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
@@ -199,7 +195,7 @@ dotchart = function() {
           return 1;
         }
         return 0;
-      }).on("mouseover", indtip.show).on("mouseout", indtip.hide);
+      }).on("mouseover.tip", indtip.show).on("mouseout.tip", indtip.hide);
       g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", panelheight).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
       if (yNA.handle) {
         return g.append("rect").attr("x", margin.left).attr("y", margin.top + height - yNA.width).attr("height", yNA.width).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");

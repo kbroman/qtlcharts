@@ -53,11 +53,13 @@ iplotScanone_pxg = (lod_data, pxg_data) ->
                            .dataByInd(false)
                            .xlab(markername)
                            .ylab("Phenotype")
+                           .xvar('geno')
+                           .yvar('pheno')
   
     svg.append("g")
        .attr("id", "pxgchart")
        .attr("transform", "translate(#{wleft+margin.left+margin.right},0)")
-       .datum([gabs, pxg_data.pheno])
+       .datum({'geno':gabs, 'pheno':pxg_data.pheno, 'indID':pxg_data.indID})
        .call(mypxgchart)
 
     mypxgchart.pointsSelect()

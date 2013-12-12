@@ -47,7 +47,8 @@ dotchart = function() {
   dataByInd = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var g, gEnter, i, na_value, panelheight, points, svg, titlegrp, v, w, x, xaxis, xrange, y, yaxis, yrange, ys;
+      var g, gEnter, i, indID, indtip, na_value, panelheight, points, svg, titlegrp, v, w, x, xaxis, xrange, y, yaxis, yrange, ys, _i, _ref, _ref1, _results;
+      indID = (_ref = data != null ? data.indID : void 0) != null ? _ref : null;
       if (dataByInd) {
         x = data.map(function(d) {
           return d[xvar];
@@ -67,6 +68,11 @@ dotchart = function() {
           return _results;
         })();
       }
+      indID = indID != null ? indID : (function() {
+        _results = [];
+        for (var _i = 1, _ref1 = x.length; 1 <= _ref1 ? _i <= _ref1 : _i >= _ref1; 1 <= _ref1 ? _i++ : _i--){ _results.push(_i); }
+        return _results;
+      }).apply(this);
       if (y.every(function(v) {
         return (v != null) && !yNA.force;
       })) {
@@ -103,14 +109,14 @@ dotchart = function() {
       if (xjitter === null) {
         w = (xrange[1] - xrange[0]) / xcategories.length;
         xjitter = (function() {
-          var _i, _len, _ref, _results;
-          _ref = d3.range(x.length);
-          _results = [];
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            v = _ref[_i];
-            _results.push((Math.random() - 0.5) * w * 0.2);
+          var _j, _len, _ref2, _results1;
+          _ref2 = d3.range(x.length);
+          _results1 = [];
+          for (_j = 0, _len = _ref2.length; _j < _len; _j++) {
+            v = _ref2[_j];
+            _results1.push((Math.random() - 0.5) * w * 0.2);
           }
-          return _results;
+          return _results1;
         })();
       } else {
         if (typeof xjitter === 'number') {
@@ -118,14 +124,14 @@ dotchart = function() {
         }
         if (xjitter.length === 1) {
           xjitter = (function() {
-            var _i, _len, _ref, _results;
-            _ref = d3.range(x.length);
-            _results = [];
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              v = _ref[_i];
-              _results.push(xjitter[0]);
+            var _j, _len, _ref2, _results1;
+            _ref2 = d3.range(x.length);
+            _results1 = [];
+            for (_j = 0, _len = _ref2.length; _j < _len; _j++) {
+              v = _ref2[_j];
+              _results1.push(xjitter[0]);
             }
-            return _results;
+            return _results1;
           })();
         }
       }
@@ -176,6 +182,10 @@ dotchart = function() {
       if (yNA.handle) {
         yaxis.append("text").attr("x", margin.left - axispos.ylabel).attr("y", margin.top + height - yNA.width / 2).text("N/A");
       }
+      indtip = d3.tip().attr('class', 'd3-tip').html(function(d, i) {
+        return indID[i];
+      }).direction('e').offset([0, 10]);
+      svg.call(indtip);
       points = g.append("g").attr("id", "points");
       pointsSelect = points.selectAll("empty").data(data).enter().append("circle").attr("cx", function(d, i) {
         return xscale(x[i]) + xjitter[i];
@@ -184,12 +194,12 @@ dotchart = function() {
       }).attr("class", function(d, i) {
         return "pt" + i;
       }).attr("r", pointsize).attr("fill", pointcolor).attr("stroke", pointstroke).attr("stroke-width", "1").attr("opacity", function(d, i) {
-        var _ref;
-        if (((y[i] != null) || yNA.handle) && (_ref = x[i], __indexOf.call(xcategories, _ref) >= 0)) {
+        var _ref2;
+        if (((y[i] != null) || yNA.handle) && (_ref2 = x[i], __indexOf.call(xcategories, _ref2) >= 0)) {
           return 1;
         }
         return 0;
-      });
+      }).on("mouseover", indtip.show).on("mouseout", indtip.hide);
       g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", panelheight).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
       if (yNA.handle) {
         return g.append("rect").attr("x", margin.left).attr("y", margin.top + height - yNA.width).attr("height", yNA.width).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
@@ -388,3 +398,7 @@ unique = function(x) {
   }
   return _results;
 };
+
+/*
+//@ sourceMappingURL=dotchart.map
+*/

@@ -24,10 +24,12 @@ iplotPXG = (data, jsOpts) ->
                       .dataByInd(false)
                       .xlab(xlab)
                       .ylab(ylab)
+                      .xvar('geno')
+                      .yvar('pheno')
                       .title(title)
 
   d3.select("div#chart")
-    .datum([gen, phe])
+    .datum({"geno":gen, "pheno":phe, "indID":data.indID})
     .call(mychart)
 
   # animate points at markers on click

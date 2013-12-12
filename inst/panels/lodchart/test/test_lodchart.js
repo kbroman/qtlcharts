@@ -54,3 +54,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=test_lodchart.map
+*/

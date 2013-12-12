@@ -170,3 +170,7 @@
   });
 
 }).call(this);
+
+/*
+//@ sourceMappingURL=test_scatterplot.map
+*/

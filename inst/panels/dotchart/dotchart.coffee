@@ -31,6 +31,9 @@ dotchart = () ->
   chart = (selection) ->
     selection.each (data) ->
 
+      # grab indID if it's there
+      indID = data?.indID ? null
+
       if dataByInd
         x = data.map (d) -> d[xvar]
         y = data.map (d) -> d[yvar]
@@ -39,6 +42,8 @@ dotchart = () ->
         y = data[yvar]
         data = ([x[i],y[i]] for i of x)
 
+      # if no indID, create one
+      indID = indID ? [1..x.length]
 
       # if all y not null
       yNA.handle = false if y.every (v) -> (v?) and !yNA.force
@@ -178,6 +183,13 @@ dotchart = () ->
             .attr("y", margin.top+height-yNA.width/2)
             .text("N/A")
 
+      indtip = d3.tip()
+                 .attr('class', 'd3-tip')
+                 .html((d,i) -> indID[i])
+                 .direction('e')
+                 .offset([0,10])
+      svg.call(indtip)
+
       points = g.append("g").attr("id", "points")
       pointsSelect =
         points.selectAll("empty")
@@ -194,6 +206,8 @@ dotchart = () ->
               .attr("opacity", (d,i) ->
                    return 1 if (y[i]? or yNA.handle) and x[i] in xcategories
                    return 0)
+              .on("mouseover", indtip.show)
+              .on("mouseout", indtip.hide)
 
       # box
       g.append("rect")

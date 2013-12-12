@@ -56,8 +56,12 @@ iplotScanone_pxg = function(lod_data, pxg_data) {
       _results = [];
       for (var _i = 1, _ref = genonames.length; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--){ _results.push(_i); }
       return _results;
-    }).apply(this)).xcatlabels(genonames).dataByInd(false).xlab(markername).ylab("Phenotype");
-    svg.append("g").attr("id", "pxgchart").attr("transform", "translate(" + (wleft + margin.left + margin.right) + ",0)").datum([gabs, pxg_data.pheno]).call(mypxgchart);
+    }).apply(this)).xcatlabels(genonames).dataByInd(false).xlab(markername).ylab("Phenotype").xvar('geno').yvar('pheno');
+    svg.append("g").attr("id", "pxgchart").attr("transform", "translate(" + (wleft + margin.left + margin.right) + ",0)").datum({
+      'geno': gabs,
+      'pheno': pxg_data.pheno,
+      'indID': pxg_data.indID
+    }).call(mypxgchart);
     return mypxgchart.pointsSelect().attr("fill", function(d, i) {
       if (inferred[i]) {
         return "Orchid";
@@ -69,3 +73,7 @@ iplotScanone_pxg = function(lod_data, pxg_data) {
     return plotPXG(markers[i], i);
   });
 };
+
+/*
+//@ sourceMappingURL=iplotScanone_pxg.map
+*/

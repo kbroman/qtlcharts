@@ -58,7 +58,7 @@ function(cross, pheno.col=1, method=c("imp", "argmax", "no_dbl_XO"), error.prob=
   RJSONIO::toJSON(list(geno=t(geno_filled),
                        pheno=phe,
                        chrByMarkers=chrByMarkers,
-                       ind=id,
+                       indID=id,
                        chrtype=chrtype,
                        genonames=genonames))
 }

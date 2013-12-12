@@ -48,8 +48,12 @@ iplotPXG = function(data, jsOpts) {
     _results = [];
     for (var _i = 1, _ref6 = gnames.length; 1 <= _ref6 ? _i <= _ref6 : _i >= _ref6; 1 <= _ref6 ? _i++ : _i--){ _results.push(_i); }
     return _results;
-  }).apply(this)).xcatlabels(gnames).dataByInd(false).xlab(xlab).ylab(ylab).title(title);
-  d3.select("div#chart").datum([gen, phe]).call(mychart);
+  }).apply(this)).xcatlabels(gnames).dataByInd(false).xlab(xlab).ylab(ylab).xvar('geno').yvar('pheno').title(title);
+  d3.select("div#chart").datum({
+    "geno": gen,
+    "pheno": phe,
+    "indID": data.indID
+  }).call(mychart);
   return mychart.pointsSelect().attr("fill", function(d, i) {
     if (inferred[i]) {
       return "Orchid";
@@ -61,3 +65,7 @@ iplotPXG = function(data, jsOpts) {
     return d3.select(this).transition().duration(500).attr("r", r * 3).transition().duration(500).attr("r", r);
   });
 };
+
+/*
+//@ sourceMappingURL=iplotPXG.map
+*/

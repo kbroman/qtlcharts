@@ -58,6 +58,7 @@ function(cross, marker, pheno.col=1,
   write_html_top(file, title=title)
 
   link_d3(file, onefile=onefile)
+  link_d3tip(file, onefile=onefile)
   link_panel('dotchart', file, onefile=onefile)
   link_chart('iplotPXG', file, onefile=onefile)
 

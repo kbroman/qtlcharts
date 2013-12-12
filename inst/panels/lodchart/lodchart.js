@@ -358,3 +358,7 @@ chrscales = function(data, width, chrGap) {
   }
   return data;
 };
+
+/*
+//@ sourceMappingURL=lodchart.map
+*/

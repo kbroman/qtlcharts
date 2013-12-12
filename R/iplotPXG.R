@@ -33,7 +33,7 @@
 iplotPXG <-
 function(cross, marker, pheno.col=1,
          file, onefile=FALSE, openfile=TRUE, title="",
-         jsOpts=NULL,
+         jsOpts=list(title=marker[1]),
          method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
          map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)
 {    
@@ -47,6 +47,11 @@ function(cross, marker, pheno.col=1,
   if(class(cross)[2] != "cross")
     stop('"cross" should have class "cross".')
   
+  if(length(marker) > 1) {
+    marker <- marker[1]
+    warning('marker should have length 1; using "', marker, '"')
+  }
+
   write_html_top(file, title=title)
 
   link_d3(file, onefile=onefile)
@@ -62,7 +67,8 @@ function(cross, marker, pheno.col=1,
   append_html_jsopts(file, jsOpts)
   append_html_jscode(file, 'iplotPXG(data,jsOpts);')
 
-  append_html_p(file, 'Click on a point for a bit of gratuitous animation.',
+  append_html_p(file, 'Pink points correspond to individuals with imputed genotypes at this marker. ',
+                'Click on a point for a bit of gratuitous animation.',
                 tag='div', class='legend', id='legend')
 
   append_html_bottom(file)

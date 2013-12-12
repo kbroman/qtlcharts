@@ -3,9 +3,9 @@
 \title{Interactive phenotype x genotype plot}
 \usage{
 iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
-  openfile = TRUE, title = "", jsOpts = NULL, method = c("imp",
-  "argmax", "no_dbl_XO"), error.prob = 0.0001, map.function = c("haldane",
-  "kosambi", "c-f", "morgan"), ...)
+  openfile = TRUE, title = "", jsOpts = list(title = marker[1]),
+  method = c("imp", "argmax", "no_dbl_XO"), error.prob = 0.0001,
+  map.function = c("haldane", "kosambi", "c-f", "morgan"), ...)
 }
 \arguments{
   \item{cross}{(Optional) Object of class \code{"cross"},

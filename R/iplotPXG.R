@@ -12,6 +12,9 @@
 #' @param onefile If TRUE, have output file contain all necessary javascript/css code.
 #' @param openfile If TRUE, open the plot in the default web browser.
 #' @param title Character string with title for plot.
+#' @param legend Character vector with text for a legend (to be
+#' combined to one string with \code{\link[base]{paste}}, with
+#' \code{collapse=''})
 #' @param jsOpts List of options to pass to the javascript code; see details.
 #' @param method Method for imputing missing genotypes.
 #' @param error.prob Genotyping error probability used in imputing missing genotypes.
@@ -33,7 +36,7 @@
 iplotPXG <-
 function(cross, marker, pheno.col=1,
          file, onefile=FALSE, openfile=TRUE, title="",
-         jsOpts=list(title=marker[1]),
+         legend, jsOpts=list(title=marker[1]),
          method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
          map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)
 {    
@@ -67,9 +70,10 @@ function(cross, marker, pheno.col=1,
   append_html_jsopts(file, jsOpts)
   append_html_jscode(file, 'iplotPXG(data,jsOpts);')
 
-  append_html_p(file, 'Pink points correspond to individuals with imputed genotypes at this marker. ',
-                'Click on a point for a bit of gratuitous animation.',
-                tag='div', class='legend', id='legend')
+  if(missing(legend))
+    legend <- c('Pink points correspond to individuals with imputed genotypes at this marker. ',
+                'Click on a point for a bit of gratuitous animation.')
+  append_legend(legend, file)
 
   append_html_bottom(file)
 

@@ -14,6 +14,9 @@
 #' @param onefile If TRUE, have output file contain all necessary javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
+#' @param legend Character vector with text for a legend (to be
+#' combined to one string with \code{\link[base]{paste}}, with
+#' \code{collapse=''})
 #' @return Character string with the name of the file created.
 #' @export
 #' @examples
@@ -21,7 +24,8 @@
 #' corr_w_scatter(geneExpr$expr, geneExpr$genotype)
 corr_w_scatter <-
 function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
-         file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot")
+         file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot",
+         legend)
 {
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -44,10 +48,11 @@ function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
 
   append_html_middle(file, title, 'chart')
 
-  append_html_p(file, 'The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
+  if(missing(legend))
+    legend <- c('The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
                 'Hover over pixels in the correlation matrix on the left to see the ',
-                'values; click to see the corresponding scatterplot on the right.',
-                tag="div", class="legend", id="legend", style="opacity:0;")
+                'values; click to see the corresponding scatterplot on the right.')
+  append_legend(legend, file)
 
   append_html_jscode(file, 'data = ', json, ';')
   append_html_jscode(file, 'corr_w_scatter(data);')

@@ -3,9 +3,9 @@
 \title{Interactive LOD curve}
 \usage{
 iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr, file,
-  onefile = FALSE, openfile = TRUE, title = "", method = c("imp",
-  "argmax", "no_dbl_XO"), error.prob = 0.0001, map.function = c("haldane",
-  "kosambi", "c-f", "morgan"), ...)
+  onefile = FALSE, openfile = TRUE, title = "", legend,
+  method = c("imp", "argmax", "no_dbl_XO"), error.prob = 0.0001,
+  map.function = c("haldane", "kosambi", "c-f", "morgan"), ...)
 }
 \arguments{
   \item{scanoneOutput}{Object of class \code{"scanone"}, as
@@ -39,6 +39,10 @@ iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr, file,
 
   \item{title}{Character string with title for plot}
 
+  \item{legend}{Character vector with text for a legend (to
+  be combined to one string with \code{\link[base]{paste}},
+  with \code{collapse=''})}
+
   \item{method}{Method for imputing missing genotypes, if
   \code{\link[qtl]{fill.geno}} is needed.}
 
@@ -67,7 +71,7 @@ genotype plot.
 data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
 out <- scanone(hyper)
-iplotScanone(out, hyper)
+iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15))
 }
 \seealso{
 \code{\link{iplotPXG}}

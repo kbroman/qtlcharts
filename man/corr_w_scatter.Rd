@@ -4,7 +4,7 @@
 \usage{
 corr_w_scatter(dat, group, reorder = TRUE, corr = cor(dat, use =
   "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
-  title = "Correlation matrix with linked scatterplot")
+  title = "Correlation matrix with linked scatterplot", legend)
 }
 \arguments{
   \item{dat}{Data matrix (individuals x variables)}
@@ -27,6 +27,10 @@ corr_w_scatter(dat, group, reorder = TRUE, corr = cor(dat, use =
   browser}
 
   \item{title}{Character string with title for plot}
+
+  \item{legend}{Character vector with text for a legend (to
+  be combined to one string with \code{\link[base]{paste}},
+  with \code{collapse=''})}
 }
 \value{
 Character string with the name of the file created.

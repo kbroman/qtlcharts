@@ -222,3 +222,9 @@ function(chart, file, onefile=FALSE)
     append_html_jslink(file, jsfile, onefile=onefile)
 }
 
+append_legend <-
+function(legend, file)
+{
+  append_html_p(file, paste(legend, collapse=""),
+                tag='p', class='legend', id='legend')
+}

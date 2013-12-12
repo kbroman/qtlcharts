@@ -3,7 +3,7 @@
 \title{Interactive phenotype x genotype plot}
 \usage{
 iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
-  openfile = TRUE, title = "", jsOpts = list(title = marker[1]),
+  openfile = TRUE, title = "", legend, jsOpts = list(title = marker[1]),
   method = c("imp", "argmax", "no_dbl_XO"), error.prob = 0.0001,
   map.function = c("haldane", "kosambi", "c-f", "morgan"), ...)
 }
@@ -26,6 +26,10 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
   browser.}
 
   \item{title}{Character string with title for plot.}
+
+  \item{legend}{Character vector with text for a legend (to
+  be combined to one string with \code{\link[base]{paste}},
+  with \code{collapse=''})}
 
   \item{jsOpts}{List of options to pass to the javascript
   code; see details.}

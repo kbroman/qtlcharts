@@ -56,7 +56,7 @@ iplotScanone_pxg = function(lod_data, pxg_data) {
       _results = [];
       for (var _i = 1, _ref = genonames.length; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--){ _results.push(_i); }
       return _results;
-    }).apply(this)).xcatlabels(genonames).dataByInd(false).xlab(markername).ylab("Phenotype").xvar('geno').yvar('pheno');
+    }).apply(this)).xcatlabels(genonames).dataByInd(false).title(markername).xlab("Genotype").ylab("Phenotype").xvar('geno').yvar('pheno');
     svg.append("g").attr("id", "pxgchart").attr("transform", "translate(" + (wleft + margin.left + margin.right) + ",0)").datum({
       'geno': gabs,
       'pheno': pxg_data.pheno,

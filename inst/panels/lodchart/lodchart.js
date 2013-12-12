@@ -41,18 +41,14 @@ lodchart = function() {
   chart = function(selection) {
     return selection.each(function(data) {
       var chr, curves, g, gEnter, hiddenpoints, markerpoints, markertip, svg, titlegrp, xaxis, yaxis, _i, _len, _ref;
-      if (!(ylim != null)) {
-        ylim = [0, d3.max(data[lodvarname])];
-      }
+      ylim = ylim != null ? ylim : [0, d3.max(data[lodvarname])];
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
       g = svg.select("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       g.append("rect").attr("x", 0).attr("y", 0).attr("height", height).attr("width", width).attr("fill", darkrect).attr("stroke", "none");
       yscale.domain(ylim).range([height, margin.inner]);
-      if (!(yticks != null)) {
-        yticks = yscale.ticks(nyticks);
-      }
+      yticks = yticks != null ? yticks : yscale.ticks(nyticks);
       data = reorgData(data, lodvarname);
       data = chrscales(data, width, chrGap);
       xscale = data.xscale;

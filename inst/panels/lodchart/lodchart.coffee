@@ -29,7 +29,7 @@ lodchart = () ->
   ## the main function
   chart = (selection) ->
     selection.each (data) ->
-      ylim = [0, d3.max(data[lodvarname])] if !(ylim?)
+      ylim = ylim ? [0, d3.max(data[lodvarname])]
 
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])
@@ -58,7 +58,7 @@ lodchart = () ->
             .range([height, margin.inner])
 
       # if yticks not provided, use nyticks to choose pretty ones
-      yticks = yscale.ticks(nyticks) if !(yticks?)
+      yticks = yticks ? yscale.ticks(nyticks)
 
       # reorganize lod,pos by chromosomes
       data = reorgData(data, lodvarname)
@@ -205,97 +205,97 @@ lodchart = () ->
 
   ## configuration parameters
   chart.width = (value) ->
-    return width if !arguments.length
+    return width unless arguments.length
     width = value
     chart
 
   chart.height = (value) ->
-    return height if !arguments.length
+    return height unless arguments.length
     height = value
     chart
 
   chart.margin = (value) ->
-    return margin if !arguments.length
+    return margin unless arguments.length
     margin = value
     chart
 
   chart.titlepos = (value) ->
-    return titlepos if !arguments.length
+    return titlepos unless arguments.length
     titlepos
     chart
 
   chart.axispos = (value) ->
-    return axispos if !arguments.length
+    return axispos unless arguments.length
     axispos = value
     chart
 
   chart.ylim = (value) ->
-    return ylim if !arguments.length
+    return ylim unless arguments.length
     ylim = value
     chart
 
   chart.nyticks = (value) ->
-    return nyticks if !arguments.length
+    return nyticks unless arguments.length
     nyticks = value
     chart
 
   chart.yticks = (value) ->
-    return yticks if !arguments.length
+    return yticks unless arguments.length
     yticks = value
     chart
 
   chart.chrGap = (value) ->
-    return chrGap if !arguments.length
+    return chrGap unless arguments.length
     chrGap = value
     chart
 
   chart.darkrect = (value) ->
-    return darkrect if !arguments.length
+    return darkrect unless arguments.length
     darkrect = value
     chart
 
   chart.lightrect = (value) ->
-    return lightrect if !arguments.length
+    return lightrect unless arguments.length
     lightrect = value
     chart
 
   chart.linecolor = (value) ->
-    return linecolor if !arguments.length
+    return linecolor unless arguments.length
     linecolor = value
     chart
 
   chart.linewidth = (value) ->
-    return linewidth if !arguments.length
+    return linewidth unless arguments.length
     linewidth = value
     chart
 
   chart.pointcolor = (value) ->
-    return pointcolor if !arguments.length
+    return pointcolor unless arguments.length
     pointcolor = value
     chart
 
   chart.pointsize = (value) ->
-    return pointsize if !arguments.length
+    return pointsize unless arguments.length
     pointsize = value
     chart
 
   chart.title = (value) ->
-    return title if !arguments.length
+    return title unless arguments.length
     title = value
     chart
 
   chart.xlab = (value) ->
-    return xlab if !arguments.length
+    return xlab unless arguments.length
     xlab = value
     chart
 
   chart.ylab = (value) ->
-    return ylab if !arguments.length
+    return ylab unless arguments.length
     ylab = value
     chart
 
   chart.lodvarname = (value) ->
-    return lodvarname if !arguments.length
+    return lodvarname unless arguments.length
     lodvarname = value
     chart
 

@@ -32,3 +32,18 @@ text {
 .x.axis text.title {
   fill: blue;
 }
+
+line.axis.grid {
+  fill: none;
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+line.x.axis.grid {
+  stroke: rgb(200, 200, 200);
+  stroke-width: 3;
+}
+
+line.y.axis.grid {
+  stroke: white;
+} 

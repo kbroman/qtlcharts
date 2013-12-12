@@ -156,7 +156,7 @@ dotchart = function() {
         return xscale(d);
       }).attr("x2", function(d) {
         return xscale(d);
-      }).attr("y1", margin.top).attr("y2", margin.top + height).attr("fill", "none").attr("stroke", "white").attr("stroke-width", 1).style("pointer-events", "none");
+      }).attr("y1", margin.top).attr("y2", margin.top + height).attr("class", "x axis grid");
       xaxis.selectAll("empty").data(xcategories).enter().append("text").attr("x", function(d) {
         return xscale(d);
       }).attr("y", margin.top + height + axispos.xlabel).text(function(d, i) {
@@ -168,7 +168,7 @@ dotchart = function() {
         return yscale(d);
       }).attr("y2", function(d) {
         return yscale(d);
-      }).attr("x1", margin.left).attr("x2", margin.left + width).attr("fill", "none").attr("stroke", "white").attr("stroke-width", 1).style("pointer-events", "none");
+      }).attr("x1", margin.left).attr("x2", margin.left + width).attr("class", "y axis grid");
       yaxis.selectAll("empty").data(yticks).enter().append("text").attr("y", function(d) {
         return yscale(d);
       }).attr("x", margin.left - axispos.ylabel).text(function(d) {

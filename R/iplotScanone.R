@@ -26,12 +26,13 @@
 #' @param legend Character vector with text for a legend (to be
 #' combined to one string with \code{\link[base]{paste}}, with
 #' \code{collapse=''})
-#' @param method Method for imputing missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
-#' @param error.prob Genotyping error probability used in imputing
-#'        missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
-#' @param map.function Map function used in imputing missing genotypes, if \code{\link[qtl]{fill.geno}} is needed.
+#' @param fillgenoArgs List of named arguments to pass to \code{\link[qtl]{fill.geno}}, if needed.
 #' @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
 #' @return Character string with the name of the file created.
+#' @details If \code{cross} is provided, \code{\link[qtl]{fill.geno}}
+#' is used to impute missing genotypes. In this case, arguments to
+#' \code{\link[qtl]{fill.geno}} are passed as a list, for example
+#' \code{fillgenoArgs=list(method="argmax", error.prob=0.002, map.function="c-f")}.
 #' @export
 #' @examples
 #' data(hyper)
@@ -42,8 +43,7 @@
 iplotScanone <-
 function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
          file, onefile=FALSE, openfile=TRUE, title="", legend,
-         method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
-         map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)
+         fillgenoArgs=NULL, ...)
 {    
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -75,11 +75,9 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
   if(class(cross)[2] != "cross")
     stop('"cross" should have class "cross".')
   
-  method <- match.arg(method)
-  map.function <- match.arg(map.function)
   iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
                    file=file, onefile=onefile, openfile=openfile, title=title, legend=legend,
-                   method=method, error.prob=error.prob, map.function=map.function, ...)
+                   fillgenoArgs=fillgenoArgs, ...)
 
   invisible(file)
 }
@@ -117,13 +115,10 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title, legend, ...)
 # iplotScanone_pxg: LOD curves with linked phe x gen plot
 iplotScanone_pxg <-
 function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, title,
-         legend, method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
-         map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)
+         legend, fillgenoArgs=NULL, ...)
 {    
   scanone_json = scanone2json(scanoneOutput, ...)
-  method <- match.arg(method)
-  map.function <- match.arg(map.function)
-  pxg_json = pxg2json(cross, pheno.col, method=method, error.prob=error.prob, map.function=map.function, ...)
+  pxg_json = pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, ...)
 
   write_html_top(file, title=title)
 

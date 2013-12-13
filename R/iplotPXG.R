@@ -16,9 +16,7 @@
 #' combined to one string with \code{\link[base]{paste}}, with
 #' \code{collapse=''})
 #' @param jsOpts List of options to pass to the javascript code; see details.
-#' @param method Method for imputing missing genotypes.
-#' @param error.prob Genotyping error probability used in imputing missing genotypes.
-#' @param map.function Map function used in imputing missing genotypes.
+#' @param fillgenoArgs List of named arguments to pass to \code{\link[qtl]{fill.geno}}, if needed.
 #' @param \dots Passed to \cite{\link[RJSONIO]{toJSON}}.
 #' @return Character string with the name of the file created.
 #' @details The argument \code{jsOpts} is a list with the following
@@ -27,6 +25,10 @@
 #'   \item{\code{height}: Height of plot in pixels.}
 #'   \item{\code{width}: Width of plot in pixels.}
 #' }
+#'
+#' The function \code{\link[qtl]{fill.geno}} is used to impute missing
+#' genotypes, with arguments passed as a list, for example
+#' \code{fillgenoArgs=list(method="argmax", error.prob=0.002, map.function="c-f")}.
 #' @export
 #' @examples
 #' data(hyper)
@@ -37,8 +39,7 @@ iplotPXG <-
 function(cross, marker, pheno.col=1,
          file, onefile=FALSE, openfile=TRUE, title="",
          legend, jsOpts=list(title=marker[1]),
-         method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
-         map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)
+         fillgenoArgs=NULL, ...)
 {    
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -64,9 +65,7 @@ function(cross, marker, pheno.col=1,
 
   append_html_middle(file, title, 'chart')
   
-  method <- match.arg(method)
-  map.function <- match.arg(map.function)
-  json <- pxg2json(pull.markers(cross, marker), pheno.col, method, error.prob, map.function, ...)
+  json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, ...)
   append_html_jscode(file, 'data = ', json, ';')
   append_html_jsopts(file, jsOpts)
   append_html_jscode(file, 'iplotPXG(data,jsOpts);')

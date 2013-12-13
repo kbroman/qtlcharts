@@ -9,9 +9,7 @@
 #
 # @param cross An object of class \code{"cross"}; see \code{\link[qtl]{read.cross}}.
 # @param pheno.col Phenotype column
-# @param method Method for imputing missing genotypes
-# @param error.prob Genotyping error probability used in imputing missing genotypes
-# @param map.function Map function used in imputing missing genotypes
+# @param fillgenoArgs List of named arguments to pass to \code{\link[qtl]{fill.geno}}, if needed.
 # @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
 # @return A character string with the input in JSON format.
 # @details Genotypes are encoded as integers; negative integers are used to indicate imputed values.
@@ -21,13 +19,9 @@
 # pxg_as_json <- pxg2json(hyper)
 # @seealso \code{\link{scanone2json}}
 pxg2json <-
-function(cross, pheno.col=1, method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
-         map.function=c("haldane", "kosambi", "c-f", "morgan"), ...)
+function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
 {
-  method <- match.arg(method)
-  map.function <- match.arg(map.function)
-    
-  geno_filled <- getImputedGenotypes(cross, method, error.prob, map.function, imputed_negative=TRUE)
+  geno_filled <- getImputedGenotypes(cross, fillgenoArgs=fillgenoArgs, imputed_negative=TRUE)
 
   phe <- qtl::pull.pheno(cross, pheno.col)
 
@@ -66,12 +60,11 @@ function(cross, pheno.col=1, method=c("imp", "argmax", "no_dbl_XO"), error.prob=
 
 # get imputed genotypes, dealing specially with X chr genotypes
 getImputedGenotypes <-
-function(cross, method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
-         map.function=c("haldane", "kosambi", "c-f", "morgan"),
-         imputed_negative=TRUE)
+function(cross, fillgenoArgs=NULL, imputed_negative=TRUE)
 {
-  method <- match.arg(method)
-  map.function <- match.arg(map.function)
+  method <- grabarg(fillgenoArgs, "method", "imp")
+  error.prob <- grabarg(fillgenoArgs, "error.prob", 0.0001)
+  map.function <- grabarg(fillgenoArgs, "map.function", "haldane")
 
   # genotypes and imputed genotypes
   geno <- qtl::pull.geno(cross)
@@ -102,3 +95,11 @@ function(cross, method=c("imp", "argmax", "no_dbl_XO"), error.prob=0.0001,
 
   geno_imp
 }
+
+# grab argument from a list
+#
+# for example:
+# grabarg(list(method="argmax", map.function="c-f"), "method", "imp")
+grabarg <-
+function(arguments, argname, default)
+  ifelse(argname %in% names(arguments), arguments[[argname]], default)

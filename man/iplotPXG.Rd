@@ -4,8 +4,7 @@
 \usage{
 iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
   openfile = TRUE, title = "", legend, jsOpts = list(title = marker[1]),
-  method = c("imp", "argmax", "no_dbl_XO"), error.prob = 0.0001,
-  map.function = c("haldane", "kosambi", "c-f", "morgan"), ...)
+  fillgenoArgs = NULL, ...)
 }
 \arguments{
   \item{cross}{(Optional) Object of class \code{"cross"},
@@ -34,13 +33,8 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
   \item{jsOpts}{List of options to pass to the javascript
   code; see details.}
 
-  \item{method}{Method for imputing missing genotypes.}
-
-  \item{error.prob}{Genotyping error probability used in
-  imputing missing genotypes.}
-
-  \item{map.function}{Map function used in imputing missing
-  genotypes.}
+  \item{fillgenoArgs}{List of named arguments to pass to
+  \code{\link[qtl]{fill.geno}}, if needed.}
 
   \item{\dots}{Passed to \cite{\link[RJSONIO]{toJSON}}.}
 }
@@ -56,6 +50,11 @@ The argument \code{jsOpts} is a list with the following
 optional components to modify aspects of the plot:
 \itemize{ \item{\code{height}: Height of plot in pixels.}
 \item{\code{width}: Width of plot in pixels.} }
+
+The function \code{\link[qtl]{fill.geno}} is used to impute
+missing genotypes, with arguments passed as a list, for
+example \code{fillgenoArgs=list(method="argmax",
+error.prob=0.002, map.function="c-f")}.
 }
 \examples{
 data(hyper)

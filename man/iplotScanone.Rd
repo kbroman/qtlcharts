@@ -4,8 +4,7 @@
 \usage{
 iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr, file,
   onefile = FALSE, openfile = TRUE, title = "", legend,
-  method = c("imp", "argmax", "no_dbl_XO"), error.prob = 0.0001,
-  map.function = c("haldane", "kosambi", "c-f", "morgan"), ...)
+  fillgenoArgs = NULL, ...)
 }
 \arguments{
   \item{scanoneOutput}{Object of class \code{"scanone"}, as
@@ -43,15 +42,8 @@ iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr, file,
   be combined to one string with \code{\link[base]{paste}},
   with \code{collapse=''})}
 
-  \item{method}{Method for imputing missing genotypes, if
-  \code{\link[qtl]{fill.geno}} is needed.}
-
-  \item{error.prob}{Genotyping error probability used in
-  imputing missing genotypes, if
-  \code{\link[qtl]{fill.geno}} is needed.}
-
-  \item{map.function}{Map function used in imputing missing
-  genotypes, if \code{\link[qtl]{fill.geno}} is needed.}
+  \item{fillgenoArgs}{List of named arguments to pass to
+  \code{\link[qtl]{fill.geno}}, if needed.}
 
   \item{\dots}{Additional arguments passed to the
   \code{\link[RJSONIO]{toJSON}} function}
@@ -66,6 +58,13 @@ as calculated by \code{\link[qtl]{scanone}}. If
 phenotype x genotype plot for a marker: Click on a marker
 on the LOD curve and see the corresponding phenotype x
 genotype plot.
+}
+\details{
+If \code{cross} is provided, \code{\link[qtl]{fill.geno}}
+is used to impute missing genotypes. In this case,
+arguments to \code{\link[qtl]{fill.geno}} are passed as a
+list, for example \code{fillgenoArgs=list(method="argmax",
+error.prob=0.002, map.function="c-f")}.
 }
 \examples{
 data(hyper)

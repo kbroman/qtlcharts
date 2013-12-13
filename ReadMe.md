@@ -19,14 +19,14 @@ You first need to install [R/qtl](http://www.rqtl.org) and the
 [RJSONIO](http://cran.r-project.org/web/packages/RJSONIO/index.html)
 package:
 
-    install.packages("qtl")
-    install.packages("RJSONIO")
+    if(!require(qtl)) install.packages("qtl")
+    if(!require(RJSONIO)) install.packages("RJSONIO")
 
 You also need the `install_github` function in
 [Hadley Wickham](http://had.co.nz/)'s [devtools]() package. So install
 and load devtools:
 
-    install.packages("devtools")
+    if(!require(devtools)) install.packages("devtools")
     library(devtools)
 
 Finally, use `install_github` function to install R/qtlcharts:

@@ -2,7 +2,7 @@
 var corr_w_scatter;
 
 corr_w_scatter = function(data) {
-  var cells, colorScale, colors, corXscale, corYscale, corZscale, corr, corrplot, drawScatter, h, i, innerPad, j, nGroup, ncorrX, ncorrY, nind, nvar, pad, pixel_height, pixel_width, scatterplot, svg, totalh, totalw, w;
+  var cells, colorScale, colors, corXscale, corYscale, corZscale, corr, corrplot, drawScatter, h, i, innerPad, j, nGroup, ncorrX, ncorrY, nind, nvar, pad, pixel_height, pixel_width, scat_tip, scatterplot, svg, totalh, totalw, w;
   h = 450;
   w = h;
   pad = {
@@ -89,6 +89,10 @@ corr_w_scatter = function(data) {
       return _results;
     })();
   }
+  scat_tip = d3.tip().attr('class', 'd3-tip').html(function(d, i) {
+    return data.ind[i];
+  }).direction('e').offset([0, 10]);
+  scatterplot.call(scat_tip);
   drawScatter = function(i, j) {
     var xScale, xticks, yScale, yticks;
     d3.selectAll("circle.points").remove();
@@ -126,7 +130,7 @@ corr_w_scatter = function(data) {
       return yScale(data.dat[data.rows[j]][d]);
     }).attr("r", 3).attr("stroke", "black").attr("stroke-width", 1).attr("fill", function(d) {
       return colors[data.group[d] - 1];
-    });
+    }).on("mouseover", scat_tip.show).on("mouseout", scat_tip.hide);
   };
   corrplot.append("rect").attr("height", h).attr("width", w).attr("fill", "none").attr("stroke", "black").attr("stroke-width", 1).attr("pointer-events", "none");
   scatterplot.append("rect").attr("height", h).attr("width", w).attr("fill", "none").attr("stroke", "black").attr("stroke-width", 1).attr("pointer-events", "none");

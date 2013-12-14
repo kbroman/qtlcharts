@@ -50,6 +50,7 @@ function(dat, group, rows, cols, reorder=TRUE, corr=cor(dat, use="pairwise.compl
 
 
   link_d3(file, onefile=onefile)
+  link_d3tip(file, onefile=onefile)
   link_chart('corr_w_scatter', file, onefile=onefile)
   link_chart('iplotPXG', file, onefile=onefile)
 

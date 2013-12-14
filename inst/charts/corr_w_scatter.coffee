@@ -116,6 +116,13 @@ corr_w_scatter = (data) ->
       colorScale = d3.scale.category20()
     colors = (colorScale(i) for i of d3.range(nGroup))
 
+  scat_tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .html((d,i) -> data.ind[i])
+              .direction('e')
+              .offset([0,10])
+  scatterplot.call(scat_tip)
+
   drawScatter = (i,j) ->
     d3.selectAll("circle.points").remove()
     d3.selectAll("text.axes").remove()
@@ -203,6 +210,8 @@ corr_w_scatter = (data) ->
                .attr("stroke", "black")
                .attr("stroke-width", 1)
                .attr("fill", (d) -> colors[data.group[d]-1])
+               .on("mouseover", scat_tip.show)
+               .on("mouseout", scat_tip.hide)
 
   # boxes around panels
   corrplot.append("rect")

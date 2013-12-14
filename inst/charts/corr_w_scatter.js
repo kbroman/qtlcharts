@@ -130,7 +130,3 @@ corr_w_scatter = function(data) {
   scatterplot.append("text").text("Scatterplot").attr("id", "corrtitle").attr("x", w / 2).attr("y", -pad.top / 2).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   return d3.select("div#legend").style("opacity", 1);
 };
-
-/*
-//@ sourceMappingURL=corr_w_scatter.map
-*/

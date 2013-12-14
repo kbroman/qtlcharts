@@ -65,7 +65,3 @@ iplotPXG = function(data, jsOpts) {
     return d3.select(this).transition().duration(500).attr("r", r * 3).transition().duration(500).attr("r", r);
   });
 };
-
-/*
-//@ sourceMappingURL=iplotPXG.map
-*/

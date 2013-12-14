@@ -73,7 +73,3 @@ iplotScanone_pxg = function(lod_data, pxg_data) {
     return plotPXG(markers[i], i);
   });
 };
-
-/*
-//@ sourceMappingURL=iplotScanone_pxg.map
-*/

@@ -87,7 +87,3 @@
   });
 
 }).call(this);
-
-/*
-//@ sourceMappingURL=test_dotchart.map
-*/

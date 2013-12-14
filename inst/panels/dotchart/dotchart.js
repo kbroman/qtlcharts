@@ -394,7 +394,3 @@ unique = function(x) {
   }
   return _results;
 };
-
-/*
-//@ sourceMappingURL=dotchart.map
-*/

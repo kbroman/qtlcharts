@@ -386,7 +386,3 @@ formatAxis = function(d) {
   ndig = Math.abs(ndig);
   return d3.format("." + ndig + "f");
 };
-
-/*
-//@ sourceMappingURL=scatterplot.map
-*/

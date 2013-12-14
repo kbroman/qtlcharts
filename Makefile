@@ -9,7 +9,7 @@ SCATTERPLOT_TESTDIR = ${SCATTERPLOT_DIR}/test
 DOTCHART_TESTDIR = ${DOTCHART_DIR}/test
 CHART_DIR = inst/charts
 
-COFFEE_ARGS = -cm # use -cm for debugging
+COFFEE_ARGS = -c # use -cm for debugging
 
 # build package documentation
 doc:

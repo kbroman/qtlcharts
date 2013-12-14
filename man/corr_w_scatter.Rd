@@ -13,15 +13,18 @@ corr_w_scatter(dat, group, rows, cols, reorder = TRUE, corr = cor(dat, use =
   (e.g., a genotype)}
 
   \item{rows}{Selected rows of the correlation matrix to
-  include in the image.}
+  include in the image. Ignored if \code{corr} is
+  provided.}
 
   \item{cols}{Selected columns of the correlation matrix to
-  include in the image.}
+  include in the image. Ignored if \code{corr} is
+  provided.}
 
   \item{reorder}{If TRUE, reorder the variables by
-  clustering}
+  clustering. Ignored if \code{corr} is provided as a
+  subset of the overall correlation matrix}
 
-  \item{corr}{Correlation matrix (optional)}
+  \item{corr}{Correlation matrix (optional).}
 
   \item{file}{Optional character vector with file to
   contain the output}
@@ -44,6 +47,14 @@ Character string with the name of the file created.
 \description{
 Creates an interactive graph with an image of a correlation
 matrix linked to underlying scatterplots.
+}
+\details{
+\code{corr} may be provided as a subset of the overall
+correlation matrix for the columns of \code{dat}. In this
+case, the \code{reorder}, \code{rows} and \code{cols}
+arguments are ignored. The row and column names of
+\code{corr} must match the names of some subset of columns
+of \code{dat}.
 }
 \examples{
 data(geneExpr)

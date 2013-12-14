@@ -8,10 +8,10 @@
 #'
 #' @param dat Data matrix (individuals x variables)
 #' @param group Option vector of groups of individuals (e.g., a genotype)
-#' @param rows Selected rows of the correlation matrix to include in the image.
-#' @param cols Selected columns of the correlation matrix to include in the image.
-#' @param reorder If TRUE, reorder the variables by clustering
-#' @param corr Correlation matrix (optional)
+#' @param rows Selected rows of the correlation matrix to include in the image. Ignored if \code{corr} is provided.
+#' @param cols Selected columns of the correlation matrix to include in the image. Ignored if \code{corr} is provided.
+#' @param reorder If TRUE, reorder the variables by clustering. Ignored if \code{corr} is provided as a subset of the overall correlation matrix
+#' @param corr Correlation matrix (optional).
 #' @param file Optional character vector with file to contain the output
 #' @param onefile If TRUE, have output file contain all necessary javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
@@ -19,8 +19,16 @@
 #' @param legend Character vector with text for a legend (to be
 #' combined to one string with \code{\link[base]{paste}}, with
 #' \code{collapse=''})
+#'
+#' @details \code{corr} may be provided as a subset of the overall
+#' correlation matrix for the columns of \code{dat}. In this case, the
+#' \code{reorder}, \code{rows} and \code{cols} arguments are ignored. The row and
+#' column names of \code{corr} must match the names of some subset of
+#' columns of \code{dat}.
+#'
 #' @return Character string with the name of the file created.
 #' @export
+#'
 #' @examples
 #' data(geneExpr)
 #' corr_w_scatter(geneExpr$expr, geneExpr$genotype)
@@ -38,12 +46,25 @@ function(dat, group, rows, cols, reorder=TRUE, corr=cor(dat, use="pairwise.compl
 
   if(missing(group)) group <- rep(1, nrow(dat))
 
-  if(missing(rows)) rows <- (1:ncol(dat))
-  else rows <- selectMatrixColumns(dat, rows)
-  if(missing(cols)) cols <- (1:ncol(dat))
-  else cols <- selectMatrixColumns(dat, cols)
-
-  json <- convert4corrwscatter(dat, group, rows, cols, reorder, corr)
+  if(!missing(corr)) {
+    if(!missing(rows) || !missing(cols)) warning("rows and cols ignored.")
+    dn <- dimnames(corr)
+    if(any(is.na(match(c(dn[[1]], dn[[2]]), colnames(dat)))))
+      stop("Mismatch between dimnames(corr) and colnames(dat).")
+    rows <- 1:nrow(corr)
+    cols <- 1:ncol(corr)
+    reorder <- FALSE
+    corr_was_presubset <- TRUE
+  }
+  else {    
+    if(missing(rows)) rows <- (1:ncol(dat))
+    else rows <- selectMatrixColumns(dat, rows)
+    if(missing(cols)) cols <- (1:ncol(dat))
+    else cols <- selectMatrixColumns(dat, cols)
+    corr_was_presubset <- FALSE
+  }
+ 
+  json <- convert4corrwscatter(dat, group, rows, cols, reorder, corr, corr_was_presubset)
 
   # start writing
   write_html_top(file, title=title)

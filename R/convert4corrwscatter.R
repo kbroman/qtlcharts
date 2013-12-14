@@ -18,7 +18,7 @@
 # geneExpr_as_json <- convert4corrwscatter(geneExpr$expr, geneExpr$genotype)
 # }
 convert4corrwscatter <-
-function(dat, group, rows, cols, reorder=TRUE, corr)
+function(dat, group, rows, cols, reorder=TRUE, corr, corr_was_presubset=FALSE)
 {
   ind <- rownames(dat)
   if(is.null(ind)) ind <- paste0("ind", 1:nrow(dat))
@@ -33,28 +33,29 @@ function(dat, group, rows, cols, reorder=TRUE, corr)
   if(!is.null(names(group)) && !all(names(group) == ind))
     stop("names(group) != rownames(dat)")
 
-  if(ncol(dat) != nrow(corr) || ncol(dat) != ncol(corr))
+  if(!corr_was_presubset) {
+    if(ncol(dat) != nrow(corr) || ncol(dat) != ncol(corr))
       stop("corr matrix should be ", ncol(dat), " x ", ncol(dat))
 
-  if(reorder) {
-    ord <- hclust(dist(corr), method="ward")$order
-    variables <- variables[ord]
-    dat <- dat[,ord]
+    if(reorder) {
+      ord <- hclust(dist(corr), method="ward")$order
+      variables <- variables[ord]
+      dat <- dat[,ord]
 
-    reconstructColumnSelection <- function(ord, cols)
-      {
-        cols.logical <- rep(FALSE, length(ord))
-        cols.logical[cols] <- TRUE
-        which(cols.logical[ord])
-      }
-    rows <- reconstructColumnSelection(ord, rows)
-    cols <- reconstructColumnSelection(ord, cols)
+      # fanciness to deal with the rows and cols args
+      reconstructColumnSelection <- function(ord, cols)
+        {
+          cols.logical <- rep(FALSE, length(ord))
+          cols.logical[cols] <- TRUE
+          which(cols.logical[ord])
+        }
+      rows <- reconstructColumnSelection(ord, rows)
+      cols <- reconstructColumnSelection(ord, cols)
 
-    # reorder the rows and columns of corr to match
-    for(i in 1:nrow(corr))
-      corr[i,] <- corr[i,ord]
-    for(i in 1:ncol(corr))
-      corr[,i] <- corr[ord,i]
+      # reorder the rows and columns of corr to match
+      corr <- corr[ord,ord]
+    }
+    corr <- corr[rows,cols]
   }
 
   # get rid of names

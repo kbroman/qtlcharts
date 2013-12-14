@@ -59,6 +59,14 @@ corr_w_scatter = (data) ->
              .attr("stroke-width", 1)
              .attr("pointer-events", "none")
 
+  corr_tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .html((d) -> d3.format(".2f")(d.value))
+              .direction('e')
+              .offset([0,10])
+  corrplot.call(corr_tip)
+
+
   cells = corrplot.selectAll("empty")
              .data(corr)
              .enter().append("rect")
@@ -72,19 +80,7 @@ corr_w_scatter = (data) ->
              .attr("stroke-width", 2)
              .on("mouseover", (d) ->
                  d3.select(this).attr("stroke", "black")
-                 corrplot.append("text").attr("id", "corrtext")
-                         .text(d3.format(".2f")(d.value))
-                         .attr("x", ->
-                             mult = -1
-                             mult = +1 if d.col < nvar/2
-                             corXscale(d.col) + mult * 30)
-                         .attr("y", ->
-                             mult = +1
-                             mult = -1 if d.row < nvar/2
-                             corYscale(d.row) + (mult + 0.35) * 20)
-                         .attr("fill", "black")
-                         .attr("dominant-baseline", "middle")
-                         .attr("text-anchor", "middle")
+                 corr_tip.show(d)
                  corrplot.append("text").attr("class","corrlabel")
                          .attr("x", corXscale(d.col)+pixel_width/2)
                          .attr("y", h+pad.bottom*0.2)
@@ -97,9 +93,9 @@ corr_w_scatter = (data) ->
                          .text(data.var[data.rows[d.row]])
                          .attr("dominant-baseline", "middle")
                          .attr("text-anchor", "end"))
-             .on("mouseout", ->
+             .on("mouseout", (d) ->
+                 corr_tip.hide(d)
                  d3.selectAll("text.corrlabel").remove()
-                 d3.selectAll("text#corrtext").remove()
                  d3.select(this).attr("stroke","none"))
              .on("click",(d) -> drawScatter(d.col, d.row))
 

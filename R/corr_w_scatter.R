@@ -8,6 +8,8 @@
 #'
 #' @param dat Data matrix (individuals x variables)
 #' @param group Option vector of groups of individuals (e.g., a genotype)
+#' @param rows Selected rows of the correlation matrix to include in the image.
+#' @param cols Selected columns of the correlation matrix to include in the image.
 #' @param reorder If TRUE, reorder the variables by clustering
 #' @param corr Correlation matrix (optional)
 #' @param file Optional character vector with file to contain the output
@@ -23,7 +25,7 @@
 #' data(geneExpr)
 #' corr_w_scatter(geneExpr$expr, geneExpr$genotype)
 corr_w_scatter <-
-function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
+function(dat, group, rows, cols, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
          file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot",
          legend)
 {
@@ -36,7 +38,12 @@ function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
 
   if(missing(group)) group <- rep(1, nrow(dat))
 
-  json <- convert4corrwscatter(dat, group, reorder, corr)                                   
+  if(missing(rows)) rows <- (1:ncol(dat))
+  else rows <- selectMatrixColumns(dat, rows)
+  if(missing(cols)) cols <- (1:ncol(dat))
+  else cols <- selectMatrixColumns(dat, cols)
+
+  json <- convert4corrwscatter(dat, group, rows, cols, reorder, corr)
 
   # start writing
   write_html_top(file, title=title)
@@ -65,3 +72,17 @@ function(dat, group, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
 }
 
 
+# turn a selection of matrix columns into a numeric vector
+# matrix
+# cols
+selectMatrixColumns <-
+function(matrix, cols)
+{
+  origcols <- cols
+  if(is.character(cols)) {
+    cols <- match(cols, colnames(matrix))
+    if(any(is.na(cols)))
+      stop("Unmatched columns: ", paste(origcols[is.na(cols)], collapse=" "))
+  }
+  (1:ncol(matrix))[cols]
+}

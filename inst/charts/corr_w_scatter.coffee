@@ -34,10 +34,14 @@ corr_w_scatter = (data) ->
   # no. data points
   nind = data.ind.length
   nvar = data.var.length
+  ncorrX = data.cols.length
+  ncorrY = data.rows.length
 
-  corXscale = d3.scale.ordinal().domain(d3.range(nvar)).rangeBands([0, w])
-  corYscale = d3.scale.ordinal().domain(d3.range(nvar)).rangeBands([h, 0])
+  corXscale = d3.scale.ordinal().domain(d3.range(ncorrX)).rangeBands([0, w])
+  corYscale = d3.scale.ordinal().domain(d3.range(ncorrY)).rangeBands([h, 0])
   corZscale = d3.scale.linear().domain([-1, 0, 1]).range(["darkslateblue", "white", "crimson"])
+  pixel_width = corXscale(1)-corXscale(0)
+  pixel_height = corYscale(0)-corYscale(1)
 
   # create list with correlations
   corr = []
@@ -82,15 +86,15 @@ corr_w_scatter = (data) ->
                          .attr("dominant-baseline", "middle")
                          .attr("text-anchor", "middle")
                  corrplot.append("text").attr("class","corrlabel")
-                         .attr("x", corXscale(d.col))
+                         .attr("x", corXscale(d.col)+pixel_width/2)
                          .attr("y", h+pad.bottom*0.2)
-                         .text(data.var[d.col])
+                         .text(data.var[data.cols[d.col]])
                          .attr("dominant-baseline", "middle")
                          .attr("text-anchor", "middle")
                  corrplot.append("text").attr("class","corrlabel")
-                         .attr("y", corYscale(d.row))
+                         .attr("y", corYscale(d.row)+pixel_height/2)
                          .attr("x", -pad.left*0.1)
-                         .text(data.var[d.row])
+                         .text(data.var[data.rows[d.row]])
                          .attr("dominant-baseline", "middle")
                          .attr("text-anchor", "end"))
              .on("mouseout", ->
@@ -117,10 +121,10 @@ corr_w_scatter = (data) ->
     d3.selectAll("text.axes").remove()
     d3.selectAll("line.axes").remove()
     xScale = d3.scale.linear()
-                     .domain(d3.extent(data.dat[i]))
+                     .domain(d3.extent(data.dat[data.cols[i]]))
                      .range([innerPad, w-innerPad])
     yScale = d3.scale.linear()
-                     .domain(d3.extent(data.dat[j]))
+                     .domain(d3.extent(data.dat[data.rows[j]]))
                      .range([h-innerPad, innerPad])
     # axis labels
     scatterplot.append("text")
@@ -128,7 +132,7 @@ corr_w_scatter = (data) ->
                .attr("class", "axes")
                .attr("x", w/2)
                .attr("y", h+pad.bottom*0.7)
-               .text(data.var[i])
+               .text(data.var[data.cols[i]])
                .attr("dominant-baseline", "middle")
                .attr("text-anchor", "middle")
                .attr("fill", "slateblue")
@@ -137,7 +141,7 @@ corr_w_scatter = (data) ->
                .attr("class", "axes")
                .attr("x", -pad.left*0.8)
                .attr("y", h/2)
-               .text(data.var[j])
+               .text(data.var[data.rows[j]])
                .attr("dominant-baseline", "middle")
                .attr("text-anchor", "middle")
                .attr("transform", "rotate(270,#{-pad.left*0.8},#{h/2})")
@@ -193,8 +197,8 @@ corr_w_scatter = (data) ->
                .enter()
                .append("circle")
                .attr("class", "points")
-               .attr("cx", (d) -> xScale(data.dat[i][d]))
-               .attr("cy", (d) -> yScale(data.dat[j][d]))
+               .attr("cx", (d) -> xScale(data.dat[data.cols[i]][d]))
+               .attr("cy", (d) -> yScale(data.dat[data.rows[j]][d]))
                .attr("r", 3)
                .attr("stroke", "black")
                .attr("stroke-width", 1)

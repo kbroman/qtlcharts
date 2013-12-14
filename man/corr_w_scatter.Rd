@@ -2,7 +2,7 @@
 \alias{corr_w_scatter}
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
-corr_w_scatter(dat, group, reorder = TRUE, corr = cor(dat, use =
+corr_w_scatter(dat, group, rows, cols, reorder = TRUE, corr = cor(dat, use =
   "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
   title = "Correlation matrix with linked scatterplot", legend)
 }
@@ -11,6 +11,12 @@ corr_w_scatter(dat, group, reorder = TRUE, corr = cor(dat, use =
 
   \item{group}{Option vector of groups of individuals
   (e.g., a genotype)}
+
+  \item{rows}{Selected rows of the correlation matrix to
+  include in the image.}
+
+  \item{cols}{Selected columns of the correlation matrix to
+  include in the image.}
 
   \item{reorder}{If TRUE, reorder the variables by
   clustering}

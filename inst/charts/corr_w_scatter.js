@@ -2,7 +2,7 @@
 var corr_w_scatter;
 
 corr_w_scatter = function(data) {
-  var cells, colorScale, colors, corXscale, corYscale, corZscale, corr, corrplot, drawScatter, h, i, innerPad, j, nGroup, nind, nvar, pad, scatterplot, svg, totalh, totalw, w;
+  var cells, colorScale, colors, corXscale, corYscale, corZscale, corr, corrplot, drawScatter, h, i, innerPad, j, nGroup, ncorrX, ncorrY, nind, nvar, pad, pixel_height, pixel_width, scatterplot, svg, totalh, totalw, w;
   h = 450;
   w = h;
   pad = {
@@ -19,9 +19,13 @@ corr_w_scatter = function(data) {
   scatterplot = svg.append("g").attr("id", "scatterplot").attr("transform", "translate(" + (pad.left * 2 + pad.right + w) + "," + pad.top + ")");
   nind = data.ind.length;
   nvar = data["var"].length;
-  corXscale = d3.scale.ordinal().domain(d3.range(nvar)).rangeBands([0, w]);
-  corYscale = d3.scale.ordinal().domain(d3.range(nvar)).rangeBands([h, 0]);
+  ncorrX = data.cols.length;
+  ncorrY = data.rows.length;
+  corXscale = d3.scale.ordinal().domain(d3.range(ncorrX)).rangeBands([0, w]);
+  corYscale = d3.scale.ordinal().domain(d3.range(ncorrY)).rangeBands([h, 0]);
   corZscale = d3.scale.linear().domain([-1, 0, 1]).range(["darkslateblue", "white", "crimson"]);
+  pixel_width = corXscale(1) - corXscale(0);
+  pixel_height = corYscale(0) - corYscale(1);
   corr = [];
   for (i in data.corr) {
     for (j in data.corr[i]) {
@@ -56,8 +60,8 @@ corr_w_scatter = function(data) {
       }
       return corYscale(d.row) + (mult + 0.35) * 20;
     }).attr("fill", "black").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
-    corrplot.append("text").attr("class", "corrlabel").attr("x", corXscale(d.col)).attr("y", h + pad.bottom * 0.2).text(data["var"][d.col]).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
-    return corrplot.append("text").attr("class", "corrlabel").attr("y", corYscale(d.row)).attr("x", -pad.left * 0.1).text(data["var"][d.row]).attr("dominant-baseline", "middle").attr("text-anchor", "end");
+    corrplot.append("text").attr("class", "corrlabel").attr("x", corXscale(d.col) + pixel_width / 2).attr("y", h + pad.bottom * 0.2).text(data["var"][data.cols[d.col]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
+    return corrplot.append("text").attr("class", "corrlabel").attr("y", corYscale(d.row) + pixel_height / 2).attr("x", -pad.left * 0.1).text(data["var"][data.rows[d.row]]).attr("dominant-baseline", "middle").attr("text-anchor", "end");
   }).on("mouseout", function() {
     d3.selectAll("text.corrlabel").remove();
     d3.selectAll("text#corrtext").remove();
@@ -90,10 +94,10 @@ corr_w_scatter = function(data) {
     d3.selectAll("circle.points").remove();
     d3.selectAll("text.axes").remove();
     d3.selectAll("line.axes").remove();
-    xScale = d3.scale.linear().domain(d3.extent(data.dat[i])).range([innerPad, w - innerPad]);
-    yScale = d3.scale.linear().domain(d3.extent(data.dat[j])).range([h - innerPad, innerPad]);
-    scatterplot.append("text").attr("id", "xaxis").attr("class", "axes").attr("x", w / 2).attr("y", h + pad.bottom * 0.7).text(data["var"][i]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("fill", "slateblue");
-    scatterplot.append("text").attr("id", "yaxis").attr("class", "axes").attr("x", -pad.left * 0.8).attr("y", h / 2).text(data["var"][j]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("transform", "rotate(270," + (-pad.left * 0.8) + "," + (h / 2) + ")").attr("fill", "slateblue");
+    xScale = d3.scale.linear().domain(d3.extent(data.dat[data.cols[i]])).range([innerPad, w - innerPad]);
+    yScale = d3.scale.linear().domain(d3.extent(data.dat[data.rows[j]])).range([h - innerPad, innerPad]);
+    scatterplot.append("text").attr("id", "xaxis").attr("class", "axes").attr("x", w / 2).attr("y", h + pad.bottom * 0.7).text(data["var"][data.cols[i]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("fill", "slateblue");
+    scatterplot.append("text").attr("id", "yaxis").attr("class", "axes").attr("x", -pad.left * 0.8).attr("y", h / 2).text(data["var"][data.rows[j]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("transform", "rotate(270," + (-pad.left * 0.8) + "," + (h / 2) + ")").attr("fill", "slateblue");
     xticks = xScale.ticks(5);
     yticks = yScale.ticks(5);
     scatterplot.selectAll("empty").data(xticks).enter().append("text").attr("class", "axes").text(function(d) {
@@ -117,9 +121,9 @@ corr_w_scatter = function(data) {
       return yScale(d);
     }).attr("x1", 0).attr("x2", w).attr("stroke", "white").attr("stroke-width", 1);
     return scatterplot.selectAll("empty").data(d3.range(nind)).enter().append("circle").attr("class", "points").attr("cx", function(d) {
-      return xScale(data.dat[i][d]);
+      return xScale(data.dat[data.cols[i]][d]);
     }).attr("cy", function(d) {
-      return yScale(data.dat[j][d]);
+      return yScale(data.dat[data.rows[j]][d]);
     }).attr("r", 3).attr("stroke", "black").attr("stroke-width", 1).attr("fill", function(d) {
       return colors[data.group[d] - 1];
     });

@@ -5,6 +5,8 @@
 #
 # @param dat Data matrix (individuals x variables)
 # @param group Option vector of groups of individuals (e.g., a genotype)
+# @param rows Rows of correlation matrix to keep in image
+# @param cols Columns of correlation matrix to keep in image
 # @param reorder If TRUE, reorder the variables by clustering
 # @param corr Correlation matrix
 # @return Character string with the input data in JSON format
@@ -16,7 +18,7 @@
 # geneExpr_as_json <- convert4corrwscatter(geneExpr$expr, geneExpr$genotype)
 # }
 convert4corrwscatter <-
-function(dat, group, reorder=TRUE, corr)
+function(dat, group, rows, cols, reorder=TRUE, corr)
 {
   ind <- rownames(dat)
   if(is.null(ind)) ind <- paste0("ind", 1:nrow(dat))
@@ -32,12 +34,21 @@ function(dat, group, reorder=TRUE, corr)
     stop("names(group) != rownames(dat)")
 
   if(ncol(dat) != nrow(corr) || ncol(dat) != ncol(corr))
-    stop("corr matrix should be ", ncol(dat), " x ", ncol(dat))
+      stop("corr matrix should be ", ncol(dat), " x ", ncol(dat))
 
   if(reorder) {
     ord <- hclust(dist(corr), method="ward")$order
     variables <- variables[ord]
     dat <- dat[,ord]
+
+    reconstructColumnSelection <- function(ord, cols)
+      {
+        cols.logical <- rep(FALSE, length(ord))
+        cols.logical[cols] <- TRUE
+        which(cols.logical[ord])
+      }
+    rows <- reconstructColumnSelection(ord, rows)
+    cols <- reconstructColumnSelection(ord, cols)
 
     # reorder the rows and columns of corr to match
     for(i in 1:nrow(corr))
@@ -52,7 +63,9 @@ function(dat, group, reorder=TRUE, corr)
 
   output <- list("ind" = toJSON(ind),
                  "var" = toJSON(variables),
-                 "corr" = toJSON(corr),
+                 "corr" = toJSON(corr[rows,cols]),
+                 "rows" = toJSON(rows-1),
+                 "cols" = toJSON(cols-1),
                  "dat" =  toJSON(t(dat)), # columns as rows
                  "group" = toJSON(group))
   paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")

@@ -1,4 +1,4 @@
-## ToDo list for R/qtlcharts
+## To Do list for R/qtlcharts
 
 ### General things
 

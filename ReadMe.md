@@ -57,6 +57,19 @@ genotype at a QTL:
     data(geneExpr)
     corr_w_scatter(geneExpr$expr, geneExpr$genotype)
 
+Finally, try `manyboxplots`, a plot of the quantiles of many
+distributions, linked to the underlying histograms.
+
+    library(qtlcharts)
+    # simulate some data
+    n.ind <- 500
+    n.gene <- 10000
+    expr <- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
+    dimnames(expr) <- list(paste0("ind", 1:n.ind),
+                           paste0("gene", 1:n.gene))
+    # generate the plot
+    manyboxplots(expr)
+
 #### Licenses
 
 Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License).)

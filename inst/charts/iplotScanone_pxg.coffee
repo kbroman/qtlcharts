@@ -18,16 +18,10 @@ iplotScanone_pxg = (lod_data, pxg_data) ->
                       .width(wleft)
                       .margin(margin)
 
-  mylodchart = lodchart().lodvarname("lod")
-                         .height(h)
-                         .width(wleft)
-                         .margin(margin)
-
   svg = d3.select("div#chart")
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)
-
 
   g_lod = svg.append("g")
              .attr("id", "lodchart")

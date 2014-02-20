@@ -80,10 +80,10 @@ clean:
 
 web:
 	scp ${LODCHART_DIR}/lodchart.* broman-2:public_html/D3/lodchart/
-	cd ${LODCHART_TESTDIR};scp test_lodchart.* *.json index.html broman-2:public_html/D3/lodchart/test/
+	cd ${LODCHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/lodchart/test/
 	scp ${SCATTERPLOT_DIR}/scatterplot.* broman-2:public_html/D3/scatterplot/
-	cd ${SCATTERPLOT_TESTDIR};scp test_scatterplot.* *.json index.html broman-2:public_html/D3/scatterplot/test/
+	cd ${SCATTERPLOT_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/scatterplot/test/
 	scp ${DOTCHART_DIR}/dotchart.* broman-2:public_html/D3/dotchart/
-	cd ${DOTCHART_TESTDIR};scp test_dotchart.* *.json index.html broman-2:public_html/D3/dotchart/test/
+	cd ${DOTCHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/dotchart/test/
 	scp ${CICHART_DIR}/cichart.* broman-2:public_html/D3/cichart/
-	cd ${CICHART_TESTDIR};scp test_cichart.* *.json index.html broman-2:public_html/D3/cichart/test/
+	cd ${CICHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/cichart/test/

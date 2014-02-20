@@ -1,0 +1,49 @@
+
+body {
+  font-family: sans-serif;
+}
+
+text {
+  font-family: sans-serif;
+  font-size: 11pt;
+}
+
+.title text {
+  dominant-baseline: middle;
+  fill: blue;
+  text-anchor: middle;
+}
+
+.y.axis text {
+  dominant-baseline: middle;
+  text-anchor: end;
+}
+
+.y.axis text.title {
+  text-anchor: middle;
+  fill: blue;
+}
+
+.x.axis text {
+  dominant-baseline: hanging;
+  text-anchor: middle;
+}
+
+.x.axis text.title {
+  fill: blue;
+}
+
+line.axis.grid {
+  fill: none;
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+line.x.axis.grid {
+  stroke: rgb(200, 200, 200);
+  stroke-width: 3;
+}
+
+line.y.axis.grid {
+  stroke: white;
+} 

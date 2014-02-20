@@ -1,5 +1,6 @@
 # create test data in JSON format
 
+set.seed(27806353)
 library(broman)
 dat <- rmvn(200, c(2, 5, 10),
             rbind(c(1, 0.5*2, 0.2*3), 

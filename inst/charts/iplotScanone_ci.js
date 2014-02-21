@@ -2,7 +2,7 @@
 var iplotScanone_ci;
 
 iplotScanone_ci = function(lod_data, pxg_data) {
-  var g_lod, h, margin, markers, mychart, mylodchart, plotCI, svg, totalh, totalw, wleft, wright, x;
+  var g_lod, h, margin, markers, mychart, mylodchart, plotCI, svg, totalh, totalw, wleft, wright, x, ylim;
   markers = (function() {
     var _results;
     _results = [];
@@ -27,8 +27,9 @@ iplotScanone_ci = function(lod_data, pxg_data) {
   mylodchart = lodchart().lodvarname("lod").height(h).width(wleft).margin(margin);
   svg = d3.select("div#chart").append("svg").attr("height", totalh).attr("width", totalw);
   g_lod = svg.append("g").attr("id", "lodchart").datum(lod_data).call(mychart);
+  ylim = null;
   plotCI = function(markername, markerindex) {
-    var ave, chr, chrtype, g, gabs, genonames, high, i, j, low, means, mycichart, p, phesub, se, variance, _i, _ref;
+    var ave, chr, chrtype, g, gabs, genonames, high, i, j, low, means, mycichart, p, phesub, range, se, variance, _i, _ref;
     svg.select("g#cichart").remove();
     g = pxg_data.geno[markerindex];
     gabs = (function() {
@@ -91,7 +92,13 @@ iplotScanone_ci = function(lod_data, pxg_data) {
       }
       return _results;
     })();
-    mycichart = cichart().height(h).width(wright).margin(margin).title(markername).xlab("Genotype").ylab("Phenotype");
+    range = [d3.min(low), d3.max(high)];
+    if (ylim === null) {
+      ylim = range;
+    } else {
+      ylim = [d3.min([range[0], ylim[0]]), d3.max([range[1], ylim[1]])];
+    }
+    mycichart = cichart().height(h).width(wright).margin(margin).title(markername).xlab("Genotype").ylab("Phenotype").ylim(ylim);
     return svg.append("g").attr("id", "cichart").attr("transform", "translate(" + (wleft + margin.left + margin.right) + ",0)").datum({
       'means': means,
       'low': low,

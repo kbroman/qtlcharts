@@ -33,6 +33,8 @@ iplotScanone_ci = (lod_data, pxg_data) ->
              .datum(lod_data)
              .call(mychart)
 
+  ylim = null
+
   plotCI = (markername, markerindex) ->
     svg.select("g#cichart").remove()
     
@@ -62,12 +64,19 @@ iplotScanone_ci = (lod_data, pxg_data) ->
     low = (means[i]-2*se[i] for i of means)
     high = (means[i]+2*se[i] for i of means)
 
+    range = [d3.min(low), d3.max(high)]
+    if ylim == null
+      ylim = range
+    else      
+      ylim = [d3.min([range[0],ylim[0]]), d3.max([range[1],ylim[1]])]
+
     mycichart = cichart().height(h)
                          .width(wright)
                          .margin(margin)
                          .title(markername)
                          .xlab("Genotype")
                          .ylab("Phenotype")
+                         .ylim(ylim)
   
     svg.append("g")
        .attr("id", "cichart")

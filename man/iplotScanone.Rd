@@ -3,9 +3,9 @@
 \alias{iplotScanone}
 \title{Interactive LOD curve}
 \usage{
-iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr, file,
-  onefile = FALSE, openfile = TRUE, title = "", legend,
-  fillgenoArgs = NULL, ...)
+iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
+  pxgtype = c("ci", "raw"), file, onefile = FALSE, openfile = TRUE,
+  title = "", legend, fillgenoArgs = NULL, ...)
 }
 \arguments{
   \item{scanoneOutput}{Object of class \code{"scanone"}, as
@@ -27,6 +27,10 @@ iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr, file,
   strings. Refer to chromosomes with a preceding - to have
   all chromosomes but those considered. A logical
   (TRUE/FALSE) vector may also be used.}
+
+  \item{pxgtype}{If phenotype x genotype plot is to be
+  shown, should it be with means \eqn{\pm}{+/-} 2 SE
+  (\code{"ci"}), or raw phenotypes (\code{"raw"})?}
 
   \item{file}{Optional character vector with file to
   contain the output}

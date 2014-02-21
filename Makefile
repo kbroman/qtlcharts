@@ -65,7 +65,7 @@ ${PANEL_DIR}/*/test/d3-tip.css: inst/d3-tip/d3-tip.css
 #------------------------------------------------------------
 
 # javascript for the real charts
-jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/corr_w_scatter.js ${CHART_DIR}/manyboxplots.js
+jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${CHART_DIR}/iplotScanone_ci.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/corr_w_scatter.js ${CHART_DIR}/manyboxplots.js
 
 ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
 	coffee ${COFFEE_ARGS} -b $^

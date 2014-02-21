@@ -19,6 +19,8 @@
 #'            values are converted to strings. Refer to chromosomes with a
 #'            preceding - to have all chromosomes but those considered. A logical
 #'            (TRUE/FALSE) vector may also be used.
+#' @param pxgtype If phenotype x genotype plot is to be shown, should it be with
+#'                means \eqn{\pm}{+/-} 2 SE (\code{"ci"}), or raw phenotypes (\code{"raw"})?
 #' @param file Optional character vector with file to contain the output
 #' @param onefile If TRUE, have output file contain all necessary javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
@@ -42,12 +44,14 @@
 #' @seealso \code{\link{iplotPXG}}
 iplotScanone <-
 function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
+         pxgtype = c("ci", "raw"),
          file, onefile=FALSE, openfile=TRUE, title="", legend,
          fillgenoArgs=NULL, ...)
 {    
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
   else file <- path.expand(file)
+  pxgtype <- match.arg(pxgtype)
 
   if(file.exists(file))
     stop('The file already exists; please remove it first: ', file)
@@ -75,9 +79,15 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
   if(class(cross)[2] != "cross")
     stop('"cross" should have class "cross".')
   
-  iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
-                   file=file, onefile=onefile, openfile=openfile, title=title, legend=legend,
-                   fillgenoArgs=fillgenoArgs, ...)
+  if(pxgtype == "raw")
+    iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
+                     file=file, onefile=onefile, openfile=openfile, title=title, legend=legend,
+                     fillgenoArgs=fillgenoArgs, ...)
+
+  else
+    iplotScanone_ci(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
+                    file=file, onefile=onefile, openfile=openfile, title=title, legend=legend,
+                    fillgenoArgs=fillgenoArgs, ...)
 
   invisible(file)
 }
@@ -137,8 +147,42 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
   if(missing(legend) || is.null(legend))
     legend <- c('Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker to view the phenotype x genotype plot on the right. ',
-                'In the phenotype x genotype plot, pink points correspond to individuals ',
-                'with imputed genotypes at the marker')
+                'In the phenotype x genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
+  append_legend(legend, file)
+
+  append_html_bottom(file)
+
+  if(openfile) browseURL(file)
+
+  invisible(file)
+}
+
+# iplotScanone_ci: LOD curves with linked phe mean +/- 2 SE x gen plot
+iplotScanone_ci <-
+function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, title,
+         legend, fillgenoArgs=NULL, ...)
+{    
+  scanone_json = scanone2json(scanoneOutput, ...)
+  pxg_json = pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, ...)
+
+  write_html_top(file, title=title)
+
+  link_d3(file, onefile=onefile)
+  link_d3tip(file, onefile=onefile)
+  link_panel('lodchart', file, onefile=onefile)
+  link_panel('cichart', file, onefile=onefile)
+  link_chart('iplotScanone_ci', file, onefile=onefile)
+
+  append_html_middle(file, title, 'chart')
+  
+  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
+  append_html_jscode(file, 'pxgData = ', pxg_json, ';')
+  append_html_jscode(file, 'iplotScanone_ci(scanoneData, pxgData);')
+
+  if(missing(legend) || is.null(legend))
+    legend <- c('Hover over marker positions on the LOD curve to see the marker names. ',
+                'Click on a marker to view the phenotype x genotype plot on the right. ',
+                'In the phenotype x genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
   append_legend(legend, file)
 
   append_html_bottom(file)

@@ -21,8 +21,6 @@
 - iplotScanone_pxg: same jitter values throughout; animate transitions
   if same chromosome class (same x-axis): need a redraw function
 
-- lodchart with CIs rather than data
-
 
 
 ### Panels
@@ -31,11 +29,11 @@
 
 - mapchart panel; indicating QTL intervals
 
-- CIchart panel (QTL effects +/- SE)
-
 - lod curve for one chromosome (argument to current panel?)
 
 - general image/heat map panel
+
+- heat map split up into chromosomes
 
 
 

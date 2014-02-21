@@ -132,7 +132,7 @@ cichart = () ->
                  .attr('class', 'd3-tip')
                  .html((d,i) ->
                     index = i % means.length
-                    f = formatAxis([low[index],means[index]])
+                    f = formatAxis([low[index],means[index]], 1)
                     "#{f(means[index])} (#{f(low[index])} - #{f(high[index])})")
                  .direction('e')
                  .offset([0,10])
@@ -275,9 +275,9 @@ cichart = () ->
   chart
 
 # function to determine rounding of axis labels
-formatAxis = (d) ->
+formatAxis = (d, extradigits=0) ->
   d = d[1] - d[0]
-  ndig = Math.floor( Math.log(d % 10) / Math.log(10) )
+  ndig = Math.floor( Math.log(d % 10) / Math.log(10) ) - extradigits
   ndig = 0 if ndig > 0
   ndig = Math.abs(ndig)
   d3.format(".#{ndig}f")

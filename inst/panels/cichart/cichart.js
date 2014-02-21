@@ -96,7 +96,7 @@ cichart = function() {
       tip = d3.tip().attr('class', 'd3-tip').html(function(d, i) {
         var f, index;
         index = i % means.length;
-        f = formatAxis([low[index], means[index]]);
+        f = formatAxis([low[index], means[index]], 1);
         return "" + (f(means[index])) + " (" + (f(low[index])) + " - " + (f(high[index])) + ")";
       }).direction('e').offset([0, 10]);
       svg.call(tip);
@@ -260,10 +260,13 @@ cichart = function() {
   return chart;
 };
 
-formatAxis = function(d) {
+formatAxis = function(d, extradigits) {
   var ndig;
+  if (extradigits == null) {
+    extradigits = 0;
+  }
   d = d[1] - d[0];
-  ndig = Math.floor(Math.log(d % 10) / Math.log(10));
+  ndig = Math.floor(Math.log(d % 10) / Math.log(10)) - extradigits;
   if (ndig > 0) {
     ndig = 0;
   }

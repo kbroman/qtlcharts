@@ -1,4 +1,4 @@
-all: jspanels jspaneltests jscharts json d3 d3-tip doc
+all: jspanels jspaneltests jscharts json d3 d3-tip doc inst/ToDo.html
 
 PANEL_DIR = inst/panels
 LODCHART_DIR = ${PANEL_DIR}/lodchart
@@ -12,6 +12,10 @@ CICHART_TESTDIR = ${CICHART_DIR}/test
 CHART_DIR = inst/charts
 
 COFFEE_ARGS = -c # use -cm for debugging
+
+# build html version of ToDo list
+inst/ToDo.html: inst/ToDo.md
+	cd inst;R -e 'library(markdown);markdownToHTML("ToDo.md", "ToDo.html")'
 
 # build package documentation
 doc:

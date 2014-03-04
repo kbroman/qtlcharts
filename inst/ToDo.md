@@ -47,6 +47,8 @@
 
 - Interactive 2d scan plot
 
+- many curves + 2 scatterplots, with ability to brush the scatter
+  plots to select curves
 
 
 ### Annoyances

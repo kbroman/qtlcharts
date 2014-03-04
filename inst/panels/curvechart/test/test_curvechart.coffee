@@ -16,6 +16,8 @@ d3.json "data.json", (data) ->
                         .width(w)
                         .margin(margin)
                         .strokewidthhilit(4)
+                        .strokecolor(["lightpink", "lightblue"])
+                        .strokecolorhilit(["Orchid", "slateblue"])
                         .commonX(true)
 
   d3.select("div#chart")

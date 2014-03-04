@@ -24,7 +24,7 @@
 
   d3.json("data.json", function(data) {
     var mychart;
-    mychart = curvechart().xlab("Age (weeks)").ylab("Body weight").height(h).width(w).margin(margin).strokewidthhilit(4).commonX(true);
+    mychart = curvechart().xlab("Age (weeks)").ylab("Body weight").height(h).width(w).margin(margin).strokewidthhilit(4).strokecolor(["lightpink", "lightblue"]).strokecolorhilit(["Orchid", "slateblue"]).commonX(true);
     return d3.select("div#chart").datum(data).call(mychart);
   });
 

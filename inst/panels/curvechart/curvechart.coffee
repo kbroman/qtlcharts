@@ -30,15 +30,15 @@ curvechart = () ->
     selection.each (data) ->
 
       # groups of colors
-      groups = data.groups
-      groups = groups ? (1 for i of data.data)
-      ngroups = d3.max(groups)
-      groups = (g-1 for g in groups) # changed from (1,2,3,...) to (0,1,2,...)
+      group = data.group
+      group = group ? (1 for i of data.data)
+      ngroup = d3.max(group)
+      group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
 
       strokecolor = [strokecolor] unless Array.isArray(strokecolor)
-      strokecolor = (strokecolor[0] for i of d3.range(ngroups)) if strokecolor.length == 1 and ngroups > 1
+      strokecolor = (strokecolor[0] for i of d3.range(ngroup)) if strokecolor.length == 1 and ngroup > 1
       strokecolorhilit = [strokecolorhilit] unless Array.isArray(strokecolorhilit)
-      strokecolorhilit = (strokecolorhilit[0] for i of d3.range(ngroups)) if strokecolorhilit.length == 1 and ngroups > 1
+      strokecolorhilit = (strokecolorhilit[0] for i of d3.range(ngroup)) if strokecolorhilit.length == 1 and ngroup > 1
   
       # reorganize data?
       if commonX # reorganize data
@@ -160,7 +160,7 @@ curvechart = () ->
            .datum((d) -> data[d])
            .attr("d", curve)
            .attr("fill", "none")
-           .attr("stroke", (d,i) -> strokecolor[groups[i]])
+           .attr("stroke", (d,i) -> strokecolor[group[i]])
            .attr("stroke-width", strokewidth)
 
       curves = g.append("g").attr("id", "curves")
@@ -172,7 +172,7 @@ curvechart = () ->
               .datum((d) -> data[d])
               .attr("d", curve)
               .attr("fill", "none")
-              .attr("stroke", (d,i) -> strokecolorhilit[groups[i]])
+              .attr("stroke", (d,i) -> strokecolorhilit[group[i]])
               .attr("stroke-width", strokewidthhilit)
               .attr("opacity", 0)
               .on("mouseover", () -> d3.select(this).attr("opacity", 1))

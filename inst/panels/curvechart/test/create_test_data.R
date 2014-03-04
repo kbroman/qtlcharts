@@ -21,7 +21,12 @@ mis <- sample(n, 10)
 for(i in mis)
   y[i,!rbinom(16, 1, 0.8)] <- NA
 
-dat <- list(x=times, data=y)
+# group = 1/2 (e.g. sex)
+means <- rowMeans(y, na.rm=TRUE)
+means <- means - min(means)
+group <- rbinom(n, 1, prob=means/max(means))+1
+
+dat <- list(x=times, data=y, group=group)
 
 library(RJSONIO)
 cat(RJSONIO::toJSON(dat), file="data.json")

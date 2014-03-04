@@ -39,9 +39,9 @@ curvechart = function() {
   commonX = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var curve, curves, g, gEnter, groups, i, j, ngroups, svg, titlegrp, tmp, xaxis, xrange, xs, yaxis, yrange, ys;
-      groups = data.groups;
-      groups = groups != null ? groups : (function() {
+      var curve, curves, g, gEnter, group, i, j, ngroup, svg, titlegrp, tmp, xaxis, xrange, xs, yaxis, yrange, ys;
+      group = data.group;
+      group = group != null ? group : (function() {
         var _results;
         _results = [];
         for (i in data.data) {
@@ -49,12 +49,12 @@ curvechart = function() {
         }
         return _results;
       })();
-      ngroups = d3.max(groups);
-      groups = (function() {
+      ngroup = d3.max(group);
+      group = (function() {
         var _i, _len, _results;
         _results = [];
-        for (_i = 0, _len = groups.length; _i < _len; _i++) {
-          g = groups[_i];
+        for (_i = 0, _len = group.length; _i < _len; _i++) {
+          g = group[_i];
           _results.push(g - 1);
         }
         return _results;
@@ -62,11 +62,11 @@ curvechart = function() {
       if (!Array.isArray(strokecolor)) {
         strokecolor = [strokecolor];
       }
-      if (strokecolor.length === 1 && ngroups > 1) {
+      if (strokecolor.length === 1 && ngroup > 1) {
         strokecolor = (function() {
           var _results;
           _results = [];
-          for (i in d3.range(ngroups)) {
+          for (i in d3.range(ngroup)) {
             _results.push(strokecolor[0]);
           }
           return _results;
@@ -75,11 +75,11 @@ curvechart = function() {
       if (!Array.isArray(strokecolorhilit)) {
         strokecolorhilit = [strokecolorhilit];
       }
-      if (strokecolorhilit.length === 1 && ngroups > 1) {
+      if (strokecolorhilit.length === 1 && ngroup > 1) {
         strokecolorhilit = (function() {
           var _results;
           _results = [];
-          for (i in d3.range(ngroups)) {
+          for (i in d3.range(ngroup)) {
             _results.push(strokecolorhilit[0]);
           }
           return _results;
@@ -160,13 +160,13 @@ curvechart = function() {
       g.selectAll("empty").append("g").data(d3.range(data.length)).enter().append("path").datum(function(d) {
         return data[d];
       }).attr("d", curve).attr("fill", "none").attr("stroke", function(d, i) {
-        return strokecolor[groups[i]];
+        return strokecolor[group[i]];
       }).attr("stroke-width", strokewidth);
       curves = g.append("g").attr("id", "curves");
       curveSelect = curves.selectAll("empty").data(d3.range(data.length)).enter().append("path").datum(function(d) {
         return data[d];
       }).attr("d", curve).attr("fill", "none").attr("stroke", function(d, i) {
-        return strokecolorhilit[groups[i]];
+        return strokecolorhilit[group[i]];
       }).attr("stroke-width", strokewidthhilit).attr("opacity", 0).on("mouseover", function() {
         return d3.select(this).attr("opacity", 1);
       }).on("mouseout", function() {

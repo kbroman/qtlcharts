@@ -56,7 +56,7 @@ dotchart = () ->
       xcatlabels = xcatlabels ? xcategories
       throw "xcatlabels.length != xcategories.length" if xcatlabels.length != xcategories.length
 
-      ylim = ylim ? [d3.min(y), d3.max(y)]
+      ylim = ylim ? d3.extent(y)
 
       # I'll replace missing values something smaller than what's observed
       na_value = d3.min(y) - 100

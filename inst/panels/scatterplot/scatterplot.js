@@ -95,10 +95,10 @@ scatterplot = function() {
         panelheight = height;
       }
       if (!(xlim != null)) {
-        xlim = [d3.min(x), d3.max(x)];
+        xlim = d3.extent(x);
       }
       if (!(ylim != null)) {
-        ylim = [d3.min(y), d3.max(y)];
+        ylim = d3.extent(y);
       }
       na_value = d3.min(x.concat(y)) - 100;
       svg = d3.select(this).selectAll("svg").data([data]);

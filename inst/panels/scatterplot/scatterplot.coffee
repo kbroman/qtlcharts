@@ -54,8 +54,8 @@ scatterplot = () ->
       else
         panelheight = height
 
-      xlim = [d3.min(x), d3.max(x)] if !(xlim?)
-      ylim = [d3.min(y), d3.max(y)] if !(ylim?)
+      xlim = d3.extent(x) if !(xlim?)
+      ylim = d3.extent(y) if !(ylim?)
 
       # I'll replace missing values something smaller than what's observed
       na_value = d3.min(x.concat y) - 100

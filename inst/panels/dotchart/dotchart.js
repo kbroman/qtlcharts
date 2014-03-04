@@ -90,7 +90,7 @@ dotchart = function() {
       if (xcatlabels.length !== xcategories.length) {
         throw "xcatlabels.length != xcategories.length";
       }
-      ylim = ylim != null ? ylim : [d3.min(y), d3.max(y)];
+      ylim = ylim != null ? ylim : d3.extent(y);
       na_value = d3.min(y) - 100;
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");

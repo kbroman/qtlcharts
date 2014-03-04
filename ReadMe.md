@@ -12,6 +12,7 @@ It is built on the following reuseable components:
 - [scatterplot](inst/panels/scatterplot): scatter plot panel
 - [dotchart](inst/panels/dotchart): dot plot panel
 - [cichart](inst/panels/cichart): confidence interval plot panel
+- [curvechart](inst/panels/curvechart): panel for multiple curves
 
 
 #### Installation

@@ -94,12 +94,8 @@ scatterplot = function() {
       } else {
         panelheight = height;
       }
-      if (!(xlim != null)) {
-        xlim = d3.extent(x);
-      }
-      if (!(ylim != null)) {
-        ylim = d3.extent(y);
-      }
+      xlim = xlim != null ? xlim : d3.extent(x);
+      ylim = ylim != null ? ylim : d3.extent(y);
       na_value = d3.min(x.concat(y)) - 100;
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
@@ -141,12 +137,8 @@ scatterplot = function() {
           }
         });
       }
-      if (!(yticks != null)) {
-        yticks = ys.ticks(nyticks);
-      }
-      if (!(xticks != null)) {
-        xticks = xs.ticks(nxticks);
-      }
+      yticks = yticks != null ? yticks : ys.ticks(nyticks);
+      xticks = xticks != null ? xticks : xs.ticks(nxticks);
       titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + width / 2).attr("y", margin.top - titlepos).text(title);
       xaxis = g.append("g").attr("class", "x axis");
       xaxis.selectAll("empty").data(xticks).enter().append("line").attr("x1", function(d) {

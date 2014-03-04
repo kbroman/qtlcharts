@@ -54,8 +54,8 @@ scatterplot = () ->
       else
         panelheight = height
 
-      xlim = d3.extent(x) if !(xlim?)
-      ylim = d3.extent(y) if !(ylim?)
+      xlim = xlim ? d3.extent(x)
+      ylim = ylim ? d3.extent(y)
 
       # I'll replace missing values something smaller than what's observed
       na_value = d3.min(x.concat y) - 100
@@ -124,8 +124,8 @@ scatterplot = () ->
         y = y.map (e) -> if e? then e else na_value
 
       # if yticks not provided, use nyticks to choose pretty ones
-      yticks = ys.ticks(nyticks) if !(yticks?)
-      xticks = xs.ticks(nxticks) if !(xticks?)
+      yticks = yticks ? ys.ticks(nyticks)
+      xticks = xticks ? xs.ticks(nxticks)
 
       # title
       titlegrp = g.append("g").attr("class", "title")

@@ -147,9 +147,7 @@ dotchart = function() {
           }
         });
       }
-      if (!(yticks != null)) {
-        yticks = ys.ticks(nyticks);
-      }
+      yticks = yticks != null ? yticks : ys.ticks(nyticks);
       titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + width / 2).attr("y", margin.top - titlepos).text(title);
       xaxis = g.append("g").attr("class", "x axis");
       xaxis.selectAll("empty").data(xcategories).enter().append("line").attr("x1", function(d) {

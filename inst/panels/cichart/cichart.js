@@ -65,9 +65,7 @@ cichart = function() {
       yrange = [margin.top + height - margin.inner, margin.top + margin.inner];
       yscale.domain(ylim).range(yrange);
       ys = d3.scale.linear().domain(ylim).range(yrange);
-      if (!(yticks != null)) {
-        yticks = ys.ticks(nyticks);
-      }
+      yticks = yticks != null ? yticks : ys.ticks(nyticks);
       titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + width / 2).attr("y", margin.top - titlepos).text(title);
       xaxis = g.append("g").attr("class", "x axis");
       xaxis.selectAll("empty").data(categories).enter().append("line").attr("x1", function(d) {

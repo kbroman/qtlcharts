@@ -116,7 +116,7 @@ dotchart = () ->
         y = y.map (e) -> if e? then e else na_value
 
       # if yticks not provided, use nyticks to choose pretty ones
-      yticks = ys.ticks(nyticks) if !(yticks?)
+      yticks = yticks ? ys.ticks(nyticks)
 
       # title
       titlegrp = g.append("g").attr("class", "title")

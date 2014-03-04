@@ -72,7 +72,7 @@ cichart = () ->
       ys = d3.scale.linear().domain(ylim).range(yrange)
 
       # if yticks not provided, use nyticks to choose pretty ones
-      yticks = ys.ticks(nyticks) if !(yticks?)
+      yticks = yticks ? ys.ticks(nyticks)
 
       # title
       titlegrp = g.append("g").attr("class", "title")

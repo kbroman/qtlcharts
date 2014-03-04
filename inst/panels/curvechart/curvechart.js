@@ -106,10 +106,12 @@ curvechart = function() {
         tmp = data[i];
         data[i] = [];
         for (j in tmp.x) {
-          data[i].push({
-            x: tmp.x[j],
-            y: tmp.y[j]
-          });
+          if (!((tmp.x[j] == null) || (tmp.y[j] == null))) {
+            data[i].push({
+              x: tmp.x[j],
+              y: tmp.y[j]
+            });
+          }
         }
       }
       svg = d3.select(this).selectAll("svg").data([data]);

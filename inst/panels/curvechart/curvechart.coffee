@@ -54,7 +54,7 @@ curvechart = () ->
         tmp = data[i]
         data[i] = []
         for j of tmp.x
-          data[i].push({x:tmp.x[j], y:tmp.y[j]})
+          data[i].push({x:tmp.x[j], y:tmp.y[j]}) unless !tmp.x[j]? or !tmp.y[j]?
 
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])

@@ -16,6 +16,11 @@ for(j in 6:16)
   y[,j] <- y[,j-1] + slope5to16
 y <- y + rnorm(prod(dim(y)), 0, 0.35)
 
+# simulate some missing data
+mis <- sample(n, 10)
+for(i in mis)
+  y[i,!rbinom(16, 1, 0.8)] <- NA
+
 dat <- list(x=times, data=y)
 
 library(RJSONIO)

@@ -24,15 +24,17 @@ d3.json "data.json", (data) ->
     .datum(data)
     .call(mychart)
 
-  tip = d3.tip()
-          .attr('class', 'd3-tip')
-          .html((d,i) -> i)
-          .direction('e')
-          .offset([0,0])
-  d3.select("div#chart svg").call(tip)
+  # add indication of individual (initially blank)
+  textbox = d3.select("div#chart svg")
+                 .append("text")
+                 .attr("class", "title")
+                 .text("")
+                 .attr("y", margin.top/2)
+                 .attr("x", margin.left)
+                 .style("text-anchor","start")
 
-
-  # add tool tips
   mychart.curvesSelect()
-         .on("mouseover.tip", tip.show)
-         .on("mouseout.tip", tip.hide)
+         .on("mouseover.text", (d,i) ->
+                textbox.text("ind #{i+1}"))
+         .on("mouseout.text", () ->
+                textbox.text(""))

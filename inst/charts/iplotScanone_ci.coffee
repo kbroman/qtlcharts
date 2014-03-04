@@ -12,12 +12,6 @@ iplotScanone_ci = (lod_data, pxg_data) ->
   totalh = h + margin.top + margin.bottom
   totalw = wleft + wright + (margin.left + margin.right)*2
 
-
-  mychart = lodchart().lodvarname("lod")
-                      .height(h)
-                      .width(wleft)
-                      .margin(margin)
-
   mylodchart = lodchart().lodvarname("lod")
                          .height(h)
                          .width(wleft)
@@ -31,7 +25,7 @@ iplotScanone_ci = (lod_data, pxg_data) ->
   g_lod = svg.append("g")
              .attr("id", "lodchart")
              .datum(lod_data)
-             .call(mychart)
+             .call(mylodchart)
 
   ylim = null
 
@@ -85,6 +79,6 @@ iplotScanone_ci = (lod_data, pxg_data) ->
        .call(mycichart)
 
   # animate points at markers on click
-  mychart.markerSelect()
+  mylodchart.markerSelect()
             .on "click", (d,i) ->
                   plotCI(markers[i], i)

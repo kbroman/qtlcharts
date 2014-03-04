@@ -2,7 +2,7 @@
 var iplotScanone_noeff;
 
 iplotScanone_noeff = function(data) {
-  var h, halfh, margin, mychart, totalh, totalw, w;
+  var h, halfh, margin, mylodchart, totalh, totalw, w;
   h = 450;
   w = 900;
   margin = {
@@ -15,9 +15,9 @@ iplotScanone_noeff = function(data) {
   halfh = h + margin.top + margin.bottom;
   totalh = halfh * 2;
   totalw = w + margin.left + margin.right;
-  mychart = lodchart().lodvarname("lod").height(h).width(w).margin(margin);
-  d3.select("div#chart").datum(data).call(mychart);
-  return mychart.markerSelect().on("click", function(d) {
+  mylodchart = lodchart().lodvarname("lod").height(h).width(w).margin(margin);
+  d3.select("div#chart").datum(data).call(mylodchart);
+  return mylodchart.markerSelect().on("click", function(d) {
     var r;
     r = d3.select(this).attr("r");
     return d3.select(this).transition().duration(500).attr("r", r * 3).transition().duration(500).attr("r", r);

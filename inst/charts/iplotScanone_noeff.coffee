@@ -10,17 +10,17 @@ iplotScanone_noeff = (data) ->
   totalh = halfh*2
   totalw = (w+margin.left+margin.right)
 
-  mychart = lodchart().lodvarname("lod")
-                      .height(h)
-                      .width(w)
-                      .margin(margin)
+  mylodchart = lodchart().lodvarname("lod")
+                         .height(h)
+                         .width(w)
+                         .margin(margin)
 
   d3.select("div#chart")
     .datum(data)
-    .call(mychart)
+    .call(mylodchart)
 
   # animate points at markers on click
-  mychart.markerSelect()
+  mylodchart.markerSelect()
             .on "click", (d) ->
                   r = d3.select(this).attr("r")
                   d3.select(this)

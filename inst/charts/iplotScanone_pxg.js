@@ -2,7 +2,7 @@
 var iplotScanone_pxg;
 
 iplotScanone_pxg = function(lod_data, pxg_data) {
-  var g_lod, h, margin, markers, mychart, plotPXG, svg, totalh, totalw, wleft, wright, x;
+  var g_lod, h, margin, markers, mylodchart, plotPXG, svg, totalh, totalw, wleft, wright, x;
   markers = (function() {
     var _results;
     _results = [];
@@ -23,9 +23,9 @@ iplotScanone_pxg = function(lod_data, pxg_data) {
   };
   totalh = h + margin.top + margin.bottom;
   totalw = wleft + wright + (margin.left + margin.right) * 2;
-  mychart = lodchart().lodvarname("lod").height(h).width(wleft).margin(margin);
+  mylodchart = lodchart().lodvarname("lod").height(h).width(wleft).margin(margin);
   svg = d3.select("div#chart").append("svg").attr("height", totalh).attr("width", totalw);
-  g_lod = svg.append("g").attr("id", "lodchart").datum(lod_data).call(mychart);
+  g_lod = svg.append("g").attr("id", "lodchart").datum(lod_data).call(mylodchart);
   plotPXG = function(markername, markerindex) {
     var chr, chrtype, g, gabs, genonames, inferred, mypxgchart, _i, _ref, _results;
     svg.select("g#pxgchart").remove();
@@ -68,7 +68,7 @@ iplotScanone_pxg = function(lod_data, pxg_data) {
       return "slateblue";
     });
   };
-  return mychart.markerSelect().on("click", function(d, i) {
+  return mylodchart.markerSelect().on("click", function(d, i) {
     return plotPXG(markers[i], i);
   });
 };

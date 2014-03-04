@@ -23,3 +23,16 @@ d3.json "data.json", (data) ->
   d3.select("div#chart")
     .datum(data)
     .call(mychart)
+
+  tip = d3.tip()
+          .attr('class', 'd3-tip')
+          .html((d,i) -> i)
+          .direction('e')
+          .offset([0,0])
+  d3.select("div#chart svg").call(tip)
+
+
+  # add tool tips
+  mychart.curvesSelect()
+         .on("mouseover.tip", tip.show)
+         .on("mouseout.tip", tip.hide)

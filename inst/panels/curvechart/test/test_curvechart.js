@@ -23,9 +23,14 @@
   totalw = halfw * 2;
 
   d3.json("data.json", function(data) {
-    var mychart;
+    var mychart, tip;
     mychart = curvechart().xlab("Age (weeks)").ylab("Body weight").height(h).width(w).margin(margin).strokewidthhilit(4).strokecolor(["lightpink", "lightblue"]).strokecolorhilit(["Orchid", "slateblue"]).commonX(true);
-    return d3.select("div#chart").datum(data).call(mychart);
+    d3.select("div#chart").datum(data).call(mychart);
+    tip = d3.tip().attr('class', 'd3-tip').html(function(d, i) {
+      return i;
+    }).direction('e').offset([0, 0]);
+    d3.select("div#chart svg").call(tip);
+    return mychart.curvesSelect().on("mouseover.tip", tip.show).on("mouseout.tip", tip.hide);
   });
 
 }).call(this);

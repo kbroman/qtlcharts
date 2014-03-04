@@ -2,7 +2,7 @@
 var curvechart, formatAxis, pullVarAsArray;
 
 curvechart = function() {
-  var axispos, chart, commonX, curveSelect, height, margin, nxticks, nyticks, rectcolor, strokecolor, strokecolorhilit, strokewidth, strokewidthhilit, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks;
+  var axispos, chart, commonX, curvesSelect, height, margin, nxticks, nyticks, rectcolor, strokecolor, strokecolorhilit, strokewidth, strokewidthhilit, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks;
   width = 800;
   height = 500;
   margin = {
@@ -35,7 +35,7 @@ curvechart = function() {
   ylab = "Y";
   yscale = d3.scale.linear();
   xscale = d3.scale.linear();
-  curveSelect = null;
+  curvesSelect = null;
   commonX = true;
   chart = function(selection) {
     return selection.each(function(data) {
@@ -163,7 +163,7 @@ curvechart = function() {
         return strokecolor[group[i]];
       }).attr("stroke-width", strokewidth);
       curves = g.append("g").attr("id", "curves");
-      curveSelect = curves.selectAll("empty").data(d3.range(data.length)).enter().append("path").datum(function(d) {
+      curvesSelect = curves.selectAll("empty").data(d3.range(data.length)).enter().append("path").datum(function(d) {
         return data[d];
       }).attr("d", curve).attr("fill", "none").attr("stroke", function(d, i) {
         return strokecolorhilit[group[i]];
@@ -322,8 +322,8 @@ curvechart = function() {
   chart.xscale = function() {
     return xscale;
   };
-  chart.curveSelect = function() {
-    return curveSelect;
+  chart.curvesSelect = function() {
+    return curvesSelect;
   };
   return chart;
 };

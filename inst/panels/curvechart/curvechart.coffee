@@ -22,7 +22,7 @@ curvechart = () ->
   ylab = "Y"
   yscale = d3.scale.linear()
   xscale = d3.scale.linear()
-  curveSelect = null
+  curvesSelect = null
   commonX = true
 
   ## the main function
@@ -164,7 +164,7 @@ curvechart = () ->
            .attr("stroke-width", strokewidth)
 
       curves = g.append("g").attr("id", "curves")
-      curveSelect =
+      curvesSelect =
         curves.selectAll("empty")
               .data(d3.range(data.length))
               .enter()
@@ -295,8 +295,8 @@ curvechart = () ->
   chart.xscale = () ->
     return xscale
 
-  chart.curveSelect = () ->
-    return curveSelect
+  chart.curvesSelect = () ->
+    return curvesSelect
 
   # return the chart function
   chart

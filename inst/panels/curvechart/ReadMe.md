@@ -52,4 +52,4 @@ Additional accessors:
     yscale(y)
 
     # selection of curves, to add .on("click", ...)
-    curveSelect = mychart.curveSelect()
+    curvesSelect = mychart.curvesSelect()

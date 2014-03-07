@@ -78,7 +78,8 @@ distributions, linked to the underlying histograms.
 Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License).)
 
 R/qtlcharts incorporates [D3.js](http://d3js.org)
-([see its license](inst/d3/LICENSE)) and
+([see its license](inst/d3/LICENSE)),
 [d3.tip](http://github.com/Caged/d3-tip)
-([see its license](inst/d3-tip/LICENSE)).
+([see its license](inst/d3-tip/LICENSE)), and
+[ColorBrewer](http://colorbrewer2.org) ([see its license](inst/colorbrewer/LICENSE))
 

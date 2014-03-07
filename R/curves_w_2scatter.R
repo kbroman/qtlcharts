@@ -74,7 +74,11 @@ function(curveMatrix, times, scatter1, scatter2,
   append_html_jscode(file, 'curve_data = ', toJSON(list(x=times, data=curveMatrix), ...), ';')
   append_html_jscode(file, 'scatter1_data = ', toJSON(scatter1, ...), ';')
   append_html_jscode(file, 'scatter2_data = ', toJSON(scatter2, ...), ';')
-  append_html_jscode(file, 'curves_w_2scatter(curve_data, scatter1_data, scatter2_data);')
+  jscode = paste0('mychart = curves_w_2scatter()',
+                  # insert configuration parameters before the semi-colon
+                  ';\n',
+                  'd3.select("div#chart").datum({"curve_data":curve_data, "scatter1_data":scatter1_data, "scatter2_data":scatter2_data}).call(mychart);')
+  append_html_jscode(file, jscode)
 
   if(missing(legend) || is.null(legend))
     legend <- c('Insert a legend here. ',

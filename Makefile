@@ -60,13 +60,13 @@ ${PANEL_DIR}/*/test/d3.min.js: inst/d3/d3.min.js
 
 # links to d3-tip for the test files
 
-d3-tip: ${LODCHART_TESTDIR}/d3-tip.js ${SCATTERPLOT_TESTDIR}/d3-tip.js ${DOTCHART_TESTDIR}/d3-tip.js ${CICHART_TESTDIR}/d3-tip.js ${CURVECHART_TESTDIR}/d3-tip.js ${LODCHART_TESTDIR}/d3-tip.css ${SCATTERPLOT_TESTDIR}/d3-tip.css ${DOTCHART_TESTDIR}/d3-tip.css ${CICHART_TESTDIR}/d3-tip.css ${CURVECHART_TESTDIR}/d3-tip.css
+d3-tip: ${LODCHART_TESTDIR}/d3-tip.min.js ${SCATTERPLOT_TESTDIR}/d3-tip.min.js ${DOTCHART_TESTDIR}/d3-tip.min.js ${CICHART_TESTDIR}/d3-tip.min.js ${CURVECHART_TESTDIR}/d3-tip.min.js ${LODCHART_TESTDIR}/d3-tip.min.css ${SCATTERPLOT_TESTDIR}/d3-tip.min.css ${DOTCHART_TESTDIR}/d3-tip.min.css ${CICHART_TESTDIR}/d3-tip.min.css ${CURVECHART_TESTDIR}/d3-tip.min.css
 
-${PANEL_DIR}/*/test/d3-tip.js: inst/d3-tip/d3-tip.js
-	ln -s ../../../d3-tip/d3-tip.js $@
+${PANEL_DIR}/*/test/d3-tip.min.js: inst/d3-tip/d3-tip.min.js
+	ln -s ../../../d3-tip/d3-tip.min.js $@
 
-${PANEL_DIR}/*/test/d3-tip.css: inst/d3-tip/d3-tip.css
-	ln -s ../../../d3-tip/d3-tip.css $@
+${PANEL_DIR}/*/test/d3-tip.min.css: inst/d3-tip/d3-tip.min.css
+	ln -s ../../../d3-tip/d3-tip.min.css $@
 
 #------------------------------------------------------------
 

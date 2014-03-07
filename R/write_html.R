@@ -188,9 +188,9 @@ function(file, onefile=FALSE)
 link_d3tip <-
 function(file, onefile=FALSE)
 {
-  append_html_csslink(file, system.file('d3-tip', 'd3-tip.css', package='qtlcharts'),
+  append_html_csslink(file, system.file('d3-tip', 'd3-tip.min.css', package='qtlcharts'),
                      onefile=onefile)
-  append_html_jslink(file, system.file('d3-tip', 'd3-tip.js', package='qtlcharts'),
+  append_html_jslink(file, system.file('d3-tip', 'd3-tip.min.js', package='qtlcharts'),
                      onefile=onefile)
 }
 

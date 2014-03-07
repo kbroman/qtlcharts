@@ -1,7 +1,4 @@
 *.Rout
 .RData
 .Rhistory
-d3.min.js
 data.json
-d3-tip.min.js
-d3-tip.min.css

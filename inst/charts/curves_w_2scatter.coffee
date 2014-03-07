@@ -156,6 +156,25 @@ curves_w_2scatter = () ->
                   .datum(curve_data)
                   .call(mycurvechart)
 
+      points1 = myscatterplot1.pointsSelect()
+      points2 = myscatterplot2.pointsSelect()
+      curves = mycurvechart.curvesSelect()
+
+      curves.on "mouseover", (d,i) ->
+                               d3.select(this).attr("opacity", 1)
+                               d3.selectAll("circle.pt#{i}").attr("fill", "Orchid").attr("r", pointsize*2)
+            .on "mouseout", (d,i) ->
+                               d3.select(this).attr("opacity", 0)
+                               d3.selectAll("circle.pt#{i}").attr("fill", pointcolor).attr("r", pointsize)
+
+      [points1, points2].forEach (points) ->
+        points.on "mouseover", (d,i) ->
+                                 d3.selectAll("circle.pt#{i}").attr("fill", "Orchid").attr("r", pointsize*2)
+                                 d3.selectAll("path.path#{i}").attr("opacity", 1)
+              .on "mouseout", (d,i) ->
+                                 d3.selectAll("circle.pt#{i}").attr("fill", pointcolor).attr("r", pointsize)
+                                 d3.selectAll("path.path#{i}").attr("opacity", 0)
+
   ## configuration parameters
   chart.hbot = (value) ->
     return hbot if !arguments.length

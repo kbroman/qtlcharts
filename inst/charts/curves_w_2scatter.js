@@ -81,7 +81,7 @@ curves_w_2scatter = function() {
   curves_ylab = "Y";
   chart = function(selection) {
     return selection.each(function(data) {
-      var curve_data, g, gEnter, g_curves, g_scat1, g_scat2, mycurvechart, myscatterplot1, myscatterplot2, scatter1_data, scatter2_data, svg, totalh, totalw, wtop;
+      var curve_data, curves, g, gEnter, g_curves, g_scat1, g_scat2, mycurvechart, myscatterplot1, myscatterplot2, points1, points2, scatter1_data, scatter2_data, svg, totalh, totalw, wtop;
       curve_data = data.curve_data;
       scatter1_data = data.scatter1_data;
       scatter2_data = data.scatter2_data;
@@ -97,7 +97,26 @@ curves_w_2scatter = function() {
       mycurvechart = curvechart().width(width).height(hbot).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).strokecolor(strokecolor).strokecolorhilit(strokecolorhilit).strokewidth(strokewidth).strokewidthhilit(strokewidthhilit).xlim(curves_xlim).ylim(curves_ylim).nxticks(curves_nxticks).xticks(curves_xticks).nyticks(curves_nyticks).yticks(curves_yticks).title(curves_title).xlab(curves_xlab).ylab(curves_ylab);
       g_scat1 = g.append("g").attr("id", "scatterplot1").datum(scatter1_data).call(myscatterplot1);
       g_scat2 = g.append("g").attr("id", "scatterplot2").attr("transform", "translate(" + (wtop + margin.left + margin.right) + ",0)").datum(scatter2_data).call(myscatterplot2);
-      return g_curves = g.append("g").attr("id", "curvechart").attr("transform", "translate(0," + (htop + margin.top + margin.bottom) + ")").datum(curve_data).call(mycurvechart);
+      g_curves = g.append("g").attr("id", "curvechart").attr("transform", "translate(0," + (htop + margin.top + margin.bottom) + ")").datum(curve_data).call(mycurvechart);
+      points1 = myscatterplot1.pointsSelect();
+      points2 = myscatterplot2.pointsSelect();
+      curves = mycurvechart.curvesSelect();
+      curves.on("mouseover", function(d, i) {
+        d3.select(this).attr("opacity", 1);
+        return d3.selectAll("circle.pt" + i).attr("fill", "Orchid").attr("r", pointsize * 2);
+      }).on("mouseout", function(d, i) {
+        d3.select(this).attr("opacity", 0);
+        return d3.selectAll("circle.pt" + i).attr("fill", pointcolor).attr("r", pointsize);
+      });
+      return [points1, points2].forEach(function(points) {
+        return points.on("mouseover", function(d, i) {
+          d3.selectAll("circle.pt" + i).attr("fill", "Orchid").attr("r", pointsize * 2);
+          return d3.selectAll("path.path" + i).attr("opacity", 1);
+        }).on("mouseout", function(d, i) {
+          d3.selectAll("circle.pt" + i).attr("fill", pointcolor).attr("r", pointsize);
+          return d3.selectAll("path.path" + i).attr("opacity", 0);
+        });
+      });
     });
   };
   chart.hbot = function(value) {

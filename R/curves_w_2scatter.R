@@ -18,6 +18,9 @@
 #' @param legend Character vector with text for a legend (to be
 #' combined to one string with \code{\link[base]{paste}}, with
 #' \code{collapse=''})
+#' @param chartOpts A list of options for configuring the chart (see
+#' the coffeescript code). Each element must be named using the
+#' corresponding option.
 #' @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
 #' @return Character string with the name of the file created.
 #' @export
@@ -41,7 +44,8 @@
 #' @seealso \code{\link{corr_w_scatter}}
 curves_w_2scatter <- 
 function(curveMatrix, times, scatter1, scatter2,
-         file, onefile=FALSE, openfile=TRUE, title="", legend, ...)
+         file, onefile=FALSE, openfile=TRUE, title="", legend,
+         chartOpts=NULL, ...)
 {    
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -74,10 +78,10 @@ function(curveMatrix, times, scatter1, scatter2,
   append_html_jscode(file, 'curve_data = ', toJSON(list(x=times, data=curveMatrix), ...), ';')
   append_html_jscode(file, 'scatter1_data = ', toJSON(scatter1, ...), ';')
   append_html_jscode(file, 'scatter2_data = ', toJSON(scatter2, ...), ';')
-  jscode = paste0('mychart = curves_w_2scatter()',
-                  # insert configuration parameters before the semi-colon
-                  ';\n',
-                  'd3.select("div#chart").datum({"curve_data":curve_data, "scatter1_data":scatter1_data, "scatter2_data":scatter2_data}).call(mychart);')
+
+  jscode = paste0('mychart = curves_w_2scatter()', convertChartOpts(chartOpts), ';\n',
+                  'd3.select("div#chart").datum({"curve_data":curve_data, ',
+                  '"scatter1_data":scatter1_data, "scatter2_data":scatter2_data}).call(mychart);')
   append_html_jscode(file, jscode)
 
   if(missing(legend) || is.null(legend))

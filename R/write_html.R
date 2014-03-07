@@ -228,3 +228,29 @@ function(legend, file)
   append_html_p(file, paste(legend, collapse=""),
                 tag='p', class='legend', id='legend')
 }
+
+# convert chart opts to javascript code
+convertChartOpts <-
+function(chartOpts)
+{
+  if(length(chartOpts)==0) return('')
+
+  # each element is converted to ".name(value)"
+  result <- ''
+  opt <- names(chartOpts)
+
+  for(i in seq(along=chartOpts)) {
+
+    # don't want scalars to become vectors
+    if(length(chartOpts[[i]])==1 && !is.list(chartOpts[[i]]))
+      chartOpts[[i]] <- toJSON(chartOpts[[i]], container=FALSE, collapse="")
+    else
+      chartOpts[[i]] <- toJSON(chartOpts[[i]], collapse="")
+
+    result <- paste0(result, '.', opt[i], '(',
+                     chartOpts[[i]], ')')
+
+  }
+
+  result
+}

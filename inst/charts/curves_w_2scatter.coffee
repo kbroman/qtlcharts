@@ -232,7 +232,7 @@ curves_w_2scatter = () ->
     scat1_xNA = value
     chart
 
-  chart.scat1_yYA = (value) ->
+  chart.scat1_yNA = (value) ->
     return scat1_yNA if !arguments.length
     scat1_yNA = value
     chart
@@ -287,7 +287,7 @@ curves_w_2scatter = () ->
     scat2_xNA = value
     chart
 
-  chart.scat2_yYA = (value) ->
+  chart.scat2_yNA = (value) ->
     return scat2_yNA if !arguments.length
     scat2_yNA = value
     chart

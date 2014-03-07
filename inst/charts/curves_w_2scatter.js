@@ -205,7 +205,7 @@ curves_w_2scatter = function() {
     scat1_xNA = value;
     return chart;
   };
-  chart.scat1_yYA = function(value) {
+  chart.scat1_yNA = function(value) {
     if (!arguments.length) {
       return scat1_yNA;
     }
@@ -282,7 +282,7 @@ curves_w_2scatter = function() {
     scat2_xNA = value;
     return chart;
   };
-  chart.scat2_yYA = function(value) {
+  chart.scat2_yNA = function(value) {
     if (!arguments.length) {
       return scat2_yNA;
     }

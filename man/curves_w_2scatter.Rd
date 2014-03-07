@@ -4,7 +4,8 @@
 \title{Plot of a bunch of curves, linked to points in two scatterplots}
 \usage{
 curves_w_2scatter(curveMatrix, times, scatter1, scatter2, file,
-  onefile = FALSE, openfile = TRUE, title = "", legend, ...)
+  onefile = FALSE, openfile = TRUE, title = "", legend,
+  chartOpts = NULL, ...)
 }
 \arguments{
   \item{curveMatrix}{Matrix (dim n_ind x n_times) with
@@ -33,6 +34,10 @@ curves_w_2scatter(curveMatrix, times, scatter1, scatter2, file,
   \item{legend}{Character vector with text for a legend (to
   be combined to one string with \code{\link[base]{paste}},
   with \code{collapse=''})}
+
+  \item{chartOpts}{A list of options for configuring the
+  chart (see the coffeescript code). Each element must be
+  named using the corresponding option.}
 
   \item{\dots}{Additional arguments passed to the
   \code{\link[RJSONIO]{toJSON}} function}

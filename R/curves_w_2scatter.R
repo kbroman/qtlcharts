@@ -71,6 +71,7 @@ function(curveMatrix, times, scatter1, scatter2,
   link_d3(file, onefile=onefile)
   link_d3tip(file, onefile=onefile)
   link_colorbrewer(file, onefile=onefile)
+  link_panelutil(file, onefile=onefile)
   link_panel('curvechart', file, onefile=onefile)
   link_panel('scatterplot', file, onefile=onefile)
   link_chart('curves_w_2scatter', file, onefile=onefile)

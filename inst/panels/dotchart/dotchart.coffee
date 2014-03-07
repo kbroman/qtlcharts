@@ -344,17 +344,3 @@ dotchart = () ->
 
   # return the chart function
   chart
-
-# function to determine rounding of axis labels
-formatAxis = (d) ->
-  d = d[1] - d[0]
-  ndig = Math.floor( Math.log(d % 10) / Math.log(10) )
-  ndig = 0 if ndig > 0
-  ndig = Math.abs(ndig)
-  d3.format(".#{ndig}f")
-
-# unique values of array (ignore nulls)
-unique = (x) ->
-  output = {}
-  output[v] = v for v in x when v
-  output[v] for v of output

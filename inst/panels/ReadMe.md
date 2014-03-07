@@ -20,6 +20,8 @@ This directory contains a set of reusable panels for
 - [curvechart](inst/panels/curvechart): panel for multiple curves
   (uses [ColorBrewer](http://colorbrewer2.org))
 
+Further utility functions are in [panelutil.coffee](panelutil.coffee).
+
 #### Licenses
 
 Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License).)

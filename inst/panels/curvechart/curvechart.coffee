@@ -324,18 +324,3 @@ curvechart = () ->
 
   # return the chart function
   chart
-
-# function to determine rounding of axis labels
-formatAxis = (d) ->
-  d = d[1] - d[0]
-  ndig = Math.floor( Math.log(d % 10) / Math.log(10) )
-  ndig = 0 if ndig > 0
-  ndig = Math.abs(ndig)
-  d3.format(".#{ndig}f")
-
-pullVarAsArray = (data, variable) ->
-  v = []
-  for i of data
-    v = v.concat data[i][variable]
-  v
-  

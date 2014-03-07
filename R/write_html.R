@@ -203,6 +203,14 @@ function(file, onefile=FALSE)
                      onefile=onefile)
 }
 
+link_panelutil <-
+function(file, onefile=FALSE)
+{
+  jsfile <- system.file('panels', 'panelutil.js', package='qtlcharts') 
+  if(file.exists(jsfile))
+    append_html_jslink(file, jsfile, onefile=onefile)
+}
+
 link_panel <-
 function(panel, file, onefile=FALSE)
 {

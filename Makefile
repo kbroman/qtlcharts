@@ -34,7 +34,7 @@ ${PANEL_DIR}/*/test/%.js: ${PANEL_DIR}/*/test/%.coffee
 #------------------------------------------------------------
 
 # javascript of panels
-jspanels: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js ${CURVECHART_DIR}/curvechart.js
+jspanels: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js ${CURVECHART_DIR}/curvechart.js ${PANEL_DIR}/panelutil.js
 
 ${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
 	coffee ${COFFEE_ARGS} -b $^
@@ -64,6 +64,7 @@ clean:
 #------------------------------------------------------------
 
 web:
+	scp ${PANEL_DIR}/panelutil.* broman-2:public_html/D3/panels/
 	scp ${LODCHART_DIR}/lodchart.* broman-2:public_html/D3/panels/lodchart/
 	cd ${LODCHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/lodchart/test/
 	scp ${SCATTERPLOT_DIR}/scatterplot.* broman-2:public_html/D3/panels/scatterplot/

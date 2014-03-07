@@ -194,6 +194,15 @@ function(file, onefile=FALSE)
                      onefile=onefile)
 }
 
+link_colorbrewer <-
+function(file, onefile=FALSE)
+{
+  append_html_csslink(file, system.file('colorbrewer', 'colorbrewer.css', package='qtlcharts'),
+                     onefile=onefile)
+  append_html_jslink(file, system.file('colorbrewer', 'colorbrewer.js', package='qtlcharts'),
+                     onefile=onefile)
+}
+
 link_panel <-
 function(panel, file, onefile=FALSE)
 {

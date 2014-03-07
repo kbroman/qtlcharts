@@ -42,7 +42,8 @@ If that doesn't work, you might have an older version of devtools, so try:
 
 #### Example use
 
-There aren't many functions available yet, but you can try this:
+Try the following example, which creates an interactive chart with LOD
+curves linked to estimated QTL effects.
 
     library(qtlcharts)
     data(hyper)

@@ -1,4 +1,4 @@
-all: jspanels jspaneltests jscharts json d3 d3-tip doc inst/ToDo.html
+all: jspanels jspaneltests jscharts json doc inst/ToDo.html
 
 PANEL_DIR = inst/panels
 LODCHART_DIR = ${PANEL_DIR}/lodchart
@@ -49,27 +49,6 @@ ${PANEL_DIR}/*/test/data.json: ${PANEL_DIR}/*/test/create_test_data.R
 
 #------------------------------------------------------------
 
-# links to d3 for the test files
-
-d3: ${LODCHART_TESTDIR}/d3.min.js ${SCATTERPLOT_TESTDIR}/d3.min.js ${DOTCHART_TESTDIR}/d3.min.js ${CICHART_TESTDIR}/d3.min.js ${CURVECHART_TESTDIR}/d3.min.js
-
-${PANEL_DIR}/*/test/d3.min.js: inst/d3/d3.min.js
-	ln -s ../../../d3/d3.min.js $@
-
-#------------------------------------------------------------
-
-# links to d3-tip for the test files
-
-d3-tip: ${LODCHART_TESTDIR}/d3-tip.min.js ${SCATTERPLOT_TESTDIR}/d3-tip.min.js ${DOTCHART_TESTDIR}/d3-tip.min.js ${CICHART_TESTDIR}/d3-tip.min.js ${CURVECHART_TESTDIR}/d3-tip.min.js ${LODCHART_TESTDIR}/d3-tip.min.css ${SCATTERPLOT_TESTDIR}/d3-tip.min.css ${DOTCHART_TESTDIR}/d3-tip.min.css ${CICHART_TESTDIR}/d3-tip.min.css ${CURVECHART_TESTDIR}/d3-tip.min.css
-
-${PANEL_DIR}/*/test/d3-tip.min.js: inst/d3-tip/d3-tip.min.js
-	ln -s ../../../d3-tip/d3-tip.min.js $@
-
-${PANEL_DIR}/*/test/d3-tip.min.css: inst/d3-tip/d3-tip.min.css
-	ln -s ../../../d3-tip/d3-tip.min.css $@
-
-#------------------------------------------------------------
-
 # javascript for the real charts
 jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${CHART_DIR}/iplotScanone_ci.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/corr_w_scatter.js ${CHART_DIR}/manyboxplots.js ${CHART_DIR}/curves_w_2scatter.js
 
@@ -85,13 +64,13 @@ clean:
 #------------------------------------------------------------
 
 web:
-	scp ${LODCHART_DIR}/lodchart.* broman-2:public_html/D3/lodchart/
-	cd ${LODCHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/lodchart/test/
-	scp ${SCATTERPLOT_DIR}/scatterplot.* broman-2:public_html/D3/scatterplot/
-	cd ${SCATTERPLOT_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/scatterplot/test/
-	scp ${DOTCHART_DIR}/dotchart.* broman-2:public_html/D3/dotchart/
-	cd ${DOTCHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/dotchart/test/
-	scp ${CICHART_DIR}/cichart.* broman-2:public_html/D3/cichart/
-	cd ${CICHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/cichart/test/
-	scp ${CURVECHART_DIR}/curvechart.* broman-2:public_html/D3/curvechart/
-	cd ${CURVECHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/curvechart/test/
+	scp ${LODCHART_DIR}/lodchart.* broman-2:public_html/D3/panels/lodchart/
+	cd ${LODCHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/lodchart/test/
+	scp ${SCATTERPLOT_DIR}/scatterplot.* broman-2:public_html/D3/panels/scatterplot/
+	cd ${SCATTERPLOT_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/panels/scatterplot/test/
+	scp ${DOTCHART_DIR}/dotchart.* broman-2:public_html/D3/panels/dotchart/
+	cd ${DOTCHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/panels/dotchart/test/
+	scp ${CICHART_DIR}/cichart.* broman-2:public_html/D3/panels/cichart/
+	cd ${CICHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/panels/cichart/test/
+	scp ${CURVECHART_DIR}/curvechart.* broman-2:public_html/D3/panels/curvechart/
+	cd ${CURVECHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/panels/curvechart/test/

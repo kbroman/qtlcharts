@@ -68,10 +68,10 @@ web:
 	scp ${LODCHART_DIR}/lodchart.* broman-2:public_html/D3/panels/lodchart/
 	cd ${LODCHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/lodchart/test/
 	scp ${SCATTERPLOT_DIR}/scatterplot.* broman-2:public_html/D3/panels/scatterplot/
-	cd ${SCATTERPLOT_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/panels/scatterplot/test/
+	cd ${SCATTERPLOT_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/scatterplot/test/
 	scp ${DOTCHART_DIR}/dotchart.* broman-2:public_html/D3/panels/dotchart/
-	cd ${DOTCHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/panels/dotchart/test/
+	cd ${DOTCHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/dotchart/test/
 	scp ${CICHART_DIR}/cichart.* broman-2:public_html/D3/panels/cichart/
-	cd ${CICHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/panels/cichart/test/
+	cd ${CICHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/cichart/test/
 	scp ${CURVECHART_DIR}/curvechart.* broman-2:public_html/D3/panels/curvechart/
-	cd ${CURVECHART_TESTDIR};scp *.js *.css *.json index.html broman-2:public_html/D3/panels/curvechart/test/
+	cd ${CURVECHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/curvechart/test/

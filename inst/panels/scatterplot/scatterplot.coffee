@@ -68,7 +68,7 @@ scatterplot = () ->
 
       # Update the outer dimensions.
       svg.attr("width", width+margin.left+margin.right)
-         .attr("height", height+margin.top+margin.bottom);
+         .attr("height", height+margin.top+margin.bottom)
 
       g = svg.select("g")
 

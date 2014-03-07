@@ -165,7 +165,9 @@ curvechart = function() {
       curves = g.append("g").attr("id", "curves");
       curvesSelect = curves.selectAll("empty").data(d3.range(data.length)).enter().append("path").datum(function(d) {
         return data[d];
-      }).attr("d", curve).attr("fill", "none").attr("stroke", function(d, i) {
+      }).attr("d", curve).attr("class", function(d, i) {
+        return "path" + i;
+      }).attr("fill", "none").attr("stroke", function(d, i) {
         return strokecolorhilit[group[i]];
       }).attr("stroke-width", strokewidthhilit).attr("opacity", 0).on("mouseover", function() {
         return d3.select(this).attr("opacity", 1);

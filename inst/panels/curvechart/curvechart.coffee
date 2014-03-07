@@ -171,6 +171,7 @@ curvechart = () ->
               .append("path")
               .datum((d) -> data[d])
               .attr("d", curve)
+              .attr("class", (d,i) -> "path#{i}")
               .attr("fill", "none")
               .attr("stroke", (d,i) -> strokecolorhilit[group[i]])
               .attr("stroke-width", strokewidthhilit)

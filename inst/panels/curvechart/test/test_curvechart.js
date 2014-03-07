@@ -24,7 +24,7 @@
 
   d3.json("data.json", function(data) {
     var mychart, textbox;
-    mychart = curvechart().xlab("Age (weeks)").ylab("Body weight").height(h).width(w).margin(margin).strokewidthhilit(4).strokecolor(["lightpink", "lightblue"]).strokecolorhilit(["Orchid", "slateblue"]).commonX(true);
+    mychart = curvechart().xlab("Age (weeks)").ylab("Body weight").height(h).width(w).margin(margin).strokewidthhilit(4).commonX(true);
     d3.select("div#chart").datum(data).call(mychart);
     textbox = d3.select("div#chart svg").append("text").attr("class", "title").text("").attr("y", margin.top / 2).attr("x", margin.left).style("text-anchor", "start");
     return mychart.curvesSelect().on("mouseover.text", function(d, i) {

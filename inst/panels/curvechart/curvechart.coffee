@@ -13,8 +13,8 @@ curvechart = () ->
   nyticks = 5
   yticks = null
   rectcolor = d3.rgb(230, 230, 230)
-  strokecolor = d3.rgb(190, 190, 190)
-  strokecolorhilit = "slateblue"
+  strokecolor = null # d3.rgb(190, 190, 190)
+  strokecolorhilit = null # "slateblue"
   strokewidth = 2
   strokewidthhilit = 2
   title = ""
@@ -34,9 +34,32 @@ curvechart = () ->
       group = group ? (1 for i of data.data)
       ngroup = d3.max(group)
       group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
-
+  
+      
+      # default light stroke colors
+      if !strokecolor?
+        if ngroup == 1 
+          strokecolor = d3.rgb(190, 190, 190) if ngroup == 1
+        else if ngroup == 2
+          strokecolor = ["lightpink", "lightblue"] if ngroup == 2
+        else if ngroup <= 9
+          strokecolor = colorbrewer.Pastel1[ngroup]
+        else # this will be a problem
+          console.log("Can't handle more than 9 groups")
+          strokecolor = colorbrewer.Pastel1[9]
       strokecolor = [strokecolor] unless Array.isArray(strokecolor)
       strokecolor = (strokecolor[0] for i of d3.range(ngroup)) if strokecolor.length == 1 and ngroup > 1
+
+      # default dark stroke colors
+      if !strokecolorhilit?
+        if ngroup == 1 
+          strokecolorhilit = d3.rgb(190, 190, 190) if ngroup == 1
+        else if ngroup == 2
+          strokecolorhilit = ["MediumVioletRed", "slateblue"] if ngroup == 2
+        else if ngroup <= 9
+          strokecolorhilit = colorbrewer.Set1[ngroup]
+        else
+          strokecolorhilit = colorbrewer.Set1[9]
       strokecolorhilit = [strokecolorhilit] unless Array.isArray(strokecolorhilit)
       strokecolorhilit = (strokecolorhilit[0] for i of d3.range(ngroup)) if strokecolorhilit.length == 1 and ngroup > 1
   

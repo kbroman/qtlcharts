@@ -24,8 +24,8 @@ Here are all of the options:
                        .xticks(null)                                            # locations of x-axis ticks
                        .yticks(null)                                            # locations of y-axis ticks
                        .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
-                       .strokecolor(d3.rgb(190,190,190))                        # color(s) for curves
-                       .strokecolorhilit("slateblue")                           # color(s) for curves when highlighted
+                       .strokecolor(null)                                       # color(s) for curves
+                       .strokecolorhilit(null)                                  # color(s) for curves when highlighted
                        .strokewidth(2)                                          # line width for curves
                        .strokewidthhilit(2)                                     # line width for curves when highlighted
                        .title("")                                               # panel title

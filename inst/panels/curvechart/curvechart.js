@@ -26,8 +26,8 @@ curvechart = function() {
   nyticks = 5;
   yticks = null;
   rectcolor = d3.rgb(230, 230, 230);
-  strokecolor = d3.rgb(190, 190, 190);
-  strokecolorhilit = "slateblue";
+  strokecolor = null;
+  strokecolorhilit = null;
   strokewidth = 2;
   strokewidthhilit = 2;
   title = "";
@@ -59,6 +59,22 @@ curvechart = function() {
         }
         return _results;
       })();
+      if (strokecolor == null) {
+        if (ngroup === 1) {
+          if (ngroup === 1) {
+            strokecolor = d3.rgb(190, 190, 190);
+          }
+        } else if (ngroup === 2) {
+          if (ngroup === 2) {
+            strokecolor = ["lightpink", "lightblue"];
+          }
+        } else if (ngroup <= 9) {
+          strokecolor = colorbrewer.Pastel1[ngroup];
+        } else {
+          console.log("Can't handle more than 9 groups");
+          strokecolor = colorbrewer.Pastel1[9];
+        }
+      }
       if (!Array.isArray(strokecolor)) {
         strokecolor = [strokecolor];
       }
@@ -71,6 +87,21 @@ curvechart = function() {
           }
           return _results;
         })();
+      }
+      if (strokecolorhilit == null) {
+        if (ngroup === 1) {
+          if (ngroup === 1) {
+            strokecolorhilit = d3.rgb(190, 190, 190);
+          }
+        } else if (ngroup === 2) {
+          if (ngroup === 2) {
+            strokecolorhilit = ["MediumVioletRed", "slateblue"];
+          }
+        } else if (ngroup <= 9) {
+          strokecolorhilit = colorbrewer.Set1[ngroup];
+        } else {
+          strokecolorhilit = colorbrewer.Set1[9];
+        }
       }
       if (!Array.isArray(strokecolorhilit)) {
         strokecolorhilit = [strokecolorhilit];

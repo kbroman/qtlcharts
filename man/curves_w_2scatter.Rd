@@ -66,7 +66,10 @@ for(j in 6:16)
 y <- y + rnorm(prod(dim(y)), 0, 0.35)
 
 # Make the plot
-curves_w_2scatter(y, times, y[,c(1,5)], y[,c(5,16)])
+curves_w_2scatter(y, times, y[,c(1,5)], y[,c(5,16)],
+                  chartOpts=list(curves_xlab="Time", curves_ylab="Size",
+                                 scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
+                                 scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))
 }
 \seealso{
 \code{\link{corr_w_scatter}}

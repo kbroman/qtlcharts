@@ -25,7 +25,7 @@ package:
     if(!require(RJSONIO)) install.packages("RJSONIO")
 
 You also need the `install_github` function in
-[Hadley Wickham](http://had.co.nz/)'s [devtools]() package. So install
+[Hadley Wickham](http://had.co.nz/)'s [devtools](http://github.com/hadley/devtools) package. So install
 and load devtools:
 
     if(!require(devtools)) install.packages("devtools")

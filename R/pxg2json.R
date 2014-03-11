@@ -18,6 +18,8 @@
 # data(hyper)
 # pxg_as_json <- pxg2json(hyper)
 # @seealso \code{\link{scanone2json}}
+#' @import qtl
+#' @import RJSONIO
 pxg2json <-
 function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
 {

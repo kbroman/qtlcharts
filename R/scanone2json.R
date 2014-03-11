@@ -18,6 +18,8 @@
 # out <- scanone(hyper, method="hk")
 # out_as_json <- scanone2json(out)
 # @seealso \code{\link{pxg2json}}
+#' @import qtl
+#' @import RJSONIO
 scanone2json <-
 function(output, ...)
 {

@@ -66,15 +66,15 @@ function(cross, marker, pheno.col=1,
 
   append_html_middle(file, title, 'chart')
   
-  json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, ...)
-  append_html_jscode(file, 'data = ', json, ';')
-  append_html_jsopts(file, jsOpts)
-  append_html_jscode(file, 'iplotPXG(data,jsOpts);')
-
   if(missing(legend))
     legend <- c('Pink points correspond to individuals with imputed genotypes at this marker. ',
                 'Click on a point for a bit of gratuitous animation.')
   append_legend(legend, file)
+
+  json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, ...)
+  append_html_jscode(file, 'data = ', json, ';')
+  append_html_jsopts(file, jsOpts)
+  append_html_jscode(file, 'iplotPXG(data,jsOpts);')
 
   append_html_bottom(file)
 

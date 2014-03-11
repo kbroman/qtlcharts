@@ -107,13 +107,13 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title, legend, ...)
 
   append_html_middle(file, title, 'chart')
   
-  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, ...), ';')
-  append_html_jscode(file, 'iplotScanone_noeff(data);')
-
   if(missing(legend) || is.null(legend))
     legend <- c('Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker for a bit of gratuitous animation.')
   append_legend(legend, file)
+
+  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, ...), ';')
+  append_html_jscode(file, 'iplotScanone_noeff(data);')
 
   append_html_bottom(file)
 
@@ -142,15 +142,15 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
 
   append_html_middle(file, title, 'chart')
   
-  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
-  append_html_jscode(file, 'pxgData = ', pxg_json, ';')
-  append_html_jscode(file, 'iplotScanone_pxg(scanoneData, pxgData);')
-
   if(missing(legend) || is.null(legend))
     legend <- c('Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker to view the phenotype x genotype plot on the right. ',
                 'In the phenotype x genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
   append_legend(legend, file)
+
+  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
+  append_html_jscode(file, 'pxgData = ', pxg_json, ';')
+  append_html_jscode(file, 'iplotScanone_pxg(scanoneData, pxgData);')
 
   append_html_bottom(file)
 
@@ -178,15 +178,15 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
 
   append_html_middle(file, title, 'chart')
   
-  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
-  append_html_jscode(file, 'pxgData = ', pxg_json, ';')
-  append_html_jscode(file, 'iplotScanone_ci(scanoneData, pxgData);')
-
   if(missing(legend) || is.null(legend))
     legend <- c('Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker to view the phenotype x genotype plot on the right. ',
                 'In the phenotype x genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
   append_legend(legend, file)
+
+  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
+  append_html_jscode(file, 'pxgData = ', pxg_json, ';')
+  append_html_jscode(file, 'iplotScanone_ci(scanoneData, pxgData);')
 
   append_html_bottom(file)
 

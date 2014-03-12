@@ -10,16 +10,20 @@
 #
 # @param output An object of class \code{"scanone"}, as output by \code{\link[qtl]{scanone}}.
 # @param \dots Additional arguments passed to \code{\link[RJSONIO]{toJSON}}.
+#
 # @return A character string with the input in JSON format.
-# @keywords interface
-#  @examples
+#
+#' @importFrom RJSONIO toJSON
+#
+# @examples
 # data(hyper)
 # hyper <- calc.genoprob(hyper)
 # out <- scanone(hyper, method="hk")
 # out_as_json <- scanone2json(out)
+#
 # @seealso \code{\link{pxg2json}}
-#' @import qtl
-#' @import RJSONIO
+#
+# @keywords interface
 scanone2json <-
 function(output, ...)
 {

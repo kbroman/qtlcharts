@@ -11,15 +11,21 @@
 # @param pheno.col Phenotype column
 # @param fillgenoArgs List of named arguments to pass to \code{\link[qtl]{fill.geno}}, if needed.
 # @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
+#
 # @return A character string with the input in JSON format.
+#
 # @details Genotypes are encoded as integers; negative integers are used to indicate imputed values.
-# @keywords interface
+#
+#' @importFrom qtl pull.pheno markernames getsex chrnames getgenonames getid nmar
+#' @importFrom RJSONIO toJSON
+#
 # @examples
 # data(hyper)
 # pxg_as_json <- pxg2json(hyper)
+#
 # @seealso \code{\link{scanone2json}}
-#' @import qtl
-#' @import RJSONIO
+#
+# @keywords interface
 pxg2json <-
 function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
 {
@@ -31,7 +37,7 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
   markers <- markernames(cross)
 
   # chr types
-  sexpgm <- getsex(cross)
+  sexpgm <- qtl::getsex(cross)
   chrtype <- sapply(cross$geno, class)
   names(chrtype) <- qtl::chrnames(cross)
   uchrtype <- unique(chrtype)
@@ -61,6 +67,7 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
 
 
 # get imputed genotypes, dealing specially with X chr genotypes
+#' @importFrom qtl pull.geno fill.geno chrnames getsex reviseXdata
 getImputedGenotypes <-
 function(cross, fillgenoArgs=NULL, imputed_negative=TRUE)
 {

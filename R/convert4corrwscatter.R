@@ -9,14 +9,20 @@
 # @param cols Columns of correlation matrix to keep in image
 # @param reorder If TRUE, reorder the variables by clustering
 # @param corr Correlation matrix
+#
 # @return Character string with the input data in JSON format
-# @seealso \code{\link{corr_w_scatter}}
-# @keywords interface
+#
+#' @importFrom RJSONIO toJSON
+#
 # @examples
 # \dontrun{
 # data(geneExpr)
 # geneExpr_as_json <- convert4corrwscatter(geneExpr$expr, geneExpr$genotype)
 # }
+#
+# @seealso \code{\link{corr_w_scatter}}
+#
+# @keywords interface
 convert4corrwscatter <-
 function(dat, group, rows, cols, reorder=TRUE, corr, corr_was_presubset=FALSE)
 {

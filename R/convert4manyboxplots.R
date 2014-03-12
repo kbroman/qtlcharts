@@ -7,8 +7,9 @@
 # @param qu Quantiles to plot (All with 0 < qu < 0.5)
 # @param orderByMedian If TRUE, reorder individuals by their median
 # @param breaks Number of break points in the histogram
-# @seealso \code{\link{manyboxplots}}
-# @keywords interface
+#
+#' @importFrom RJSONIO toJSON
+#
 # @examples
 # \dontrun{
 # n.ind <- 500
@@ -18,6 +19,11 @@
 #                        paste0("gene", 1:n.gene))
 # geneExpr_as_json <- convert4manyboxplots(expr)
 # }
+#
+#
+# @seealso \code{\link{manyboxplots}}
+#
+# @keywords interface
 convert4manyboxplots <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
          breaks=251)
@@ -53,10 +59,10 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
   dimnames(quant) <- dimnames(counts) <- NULL
 
   # data structure for JSON
-  output <- list("ind" = toJSON(ind),
-                 "qu" = toJSON(qu),
-                 "breaks" = toJSON(breaks),
-                 "quant" = toJSON(quant),
-                 "counts" = toJSON(t(counts)))
+  output <- list("ind" = RJSONIO::toJSON(ind),
+                 "qu" = RJSONIO::toJSON(qu),
+                 "breaks" = RJSONIO::toJSON(breaks),
+                 "quant" = RJSONIO::toJSON(quant),
+                 "counts" = RJSONIO::toJSON(t(counts)))
   paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
 }

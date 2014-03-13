@@ -4,8 +4,8 @@
 \title{Interactive phenotype x genotype plot}
 \usage{
 iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
-  openfile = TRUE, title = "", legend, jsOpts = list(title = marker[1]),
-  fillgenoArgs = NULL, ...)
+  openfile = TRUE, title = "", legend, chartOpts = list(title =
+  marker[1]), fillgenoArgs = NULL, ...)
 }
 \arguments{
   \item{cross}{(Optional) Object of class \code{"cross"},
@@ -31,8 +31,8 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
   be combined to one string with \code{\link[base]{paste}},
   with \code{collapse=''})}
 
-  \item{jsOpts}{List of options to pass to the javascript
-  code; see details.}
+  \item{chartOpts}{List of options to pass to the
+  javascript code; see details.}
 
   \item{fillgenoArgs}{List of named arguments to pass to
   \code{\link[qtl]{fill.geno}}, if needed.}
@@ -46,7 +46,7 @@ Character string with the name of the file created.
 Creates an interactive graph of phenotypes vs genotypes at a marker.
 }
 \details{
-The argument \code{jsOpts} is a list with the following
+The argument \code{chartOpts} is a list with the following
 optional components to modify aspects of the plot:
 \itemize{
   \item{\code{height}: Height of plot in pixels.}

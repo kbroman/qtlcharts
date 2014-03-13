@@ -158,20 +158,20 @@ function(file, ..., tag="p", id, class, style)
   invisible(NULL)
 }
 
-# Append jsOpts data to an html file
+# Append chartOpts data to an html file
 #
 # @param file File to which to write
-# @param jsOpts The options (a list)
+# @param chartOpts The options (a list)
 # @return None (invisible NULL)
 # @keywords IO
-append_html_jsopts <-
-function(file, jsOpts)
+append_html_chartopts <-
+function(file, chartOpts)
 {
-  if(is.null(jsOpts))
-    jsOpts <- list("null" = NULL)
+  if(is.null(chartOpts))
+    chartOpts <- list("null" = NULL)
   
   cat('\n<script type="text/javascript">\n', file=file, append=TRUE)
-  cat('jsOpts = ', toJSON(jsOpts), ';', file=file, append=TRUE, sep='')
+  cat('chartOpts = ', toJSON(chartOpts), ';', file=file, append=TRUE, sep='')
   cat('\n</script>\n', file=file, append=TRUE)
 
   invisible(NULL)

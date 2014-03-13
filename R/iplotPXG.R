@@ -15,11 +15,11 @@
 #' @param legend Character vector with text for a legend (to be
 #' combined to one string with \code{\link[base]{paste}}, with
 #' \code{collapse=''})
-#' @param jsOpts List of options to pass to the javascript code; see details.
+#' @param chartOpts List of options to pass to the javascript code; see details.
 #' @param fillgenoArgs List of named arguments to pass to \code{\link[qtl]{fill.geno}}, if needed.
 #' @param \dots Passed to \cite{\link[RJSONIO]{toJSON}}.
 #' @return Character string with the name of the file created.
-#' @details The argument \code{jsOpts} is a list with the following
+#' @details The argument \code{chartOpts} is a list with the following
 #' optional components to modify aspects of the plot:
 #' \itemize{
 #'   \item{\code{height}: Height of plot in pixels.}
@@ -38,7 +38,7 @@
 iplotPXG <-
 function(cross, marker, pheno.col=1,
          file, onefile=FALSE, openfile=TRUE, title="",
-         legend, jsOpts=list(title=marker[1]),
+         legend, chartOpts=list(title=marker[1]),
          fillgenoArgs=NULL, ...)
 {    
   if(missing(file))
@@ -73,8 +73,8 @@ function(cross, marker, pheno.col=1,
 
   json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, ...)
   append_html_jscode(file, 'data = ', json, ';')
-  append_html_jsopts(file, jsOpts)
-  append_html_jscode(file, 'iplotPXG(data,jsOpts);')
+  append_html_chartopts(file, chartOpts)
+  append_html_jscode(file, 'iplotPXG(data,chartOpts);')
 
   append_html_bottom(file)
 

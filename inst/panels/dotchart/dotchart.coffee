@@ -16,7 +16,7 @@ dotchart = () ->
   rectcolor = d3.rgb(230, 230, 230)
   pointcolor = "slateblue"
   pointstroke = "black"
-  pointsize = 3 # default = no visible points at markers
+  pointsize = 3
   title = ""
   xlab = "Group"
   ylab = "Response"

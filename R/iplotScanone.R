@@ -144,8 +144,8 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
   
   if(missing(legend) || is.null(legend))
     legend <- c('Hover over marker positions on the LOD curve to see the marker names. ',
-                'Click on a marker to view the phenotype x genotype plot on the right. ',
-                'In the phenotype x genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
+                'Click on a marker to view the phenotype &times; genotype plot on the right. ',
+                'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
   append_legend(legend, file)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
@@ -180,8 +180,8 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
   
   if(missing(legend) || is.null(legend))
     legend <- c('Hover over marker positions on the LOD curve to see the marker names. ',
-                'Click on a marker to view the phenotype x genotype plot on the right. ',
-                'In the phenotype x genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
+                'Click on a marker to view the phenotype &times; genotype plot on the right. ',
+                'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
   append_legend(legend, file)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')

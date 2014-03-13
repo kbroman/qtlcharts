@@ -72,6 +72,7 @@ function(dat, group, rows, cols, reorder=TRUE, corr=cor(dat, use="pairwise.compl
 
   link_d3(file, onefile=onefile)
   link_d3tip(file, onefile=onefile)
+  link_panelutil(file, onefile=onefile)
   link_chart('corr_w_scatter', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')

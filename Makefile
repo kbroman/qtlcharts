@@ -21,7 +21,7 @@ inst/ToDo.html: inst/ToDo.md
 
 # build package documentation
 doc:
-	R -e 'library(devtools);document(roclets=c("namespace", "rd"))'
+	R -e 'library(devtools);document()'
 
 #------------------------------------------------------------
 

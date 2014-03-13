@@ -81,18 +81,17 @@ function(curveMatrix, times, scatter1, scatter2,
   dimnames(curveMatrix) <- names(times) <- dimnames(scatter1) <- dimnames(scatter2) <- NULL
 
   if(missing(legend) || is.null(legend))
-    legend <- c('Insert a legend here. ',
-                'Really; I mean it!') 
+    legend <- c('The top two scatterplots are for slices from the curves below. ',
+                'The three panels are linked: hover over an element in one panel, ',
+                'and the corresponding elements in the other panels will be highlighted.')
   append_legend(legend, file)
 
   append_html_jscode(file, 'curve_data = ', toJSON(list(x=times, data=curveMatrix), ...), ';')
   append_html_jscode(file, 'scatter1_data = ', toJSON(scatter1, ...), ';')
   append_html_jscode(file, 'scatter2_data = ', toJSON(scatter2, ...), ';')
+  append_html_chartopts(file, chartOpts)
 
-  jscode = paste0('mychart = curves_w_2scatter()', convertChartOpts(chartOpts), ';\n',
-                  'd3.select("div#chart").datum({"curve_data":curve_data, ',
-                  '"scatter1_data":scatter1_data, "scatter2_data":scatter2_data}).call(mychart);')
-  append_html_jscode(file, jscode)
+  append_html_jscode(file, 'curves_w_2scatter(curve_data, scatter1_data, scatter2_data, chartOpts)')
 
   append_html_bottom(file)
 

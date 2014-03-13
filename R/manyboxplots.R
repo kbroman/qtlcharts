@@ -47,6 +47,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
 
   link_d3(file, onefile=onefile)
   link_d3tip(file, onefile=onefile)
+  link_panelutil(file, onefile=onefile)
   link_chart('manyboxplots', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')

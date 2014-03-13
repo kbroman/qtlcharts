@@ -13,12 +13,16 @@
 #' @param openfile If TRUE, open the plot in the default web browser.
 #' @param title Character string with title for plot.
 #' @param legend Character vector with text for a legend (to be
-#' combined to one string with \code{\link[base]{paste}}, with
-#' \code{collapse=''})
-#' @param chartOpts List of options to pass to the javascript code; see details.
+#'    combined to one string with \code{\link[base]{paste}}, with
+#'    \code{collapse=''})
+#' @param chartOpts A list of options for configuring the chart.
+#'    Each element must be named using the
+#'    corresponding option. See details.
 #' @param fillgenoArgs List of named arguments to pass to \code{\link[qtl]{fill.geno}}, if needed.
 #' @param \dots Passed to \cite{\link[RJSONIO]{toJSON}}.
+#'
 #' @return Character string with the name of the file created.
+#'
 #' @details The argument \code{chartOpts} is a list with
 #' optional components to modify aspects of the plot, e.g.:
 #' \itemize{
@@ -29,11 +33,14 @@
 #' The function \code{\link[qtl]{fill.geno}} is used to impute missing
 #' genotypes, with arguments passed as a list, for example
 #' \code{fillgenoArgs=list(method="argmax", error.prob=0.002, map.function="c-f")}.
+#'
 #' @export
+#'
 #' @examples
 #' data(hyper)
 #' marker <- sample(markernames(hyper), 1)
 #' iplotPXG(hyper, marker)
+#'
 #' @seealso \code{\link{iplotScanone}}
 iplotPXG <-
 function(cross, marker, pheno.col=1,

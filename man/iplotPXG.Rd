@@ -31,8 +31,9 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
   be combined to one string with \code{\link[base]{paste}},
   with \code{collapse=''})}
 
-  \item{chartOpts}{List of options to pass to the
-  javascript code; see details.}
+  \item{chartOpts}{A list of options for configuring the
+  chart.  Each element must be named using the
+  corresponding option. See details.}
 
   \item{fillgenoArgs}{List of named arguments to pass to
   \code{\link[qtl]{fill.geno}}, if needed.}

@@ -19,8 +19,8 @@
 #' @param fillgenoArgs List of named arguments to pass to \code{\link[qtl]{fill.geno}}, if needed.
 #' @param \dots Passed to \cite{\link[RJSONIO]{toJSON}}.
 #' @return Character string with the name of the file created.
-#' @details The argument \code{chartOpts} is a list with the following
-#' optional components to modify aspects of the plot:
+#' @details The argument \code{chartOpts} is a list with
+#' optional components to modify aspects of the plot, e.g.:
 #' \itemize{
 #'   \item{\code{height}: Height of plot in pixels.}
 #'   \item{\code{width}: Width of plot in pixels.}

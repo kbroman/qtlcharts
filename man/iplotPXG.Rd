@@ -46,8 +46,8 @@ Character string with the name of the file created.
 Creates an interactive graph of phenotypes vs genotypes at a marker.
 }
 \details{
-The argument \code{chartOpts} is a list with the following
-optional components to modify aspects of the plot:
+The argument \code{chartOpts} is a list with
+optional components to modify aspects of the plot, e.g.:
 \itemize{
   \item{\code{height}: Height of plot in pixels.}
   \item{\code{width}: Width of plot in pixels.}

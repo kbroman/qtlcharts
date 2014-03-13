@@ -60,6 +60,7 @@ curves_w_2scatter = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
 
   # Select the svg element, if it exists.
   svg = d3.select("div#chart")
+          .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)
 

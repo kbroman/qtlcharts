@@ -19,6 +19,9 @@
 #' @param caption Character vector with text for a caption (to be
 #'   combined to one string with \code{\link[base]{paste}}, with
 #'   \code{collapse=''})
+#' @param chartOpts A list of options for configuring the chart (see
+#'   the coffeescript code). Each element must be named using the
+#'   corresponding option.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -37,7 +40,7 @@
 manyboxplots <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
          file, onefile=FALSE, openfile=TRUE, title="Many box plots",
-         caption)
+         caption, chartOpts=NULL)
 {
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -59,7 +62,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
   append_html_middle(file, title, 'chart')
 
   if(missing(caption))
-    caption <- c('Top panel is like a set of ', nrow(dat), ' box plots: ',
+    caption <- c('The top panel is like a set of ', nrow(dat), ' box plots: ',
                 'lines are drawn at a series of percentiles for each of the distributions. ',
                 'Hover over a column in the top panel and the corresponding distribution ',
                 'is show below; click for it to persist; click again to make it go away.')
@@ -67,7 +70,8 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
   append_caption(caption, file)
 
   append_html_jscode(file, 'data = ', json, ';')
-  append_html_jscode(file, 'manyboxplots(data);')
+  append_html_chartopts(file, chartOpts)
+  append_html_jscode(file, 'manyboxplots(data, chartOpts);')
 
   append_html_bottom(file)
 

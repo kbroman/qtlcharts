@@ -1,4 +1,4 @@
-# manyboxplots2.coffee
+# manyboxplots.coffee
 #
 # Top panel is like a set of n box plots:
 #   lines are drawn at the 0.1, 1, 10, 25, 50, 75, 90, 99, 99.9 percentiles
@@ -7,16 +7,16 @@
 #   is show below; click for it to persist; click again to make it go away.
 #
 
-manyboxplots = (data) ->
+manyboxplots = (data, chartOpts) ->
 
-  # dimensions of SVG
-  w = 1000
-  h =  450
-  pad = {left:60, top:20, right:60, bottom: 40}
-
-  # axis labels
-  ylab = "Response"
-  xlab = "Individuals"
+  # chartOpts start
+  width = chartOpts?.width ? 1000
+  height = chartOpts?.height ? 450
+  margin = chartOpts?.margin ? {left:60, top:20, right:60, bottom: 40}
+  ylab = chartOpts?.ylab ? "Response"
+  xlab = chartOpts?.xlab ? "Individuals"
+  rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
+  # chartOpts end
 
   # y-axis limits for top figure
   topylim = [data.quant[0][0], data.quant[0][1]]
@@ -59,14 +59,14 @@ manyboxplots = (data) ->
   # x and y scales for top figure
   xScale = d3.scale.linear()
              .domain([-1, data.ind.length])
-             .range([pad.left, w-pad.right])
+             .range([margin.left, width-margin.right])
 
   # width of rectangles in top panel
   recWidth = xScale(1) - xScale(0)
 
   yScale = d3.scale.linear()
              .domain(topylim)
-             .range([h-pad.bottom, pad.top])
+             .range([height-margin.bottom, margin.top])
 
   # function to create quantile lines
   quline = (j) ->
@@ -76,17 +76,17 @@ manyboxplots = (data) ->
 
   svg = d3.select("div#chart")
           .append("svg")
-          .attr("width", w)
-          .attr("height", h)
+          .attr("width", width)
+          .attr("height", height)
 
   # gray background
   svg.append("rect")
-     .attr("x", pad.left)
-     .attr("y", pad.top)
-     .attr("height", h-pad.top-pad.bottom)
-     .attr("width", w-pad.left-pad.right)
+     .attr("x", margin.left)
+     .attr("y", margin.top)
+     .attr("height", height-margin.top-margin.bottom)
+     .attr("width", width-margin.left-margin.right)
      .attr("stroke", "none")
-     .attr("fill", d3.rgb(200, 200, 200))
+     .attr("fill", rectcolor)
      .attr("pointer-events", "none")
 
   # axis on left
@@ -100,20 +100,12 @@ manyboxplots = (data) ->
      .append("line")
      .attr("class", "line")
      .attr("class", "axis")
-     .attr("x1", pad.left)
-     .attr("x2", w-pad.right)
+     .attr("x1", margin.left)
+     .attr("x2", width-margin.right)
      .attr("y1", (d) -> yScale(d))
      .attr("y2", (d) -> yScale(d))
      .attr("stroke", "white")
      .attr("pointer-events", "none")
-
-  # function to determine rounding of axis labels
-  formatAxis = (d) ->
-    d = d[1] - d[0]
-    ndig = Math.floor( Math.log(d % 10) / Math.log(10) )
-    ndig = 0 if ndig > 0
-    ndig = Math.abs(ndig)
-    d3.format(".#{ndig}f")
 
   # axis: labels
   Laxis.append("g").selectAll("empty")
@@ -122,7 +114,7 @@ manyboxplots = (data) ->
      .append("text")
      .attr("class", "axis")
      .text((d) -> formatAxis(LaxisData)(d))
-     .attr("x", pad.left*0.9)
+     .attr("x", margin.left*0.9)
      .attr("y", (d) -> yScale(d))
      .attr("dominant-baseline", "middle")
      .attr("text-anchor", "end")
@@ -138,8 +130,8 @@ manyboxplots = (data) ->
      .append("line")
      .attr("class", "line")
      .attr("class", "axis")
-     .attr("y1", pad.top)
-     .attr("y2", h-pad.bottom)
+     .attr("y1", margin.top)
+     .attr("y2", height-margin.bottom)
      .attr("x1", (d) -> xScale(d-1))
      .attr("x2", (d) -> xScale(d-1))
      .attr("stroke", "white")
@@ -152,7 +144,7 @@ manyboxplots = (data) ->
      .append("text")
      .attr("class", "axis")
      .text((d) -> d)
-     .attr("y", h-pad.bottom*0.75)
+     .attr("y", height-margin.bottom*0.75)
      .attr("x", (d) -> xScale(d-1))
      .attr("dominant-baseline", "middle")
      .attr("text-anchor", "middle")
@@ -204,9 +196,9 @@ manyboxplots = (data) ->
                  .enter()
                  .append("rect")
                  .attr("x", (d) -> xScale(d) - recWidth/2)
-                 .attr("y", pad.top)
+                 .attr("y", margin.top)
                  .attr("width", recWidth)
-                 .attr("height", h - pad.top - pad.bottom)
+                 .attr("height", height - margin.top - margin.bottom)
                  .attr("fill", "purple")
                  .attr("stroke", "none")
                  .attr("opacity", "0")
@@ -220,7 +212,7 @@ manyboxplots = (data) ->
        .append("text")
        .attr("class", "qu")
        .text( (d) -> "#{d*100}%")
-       .attr("x", w)
+       .attr("x", width)
        .attr("y", (d,i) -> yScale(((i+0.5)/nQuant/2 + 0.25) * (topylim[1] - topylim[0]) + topylim[0]))
        .attr("fill", (d,i) -> qucolors[i])
        .attr("text-anchor", "end")
@@ -228,38 +220,38 @@ manyboxplots = (data) ->
 
   # box around the outside
   svg.append("rect")
-     .attr("x", pad.left)
-     .attr("y", pad.top)
-     .attr("height", h-pad.top-pad.bottom)
-     .attr("width", w-pad.left-pad.right)
+     .attr("x", margin.left)
+     .attr("y", margin.top)
+     .attr("height", height-margin.top-margin.bottom)
+     .attr("width", width-margin.left-margin.right)
      .attr("stroke", "black")
      .attr("stroke-width", 2)
      .attr("fill", "none")
 
   # lower svg
   lowsvg = d3.select("div#chart").append("svg")
-             .attr("height", h)
-             .attr("width", w)
+             .attr("height", height)
+             .attr("width", width)
 
   lo = data.breaks[0] - (data.breaks[1] - data.breaks[0])
   hi = data.breaks[data.breaks.length-1] + (data.breaks[1] - data.breaks[0])
 
   lowxScale = d3.scale.linear()
              .domain([lo, hi])
-             .range([pad.left, w-pad.right])
+             .range([margin.left, width-margin.right])
 
   lowyScale = d3.scale.linear()
              .domain([0, botylim[1]+1])
-             .range([h-pad.bottom, pad.top])
+             .range([height-margin.bottom, margin.top])
 
   # gray background
   lowsvg.append("rect")
-     .attr("x", pad.left)
-     .attr("y", pad.top)
-     .attr("height", h-pad.top-pad.bottom)
-     .attr("width", w-pad.left-pad.right)
+     .attr("x", margin.left)
+     .attr("y", margin.top)
+     .attr("height", height-margin.top-margin.bottom)
+     .attr("width", width-margin.left-margin.right)
      .attr("stroke", "none")
-     .attr("fill", d3.rgb(200, 200, 200))
+     .attr("fill", rectcolor)
 
   # axis on left
   lowBaxisData = lowxScale.ticks(8)
@@ -272,8 +264,8 @@ manyboxplots = (data) ->
      .append("line")
      .attr("class", "line")
      .attr("class", "axis")
-     .attr("y1", pad.top)
-     .attr("y2", h-pad.bottom)
+     .attr("y1", margin.top)
+     .attr("y2", height-margin.bottom)
      .attr("x1", (d) -> lowxScale(d))
      .attr("x2", (d) -> lowxScale(d))
      .attr("stroke", "white")
@@ -285,7 +277,7 @@ manyboxplots = (data) ->
      .append("text")
      .attr("class", "axis")
      .text((d) -> formatAxis(lowBaxisData)(d))
-     .attr("y", h-pad.bottom*0.75)
+     .attr("y", height-margin.bottom*0.75)
      .attr("x", (d) -> lowxScale(d))
      .attr("dominant-baseline", "middle")
      .attr("text-anchor", "middle")
@@ -311,8 +303,8 @@ manyboxplots = (data) ->
 
   lowsvg.append("text")
         .datum(randomInd)
-        .attr("x", pad.left*1.1)
-        .attr("y", pad.top*2)
+        .attr("x", margin.left*1.1)
+        .attr("y", margin.top*2)
         .text((d) -> data.ind[d])
         .attr("id", "histtitle")
         .attr("text-anchor", "start")
@@ -359,47 +351,35 @@ manyboxplots = (data) ->
 
   # box around the outside
   lowsvg.append("rect")
-     .attr("x", pad.left)
-     .attr("y", pad.top)
-     .attr("height", h-pad.bottom-pad.top)
-     .attr("width", w-pad.left-pad.right)
+     .attr("x", margin.left)
+     .attr("y", margin.top)
+     .attr("height", height-margin.bottom-margin.top)
+     .attr("width", width-margin.left-margin.right)
      .attr("stroke", "black")
      .attr("stroke-width", 2)
      .attr("fill", "none")
 
   svg.append("text")
      .text(ylab)
-     .attr("x", pad.left*0.2)
-     .attr("y", h/2)
+     .attr("x", margin.left*0.2)
+     .attr("y", height/2)
      .attr("fill", "blue")
-     .attr("transform", "rotate(270 #{pad.left*0.2} #{h/2})")
+     .attr("transform", "rotate(270 #{margin.left*0.2} #{height/2})")
      .attr("dominant-baseline", "middle")
      .attr("text-anchor", "middle")
 
   lowsvg.append("text")
      .text(ylab)
-     .attr("x", (w-pad.left-pad.bottom)/2+pad.left)
-     .attr("y", h-pad.bottom*0.2)
+     .attr("x", (width-margin.left-margin.bottom)/2+margin.left)
+     .attr("y", height-margin.bottom*0.2)
      .attr("fill", "blue")
      .attr("dominant-baseline", "middle")
      .attr("text-anchor", "middle")
 
   svg.append("text")
      .text(xlab)
-     .attr("x", (w-pad.left-pad.bottom)/2+pad.left)
-     .attr("y", h-pad.bottom*0.2)
+     .attr("x", (width-margin.left-margin.bottom)/2+margin.left)
+     .attr("y", height-margin.bottom*0.2)
      .attr("fill", "blue")
      .attr("dominant-baseline", "middle")
      .attr("text-anchor", "middle")
-
-  # add caption
-  text = "The top panel is like #{data.ind.length} boxplots:\n"
-  text += "lines are drawn at the "
-  for q,i in data.qu
-    if i > 0
-      text += ", "
-    text += "#{q*100}"
-  text += " percentiles for each of #{data.ind.length} distributions.\n"
-
-  d3.select("div#caption")
-    .style("opacity", 1)

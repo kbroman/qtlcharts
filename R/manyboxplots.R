@@ -10,16 +10,20 @@
 #' @param qu Quantiles to plot (All with 0 < qu < 0.5)
 #' @param orderByMedian If TRUE, reorder individuals by their median
 #' @param breaks Number of break points in the histogram
-#' @param file Optional character vector with file to contain the output
-#' @param onefile If TRUE, have output file contain all necessary javascript/css code
+#' @param file Optional character vector with file to contain the
+#'   output
+#' @param onefile If TRUE, have output file contain all necessary
+#'   javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
-#' @param legend Character vector with text for a legend (to be
-#' combined to one string with \code{\link[base]{paste}}, with
-#' \code{collapse=''})
+#' @param caption Character vector with text for a caption (to be
+#'   combined to one string with \code{\link[base]{paste}}, with
+#'   \code{collapse=''})
 #'
 #' @return Character string with the name of the file created.
-#' @export
+#'
+#' @keywords hplot
+#' @seealso \code{\link{corr_w_scatter}}
 #'
 #' @examples
 #' n.ind <- 500
@@ -28,10 +32,12 @@
 #' dimnames(expr) <- list(paste0("ind", 1:n.ind),
 #'                        paste0("gene", 1:n.gene))
 #' manyboxplots(expr)
+#'
+#' @export
 manyboxplots <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
          file, onefile=FALSE, openfile=TRUE, title="Many box plots",
-         legend)
+         caption)
 {
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -52,13 +58,13 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
 
   append_html_middle(file, title, 'chart')
 
-  if(missing(legend))
-    legend <- c('Top panel is like a set of ', nrow(dat), ' box plots: ',
+  if(missing(caption))
+    caption <- c('Top panel is like a set of ', nrow(dat), ' box plots: ',
                 'lines are drawn at a series of percentiles for each of the distributions. ',
                 'Hover over a column in the top panel and the corresponding distribution ',
                 'is show below; click for it to persist; click again to make it go away.')
 
-  append_legend(legend, file)
+  append_caption(caption, file)
 
   append_html_jscode(file, 'data = ', json, ';')
   append_html_jscode(file, 'manyboxplots(data);')

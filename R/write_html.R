@@ -135,7 +135,7 @@ function(file)
 # Append a paragraph to an html file
 #
 # @param file File to which to write
-# @param \dots The text to put within the paragraph
+# @param ... The text to put within the paragraph
 # @param tag The type of object to add
 # @param id Optional id
 # @param class Optional class
@@ -239,11 +239,11 @@ function(chart, file, onefile=FALSE)
     append_html_jslink(file, jsfile, onefile=onefile)
 }
 
-append_legend <-
-function(legend, file)
+append_caption <-
+function(caption, file)
 {
-  append_html_p(file, paste(legend, collapse=""),
-                tag='p', class='legend', id='legend')
+  append_html_p(file, paste(caption, collapse=""),
+                tag='p', class='caption', id='caption')
 }
 
 # convert chart opts to javascript code

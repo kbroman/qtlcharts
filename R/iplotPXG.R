@@ -5,21 +5,24 @@
 #'
 #' Creates an interactive graph of phenotypes vs genotypes at a marker.
 #'
-#' @param cross (Optional) Object of class \code{"cross"}, see \code{\link[qtl]{read.cross}}.
+#' @param cross (Optional) Object of class \code{"cross"}, see
+#'   \code{\link[qtl]{read.cross}}.
 #' @param marker Character string with marker name.
 #' @param pheno.col (Optional) Phenotype column in cross object.
-#' @param file Optional character vector with file to contain the output.
-#' @param onefile If TRUE, have output file contain all necessary javascript/css code.
+#' @param file Optional character vector with file to contain the
+#'   output.
+#' @param onefile If TRUE, have output file contain all necessary
+#'   javascript/css code.
 #' @param openfile If TRUE, open the plot in the default web browser.
 #' @param title Character string with title for plot.
-#' @param legend Character vector with text for a legend (to be
-#'    combined to one string with \code{\link[base]{paste}}, with
-#'    \code{collapse=''})
-#' @param chartOpts A list of options for configuring the chart.
-#'    Each element must be named using the
-#'    corresponding option. See details.
-#' @param fillgenoArgs List of named arguments to pass to \code{\link[qtl]{fill.geno}}, if needed.
-#' @param \dots Passed to \cite{\link[RJSONIO]{toJSON}}.
+#' @param caption Character vector with text for a caption (to be
+#'   combined to one string with \code{\link[base]{paste}}, with
+#'   \code{collapse=''})
+#' @param chartOpts A list of options for configuring the chart.  Each
+#'   element must be named using the corresponding option. See details.
+#' @param fillgenoArgs List of named arguments to pass to
+#'   \code{\link[qtl]{fill.geno}}, if needed.
+#' @param ... Passed to \cite{\link[RJSONIO]{toJSON}}.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -34,18 +37,19 @@
 #' genotypes, with arguments passed as a list, for example
 #' \code{fillgenoArgs=list(method="argmax", error.prob=0.002, map.function="c-f")}.
 #'
-#' @export
+#' @keywords hplot
+#' @seealso \code{\link{iplotScanone}}
 #'
 #' @examples
 #' data(hyper)
 #' marker <- sample(markernames(hyper), 1)
 #' iplotPXG(hyper, marker)
 #'
-#' @seealso \code{\link{iplotScanone}}
+#' @export
 iplotPXG <-
 function(cross, marker, pheno.col=1,
          file, onefile=FALSE, openfile=TRUE, title="",
-         legend, chartOpts=list(title=marker[1]),
+         caption, chartOpts=list(title=marker[1]),
          fillgenoArgs=NULL, ...)
 {    
   if(missing(file))
@@ -73,10 +77,10 @@ function(cross, marker, pheno.col=1,
 
   append_html_middle(file, title, 'chart')
   
-  if(missing(legend))
-    legend <- c('Pink points correspond to individuals with imputed genotypes at this marker. ',
+  if(missing(caption))
+    caption <- c('Pink points correspond to individuals with imputed genotypes at this marker. ',
                 'Click on a point for a bit of gratuitous animation.')
-  append_legend(legend, file)
+  append_caption(caption, file)
 
   json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, ...)
   append_html_jscode(file, 'data = ', json, ';')

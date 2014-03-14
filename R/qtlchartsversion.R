@@ -4,9 +4,11 @@
 #' print the installed version of R/qtlcharts
 #'
 #' @return Character string with version number
-#' @export
+#'
 #' @examples
 #' qtlchartsversion()
+#'
+#' @export
 qtlchartsversion <-
 function()
 {

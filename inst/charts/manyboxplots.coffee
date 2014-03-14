@@ -392,7 +392,7 @@ manyboxplots = (data) ->
      .attr("dominant-baseline", "middle")
      .attr("text-anchor", "middle")
 
-  # add legend
+  # add caption
   text = "The top panel is like #{data.ind.length} boxplots:\n"
   text += "lines are drawn at the "
   for q,i in data.qu
@@ -401,5 +401,5 @@ manyboxplots = (data) ->
     text += "#{q*100}"
   text += " percentiles for each of #{data.ind.length} distributions.\n"
 
-  d3.select("div#legend")
+  d3.select("div#caption")
     .style("opacity", 1)

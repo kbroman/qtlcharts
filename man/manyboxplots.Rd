@@ -5,7 +5,7 @@
 \usage{
 manyboxplots(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian = TRUE,
   breaks = 251, file, onefile = FALSE, openfile = TRUE,
-  title = "Many box plots", legend)
+  title = "Many box plots", caption)
 }
 \arguments{
   \item{dat}{Data matrix (individuals x variables)}
@@ -28,9 +28,9 @@ manyboxplots(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian = TRUE,
 
   \item{title}{Character string with title for plot}
 
-  \item{legend}{Character vector with text for a legend (to
-  be combined to one string with \code{\link[base]{paste}},
-  with \code{collapse=''})}
+  \item{caption}{Character vector with text for a caption
+  (to be combined to one string with
+  \code{\link[base]{paste}}, with \code{collapse=''})}
 }
 \value{
 Character string with the name of the file created.
@@ -47,4 +47,8 @@ dimnames(expr) <- list(paste0("ind", 1:n.ind),
                        paste0("gene", 1:n.gene))
 manyboxplots(expr)
 }
+\seealso{
+\code{\link{corr_w_scatter}}
+}
+\keyword{hplot}
 

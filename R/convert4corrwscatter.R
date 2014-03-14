@@ -14,15 +14,14 @@
 #
 #' @importFrom RJSONIO toJSON
 #
+# @keywords interface
+# @seealso \code{\link{corr_w_scatter}}
+#
 # @examples
 # \dontrun{
 # data(geneExpr)
 # geneExpr_as_json <- convert4corrwscatter(geneExpr$expr, geneExpr$genotype)
 # }
-#
-# @seealso \code{\link{corr_w_scatter}}
-#
-# @keywords interface
 convert4corrwscatter <-
 function(dat, group, rows, cols, reorder=TRUE, corr, corr_was_presubset=FALSE)
 {

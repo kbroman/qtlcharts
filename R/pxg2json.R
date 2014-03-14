@@ -7,10 +7,13 @@
 # for use with interative graphics, such as \code{\link{iplotScanone}}.
 # (Largely for internal use.)
 #
-# @param cross An object of class \code{"cross"}; see \code{\link[qtl]{read.cross}}.
+# @param cross An object of class \code{"cross"}; see
+#   \code{\link[qtl]{read.cross}}.
 # @param pheno.col Phenotype column
-# @param fillgenoArgs List of named arguments to pass to \code{\link[qtl]{fill.geno}}, if needed.
-# @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
+# @param fillgenoArgs List of named arguments to pass to
+#   \code{\link[qtl]{fill.geno}}, if needed.
+# @param ... Additional arguments passed to the
+#   \code{\link[RJSONIO]{toJSON}} function
 #
 # @return A character string with the input in JSON format.
 #
@@ -19,13 +22,12 @@
 #' @importFrom qtl pull.pheno markernames getsex chrnames getgenonames getid nmar
 #' @importFrom RJSONIO toJSON
 #
+# @keywords interface
+# @seealso \code{\link{scanone2json}}
+#
 # @examples
 # data(hyper)
 # pxg_as_json <- pxg2json(hyper)
-#
-# @seealso \code{\link{scanone2json}}
-#
-# @keywords interface
 pxg2json <-
 function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
 {
@@ -68,6 +70,7 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
 
 # get imputed genotypes, dealing specially with X chr genotypes
 #' @importFrom qtl pull.geno fill.geno chrnames getsex reviseXdata
+#
 getImputedGenotypes <-
 function(cross, fillgenoArgs=NULL, imputed_negative=TRUE)
 {

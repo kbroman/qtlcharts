@@ -8,7 +8,12 @@
 # @param orderByMedian If TRUE, reorder individuals by their median
 # @param breaks Number of break points in the histogram
 #
+# @return Character string with the input data in JSON format
+#
 #' @importFrom RJSONIO toJSON
+#
+# @keywords interface
+# @seealso \code{\link{manyboxplots}}
 #
 # @examples
 # \dontrun{
@@ -19,11 +24,6 @@
 #                        paste0("gene", 1:n.gene))
 # geneExpr_as_json <- convert4manyboxplots(expr)
 # }
-#
-#
-# @seealso \code{\link{manyboxplots}}
-#
-# @keywords interface
 convert4manyboxplots <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
          breaks=251)

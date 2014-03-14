@@ -5,7 +5,7 @@
 \usage{
 iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
   pxgtype = c("ci", "raw"), file, onefile = FALSE, openfile = TRUE,
-  title = "", legend, fillgenoArgs = NULL, ...)
+  title = "", caption, fillgenoArgs = NULL, ...)
 }
 \arguments{
   \item{scanoneOutput}{Object of class \code{"scanone"}, as
@@ -43,14 +43,14 @@ iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
 
   \item{title}{Character string with title for plot}
 
-  \item{legend}{Character vector with text for a legend (to
-  be combined to one string with \code{\link[base]{paste}},
-  with \code{collapse=''})}
+  \item{caption}{Character vector with text for a caption
+  (to be combined to one string with
+  \code{\link[base]{paste}}, with \code{collapse=''})}
 
   \item{fillgenoArgs}{List of named arguments to pass to
   \code{\link[qtl]{fill.geno}}, if needed.}
 
-  \item{\dots}{Additional arguments passed to the
+  \item{...}{Additional arguments passed to the
   \code{\link[RJSONIO]{toJSON}} function}
 }
 \value{
@@ -67,7 +67,8 @@ corresponding phenotype x genotype plot.
 If \code{cross} is provided, \code{\link[qtl]{fill.geno}}
 is used to impute missing genotypes. In this case, arguments to
 \code{\link[qtl]{fill.geno}} are passed as a list, for example
-\code{fillgenoArgs=list(method="argmax", error.prob=0.002, map.function="c-f")}.
+\code{fillgenoArgs=list(method="argmax", error.prob=0.002,
+map.function="c-f")}.
 }
 \examples{
 data(hyper)
@@ -78,4 +79,5 @@ iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15))
 \seealso{
 \code{\link{iplotPXG}}
 }
+\keyword{hplot}
 

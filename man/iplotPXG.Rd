@@ -4,7 +4,7 @@
 \title{Interactive phenotype x genotype plot}
 \usage{
 iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
-  openfile = TRUE, title = "", legend, chartOpts = list(title =
+  openfile = TRUE, title = "", caption, chartOpts = list(title =
   marker[1]), fillgenoArgs = NULL, ...)
 }
 \arguments{
@@ -27,9 +27,9 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
 
   \item{title}{Character string with title for plot.}
 
-  \item{legend}{Character vector with text for a legend (to
-  be combined to one string with \code{\link[base]{paste}},
-  with \code{collapse=''})}
+  \item{caption}{Character vector with text for a caption
+  (to be combined to one string with
+  \code{\link[base]{paste}}, with \code{collapse=''})}
 
   \item{chartOpts}{A list of options for configuring the
   chart.  Each element must be named using the
@@ -38,7 +38,7 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
   \item{fillgenoArgs}{List of named arguments to pass to
   \code{\link[qtl]{fill.geno}}, if needed.}
 
-  \item{\dots}{Passed to \cite{\link[RJSONIO]{toJSON}}.}
+  \item{...}{Passed to \cite{\link[RJSONIO]{toJSON}}.}
 }
 \value{
 Character string with the name of the file created.
@@ -66,4 +66,5 @@ iplotPXG(hyper, marker)
 \seealso{
 \code{\link{iplotScanone}}
 }
+\keyword{hplot}
 

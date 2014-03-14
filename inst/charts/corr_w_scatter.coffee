@@ -241,5 +241,5 @@ corr_w_scatter = (data) ->
              .attr("dominant-baseline", "middle")
              .attr("text-anchor", "middle")
 
-  d3.select("div#legend")
+  d3.select("div#caption")
     .style("opacity", 1)

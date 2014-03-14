@@ -8,17 +8,25 @@
 #'
 #' @param dat Data matrix (individuals x variables)
 #' @param group Option vector of groups of individuals (e.g., a genotype)
-#' @param rows Selected rows of the correlation matrix to include in the image. Ignored if \code{corr} is provided.
-#' @param cols Selected columns of the correlation matrix to include in the image. Ignored if \code{corr} is provided.
-#' @param reorder If TRUE, reorder the variables by clustering. Ignored if \code{corr} is provided as a subset of the overall correlation matrix
+#' @param rows Selected rows of the correlation matrix to include in
+#'   the image. Ignored if \code{corr} is provided.
+#' @param cols Selected columns of the correlation matrix to include
+#'   in the image. Ignored if \code{corr} is provided.
+#' @param reorder If TRUE, reorder the variables by
+#'   clustering. Ignored if \code{corr} is provided as a subset of the
+#'   overall correlation matrix
 #' @param corr Correlation matrix (optional).
-#' @param file Optional character vector with file to contain the output
-#' @param onefile If TRUE, have output file contain all necessary javascript/css code
+#' @param file Optional character vector with file to contain the
+#'   output
+#' @param onefile If TRUE, have output file contain all necessary
+#'   javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
-#' @param legend Character vector with text for a legend (to be
-#' combined to one string with \code{\link[base]{paste}}, with
-#' \code{collapse=''})
+#' @param caption Character vector with text for a caption (to be
+#'   combined to one string with \code{\link[base]{paste}}, with
+#'   \code{collapse=''})
+#'
+#' @return Character string with the name of the file created.
 #'
 #' @details \code{corr} may be provided as a subset of the overall
 #' correlation matrix for the columns of \code{dat}. In this case, the
@@ -26,16 +34,18 @@
 #' column names of \code{corr} must match the names of some subset of
 #' columns of \code{dat}.
 #'
-#' @return Character string with the name of the file created.
-#' @export
-#'
+#' @keywords hplot
+#' @seealso \code{\link{curves_w_2scatter}}
+#' 
 #' @examples
 #' data(geneExpr)
 #' corr_w_scatter(geneExpr$expr, geneExpr$genotype)
+#'
+#' @export
 corr_w_scatter <-
 function(dat, group, rows, cols, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
          file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot",
-         legend)
+         caption)
 {
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -77,11 +87,11 @@ function(dat, group, rows, cols, reorder=TRUE, corr=cor(dat, use="pairwise.compl
 
   append_html_middle(file, title, 'chart')
 
-  if(missing(legend))
-    legend <- c('The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
+  if(missing(caption))
+    caption <- c('The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
                 'Hover over pixels in the correlation matrix on the left to see the ',
                 'values; click to see the corresponding scatterplot on the right.')
-  append_legend(legend, file)
+  append_caption(caption, file)
 
   append_html_jscode(file, 'data = ', json, ';')
   append_html_jscode(file, 'corr_w_scatter(data);')

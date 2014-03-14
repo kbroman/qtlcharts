@@ -126,5 +126,5 @@ corr_w_scatter = function(data) {
   scatterplot.append("rect").attr("height", h).attr("width", w).attr("fill", "none").attr("stroke", "black").attr("stroke-width", 1).attr("pointer-events", "none");
   corrplot.append("text").text("Correlation matrix").attr("id", "corrtitle").attr("x", w / 2).attr("y", -pad.top / 2).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   scatterplot.append("text").text("Scatterplot").attr("id", "corrtitle").attr("x", w / 2).attr("y", -pad.top / 2).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
-  return d3.select("div#legend").style("opacity", 1);
+  return d3.select("div#caption").style("opacity", 1);
 };

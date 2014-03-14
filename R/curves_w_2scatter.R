@@ -8,22 +8,32 @@
 #' (say, of the first vs middle and middle vs last times).
 #' 
 #' @param curveMatrix Matrix (dim n_ind x n_times) with outcomes
-#' @param times Vector (length n_times) with time points for the columns of curveMatrix
-#' @param scatter1 Matrix (dim n_ind x 2) with data for the first scatterplot
-#' @param scatter2 Matrix (dim n_ind x 2) with data for the second scatterplot
-#' @param file Optional character vector with file to contain the output
-#' @param onefile If TRUE, have output file contain all necessary javascript/css code
+#' @param times Vector (length n_times) with time points for the
+#'   columns of curveMatrix
+#' @param scatter1 Matrix (dim n_ind x 2) with data for the first
+#'   scatterplot
+#' @param scatter2 Matrix (dim n_ind x 2) with data for the second
+#'   scatterplot
+#' @param file Optional character vector with file to contain the
+#'   output
+#' @param onefile If TRUE, have output file contain all necessary
+#'   javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
-#' @param legend Character vector with text for a legend (to be
-#' combined to one string with \code{\link[base]{paste}}, with
-#' \code{collapse=''})
+#' @param caption Character vector with text for a caption (to be
+#'   combined to one string with \code{\link[base]{paste}}, with
+#'   \code{collapse=''})
 #' @param chartOpts A list of options for configuring the chart (see
-#' the coffeescript code). Each element must be named using the
-#' corresponding option.
-#' @param \dots Additional arguments passed to the \code{\link[RJSONIO]{toJSON}} function
+#'   the coffeescript code). Each element must be named using the
+#'   corresponding option.
+#' @param ... Additional arguments passed to the
+#'   \code{\link[RJSONIO]{toJSON}} function
+#'
 #' @return Character string with the name of the file created.
-#' @export
+#'
+#' @keywords hplot
+#' @seealso \code{\link{corr_w_scatter}}
+#'
 #' @examples
 #' # random growth curves, based on some data
 #' times <- 1:16
@@ -44,10 +54,11 @@
 #'                   chartOpts=list(curves_xlab="Time", curves_ylab="Size",
 #'                                  scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
 #'                                  scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))
-#' @seealso \code{\link{corr_w_scatter}}
+#'
+#' @export
 curves_w_2scatter <- 
 function(curveMatrix, times, scatter1, scatter2,
-         file, onefile=FALSE, openfile=TRUE, title="", legend,
+         file, onefile=FALSE, openfile=TRUE, title="", caption,
          chartOpts=NULL, ...)
 {    
   if(missing(file))
@@ -80,11 +91,11 @@ function(curveMatrix, times, scatter1, scatter2,
   
   dimnames(curveMatrix) <- names(times) <- dimnames(scatter1) <- dimnames(scatter2) <- NULL
 
-  if(missing(legend) || is.null(legend))
-    legend <- c('The top two scatterplots are for slices from the curves below. ',
+  if(missing(caption) || is.null(caption))
+    caption <- c('The top two scatterplots are for slices from the curves below. ',
                 'The three panels are linked: hover over an element in one panel, ',
                 'and the corresponding elements in the other panels will be highlighted.')
-  append_legend(legend, file)
+  append_caption(caption, file)
 
   append_html_jscode(file, 'curve_data = ', toJSON(list(x=times, data=curveMatrix), ...), ';')
   append_html_jscode(file, 'scatter1_data = ', toJSON(scatter1, ...), ';')

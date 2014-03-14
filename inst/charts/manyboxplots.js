@@ -221,5 +221,5 @@ manyboxplots = function(data) {
     text += "" + (q * 100);
   }
   text += " percentiles for each of " + data.ind.length + " distributions.\n";
-  return d3.select("div#legend").style("opacity", 1);
+  return d3.select("div#caption").style("opacity", 1);
 };

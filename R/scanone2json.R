@@ -8,22 +8,23 @@
 # interactive graphics, such as \code{\link{iplotScanone}}.
 # (Largely for internal use.)
 #
-# @param output An object of class \code{"scanone"}, as output by \code{\link[qtl]{scanone}}.
-# @param \dots Additional arguments passed to \code{\link[RJSONIO]{toJSON}}.
+# @param output An object of class \code{"scanone"}, as output by
+#   \code{\link[qtl]{scanone}}.
+# @param ... Additional arguments passed to
+#   \code{\link[RJSONIO]{toJSON}}.
 #
 # @return A character string with the input in JSON format.
 #
 #' @importFrom RJSONIO toJSON
+#
+# @keywords interface
+# @seealso \code{\link{pxg2json}}
 #
 # @examples
 # data(hyper)
 # hyper <- calc.genoprob(hyper)
 # out <- scanone(hyper, method="hk")
 # out_as_json <- scanone2json(out)
-#
-# @seealso \code{\link{pxg2json}}
-#
-# @keywords interface
 scanone2json <-
 function(output, ...)
 {

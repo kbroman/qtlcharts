@@ -81,5 +81,5 @@ R/qtlcharts incorporates [D3.js](http://d3js.org)
 ([see its license](inst/d3/LICENSE)),
 [d3.tip](http://github.com/Caged/d3-tip)
 ([see its license](inst/d3-tip/LICENSE)), and
-[ColorBrewer](http://colorbrewer2.org) ([see its license](inst/colorbrewer/LICENSE))
+[ColorBrewer](http://colorbrewer2.org) ([see its license](inst/colorbrewer/LICENSE)).
 

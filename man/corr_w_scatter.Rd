@@ -5,7 +5,8 @@
 \usage{
 corr_w_scatter(dat, group, rows, cols, reorder = TRUE, corr = cor(dat, use =
   "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
-  title = "Correlation matrix with linked scatterplot", caption)
+  title = "Correlation matrix with linked scatterplot", caption,
+  chartOpts = NULL)
 }
 \arguments{
   \item{dat}{Data matrix (individuals x variables)}
@@ -41,6 +42,10 @@ corr_w_scatter(dat, group, rows, cols, reorder = TRUE, corr = cor(dat, use =
   \item{caption}{Character vector with text for a caption
   (to be combined to one string with
   \code{\link[base]{paste}}, with \code{collapse=''})}
+
+  \item{chartOpts}{A list of options for configuring the
+  chart (see the coffeescript code). Each element must be
+  named using the corresponding option.}
 }
 \value{
 Character string with the name of the file created.

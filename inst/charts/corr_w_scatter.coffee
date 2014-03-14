@@ -3,16 +3,20 @@
 # Left panel is a heat map of a correlation matrix; hover over pixels
 # to see the values; click to see the corresponding scatterplot on the right
 
-corr_w_scatter = (data) ->
+corr_w_scatter = (data, chartOpts) ->
 
-  # dimensions of SVG
-  h = 450
-  w = h
-  pad = {left:70, top:40, right:5, bottom: 70}
-  innerPad = 5
+  # chartOpts start
+  height = chartOpts?.height ? 450
+  width = chartOpts?.width ? height
+  margin = chartOpts?.margin ? {left:70, top:40, right:5, bottom: 70, inner:5}
+  corcolors = chartOpts?.corcolors ? ["darkslateblue", "white", "crimson"]
+  rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
+  cortitle = chartOpts?.cortitle ? ""
+  scattitle = chartOpts?.scattitle ? ""
+  # chartOpts end
 
-  totalh = h + pad.top + pad.bottom
-  totalw = (w + pad.left + pad.right)*2
+  totalh = height + margin.top + margin.bottom
+  totalw = (width + margin.left + margin.right)*2
 
   svg = d3.select("div#chart")
           .append("svg")
@@ -21,13 +25,13 @@ corr_w_scatter = (data) ->
 
   # panel for correlation image
   corrplot = svg.append("g")
-               .attr("id", "corrplot")
-               .attr("transform", "translate(#{pad.left},#{pad.top})")
+               .attr("id", "corplot")
+               .attr("transform", "translate(#{margin.left},#{margin.top})")
 
   # panel for scatterplot
   scatterplot = svg.append("g")
                    .attr("id", "scatterplot")
-                   .attr("transform", "translate(#{pad.left*2+pad.right+w},#{pad.top})")
+                   .attr("transform", "translate(#{margin.left*2+margin.right+width},#{margin.top})")
 
   # no. data points
   nind = data.ind.length
@@ -35,9 +39,9 @@ corr_w_scatter = (data) ->
   ncorrX = data.cols.length
   ncorrY = data.rows.length
 
-  corXscale = d3.scale.ordinal().domain(d3.range(ncorrX)).rangeBands([0, w])
-  corYscale = d3.scale.ordinal().domain(d3.range(ncorrY)).rangeBands([h, 0])
-  corZscale = d3.scale.linear().domain([-1, 0, 1]).range(["darkslateblue", "white", "crimson"])
+  corXscale = d3.scale.ordinal().domain(d3.range(ncorrX)).rangeBands([0, width])
+  corYscale = d3.scale.ordinal().domain(d3.range(ncorrY)).rangeBands([height, 0])
+  corZscale = d3.scale.linear().domain([-1, 0, 1]).range(corcolors)
   pixel_width = corXscale(1)-corXscale(0)
   pixel_height = corYscale(0)-corYscale(1)
 
@@ -50,9 +54,9 @@ corr_w_scatter = (data) ->
 
   # gray background on scatterplot
   scatterplot.append("rect")
-             .attr("height", h)
-             .attr("width", w)
-             .attr("fill", d3.rgb(200, 200, 200))
+             .attr("height", height)
+             .attr("width", width)
+             .attr("fill", rectcolor)
              .attr("stroke", "black")
              .attr("stroke-width", 1)
              .attr("pointer-events", "none")
@@ -81,13 +85,13 @@ corr_w_scatter = (data) ->
                  corr_tip.show(d)
                  corrplot.append("text").attr("class","corrlabel")
                          .attr("x", corXscale(d.col)+pixel_width/2)
-                         .attr("y", h+pad.bottom*0.2)
+                         .attr("y", height+margin.bottom*0.2)
                          .text(data.var[data.cols[d.col]])
                          .attr("dominant-baseline", "middle")
                          .attr("text-anchor", "middle")
                  corrplot.append("text").attr("class","corrlabel")
                          .attr("y", corYscale(d.row)+pixel_height/2)
-                         .attr("x", -pad.left*0.1)
+                         .attr("x", -margin.left*0.1)
                          .text(data.var[data.rows[d.row]])
                          .attr("dominant-baseline", "middle")
                          .attr("text-anchor", "end"))
@@ -123,16 +127,16 @@ corr_w_scatter = (data) ->
     d3.selectAll("line.axes").remove()
     xScale = d3.scale.linear()
                      .domain(d3.extent(data.dat[data.cols[i]]))
-                     .range([innerPad, w-innerPad])
+                     .range([margin.inner, width-margin.inner])
     yScale = d3.scale.linear()
                      .domain(d3.extent(data.dat[data.rows[j]]))
-                     .range([h-innerPad, innerPad])
+                     .range([height-margin.inner, margin.inner])
     # axis labels
     scatterplot.append("text")
                .attr("id", "xaxis")
                .attr("class", "axes")
-               .attr("x", w/2)
-               .attr("y", h+pad.bottom*0.7)
+               .attr("x", width/2)
+               .attr("y", height+margin.bottom*0.7)
                .text(data.var[data.cols[i]])
                .attr("dominant-baseline", "middle")
                .attr("text-anchor", "middle")
@@ -140,12 +144,12 @@ corr_w_scatter = (data) ->
     scatterplot.append("text")
                .attr("id", "yaxis")
                .attr("class", "axes")
-               .attr("x", -pad.left*0.8)
-               .attr("y", h/2)
+               .attr("x", -margin.left*0.8)
+               .attr("y", height/2)
                .text(data.var[data.rows[j]])
                .attr("dominant-baseline", "middle")
                .attr("text-anchor", "middle")
-               .attr("transform", "rotate(270,#{-pad.left*0.8},#{h/2})")
+               .attr("transform", "rotate(270,#{-margin.left*0.8},#{height/2})")
                .attr("fill", "slateblue")
     # axis scales
     xticks = xScale.ticks(5)
@@ -157,7 +161,7 @@ corr_w_scatter = (data) ->
                .attr("class", "axes")
                .text((d) -> d3.format(".2f")(d))
                .attr("x", (d) -> xScale(d))
-               .attr("y", h+pad.bottom*0.3)
+               .attr("y", height+margin.bottom*0.3)
                .attr("dominant-baseline", "middle")
                .attr("text-anchor", "middle")
     scatterplot.selectAll("empty")
@@ -166,7 +170,7 @@ corr_w_scatter = (data) ->
                .append("text")
                .attr("class", "axes")
                .text((d) -> d3.format(".2f")(d))
-               .attr("x", -pad.left*0.1)
+               .attr("x", -margin.left*0.1)
                .attr("y", (d) -> yScale(d))
                .attr("dominant-baseline", "middle")
                .attr("text-anchor", "end")
@@ -178,7 +182,7 @@ corr_w_scatter = (data) ->
                .attr("x1", (d) -> xScale(d))
                .attr("x2", (d) -> xScale(d))
                .attr("y1", 0)
-               .attr("y2", h)
+               .attr("y2", height)
                .attr("stroke", "white")
                .attr("stroke-width", 1)
     scatterplot.selectAll("empty")
@@ -189,7 +193,7 @@ corr_w_scatter = (data) ->
                .attr("y1", (d) -> yScale(d))
                .attr("y2", (d) -> yScale(d))
                .attr("x1", 0)
-               .attr("x2", w)
+               .attr("x2", width)
                .attr("stroke", "white")
                .attr("stroke-width", 1)
     # the points
@@ -209,16 +213,16 @@ corr_w_scatter = (data) ->
 
   # boxes around panels
   corrplot.append("rect")
-         .attr("height", h)
-         .attr("width", w)
+         .attr("height", height)
+         .attr("width", width)
          .attr("fill", "none")
          .attr("stroke", "black")
          .attr("stroke-width", 1)
          .attr("pointer-events", "none")
 
   scatterplot.append("rect")
-             .attr("height", h)
-             .attr("width", w)
+             .attr("height", height)
+             .attr("width", width)
              .attr("fill", "none")
              .attr("stroke", "black")
              .attr("stroke-width", 1)
@@ -226,18 +230,18 @@ corr_w_scatter = (data) ->
 
   # text above
   corrplot.append("text")
-          .text("Correlation matrix")
+          .text(cortitle)
           .attr("id", "corrtitle")
-          .attr("x", w/2)
-          .attr("y", -pad.top/2)
+          .attr("x", width/2)
+          .attr("y", -margin.top/2)
           .attr("dominant-baseline", "middle")
           .attr("text-anchor", "middle")
 
   scatterplot.append("text")
-             .text("Scatterplot")
-             .attr("id", "corrtitle")
-             .attr("x", w/2)
-             .attr("y", -pad.top/2)
+             .text(scattitle)
+             .attr("id", "scattitle")
+             .attr("x", width/2)
+             .attr("y", -margin.top/2)
              .attr("dominant-baseline", "middle")
              .attr("text-anchor", "middle")
 

@@ -25,6 +25,9 @@
 #' @param caption Character vector with text for a caption (to be
 #'   combined to one string with \code{\link[base]{paste}}, with
 #'   \code{collapse=''})
+#' @param chartOpts A list of options for configuring the chart (see
+#'   the coffeescript code). Each element must be named using the
+#'   corresponding option.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -45,7 +48,7 @@
 corr_w_scatter <-
 function(dat, group, rows, cols, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
          file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot",
-         caption)
+         caption, chartOpts=NULL)
 {
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -94,7 +97,8 @@ function(dat, group, rows, cols, reorder=TRUE, corr=cor(dat, use="pairwise.compl
   append_caption(caption, file)
 
   append_html_jscode(file, 'data = ', json, ';')
-  append_html_jscode(file, 'corr_w_scatter(data);')
+  append_html_chartopts(file, chartOpts)
+  append_html_jscode(file, 'corr_w_scatter(data, chartOpts);')
 
   append_html_bottom(file)
 

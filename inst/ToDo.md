@@ -21,23 +21,40 @@
 - iplotScanone_pxg: same jitter values throughout; animate transitions
   if same chromosome class (same x-axis): need a redraw function
 
+- Add d3-tip to manyboxplot for individual IDs
+
+- iplotPXG: are the d3-tip IDs taken from the cross object?
+
+- scatterplot: allow groupings by color
+
+- curves_w_2scatter
+  - make it just curves_w_scatter, and allow use of one or two
+    scatterplots (or none?)
+  - allow grouping by color
+  - allow either brush or mouseover
+
+- curvechart: selection of color as a separate function
+  (takes number + pastel/dark)
+
 
 
 ### Panels
 
 - panel of inferred QTL (like a scatterplot) (for cis/trans plot)
 
-- mapchart panel; indicating QTL intervals
+- mapchart panel
 
 - lod curve for one chromosome (argument to current panel?)
 
 - general image/heat map panel
 
-- heat map split up into chromosomes
+- heat map split up into chromosomes (for multiple LOD curves)
 
 
 
 ### Charts
+
+- genetic/physical map of markers; ability to indicate QTL intervals
 
 - heat map of LOD curves for 10-100 curves
 
@@ -47,8 +64,7 @@
 
 - Interactive 2d scan plot
 
-- many curves + 2 scatterplots, with ability to brush the scatter
-  plots to select curves
+- curves_w_heatmap: heatmap of multiple curves linked to curvechart
 
 
 ### Annoyances

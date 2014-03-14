@@ -1,6 +1,6 @@
 # A variety of utility functions used by the different panel functions
 
-# function to determine rounding of axis labels
+# determine rounding of axis labels
 formatAxis = (d) ->
   d = d[1] - d[0]
   ndig = Math.floor( Math.log(d % 10) / Math.log(10) )
@@ -69,3 +69,25 @@ reorgLodData = (data, lodvarname) ->
     if marker != ""
       data.markers.push({name:marker, chr:data.chr[i], pos:data.pos[i], lod:data[lodvarname][i]})
   data
+
+# Select a set of categorical colors
+# ngroup is positive integer
+# palette = "dark" or "pastel"
+selectGroupColors = (ngroup, palette) ->
+  return [] if ngroup == 0
+
+  if palette == "dark"
+    return "slateblue" if ngroup == 1
+    return ["MediumVioletRed", "slateblue"] if ngroup == 2
+    return colorbrewer.Set1[ngroup] if ngroup <= 9
+    return d3.scale.category20().range()[0...ngroup]
+  else
+    return d3.rgb(190, 190, 190) if ngroup == 1
+    return ["lightpink", "lightblue"] if ngroup == 2
+    return colorbrewer.Pastel1[ngroup] if ngroup <= 9
+    # below is rough attempt to make _big_ pastel palette
+    return ["#8fc7f4", "#fed7f8", "#ffbf8e", "#fffbb8",
+            "#8ce08c", "#d8ffca", "#f68788", "#ffd8d6",
+            "#d4a7fd", "#f5f0f5", "#cc968b", "#f4dcd4",
+            "#f3b7f2", "#f7f6f2", "#bfbfbf", "#f7f7f7",
+            "#fcfd82", "#fbfbcd", "#87feff", "#defaf5"][0...ngroup]

@@ -5,7 +5,7 @@
 \usage{
 iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
   pxgtype = c("ci", "raw"), file, onefile = FALSE, openfile = TRUE,
-  title = "", caption, fillgenoArgs = NULL, ...)
+  title = "", caption, fillgenoArgs = NULL, chartOpts = NULL, ...)
 }
 \arguments{
   \item{scanoneOutput}{Object of class \code{"scanone"}, as
@@ -49,6 +49,10 @@ iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
 
   \item{fillgenoArgs}{List of named arguments to pass to
   \code{\link[qtl]{fill.geno}}, if needed.}
+
+  \item{chartOpts}{A list of options for configuring the
+  chart (see the coffeescript code). Each element must be
+  named using the corresponding option.}
 
   \item{...}{Additional arguments passed to the
   \code{\link[RJSONIO]{toJSON}} function}

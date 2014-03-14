@@ -1,18 +1,21 @@
 # iplotScanone_noeff: LOD curves (nothing else)
 # Karl W Broman
 
-iplotScanone_noeff = (data) ->
+iplotScanone_noeff = (data, chartOpts) ->
 
-  h = 450
-  w = 900
-  margin = {left:60, top:40, right:40, bottom: 40, inner:5}
-  halfh = (h+margin.top+margin.bottom)
+  # chartOpts start
+  height = chartOpts?.height ? 450
+  width = chartOpts?.width ? 900
+  margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5}
+  # chartOpts end
+
+  halfh = (height+margin.top+margin.bottom)
   totalh = halfh*2
-  totalw = (w+margin.left+margin.right)
+  totalw = (width+margin.left+margin.right)
 
   mylodchart = lodchart().lodvarname("lod")
-                         .height(h)
-                         .width(w)
+                         .height(height)
+                         .width(width)
                          .margin(margin)
 
   d3.select("div#chart")

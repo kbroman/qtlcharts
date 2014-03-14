@@ -1,20 +1,25 @@
 # iplotScanone_pxg: lod curves + phe x gen plot
 # Karl W Broman
 
-iplotScanone_pxg = (lod_data, pxg_data) ->
+iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
 
   markers = (x for x of pxg_data.chrByMarkers)
 
-  h = 450
-  wleft = 700
-  wright = 300
-  margin = {left:60, top:40, right:40, bottom: 40, inner:5}
-  totalh = h + margin.top + margin.bottom
+  # chartOpts start
+  height = chartOpts?.height ? 450
+  wleft = chartOpts?.wleft ? 700
+  wright = chartOpts?.wright ? 300
+  margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5}
+  pointcolor = chartOpts?.pointcolor ? "slateblue"
+  pointcolorhilit = chartOpts?.pointcolorhilit ? "Orchid"
+  # chartOpts end
+
+  totalh = height + margin.top + margin.bottom
   totalw = wleft + wright + (margin.left + margin.right)*2
 
 
   mylodchart = lodchart().lodvarname("lod")
-                         .height(h)
+                         .height(height)
                          .width(wleft)
                          .margin(margin)
 
@@ -39,7 +44,7 @@ iplotScanone_pxg = (lod_data, pxg_data) ->
     chrtype = pxg_data.chrtype[chr]
     genonames = pxg_data.genonames[chrtype]
 
-    mypxgchart = dotchart().height(h)
+    mypxgchart = dotchart().height(height)
                            .width(wright)
                            .margin(margin)
                            .xcategories([1..genonames.length])
@@ -59,8 +64,8 @@ iplotScanone_pxg = (lod_data, pxg_data) ->
 
     mypxgchart.pointsSelect()
               .attr("fill", (d,i) ->
-                    return "Orchid" if inferred[i]
-                    "slateblue")
+                    return pointcolorhilit if inferred[i]
+                    pointcolor)
 
   # animate points at markers on click
   mylodchart.markerSelect()

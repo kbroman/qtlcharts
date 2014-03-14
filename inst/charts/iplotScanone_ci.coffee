@@ -1,19 +1,22 @@
 # iplotScanone_ci: lod curves + phe x gen (as mean +/- 2 SE) plot
 # Karl W Broman
 
-iplotScanone_ci = (lod_data, pxg_data) ->
+iplotScanone_ci = (lod_data, pxg_data, chartOpts) ->
 
   markers = (x for x of pxg_data.chrByMarkers)
 
-  h = 450
-  wleft = 700
-  wright = 300
-  margin = {left:60, top:40, right:40, bottom: 40, inner:5}
-  totalh = h + margin.top + margin.bottom
+  # chartOpts start
+  height = chartOpts?.height ? 450
+  wleft = chartOpts?.wleft ? 700
+  wright = chartOpts?.wright ? 300
+  margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5}
+  # chartOpts end
+
+  totalh = height + margin.top + margin.bottom
   totalw = wleft + wright + (margin.left + margin.right)*2
 
   mylodchart = lodchart().lodvarname("lod")
-                         .height(h)
+                         .height(height)
                          .width(wleft)
                          .margin(margin)
 
@@ -64,7 +67,7 @@ iplotScanone_ci = (lod_data, pxg_data) ->
     else      
       ylim = [d3.min([range[0],ylim[0]]), d3.max([range[1],ylim[1]])]
 
-    mycichart = cichart().height(h)
+    mycichart = cichart().height(height)
                          .width(wright)
                          .margin(margin)
                          .title(markername)

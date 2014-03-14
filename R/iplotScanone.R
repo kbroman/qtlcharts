@@ -35,6 +35,9 @@
 #'   \code{collapse=''})
 #' @param fillgenoArgs List of named arguments to pass to
 #'   \code{\link[qtl]{fill.geno}}, if needed.
+#' @param chartOpts A list of options for configuring the chart (see
+#'   the coffeescript code). Each element must be named using the
+#'   corresponding option.
 #' @param ... Additional arguments passed to the
 #'   \code{\link[RJSONIO]{toJSON}} function
 #'
@@ -60,7 +63,7 @@ iplotScanone <-
 function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
          pxgtype = c("ci", "raw"),
          file, onefile=FALSE, openfile=TRUE, title="", caption,
-         fillgenoArgs=NULL, ...)
+         fillgenoArgs=NULL, chartOpts=NULL, ...)
 {    
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -88,7 +91,8 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 
   if(missing(cross))
     return(iplotScanone_noeff(scanoneOutput=scanoneOutput, file=file, onefile=onefile,
-                              openfile=openfile, title=title, caption=caption, ...))
+                              openfile=openfile, title=title, caption=caption,
+                              chartOpts=chartOpts, ...))
 
   if(class(cross)[2] != "cross")
     stop('"cross" should have class "cross".')
@@ -96,12 +100,12 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
   if(pxgtype == "raw")
     iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
                      file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
-                     fillgenoArgs=fillgenoArgs, ...)
+                     fillgenoArgs=fillgenoArgs,  chartOpts=chartOpts, ...)
 
   else
     iplotScanone_ci(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
                     file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
-                    fillgenoArgs=fillgenoArgs, ...)
+                    fillgenoArgs=fillgenoArgs, chartOpts=chartOpts, ...)
 
   invisible(file)
 }
@@ -109,7 +113,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 
 # iplotScanone: LOD curves with nothing else
 iplotScanone_noeff <-
-function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title, caption, ...)
+function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", caption, chartOpts=NULL, ...)
 {    
   write_html_top(file, title=title)
 
@@ -127,7 +131,8 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title, caption, ...)
   append_caption(caption, file)
 
   append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, ...), ';')
-  append_html_jscode(file, 'iplotScanone_noeff(data);')
+  append_html_chartopts(file, chartOpts)
+  append_html_jscode(file, 'iplotScanone_noeff(data, chartOpts);')
 
   append_html_bottom(file)
 
@@ -139,8 +144,8 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title, caption, ...)
 
 # iplotScanone_pxg: LOD curves with linked phe x gen plot
 iplotScanone_pxg <-
-function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, title,
-         caption, fillgenoArgs=NULL, ...)
+function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
+         title="", caption, fillgenoArgs=NULL, chartOpts=NULL, ...)
 {    
   scanone_json = scanone2json(scanoneOutput, ...)
   pxg_json = pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, ...)
@@ -164,7 +169,8 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';')
-  append_html_jscode(file, 'iplotScanone_pxg(scanoneData, pxgData);')
+  append_html_chartopts(file, chartOpts)
+  append_html_jscode(file, 'iplotScanone_pxg(scanoneData, pxgData, chartOpts);')
 
   append_html_bottom(file)
 
@@ -175,8 +181,8 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
 
 # iplotScanone_ci: LOD curves with linked phe mean +/- 2 SE x gen plot
 iplotScanone_ci <-
-function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, title,
-         caption, fillgenoArgs=NULL, ...)
+function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
+         title="", caption, fillgenoArgs=NULL, chartOpts=NULL, ...)
 {    
   scanone_json = scanone2json(scanoneOutput, ...)
   pxg_json = pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, ...)
@@ -200,7 +206,8 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE, 
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';')
-  append_html_jscode(file, 'iplotScanone_ci(scanoneData, pxgData);')
+  append_html_chartopts(file, chartOpts)
+  append_html_jscode(file, 'iplotScanone_ci(scanoneData, pxgData, chartOpts);')
 
   append_html_bottom(file)
 

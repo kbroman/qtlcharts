@@ -66,7 +66,7 @@ data(geneExpr)
 corr_w_scatter(geneExpr$expr, geneExpr$genotype)
 }
 \seealso{
-\code{\link{curves_w_2scatter}}
+\code{\link{curves_w_scatter}}
 }
 \keyword{hplot}
 

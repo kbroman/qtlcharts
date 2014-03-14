@@ -1,10 +1,10 @@
-# curves_w_2scatter.R
+# curves_w_scatter.R
 # Karl W Broman
 
-#' Plot of a bunch of curves, linked to points in two scatterplots
+#' Plot of a bunch of curves, linked to points in scatterplots
 #'
 #' Creates an interactive graph with a panel having a number of curves
-#' (say, a phenotype measured over time) linked to two scatter plots
+#' (say, a phenotype measured over time) linked to one or two (or no) scatter plots
 #' (say, of the first vs middle and middle vs last times).
 #' 
 #' @param curveMatrix Matrix (dim n_ind x n_times) with outcomes
@@ -50,14 +50,15 @@
 #' y <- y + rnorm(prod(dim(y)), 0, 0.35)
 #'
 #' # Make the plot
-#' curves_w_2scatter(y, times, y[,c(1,5)], y[,c(5,16)],
+#' curves_w_scatter(y, times, y[,c(1,5)], y[,c(5,16)],
 #'                   chartOpts=list(curves_xlab="Time", curves_ylab="Size",
 #'                                  scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
 #'                                  scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))
 #'
 #' @export
-curves_w_2scatter <- 
-function(curveMatrix, times, scatter1, scatter2,
+#' @importFrom RJSONIO toJSON
+curves_w_scatter <- 
+function(curveMatrix, times, scatter1=NULL, scatter2=NULL,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          chartOpts=NULL, ...)
 {    
@@ -72,10 +73,14 @@ function(curveMatrix, times, scatter1, scatter2,
   n.times <- ncol(curveMatrix)
   if(length(times) != n.times)
     stop("length(times) != ncol(curveMatrix)")
-  if(nrow(scatter1) != n.ind)
+  if(!is.null(scatter1) && nrow(scatter1) != n.ind)
     stop("nrow(scatter1) != nrow(curveMatrix)")
-  if(nrow(scatter2) != n.ind)
+  if(!is.null(scatter2) && nrow(scatter2) != n.ind)
     stop("nrow(scatter2) != nrow(curveMatrix)")
+  if(is.null(scatter1) && !is.null(scatter2)) {
+    scatter1 <- scatter2
+    scatter2 <- NULL
+  }
 
   write_html_top(file, title=title)
 
@@ -85,24 +90,34 @@ function(curveMatrix, times, scatter1, scatter2,
   link_panelutil(file, onefile=onefile)
   link_panel('curvechart', file, onefile=onefile)
   link_panel('scatterplot', file, onefile=onefile)
-  link_chart('curves_w_2scatter', file, onefile=onefile)
+  link_chart('curves_w_scatter', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')
   
   dimnames(curveMatrix) <- names(times) <- dimnames(scatter1) <- dimnames(scatter2) <- NULL
 
-  if(missing(caption) || is.null(caption))
-    caption <- c('The top two scatterplots are for slices from the curves below. ',
-                'The three panels are linked: hover over an element in one panel, ',
-                'and the corresponding elements in the other panels will be highlighted.')
+  if(missing(caption) || is.null(caption)) {
+    if(is.null(scatter1)) # no scatterplots
+      caption <- 'Hover over a curve to have it highlighted.'
+    else if(is.null(scatter2)) # one scatterplot
+      caption <- c('The curves are linked to the scatterplot below: ',
+                  'hover over an element in one panel, ',
+                  'and the corresponding element in the other panel will be highlighted.')
+    else
+      caption <- c('The curves are linked to the two scatterplots below: ',
+                  'hover over an element in one panel, ',
+                  'and the corresponding elements in the other panels will be highlighted.')
+  }
   append_caption(caption, file)
 
   append_html_jscode(file, 'curve_data = ', toJSON(list(x=times, data=curveMatrix), ...), ';')
-  append_html_jscode(file, 'scatter1_data = ', toJSON(scatter1, ...), ';')
-  append_html_jscode(file, 'scatter2_data = ', toJSON(scatter2, ...), ';')
+  scat1_json = ifelse(is.null(scatter1), toJSON(NULL, container=FALSE), toJSON(scatter1, ...))
+  append_html_jscode(file, 'scatter1_data = ', scat1_json, ';')
+  scat2_json = ifelse(is.null(scatter2), toJSON(NULL, container=FALSE), toJSON(scatter2, ...))
+  append_html_jscode(file, 'scatter2_data = ', scat2_json, ';')
   append_html_chartopts(file, chartOpts)
 
-  append_html_jscode(file, 'curves_w_2scatter(curve_data, scatter1_data, scatter2_data, chartOpts)')
+  append_html_jscode(file, 'curves_w_scatter(curve_data, scatter1_data, scatter2_data, chartOpts)')
 
   append_html_bottom(file)
 

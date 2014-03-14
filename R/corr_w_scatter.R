@@ -38,7 +38,7 @@
 #' columns of \code{dat}.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{curves_w_2scatter}}
+#' @seealso \code{\link{curves_w_scatter}}
 #' 
 #' @examples
 #' data(geneExpr)

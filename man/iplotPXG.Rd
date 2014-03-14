@@ -47,16 +47,10 @@ Character string with the name of the file created.
 Creates an interactive graph of phenotypes vs genotypes at a marker.
 }
 \details{
-The argument \code{chartOpts} is a list with
-optional components to modify aspects of the plot, e.g.:
-\itemize{
-  \item{\code{height}: Height of plot in pixels.}
-  \item{\code{width}: Width of plot in pixels.}
-}
-
-The function \code{\link[qtl]{fill.geno}} is used to impute missing
-genotypes, with arguments passed as a list, for example
-\code{fillgenoArgs=list(method="argmax", error.prob=0.002, map.function="c-f")}.
+The function \code{\link[qtl]{fill.geno}} is used to
+impute missing genotypes, with arguments passed as a list, for
+example \code{fillgenoArgs=list(method="argmax", error.prob=0.002,
+map.function="c-f")}.
 }
 \examples{
 data(hyper)

@@ -21,7 +21,7 @@ You first need to install [R/qtl](http://www.rqtl.org) and the
 [RJSONIO](http://cran.r-project.org/web/packages/RJSONIO/index.html)
 package:
 
-```r
+```S
 if(!require(qtl)) install.packages("qtl")
 if(!require(RJSONIO)) install.packages("RJSONIO")
 ```
@@ -30,20 +30,20 @@ You also need the `install_github` function in
 [Hadley Wickham](http://had.co.nz/)'s [devtools](http://github.com/hadley/devtools) package. So install
 and load devtools:
 
-```r
+```S
 if(!require(devtools)) install.packages("devtools")
 library(devtools)
 ```
 
 Finally, use `install_github` function to install R/qtlcharts:
 
-```r
+```S
 install_github("kbroman/qtlcharts")
 ```
 
 If that doesn't work, you might have an older version of devtools, so try:
 
-```r
+```S
 install_github("qtlcharts", "kbroman")
 ```
 
@@ -52,7 +52,7 @@ install_github("qtlcharts", "kbroman")
 Try the following example, which creates an interactive chart with LOD
 curves linked to estimated QTL effects.
 
-```r
+```S
 library(qtlcharts)
 data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
@@ -65,7 +65,7 @@ gene expression of a set of 100 genes) linked to the underlying
 scatterplots, with the points in the scatterplot colored by their
 genotype at a QTL:
 
-```r
+```S
 library(qtlcharts)
 data(geneExpr)
 corr_w_scatter(geneExpr$expr, geneExpr$genotype)
@@ -74,7 +74,7 @@ corr_w_scatter(geneExpr$expr, geneExpr$genotype)
 Finally, try `manyboxplots`, a plot of the quantiles of many
 distributions, linked to the underlying histograms.
 
-```r
+```S
 library(qtlcharts)
 # simulate some data
 n.ind <- 500

@@ -8,7 +8,7 @@ following
 For an illustration of its use, see [test_curvechart.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/panels/curvechart/test/test_curvechart.coffee).
 
 Add see it in action
-[here](http://www.biostat.wisc.edu/~kbroman/D3/curvechart/test).
+[here](http://www.biostat.wisc.edu/~kbroman/D3/panels/curvechart/test).
 
 Here are all of the options:
 

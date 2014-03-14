@@ -40,6 +40,11 @@ scatterplot = () ->
         y = data[yvar]
         data = ([x[i],y[i]] for i of x)
 
+      # grab indID if it's there
+      # if no indID, create a vector of them
+      indID = data?.indID ? null
+      indID = indID ? [1..x.length]
+
       # if all (x,y) not null
       xNA.handle = false if x.every (v) -> (v?) and !xNA.force
       yNA.handle = false if y.every (v) -> (v?) and !yNA.force
@@ -197,6 +202,13 @@ scatterplot = () ->
             .attr("y", margin.top+height-yNA.width/2)
             .text("N/A")
 
+      indtip = d3.tip()
+                 .attr('class', 'd3-tip')
+                 .html((d,i) -> indID[i])
+                 .direction('e')
+                 .offset([0,10])
+      svg.call(indtip)
+
       points = g.append("g").attr("id", "points")
       pointsSelect =
         points.selectAll("empty")
@@ -213,6 +225,8 @@ scatterplot = () ->
               .attr("opacity", (d,i) ->
                    return 1 if (x[i]? or xNA.handle) and (y[i]? or yNA.handle)
                    return 0)
+              .on("mouseover.paneltip", indtip.show)
+              .on("mouseout.paneltip", indtip.hide)
 
       # box
       g.append("rect")

@@ -167,8 +167,8 @@ cichart = () ->
               .attr("fill", "none")
               .attr("stroke", segcolor)
               .attr("stroke-width", segstrokewidth)
-              .on("mouseover.tip", tip.show)
-              .on("mouseout.tip", tip.hide)
+              .on("mouseover.paneltip", tip.show)
+              .on("mouseout.paneltip", tip.hide)
       # box
       g.append("rect")
              .attr("x", margin.left)

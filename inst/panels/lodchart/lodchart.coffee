@@ -163,7 +163,6 @@ lodchart = () ->
                       [d.name, " LOD = #{d3.format('.2f')(d.lod)}"])
                     .direction("e")
                     .offset([0,10])
-
       svg.call(markertip)
 
       markerSelect =
@@ -179,10 +178,10 @@ lodchart = () ->
                   .attr("fill", pointcolor)
                   .attr("stroke", "black")
                   .attr("stroke-width", "1")
-                  .on "mouseover", (d) ->
+                  .on "mouseover.paneltip", (d) ->
                      d3.select(this).attr("opacity", 1)
                      markertip.show(d)
-                  .on "mouseout", ->
+                  .on "mouseout.paneltip", ->
                      d3.select(this).attr("opacity", 0)
                      .call(markertip.hide)
 

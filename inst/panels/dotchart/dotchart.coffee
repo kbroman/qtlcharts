@@ -31,8 +31,6 @@ dotchart = () ->
   chart = (selection) ->
     selection.each (data) ->
 
-      # grab indID if it's there
-      indID = data?.indID ? null
 
       if dataByInd
         x = data.map (d) -> d[xvar]
@@ -42,8 +40,10 @@ dotchart = () ->
         y = data[yvar]
         data = ([x[i],y[i]] for i of x)
 
+      # grab indID if it's there
       # if no indID, create a vector of them
-      indID = indID ? [1..x.length].map (d) -> "ind #{d}"
+      indID = data?.indID ? null
+      indID = indID ? [1..x.length]
 
       # if all y not null
       yNA.handle = false if y.every (v) -> (v?) and !yNA.force
@@ -200,8 +200,8 @@ dotchart = () ->
               .attr("opacity", (d,i) ->
                    return 1 if (y[i]? or yNA.handle) and x[i] in xcategories
                    return 0)
-              .on("mouseover.tip", indtip.show)
-              .on("mouseout.tip", indtip.hide)
+              .on("mouseover.paneltip", indtip.show)
+              .on("mouseout.paneltip", indtip.hide)
 
       # box
       g.append("rect")

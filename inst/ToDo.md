@@ -32,14 +32,14 @@
   if same chromosome class (same x-axis): need a redraw function
 
 - Add d3-tip to manyboxplot for individual IDs
+- Add individual IDs to curves_w_scatter
 
 - scatterplot: allow groupings by color
 
-- scatterplot: include individual IDs with d3-tip
+- curvechart: include individual IDs with d3-tip (maybe add points at
+  last observed time?, and have tip from there?)
 
-- curves_w_2scatter
-  - make it just curves_w_scatter, and allow use of one or two
-    scatterplots (or none?)
+- curves_w_scatter
   - allow grouping by color
   - allow either brush or mouseover
 

@@ -3,13 +3,13 @@
 \alias{corr_w_scatter}
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
-corr_w_scatter(dat, group, rows, cols, reorder = TRUE, corr = cor(dat, use =
+corr_w_scatter(mat, group, rows, cols, reorder = TRUE, corr = cor(mat, use =
   "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
   title = "Correlation matrix with linked scatterplot", caption,
   chartOpts = NULL)
 }
 \arguments{
-  \item{dat}{Data matrix (individuals x variables)}
+  \item{mat}{Data matrix (individuals x variables)}
 
   \item{group}{Option vector of groups of individuals
   (e.g., a genotype)}
@@ -56,10 +56,13 @@ correlation matrix linked to underlying scatterplots.
 }
 \details{
 \code{corr} may be provided as a subset of the overall
-correlation matrix for the columns of \code{dat}. In this case, the
+correlation matrix for the columns of \code{mat}. In this case, the
 \code{reorder}, \code{rows} and \code{cols} arguments are ignored. The row and
 column names of \code{corr} must match the names of some subset of
-columns of \code{dat}.
+columns of \code{mat}.
+
+Individual IDs are taken from \code{rownames(mat)}; they must match
+\code{names(group)}.
 }
 \examples{
 data(geneExpr)

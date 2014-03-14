@@ -25,8 +25,8 @@
 convert4corrwscatter <-
 function(dat, group, rows, cols, reorder=TRUE, corr, corr_was_presubset=FALSE)
 {
-  ind <- rownames(dat)
-  if(is.null(ind)) ind <- paste0("ind", 1:nrow(dat))
+  indID <- rownames(dat)
+  if(is.null(indID)) indID <- paste(1:nrow(dat))
 
   variables <- colnames(dat)
   if(is.null(variables)) variable <- paste0("var", 1:ncol(dat))
@@ -35,7 +35,7 @@ function(dat, group, rows, cols, reorder=TRUE, corr, corr_was_presubset=FALSE)
 
   if(nrow(dat) != length(group))
     stop("nrow(dat) != length(group)")
-  if(!is.null(names(group)) && !all(names(group) == ind))
+  if(!is.null(names(group)) && !all(names(group) == indID))
     stop("names(group) != rownames(dat)")
 
   if(!corr_was_presubset) {
@@ -67,7 +67,7 @@ function(dat, group, rows, cols, reorder=TRUE, corr, corr_was_presubset=FALSE)
   dimnames(corr) <- dimnames(dat) <- NULL
   names(group) <- NULL
 
-  output <- list("ind" = toJSON(ind),
+  output <- list("indID" = toJSON(indID),
                  "var" = toJSON(variables),
                  "corr" = toJSON(corr[rows,cols]),
                  "rows" = toJSON(rows-1),

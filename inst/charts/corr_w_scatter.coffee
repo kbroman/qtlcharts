@@ -34,7 +34,7 @@ corr_w_scatter = (data, chartOpts) ->
                    .attr("transform", "translate(#{margin.left*2+margin.right+width},#{margin.top})")
 
   # no. data points
-  nind = data.ind.length
+  nind = data.indID.length
   nvar = data.var.length
   ncorrX = data.cols.length
   ncorrY = data.rows.length
@@ -116,7 +116,7 @@ corr_w_scatter = (data, chartOpts) ->
 
   scat_tip = d3.tip()
               .attr('class', 'd3-tip')
-              .html((d,i) -> data.ind[i])
+              .html((d,i) -> data.indID[i])
               .direction('e')
               .offset([0,10])
   scatterplot.call(scat_tip)

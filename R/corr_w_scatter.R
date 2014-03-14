@@ -6,7 +6,7 @@
 #' Creates an interactive graph with an image of a
 #' correlation matrix linked to underlying scatterplots.
 #'
-#' @param dat Data matrix (individuals x variables)
+#' @param mat Data matrix (individuals x variables)
 #' @param group Option vector of groups of individuals (e.g., a genotype)
 #' @param rows Selected rows of the correlation matrix to include in
 #'   the image. Ignored if \code{corr} is provided.
@@ -32,10 +32,13 @@
 #' @return Character string with the name of the file created.
 #'
 #' @details \code{corr} may be provided as a subset of the overall
-#' correlation matrix for the columns of \code{dat}. In this case, the
+#' correlation matrix for the columns of \code{mat}. In this case, the
 #' \code{reorder}, \code{rows} and \code{cols} arguments are ignored. The row and
 #' column names of \code{corr} must match the names of some subset of
-#' columns of \code{dat}.
+#' columns of \code{mat}.
+#'
+#' Individual IDs are taken from \code{rownames(mat)}; they must match
+#' \code{names(group)}.
 #'
 #' @keywords hplot
 #' @seealso \code{\link{curves_w_scatter}}
@@ -46,7 +49,7 @@
 #'
 #' @export
 corr_w_scatter <-
-function(dat, group, rows, cols, reorder=TRUE, corr=cor(dat, use="pairwise.complete.obs"),
+function(mat, group, rows, cols, reorder=TRUE, corr=cor(mat, use="pairwise.complete.obs"),
          file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot",
          caption, chartOpts=NULL)
 {
@@ -57,27 +60,27 @@ function(dat, group, rows, cols, reorder=TRUE, corr=cor(dat, use="pairwise.compl
   if(file.exists(file))
     stop('The file already exists; please remove it first: ', file)
 
-  if(missing(group)) group <- rep(1, nrow(dat))
+  if(missing(group)) group <- rep(1, nrow(mat))
 
   if(!missing(corr)) {
     if(!missing(rows) || !missing(cols)) warning("rows and cols ignored.")
     dn <- dimnames(corr)
-    if(any(is.na(match(c(dn[[1]], dn[[2]]), colnames(dat)))))
-      stop("Mismatch between dimnames(corr) and colnames(dat).")
+    if(any(is.na(match(c(dn[[1]], dn[[2]]), colnames(mat)))))
+      stop("Mismatch between dimnames(corr) and colnames(mat).")
     rows <- 1:nrow(corr)
     cols <- 1:ncol(corr)
     reorder <- FALSE
     corr_was_presubset <- TRUE
   }
   else {    
-    if(missing(rows)) rows <- (1:ncol(dat))
-    else rows <- selectMatrixColumns(dat, rows)
-    if(missing(cols)) cols <- (1:ncol(dat))
-    else cols <- selectMatrixColumns(dat, cols)
+    if(missing(rows)) rows <- (1:ncol(mat))
+    else rows <- selectMatrixColumns(mat, rows)
+    if(missing(cols)) cols <- (1:ncol(mat))
+    else cols <- selectMatrixColumns(mat, cols)
     corr_was_presubset <- FALSE
   }
  
-  json <- convert4corrwscatter(dat, group, rows, cols, reorder, corr, corr_was_presubset)
+  json <- convert4corrwscatter(mat, group, rows, cols, reorder, corr, corr_was_presubset)
 
   # start writing
   write_html_top(file, title=title)

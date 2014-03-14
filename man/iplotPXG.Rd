@@ -51,6 +51,10 @@ The function \code{\link[qtl]{fill.geno}} is used to
 impute missing genotypes, with arguments passed as a list, for
 example \code{fillgenoArgs=list(method="argmax", error.prob=0.002,
 map.function="c-f")}.
+
+Individual IDs (viewable when hovering over a point) are taken from
+the input \code{cross} object, using the \code{\link[qtl]{getid}}
+function in R/qtl.
 }
 \examples{
 data(hyper)

@@ -31,6 +31,10 @@
 #' example \code{fillgenoArgs=list(method="argmax", error.prob=0.002,
 #' map.function="c-f")}.
 #'
+#' Individual IDs (viewable when hovering over a point) are taken from
+#' the input \code{cross} object, using the \code{\link[qtl]{getid}}
+#' function in R/qtl.
+#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotScanone}}
 #'

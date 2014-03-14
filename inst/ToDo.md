@@ -22,31 +22,26 @@
   - the panels: what, where, how
   - the basic method I'm using for creating a chart
 
+
+
 ### Enhancements to current charts
 
 - lodchart: optional inclusion of ticks at markers
-
-- use d3-tip in lodchart:
-  - marker name + LOD score
-  - also include point at overall chromosome peak?
 
 - iplotScanone_pxg: same jitter values throughout; animate transitions
   if same chromosome class (same x-axis): need a redraw function
 
 - Add d3-tip to manyboxplot for individual IDs
 
-- iplotPXG: are the d3-tip IDs taken from the cross object?
-
 - scatterplot: allow groupings by color
+
+- scatterplot: include individual IDs with d3-tip
 
 - curves_w_2scatter
   - make it just curves_w_scatter, and allow use of one or two
     scatterplots (or none?)
   - allow grouping by color
   - allow either brush or mouseover
-
-- curvechart: selection of color as a separate function
-  (takes number + pastel/dark)
 
 
 

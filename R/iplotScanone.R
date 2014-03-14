@@ -49,6 +49,11 @@
 #' \code{fillgenoArgs=list(method="argmax", error.prob=0.002,
 #' map.function="c-f")}.
 #'
+#' With \code{pxgtype="raw"}, individual IDs (viewable when hovering
+#' over a point in the phenotype-by-genotype plot) are taken from the
+#' input \code{cross} object, using the \code{\link[qtl]{getid}}
+#' function in R/qtl.
+#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotPXG}}
 #'

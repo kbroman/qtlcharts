@@ -11,25 +11,27 @@ Add see it in action
 
 Here are all of the options:
 
-    mychart = cichart().xvar("x")                                               # variable containing x-coordinate
-                       .yvar("y")                                               # variable containing y-coordinate
-                       .width(400)                                              # internal width of chart
-                       .height(500)                                             # internal height
-                       .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
-                       .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
-                       .titlepos(20)                                            # spacing for panel title
-                       .xcatlabels(null)                                        # labels for x-axis categories
-                       .segwidth(null)                                          # width of horizontal line segments
-                       .ylim(null)                                              # y-axis limits
-                       .nyticks(5)                                              # no. y-axis ticks
-                       .yticks(null)                                            # locations of y-axis ticks
-                       .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
-                       .segcolor("slateblue")                                   # color for horizontal line segments
-                       .vertsegcolor(d3.rgb(100,100,100))                       # color for vertical line segments
-                       .segstrokewidth("2")                                     # stroke width for horiz line segs
-                       .title("")                                               # panel title
-                       .xlab("Group")                                           # x-axis label
-                       .ylab("Response")                                        # y-axis label
+```coffeescript
+mychart = cichart().xvar("x")                                               # variable containing x-coordinate
+                   .yvar("y")                                               # variable containing y-coordinate
+                   .width(400)                                              # internal width of chart
+                   .height(500)                                             # internal height
+                   .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
+                   .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
+                   .titlepos(20)                                            # spacing for panel title
+                   .xcatlabels(null)                                        # labels for x-axis categories
+                   .segwidth(null)                                          # width of horizontal line segments
+                   .ylim(null)                                              # y-axis limits
+                   .nyticks(5)                                              # no. y-axis ticks
+                   .yticks(null)                                            # locations of y-axis ticks
+                   .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
+                   .segcolor("slateblue")                                   # color for horizontal line segments
+                   .vertsegcolor(d3.rgb(100,100,100))                       # color for vertical line segments
+                   .segstrokewidth("2")                                     # stroke width for horiz line segs
+                   .title("")                                               # panel title
+                   .xlab("Group")                                           # x-axis label
+                   .ylab("Response")                                        # y-axis label
+```
 
 Organization of data:
 
@@ -37,10 +39,12 @@ Organization of data:
 
 Additional accessors:
 
-    # x-axis scale
-    xscale = mychart.xscale()
-    xscale(x)
+```coffeescript
+# x-axis scale
+xscale = mychart.xscale()
+xscale(x)
 
-    # y-axis scale
-    yscale = mychart.yscale()
-    yscale(y)
+# y-axis scale
+yscale = mychart.yscale()
+yscale(y)
+```

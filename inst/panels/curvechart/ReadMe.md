@@ -12,26 +12,28 @@ Add see it in action
 
 Here are all of the options:
 
-    mychart = cichart().width(800)                                              # internal width of chart
-                       .height(500)                                             # internal height
-                       .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
-                       .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
-                       .titlepos(20)                                            # spacing for panel title
-                       .xlim(null)                                              # x-axis limits
-                       .ylim(null)                                              # y-axis limits
-                       .nxticks(5)                                              # no. x-axis ticks
-                       .nyticks(5)                                              # no. y-axis ticks
-                       .xticks(null)                                            # locations of x-axis ticks
-                       .yticks(null)                                            # locations of y-axis ticks
-                       .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
-                       .strokecolor(null)                                       # color(s) for curves
-                       .strokecolorhilit(null)                                  # color(s) for curves when highlighted
-                       .strokewidth(2)                                          # line width for curves
-                       .strokewidthhilit(2)                                     # line width for curves when highlighted
-                       .title("")                                               # panel title
-                       .xlab("X")                                               # x-axis label
-                       .ylab("Y")                                               # y-axis label
-                       .commonX(true)                                           # Do all curves have a common set of X's?
+```coffeescript
+mychart = cichart().width(800)                                              # internal width of chart
+                   .height(500)                                             # internal height
+                   .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
+                   .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
+                   .titlepos(20)                                            # spacing for panel title
+                   .xlim(null)                                              # x-axis limits
+                   .ylim(null)                                              # y-axis limits
+                   .nxticks(5)                                              # no. x-axis ticks
+                   .nyticks(5)                                              # no. y-axis ticks
+                   .xticks(null)                                            # locations of x-axis ticks
+                   .yticks(null)                                            # locations of y-axis ticks
+                   .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
+                   .strokecolor(null)                                       # color(s) for curves
+                   .strokecolorhilit(null)                                  # color(s) for curves when highlighted
+                   .strokewidth(2)                                          # line width for curves
+                   .strokewidthhilit(2)                                     # line width for curves when highlighted
+                   .title("")                                               # panel title
+                   .xlab("X")                                               # x-axis label
+                   .ylab("Y")                                               # y-axis label
+                   .commonX(true)                                           # Do all curves have a common set of X's?
+```
 
 Organization of data:
 
@@ -43,13 +45,15 @@ Organization of data:
 
 Additional accessors:
 
-    # x-axis scale
-    xscale = mychart.xscale()
-    xscale(x)
+```coffeescript
+# x-axis scale
+xscale = mychart.xscale()
+xscale(x)
 
-    # y-axis scale
-    yscale = mychart.yscale()
-    yscale(y)
+# y-axis scale
+yscale = mychart.yscale()
+yscale(y)
 
-    # selection of curves, to add .on("click", ...)
-    curvesSelect = mychart.curvesSelect()
+# selection of curves, to add .on("click", ...)
+curvesSelect = mychart.curvesSelect()
+```

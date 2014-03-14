@@ -12,28 +12,30 @@ Add see it in action
 
 Here are all of the options:
 
-    mychart = dotchart().xvar("x")                                               # variable containing x-coordinate
-                        .yvar("y")                                               # variable containing y-coordinate
-                        .width(400)                                              # internal width of chart
-                        .height(500)                                             # internal height
-                        .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
-                        .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
-                        .titlepos(20)                                            # spacing for panel title
-                        .xjitter(null)                                           # horizontal jittering
-                        .xcategories(null)                                       # ordered categories for X variable
-                        .xcatlabels(null)                                        # labels for x-axis categories
-                        .ylim(null)                                              # y-axis limits
-                        .nyticks(5)                                              # no. y-axis ticks
-                        .yticks(null)                                            # locations of y-axis ticks
-                        .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
-                        .pointcolor("darkslateblue")                             # color for points
-                        .pointstroke("black")                                    # stroke color for points
-                        .pointsize(3)                                            # radius of points at markers
-                        .title("")                                               # panel title
-                        .xlab("Group")                                           # x-axis label
-                        .ylab("Response")                                        # y-axis label
-                        .yNA({handle:true, force:false, width:15, gap:10})       # treatment of missing y values
-                        .dataByInd(true)                                         # is data organized by individual?
+```coffeescript
+mychart = dotchart().xvar("x")                                               # variable containing x-coordinate
+                    .yvar("y")                                               # variable containing y-coordinate
+                    .width(400)                                              # internal width of chart
+                    .height(500)                                             # internal height
+                    .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
+                    .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
+                    .titlepos(20)                                            # spacing for panel title
+                    .xjitter(null)                                           # horizontal jittering
+                    .xcategories(null)                                       # ordered categories for X variable
+                    .xcatlabels(null)                                        # labels for x-axis categories
+                    .ylim(null)                                              # y-axis limits
+                    .nyticks(5)                                              # no. y-axis ticks
+                    .yticks(null)                                            # locations of y-axis ticks
+                    .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
+                    .pointcolor("darkslateblue")                             # color for points
+                    .pointstroke("black")                                    # stroke color for points
+                    .pointsize(3)                                            # radius of points at markers
+                    .title("")                                               # panel title
+                    .xlab("Group")                                           # x-axis label
+                    .ylab("Response")                                        # y-axis label
+                    .yNA({handle:true, force:false, width:15, gap:10})       # treatment of missing y values
+                    .dataByInd(true)                                         # is data organized by individual?
+```
 
 Treatment of missing values through `yNA`:
 
@@ -57,13 +59,15 @@ Organization of data:
 
 Additional accessors:
 
-    # x-axis scale
-    xscale = mychart.xscale()
-    xscale(x)
+```coffeescript
+# x-axis scale
+xscale = mychart.xscale()
+xscale(x)
 
-    # y-axis scale
-    yscale = mychart.yscale()
-    yscale(y)
+# y-axis scale
+yscale = mychart.yscale()
+yscale(y)
 
-    # selection of points at markers, to add .on("click", ...)
-    pointsSelect = mychart.pointsSelect()
+# selection of points at markers, to add .on("click", ...)
+pointsSelect = mychart.pointsSelect()
+```

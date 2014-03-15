@@ -2,6 +2,9 @@
 
 ### General things
 
+- standard ways to give title
+  (draw axis labels from data?)
+
 - move colors etc to CSS
 
 - function to write CSS styles

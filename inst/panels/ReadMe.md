@@ -1,7 +1,6 @@
 ## Reuseable D3-based panels
 
-Karl W Broman,
-[http://www.biostat.wisc.edu/~kbroman](http://www.biostat.wisc.edu/~kbroman)
+[Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
 
 This directory contains a set of reusable panels for
 [D3](http://d3js.org)-based interactive charts for xQTL data.

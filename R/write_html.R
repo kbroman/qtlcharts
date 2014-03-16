@@ -110,6 +110,7 @@ function(file, title, div)
 {
   text <- '</head>\n\n<body>\n'
   if(!missing(title)) text <- c(text, '<h3>', title, '</h3>\n\n')
+  text <- c(text, '<p id="loading">Loading...</p>\n\n')
   if(!missing(div)) text <- c(text, '<div id="', div, '"></div>\n\n')
 
   cat(text, file=file, append=TRUE, sep='')
@@ -127,6 +128,7 @@ function(file, title, div)
 append_html_bottom <-
 function(file)
 {
+  cat('<script type="text/javascript">d3.select("p#loading").remove();</script>\n\n', file=file, append=TRUE)
   cat('</body>\n</html>\n', file=file, append=TRUE)
 
   invisible(NULL)

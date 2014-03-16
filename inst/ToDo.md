@@ -2,7 +2,7 @@
 
 ### General things
 
-- standard ways to give title
+- standard ways to give title and axis labels
   (draw axis labels from data?)
 
 - move colors etc to CSS

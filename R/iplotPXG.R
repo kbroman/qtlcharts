@@ -65,7 +65,8 @@ function(cross, marker, pheno.col=1,
     warning('marker should have length 1; using "', marker, '"')
   }
 
-  write_html_top(file, title=title)
+  filetitle <- ifelse(title=="", marker, title)
+  write_html_top(file, title=filetitle)
 
   link_d3(file, onefile=onefile)
   link_d3tip(file, onefile=onefile)

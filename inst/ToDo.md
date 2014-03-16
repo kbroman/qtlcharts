@@ -1,5 +1,10 @@
 ## To Do list for R/qtlcharts
 
+### Bugs
+
+- iplotPXG behaves badly if the chosen phenotype is non-numeric
+  (e.g., a factor)
+
 ### General things
 
 - standard ways to give axis labels

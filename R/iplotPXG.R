@@ -84,8 +84,7 @@ function(cross, marker, pheno.col=1,
   json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, ...)
 
   # use phenotype name as y-axis label, unless ylab is already provided
-  chartOpts <- add2chartOpts(chartOpts, ylab=getPhename(cross, pheno.col=pheno.col))
-  print(chartOpts)
+  chartOpts <- add2chartOpts(chartOpts, ylab=getPhename(cross, pheno.col))
 
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)

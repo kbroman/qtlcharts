@@ -82,6 +82,11 @@ function(cross, marker, pheno.col=1,
   append_caption(caption, file)
 
   json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, ...)
+
+  # use phenotype name as y-axis label, unless ylab is already provided
+  chartOpts <- add2chartOpts(chartOpts, ylab=getPhename(cross, pheno.col=pheno.col))
+  print(chartOpts)
+
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotPXG(data,chartOpts);')
@@ -91,4 +96,11 @@ function(cross, marker, pheno.col=1,
   if(openfile) browseURL(file)
 
   invisible(file)
+}
+
+getPhename <-
+function(cross, pheno.col)
+{
+  if(is.character(pheno.col)) return(pheno.col)
+  names(cross$pheno)[pheno.col]
 }

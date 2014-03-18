@@ -45,8 +45,9 @@
 #' 
 #' @examples
 #' data(geneExpr)
-#' corr_w_scatter(geneExpr$expr, geneExpr$genotype)
-#'
+#' corr_w_scatter(geneExpr$expr, geneExpr$genotype,
+#'                chartOpts=list(cortitle="Correlation matrix",
+#'                               scattitle="Scatterplot"))
 #' @export
 corr_w_scatter <-
 function(mat, group, rows, cols, reorder=TRUE, corr=cor(mat, use="pairwise.complete.obs"),

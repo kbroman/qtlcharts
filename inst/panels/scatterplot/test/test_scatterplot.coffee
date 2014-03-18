@@ -19,16 +19,15 @@ d3.json "data.json", (data) ->
                          .margin(margin)
 
   d3.select("div#chart1")
-    .datum(data)
+    .datum({data:data})
     .call(mychart)
 
   # animate points
   mychart.pointsSelect()
             .on "mouseover", (d) ->
-               d3.select(this).attr("r", mychart.pointsize()*3).on "click", (d) ->
-                  d3.select(this).attr("fill", "Orchid").on "mouseout", (d) ->
-                    d3.select(this).attr("fill", mychart.pointcolor()).attr("r", mychart.pointsize())
-            .on "mouseout", (d) -> d3.select(this).attr("fill", mychart.pointcolor()).attr("r", mychart.pointsize())
+               d3.select(this).attr("r", mychart.pointsize()*3)
+            .on "mouseout", (d) ->
+               d3.select(this).attr("r", mychart.pointsize())
 
 
 # Example 2: three scatterplots within one SVG, with brushing
@@ -59,7 +58,7 @@ d3.json "data.json", (data) ->
 
     chart[i] = svg.append("g").attr("id", "chart#{i}")
                   .attr("transform", "translate(#{xshift[i]},#{yshift[i]})")
-    chart[i].datum(data).call(mychart[i])
+    chart[i].datum({data:data}).call(mychart[i])
 
   brush = []
   brushstart = (i) ->
@@ -143,24 +142,24 @@ d3.json "data.json", (data) ->
   chart12 = svg.append("g").attr("id", "chart12")
                .attr("transform", "translate(#{halfw}, #{halfh})")
 
-  chart01.datum(data)
+  chart01.datum({data:data})
     .call(mychart01)
 
-  chart02.datum(data)
+  chart02.datum({data:data})
     .call(mychart02)
 
-  chart12.datum(data)
+  chart12.datum({data:data})
     .call(mychart12)
 
   [mychart01, mychart02, mychart12].forEach (chart) ->
     chart.pointsSelect()
              .on "mouseover", (d,i) ->
-                svg.selectAll("circle.pt#{i}").attr("r", chart.pointsize()*3).attr("fill", "Orchid")
+                svg.selectAll("circle.pt#{i}").attr("r", chart.pointsize()*3)
              .on "mouseout", (d,i) ->
-                svg.selectAll("circle.pt#{i}").attr("r", chart.pointsize()).attr("fill", chart.pointcolor())
+                svg.selectAll("circle.pt#{i}").attr("r", chart.pointsize())
 
 
-# Example 4: simplest use
+# Example 4: Data not by individual but with X and Y as separate columns
 d3.json "data.json", (data) ->
   mychart = scatterplot().height(h)
                          .width(w)
@@ -170,15 +169,12 @@ d3.json "data.json", (data) ->
   data2 = [(x[0] for x in data), (x[1] for x in data)]
 
   d3.select("div#chart4")
-    .datum(data2)
+    .datum({data:data2})
     .call(mychart)
 
   # animate points
   mychart.pointsSelect()
             .on "mouseover", (d) ->
-               d3.select(this).attr("r", mychart.pointsize()*3).on "click", (d) ->
-                  d3.select(this).attr("fill", "Orchid").on "mouseout", (d) ->
-                    d3.select(this).attr("fill", mychart.pointcolor()).attr("r", mychart.pointsize())
-            .on "mouseout", (d) -> d3.select(this).attr("fill", mychart.pointcolor()).attr("r", mychart.pointsize())
-
-
+               d3.select(this).attr("r", mychart.pointsize()*3)
+            .on "mouseout", (d) ->
+               d3.select(this).attr("r", mychart.pointsize())

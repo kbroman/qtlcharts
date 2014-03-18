@@ -52,25 +52,17 @@ scatterplot = function() {
   dataByInd = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var g, gEnter, i, indID, indtip, na_value, panelheight, paneloffset, panelwidth, points, svg, titlegrp, x, xaxis, xrange, xs, y, yaxis, yrange, ys, _i, _ref, _ref1, _results;
+      var g, gEnter, indID, indtip, na_value, panelheight, paneloffset, panelwidth, points, svg, titlegrp, x, xaxis, xrange, xs, y, yaxis, yrange, ys, _i, _ref, _ref1, _results;
       if (dataByInd) {
-        x = data.map(function(d) {
+        x = data.data.map(function(d) {
           return d[xvar];
         });
-        y = data.map(function(d) {
+        y = data.data.map(function(d) {
           return d[yvar];
         });
       } else {
-        x = data[xvar];
-        y = data[yvar];
-        data = (function() {
-          var _results;
-          _results = [];
-          for (i in x) {
-            _results.push([x[i], y[i]]);
-          }
-          return _results;
-        })();
+        x = data.data[xvar];
+        y = data.data[yvar];
       }
       indID = (_ref = data != null ? data.indID : void 0) != null ? _ref : null;
       indID = indID != null ? indID : (function() {
@@ -181,7 +173,7 @@ scatterplot = function() {
       }).direction('e').offset([0, 10]);
       svg.call(indtip);
       points = g.append("g").attr("id", "points");
-      pointsSelect = points.selectAll("empty").data(data).enter().append("circle").attr("cx", function(d, i) {
+      pointsSelect = points.selectAll("empty").data(d3.range(x.length)).enter().append("circle").attr("cx", function(d, i) {
         return xscale(x[i]);
       }).attr("cy", function(d, i) {
         return yscale(y[i]);

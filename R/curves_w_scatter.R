@@ -112,9 +112,9 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL,
   append_caption(caption, file)
 
   append_html_jscode(file, 'curve_data = ', toJSON(list(x=times, data=curveMatrix), ...), ';')
-  scat1_json = ifelse(is.null(scatter1), toJSON(NULL, container=FALSE), toJSON(scatter1, ...))
+  scat1_json = ifelse(is.null(scatter1), toJSON(NULL, container=FALSE), toJSON(list(data=scatter1), ...))
   append_html_jscode(file, 'scatter1_data = ', scat1_json, ';')
-  scat2_json = ifelse(is.null(scatter2), toJSON(NULL, container=FALSE), toJSON(scatter2, ...))
+  scat2_json = ifelse(is.null(scatter2), toJSON(NULL, container=FALSE), toJSON(list(data=scatter2), ...))
   append_html_jscode(file, 'scatter2_data = ', scat2_json, ';')
   append_html_chartopts(file, chartOpts)
 

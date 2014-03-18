@@ -28,7 +28,7 @@ mychart = scatterplot().xvar("x")                                               
                        .xticks(null)                                            # locations of x-axis ticks
                        .yticks(null)                                            # locations of y-axis ticks
                        .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
-                       .pointcolor("darkslateblue")                             # color for points
+                       .pointcolor(null)                                        # color for points
                        .pointstroke("black")                                    # stroke color for points
                        .pointsize(3)                                            # radius of points at markers
                        .title("")                                               # panel title
@@ -48,9 +48,15 @@ Treatment of missing values through `xNA` and `yNA`:
 
 Organization of data:
 
-  If `dataByInd == true` (the default), we expect the data to be like `[[x1,y1], [x2,y2], ..., [xn,yn]]`
+  The input data should have a component `data` that contains the
+  values to be plotted.  If `dataByInd == true` (the default), we
+  expect this data to be like `[[x1,y1], [x2,y2], ..., [xn,yn]]`
+  Alternatively, if `dataByInd == false` we expect this data to be
+  like `[[x1,x2, ..., xn], [y1,y2, ..., yn]]`
 
-  Alternatively, if `dataByInd == false` we expect the data to be like `[[x1,x2, ..., xn], [y1,y2, ..., yn]]`
+  The input can include a component `indID` for individual IDs
+  (viewable with tool tips) and a component `group` taking values 1,
+  2, ..., defining groups to be colored differently.
 
 Additional accessors:
 

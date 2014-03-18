@@ -33,12 +33,11 @@ scatterplot = () ->
     selection.each (data) ->
 
       if dataByInd
-        x = data.map (d) -> d[xvar]
-        y = data.map (d) -> d[yvar]
+        x = data.data.map (d) -> d[xvar]
+        y = data.data.map (d) -> d[yvar]
       else # reorganize data
-        x = data[xvar]
-        y = data[yvar]
-        data = ([x[i],y[i]] for i of x)
+        x = data.data[xvar]
+        y = data.data[yvar]
 
       # grab indID if it's there
       # if no indID, create a vector of them
@@ -212,7 +211,7 @@ scatterplot = () ->
       points = g.append("g").attr("id", "points")
       pointsSelect =
         points.selectAll("empty")
-              .data(data)
+              .data(d3.range(x.length))
               .enter()
               .append("circle")
               .attr("cx", (d,i) -> xscale(x[i]))

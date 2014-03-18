@@ -94,6 +94,7 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL,
 
   append_html_middle(file, title, 'chart')
   
+  if(is.data.frame(curveMatrix)) curveMatrix <- as.matrix(curveMatrix)
   dimnames(curveMatrix) <- names(times) <- dimnames(scatter1) <- dimnames(scatter2) <- NULL
 
   if(missing(caption) || is.null(caption)) {

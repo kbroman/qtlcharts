@@ -7,6 +7,11 @@
 
 ### General things
 
+- pointcolor for panels should end up being a vector of length =
+  no. individuals and there should be a related pointcolorhilit
+  All panels should handle group, pointcolor, and pointcolorhilit in a
+  standard way
+
 - standard ways to give axis labels
   (draw axis labels from data?)
 

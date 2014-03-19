@@ -166,10 +166,10 @@ d3.json "data.json", (data) ->
                          .margin(margin)
                          .dataByInd(false)
 
-  data2 = [(x[0] for x in data), (x[1] for x in data)]
+  dataReorg = [(x[0] for x in data), (x[1] for x in data)]
 
   d3.select("div#chart4")
-    .datum({data:data2})
+    .datum({data:dataReorg})
     .call(mychart)
 
   # animate points

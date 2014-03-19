@@ -142,9 +142,9 @@
   });
 
   d3.json("data.json", function(data) {
-    var data2, mychart, x;
+    var dataReorg, mychart, x;
     mychart = scatterplot().height(h).width(w).margin(margin).dataByInd(false);
-    data2 = [
+    dataReorg = [
       (function() {
         var _i, _len, _results;
         _results = [];
@@ -164,7 +164,7 @@
       })()
     ];
     d3.select("div#chart4").datum({
-      data: data2
+      data: dataReorg
     }).call(mychart);
     return mychart.pointsSelect().on("mouseover", function(d) {
       return d3.select(this).attr("r", mychart.pointsize() * 3);

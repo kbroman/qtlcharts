@@ -91,3 +91,11 @@ selectGroupColors = (ngroup, palette) ->
             "#d4a7fd", "#f5f0f5", "#cc968b", "#f4dcd4",
             "#f3b7f2", "#f7f6f2", "#bfbfbf", "#f7f7f7",
             "#fcfd82", "#fbfbcd", "#87feff", "#defaf5"][0...ngroup]
+
+# expand element/array (e.g., of colors) to a given length
+#     single elment -> array, then repeated to length n
+expand2vector = (input, n) ->
+  return input if Array.isArray(input) and input.length >= n
+  input = [input] unless Array.isArray(input)
+  input = (input[0] for i of d3.range(n)) if input.length == 1 and n > 1
+  input

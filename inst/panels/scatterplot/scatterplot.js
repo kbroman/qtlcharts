@@ -38,7 +38,7 @@ scatterplot = function() {
   nyticks = 5;
   yticks = null;
   rectcolor = d3.rgb(230, 230, 230);
-  pointcolor = "slateblue";
+  pointcolor = null;
   pointstroke = "black";
   pointsize = 3;
   title = "";
@@ -52,7 +52,7 @@ scatterplot = function() {
   dataByInd = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var g, gEnter, indID, indtip, na_value, panelheight, paneloffset, panelwidth, points, svg, titlegrp, x, xaxis, xrange, xs, y, yaxis, yrange, ys, _i, _ref, _ref1, _results;
+      var g, gEnter, group, i, indID, indtip, na_value, ngroup, panelheight, paneloffset, panelwidth, points, svg, titlegrp, x, xaxis, xrange, xs, y, yaxis, yrange, ys, _i, _ref, _ref1, _ref2, _ref3, _results;
       if (dataByInd) {
         x = data.data.map(function(d) {
           return d[xvar];
@@ -70,6 +70,29 @@ scatterplot = function() {
         for (var _i = 1, _ref1 = x.length; 1 <= _ref1 ? _i <= _ref1 : _i >= _ref1; 1 <= _ref1 ? _i++ : _i--){ _results.push(_i); }
         return _results;
       }).apply(this);
+      group = (_ref2 = data != null ? data.group : void 0) != null ? _ref2 : (function() {
+        var _j, _len, _results1;
+        _results1 = [];
+        for (_j = 0, _len = x.length; _j < _len; _j++) {
+          i = x[_j];
+          _results1.push(1);
+        }
+        return _results1;
+      })();
+      ngroup = d3.max(group);
+      group = (function() {
+        var _j, _len, _results1;
+        _results1 = [];
+        for (_j = 0, _len = group.length; _j < _len; _j++) {
+          g = group[_j];
+          _results1.push(g - 1);
+        }
+        return _results1;
+      })();
+      pointcolor = (_ref3 = data != null ? data.pointcolor : void 0) != null ? _ref3 : selectGroupColors(ngroup, "dark");
+      pointcolor = expand2vector(pointcolor, ngroup);
+      console.log(group);
+      console.log(pointcolor);
       if (x.every(function(v) {
         return (v != null) && !xNA.force;
       })) {
@@ -179,7 +202,9 @@ scatterplot = function() {
         return yscale(y[i]);
       }).attr("class", function(d, i) {
         return "pt" + i;
-      }).attr("r", pointsize).attr("fill", pointcolor).attr("stroke", pointstroke).attr("stroke-width", "1").attr("opacity", function(d, i) {
+      }).attr("r", pointsize).attr("fill", function(d, i) {
+        return pointcolor[group[i]];
+      }).attr("stroke", pointstroke).attr("stroke-width", "1").attr("opacity", function(d, i) {
         if (((x[i] != null) || xNA.handle) && ((y[i] != null) || yNA.handle)) {
           return 1;
         }

@@ -15,7 +15,7 @@ scatterplot = () ->
   nyticks = 5
   yticks = null
   rectcolor = d3.rgb(230, 230, 230)
-  pointcolor = "slateblue"
+  pointcolor = null
   pointstroke = "black"
   pointsize = 3 # default = no visible points at markers
   title = ""
@@ -43,6 +43,18 @@ scatterplot = () ->
       # if no indID, create a vector of them
       indID = data?.indID ? null
       indID = indID ? [1..x.length]
+
+      # groups of colors
+      group = data?.group ? (1 for i in x)
+      ngroup = d3.max(group)
+      group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
+
+      # colors of the points in the different groups
+      pointcolor = data?.pointcolor ? selectGroupColors(ngroup, "dark")
+      pointcolor = expand2vector(pointcolor, ngroup)
+
+      console.log(group)
+      console.log(pointcolor)
 
       # if all (x,y) not null
       xNA.handle = false if x.every (v) -> (v?) and !xNA.force
@@ -218,7 +230,7 @@ scatterplot = () ->
               .attr("cy", (d,i) -> yscale(y[i]))
               .attr("class", (d,i) -> "pt#{i}")
               .attr("r", pointsize)
-              .attr("fill", pointcolor)
+              .attr("fill", (d,i) -> pointcolor[group[i]])
               .attr("stroke", pointstroke)
               .attr("stroke-width", "1")
               .attr("opacity", (d,i) ->

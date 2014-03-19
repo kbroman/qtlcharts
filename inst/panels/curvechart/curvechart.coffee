@@ -158,7 +158,7 @@ curvechart = () ->
 
       indtip = d3.tip()
                  .attr('class', 'd3-tip')
-                 .html((d,i) -> indID[i])
+                 .html((d,i) -> indID[d])
                  .direction('e')
                  .offset([0,10])
       svg.call(indtip)
@@ -178,23 +178,22 @@ curvechart = () ->
            .attr("stroke-width", strokewidth)
 
       # grab the last non-null point from each curve
-      lastpoint = []
+      lastpoint = ({x:null, y:null} for i of data)
       for i of data
-        lastpoint[j] = {x:null, y:null}
-        for j of data[i]
-          if data[i][j].x? and data[i][j].y?
-            lastpoint[i] = data[i][j]
+        for v in data[i]
+          lastpoint[i] = v if v.x? and v.y?
+      console.log(lastpoint)
 
-      points = g.append("g").attr("id", "invisiblepoints")
-                .selectAll("empty")
+      pointsg = g.append("g").attr("id", "invisiblepoints")
+      points = pointsg.selectAll("empty")
                 .data(lastpoint)
                 .enter()
                 .append("circle")
                 .attr("id", (d,i) -> "hiddenpoint#{i}")
                 .attr("cx", (d) -> xscale(d.x))
                 .attr("cy", (d) -> yscale(d.y))
-                .attr("r", 0)
-                .attr("opacity", 0)
+                .attr("r", 5)
+                .attr("opacity", 1)
 
       curves = g.append("g").attr("id", "curves")
       curvesSelect =
@@ -211,8 +210,13 @@ curvechart = () ->
               .attr("opacity", 0)
               .on "mouseover.panel", (d,i) ->
                      d3.select(this).attr("opacity", 1)
-                     d3.select("circle#hiddenpoint#{i}").call(indtip.show)
-              .on("mouseout.panel", () -> d3.select(this).attr("opacity", 0))
+                     circle = d3.select("circle#hiddenpoint#{i}")
+                     circle.attr("fill", "Orchid")
+                     indtip.show(d, circle.node())
+              .on "mouseout.panel", (d,i) ->
+                     d3.select(this).attr("opacity", 0)
+                     d3.select("circle#hiddenpoint#{i}").attr("fill", "black")
+                     indtip.hide()  
 
       # box
       g.append("rect")

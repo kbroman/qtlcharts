@@ -47,13 +47,12 @@
 - Add d3-tip to manyboxplot for individual IDs
 - Add individual IDs to curves_w_scatter
 
-- scatterplot: allow groupings by color
-
 - curvechart: include individual IDs with d3-tip (maybe add points at
   last observed time?, and have tip from there?)
 
 - curves_w_scatter
   - allow grouping by color
+  - individual IDs via d3-tip
   - allow either brush or mouseover
 
 

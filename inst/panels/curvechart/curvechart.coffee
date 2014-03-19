@@ -30,21 +30,17 @@ curvechart = () ->
     selection.each (data) ->
 
       # groups of colors
-      group = data.group
-      group = group ? (1 for i of data.data)
+      group = data?.group ? (1 for i of data.data)
       ngroup = d3.max(group)
       group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
-  
       
       # default light stroke colors
       strokecolor = strokecolor ? selectGroupColors(ngroup, "pastel")
-      strokecolor = [strokecolor] unless Array.isArray(strokecolor)
-      strokecolor = (strokecolor[0] for i of d3.range(ngroup)) if strokecolor.length == 1 and ngroup > 1
+      strokecolor = expand2vector(strokecolor, ngroup)
 
       # default dark stroke colors
       strokecolorhilit = strokecolorhilit ? selectGroupColors(ngroup, "dark")
-      strokecolorhilit = [strokecolorhilit] unless Array.isArray(strokecolorhilit)
-      strokecolorhilit = (strokecolorhilit[0] for i of d3.range(ngroup)) if strokecolorhilit.length == 1 and ngroup > 1
+      strokecolorhilit = expand2vector(strokecolorhilit, ngroup)
   
       # reorganize data?
       if commonX # reorganize data

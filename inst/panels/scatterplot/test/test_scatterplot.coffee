@@ -178,3 +178,29 @@ d3.json "data.json", (data) ->
                d3.select(this).attr("r", mychart.pointsize()*3)
             .on "mouseout", (d) ->
                d3.select(this).attr("r", mychart.pointsize())
+
+# Example 5: color by grouping
+d3.json "data.json", (data) ->
+  mychart = scatterplot().xvar(0)
+                         .yvar(1)
+                         .xlab("X1")
+                         .ylab("X2")
+                         .height(h)
+                         .width(w)
+                         .margin(margin)
+
+  ngroup = 3
+  group = (Math.ceil(Math.random()*ngroup) for i in data)
+
+  d3.select("div#chart5")
+    .datum({data:data, group:group})
+    .call(mychart)
+
+  # animate points
+  mychart.pointsSelect()
+            .on "mouseover", (d) ->
+               d3.select(this).attr("r", mychart.pointsize()*3)
+            .on "mouseout", (d) ->
+               d3.select(this).attr("r", mychart.pointsize())
+
+

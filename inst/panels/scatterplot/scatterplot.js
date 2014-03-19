@@ -91,8 +91,6 @@ scatterplot = function() {
       })();
       pointcolor = (_ref3 = data != null ? data.pointcolor : void 0) != null ? _ref3 : selectGroupColors(ngroup, "dark");
       pointcolor = expand2vector(pointcolor, ngroup);
-      console.log(group);
-      console.log(pointcolor);
       if (x.every(function(v) {
         return (v != null) && !xNA.force;
       })) {

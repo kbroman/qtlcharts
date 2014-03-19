@@ -173,4 +173,28 @@
     });
   });
 
+  d3.json("data.json", function(data) {
+    var group, i, mychart, ngroup;
+    mychart = scatterplot().xvar(0).yvar(1).xlab("X1").ylab("X2").height(h).width(w).margin(margin);
+    ngroup = 3;
+    group = (function() {
+      var _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = data.length; _i < _len; _i++) {
+        i = data[_i];
+        _results.push(Math.ceil(Math.random() * ngroup));
+      }
+      return _results;
+    })();
+    d3.select("div#chart5").datum({
+      data: data,
+      group: group
+    }).call(mychart);
+    return mychart.pointsSelect().on("mouseover", function(d) {
+      return d3.select(this).attr("r", mychart.pointsize() * 3);
+    }).on("mouseout", function(d) {
+      return d3.select(this).attr("r", mychart.pointsize());
+    });
+  });
+
 }).call(this);

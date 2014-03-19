@@ -53,9 +53,6 @@ scatterplot = () ->
       pointcolor = data?.pointcolor ? selectGroupColors(ngroup, "dark")
       pointcolor = expand2vector(pointcolor, ngroup)
 
-      console.log(group)
-      console.log(pointcolor)
-
       # if all (x,y) not null
       xNA.handle = false if x.every (v) -> (v?) and !xNA.force
       yNA.handle = false if y.every (v) -> (v?) and !yNA.force

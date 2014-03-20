@@ -158,7 +158,7 @@ curvechart = () ->
 
       indtip = d3.tip()
                  .attr('class', 'd3-tip')
-                 .html((d,i) -> indID[d])
+                 .html((d) -> indID[d])
                  .direction('e')
                  .offset([0,10])
       svg.call(indtip)
@@ -182,7 +182,6 @@ curvechart = () ->
       for i of data
         for v in data[i]
           lastpoint[i] = v if v.x? and v.y?
-      console.log(lastpoint)
 
       pointsg = g.append("g").attr("id", "invisiblepoints")
       points = pointsg.selectAll("empty")
@@ -192,8 +191,8 @@ curvechart = () ->
                 .attr("id", (d,i) -> "hiddenpoint#{i}")
                 .attr("cx", (d) -> xscale(d.x))
                 .attr("cy", (d) -> yscale(d.y))
-                .attr("r", 5)
-                .attr("opacity", 1)
+                .attr("r", 1)
+                .attr("opacity", 0)
 
       curves = g.append("g").attr("id", "curves")
       curvesSelect =
@@ -211,11 +210,9 @@ curvechart = () ->
               .on "mouseover.panel", (d,i) ->
                      d3.select(this).attr("opacity", 1)
                      circle = d3.select("circle#hiddenpoint#{i}")
-                     circle.attr("fill", "Orchid")
-                     indtip.show(d, circle.node())
-              .on "mouseout.panel", (d,i) ->
+                     indtip.show(i, circle.node())
+              .on "mouseout.panel", () ->
                      d3.select(this).attr("opacity", 0)
-                     d3.select("circle#hiddenpoint#{i}").attr("fill", "black")
                      indtip.hide()  
 
       # box

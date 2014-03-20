@@ -39,7 +39,7 @@ curvechart = function() {
   commonX = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var curve, curves, g, gEnter, group, i, indID, indtip, j, lastpoint, ngroup, points, svg, titlegrp, tmp, xaxis, xrange, xs, yaxis, yrange, ys, _i, _ref, _ref1, _ref2, _results;
+      var curve, curves, g, gEnter, group, i, indID, indtip, j, lastpoint, ngroup, points, pointsg, svg, titlegrp, tmp, v, xaxis, xrange, xs, yaxis, yrange, ys, _i, _j, _len, _ref, _ref1, _ref2, _ref3, _results;
       indID = (_ref = data != null ? data.indID : void 0) != null ? _ref : null;
       indID = indID != null ? indID : (function() {
         _results = [];
@@ -135,8 +135,8 @@ curvechart = function() {
         return formatAxis(yticks)(d);
       });
       yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
-      indtip = d3.tip().attr('class', 'd3-tip').html(function(d, i) {
-        return indID[i];
+      indtip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+        return indID[d];
       }).direction('e').offset([0, 10]);
       svg.call(indtip);
       curve = d3.svg.line().x(function(d) {
@@ -149,25 +149,34 @@ curvechart = function() {
       }).attr("d", curve).attr("fill", "none").attr("stroke", function(d, i) {
         return strokecolor[group[i]];
       }).attr("stroke-width", strokewidth);
-      lastpoint = [];
+      lastpoint = (function() {
+        var _results1;
+        _results1 = [];
+        for (i in data) {
+          _results1.push({
+            x: null,
+            y: null
+          });
+        }
+        return _results1;
+      })();
       for (i in data) {
-        lastpoint[j] = {
-          x: null,
-          y: null
-        };
-        for (j in data[i]) {
-          if ((data[i][j].x != null) && (data[i][j].y != null)) {
-            lastpoint[i] = data[i][j];
+        _ref3 = data[i];
+        for (_j = 0, _len = _ref3.length; _j < _len; _j++) {
+          v = _ref3[_j];
+          if ((v.x != null) && (v.y != null)) {
+            lastpoint[i] = v;
           }
         }
       }
-      points = g.append("g").attr("id", "invisiblepoints").selectAll("empty").data(lastpoint).enter().append("circle").attr("id", function(d, i) {
+      pointsg = g.append("g").attr("id", "invisiblepoints");
+      points = pointsg.selectAll("empty").data(lastpoint).enter().append("circle").attr("id", function(d, i) {
         return "hiddenpoint" + i;
       }).attr("cx", function(d) {
         return xscale(d.x);
       }).attr("cy", function(d) {
         return yscale(d.y);
-      }).attr("r", 0).attr("opacity", 0);
+      }).attr("r", 1).attr("opacity", 0);
       curves = g.append("g").attr("id", "curves");
       curvesSelect = curves.selectAll("empty").data(d3.range(data.length)).enter().append("path").datum(function(d) {
         return data[d];
@@ -176,10 +185,13 @@ curvechart = function() {
       }).attr("fill", "none").attr("stroke", function(d, i) {
         return strokecolorhilit[group[i]];
       }).attr("stroke-width", strokewidthhilit).attr("opacity", 0).on("mouseover.panel", function(d, i) {
+        var circle;
         d3.select(this).attr("opacity", 1);
-        return d3.select("circle#hiddenpoint" + i).call(indtip.show);
+        circle = d3.select("circle#hiddenpoint" + i);
+        return indtip.show(i, circle.node());
       }).on("mouseout.panel", function() {
-        return d3.select(this).attr("opacity", 0);
+        d3.select(this).attr("opacity", 0);
+        return indtip.hide();
       });
       return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });

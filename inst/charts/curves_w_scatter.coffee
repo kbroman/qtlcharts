@@ -11,11 +11,11 @@ curves_w_scatter = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
   axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
   titlepos = chartOpts?.titlepos ? 20
   rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
-  pointcolor = chartOpts?.pointcolor ? "slateblue"
+  pointcolor = chartOpts?.pointcolor ? null
   pointstroke = chartOpts?.pointstroke ? "black"
   pointsize = chartOpts?.pointsize ? 3
-  strokecolor = chartOpts?.strokecolor ? d3.rgb(190, 190, 190)
-  strokecolorhilit = chartOpts?.strokecolorhilit ? "slateblue"
+  strokecolor = chartOpts?.strokecolor ? null
+  strokecolorhilit = chartOpts?.strokecolorhilit ? null
   strokewidth = chartOpts?.strokewidth ? 2
   strokewidthhilit = chartOpts?.strokewidthhilit ? 2
 
@@ -160,17 +160,17 @@ curves_w_scatter = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
 
   curves.on "mouseover", (d,i) ->
                            d3.select(this).attr("opacity", 1)
-                           d3.selectAll("circle.pt#{i}").attr("fill", "Orchid").attr("r", pointsize*2) if nscatter > 0
+                           d3.selectAll("circle.pt#{i}").attr("r", pointsize*2) if nscatter > 0
         .on "mouseout", (d,i) ->
                            d3.select(this).attr("opacity", 0)
-                           d3.selectAll("circle.pt#{i}").attr("fill", pointcolor).attr("r", pointsize) if nscatter > 0
+                           d3.selectAll("circle.pt#{i}").attr("r", pointsize) if nscatter > 0
 
   
   if nscatter > 0
     allpoints.forEach (points) ->
       points.on "mouseover", (d,i) ->
-                               d3.selectAll("circle.pt#{i}").attr("fill", "Orchid").attr("r", pointsize*2)
+                               d3.selectAll("circle.pt#{i}").attr("r", pointsize*2)
                                d3.selectAll("path.path#{i}").attr("opacity", 1)
             .on "mouseout", (d,i) ->
-                               d3.selectAll("circle.pt#{i}").attr("fill", pointcolor).attr("r", pointsize)
+                               d3.selectAll("circle.pt#{i}").attr("r", pointsize)
                                d3.selectAll("path.path#{i}").attr("opacity", 0)

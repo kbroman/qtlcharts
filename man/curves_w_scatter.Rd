@@ -3,9 +3,9 @@
 \alias{curves_w_scatter}
 \title{Plot of a bunch of curves, linked to points in scatterplots}
 \usage{
-curves_w_scatter(curveMatrix, times, scatter1 = NULL, scatter2 = NULL, file,
-  onefile = FALSE, openfile = TRUE, title = "", caption,
-  chartOpts = NULL, ...)
+curves_w_scatter(curveMatrix, times, scatter1 = NULL, scatter2 = NULL,
+  group = NULL, file, onefile = FALSE, openfile = TRUE, title = "",
+  caption, chartOpts = NULL, ...)
 }
 \arguments{
   \item{curveMatrix}{Matrix (dim n_ind x n_times) with
@@ -19,6 +19,9 @@ curves_w_scatter(curveMatrix, times, scatter1 = NULL, scatter2 = NULL, file,
 
   \item{scatter2}{Matrix (dim n_ind x 2) with data for the
   second scatterplot}
+
+  \item{group}{Optional vector of groups of individuals
+  (e.g., a genotype)}
 
   \item{file}{Optional character vector with file to
   contain the output}

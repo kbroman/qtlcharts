@@ -14,6 +14,7 @@
 #'   scatterplot
 #' @param scatter2 Matrix (dim n_ind x 2) with data for the second
 #'   scatterplot
+#' @param group Optional vector of groups of individuals (e.g., a genotype)
 #' @param file Optional character vector with file to contain the
 #'   output
 #' @param onefile If TRUE, have output file contain all necessary
@@ -58,7 +59,7 @@
 #' @export
 #' @importFrom RJSONIO toJSON
 curves_w_scatter <- 
-function(curveMatrix, times, scatter1=NULL, scatter2=NULL,
+function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          chartOpts=NULL, ...)
 {    
@@ -81,6 +82,12 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL,
     scatter1 <- scatter2
     scatter2 <- NULL
   }
+  if(!is.null(group) && length(group) != n.ind) {
+    stop("length(group) != nrow(curveMatrix)")
+    if(any(group <= 0)) stop("group values should be >= 0")
+  }
+  indID <- rownames(curveMatrix)
+  dimnames(curveMatrix) <- dimnames(scatter1) <- dimnames(scatter2) <- names(group) <- NULL
 
   write_html_top(file, title=title)
 
@@ -111,10 +118,10 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL,
   }
   append_caption(caption, file)
 
-  append_html_jscode(file, 'curve_data = ', toJSON(list(x=times, data=curveMatrix), ...), ';')
-  scat1_json = ifelse(is.null(scatter1), toJSON(NULL, container=FALSE), toJSON(list(data=scatter1), ...))
+  append_html_jscode(file, 'curve_data = ', toJSON(list(x=times, data=curveMatrix, group=group, indID=indID), ...), ';')
+  scat1_json = ifelse(is.null(scatter1), toJSON(NULL, container=FALSE), toJSON(list(data=scatter1, group=group, indID=indID), ...))
   append_html_jscode(file, 'scatter1_data = ', scat1_json, ';')
-  scat2_json = ifelse(is.null(scatter2), toJSON(NULL, container=FALSE), toJSON(list(data=scatter2), ...))
+  scat2_json = ifelse(is.null(scatter2), toJSON(NULL, container=FALSE), toJSON(list(data=scatter2, group=group, indID=indID), ...))
   append_html_jscode(file, 'scatter2_data = ', scat2_json, ';')
   append_html_chartopts(file, chartOpts)
 

@@ -21,11 +21,11 @@ curves_w_scatter = function(curve_data, scatter1_data, scatter2_data, chartOpts)
   };
   titlepos = (_ref5 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? _ref5 : 20;
   rectcolor = (_ref6 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref6 : d3.rgb(230, 230, 230);
-  pointcolor = (_ref7 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? _ref7 : "slateblue";
+  pointcolor = (_ref7 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? _ref7 : null;
   pointstroke = (_ref8 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? _ref8 : "black";
   pointsize = (_ref9 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? _ref9 : 3;
-  strokecolor = (_ref10 = chartOpts != null ? chartOpts.strokecolor : void 0) != null ? _ref10 : d3.rgb(190, 190, 190);
-  strokecolorhilit = (_ref11 = chartOpts != null ? chartOpts.strokecolorhilit : void 0) != null ? _ref11 : "slateblue";
+  strokecolor = (_ref10 = chartOpts != null ? chartOpts.strokecolor : void 0) != null ? _ref10 : null;
+  strokecolorhilit = (_ref11 = chartOpts != null ? chartOpts.strokecolorhilit : void 0) != null ? _ref11 : null;
   strokewidth = (_ref12 = chartOpts != null ? chartOpts.strokewidth : void 0) != null ? _ref12 : 2;
   strokewidthhilit = (_ref13 = chartOpts != null ? chartOpts.strokewidthhilit : void 0) != null ? _ref13 : 2;
   curves_xlim = (_ref14 = chartOpts != null ? chartOpts.curves_xlim : void 0) != null ? _ref14 : null;
@@ -115,25 +115,23 @@ curves_w_scatter = function(curve_data, scatter1_data, scatter2_data, chartOpts)
   curves.on("mouseover", function(d, i) {
     d3.select(this).attr("opacity", 1);
     if (nscatter > 0) {
-      return d3.selectAll("circle.pt" + i).attr("fill", "Orchid").attr("r", pointsize * 2);
+      return d3.selectAll("circle.pt" + i).attr("r", pointsize * 2);
     }
   }).on("mouseout", function(d, i) {
     d3.select(this).attr("opacity", 0);
     if (nscatter > 0) {
-      return d3.selectAll("circle.pt" + i).attr("fill", pointcolor).attr("r", pointsize);
+      return d3.selectAll("circle.pt" + i).attr("r", pointsize);
     }
   });
   if (nscatter > 0) {
     return allpoints.forEach(function(points) {
       return points.on("mouseover", function(d, i) {
-        d3.selectAll("circle.pt" + i).attr("fill", "Orchid").attr("r", pointsize * 2);
+        d3.selectAll("circle.pt" + i).attr("r", pointsize * 2);
         return d3.selectAll("path.path" + i).attr("opacity", 1);
       }).on("mouseout", function(d, i) {
-        d3.selectAll("circle.pt" + i).attr("fill", pointcolor).attr("r", pointsize);
+        d3.selectAll("circle.pt" + i).attr("r", pointsize);
         return d3.selectAll("path.path" + i).attr("opacity", 0);
       });
     });
   }
 };
-
-//# sourceMappingURL=curves_w_scatter.map

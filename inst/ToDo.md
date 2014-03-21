@@ -7,11 +7,6 @@
 
 ### General things
 
-- pointcolor for panels should end up being a vector of length =
-  no. individuals and there should be a related pointcolorhilit
-  All panels should handle group, pointcolor, and pointcolorhilit in a
-  standard way
-
 - standard ways to give axis labels
   (draw axis labels from data?)
 
@@ -45,14 +40,8 @@
   if same chromosome class (same x-axis): need a redraw function
 
 - Add d3-tip to manyboxplot for individual IDs
-- Add individual IDs to curves_w_scatter
-
-- curvechart: include individual IDs with d3-tip (maybe add points at
-  last observed time?, and have tip from there?)
 
 - curves_w_scatter
-  - allow grouping by color
-  - individual IDs via d3-tip
   - allow either brush or mouseover
 
 
@@ -60,16 +49,12 @@
 ### Panels
 
 - panel of inferred QTL (like a scatterplot) (for cis/trans plot)
-
 - mapchart panel
-
 - lod curve for one chromosome (argument to current panel?)
-
 - general image/heat map panel
-
 - heat map split up into chromosomes (for multiple LOD curves)
-
-
+- heat map with slices
+- heat map with slices and scatterplot
 
 ### Charts
 

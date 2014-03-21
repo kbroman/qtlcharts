@@ -31,14 +31,12 @@ dotchart = () ->
   chart = (selection) ->
     selection.each (data) ->
 
-
       if dataByInd
         x = data.map (d) -> d[xvar]
         y = data.map (d) -> d[yvar]
       else # reorganize data
         x = data[xvar]
         y = data[yvar]
-        data = ([x[i],y[i]] for i of x)
 
       # grab indID if it's there
       # if no indID, create a vector of them
@@ -187,7 +185,7 @@ dotchart = () ->
       points = g.append("g").attr("id", "points")
       pointsSelect =
         points.selectAll("empty")
-              .data(data)
+              .data(x)
               .enter()
               .append("circle")
               .attr("cx", (d,i) -> xscale(x[i])+xjitter[i])

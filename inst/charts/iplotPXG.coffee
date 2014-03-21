@@ -52,7 +52,7 @@ iplotPXG = (data, chartOpts) ->
                       .yNA(yNA)
 
   d3.select("div#chart")
-    .datum({"geno":gen, "pheno":phe, "indID":data.indID})
+    .datum({geno:gen, pheno:phe, indID:data.indID})
     .call(mychart)
 
   # animate points at markers on click

@@ -47,7 +47,7 @@ dotchart = function() {
   dataByInd = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var g, gEnter, i, indID, indtip, na_value, panelheight, points, svg, titlegrp, v, w, x, xaxis, xrange, y, yaxis, yrange, ys, _i, _ref, _ref1, _results;
+      var g, gEnter, indID, indtip, na_value, panelheight, points, svg, titlegrp, v, w, x, xaxis, xrange, y, yaxis, yrange, ys, _i, _ref, _ref1, _results;
       if (dataByInd) {
         x = data.map(function(d) {
           return d[xvar];
@@ -58,14 +58,6 @@ dotchart = function() {
       } else {
         x = data[xvar];
         y = data[yvar];
-        data = (function() {
-          var _results;
-          _results = [];
-          for (i in x) {
-            _results.push([x[i], y[i]]);
-          }
-          return _results;
-        })();
       }
       indID = (_ref = data != null ? data.indID : void 0) != null ? _ref : null;
       indID = indID != null ? indID : (function() {
@@ -179,7 +171,7 @@ dotchart = function() {
       }).direction('e').offset([0, 10]);
       svg.call(indtip);
       points = g.append("g").attr("id", "points");
-      pointsSelect = points.selectAll("empty").data(data).enter().append("circle").attr("cx", function(d, i) {
+      pointsSelect = points.selectAll("empty").data(x).enter().append("circle").attr("cx", function(d, i) {
         return xscale(x[i]) + xjitter[i];
       }).attr("cy", function(d, i) {
         return yscale(y[i]);

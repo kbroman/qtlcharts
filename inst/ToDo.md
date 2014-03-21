@@ -39,8 +39,6 @@
 - iplotScanone_pxg: same jitter values throughout; animate transitions
   if same chromosome class (same x-axis): need a redraw function
 
-- Add d3-tip to manyboxplot for individual IDs
-
 - curves_w_scatter
   - allow either brush or mouseover
 

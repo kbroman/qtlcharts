@@ -170,6 +170,13 @@ manyboxplots = (data, chartOpts) ->
        .attr("stroke", qucolors[j])
        .attr("pointer-events", "none")
 
+  indtip = d3.tip()
+             .attr('class', 'd3-tip')
+             .html((d) -> d)
+             .direction('e')
+             .offset([0,10])
+  svg.call(indtip)
+
   # vertical rectangles representing each array
   indRectGrp = svg.append("g").attr("id", "indRect")
 
@@ -187,6 +194,17 @@ manyboxplots = (data, chartOpts) ->
                  .attr("stroke", "none")
                  .attr("opacity", "0")
                  .attr("pointer-events", "none")
+
+  circles = svg.selectAll("empty")
+               .data(indindex)
+               .enter()
+               .append("circle")
+               .attr("cx", (d) -> xScale(d) - recWidth/2)
+               .attr("cy", (d) -> yScale(data.quant[(nQuant-1)/2][d]))
+               .attr("id", (d,i) -> "hiddenpoint#{i}")
+               .attr("r", 1)
+               .attr("opacity", 0)
+               .attr("pointer-events", "none")
 
   # vertical rectangles representing each array
   longRectGrp = svg.append("g").attr("id", "longRect")
@@ -301,32 +319,23 @@ manyboxplots = (data, chartOpts) ->
 
   histColors = ["blue", "red", "green", "MediumVioletRed", "black"]
 
-  lowsvg.append("text")
-        .datum(randomInd)
-        .attr("x", margin.left*1.1)
-        .attr("y", margin.top*2)
-        .text((d) -> data.ind[d])
-        .attr("id", "histtitle")
-        .attr("text-anchor", "start")
-        .attr("dominant-baseline", "middle")
-        .attr("fill", "blue")
-
   clickStatus = []
   for d in indindex
     clickStatus.push(0)
 
   longRect
-    .on "mouseover", (d) ->
+    .on "mouseover", (d,i) ->
               d3.select("rect#rect#{data.ind[d]}")
                  .attr("opacity", "1")
               d3.select("#histline")
                  .datum(data.counts[d])
                  .attr("d", histline)
-              d3.select("#histtitle")
-                 .datum(d)
-                 .text((d) -> data.ind[d])
+              circle = d3.select("circle#hiddenpoint#{i}")
+              indtip.show(data.ind[i], circle.node())
+
 
     .on "mouseout", (d) ->
+              indtip.hide()
               if !clickStatus[d]
                 d3.select("rect#rect#{data.ind[d]}").attr("opacity", "0")
 

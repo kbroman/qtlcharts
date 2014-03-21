@@ -7,7 +7,7 @@
 #' correlation matrix linked to underlying scatterplots.
 #'
 #' @param mat Data matrix (individuals x variables)
-#' @param group Option vector of groups of individuals (e.g., a genotype)
+#' @param group Optional vector of groups of individuals (e.g., a genotype)
 #' @param rows Selected rows of the correlation matrix to include in
 #'   the image. Ignored if \code{corr} is provided.
 #' @param cols Selected columns of the correlation matrix to include

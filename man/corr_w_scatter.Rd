@@ -11,7 +11,7 @@ corr_w_scatter(mat, group, rows, cols, reorder = TRUE, corr = cor(mat, use =
 \arguments{
   \item{mat}{Data matrix (individuals x variables)}
 
-  \item{group}{Option vector of groups of individuals
+  \item{group}{Optional vector of groups of individuals
   (e.g., a genotype)}
 
   \item{rows}{Selected rows of the correlation matrix to

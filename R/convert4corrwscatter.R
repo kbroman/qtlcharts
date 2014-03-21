@@ -4,7 +4,7 @@
 # Convert data to JSON format for corr_w_scatter vis
 #
 # @param dat Data matrix (individuals x variables)
-# @param group Option vector of groups of individuals (e.g., a genotype)
+# @param group Optional vector of groups of individuals (e.g., a genotype)
 # @param rows Rows of correlation matrix to keep in image
 # @param cols Columns of correlation matrix to keep in image
 # @param reorder If TRUE, reorder the variables by clustering

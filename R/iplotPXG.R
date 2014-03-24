@@ -5,10 +5,10 @@
 #'
 #' Creates an interactive graph of phenotypes vs genotypes at a marker.
 #'
-#' @param cross (Optional) Object of class \code{"cross"}, see
+#' @param cross Object of class \code{"cross"}, see
 #'   \code{\link[qtl]{read.cross}}.
 #' @param marker Character string with marker name.
-#' @param pheno.col (Optional) Phenotype column in cross object.
+#' @param pheno.col Phenotype column in cross object.
 #' @param file Optional character vector with file to contain the
 #'   output.
 #' @param onefile If TRUE, have output file contain all necessary
@@ -36,7 +36,7 @@
 #' function in R/qtl.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotScanone}}
+#' @seealso \code{\link{iplotScanone}}, \code{\link{iplotMap}}
 #'
 #' @examples
 #' data(hyper)

@@ -2,6 +2,7 @@
 
 export(corr_w_scatter)
 export(curves_w_scatter)
+export(iplotMap)
 export(iplotPXG)
 export(iplotScanone)
 export(manyboxplots)

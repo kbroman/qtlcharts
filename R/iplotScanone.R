@@ -55,7 +55,7 @@
 #' function in R/qtl.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotPXG}}
+#' @seealso \code{\link{iplotPXG}}, \code{\link{iplotMap}}
 #'
 #' @examples
 #' data(hyper)

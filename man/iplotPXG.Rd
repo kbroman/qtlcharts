@@ -8,13 +8,12 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
   marker[1]), fillgenoArgs = NULL, ...)
 }
 \arguments{
-  \item{cross}{(Optional) Object of class \code{"cross"},
-  see \code{\link[qtl]{read.cross}}.}
+  \item{cross}{Object of class \code{"cross"}, see
+  \code{\link[qtl]{read.cross}}.}
 
   \item{marker}{Character string with marker name.}
 
-  \item{pheno.col}{(Optional) Phenotype column in cross
-  object.}
+  \item{pheno.col}{Phenotype column in cross object.}
 
   \item{file}{Optional character vector with file to
   contain the output.}
@@ -62,7 +61,7 @@ marker <- sample(markernames(hyper), 1)
 iplotPXG(hyper, marker)
 }
 \seealso{
-\code{\link{iplotScanone}}
+\code{\link{iplotScanone}}, \code{\link{iplotMap}}
 }
 \keyword{hplot}
 

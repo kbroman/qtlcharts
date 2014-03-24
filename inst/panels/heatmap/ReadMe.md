@@ -25,11 +25,12 @@ mychart = heatmap().width(400)                                              # in
                    .nyticks(5)                                              # no. y-axis ticks
                    .yticks(null)                                            # locations of y-axis ticks
                    .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
-                   .colors(["slateblue", "white", "Orchid"]                 # colors
+                   .colors(["slateblue", "white", "crimson"]                # colors
+                   .zlim(null)                                              # z-axis limits
                    .title("")                                               # panel title
                    .xlab("X")                                               # x-axis label
                    .ylab("Y")                                               # y-axis label
-                   .zthresh(null)                                           # cells below this are not plotted
+                   .zthresh(null)                                           # plot cells with z >= zthresh or <= -zthresh
                    .dataByCell(false)                                       # is data organized by cell?
 ```
 

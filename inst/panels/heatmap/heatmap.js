@@ -107,14 +107,6 @@ heatmap = function() {
       });
       xLR = getLeftRight(data.x);
       yLR = getLeftRight(data.y);
-      _ref = data.cells;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        cell = _ref[_i];
-        cell.recLeft = (xLR[cell.x].left + cell.x) / 2;
-        cell.recRight = (xLR[cell.x].right + cell.x) / 2;
-        cell.recTop = (yLR[cell.y].right + cell.y) / 2;
-        cell.recBottom = (yLR[cell.y].left + cell.y) / 2;
-      }
       xlim = xlim != null ? xlim : xLR.extent;
       ylim = ylim != null ? ylim : yLR.extent;
       zmin = d3.min(data.allz);
@@ -123,20 +115,31 @@ heatmap = function() {
         zmax = -zmin;
       }
       zlim = zlim != null ? zlim : [-zmax, 0, zmax];
+      if (zlim.length !== colors.length) {
+        console.log("zlim.length (" + zlim.length + ") != colors.length (" + colors.length + ")");
+      }
       zscale.domain(zlim).range(colors);
       zthresh = zthresh != null ? zthresh : zmin - 1;
       data.cells = (function() {
-        var _j, _len1, _ref1, _results;
-        _ref1 = data.cells;
+        var _i, _len, _ref, _results;
+        _ref = data.cells;
         _results = [];
-        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-          cell = _ref1[_j];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          cell = _ref[_i];
           if (cell.z >= zthresh || cell.z <= -zthresh) {
             _results.push(cell);
           }
         }
         return _results;
       })();
+      _ref = data.cells;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        cell = _ref[_i];
+        cell.recLeft = (xLR[cell.x].left + cell.x) / 2;
+        cell.recRight = (xLR[cell.x].right + cell.x) / 2;
+        cell.recTop = (yLR[cell.y].right + cell.y) / 2;
+        cell.recBottom = (yLR[cell.y].left + cell.y) / 2;
+      }
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
@@ -178,7 +181,7 @@ heatmap = function() {
         x = formatAxis(data.x)(d.x);
         y = formatAxis(data.y)(d.y);
         z = formatAxis(data.allz)(d.z);
-        return "(" + x + " " + y + ") &rarr; " + z;
+        return "(" + x + ", " + y + ") &rarr; " + z;
       }).direction('e').offset([0, 10]);
       svg.call(celltip);
       cells = g.append("g").attr("id", "cells");
@@ -328,6 +331,14 @@ heatmap = function() {
       return zthresh;
     }
     zthresh = value;
+    return chart;
+  };
+  chart.zlim = function(value) {
+    var zlim;
+    if (!arguments.length) {
+      return zlim;
+    }
+    zlim = value;
     return chart;
   };
   chart.xscale = function() {

@@ -13,6 +13,7 @@ It is built on the following reuseable components:
 - [cichart](inst/panels/cichart): confidence interval plot panel
 - [curvechart](inst/panels/curvechart): panel for multiple curves
 - [mapchart](inst/panels/mapchart): genetic marker map panel
+- [heatmap](inst/panels/heatmap): heat map panel
 
 
 #### Installation

@@ -53,13 +53,6 @@ heatmap = () ->
       xLR = getLeftRight(data.x)
       yLR = getLeftRight(data.y)
 
-      # insert info about left, right, top, bottom points of cell rectangles
-      for cell in data.cells
-        cell.recLeft = (xLR[cell.x].left+cell.x)/2
-        cell.recRight = (xLR[cell.x].right+cell.x)/2
-        cell.recTop = (yLR[cell.y].right+cell.y)/2
-        cell.recBottom = (yLR[cell.y].left+cell.y)/2
-
       # x and y axis limits
       xlim = xlim ? xLR.extent
       ylim = ylim ? yLR.extent
@@ -69,10 +62,20 @@ heatmap = () ->
       zmax = d3.max(data.allz)
       zmax = -zmin if -zmin > zmax
       zlim = zlim ? [-zmax, 0, zmax]
+      if zlim.length != colors.length
+        console.log("zlim.length (#{zlim.length}) != colors.length (#{colors.length})")
       zscale.domain(zlim).range(colors)
 
+      # discard cells with |z| < zthresh
       zthresh = zthresh ? zmin - 1
       data.cells = (cell for cell in data.cells when cell.z >= zthresh or cell.z <= -zthresh)
+
+      # insert info about left, right, top, bottom points of cell rectangles
+      for cell in data.cells
+        cell.recLeft = (xLR[cell.x].left+cell.x)/2
+        cell.recRight = (xLR[cell.x].right+cell.x)/2
+        cell.recTop = (yLR[cell.y].right+cell.y)/2
+        cell.recBottom = (yLR[cell.y].left+cell.y)/2
 
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])
@@ -165,7 +168,7 @@ heatmap = () ->
                     x = formatAxis(data.x)(d.x)
                     y = formatAxis(data.y)(d.y)
                     z = formatAxis(data.allz)(d.z)
-                    "(#{x} #{y}) &rarr; #{z}")
+                    "(#{x}, #{y}) &rarr; #{z}")
                  .direction('e')
                  .offset([0,10])
       svg.call(celltip)
@@ -290,6 +293,11 @@ heatmap = () ->
   chart.zthresh = (value) ->
     return zthresh if !arguments.length
     zthresh = value
+    chart
+
+  chart.zlim = (value) ->
+    return zlim if !arguments.length
+    zlim = value
     chart
 
   chart.xscale = () ->

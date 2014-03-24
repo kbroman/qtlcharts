@@ -52,6 +52,10 @@ xscale(x)
 yscale = mychart.yscale()
 yscale(y)
 
+# z-axis scale
+zscale = mychart.zscale()
+zscale(z)
+
 # selection of cells within image, to add .on("click", ...)
 cellSelect = mychart.cellSelect()
 ```

@@ -3,7 +3,7 @@
 heatmap = () ->
   width = 400
   height = 500
-  margin = {left:60, top:40, right:40, bottom: 40, inner:5}
+  margin = {left:60, top:40, right:40, bottom: 40}
   axispos = {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
   titlepos = 20
   xlim = null
@@ -13,13 +13,14 @@ heatmap = () ->
   nyticks = 5
   yticks = null
   rectcolor = d3.rgb(230, 230, 230)
-  colors = ["slateblue", "white", "Orchid"]
+  colors = ["slateblue", "white", "crimson"]
   title = ""
-  xlab = "Group"
-  ylab = "Response"
+  xlab = "X"
+  ylab = "Y"
   zthresh = null
   xscale = d3.scale.linear()
   yscale = d3.scale.linear()
+  zscale = d3.scale.linear()
   cellSelect = null
   dataByCell = false
 
@@ -44,9 +45,34 @@ heatmap = () ->
             data.cells.push({x:data.x[i], y:data.y[j], z:data.z[i][j]})
         data.allz = (cell.z for cell in data.cells)
 
-      xlim = xlim ? d3.extent(data.x)
-      ylim = ylim ? d3.extent(data.y)
-      zlim = zlim ? d3.extent(data.allz)
+      # sort the x and y values
+      data.x.sort((a,b) -> a-b)
+      data.y.sort((a,b) -> a-b)
+
+      # x values to left and right of each value
+      xLR = getLeftRight(data.x)
+      yLR = getLeftRight(data.y)
+
+      # insert info about left, right, top, bottom points of cell rectangles
+      for cell in data.cells
+        cell.recLeft = (xLR[cell.x].left+cell.x)/2
+        cell.recRight = (xLR[cell.x].right+cell.x)/2
+        cell.recTop = (yLR[cell.y].right+cell.y)/2
+        cell.recBottom = (yLR[cell.y].left+cell.y)/2
+
+      # x and y axis limits
+      xlim = xlim ? xLR.extent
+      ylim = ylim ? yLR.extent
+
+      # z-axis (color) limits; if not provided, make symmetric about 0
+      zmin = d3.min(data.allz)
+      zmax = d3.max(data.allz)
+      zmax = -zmin if -zmin > zmax
+      zlim = zlim ? [-zmax, 0, zmax]
+      zscale.domain(zlim).range(colors)
+
+      zthresh = zthresh ? zmin - 1
+      data.cells = (cell for cell in data.cells when cell.z >= zthresh or cell.z <= -zthresh)
 
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])
@@ -69,10 +95,10 @@ heatmap = () ->
        .attr("fill", rectcolor)
        .attr("stroke", "none")
 
-      xrange = [margin.left+margin.inner, margin.left+width-margin.inner]
+      xrange = [margin.left, margin.left+width]
       xscale.domain(xlim).range(xrange)
 
-      yrange = [margin.top+height-margin.inner, margin.top+margin.inner]
+      yrange = [margin.top+height, margin.top]
       yscale.domain(ylim).range(yrange)
 
       # if xticks not provided, use nxticks to choose pretty ones
@@ -139,29 +165,31 @@ heatmap = () ->
                     x = formatAxis(data.x)(d.x)
                     y = formatAxis(data.y)(d.y)
                     z = formatAxis(data.allz)(d.z)
-                    "#{x} #{y} #{z}")
+                    "(#{x} #{y}) &rarr; #{z}")
                  .direction('e')
                  .offset([0,10])
       svg.call(celltip)
 
       cells = g.append("g").attr("id", "cells")
-#      cellSelect =
-#        cells.selectAll("empty")
-#              .data(data.data)
-#              .enter()
-#              .append("circle")
-#              .attr("cx", (d,i) -> xscale(x[i])+xjitter[i])
-#              .attr("cy", (d,i) -> yscale(y[i]))
-#              .attr("class", (d,i) -> "pt#{i}")
-#              .attr("r", pointsize)
-#              .attr("fill", pointcolor)
-#              .attr("stroke", pointstroke)
-#              .attr("stroke-width", "1")
-#              .attr("opacity", (d,i) ->
-#                   return 1 if (y[i]? or yNA.handle) and x[i] in xcategories
-#                   return 0)
-#              .on("mouseover.paneltip", indtip.show)
-#              .on("mouseout.paneltip", indtip.hide)
+      cellSelect =
+       cells.selectAll("empty")
+              .data(data.cells)
+              .enter()
+              .append("rect")
+              .attr("x", (d) -> xscale(d.recLeft))
+              .attr("y", (d) -> yscale(d.recTop))
+              .attr("width", (d) -> xscale(d.recRight)-xscale(d.recLeft))
+              .attr("height", (d) -> yscale(d.recBottom) - yscale(d.recTop))
+              .attr("class", (d,i) -> "cell#{i}")
+              .attr("fill", (d) -> zscale(d.z))
+              .attr("stroke", "none")
+              .attr("stroke-width", "1")
+              .on("mouseover.paneltip", (d) ->
+                  d3.select(this).attr("stroke", "black")
+                  celltip.show(d))
+              .on("mouseout.paneltip", () ->
+                  d3.select(this).attr("stroke", "none")
+                  celltip.hide())
 
       # box
       g.append("rect")
@@ -259,11 +287,19 @@ heatmap = () ->
     ylab = value
     chart
 
-  chart.yscale = () ->
-    return yscale
+  chart.zthresh = (value) ->
+    return zthresh if !arguments.length
+    zthresh = value
+    chart
 
   chart.xscale = () ->
     return xscale
+
+  chart.yscale = () ->
+    return yscale
+
+  chart.zscale = () ->
+    return zscale
 
   chart.cellSelect = () ->
     return cellSelect

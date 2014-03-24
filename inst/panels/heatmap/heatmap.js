@@ -2,15 +2,14 @@
 var heatmap;
 
 heatmap = function() {
-  var axispos, cellSelect, chart, colors, dataByCell, height, margin, nxticks, nyticks, rectcolor, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks, zthresh;
+  var axispos, cellSelect, chart, colors, dataByCell, height, margin, nxticks, nyticks, rectcolor, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks, zscale, zthresh;
   width = 400;
   height = 500;
   margin = {
     left: 60,
     top: 40,
     right: 40,
-    bottom: 40,
-    inner: 5
+    bottom: 40
   };
   axispos = {
     xtitle: 25,
@@ -26,18 +25,19 @@ heatmap = function() {
   nyticks = 5;
   yticks = null;
   rectcolor = d3.rgb(230, 230, 230);
-  colors = ["slateblue", "white", "Orchid"];
+  colors = ["slateblue", "white", "crimson"];
   title = "";
-  xlab = "Group";
-  ylab = "Response";
+  xlab = "X";
+  ylab = "Y";
   zthresh = null;
   xscale = d3.scale.linear();
   yscale = d3.scale.linear();
+  zscale = d3.scale.linear();
   cellSelect = null;
   dataByCell = false;
   chart = function(selection) {
     return selection.each(function(data) {
-      var cell, cells, celltip, g, gEnter, i, j, nx, ny, svg, titlegrp, xaxis, xrange, yaxis, yrange, zlim;
+      var cell, cells, celltip, g, gEnter, i, j, nx, ny, svg, titlegrp, xLR, xaxis, xrange, yLR, yaxis, yrange, zlim, zmax, zmin, _i, _len, _ref;
       if (dataByCell) {
         data.x = (function() {
           var _i, _len, _ref, _results;
@@ -99,17 +99,52 @@ heatmap = function() {
           return _results;
         })();
       }
-      xlim = xlim != null ? xlim : d3.extent(data.x);
-      ylim = ylim != null ? ylim : d3.extent(data.y);
-      zlim = zlim != null ? zlim : d3.extent(data.allz);
+      data.x.sort(function(a, b) {
+        return a - b;
+      });
+      data.y.sort(function(a, b) {
+        return a - b;
+      });
+      xLR = getLeftRight(data.x);
+      yLR = getLeftRight(data.y);
+      _ref = data.cells;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        cell = _ref[_i];
+        cell.recLeft = (xLR[cell.x].left + cell.x) / 2;
+        cell.recRight = (xLR[cell.x].right + cell.x) / 2;
+        cell.recTop = (yLR[cell.y].right + cell.y) / 2;
+        cell.recBottom = (yLR[cell.y].left + cell.y) / 2;
+      }
+      xlim = xlim != null ? xlim : xLR.extent;
+      ylim = ylim != null ? ylim : yLR.extent;
+      zmin = d3.min(data.allz);
+      zmax = d3.max(data.allz);
+      if (-zmin > zmax) {
+        zmax = -zmin;
+      }
+      zlim = zlim != null ? zlim : [-zmax, 0, zmax];
+      zscale.domain(zlim).range(colors);
+      zthresh = zthresh != null ? zthresh : zmin - 1;
+      data.cells = (function() {
+        var _j, _len1, _ref1, _results;
+        _ref1 = data.cells;
+        _results = [];
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          cell = _ref1[_j];
+          if (cell.z >= zthresh || cell.z <= -zthresh) {
+            _results.push(cell);
+          }
+        }
+        return _results;
+      })();
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
       g = svg.select("g");
       g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", rectcolor).attr("stroke", "none");
-      xrange = [margin.left + margin.inner, margin.left + width - margin.inner];
+      xrange = [margin.left, margin.left + width];
       xscale.domain(xlim).range(xrange);
-      yrange = [margin.top + height - margin.inner, margin.top + margin.inner];
+      yrange = [margin.top + height, margin.top];
       yscale.domain(ylim).range(yrange);
       xticks = xticks != null ? xticks : xscale.ticks(nxticks);
       yticks = yticks != null ? yticks : yscale.ticks(nyticks);
@@ -143,10 +178,29 @@ heatmap = function() {
         x = formatAxis(data.x)(d.x);
         y = formatAxis(data.y)(d.y);
         z = formatAxis(data.allz)(d.z);
-        return "" + x + " " + y + " " + z;
+        return "(" + x + " " + y + ") &rarr; " + z;
       }).direction('e').offset([0, 10]);
       svg.call(celltip);
       cells = g.append("g").attr("id", "cells");
+      cellSelect = cells.selectAll("empty").data(data.cells).enter().append("rect").attr("x", function(d) {
+        return xscale(d.recLeft);
+      }).attr("y", function(d) {
+        return yscale(d.recTop);
+      }).attr("width", function(d) {
+        return xscale(d.recRight) - xscale(d.recLeft);
+      }).attr("height", function(d) {
+        return yscale(d.recBottom) - yscale(d.recTop);
+      }).attr("class", function(d, i) {
+        return "cell" + i;
+      }).attr("fill", function(d) {
+        return zscale(d.z);
+      }).attr("stroke", "none").attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
+        d3.select(this).attr("stroke", "black");
+        return celltip.show(d);
+      }).on("mouseout.paneltip", function() {
+        d3.select(this).attr("stroke", "none");
+        return celltip.hide();
+      });
       return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });
   };
@@ -269,11 +323,21 @@ heatmap = function() {
     ylab = value;
     return chart;
   };
-  chart.yscale = function() {
-    return yscale;
+  chart.zthresh = function(value) {
+    if (!arguments.length) {
+      return zthresh;
+    }
+    zthresh = value;
+    return chart;
   };
   chart.xscale = function() {
     return xscale;
+  };
+  chart.yscale = function() {
+    return yscale;
+  };
+  chart.zscale = function() {
+    return zscale;
   };
   chart.cellSelect = function() {
     return cellSelect;

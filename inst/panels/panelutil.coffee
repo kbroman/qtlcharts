@@ -99,3 +99,37 @@ expand2vector = (input, n) ->
   input = [input] unless Array.isArray(input)
   input = (input[0] for i of d3.range(n)) if input.length == 1 and n > 1
   input
+
+# median of a vector
+median = (x) ->
+  return null if !x? 
+  n = x.length
+  x.sort((a,b) -> a-b)
+  if n % 2 == 1
+    return x[(n-1)/2]
+  (x[n/2] + x[(n/2)-1])/2
+
+# given a vector of x's, return hash with values to left and right, and the differences
+getLeftRight = (x) ->
+  n = x.length
+  x.sort( (a,b) -> a-b )
+
+  xdif = []
+  result = {}
+  for v in x
+    result[v] = {}
+
+  for i in [1...n]
+    xdif.push(x[i]-x[i-1])
+    result[x[i]].left = x[i-1]
+  for i in [0...(n-1)]
+    result[x[i]].right = x[i+1]
+
+  xdif = median(xdif)
+  result.mediandiff = xdif
+
+  result[x[0]].left = x[0]-xdif
+  result[x[n-1]].right = x[n-1]+xdif
+  result.extent = [x[0]-xdif/2, x[n-1]+xdif/2]
+
+  result

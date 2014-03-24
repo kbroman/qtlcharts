@@ -7,7 +7,7 @@ w = 600
 d3.json "data.json", (data) ->
   mychart = heatmap().height(h)
                      .width(w)
-                     .zthresh(1) 
+                     .zthresh(0.5)
 
   d3.select("div#chart")
     .datum(data)

@@ -8,7 +8,7 @@
 
   d3.json("data.json", function(data) {
     var mychart;
-    mychart = heatmap().height(h).width(w).zthresh(1);
+    mychart = heatmap().height(h).width(w).zthresh(0.5);
     return d3.select("div#chart").datum(data).call(mychart);
   });
 

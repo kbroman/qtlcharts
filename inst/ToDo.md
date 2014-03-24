@@ -5,6 +5,8 @@
 - iplotPXG behaves badly if the chosen phenotype is non-numeric
   (e.g., a factor)
 
+
+
 ### General things
 
 - standard ways to give axis labels
@@ -48,10 +50,9 @@
 
 - panel of inferred QTL (like a scatterplot) (for cis/trans plot)
 - lod curve for one chromosome (argument to current panel?)
-- general image/heat map panel
 - heat map split up into chromosomes (for multiple LOD curves)
-- heat map with slices
-- heat map with slices and scatterplot
+
+
 
 ### Charts
 
@@ -62,6 +63,9 @@
 - cis/trans figure, with slider for selecting a band of LOD scores
 - Interactive 2d scan plot
 - curves_w_heatmap: heatmap of multiple curves linked to curvechart
+- heat map with slices
+- corr_w_scatter: also include plots with slices of the correlation matrix?
+
 
 
 ### Annoyances

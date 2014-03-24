@@ -12,6 +12,7 @@ It is built on the following reuseable components:
 - [dotchart](inst/panels/dotchart): dot plot panel
 - [cichart](inst/panels/cichart): confidence interval plot panel
 - [curvechart](inst/panels/curvechart): panel for multiple curves
+- [mapchart](inst/panels/mapchart): genetic marker map panel
 
 
 #### Installation

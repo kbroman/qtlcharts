@@ -21,8 +21,13 @@ This directory contains a set of reusable panels for
   \[[Example](http://www.biostat.wisc.edu/~kbroman/D3/panels/cichart/test)\]
 
 - [curvechart](inst/panels/curvechart): panel for multiple curves
-  (uses [ColorBrewer](http://colorbrewer2.org))
+  (uses [d3.tip](http://github.com/Caged/d3-tip)
+  and [ColorBrewer](http://colorbrewer2.org))
   \[[Example](http://www.biostat.wisc.edu/~kbroman/D3/panels/curvechart/test)\]
+
+- [mapchart](inst/panels/mapchart): genetic marker map panel
+  (uses [d3.tip](http://github.com/Caged/d3-tip))
+  \[[Example](http://www.biostat.wisc.edu/~kbroman/D3/panels/mapchart/test)\]
 
 Further utility functions are in [panelutil.coffee](panelutil.coffee).
 

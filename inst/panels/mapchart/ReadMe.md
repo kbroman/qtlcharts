@@ -24,6 +24,7 @@ mychart = mapchart().width(400)                                              # i
                     .tickwidth(null)                                         # width of tick markers at markers, in pixels
                     .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
                     .linecolor("slateblue")                                  # color for lines
+                    .linecolorhilit("Orchid)                                 # color for lines when highlighted
                     .linewidth(3)                                            # line width
                     .title("")                                               # panel title
                     .xlab("Chromosome")                                      # x-axis label

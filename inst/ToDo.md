@@ -47,7 +47,6 @@
 ### Panels
 
 - panel of inferred QTL (like a scatterplot) (for cis/trans plot)
-- mapchart panel
 - lod curve for one chromosome (argument to current panel?)
 - general image/heat map panel
 - heat map split up into chromosomes (for multiple LOD curves)
@@ -56,7 +55,8 @@
 
 ### Charts
 
-- genetic/physical map of markers; ability to indicate QTL intervals
+- genetic map of markers, indicating a set of QTL intervals
+  (linked to the LOD curves)
 - heat map of LOD curves for 10-100 curves
 - heat map for functional traits
 - cis/trans figure, with slider for selecting a band of LOD scores

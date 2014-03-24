@@ -20,8 +20,6 @@
 #'   \code{collapse=''})
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option. See details.
-#' @param fillgenoArgs List of named arguments to pass to
-#'   \code{\link[qtl]{fill.geno}}, if needed.
 #' @param ... Passed to \cite{\link[RJSONIO]{toJSON}}.
 #'
 #' @return Character string with the name of the file created.

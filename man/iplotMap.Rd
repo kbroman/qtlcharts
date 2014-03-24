@@ -32,9 +32,6 @@ iplotMap(map, shift = FALSE, file, onefile = FALSE, openfile = TRUE,
   chart.  Each element must be named using the
   corresponding option. See details.}
 
-  \item{fillgenoArgs}{List of named arguments to pass to
-  \code{\link[qtl]{fill.geno}}, if needed.}
-
   \item{...}{Passed to \cite{\link[RJSONIO]{toJSON}}.}
 }
 \value{

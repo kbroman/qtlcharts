@@ -70,6 +70,69 @@ reorgLodData = (data, lodvarname) ->
       data.markers.push({name:marker, chr:data.chr[i], pos:data.pos[i], lod:data[lodvarname][i]})
   data
 
+# reorganize lod/pos by chromosome, when multiple LOD columns
+reorgLodData2 = (data) ->
+  data.posByChr = {}
+  data.lodByChr = {}
+  for chr,i in data.chrnames
+    data.posByChr[chr] = []
+    data.lodByChr[chr] = []
+    for pos,j in data.pos
+      if data.chr[j] == chr
+        data.posByChr[chr].push(pos) if data.chr[j] == chr
+        lodval = (data[lodcolumn][j] for lodcolumn in data.lodnames)
+        data.lodByChr[chr].push(lodval) if data.chr[j] == chr
+  data.markers = []
+  for marker,i in data.markernames
+    if marker != ""
+      data.markers.push({name:marker, chr:data.chr[i], pos:data.pos[i]})
+  data
+
+# calculate chromosome start/end + scales, for heat map
+chrscales2 = (data, width, chrGap, leftMargin) ->
+  # start and end of chromosome positions
+  chrStart = []
+  chrEnd = []
+  chrLength = []
+  totalChrLength = 0
+  maxd = 0
+  for chr in data.chrnames
+    d = maxdiff(data.posByChr[chr])
+    maxd = d if d > maxd
+
+    rng = d3.extent(data.posByChr[chr])
+    chrStart.push(rng[0])
+    chrEnd.push(rng[1])
+    L = rng[1] - rng[0]
+    chrLength.push(L)
+    totalChrLength += L
+
+  # adjust lengths for heatmap
+  data.recwidth = maxd
+  chrStart = chrStart.map (x) -> x-maxd/2
+  chrEnd = chrEnd.map (x) -> x+maxd/2
+  chrLength = chrLength.map (x) -> x+maxd
+  totalChrLength += (chrLength.length*maxd)
+
+  # break up x axis into chromosomes by length, with gaps
+  data.chrStart = []
+  data.chrEnd = []
+  cur = leftMargin
+  data.xscale = {}
+  for chr,i in data.chrnames
+    data.chrStart.push(cur)
+    w = Math.round((width-chrGap*(data.chrnames.length-1))/totalChrLength*chrLength[i])
+    data.chrEnd.push(cur + w)
+    cur = data.chrEnd[i] + chrGap
+    # x-axis scales, by chromosome
+    data.xscale[chr] = d3.scale.linear()
+                         .domain([chrStart[i], chrEnd[i]])
+                         .range([data.chrStart[i], data.chrEnd[i]])
+
+  # return data with new stuff added
+  data
+
+
 # Select a set of categorical colors
 # ngroup is positive integer
 # palette = "dark" or "pastel"
@@ -133,3 +196,30 @@ getLeftRight = (x) ->
   result.extent = [x[0]-xdif/2, x[n-1]+xdif/2]
 
   result
+
+# maximum difference between adjacent values in a vector
+maxdiff = (x) ->
+  return null if x.length < 2
+  result = x[1] - x[0]
+  return result if x.length < 3
+  for i in [2...x.length]
+    d = x[i] - x[i-1]
+    result = d if d > result
+  result
+
+# matrix extent, min max
+matrixMin = (mat) ->
+  result = mat[0][0]
+  for i of mat
+    for j of mat[i]
+      result = mat[i][j] if result > mat[i][j]
+  result      
+
+matrixMax = (mat) ->
+  result = mat[0][0]
+  for i of mat
+    for j of mat[i]
+      result = mat[i][j] if result < mat[i][j]
+  result      
+
+matrixExtent = (mat) -> [matrixMin(mat), matrixMax(mat)]

@@ -2,9 +2,9 @@
 var lodheatmap;
 
 lodheatmap = function() {
-  var axispos, cellSelect, chart, colors, dataByCell, height, margin, nxticks, nyticks, rectcolor, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks, zscale, zthresh;
-  width = 400;
-  height = 500;
+  var axispos, cellSelect, chart, chrGap, colors, dataByCell, height, margin, rectcolor, title, titlepos, width, xlab, xscale, ylab, yscale, zscale, zthresh;
+  width = 1200;
+  height = 600;
   margin = {
     left: 60,
     top: 40,
@@ -17,18 +17,13 @@ lodheatmap = function() {
     xlabel: 5,
     ylabel: 5
   };
+  chrGap = 5;
   titlepos = 20;
-  xlim = null;
-  nxticks = 5;
-  xticks = null;
-  ylim = null;
-  nyticks = 5;
-  yticks = null;
   rectcolor = d3.rgb(230, 230, 230);
   colors = ["slateblue", "white", "crimson"];
   title = "";
-  xlab = "X";
-  ylab = "Y";
+  xlab = "Chromosome";
+  ylab = "";
   zthresh = null;
   xscale = d3.scale.linear();
   yscale = d3.scale.linear();
@@ -37,80 +32,32 @@ lodheatmap = function() {
   dataByCell = false;
   chart = function(selection) {
     return selection.each(function(data) {
-      var cell, cells, celltip, g, gEnter, i, j, nx, ny, svg, titlegrp, xLR, xaxis, xrange, yLR, yaxis, yrange, zlim, zmax, zmin, _i, _len, _ref;
-      if (dataByCell) {
-        data.x = (function() {
-          var _i, _len, _ref, _results;
-          _ref = data.cells;
-          _results = [];
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            cell = _ref[_i];
-            _results.push(cell.x);
-          }
-          return _results;
-        })();
-        data.y = (function() {
-          var _i, _len, _ref, _results;
-          _ref = data.cells;
-          _results = [];
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            cell = _ref[_i];
-            _results.push(cell.y);
-          }
-          return _results;
-        })();
-        data.allz = (function() {
-          var _i, _len, _ref, _results;
-          _ref = data.cells;
-          _results = [];
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            cell = _ref[_i];
-            _results.push(cell.z);
-          }
-          return _results;
-        })();
-      } else {
-        nx = data.x.length;
-        ny = data.y.length;
-        if (nx !== data.z.length) {
-          console.log("data.x.length (" + data.x.length + ") != data.z.length (" + data.z.length + ")");
-        }
-        if (ny !== data.z[0].length) {
-          console.log("data.y.length (" + data.y.length + ") != data.z[0].length (" + data.z[0].length + ")");
-        }
-        data.cells = [];
-        for (i in data.z) {
-          for (j in data.z[i]) {
-            data.cells.push({
-              x: data.x[i],
-              y: data.y[j],
-              z: data.z[i][j]
-            });
-          }
-        }
-        data.allz = (function() {
-          var _i, _len, _ref, _results;
-          _ref = data.cells;
-          _results = [];
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            cell = _ref[_i];
-            _results.push(cell.z);
-          }
-          return _results;
-        })();
+      var cells, celltip, chr, extent, g, gEnter, i, j, lod, lodcol, nlod, pos, svg, titlegrp, xLR, xaxis, yaxis, zlim, zmax, zmin, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
+      data = reorgLodData2(data);
+      data = chrscales2(data, width, chrGap, margin.left);
+      xscale = data.xscale;
+      nlod = data.lodnames.length;
+      yscale.domain([-0.5, nlod + 0.5]).range([height, 0]);
+      xLR = {};
+      _ref = data.chrnames;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        chr = _ref[_i];
+        xLR[chr] = getLeftRight(data.posByChr[chr]);
       }
-      data.x.sort(function(a, b) {
-        return a - b;
-      });
-      data.y.sort(function(a, b) {
-        return a - b;
-      });
-      xLR = getLeftRight(data.x);
-      yLR = getLeftRight(data.y);
-      xlim = xlim != null ? xlim : xLR.extent;
-      ylim = ylim != null ? ylim : yLR.extent;
-      zmin = d3.min(data.allz);
-      zmax = d3.max(data.allz);
+      zmin = 0;
+      zmax = 0;
+      _ref1 = data.lodnames;
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        lodcol = _ref1[_j];
+        extent = d3.extent(data[lodcol]);
+        if (extent[0] < zmin) {
+          zmin = extent[0];
+        }
+        if (extent[1] > zmin) {
+          zmax = extent[1];
+        }
+      }
+      console.log(zmin, zmax);
       if (-zmin > zmax) {
         zmax = -zmin;
       }
@@ -120,79 +67,67 @@ lodheatmap = function() {
       }
       zscale.domain(zlim).range(colors);
       zthresh = zthresh != null ? zthresh : zmin - 1;
-      data.cells = (function() {
-        var _i, _len, _ref, _results;
-        _ref = data.cells;
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          cell = _ref[_i];
-          if (cell.z >= zthresh || cell.z <= -zthresh) {
-            _results.push(cell);
+      data.cells = [];
+      _ref2 = data.chrnames;
+      for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+        chr = _ref2[_k];
+        _ref3 = data.posByChr[chr];
+        for (i = _l = 0, _len3 = _ref3.length; _l < _len3; i = ++_l) {
+          pos = _ref3[i];
+          _ref4 = data.lodByChr[chr][i];
+          for (j = _m = 0, _len4 = _ref4.length; _m < _len4; j = ++_m) {
+            lod = _ref4[j];
+            if (lod >= zthresh || lod <= -zthresh) {
+              data.cells.push({
+                z: lod,
+                left: (xscale[chr](pos) + xscale[chr](xLR[chr][pos].left)) / 2,
+                right: (xscale[chr](pos) + xscale[chr](xLR[chr][pos].right)) / 2,
+                top: yscale(j + 0.5),
+                height: yscale(j - 0.5) - yscale(j + 0.5),
+                lodindex: j,
+                chr: chr,
+                pos: pos
+              });
+            }
           }
         }
-        return _results;
-      })();
-      _ref = data.cells;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        cell = _ref[_i];
-        cell.recLeft = (xLR[cell.x].left + cell.x) / 2;
-        cell.recRight = (xLR[cell.x].right + cell.x) / 2;
-        cell.recTop = (yLR[cell.y].right + cell.y) / 2;
-        cell.recBottom = (yLR[cell.y].left + cell.y) / 2;
       }
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
       g = svg.select("g");
-      g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", rectcolor).attr("stroke", "none");
-      xrange = [margin.left, margin.left + width];
-      xscale.domain(xlim).range(xrange);
-      yrange = [margin.top + height, margin.top];
-      yscale.domain(ylim).range(yrange);
-      xticks = xticks != null ? xticks : xscale.ticks(nxticks);
-      yticks = yticks != null ? yticks : yscale.ticks(nyticks);
+      g.append("g").attr("id", "boxes").selectAll("empty").data(data.chrnames).enter().append("rect").attr("id", function(d) {
+        return "box" + d;
+      }).attr("x", function(d, i) {
+        return data.chrStart[i];
+      }).attr("y", function(d) {
+        return margin.top;
+      }).attr("height", height).attr("width", function(d, i) {
+        return data.chrEnd[i] - data.chrStart[i];
+      }).attr("fill", rectcolor).attr("stroke", "none");
       titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + width / 2).attr("y", margin.top - titlepos).text(title);
       xaxis = g.append("g").attr("class", "x axis");
-      xaxis.selectAll("empty").data(xticks).enter().append("line").attr("x1", function(d) {
-        return xscale(d);
-      }).attr("x2", function(d) {
-        return xscale(d);
-      }).attr("y1", margin.top).attr("y2", margin.top + height).attr("class", "y axis grid");
-      xaxis.selectAll("empty").data(xticks).enter().append("text").attr("x", function(d) {
-        return xscale(d);
+      xaxis.selectAll("empty").data(data.chrnames).enter().append("text").attr("x", function(d, i) {
+        return (data.chrStart[i] + data.chrEnd[i]) / 2;
       }).attr("y", margin.top + height + axispos.xlabel).text(function(d) {
-        return formatAxis(xticks)(d);
+        return d;
       });
       xaxis.append("text").attr("class", "title").attr("x", margin.left + width / 2).attr("y", margin.top + height + axispos.xtitle).text(xlab);
       yaxis = g.append("g").attr("class", "y axis");
-      yaxis.selectAll("empty").data(yticks).enter().append("line").attr("y1", function(d) {
-        return yscale(d);
-      }).attr("y2", function(d) {
-        return yscale(d);
-      }).attr("x1", margin.left).attr("x2", margin.left + width).attr("class", "y axis grid");
-      yaxis.selectAll("empty").data(yticks).enter().append("text").attr("y", function(d) {
-        return yscale(d);
-      }).attr("x", margin.left - axispos.ylabel).text(function(d) {
-        return formatAxis(yticks)(d);
-      });
       yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
       celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
-        var x, y, z;
-        x = formatAxis(data.x)(d.x);
-        y = formatAxis(data.y)(d.y);
-        z = formatAxis(data.allz)(d.z);
-        return "(" + x + ", " + y + ") &rarr; " + z;
+        return "LOD = " + d3.format(".2f")(d.z);
       }).direction('e').offset([0, 10]);
       svg.call(celltip);
       cells = g.append("g").attr("id", "cells");
       cellSelect = cells.selectAll("empty").data(data.cells).enter().append("rect").attr("x", function(d) {
-        return xscale(d.recLeft);
+        return d.left;
       }).attr("y", function(d) {
-        return yscale(d.recTop);
+        return d.top;
       }).attr("width", function(d) {
-        return xscale(d.recRight) - xscale(d.recLeft);
+        return d.right - d.left;
       }).attr("height", function(d) {
-        return yscale(d.recBottom) - yscale(d.recTop);
+        return d.height;
       }).attr("class", function(d, i) {
         return "cell" + i;
       }).attr("fill", function(d) {
@@ -204,7 +139,15 @@ lodheatmap = function() {
         d3.select(this).attr("stroke", "none");
         return celltip.hide();
       });
-      return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
+      return g.append("g").attr("id", "boxes").selectAll("empty").data(data.chrnames).enter().append("rect").attr("id", function(d) {
+        return "box" + d;
+      }).attr("x", function(d, i) {
+        return data.chrStart[i];
+      }).attr("y", function(d) {
+        return margin.top;
+      }).attr("height", height).attr("width", function(d, i) {
+        return data.chrEnd[i] - data.chrStart[i];
+      }).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });
   };
   chart.width = function(value) {
@@ -243,6 +186,7 @@ lodheatmap = function() {
     return chart;
   };
   chart.xlim = function(value) {
+    var xlim;
     if (!arguments.length) {
       return xlim;
     }
@@ -250,6 +194,7 @@ lodheatmap = function() {
     return chart;
   };
   chart.nxticks = function(value) {
+    var nxticks;
     if (!arguments.length) {
       return nxticks;
     }
@@ -257,6 +202,7 @@ lodheatmap = function() {
     return chart;
   };
   chart.xticks = function(value) {
+    var xticks;
     if (!arguments.length) {
       return xticks;
     }
@@ -264,6 +210,7 @@ lodheatmap = function() {
     return chart;
   };
   chart.ylim = function(value) {
+    var ylim;
     if (!arguments.length) {
       return ylim;
     }
@@ -271,6 +218,7 @@ lodheatmap = function() {
     return chart;
   };
   chart.nyticks = function(value) {
+    var nyticks;
     if (!arguments.length) {
       return nyticks;
     }
@@ -278,6 +226,7 @@ lodheatmap = function() {
     return chart;
   };
   chart.yticks = function(value) {
+    var yticks;
     if (!arguments.length) {
       return yticks;
     }

@@ -1,22 +1,17 @@
 # lodheatmap: reuseable panel with heat map of LOD curves
 
 lodheatmap = () ->
-  width = 400
-  height = 500
+  width = 1200
+  height = 600
   margin = {left:60, top:40, right:40, bottom: 40}
   axispos = {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
+  chrGap = 5
   titlepos = 20
-  xlim = null
-  nxticks = 5
-  xticks = null
-  ylim = null
-  nyticks = 5
-  yticks = null
   rectcolor = d3.rgb(230, 230, 230)
   colors = ["slateblue", "white", "crimson"]
   title = ""
-  xlab = "X"
-  ylab = "Y"
+  xlab = "Chromosome"
+  ylab = ""
   zthresh = null
   xscale = d3.scale.linear()
   yscale = d3.scale.linear()
@@ -28,54 +23,41 @@ lodheatmap = () ->
   chart = (selection) ->
     selection.each (data) ->
 
-      if dataByCell
-        data.x = (cell.x for cell in data.cells)
-        data.y = (cell.y for cell in data.cells)
-        data.allz = (cell.z for cell in data.cells)
-      else
-        nx = data.x.length
-        ny = data.y.length
-        if(nx != data.z.length)
-          console.log("data.x.length (#{data.x.length}) != data.z.length (#{data.z.length})")
-        if(ny != data.z[0].length)
-          console.log("data.y.length (#{data.y.length}) != data.z[0].length (#{data.z[0].length})")
-        data.cells = []
-        for i of data.z
-          for j of data.z[i]
-            data.cells.push({x:data.x[i], y:data.y[j], z:data.z[i][j]})
-        data.allz = (cell.z for cell in data.cells)
+      data = reorgLodData2(data)
+      data = chrscales2(data, width, chrGap, margin.left)
+      xscale = data.xscale
 
-      # sort the x and y values
-      data.x.sort((a,b) -> a-b)
-      data.y.sort((a,b) -> a-b)
+      nlod = data.lodnames.length
+      yscale.domain([-0.5, nlod+0.5]).range([height, 0])
 
-      # x values to left and right of each value
-      xLR = getLeftRight(data.x)
-      yLR = getLeftRight(data.y)
-
-      # x and y axis limits
-      xlim = xlim ? xLR.extent
-      ylim = ylim ? yLR.extent
-
+      xLR = {}
+      for chr in data.chrnames
+        xLR[chr] = getLeftRight(data.posByChr[chr])
+      
       # z-axis (color) limits; if not provided, make symmetric about 0
-      zmin = d3.min(data.allz)
-      zmax = d3.max(data.allz)
+      zmin = 0
+      zmax = 0
+      for lodcol in data.lodnames
+        extent = d3.extent(data[lodcol])
+        zmin = extent[0] if extent[0] < zmin
+        zmax = extent[1] if extent[1] > zmin
+      console.log(zmin, zmax)
       zmax = -zmin if -zmin > zmax
       zlim = zlim ? [-zmax, 0, zmax]
       if zlim.length != colors.length
         console.log("zlim.length (#{zlim.length}) != colors.length (#{colors.length})")
       zscale.domain(zlim).range(colors)
 
-      # discard cells with |z| < zthresh
       zthresh = zthresh ? zmin - 1
-      data.cells = (cell for cell in data.cells when cell.z >= zthresh or cell.z <= -zthresh)
 
-      # insert info about left, right, top, bottom points of cell rectangles
-      for cell in data.cells
-        cell.recLeft = (xLR[cell.x].left+cell.x)/2
-        cell.recRight = (xLR[cell.x].right+cell.x)/2
-        cell.recTop = (yLR[cell.y].right+cell.y)/2
-        cell.recBottom = (yLR[cell.y].left+cell.y)/2
+      data.cells = []
+      for chr in data.chrnames
+        for pos, i in data.posByChr[chr]
+          for lod,j in data.lodByChr[chr][i]
+            if lod >= zthresh or lod <= -zthresh
+              data.cells.push({z: lod, left:  (xscale[chr](pos) + xscale[chr](xLR[chr][pos].left) )/2,
+              right: (xscale[chr](pos) + xscale[chr](xLR[chr][pos].right) )/2,
+              top:yscale(j+0.5), height:yscale(j-0.5)-yscale(j+0.5), lodindex:j, chr:chr, pos:pos})
 
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])
@@ -89,24 +71,18 @@ lodheatmap = () ->
 
       g = svg.select("g")
 
-      # box
-      g.append("rect")
-       .attr("x", margin.left)
-       .attr("y", margin.top)
+      # boxes
+      g.append("g").attr("id", "boxes").selectAll("empty")
+       .data(data.chrnames)
+       .enter()
+       .append("rect")
+       .attr("id", (d) -> "box#{d}")
+       .attr("x", (d,i) -> data.chrStart[i])
+       .attr("y", (d) -> margin.top)
        .attr("height", height)
-       .attr("width", width)
+       .attr("width", (d,i) -> data.chrEnd[i] - data.chrStart[i])
        .attr("fill", rectcolor)
        .attr("stroke", "none")
-
-      xrange = [margin.left, margin.left+width]
-      xscale.domain(xlim).range(xrange)
-
-      yrange = [margin.top+height, margin.top]
-      yscale.domain(ylim).range(yrange)
-
-      # if xticks not provided, use nxticks to choose pretty ones
-      xticks = xticks ? xscale.ticks(nxticks)
-      yticks = yticks ? yscale.ticks(nyticks)
 
       # title
       titlegrp = g.append("g").attr("class", "title")
@@ -118,21 +94,12 @@ lodheatmap = () ->
       # x-axis
       xaxis = g.append("g").attr("class", "x axis")
       xaxis.selectAll("empty")
-           .data(xticks)
-           .enter()
-           .append("line")
-           .attr("x1", (d) -> xscale(d))
-           .attr("x2", (d) -> xscale(d))
-           .attr("y1", margin.top)
-           .attr("y2", margin.top+height)
-           .attr("class", "y axis grid") 
-      xaxis.selectAll("empty")
-           .data(xticks)
+           .data(data.chrnames)
            .enter()
            .append("text")
-           .attr("x", (d) -> xscale(d))
+           .attr("x", (d,i) -> (data.chrStart[i] + data.chrEnd[i])/2)
            .attr("y", margin.top+height+axispos.xlabel)
-           .text((d) -> formatAxis(xticks)(d))
+           .text((d) -> d)
       xaxis.append("text").attr("class", "title")
            .attr("x", margin.left+width/2)
            .attr("y", margin.top+height+axispos.xtitle)
@@ -140,22 +107,6 @@ lodheatmap = () ->
 
       # y-axis
       yaxis = g.append("g").attr("class", "y axis")
-      yaxis.selectAll("empty")
-           .data(yticks)
-           .enter()
-           .append("line")
-           .attr("y1", (d) -> yscale(d))
-           .attr("y2", (d) -> yscale(d))
-           .attr("x1", margin.left)
-           .attr("x2", margin.left+width)
-           .attr("class", "y axis grid") 
-      yaxis.selectAll("empty")
-           .data(yticks)
-           .enter()
-           .append("text")
-           .attr("y", (d) -> yscale(d))
-           .attr("x", margin.left-axispos.ylabel)
-           .text((d) -> formatAxis(yticks)(d))
       yaxis.append("text").attr("class", "title")
            .attr("y", margin.top+height/2)
            .attr("x", margin.left-axispos.ytitle)
@@ -164,11 +115,7 @@ lodheatmap = () ->
 
       celltip = d3.tip()
                  .attr('class', 'd3-tip')
-                 .html((d) ->
-                    x = formatAxis(data.x)(d.x)
-                    y = formatAxis(data.y)(d.y)
-                    z = formatAxis(data.allz)(d.z)
-                    "(#{x}, #{y}) &rarr; #{z}")
+                 .html((d) -> "LOD = " + d3.format(".2f")(d.z))
                  .direction('e')
                  .offset([0,10])
       svg.call(celltip)
@@ -179,10 +126,10 @@ lodheatmap = () ->
               .data(data.cells)
               .enter()
               .append("rect")
-              .attr("x", (d) -> xscale(d.recLeft))
-              .attr("y", (d) -> yscale(d.recTop))
-              .attr("width", (d) -> xscale(d.recRight)-xscale(d.recLeft))
-              .attr("height", (d) -> yscale(d.recBottom) - yscale(d.recTop))
+              .attr("x", (d) -> d.left)
+              .attr("y", (d) -> d.top)
+              .attr("width", (d) -> d.right - d.left)
+              .attr("height", (d) -> d.height)
               .attr("class", (d,i) -> "cell#{i}")
               .attr("fill", (d) -> zscale(d.z))
               .attr("stroke", "none")
@@ -194,15 +141,19 @@ lodheatmap = () ->
                   d3.select(this).attr("stroke", "none")
                   celltip.hide())
 
-      # box
-      g.append("rect")
-             .attr("x", margin.left)
-             .attr("y", margin.top)
-             .attr("height", height)
-             .attr("width", width)
-             .attr("fill", "none")
-             .attr("stroke", "black")
-             .attr("stroke-width", "none")
+      # boxes
+      g.append("g").attr("id", "boxes").selectAll("empty")
+       .data(data.chrnames)
+       .enter()
+       .append("rect")
+       .attr("id", (d) -> "box#{d}")
+       .attr("x", (d,i) -> data.chrStart[i])
+       .attr("y", (d) -> margin.top)
+       .attr("height", height)
+       .attr("width", (d,i) -> data.chrEnd[i] - data.chrStart[i])
+       .attr("fill", "none")
+       .attr("stroke", "black")
+       .attr("stroke-width", "none")
 
   ## configuration parameters
   chart.width = (value) ->

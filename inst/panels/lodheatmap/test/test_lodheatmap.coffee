@@ -7,7 +7,7 @@ w = 1000
 d3.json "data.json", (data) ->
   mychart = lodheatmap().height(h)
                         .width(w)
-                        .zthresh(2.0)
+                        .zthresh(1.0)
 
   d3.select("div#chart")
     .datum(data)

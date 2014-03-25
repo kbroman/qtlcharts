@@ -32,12 +32,13 @@ lodheatmap = function() {
   dataByCell = false;
   chart = function(selection) {
     return selection.each(function(data) {
-      var cells, celltip, chr, extent, g, gEnter, i, j, lod, lodcol, nlod, pos, svg, titlegrp, xLR, xaxis, yaxis, zlim, zmax, zmin, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
+      var cells, celltip, chr, extent, g, gEnter, i, j, lod, lodcol, nlod, pos, rectHeight, svg, titlegrp, xLR, xaxis, yaxis, zlim, zmax, zmin, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
       data = reorgLodData2(data);
       data = chrscales2(data, width, chrGap, margin.left);
       xscale = data.xscale;
       nlod = data.lodnames.length;
-      yscale.domain([-0.5, nlod + 0.5]).range([height, 0]);
+      yscale.domain([-0.5, nlod - 0.5]).range([margin.top + height, margin.top]);
+      rectHeight = yscale(0) - yscale(1);
       xLR = {};
       _ref = data.chrnames;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -57,7 +58,6 @@ lodheatmap = function() {
           zmax = extent[1];
         }
       }
-      console.log(zmin, zmax);
       if (-zmin > zmax) {
         zmax = -zmin;
       }
@@ -82,8 +82,6 @@ lodheatmap = function() {
                 z: lod,
                 left: (xscale[chr](pos) + xscale[chr](xLR[chr][pos].left)) / 2,
                 right: (xscale[chr](pos) + xscale[chr](xLR[chr][pos].right)) / 2,
-                top: yscale(j + 0.5),
-                height: yscale(j - 0.5) - yscale(j + 0.5),
                 lodindex: j,
                 chr: chr,
                 pos: pos
@@ -116,19 +114,20 @@ lodheatmap = function() {
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
       celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
-        return "LOD = " + d3.format(".2f")(d.z);
+        var p, z;
+        z = d3.format(".2f")(d.z);
+        p = d3.format(".1f")(d.pos);
+        return "" + d.chr + "@" + p + " &rarr; " + z;
       }).direction('e').offset([0, 10]);
       svg.call(celltip);
       cells = g.append("g").attr("id", "cells");
       cellSelect = cells.selectAll("empty").data(data.cells).enter().append("rect").attr("x", function(d) {
         return d.left;
       }).attr("y", function(d) {
-        return d.top;
+        return yscale(d.lodindex) - rectHeight / 2;
       }).attr("width", function(d) {
         return d.right - d.left;
-      }).attr("height", function(d) {
-        return d.height;
-      }).attr("class", function(d, i) {
+      }).attr("height", rectHeight).attr("class", function(d, i) {
         return "cell" + i;
       }).attr("fill", function(d) {
         return zscale(d.z);

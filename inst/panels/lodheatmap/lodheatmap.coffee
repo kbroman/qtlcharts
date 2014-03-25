@@ -28,7 +28,8 @@ lodheatmap = () ->
       xscale = data.xscale
 
       nlod = data.lodnames.length
-      yscale.domain([-0.5, nlod+0.5]).range([height, 0])
+      yscale.domain([-0.5, nlod-0.5]).range([margin.top+height, margin.top])
+      rectHeight = yscale(0)-yscale(1)
 
       xLR = {}
       for chr in data.chrnames
@@ -41,7 +42,6 @@ lodheatmap = () ->
         extent = d3.extent(data[lodcol])
         zmin = extent[0] if extent[0] < zmin
         zmax = extent[1] if extent[1] > zmin
-      console.log(zmin, zmax)
       zmax = -zmin if -zmin > zmax
       zlim = zlim ? [-zmax, 0, zmax]
       if zlim.length != colors.length
@@ -55,9 +55,8 @@ lodheatmap = () ->
         for pos, i in data.posByChr[chr]
           for lod,j in data.lodByChr[chr][i]
             if lod >= zthresh or lod <= -zthresh
-              data.cells.push({z: lod, left:  (xscale[chr](pos) + xscale[chr](xLR[chr][pos].left) )/2,
-              right: (xscale[chr](pos) + xscale[chr](xLR[chr][pos].right) )/2,
-              top:yscale(j+0.5), height:yscale(j-0.5)-yscale(j+0.5), lodindex:j, chr:chr, pos:pos})
+              data.cells.push({z: lod, left: (xscale[chr](pos) + xscale[chr](xLR[chr][pos].left) )/2,
+              right: (xscale[chr](pos) + xscale[chr](xLR[chr][pos].right) )/2, lodindex:j, chr:chr, pos:pos})
 
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])
@@ -115,7 +114,10 @@ lodheatmap = () ->
 
       celltip = d3.tip()
                  .attr('class', 'd3-tip')
-                 .html((d) -> "LOD = " + d3.format(".2f")(d.z))
+                 .html((d) ->
+                         z = d3.format(".2f")(d.z)
+                         p = d3.format(".1f")(d.pos)
+                         "#{d.chr}@#{p} &rarr; #{z}")
                  .direction('e')
                  .offset([0,10])
       svg.call(celltip)
@@ -127,9 +129,9 @@ lodheatmap = () ->
               .enter()
               .append("rect")
               .attr("x", (d) -> d.left)
-              .attr("y", (d) -> d.top)
+              .attr("y", (d) -> yscale(d.lodindex)-rectHeight/2)
               .attr("width", (d) -> d.right - d.left)
-              .attr("height", (d) -> d.height)
+              .attr("height", rectHeight)
               .attr("class", (d,i) -> "cell#{i}")
               .attr("fill", (d) -> zscale(d.z))
               .attr("stroke", "none")

@@ -7,6 +7,6 @@ w = 1000;
 
 d3.json("data.json", function(data) {
   var mychart;
-  mychart = lodheatmap().height(h).width(w).zthresh(2.0);
+  mychart = lodheatmap().height(h).width(w).zthresh(1.0);
   return d3.select("div#chart").datum(data).call(mychart);
 });

@@ -87,7 +87,11 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
     if(any(group <= 0)) stop("group values should be >= 0")
   }
   indID <- rownames(curveMatrix)
-  dimnames(curveMatrix) <- dimnames(scatter1) <- dimnames(scatter2) <- names(group) <- NULL
+  
+  if(is.data.frame(curveMatrix)) curveMatrix <- as.matrix(curveMatrix)
+  if(is.data.frame(scatter1)) scatter1 <- as.matrix(scatter1)
+  if(is.data.frame(scatter2)) scatter2 <- as.matrix(scatter2)
+  dimnames(curveMatrix) <- dimnames(scatter1) <- dimnames(scatter2) <- names(group) <- names(times) <- NULL
 
   write_html_top(file, title=title)
 
@@ -100,9 +104,6 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
   link_chart('curves_w_scatter', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')
-  
-  if(is.data.frame(curveMatrix)) curveMatrix <- as.matrix(curveMatrix)
-  dimnames(curveMatrix) <- names(times) <- dimnames(scatter1) <- dimnames(scatter2) <- NULL
 
   if(missing(caption) || is.null(caption)) {
     if(is.null(scatter1)) # no scatterplots

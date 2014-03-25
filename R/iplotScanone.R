@@ -73,24 +73,35 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
   if(missing(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
   else file <- path.expand(file)
-  pxgtype <- match.arg(pxgtype)
-
   if(file.exists(file))
     stop('The file already exists; please remove it first: ', file)
 
   if(!any(class(scanoneOutput) == "scanone"))
     stop('"scanoneOutput" should have class "scanone".')
 
+  if(!missing(chr)) {
+     scanoneOutput <- subset(scanoneOutput, chr=chr)
+    if(!missing(cross)) cross <- subset(cross, chr=chr)
+   }
+
+  pxgtype <- match.arg(pxgtype)
+
+  if(length(lodcolumn) > 1) {
+    if(missing(cross))
+      return(iplotScanone_multi_noeff(scanoneOutput, lodcolumn=lodcolumn,
+                                      file=file, onefile=onefile, openfile=openfile, title=title,
+                                      caption=caption, chartOpts=chartOpts, ...))
+    else
+      return(iplotScanone_multi(scanoneOutput, cross=cross, lodcolumn=lodcolumn, pheno.col=pheno.col,
+                                file=file, onefile=onefile, openfile=openfile, title=title,
+                                caption=caption, fillgenoArgs=fillgenoArgs, chartOpts=chartOpts, ...))
+  }
+
   if(lodcolumn < 1 || lodcolumn > ncol(scanoneOutput)-2)
     stop('lodcolumn must be between 1 and ', ncol(scanoneOutput)-2)
 
   scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2), drop=FALSE]
   colnames(scanoneOutput)[3] <- 'lod'
-
-  if(!missing(chr)) {
-     scanoneOutput <- subset(scanoneOutput, chr=chr)
-    if(!missing(cross)) cross <- subset(cross, chr=chr)
-   }
 
   if(missing(caption)) caption <- NULL
 
@@ -103,14 +114,14 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
     stop('"cross" should have class "cross".')
   
   if(pxgtype == "raw")
-    iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
-                     file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
-                     fillgenoArgs=fillgenoArgs,  chartOpts=chartOpts, ...)
+    return(iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
+                            file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
+                            fillgenoArgs=fillgenoArgs,  chartOpts=chartOpts, ...))
 
   else
-    iplotScanone_ci(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
-                    file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
-                    fillgenoArgs=fillgenoArgs, chartOpts=chartOpts, ...)
+    return(iplotScanone_ci(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
+                           file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
+                           fillgenoArgs=fillgenoArgs, chartOpts=chartOpts, ...))
 
   invisible(file)
 }
@@ -220,3 +231,80 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
 
   invisible(file)
 }
+
+# iplotScanone_multi_noeff: version for multiple LOD curves; no QTL effects
+iplotScanone_multi_noeff <-
+function(scanoneOutput, lodcolumn,
+         file, onefile=FALSE, openfile=TRUE,
+         title="", caption, chartOpts=NULL, ...)
+{
+  scanone_json = scanone2json(scanoneOutput, ...)
+
+  write_html_top(file, title=title)
+
+  link_d3(file, onefile=onefile)
+  link_d3tip(file, onefile=onefile)
+  link_panelutil(file, onefile=onefile)
+  link_panel('lodchart', file, onefile=onefile)
+  link_panel('cichart', file, onefile=onefile)
+  link_chart('iplotScanone_multi_noeff', file, onefile=onefile)
+
+  append_html_middle(file, title, 'chart')
+  
+  if(missing(caption) || is.null(caption))
+    caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
+                'Click on a marker to view the phenotype &times; genotype plot on the right. ',
+                'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
+  append_caption(caption, file)
+
+  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
+  append_html_chartopts(file, chartOpts)
+  append_html_jscode(file, 'iplotScanone_ci(scanoneData, pxgData, chartOpts);')
+
+  append_html_bottom(file)
+
+  if(openfile) browseURL(file)
+
+  invisible(file)
+
+}
+
+# iplotScanone_multi: version for multiple LOD curves/phenotypes
+iplotScanone_multi <-
+function(scanoneOutput, cross, lodcolumn, pheno.col,
+         file, onefile=FALSE, openfile=TRUE,
+         title="", caption, fillgenoArgs=NULL, chartOpts=NULL, ...)
+{
+  scanone_json = scanone2json(scanoneOutput, ...)
+  pxg_json = pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, ...)
+
+  write_html_top(file, title=title)
+
+  link_d3(file, onefile=onefile)
+  link_d3tip(file, onefile=onefile)
+  link_panelutil(file, onefile=onefile)
+  link_panel('lodchart', file, onefile=onefile)
+  link_panel('cichart', file, onefile=onefile)
+  link_chart('iplotScanone_multi', file, onefile=onefile)
+
+  append_html_middle(file, title, 'chart')
+  
+  if(missing(caption) || is.null(caption))
+    caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
+                'Click on a marker to view the phenotype &times; genotype plot on the right. ',
+                'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
+  append_caption(caption, file)
+
+  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
+  append_html_jscode(file, 'pxgData = ', pxg_json, ';')
+  append_html_chartopts(file, chartOpts)
+  append_html_jscode(file, 'iplotScanone_ci(scanoneData, pxgData, chartOpts);')
+
+  append_html_bottom(file)
+
+  if(openfile) browseURL(file)
+
+  invisible(file)
+
+}
+

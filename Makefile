@@ -34,7 +34,7 @@ doc:
 # javascript of panel tests
 jspaneltests: ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js ${HEATMAP_TESTDIR}/test_heatmap.js ${LODHEATMAP_TESTDIR}/test_lodheatmap.js
 
-${PANEL_DIR}/*/test/%.js: ${PANEL_DIR}/*/test/%.coffee
+${PANEL_DIR}/%/test/%.js: ${PANEL_DIR}/%/test/%.coffee
 	coffee ${COFFEE_ARGS} $^
 
 #------------------------------------------------------------
@@ -50,7 +50,7 @@ ${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
 # test data files
 json: ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json ${HEATMAP_TESTDIR}/data.json ${LODHEATMAP_TESTDIR}/data.json
 
-${PANEL_DIR}/*/test/data.json: ${PANEL_DIR}/*/test/create_test_data.R
+${PANEL_DIR}/%/test/data.json: ${PANEL_DIR}/%/test/create_test_data.R
 	cd $(@D);R CMD BATCH $(<F)
 
 #------------------------------------------------------------
@@ -65,7 +65,7 @@ ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
 
 # remove all data files and javascript files
 clean:
-	rm ${PANEL_DIR}/*/*.js ${PANEL_DIR}/*/test/*.js  ${PANEL_DIR}/*/test/*.json ${CHART_DIR}/*.js
+	rm ${PANEL_DIR}/*/*.js ${PANEL_DIR}/*/test/*.js ${PANEL_DIR}/*/test/*.json ${CHART_DIR}/*.js
 
 #------------------------------------------------------------
 

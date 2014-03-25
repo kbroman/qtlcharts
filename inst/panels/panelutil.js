@@ -40,7 +40,7 @@ pullVarAsArray = function(data, variable) {
 reorgLodData = function(data, lodvarname) {
   var chr, i, j, lodcolumn, lodval, marker, pos, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
   if (lodvarname == null) {
-    lodvarname = data.lodnames[0];
+    lodvarname = null;
   }
   data.posByChr = {};
   data.lodByChr = {};
@@ -54,7 +54,7 @@ reorgLodData = function(data, lodvarname) {
       pos = _ref1[j];
       if (data.chr[j] === chr) {
         data.posByChr[chr].push(pos);
-        if (data.lodnames.length === 1) {
+        if (lodvarname != null) {
           lodval = data[lodvarname][j];
         } else {
           lodval = (function() {
@@ -72,17 +72,19 @@ reorgLodData = function(data, lodvarname) {
       }
     }
   }
-  data.markers = [];
-  _ref2 = data.markernames;
-  for (i = _k = 0, _len2 = _ref2.length; _k < _len2; i = ++_k) {
-    marker = _ref2[i];
-    if (marker !== "") {
-      data.markers.push({
-        name: marker,
-        chr: data.chr[i],
-        pos: data.pos[i],
-        lod: data[lodvarname][i]
-      });
+  if (lodvarname != null) {
+    data.markers = [];
+    _ref2 = data.markernames;
+    for (i = _k = 0, _len2 = _ref2.length; _k < _len2; i = ++_k) {
+      marker = _ref2[i];
+      if (marker !== "") {
+        data.markers.push({
+          name: marker,
+          chr: data.chr[i],
+          pos: data.pos[i],
+          lod: data[lodvarname][i]
+        });
+      }
     }
   }
   return data;

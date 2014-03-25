@@ -36,5 +36,11 @@ function(output, ...)
   # chromosome names
   chrnames <- as.character(unique(output[,1]))
 
-  RJSONIO::toJSON(c(list(chrnames = chrnames), as.list(output), list(markernames = mnames)), ...)
+  # lod column names
+  lodnames <- names(output)[-(1:2)]
+  if(length(lodnames) != length(unique(lodnames)))
+    warning("lod column names are not unique")
+
+  RJSONIO::toJSON(c(list(chrnames = chrnames, lodnames=lodnames),
+                    as.list(output), list(markernames = mnames)), ...)
 }

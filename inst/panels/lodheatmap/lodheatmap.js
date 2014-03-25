@@ -112,9 +112,16 @@ lodheatmap = function() {
       xaxis.append("text").attr("class", "title").attr("x", margin.left + width / 2).attr("y", margin.top + height + axispos.xtitle).text(xlab);
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
+      yaxis.selectAll("empty").data(data.lodnames).enter().append("text").attr("id", function(d, i) {
+        return "yaxis" + i;
+      }).attr("y", function(d, i) {
+        return yscale(i);
+      }).attr("x", margin.left - axispos.ylabel).text(function(d) {
+        return d;
+      }).attr("opacity", 0);
       celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
         var p, z;
-        z = d3.format(".2f")(d.z);
+        z = d3.format(".2f")(Math.abs(d.z));
         p = d3.format(".1f")(d.pos);
         return "" + d.chr + "@" + p + " &rarr; " + z;
       }).direction('e').offset([0, 10]);
@@ -131,9 +138,11 @@ lodheatmap = function() {
       }).attr("fill", function(d) {
         return zscale(d.z);
       }).attr("stroke", "none").attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
+        yaxis.select("text#yaxis" + d.lodindex).attr("opacity", 1);
         d3.select(this).attr("stroke", "black");
         return celltip.show(d);
-      }).on("mouseout.paneltip", function() {
+      }).on("mouseout.paneltip", function(d) {
+        yaxis.select("text#yaxis" + d.lodindex).attr("opacity", 0);
         d3.select(this).attr("stroke", "none");
         return celltip.hide();
       });

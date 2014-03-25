@@ -110,11 +110,20 @@ lodheatmap = () ->
            .attr("x", margin.left-axispos.ytitle)
            .text(ylab)
            .attr("transform", "rotate(270,#{margin.left-axispos.ytitle},#{margin.top+height/2})")
+      yaxis.selectAll("empty")
+           .data(data.lodnames)
+           .enter()
+           .append("text")
+           .attr("id", (d,i) -> "yaxis#{i}")
+           .attr("y", (d,i) -> yscale(i))
+           .attr("x", margin.left-axispos.ylabel)
+           .text((d) -> d)
+           .attr("opacity", 0)
 
       celltip = d3.tip()
                  .attr('class', 'd3-tip')
                  .html((d) ->
-                         z = d3.format(".2f")(d.z)
+                         z = d3.format(".2f")(Math.abs(d.z))
                          p = d3.format(".1f")(d.pos)
                          "#{d.chr}@#{p} &rarr; #{z}")
                  .direction('e')
@@ -136,9 +145,11 @@ lodheatmap = () ->
               .attr("stroke", "none")
               .attr("stroke-width", "1")
               .on("mouseover.paneltip", (d) ->
+                  yaxis.select("text#yaxis#{d.lodindex}").attr("opacity", 1)
                   d3.select(this).attr("stroke", "black")
                   celltip.show(d))
-              .on("mouseout.paneltip", () ->
+              .on("mouseout.paneltip", (d) ->
+                  yaxis.select("text#yaxis#{d.lodindex}").attr("opacity", 0)
                   d3.select(this).attr("stroke", "none")
                   celltip.hide())
 

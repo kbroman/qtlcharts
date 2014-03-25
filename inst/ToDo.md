@@ -50,7 +50,6 @@
 
 - panel of inferred QTL (like a scatterplot) (for cis/trans plot)
 - lod curve for one chromosome (argument to current panel?)
-- heat map split up into chromosomes (for multiple LOD curves)
 
 
 

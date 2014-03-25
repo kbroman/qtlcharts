@@ -14,6 +14,7 @@ It is built on the following reuseable components:
 - [curvechart](inst/panels/curvechart): panel for multiple curves
 - [mapchart](inst/panels/mapchart): genetic marker map panel
 - [heatmap](inst/panels/heatmap): heat map panel
+- [lodheatmap](inst/panels/lodheatmap): panel for heat map of LOD curves
 
 
 #### Installation

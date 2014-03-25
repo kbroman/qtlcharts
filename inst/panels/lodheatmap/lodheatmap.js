@@ -2,7 +2,7 @@
 var lodheatmap;
 
 lodheatmap = function() {
-  var axispos, cellSelect, chart, chrGap, colors, dataByCell, height, margin, rectcolor, title, titlepos, width, xlab, xscale, ylab, yscale, zscale, zthresh;
+  var axispos, cellSelect, chart, chrGap, colors, height, margin, rectcolor, title, titlepos, width, xlab, xscale, ylab, yscale, zscale, zthresh;
   width = 1200;
   height = 600;
   margin = {
@@ -29,7 +29,6 @@ lodheatmap = function() {
   yscale = d3.scale.linear();
   zscale = d3.scale.linear();
   cellSelect = null;
-  dataByCell = false;
   chart = function(selection) {
     return selection.each(function(data) {
       var cells, celltip, chr, extent, g, gEnter, i, j, lod, lodcol, nlod, pos, rectHeight, svg, titlegrp, xLR, xaxis, yaxis, zlim, zmax, zmin, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
@@ -184,54 +183,6 @@ lodheatmap = function() {
     titlepos;
     return chart;
   };
-  chart.xlim = function(value) {
-    var xlim;
-    if (!arguments.length) {
-      return xlim;
-    }
-    xlim = value;
-    return chart;
-  };
-  chart.nxticks = function(value) {
-    var nxticks;
-    if (!arguments.length) {
-      return nxticks;
-    }
-    nxticks = value;
-    return chart;
-  };
-  chart.xticks = function(value) {
-    var xticks;
-    if (!arguments.length) {
-      return xticks;
-    }
-    xticks = value;
-    return chart;
-  };
-  chart.ylim = function(value) {
-    var ylim;
-    if (!arguments.length) {
-      return ylim;
-    }
-    ylim = value;
-    return chart;
-  };
-  chart.nyticks = function(value) {
-    var nyticks;
-    if (!arguments.length) {
-      return nyticks;
-    }
-    nyticks = value;
-    return chart;
-  };
-  chart.yticks = function(value) {
-    var yticks;
-    if (!arguments.length) {
-      return yticks;
-    }
-    yticks = value;
-    return chart;
-  };
   chart.rectcolor = function(value) {
     if (!arguments.length) {
       return rectcolor;
@@ -244,13 +195,6 @@ lodheatmap = function() {
       return colors;
     }
     colors = value;
-    return chart;
-  };
-  chart.dataByCell = function(value) {
-    if (!arguments.length) {
-      return dataByCell;
-    }
-    dataByCell = value;
     return chart;
   };
   chart.title = function(value) {

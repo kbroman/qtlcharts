@@ -26,6 +26,9 @@ This directory contains a set of reusable panels for
 - [heatmap](inst/panels/heatmap): heat map panel
   (uses [d3.tip](http://github.com/Caged/d3-tip))
   \[[Example](http://www.biostat.wisc.edu/~kbroman/D3/panels/heatmap/test)\]
+- [lodheatmap](inst/panels/lodheatmap): panel for heat map of LOD curves
+  (uses [d3.tip](http://github.com/Caged/d3-tip))
+  \[[Example](http://www.biostat.wisc.edu/~kbroman/D3/panels/lodheatmap/test)\]
 
 Further utility functions are in [panelutil.coffee](panelutil.coffee).
 

@@ -15,7 +15,7 @@ Here are all of the options:
 ```coffeescript
 mychart = heatmap().width(400)                                              # internal width of chart
                    .height(500)                                             # internal height
-                   .margin({left:60, top:40, right:40, bottom:40, inner:5}) # margins
+                   .margin({left:60, top:40, right:40, bottom:40})          # margins
                    .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
                    .titlepos(20)                                            # spacing for panel title
                    .xlim(null)                                              # x-axis limits

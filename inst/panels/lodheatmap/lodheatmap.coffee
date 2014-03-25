@@ -17,7 +17,6 @@ lodheatmap = () ->
   yscale = d3.scale.linear()
   zscale = d3.scale.linear()
   cellSelect = null
-  dataByCell = false
 
   ## the main function
   chart = (selection) ->
@@ -183,36 +182,6 @@ lodheatmap = () ->
     titlepos
     chart
 
-  chart.xlim = (value) ->
-    return xlim if !arguments.length
-    xlim = value
-    chart
-
-  chart.nxticks = (value) ->
-    return nxticks if !arguments.length
-    nxticks = value
-    chart
-
-  chart.xticks = (value) ->
-    return xticks if !arguments.length
-    xticks = value
-    chart
-
-  chart.ylim = (value) ->
-    return ylim if !arguments.length
-    ylim = value
-    chart
-
-  chart.nyticks = (value) ->
-    return nyticks if !arguments.length
-    nyticks = value
-    chart
-
-  chart.yticks = (value) ->
-    return yticks if !arguments.length
-    yticks = value
-    chart
-
   chart.rectcolor = (value) ->
     return rectcolor if !arguments.length
     rectcolor = value
@@ -221,11 +190,6 @@ lodheatmap = () ->
   chart.colors = (value) ->
     return colors if !arguments.length
     colors = value
-    chart
-
-  chart.dataByCell = (value) ->
-    return dataByCell if !arguments.length
-    dataByCell = value
     chart
 
   chart.title = (value) ->

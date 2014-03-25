@@ -32,8 +32,8 @@ lodheatmap = function() {
   chart = function(selection) {
     return selection.each(function(data) {
       var cells, celltip, chr, extent, g, gEnter, i, j, lod, lodcol, nlod, pos, rectHeight, svg, titlegrp, xLR, xaxis, yaxis, zlim, zmax, zmin, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
-      data = reorgLodData2(data);
-      data = chrscales2(data, width, chrGap, margin.left);
+      data = reorgLodData(data);
+      data = chrscales(data, width, chrGap, margin.left, true);
       xscale = data.xscale;
       nlod = data.lodnames.length;
       yscale.domain([-0.5, nlod - 0.5]).range([margin.top + height, margin.top]);

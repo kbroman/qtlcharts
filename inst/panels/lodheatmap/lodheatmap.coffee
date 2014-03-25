@@ -22,8 +22,8 @@ lodheatmap = () ->
   chart = (selection) ->
     selection.each (data) ->
 
-      data = reorgLodData2(data)
-      data = chrscales2(data, width, chrGap, margin.left)
+      data = reorgLodData(data)
+      data = chrscales(data, width, chrGap, margin.left, true)
       xscale = data.xscale
 
       nlod = data.lodnames.length

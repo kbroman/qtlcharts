@@ -21,6 +21,7 @@ lodchart = () ->
   ylab = "LOD score"
   yscale = d3.scale.linear()
   xscale = null
+  pad4heatmap = false
   lodcurve = null
   lodvarname = "lod"
   markerSelect = null
@@ -64,7 +65,7 @@ lodchart = () ->
       data = reorgLodData(data, lodvarname)
 
       # add chromosome scales (for x-axis)
-      data = chrscales(data, width, chrGap)
+      data = chrscales(data, width, chrGap, 0, pad4heatmap)
       xscale = data.xscale
 
       # chr rectangles
@@ -296,6 +297,11 @@ lodchart = () ->
   chart.lodvarname = (value) ->
     return lodvarname unless arguments.length
     lodvarname = value
+    chart
+
+  chart.pad4heatmap = (value) ->
+    return pad4heatmap unless arguments.length
+    pad4heatmap = value
     chart
 
   chart.yscale = () ->

@@ -2,7 +2,7 @@
 var lodchart;
 
 lodchart = function() {
-  var axispos, chart, chrGap, chrSelect, darkrect, height, lightrect, linecolor, linewidth, lodcurve, lodvarname, margin, markerSelect, nyticks, pointcolor, pointsize, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
+  var axispos, chart, chrGap, chrSelect, darkrect, height, lightrect, linecolor, linewidth, lodcurve, lodvarname, margin, markerSelect, nyticks, pad4heatmap, pointcolor, pointsize, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
   width = 800;
   height = 500;
   margin = {
@@ -34,6 +34,7 @@ lodchart = function() {
   ylab = "LOD score";
   yscale = d3.scale.linear();
   xscale = null;
+  pad4heatmap = false;
   lodcurve = null;
   lodvarname = "lod";
   markerSelect = null;
@@ -50,7 +51,7 @@ lodchart = function() {
       yscale.domain(ylim).range([height, margin.inner]);
       yticks = yticks != null ? yticks : yscale.ticks(nyticks);
       data = reorgLodData(data, lodvarname);
-      data = chrscales(data, width, chrGap);
+      data = chrscales(data, width, chrGap, 0, pad4heatmap);
       xscale = data.xscale;
       chrSelect = g.append("g").attr("class", "chrRect").selectAll("empty").data(data.chrnames).enter().append("rect").attr("id", function(d) {
         return "chrrect" + d;
@@ -256,6 +257,13 @@ lodchart = function() {
       return lodvarname;
     }
     lodvarname = value;
+    return chart;
+  };
+  chart.pad4heatmap = function(value) {
+    if (!arguments.length) {
+      return pad4heatmap;
+    }
+    pad4heatmap = value;
     return chart;
   };
   chart.yscale = function() {

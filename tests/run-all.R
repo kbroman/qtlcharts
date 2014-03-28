@@ -1,3 +1,3 @@
 library(testthat)
-library(broman)
-test_package("broman")
+library(qtlcharts)
+test_package("qtlcharts")

@@ -43,7 +43,7 @@ Creates an interactive graph of a genetic marker map.
 \examples{
 data(hyper)
 map <- pull.map(hyper)
-iplotMap(map, shift=TRUE)
+iplotMap(map, shift=TRUE, title="iplotMap example")
 }
 \seealso{
 \code{\link{iplotScanone}}, \code{\link{iplotPXG}}

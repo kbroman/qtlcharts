@@ -52,9 +52,10 @@
 #'
 #' # Make the plot
 #' curves_w_scatter(y, times, y[,c(1,5)], y[,c(5,16)],
-#'                   chartOpts=list(curves_xlab="Time", curves_ylab="Size",
-#'                                  scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
-#'                                  scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))
+#'                  title = "curves_w_scatter example",
+#'                  chartOpts=list(curves_xlab="Time", curves_ylab="Size",
+#'                                 scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
+#'                                 scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))
 #'
 #' @export
 #' @importFrom RJSONIO toJSON

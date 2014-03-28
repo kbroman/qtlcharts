@@ -83,7 +83,8 @@ function in R/qtl.
 data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
 out <- scanone(hyper)
-iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15))
+iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
+             title="iplotScanone example")
 }
 \seealso{
 \code{\link{iplotPXG}}, \code{\link{iplotMap}}

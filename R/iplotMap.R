@@ -30,7 +30,7 @@
 #' @examples
 #' data(hyper)
 #' map <- pull.map(hyper)
-#' iplotMap(map, shift=TRUE)
+#' iplotMap(map, shift=TRUE, title="iplotMap example")
 #'
 #' @export
 iplotMap <-

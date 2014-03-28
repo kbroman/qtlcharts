@@ -41,7 +41,7 @@
 #' @examples
 #' data(hyper)
 #' marker <- sample(markernames(hyper), 1)
-#' iplotPXG(hyper, marker)
+#' iplotPXG(hyper, marker, title="iplotPXG example")
 #'
 #' @export
 iplotPXG <-

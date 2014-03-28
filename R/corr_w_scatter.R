@@ -46,6 +46,7 @@
 #' @examples
 #' data(geneExpr)
 #' corr_w_scatter(geneExpr$expr, geneExpr$genotype,
+#'                title = "corr_w_scatter example",
 #'                chartOpts=list(cortitle="Correlation matrix",
 #'                               scattitle="Scatterplot"))
 #' @export

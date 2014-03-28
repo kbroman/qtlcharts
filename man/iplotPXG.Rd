@@ -58,7 +58,7 @@ function in R/qtl.
 \examples{
 data(hyper)
 marker <- sample(markernames(hyper), 1)
-iplotPXG(hyper, marker)
+iplotPXG(hyper, marker, title="iplotPXG example")
 }
 \seealso{
 \code{\link{iplotScanone}}, \code{\link{iplotMap}}

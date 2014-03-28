@@ -1,5 +1,5 @@
-# corr_w_scatter
-# Karl W Broman
+## corr_w_scatter
+## Karl W Broman
 
 #' Image of correlation matrix with linked scatterplot
 #'
@@ -109,20 +109,4 @@ function(mat, group, rows, cols, reorder=TRUE, corr=cor(mat, use="pairwise.compl
   if(openfile) browseURL(file)
 
   invisible(file)
-}
-
-
-# turn a selection of matrix columns into a numeric vector
-# matrix
-# cols
-selectMatrixColumns <-
-function(matrix, cols)
-{
-  origcols <- cols
-  if(is.character(cols)) {
-    cols <- match(cols, colnames(matrix))
-    if(any(is.na(cols)))
-      stop("Unmatched columns: ", paste(origcols[is.na(cols)], collapse=" "))
-  }
-  (1:ncol(matrix))[cols]
 }

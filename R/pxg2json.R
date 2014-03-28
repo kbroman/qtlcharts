@@ -108,10 +108,3 @@ function(cross, fillgenoArgs=NULL, imputed_negative=TRUE)
   geno_imp
 }
 
-# grab argument from a list
-#
-# for example:
-# grabarg(list(method="argmax", map.function="c-f"), "method", "imp")
-grabarg <-
-function(arguments, argname, default)
-  ifelse(argname %in% names(arguments), arguments[[argname]], default)

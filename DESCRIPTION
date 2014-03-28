@@ -16,6 +16,7 @@ Depends:
     utils
 Suggests:
     devtools,
-    roxygen2
+    roxygen2,
+    testthat
 License: MIT + file LICENSE
 URL: http://github.com/kbroman/qtlcharts

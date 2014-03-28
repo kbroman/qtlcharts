@@ -1,5 +1,5 @@
-# iplotPXG
-# Karl W Broman
+## iplotPXG
+## Karl W Broman
 
 #' Interactive phenotype x genotype plot
 #'
@@ -95,11 +95,4 @@ function(cross, marker, pheno.col=1,
   if(openfile) browseURL(file)
 
   invisible(file)
-}
-
-getPhename <-
-function(cross, pheno.col)
-{
-  if(is.character(pheno.col)) return(pheno.col)
-  names(cross$pheno)[pheno.col]
 }

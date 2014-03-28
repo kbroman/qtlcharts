@@ -1,5 +1,5 @@
-# manyboxplots
-# Karl W Broman
+## manyboxplots
+## Karl W Broman
 
 #' Modern boxplot linked to underlying histrograms
 #'

@@ -1,5 +1,5 @@
-# convert4corrwscatter
-# Karl W Broman
+## convert4corrwscatter
+## Karl W Broman
 
 # Convert data to JSON format for corr_w_scatter vis
 #

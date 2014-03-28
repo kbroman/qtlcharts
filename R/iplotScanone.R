@@ -1,5 +1,5 @@
-# iplotScanone
-# Karl W Broman
+## iplotScanone
+## Karl W Broman
 
 #' Interactive LOD curve
 #'
@@ -307,4 +307,3 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
   invisible(file)
 
 }
-

@@ -1,5 +1,5 @@
-# curves_w_scatter.R
-# Karl W Broman
+## curves_w_scatter.R
+## Karl W Broman
 
 #' Plot of a bunch of curves, linked to points in scatterplots
 #'

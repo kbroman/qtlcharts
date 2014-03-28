@@ -1,5 +1,5 @@
-# convert4manyboxplots
-# Karl W Broman
+## convert4manyboxplots
+## Karl W Broman
 
 # Convert data to JSON format for manyboxplots vis
 #

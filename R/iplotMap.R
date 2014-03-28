@@ -1,5 +1,5 @@
-# iplotMap
-# Karl W Broman
+## iplotMap
+## Karl W Broman
 
 #' Interactive genetic map plot
 #'

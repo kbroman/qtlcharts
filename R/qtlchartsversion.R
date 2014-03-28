@@ -1,5 +1,5 @@
-# qtlchartsversion
-# Karl W Broman
+## qtlchartsversion
+## Karl W Broman
 
 #' print the installed version of R/qtlcharts
 #'

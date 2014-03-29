@@ -308,7 +308,7 @@ curvechart = () ->
 
   chart.commonX = (value) ->
     return commonX if !arguments.length
-    dataByInd = value
+    commonX = value
     chart
 
   chart.title = (value) ->

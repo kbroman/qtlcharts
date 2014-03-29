@@ -309,11 +309,10 @@ curvechart = function() {
     return chart;
   };
   chart.commonX = function(value) {
-    var dataByInd;
     if (!arguments.length) {
       return commonX;
     }
-    dataByInd = value;
+    commonX = value;
     return chart;
   };
   chart.title = function(value) {

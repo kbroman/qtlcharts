@@ -34,11 +34,8 @@ reorgLodData = (data, lodvarname=null) ->
     for pos,j in data.pos
       if data.chr[j] == chr
         data.posByChr[chr].push(pos)
-        if lodvarname?
-          lodval = data[lodvarname][j]
-        else
-          data.lodnames = [data.lodnames] unless Array.isArray(data.lodnames)
-          lodval = (data[lodcolumn][j] for lodcolumn in data.lodnames)
+        data.lodnames = [data.lodnames] unless Array.isArray(data.lodnames)
+        lodval = (data[lodcolumn][j] for lodcolumn in data.lodnames)
         data.lodByChr[chr].push(lodval)
 
   if lodvarname?

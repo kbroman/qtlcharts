@@ -54,23 +54,19 @@ reorgLodData = function(data, lodvarname) {
       pos = _ref1[j];
       if (data.chr[j] === chr) {
         data.posByChr[chr].push(pos);
-        if (lodvarname != null) {
-          lodval = data[lodvarname][j];
-        } else {
-          if (!Array.isArray(data.lodnames)) {
-            data.lodnames = [data.lodnames];
-          }
-          lodval = (function() {
-            var _k, _len2, _ref2, _results;
-            _ref2 = data.lodnames;
-            _results = [];
-            for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
-              lodcolumn = _ref2[_k];
-              _results.push(data[lodcolumn][j]);
-            }
-            return _results;
-          })();
+        if (!Array.isArray(data.lodnames)) {
+          data.lodnames = [data.lodnames];
         }
+        lodval = (function() {
+          var _k, _len2, _ref2, _results;
+          _ref2 = data.lodnames;
+          _results = [];
+          for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+            lodcolumn = _ref2[_k];
+            _results.push(data[lodcolumn][j]);
+          }
+          return _results;
+        })();
         data.lodByChr[chr].push(lodval);
       }
     }

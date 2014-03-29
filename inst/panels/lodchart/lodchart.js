@@ -2,7 +2,7 @@
 var lodchart;
 
 lodchart = function() {
-  var axispos, chart, chrGap, chrSelect, darkrect, height, lightrect, linecolor, linewidth, lodcurve, lodvarname, margin, markerSelect, nyticks, pad4heatmap, pointcolor, pointsize, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
+  var axispos, chart, chrGap, chrSelect, darkrect, height, lightrect, linecolor, linewidth, lodcurve, lodvarname, margin, markerSelect, nyticks, pad4heatmap, plotAll, pointcolor, pointsize, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
   width = 800;
   height = 500;
   margin = {
@@ -39,11 +39,24 @@ lodchart = function() {
   lodvarname = null;
   markerSelect = null;
   chrSelect = null;
+  plotAll = false;
   chart = function(selection) {
     return selection.each(function(data) {
-      var chr, curves, g, gEnter, hiddenpoints, markerpoints, markertip, svg, titlegrp, xaxis, yaxis, _i, _len, _ref;
+      var allcurves, chr, curves, g, gEnter, hiddenpoints, i, lodcolumn, lodvarnum, markerpoints, markertip, name, svg, titlegrp, xaxis, yaxis, _i, _j, _len, _len1, _ref, _ref1;
       lodvarname = lodvarname != null ? lodvarname : data.lodnames[0];
       ylim = ylim != null ? ylim : [0, d3.max(data[lodvarname])];
+      lodvarnum = ((function() {
+        var _i, _len, _ref, _results;
+        _ref = data.lodnames;
+        _results = [];
+        for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+          name = _ref[i];
+          if (name === lodvarname) {
+            _results.push(i);
+          }
+        }
+        return _results;
+      })())[0];
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
@@ -85,18 +98,28 @@ lodchart = function() {
         return formatAxis(yticks)(d);
       });
       yaxis.append("text").attr("class", "title").attr("y", height / 2).attr("x", -axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (-axispos.ytitle) + "," + (height / 2) + ")");
-      lodcurve = function(chr) {
+      lodcurve = function(chr, lodcolumn) {
         return d3.svg.line().x(function(d) {
           return xscale[chr](d);
         }).y(function(d, i) {
-          return yscale(data.lodByChr[chr][i]);
+          return yscale(data.lodByChr[chr][i][lodcolumn]);
         });
       };
       curves = g.append("g").attr("id", "curves");
       _ref = data.chrnames;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         chr = _ref[_i];
-        curves.append("path").datum(data.posByChr[chr]).attr("d", lodcurve(chr)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none");
+        curves.append("path").datum(data.posByChr[chr]).attr("d", lodcurve(chr, lodvarnum)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none");
+      }
+      if (plotAll) {
+        allcurves = g.append("g").attr("id", "curves");
+        for (lodcolumn in data.lodnames) {
+          _ref1 = data.chrnames;
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            chr = _ref1[_j];
+            curves.append("path").datum(data.posByChr[chr]).attr("class", "lodcurve" + lodcolumn).attr("d", lodcurve(chr, lodcolumn)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none").attr("opacity", 0);
+          }
+        }
       }
       if (pointsize > 0) {
         markerpoints = g.append("g").attr("id", "markerpoints_visible");
@@ -265,6 +288,13 @@ lodchart = function() {
       return pad4heatmap;
     }
     pad4heatmap = value;
+    return chart;
+  };
+  chart.plotAll = function(value) {
+    if (!arguments.length) {
+      return plotAll;
+    }
+    plotAll = value;
     return chart;
   };
   chart.yscale = function() {

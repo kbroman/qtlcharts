@@ -26,12 +26,14 @@ lodchart = () ->
   lodvarname = null
   markerSelect = null
   chrSelect = null
+  plotAll = false
 
   ## the main function
   chart = (selection) ->
     selection.each (data) ->
       lodvarname = lodvarname ? data.lodnames[0]
       ylim = ylim ? [0, d3.max(data[lodvarname])]
+      lodvarnum = (i for name,i in data.lodnames when name == lodvarname)[0]
 
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])
@@ -128,21 +130,36 @@ lodchart = () ->
            .attr("transform", "rotate(270,#{-axispos.ytitle},#{height/2})")
 
       # lod curves by chr
-      lodcurve = (chr) ->
+      lodcurve = (chr, lodcolumn) ->
           d3.svg.line()
             .x((d) -> xscale[chr](d))
-            .y((d,i) -> yscale(data.lodByChr[chr][i]))
+            .y((d,i) -> yscale(data.lodByChr[chr][i][lodcolumn]))
 
       curves = g.append("g").attr("id", "curves")
 
       for chr in data.chrnames
         curves.append("path")
               .datum(data.posByChr[chr])
-              .attr("d", lodcurve(chr))
+              .attr("d", lodcurve(chr, lodvarnum))
               .attr("stroke", linecolor)
               .attr("fill", "none")
               .attr("stroke-width", linewidth)
               .style("pointer-events", "none")
+
+      if plotAll
+        allcurves = g.append("g").attr("id", "curves")
+
+        for lodcolumn of data.lodnames
+          for chr in data.chrnames
+            curves.append("path")
+                  .datum(data.posByChr[chr])
+                  .attr("class", "lodcurve#{lodcolumn}")
+                  .attr("d", lodcurve(chr, lodcolumn))
+                  .attr("stroke", linecolor)
+                  .attr("fill", "none")
+                  .attr("stroke-width", linewidth)
+                  .style("pointer-events", "none")
+                  .attr("opacity", 0)
 
       # points at markers
       if pointsize > 0
@@ -303,6 +320,11 @@ lodchart = () ->
   chart.pad4heatmap = (value) ->
     return pad4heatmap unless arguments.length
     pad4heatmap = value
+    chart
+
+  chart.plotAll = (value) ->
+    return plotAll unless arguments.length
+    plotAll = value
     chart
 
   chart.yscale = () ->

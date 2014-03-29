@@ -33,7 +33,7 @@ lodchart = () ->
     selection.each (data) ->
       lodvarname = lodvarname ? data.lodnames[0]
       ylim = ylim ? [0, d3.max(data[lodvarname])]
-      lodvarnum = (i for name,i in data.lodnames when name == lodvarname)[0]
+      lodvarnum = data.lodnames.indexOf(lodvarname)
 
       # Select the svg element, if it exists.
       svg = d3.select(this).selectAll("svg").data([data])

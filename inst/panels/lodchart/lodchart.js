@@ -42,21 +42,10 @@ lodchart = function() {
   plotAll = false;
   chart = function(selection) {
     return selection.each(function(data) {
-      var allcurves, chr, curves, g, gEnter, hiddenpoints, i, lodcolumn, lodvarnum, markerpoints, markertip, name, svg, titlegrp, xaxis, yaxis, _i, _j, _len, _len1, _ref, _ref1;
+      var allcurves, chr, curves, g, gEnter, hiddenpoints, lodcolumn, lodvarnum, markerpoints, markertip, svg, titlegrp, xaxis, yaxis, _i, _j, _len, _len1, _ref, _ref1;
       lodvarname = lodvarname != null ? lodvarname : data.lodnames[0];
       ylim = ylim != null ? ylim : [0, d3.max(data[lodvarname])];
-      lodvarnum = ((function() {
-        var _i, _len, _ref, _results;
-        _ref = data.lodnames;
-        _results = [];
-        for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
-          name = _ref[i];
-          if (name === lodvarname) {
-            _results.push(i);
-          }
-        }
-        return _results;
-      })())[0];
+      lodvarnum = data.lodnames.indexOf(lodvarname);
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);

@@ -23,13 +23,14 @@ lodchart = () ->
   xscale = null
   pad4heatmap = false
   lodcurve = null
-  lodvarname = "lod"
+  lodvarname = null
   markerSelect = null
   chrSelect = null
 
   ## the main function
   chart = (selection) ->
     selection.each (data) ->
+      lodvarname = lodvarname ? data.lodnames[0]
       ylim = ylim ? [0, d3.max(data[lodvarname])]
 
       # Select the svg element, if it exists.

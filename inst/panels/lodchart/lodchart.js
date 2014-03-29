@@ -36,12 +36,13 @@ lodchart = function() {
   xscale = null;
   pad4heatmap = false;
   lodcurve = null;
-  lodvarname = "lod";
+  lodvarname = null;
   markerSelect = null;
   chrSelect = null;
   chart = function(selection) {
     return selection.each(function(data) {
       var chr, curves, g, gEnter, hiddenpoints, markerpoints, markertip, svg, titlegrp, xaxis, yaxis, _i, _len, _ref;
+      lodvarname = lodvarname != null ? lodvarname : data.lodnames[0];
       ylim = ylim != null ? ylim : [0, d3.max(data[lodvarname])];
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");

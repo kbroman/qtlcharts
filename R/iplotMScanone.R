@@ -114,6 +114,7 @@ function(scanoneOutput,
   link_panelutil(file, onefile=onefile)
   link_panel('lodheatmap', file, onefile=onefile)
   link_panel('lodchart', file, onefile=onefile)
+  link_panel('curvechart', file, onefile=onefile)
   link_chart('iplotMScanone_noeff', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')

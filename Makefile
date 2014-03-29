@@ -56,7 +56,7 @@ ${PANEL_DIR}/%/test/data.json: ${PANEL_DIR}/%/test/create_test_data.R
 #------------------------------------------------------------
 
 # javascript for the real charts
-jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${CHART_DIR}/iplotScanone_ci.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/corr_w_scatter.js ${CHART_DIR}/manyboxplots.js ${CHART_DIR}/curves_w_scatter.js ${CHART_DIR}/iplotMap.js
+jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${CHART_DIR}/iplotScanone_ci.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/corr_w_scatter.js ${CHART_DIR}/manyboxplots.js ${CHART_DIR}/curves_w_scatter.js ${CHART_DIR}/iplotMap.js ${CHART_DIR}/iplotMScanone_noeff.js
 
 ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
 	coffee ${COFFEE_ARGS} -b $^

@@ -42,7 +42,7 @@ lodchart = function() {
   plotAll = false;
   chart = function(selection) {
     return selection.each(function(data) {
-      var allcurves, chr, curves, g, gEnter, hiddenpoints, lodcolumn, lodvarnum, markerpoints, markertip, svg, titlegrp, xaxis, yaxis, _i, _j, _len, _len1, _ref, _ref1;
+      var chr, curves, g, gEnter, hiddenpoints, lodcolumn, lodvarnum, markerpoints, markertip, svg, titlegrp, xaxis, yaxis, _i, _j, _len, _len1, _ref, _ref1;
       lodvarname = lodvarname != null ? lodvarname : data.lodnames[0];
       ylim = ylim != null ? ylim : [0, d3.max(data[lodvarname])];
       lodvarnum = data.lodnames.indexOf(lodvarname);
@@ -95,46 +95,46 @@ lodchart = function() {
         });
       };
       curves = g.append("g").attr("id", "curves");
-      _ref = data.chrnames;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        chr = _ref[_i];
-        curves.append("path").datum(data.posByChr[chr]).attr("d", lodcurve(chr, lodvarnum)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none");
-      }
       if (plotAll) {
-        allcurves = g.append("g").attr("id", "curves");
         for (lodcolumn in data.lodnames) {
-          _ref1 = data.chrnames;
-          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-            chr = _ref1[_j];
+          _ref = data.chrnames;
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            chr = _ref[_i];
             curves.append("path").datum(data.posByChr[chr]).attr("class", "lodcurve" + lodcolumn).attr("d", lodcurve(chr, lodcolumn)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none").attr("opacity", 0);
           }
         }
-      }
-      if (pointsize > 0) {
-        markerpoints = g.append("g").attr("id", "markerpoints_visible");
-        markerpoints.selectAll("empty").data(data.markers).enter().append("circle").attr("cx", function(d) {
+      } else {
+        _ref1 = data.chrnames;
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          chr = _ref1[_j];
+          curves.append("path").datum(data.posByChr[chr]).attr("d", lodcurve(chr, lodvarnum)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none");
+        }
+        if (pointsize > 0) {
+          markerpoints = g.append("g").attr("id", "markerpoints_visible");
+          markerpoints.selectAll("empty").data(data.markers).enter().append("circle").attr("cx", function(d) {
+            return xscale[d.chr](d.pos);
+          }).attr("cy", function(d) {
+            return yscale(d.lod);
+          }).attr("r", pointsize).attr("fill", pointcolor).attr("pointer-events", "hidden");
+        }
+        hiddenpoints = g.append("g").attr("id", "markerpoints_hidden");
+        markertip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+          return [d.name, " LOD = " + (d3.format('.2f')(d.lod))];
+        }).direction("e").offset([0, 10]);
+        svg.call(markertip);
+        markerSelect = hiddenpoints.selectAll("empty").data(data.markers).enter().append("circle").attr("cx", function(d) {
           return xscale[d.chr](d.pos);
         }).attr("cy", function(d) {
           return yscale(d.lod);
-        }).attr("r", pointsize).attr("fill", pointcolor).attr("pointer-events", "hidden");
+        }).attr("id", function(d) {
+          return d.name;
+        }).attr("r", d3.max([pointsize * 2, 3])).attr("opacity", 0).attr("fill", pointcolor).attr("stroke", "black").attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
+          d3.select(this).attr("opacity", 1);
+          return markertip.show(d);
+        }).on("mouseout.paneltip", function() {
+          return d3.select(this).attr("opacity", 0).call(markertip.hide);
+        });
       }
-      hiddenpoints = g.append("g").attr("id", "markerpoints_hidden");
-      markertip = d3.tip().attr('class', 'd3-tip').html(function(d) {
-        return [d.name, " LOD = " + (d3.format('.2f')(d.lod))];
-      }).direction("e").offset([0, 10]);
-      svg.call(markertip);
-      markerSelect = hiddenpoints.selectAll("empty").data(data.markers).enter().append("circle").attr("cx", function(d) {
-        return xscale[d.chr](d.pos);
-      }).attr("cy", function(d) {
-        return yscale(d.lod);
-      }).attr("id", function(d) {
-        return d.name;
-      }).attr("r", d3.max([pointsize * 2, 3])).attr("opacity", 0).attr("fill", pointcolor).attr("stroke", "black").attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
-        d3.select(this).attr("opacity", 1);
-        return markertip.show(d);
-      }).on("mouseout.paneltip", function() {
-        return d3.select(this).attr("opacity", 0).call(markertip.hide);
-      });
       titlegrp = g.append("g").attr("class", "title").append("text").attr("x", width / 2).attr("y", -titlepos).text(title);
       return g.append("rect").attr("x", 0).attr("y", 0).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });

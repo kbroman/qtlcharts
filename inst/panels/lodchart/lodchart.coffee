@@ -137,18 +137,7 @@ lodchart = () ->
 
       curves = g.append("g").attr("id", "curves")
 
-      for chr in data.chrnames
-        curves.append("path")
-              .datum(data.posByChr[chr])
-              .attr("d", lodcurve(chr, lodvarnum))
-              .attr("stroke", linecolor)
-              .attr("fill", "none")
-              .attr("stroke-width", linewidth)
-              .style("pointer-events", "none")
-
-      if plotAll
-        allcurves = g.append("g").attr("id", "curves")
-
+      if plotAll # plot all curves
         for lodcolumn of data.lodnames
           for chr in data.chrnames
             curves.append("path")
@@ -161,48 +150,58 @@ lodchart = () ->
                   .style("pointer-events", "none")
                   .attr("opacity", 0)
 
-      # points at markers
-      if pointsize > 0
-        markerpoints = g.append("g").attr("id", "markerpoints_visible")
-        markerpoints.selectAll("empty")
+      else # just plot the selected curve
+        for chr in data.chrnames
+          curves.append("path")
+                .datum(data.posByChr[chr])
+                .attr("d", lodcurve(chr, lodvarnum))
+                .attr("stroke", linecolor)
+                .attr("fill", "none")
+                .attr("stroke-width", linewidth)
+                .style("pointer-events", "none")
+
+        # points at markers
+        if pointsize > 0
+          markerpoints = g.append("g").attr("id", "markerpoints_visible")
+          markerpoints.selectAll("empty")
+                      .data(data.markers)
+                      .enter()
+                      .append("circle")
+                      .attr("cx", (d) -> xscale[d.chr](d.pos))
+                      .attr("cy", (d) -> yscale(d.lod))
+                      .attr("r", pointsize)
+                      .attr("fill", pointcolor)
+                      .attr("pointer-events", "hidden")
+        # these hidden points are what gets selected...a bit larger
+        hiddenpoints = g.append("g").attr("id", "markerpoints_hidden")
+
+        markertip = d3.tip()
+                      .attr('class', 'd3-tip')
+                      .html((d) ->
+                        [d.name, " LOD = #{d3.format('.2f')(d.lod)}"])
+                      .direction("e")
+                      .offset([0,10])
+        svg.call(markertip)
+
+        markerSelect =
+          hiddenpoints.selectAll("empty")
                     .data(data.markers)
                     .enter()
                     .append("circle")
                     .attr("cx", (d) -> xscale[d.chr](d.pos))
                     .attr("cy", (d) -> yscale(d.lod))
-                    .attr("r", pointsize)
+                    .attr("id", (d) -> d.name)
+                    .attr("r", d3.max([pointsize*2, 3]))
+                    .attr("opacity", 0)
                     .attr("fill", pointcolor)
-                    .attr("pointer-events", "hidden")
-      # these hidden points are what gets selected...a bit larger
-      hiddenpoints = g.append("g").attr("id", "markerpoints_hidden")
-
-      markertip = d3.tip()
-                    .attr('class', 'd3-tip')
-                    .html((d) ->
-                      [d.name, " LOD = #{d3.format('.2f')(d.lod)}"])
-                    .direction("e")
-                    .offset([0,10])
-      svg.call(markertip)
-
-      markerSelect =
-        hiddenpoints.selectAll("empty")
-                  .data(data.markers)
-                  .enter()
-                  .append("circle")
-                  .attr("cx", (d) -> xscale[d.chr](d.pos))
-                  .attr("cy", (d) -> yscale(d.lod))
-                  .attr("id", (d) -> d.name)
-                  .attr("r", d3.max([pointsize*2, 3]))
-                  .attr("opacity", 0)
-                  .attr("fill", pointcolor)
-                  .attr("stroke", "black")
-                  .attr("stroke-width", "1")
-                  .on "mouseover.paneltip", (d) ->
-                     d3.select(this).attr("opacity", 1)
-                     markertip.show(d)
-                  .on "mouseout.paneltip", ->
-                     d3.select(this).attr("opacity", 0)
-                     .call(markertip.hide)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", "1")
+                    .on "mouseover.paneltip", (d) ->
+                       d3.select(this).attr("opacity", 1)
+                       markertip.show(d)
+                    .on "mouseout.paneltip", ->
+                       d3.select(this).attr("opacity", 0)
+                       .call(markertip.hide)
 
       # title
       titlegrp = g.append("g").attr("class", "title")

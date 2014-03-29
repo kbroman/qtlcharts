@@ -1,5 +1,13 @@
 ## To Do list for R/qtlcharts
 
+### In process
+
+- iplotMScanone_noeff: axis labels on upper-right panel
+- iplotMScanone_eff (need haley-knott version of effectscan in R/qtl?)
+- iplotMScanone: qualitative vs quantitative axes
+
+
+
 ### Bugs
 
 - iplotPXG behaves badly if the chosen phenotype is non-numeric
@@ -55,10 +63,7 @@
 
 ### Charts
 
-- genetic map of markers, indicating a set of QTL intervals
-  (linked to the LOD curves)
-- heat map of LOD curves for 10-100 curves
-- heat map for functional traits
+- Set of QTL intervals on a genetic map plot, linked to the LOD curves
 - cis/trans figure, with slider for selecting a band of LOD scores
 - Interactive 2d scan plot
 - curves_w_heatmap: heatmap of multiple curves linked to curvechart

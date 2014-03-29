@@ -57,6 +57,9 @@ reorgLodData = function(data, lodvarname) {
         if (lodvarname != null) {
           lodval = data[lodvarname][j];
         } else {
+          if (!Array.isArray(data.lodnames)) {
+            data.lodnames = [data.lodnames];
+          }
           lodval = (function() {
             var _k, _len2, _ref2, _results;
             _ref2 = data.lodnames;

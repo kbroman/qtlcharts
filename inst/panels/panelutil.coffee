@@ -21,10 +21,13 @@ pullVarAsArray = (data, variable) ->
     v = v.concat data[i][variable]
   v
   
-# reorganize lod/pos by chromosome, when multiple LOD columns
+# reorganize lod/pos by chromosome
+# lodvarname==null    -> case for multiple LOD columns (lodheatmap)
+# lodvarname provided -> case for one LOD column (lodchart)
 reorgLodData = (data, lodvarname=null) ->
   data.posByChr = {}
   data.lodByChr = {}
+
   for chr,i in data.chrnames
     data.posByChr[chr] = []
     data.lodByChr[chr] = []
@@ -34,13 +37,16 @@ reorgLodData = (data, lodvarname=null) ->
         if lodvarname?
           lodval = data[lodvarname][j]
         else
+          data.lodnames = [data.lodnames] unless Array.isArray(data.lodnames)
           lodval = (data[lodcolumn][j] for lodcolumn in data.lodnames)
         data.lodByChr[chr].push(lodval)
+
   if lodvarname?
     data.markers = []
     for marker,i in data.markernames
       if marker != ""
         data.markers.push({name:marker, chr:data.chr[i], pos:data.pos[i], lod:data[lodvarname][i]})
+
   data
 
 # calculate chromosome start/end + scales, for heat map

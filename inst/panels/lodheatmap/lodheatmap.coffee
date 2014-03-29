@@ -12,6 +12,7 @@ lodheatmap = () ->
   title = ""
   xlab = "Chromosome"
   ylab = ""
+  zlim = null
   zthresh = null
   xscale = d3.scale.linear()
   yscale = d3.scale.linear()
@@ -226,6 +227,11 @@ lodheatmap = () ->
   chart.zlim = (value) ->
     return zlim if !arguments.length
     zlim = value
+    chart
+
+  chart.chrGap = (value) ->
+    return chrGap if !arguments.length
+    chrGap = value
     chart
 
   chart.xscale = () ->

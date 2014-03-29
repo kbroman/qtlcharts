@@ -2,7 +2,7 @@
 var lodheatmap;
 
 lodheatmap = function() {
-  var axispos, cellSelect, chart, chrGap, colors, height, margin, rectcolor, title, titlepos, width, xlab, xscale, ylab, yscale, zscale, zthresh;
+  var axispos, cellSelect, chart, chrGap, colors, height, margin, rectcolor, title, titlepos, width, xlab, xscale, ylab, yscale, zlim, zscale, zthresh;
   width = 1200;
   height = 600;
   margin = {
@@ -24,6 +24,7 @@ lodheatmap = function() {
   title = "";
   xlab = "Chromosome";
   ylab = "";
+  zlim = null;
   zthresh = null;
   xscale = d3.scale.linear();
   yscale = d3.scale.linear();
@@ -31,7 +32,7 @@ lodheatmap = function() {
   cellSelect = null;
   chart = function(selection) {
     return selection.each(function(data) {
-      var cells, celltip, chr, extent, g, gEnter, i, j, lod, lodcol, nlod, pos, rectHeight, svg, titlegrp, xLR, xaxis, yaxis, zlim, zmax, zmin, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
+      var cells, celltip, chr, extent, g, gEnter, i, j, lod, lodcol, nlod, pos, rectHeight, svg, titlegrp, xLR, xaxis, yaxis, zmax, zmin, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
       data = reorgLodData(data);
       data = chrscales(data, width, chrGap, margin.left, true);
       xscale = data.xscale;
@@ -235,11 +236,17 @@ lodheatmap = function() {
     return chart;
   };
   chart.zlim = function(value) {
-    var zlim;
     if (!arguments.length) {
       return zlim;
     }
     zlim = value;
+    return chart;
+  };
+  chart.chrGap = function(value) {
+    if (!arguments.length) {
+      return chrGap;
+    }
+    chrGap = value;
     return chart;
   };
   chart.xscale = function() {

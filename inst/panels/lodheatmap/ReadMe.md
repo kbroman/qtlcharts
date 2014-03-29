@@ -25,6 +25,7 @@ mychart = lodheatmap().width(1200)                                             #
                       .xlab("X")                                               # x-axis label
                       .ylab("Y")                                               # y-axis label
                       .zthresh(null)                                           # plot cells with z >= zthresh or <= -zthresh
+                      .chrGap(5)                                               # gap between chromosomes (in pixels)
 ```
 
 Organization of data *(needs to be explained)*

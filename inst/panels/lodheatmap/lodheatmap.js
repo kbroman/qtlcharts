@@ -54,7 +54,7 @@ lodheatmap = function() {
         if (extent[0] < zmin) {
           zmin = extent[0];
         }
-        if (extent[1] > zmin) {
+        if (extent[1] > zmax) {
           zmax = extent[1];
         }
       }

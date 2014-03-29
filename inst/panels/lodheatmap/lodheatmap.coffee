@@ -41,7 +41,7 @@ lodheatmap = () ->
       for lodcol in data.lodnames
         extent = d3.extent(data[lodcol])
         zmin = extent[0] if extent[0] < zmin
-        zmax = extent[1] if extent[1] > zmin
+        zmax = extent[1] if extent[1] > zmax
       zmax = -zmin if -zmin > zmax
       zlim = zlim ? [-zmax, 0, zmax]
       if zlim.length != colors.length

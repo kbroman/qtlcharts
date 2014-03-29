@@ -86,16 +86,16 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
 
   stop("Not yet working with QTL effects")
 
-  if(missing(effects)) {
-    stopifnot(length(pheno.col) == length(lodcolumn))
-    stopifnot(class(cross)[2] == "cross")
+#  if(missing(effects)) {
+#    stopifnot(length(pheno.col) == length(lodcolumn))
+#    stopifnot(class(cross)[2] == "cross")
+#
+#    effects <- calcQTLEffects(cross, pheno.col)
+#  }
 
-    effects <- calcQTLEffects(cross, pheno.col)
-  }
-
-  iplotMScanone_eff(scanoneOutput, effects,
-                    file=file, onefile=onefile, openfile=openfile, title=title,
-                    caption=caption, chartOpts=chartOpts, ...)
+#  iplotMScanone_eff(scanoneOutput, effects,
+#                    file=file, onefile=onefile, openfile=openfile, title=title,
+#                    caption=caption, chartOpts=chartOpts, ...)
 }
 
 
@@ -140,7 +140,7 @@ function(scanoneOutput, effects,
          title="", caption, chartOpts=NULL, ...)
 {
   scanone_json <- scanone2json(scanoneOutput, ...)
-  effects_json <- curves2json(effects, ...)
+#  effects_json <- curves2json(effects, ...)
 
   write_html_top(file, title=title)
 
@@ -160,7 +160,7 @@ function(scanoneOutput, effects,
   append_caption(caption, file)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
-  append_html_jscode(file, 'effectsData = ', effects_json, ';')
+#  append_html_jscode(file, 'effectsData = ', effects_json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotMScanone_eff(scanoneData, effectsData, chartOpts);')
 

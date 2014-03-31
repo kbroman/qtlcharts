@@ -34,3 +34,40 @@ function(matrix, cols)
 
   (1:ncol(matrix))[cols]
 }
+
+# extract phenotypes
+#' @importFrom qtl find.pheno
+#
+extractPheno <-
+function(cross, pheno.col)
+{
+  if(is.character(pheno.col)) {
+    pheindex <- qtl::find.pheno(cross, pheno.col)
+    if(any(is.na(pheindex)))
+      stop("Some phenotypes not found: ",
+           paste(pheno.col[is.na(pheindex)], collapse=" "))
+    pheno.col <- pheindex
+  }
+  if(is.matrix(pheno.col) && nrow(pheno.col) == nind(cross))
+    return(pheno.col) # treat as phenotype matrix
+  if(is.numeric(pheno.col) && length(pheno.col) == nind(cross))
+    return(cbind("phenotype"=pheno.col))
+
+  if(is.numeric(pheno.col)) { # look for problem indices
+    if(any(pheno.col == 0))
+      stop("Cannot have pheno.col == 0")
+    if(any(pheno.col < 0) && !all(pheno.col < 0))
+      stop("Cannot give a mixture of positive and negative indices")
+  }
+
+  # handle negative indices and logical values
+  pheno.col <- (1:nphe(cross))[pheno.col]
+
+  phe <- cross$pheno[,pheno.col,drop=FALSE]
+  isnum <- sapply(phe, is.numeric)
+  if(!all(isnum))
+    stop("Some phenotypes not numeric: ",
+         paste(phenames(cross)[pheno.col[!isnum]], collapse=" "))
+
+  as.matrix(phe)
+}

@@ -31,3 +31,32 @@ test_that("grabarg works in simple cases", {
   expect_equal( grabarg(list(method="argmax", map.function="c-f"), "method", "imp"), "argmax" )
 
 })
+
+test_that("extractPheno works", {
+
+  data(grav)
+  expect_equivalent( extractPheno(grav, 1), as.matrix(grav$pheno[,1,drop=FALSE]) )
+  expect_equivalent( extractPheno(grav, c(1, 5, 241)), as.matrix(grav$pheno[,c(1, 5, 241),drop=FALSE]) )
+
+  expect_equivalent( extractPheno(grav, "T0"), as.matrix(grav$pheno[,"T0",drop=FALSE]) )
+  expect_equivalent( extractPheno(grav, c("T0", "T10", "T480")), as.matrix(grav$pheno[,c("T0", "T10", "T480"),drop=FALSE]) )
+
+  # vector of phenotypes
+  x <- rnorm(nind(grav))
+  expect_equivalent( extractPheno(grav, x), cbind(x) )
+
+  # matrix of phenotypes
+  x <- matrix(rnorm(nind(grav)*10), ncol=10)
+  expect_equivalent( extractPheno(grav, x), x )
+
+  expect_error( extractPheno(grav, "blah") )
+  expect_error( extractPheno(grav, 0) )
+  expect_error( extractPheno(grav, c(-1, 5)) )
+
+  # negative indices
+  expect_equivalent( extractPheno(grav, -(11:20)), as.matrix(grav$pheno[,-(11:20),drop=FALSE]) )
+
+  # logical values
+  expect_equivalent( extractPheno(grav, qtl::phenames(grav) == "T240"), as.matrix(grav$pheno[,"T240",drop=FALSE]) )
+
+})

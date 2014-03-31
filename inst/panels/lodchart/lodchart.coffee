@@ -78,8 +78,12 @@ lodchart = () ->
                  .enter()
                  .append("rect")
                  .attr("id", (d) -> "chrrect#{d}")
-                 .attr("x", (d,i) -> data.chrStart[i]-chrGap/2)
-                 .attr("width", (d,i) -> data.chrEnd[i] - data.chrStart[i]+chrGap)
+                 .attr("x", (d,i) ->
+                   return data.chrStart[i] if i==0 and pad4heatmap
+                   data.chrStart[i]-chrGap/2)
+                 .attr("width", (d,i) ->
+                    return data.chrEnd[i] - data.chrStart[i]+chrGap/2 if i+1 == data.chrnames.length and pad4heatmap
+                    data.chrEnd[i] - data.chrStart[i]+chrGap)
                  .attr("y", margin.top)
                  .attr("height", height)
                  .attr("fill", (d,i) ->

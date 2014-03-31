@@ -59,8 +59,14 @@ lodchart = function() {
       chrSelect = g.append("g").attr("class", "chrRect").selectAll("empty").data(data.chrnames).enter().append("rect").attr("id", function(d) {
         return "chrrect" + d;
       }).attr("x", function(d, i) {
+        if (i === 0 && pad4heatmap) {
+          return data.chrStart[i];
+        }
         return data.chrStart[i] - chrGap / 2;
       }).attr("width", function(d, i) {
+        if (i + 1 === data.chrnames.length && pad4heatmap) {
+          return data.chrEnd[i] - data.chrStart[i] + chrGap / 2;
+        }
         return data.chrEnd[i] - data.chrStart[i] + chrGap;
       }).attr("y", margin.top).attr("height", height).attr("fill", function(d, i) {
         if (i % 2) {

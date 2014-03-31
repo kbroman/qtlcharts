@@ -104,13 +104,23 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
                              .nxticks(0)
                              .commonX(false)
 
-
-
   g_curvechart = svg.append("g")
                     .attr("transform", "translate(#{wleft+margin.top+margin.bottom},0)")
                     .attr("id", "curvehart")
                     .datum(lod4curves)
                     .call(mycurvechart)
+
+  # add X axis
+  curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
+                                 .selectAll("empty")
+                                 .data(lod_data.lodnames)
+                                 .enter()
+                                 .append("text")
+                                 .attr("id", (d,i) -> "xaxis#{i}")
+                                 .attr("x", (d,i) -> mycurvechart.xscale()(i))
+                                 .attr("y", margin.top+htop+axispos.xlabel)
+                                 .text((d) -> d)
+                                 .attr("opacity", 0)
 
   posindex = {}
   curindex = 0
@@ -132,9 +142,11 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
                                    .attr("opacity", 1)
                        p = d3.format(".1f")(d.pos)
                        g_curvechart.select("g.title text").text("#{d.chr}@#{p}")
+                       g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 1)
               .on "mouseout", (d) ->
                        g_lodchart.select("g#lodcurves").remove()
                        g_lodchart.select("g.title text").text("")
                        g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}")
                                    .attr("opacity", 0)
                        g_curvechart.select("g.title text").text("")
+                       g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 0)

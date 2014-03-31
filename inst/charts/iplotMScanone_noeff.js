@@ -101,10 +101,16 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
   }
   mycurvechart.curvesSelect().on("mouseover.panel", null).on("mouseout.panel", null);
   return mylodheatmap.cellSelect().on("mouseover", function(d) {
+    var p;
     plotLodCurve(d.lodindex);
-    return g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("opacity", 1);
+    g_lodchart.select("g.title text").text("" + lod_data.lodnames[d.lodindex]);
+    g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("opacity", 1);
+    p = d3.format(".1f")(d.pos);
+    return g_curvechart.select("g.title text").text("" + d.chr + "@" + p);
   }).on("mouseout", function(d) {
     g_lodchart.select("g#lodcurves").remove();
-    return g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("opacity", 0);
+    g_lodchart.select("g.title text").text("");
+    g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("opacity", 0);
+    return g_curvechart.select("g.title text").text("");
   });
 };

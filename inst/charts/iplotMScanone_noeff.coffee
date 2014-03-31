@@ -127,9 +127,14 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
   mylodheatmap.cellSelect()
               .on "mouseover", (d) ->
                        plotLodCurve(d.lodindex)
+                       g_lodchart.select("g.title text").text("#{lod_data.lodnames[d.lodindex]}")
                        g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}")
                                    .attr("opacity", 1)
+                       p = d3.format(".1f")(d.pos)
+                       g_curvechart.select("g.title text").text("#{d.chr}@#{p}")
               .on "mouseout", (d) ->
                        g_lodchart.select("g#lodcurves").remove()
+                       g_lodchart.select("g.title text").text("")
                        g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}")
                                    .attr("opacity", 0)
+                       g_curvechart.select("g.title text").text("")

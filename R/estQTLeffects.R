@@ -201,3 +201,28 @@ function(effects, crosstype, chrtype)
 
   effects
 }
+
+# strip off names; save colnames within the lists
+#' @importFrom RJSONIO toJSON
+#
+effects2json <-
+function(effects, ...)
+{
+  names(effects) <- NULL
+  for(i in seq(along=effects)) {
+    cn <- colnames(effects[[i]])
+
+    # make sure it's not a scalar
+    if(length(cn)==1) cn <- list(cn)
+
+    dimnames(effects[[i]]) <- NULL
+    effects[[i]] <- t(effects[[i]])
+
+    # make sure we don't lose the rows
+    if(nrow(effects[[i]]) == 1) effects[[i]] <- list(effects[[i]])
+
+    effects[[i]] <- list(effects=effects[[i]], names=cn)
+  }
+
+  RJSONIO::toJSON(effects, ...)
+}

@@ -49,7 +49,10 @@
 #' grav <- calc.genoprob(grav, step=1)
 #' grav <- reduce2grid(grav)
 #' out <- scanone(grav, phe=seq(1, nphe(grav), by=5))
-#' iplotMScanone(out, title="iplotMScanone example")
+#' iplotMScanone(out, title="iplotMScanone example, no effects")
+#'
+#' eff <- estQTLeffects(grav, phe=seq(1, nphe(grav), by=5), what="effects")
+#' iplotMScanone(out, effects=eff, title="iplotMScanone example, with effects")
 #'
 #' @export
 iplotMScanone <-
@@ -68,7 +71,9 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
     stop('"scanoneOutput" should have class "scanone".')
 
   if(!missing(chr)) {
-     scanoneOutput <- subset(scanoneOutput, chr=chr)
+    rn <- rownames(scanoneOutput)
+    scanoneOutput <- subset(scanoneOutput, chr=chr)
+    if(!missing(effects)) effects <- effects[match(rownames(scanoneOutput), rn)]
     if(!missing(cross)) cross <- subset(cross, chr=chr)
    }
 
@@ -84,18 +89,24 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
                                 file=file, onefile=onefile, openfile=openfile, title=title,
                                 caption=caption, chartOpts=chartOpts, ...))
 
-  stop("Not yet working with QTL effects")
+  if(missing(effects)) {
+    stopifnot(length(pheno.col) == length(lodcolumn))
+    stopifnot(class(cross)[2] == "cross")
 
-#  if(missing(effects)) {
-#    stopifnot(length(pheno.col) == length(lodcolumn))
-#    stopifnot(class(cross)[2] == "cross")
-#
-#    effects <- calcQTLEffects(cross, pheno.col)
-#  }
+    crosstype <- class(cross)[1]
+    handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid") # handled for add/dom effects
+    what <- ifelse(crosstype %in% handled_crosses, "effects", "means")
+    effects <- estQTLEffects(cross, pheno.col, what=what)
+  }
 
-#  iplotMScanone_eff(scanoneOutput, effects,
-#                    file=file, onefile=onefile, openfile=openfile, title=title,
-#                    caption=caption, chartOpts=chartOpts, ...)
+  stopifnot(length(effects) == nrow(scanoneOutput))
+  stopifnot(all(vapply(effects, nrow, 1) == ncol(scanoneOutput)-2))
+
+  scanoneOutput <- calcSignedLOD(scanoneOutput, effects)
+
+  iplotMScanone_eff(scanoneOutput, effects,
+                    file=file, onefile=onefile, openfile=openfile, title=title,
+                    caption=caption, chartOpts=chartOpts, ...)
 }
 
 
@@ -120,7 +131,8 @@ function(scanoneOutput,
   append_html_middle(file, title, 'chart')
   
   if(missing(caption) || is.null(caption))
-    caption <- c('Hover over rows in the LOD image at top to see the individual curves below.')
+    caption <- c('Hover over rows in the LOD image at top to see the individual curves below and, ',
+                 'to the right, a plot of LOD score for each column at that genomic position.')
   append_caption(caption, file)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
@@ -141,7 +153,7 @@ function(scanoneOutput, effects,
          title="", caption, chartOpts=NULL, ...)
 {
   scanone_json <- scanone2json(scanoneOutput, ...)
-#  effects_json <- curves2json(effects, ...)
+  effects_json <- effects2json(effects, ...)
 
   write_html_top(file, title=title)
 
@@ -161,7 +173,7 @@ function(scanoneOutput, effects,
   append_caption(caption, file)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
-#  append_html_jscode(file, 'effectsData = ', effects_json, ';')
+  append_html_jscode(file, 'effectsData = ', effects_json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotMScanone_eff(scanoneData, effectsData, chartOpts);')
 

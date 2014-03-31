@@ -70,7 +70,10 @@ data(grav)
 grav <- calc.genoprob(grav, step=1)
 grav <- reduce2grid(grav)
 out <- scanone(grav, phe=seq(1, nphe(grav), by=5))
-iplotMScanone(out, title="iplotMScanone example")
+iplotMScanone(out, title="iplotMScanone example, no effects")
+
+eff <- estQTLeffects(grav, phe=seq(1, nphe(grav), by=5), what="effects")
+iplotMScanone(out, effects=eff, title="iplotMScanone example, with effects")
 }
 \seealso{
 \code{\link{iplotScanone}}

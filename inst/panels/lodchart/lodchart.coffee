@@ -47,19 +47,18 @@ lodchart = () ->
 
       # Update the inner dimensions.
       g = svg.select("g")
-          .attr("transform", "translate(#{margin.left},#{margin.top})")
 
       # box
       g.append("rect")
-       .attr("x", 0)
-       .attr("y", 0)
+       .attr("x", margin.left)
+       .attr("y", margin.top)
        .attr("height", height)
        .attr("width", width)
        .attr("fill", darkrect)
        .attr("stroke", "none")
 
       yscale.domain(ylim)
-            .range([height, margin.inner])
+            .range([height+margin.top, margin.top+margin.inner])
 
       # if yticks not provided, use nyticks to choose pretty ones
       yticks = yticks ? yscale.ticks(nyticks)
@@ -68,7 +67,7 @@ lodchart = () ->
       data = reorgLodData(data, lodvarname)
 
       # add chromosome scales (for x-axis)
-      data = chrscales(data, width, chrGap, 0, pad4heatmap)
+      data = chrscales(data, width, chrGap, margin.left, pad4heatmap)
       xscale = data.xscale
 
       # chr rectangles
@@ -81,7 +80,7 @@ lodchart = () ->
                  .attr("id", (d) -> "chrrect#{d}")
                  .attr("x", (d,i) -> data.chrStart[i]-chrGap/2)
                  .attr("width", (d,i) -> data.chrEnd[i] - data.chrStart[i]+chrGap)
-                 .attr("y", 0)
+                 .attr("y", margin.top)
                  .attr("height", height)
                  .attr("fill", (d,i) ->
                     return darkrect if i % 2
@@ -95,11 +94,11 @@ lodchart = () ->
            .enter()
            .append("text")
            .text((d) -> d)
-           .attr("x", (d,i) -> (data.chrStart[i]+data.chrEnd[i])/2)
-           .attr("y", height+axispos.xlabel)
+           .attr("x", (d,i) -> (data.chrStart[i]+data.chrEnd[i])/2+margin.left)
+           .attr("y", margin.top+height+axispos.xlabel)
       xaxis.append("text").attr("class", "title")
-           .attr("y", height+axispos.xtitle)
-           .attr("x", width/2)
+           .attr("y", margin.top+height+axispos.xtitle)
+           .attr("x", margin.left+width/2)
            .text(xlab)
 
       # y-axis
@@ -110,8 +109,8 @@ lodchart = () ->
            .append("line")
            .attr("y1", (d) -> yscale(d))
            .attr("y2", (d) -> yscale(d))
-           .attr("x1", 0)
-           .attr("x2", width)
+           .attr("x1", margin.left)
+           .attr("x2", margin.left+width)
            .attr("fill", "none")
            .attr("stroke", "white")
            .attr("stroke-width", 1)
@@ -121,13 +120,13 @@ lodchart = () ->
            .enter()
            .append("text")
            .attr("y", (d) -> yscale(d))
-           .attr("x", -axispos.ylabel)
+           .attr("x", margin.left-axispos.ylabel)
            .text((d) -> formatAxis(yticks)(d))
       yaxis.append("text").attr("class", "title")
-           .attr("y", height/2)
-           .attr("x", -axispos.ytitle)
+           .attr("y", margin.top+height/2)
+           .attr("x", margin.left-axispos.ytitle)
            .text(ylab)
-           .attr("transform", "rotate(270,#{-axispos.ytitle},#{height/2})")
+           .attr("transform", "rotate(270,#{margin.left-axispos.ytitle},#{margin.top+height/2})")
 
       # lod curves by chr
       lodcurve = (chr, lodcolumn) ->
@@ -194,14 +193,14 @@ lodchart = () ->
       # title
       titlegrp = g.append("g").attr("class", "title")
        .append("text")
-       .attr("x", width/2)
-       .attr("y", -titlepos)
+       .attr("x", margin.left+width/2)
+       .attr("y", margin.top-titlepos)
        .text(title)
 
       # another box around edge
       g.append("rect")
-       .attr("x", 0)
-       .attr("y", 0)
+       .attr("x", margin.left)
+       .attr("y", margin.top)
        .attr("height", height)
        .attr("width", width)
        .attr("fill", "none")

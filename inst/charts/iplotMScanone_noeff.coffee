@@ -68,8 +68,8 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
 
   lodcurve = (chr, lodcolumn) ->
           d3.svg.line()
-            .x((d) -> mylodchart.xscale()[chr](d)+margin.left)
-            .y((d,i) -> mylodchart.yscale()(lod_data.lodByChr[chr][i][lodcolumn])+margin.top)
+            .x((d) -> mylodchart.xscale()[chr](d))
+            .y((d,i) -> mylodchart.yscale()(lod_data.lodByChr[chr][i][lodcolumn]))
 
   lodchart_curves = null
   plotLodCurve = (lodcolumn) ->

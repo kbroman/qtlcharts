@@ -40,9 +40,9 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
   g_lodchart = svg.append("g").attr("transform", "translate(0," + (htop + margin.top + margin.bottom) + ")").attr("id", "lodchart").datum(lod_data).call(mylodchart);
   lodcurve = function(chr, lodcolumn) {
     return d3.svg.line().x(function(d) {
-      return mylodchart.xscale()[chr](d) + margin.left;
+      return mylodchart.xscale()[chr](d);
     }).y(function(d, i) {
-      return mylodchart.yscale()(lod_data.lodByChr[chr][i][lodcolumn]) + margin.top;
+      return mylodchart.yscale()(lod_data.lodByChr[chr][i][lodcolumn]);
     });
   };
   lodchart_curves = null;

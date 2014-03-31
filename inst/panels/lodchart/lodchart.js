@@ -49,12 +49,12 @@ lodchart = function() {
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
-      g = svg.select("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-      g.append("rect").attr("x", 0).attr("y", 0).attr("height", height).attr("width", width).attr("fill", darkrect).attr("stroke", "none");
-      yscale.domain(ylim).range([height, margin.inner]);
+      g = svg.select("g");
+      g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", darkrect).attr("stroke", "none");
+      yscale.domain(ylim).range([height + margin.top, margin.top + margin.inner]);
       yticks = yticks != null ? yticks : yscale.ticks(nyticks);
       data = reorgLodData(data, lodvarname);
-      data = chrscales(data, width, chrGap, 0, pad4heatmap);
+      data = chrscales(data, width, chrGap, margin.left, pad4heatmap);
       xscale = data.xscale;
       chrSelect = g.append("g").attr("class", "chrRect").selectAll("empty").data(data.chrnames).enter().append("rect").attr("id", function(d) {
         return "chrrect" + d;
@@ -62,7 +62,7 @@ lodchart = function() {
         return data.chrStart[i] - chrGap / 2;
       }).attr("width", function(d, i) {
         return data.chrEnd[i] - data.chrStart[i] + chrGap;
-      }).attr("y", 0).attr("height", height).attr("fill", function(d, i) {
+      }).attr("y", margin.top).attr("height", height).attr("fill", function(d, i) {
         if (i % 2) {
           return darkrect;
         }
@@ -72,21 +72,21 @@ lodchart = function() {
       xaxis.selectAll("empty").data(data.chrnames).enter().append("text").text(function(d) {
         return d;
       }).attr("x", function(d, i) {
-        return (data.chrStart[i] + data.chrEnd[i]) / 2;
-      }).attr("y", height + axispos.xlabel);
-      xaxis.append("text").attr("class", "title").attr("y", height + axispos.xtitle).attr("x", width / 2).text(xlab);
+        return (data.chrStart[i] + data.chrEnd[i]) / 2 + margin.left;
+      }).attr("y", margin.top + height + axispos.xlabel);
+      xaxis.append("text").attr("class", "title").attr("y", margin.top + height + axispos.xtitle).attr("x", margin.left + width / 2).text(xlab);
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.selectAll("empty").data(yticks).enter().append("line").attr("y1", function(d) {
         return yscale(d);
       }).attr("y2", function(d) {
         return yscale(d);
-      }).attr("x1", 0).attr("x2", width).attr("fill", "none").attr("stroke", "white").attr("stroke-width", 1).style("pointer-events", "none");
+      }).attr("x1", margin.left).attr("x2", margin.left + width).attr("fill", "none").attr("stroke", "white").attr("stroke-width", 1).style("pointer-events", "none");
       yaxis.selectAll("empty").data(yticks).enter().append("text").attr("y", function(d) {
         return yscale(d);
-      }).attr("x", -axispos.ylabel).text(function(d) {
+      }).attr("x", margin.left - axispos.ylabel).text(function(d) {
         return formatAxis(yticks)(d);
       });
-      yaxis.append("text").attr("class", "title").attr("y", height / 2).attr("x", -axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (-axispos.ytitle) + "," + (height / 2) + ")");
+      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
       lodcurve = function(chr, lodcolumn) {
         return d3.svg.line().x(function(d) {
           return xscale[chr](d);
@@ -127,8 +127,8 @@ lodchart = function() {
           return d3.select(this).attr("opacity", 0).call(markertip.hide);
         });
       }
-      titlegrp = g.append("g").attr("class", "title").append("text").attr("x", width / 2).attr("y", -titlepos).text(title);
-      return g.append("rect").attr("x", 0).attr("y", 0).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
+      titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + width / 2).attr("y", margin.top - titlepos).text(title);
+      return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });
   };
   chart.width = function(value) {

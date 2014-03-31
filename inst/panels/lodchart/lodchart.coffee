@@ -94,7 +94,7 @@ lodchart = () ->
            .enter()
            .append("text")
            .text((d) -> d)
-           .attr("x", (d,i) -> (data.chrStart[i]+data.chrEnd[i])/2+margin.left)
+           .attr("x", (d,i) -> (data.chrStart[i]+data.chrEnd[i])/2)
            .attr("y", margin.top+height+axispos.xlabel)
       xaxis.append("text").attr("class", "title")
            .attr("y", margin.top+height+axispos.xtitle)

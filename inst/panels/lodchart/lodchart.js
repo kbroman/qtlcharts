@@ -72,7 +72,7 @@ lodchart = function() {
       xaxis.selectAll("empty").data(data.chrnames).enter().append("text").text(function(d) {
         return d;
       }).attr("x", function(d, i) {
-        return (data.chrStart[i] + data.chrEnd[i]) / 2 + margin.left;
+        return (data.chrStart[i] + data.chrEnd[i]) / 2;
       }).attr("y", margin.top + height + axispos.xlabel);
       xaxis.append("text").attr("class", "title").attr("y", margin.top + height + axispos.xtitle).attr("x", margin.left + width / 2).text(xlab);
       yaxis = g.append("g").attr("class", "y axis");

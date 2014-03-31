@@ -20,7 +20,7 @@ text {
 
 .y.axis text.title {
   text-anchor: middle;
-  fill: blue;
+  fill: slateblue;
 }
 
 .x.axis text {
@@ -29,7 +29,7 @@ text {
 }
 
 .x.axis text.title {
-  fill: blue;
+  fill: slateblue;
 }
 
 line.axis.grid {

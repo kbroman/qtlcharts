@@ -45,7 +45,7 @@ function(cross, pheno.col=1, what=c("means", "effects"))
   
   what <- match.arg(what)
   handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid")
-  if(what == "effects" && is.na(match(crosstype, handled_crosses))) {
+  if(what == "effects" && !(crosstype %in% handled_crosses)) {
     warning("Can't calculate effects for cross type \"", crosstype, "\"; returning means.")
     what <- "means"
   }

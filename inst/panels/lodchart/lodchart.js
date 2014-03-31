@@ -2,7 +2,7 @@
 var lodchart;
 
 lodchart = function() {
-  var axispos, chart, chrGap, chrSelect, darkrect, height, lightrect, linecolor, linewidth, lodcurve, lodvarname, margin, markerSelect, nyticks, pad4heatmap, plotAll, pointcolor, pointsize, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
+  var axispos, chart, chrGap, chrSelect, darkrect, height, lightrect, linecolor, linewidth, lodcurve, lodvarname, margin, markerSelect, nyticks, pad4heatmap, pointcolor, pointsAtMarkers, pointsize, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
   width = 800;
   height = 500;
   margin = {
@@ -39,10 +39,10 @@ lodchart = function() {
   lodvarname = null;
   markerSelect = null;
   chrSelect = null;
-  plotAll = false;
+  pointsAtMarkers = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var chr, curves, g, gEnter, hiddenpoints, lodcolumn, lodvarnum, markerpoints, markertip, svg, titlegrp, xaxis, yaxis, _i, _j, _len, _len1, _ref, _ref1;
+      var chr, curves, g, gEnter, hiddenpoints, lodvarnum, markerpoints, markertip, svg, titlegrp, xaxis, yaxis, _i, _len, _ref;
       lodvarname = lodvarname != null ? lodvarname : data.lodnames[0];
       ylim = ylim != null ? ylim : [0, d3.max(data[lodvarname])];
       lodvarnum = data.lodnames.indexOf(lodvarname);
@@ -95,28 +95,20 @@ lodchart = function() {
         });
       };
       curves = g.append("g").attr("id", "curves");
-      if (plotAll) {
-        for (lodcolumn in data.lodnames) {
-          _ref = data.chrnames;
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            chr = _ref[_i];
-            curves.append("path").datum(data.posByChr[chr]).attr("class", "lodcurve" + lodcolumn).attr("d", lodcurve(chr, lodcolumn)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none").attr("opacity", 0);
-          }
-        }
-      } else {
-        _ref1 = data.chrnames;
-        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-          chr = _ref1[_j];
-          curves.append("path").datum(data.posByChr[chr]).attr("d", lodcurve(chr, lodvarnum)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none");
-        }
-        if (pointsize > 0) {
-          markerpoints = g.append("g").attr("id", "markerpoints_visible");
-          markerpoints.selectAll("empty").data(data.markers).enter().append("circle").attr("cx", function(d) {
-            return xscale[d.chr](d.pos);
-          }).attr("cy", function(d) {
-            return yscale(d.lod);
-          }).attr("r", pointsize).attr("fill", pointcolor).attr("pointer-events", "hidden");
-        }
+      _ref = data.chrnames;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        chr = _ref[_i];
+        curves.append("path").datum(data.posByChr[chr]).attr("d", lodcurve(chr, lodvarnum)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none");
+      }
+      if (pointsize > 0) {
+        markerpoints = g.append("g").attr("id", "markerpoints_visible");
+        markerpoints.selectAll("empty").data(data.markers).enter().append("circle").attr("cx", function(d) {
+          return xscale[d.chr](d.pos);
+        }).attr("cy", function(d) {
+          return yscale(d.lod);
+        }).attr("r", pointsize).attr("fill", pointcolor).attr("pointer-events", "hidden");
+      }
+      if (pointsAtMarkers) {
         hiddenpoints = g.append("g").attr("id", "markerpoints_hidden");
         markertip = d3.tip().attr('class', 'd3-tip').html(function(d) {
           return [d.name, " LOD = " + (d3.format('.2f')(d.lod))];
@@ -279,11 +271,11 @@ lodchart = function() {
     pad4heatmap = value;
     return chart;
   };
-  chart.plotAll = function(value) {
+  chart.pointsAtMarkers = function(value) {
     if (!arguments.length) {
-      return plotAll;
+      return pointsAtMarkers;
     }
-    plotAll = value;
+    pointsAtMarkers = value;
     return chart;
   };
   chart.yscale = function() {

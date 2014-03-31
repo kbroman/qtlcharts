@@ -26,7 +26,7 @@ lodchart = () ->
   lodvarname = null
   markerSelect = null
   chrSelect = null
-  plotAll = false
+  pointsAtMarkers = true
 
   ## the main function
   chart = (selection) ->
@@ -137,41 +137,29 @@ lodchart = () ->
 
       curves = g.append("g").attr("id", "curves")
 
-      if plotAll # plot all curves
-        for lodcolumn of data.lodnames
-          for chr in data.chrnames
-            curves.append("path")
-                  .datum(data.posByChr[chr])
-                  .attr("class", "lodcurve#{lodcolumn}")
-                  .attr("d", lodcurve(chr, lodcolumn))
-                  .attr("stroke", linecolor)
-                  .attr("fill", "none")
-                  .attr("stroke-width", linewidth)
-                  .style("pointer-events", "none")
-                  .attr("opacity", 0)
+      for chr in data.chrnames
+        curves.append("path")
+              .datum(data.posByChr[chr])
+              .attr("d", lodcurve(chr, lodvarnum))
+              .attr("stroke", linecolor)
+              .attr("fill", "none")
+              .attr("stroke-width", linewidth)
+              .style("pointer-events", "none")
 
-      else # just plot the selected curve
-        for chr in data.chrnames
-          curves.append("path")
-                .datum(data.posByChr[chr])
-                .attr("d", lodcurve(chr, lodvarnum))
-                .attr("stroke", linecolor)
-                .attr("fill", "none")
-                .attr("stroke-width", linewidth)
-                .style("pointer-events", "none")
+      # points at markers
+      if pointsize > 0
+        markerpoints = g.append("g").attr("id", "markerpoints_visible")
+        markerpoints.selectAll("empty")
+                    .data(data.markers)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", (d) -> xscale[d.chr](d.pos))
+                    .attr("cy", (d) -> yscale(d.lod))
+                    .attr("r", pointsize)
+                    .attr("fill", pointcolor)
+                    .attr("pointer-events", "hidden")
 
-        # points at markers
-        if pointsize > 0
-          markerpoints = g.append("g").attr("id", "markerpoints_visible")
-          markerpoints.selectAll("empty")
-                      .data(data.markers)
-                      .enter()
-                      .append("circle")
-                      .attr("cx", (d) -> xscale[d.chr](d.pos))
-                      .attr("cy", (d) -> yscale(d.lod))
-                      .attr("r", pointsize)
-                      .attr("fill", pointcolor)
-                      .attr("pointer-events", "hidden")
+      if pointsAtMarkers
         # these hidden points are what gets selected...a bit larger
         hiddenpoints = g.append("g").attr("id", "markerpoints_hidden")
 
@@ -185,23 +173,23 @@ lodchart = () ->
 
         markerSelect =
           hiddenpoints.selectAll("empty")
-                    .data(data.markers)
-                    .enter()
-                    .append("circle")
-                    .attr("cx", (d) -> xscale[d.chr](d.pos))
-                    .attr("cy", (d) -> yscale(d.lod))
-                    .attr("id", (d) -> d.name)
-                    .attr("r", d3.max([pointsize*2, 3]))
-                    .attr("opacity", 0)
-                    .attr("fill", pointcolor)
-                    .attr("stroke", "black")
-                    .attr("stroke-width", "1")
-                    .on "mouseover.paneltip", (d) ->
-                       d3.select(this).attr("opacity", 1)
-                       markertip.show(d)
-                    .on "mouseout.paneltip", ->
-                       d3.select(this).attr("opacity", 0)
-                       .call(markertip.hide)
+                      .data(data.markers)
+                      .enter()
+                      .append("circle")
+                      .attr("cx", (d) -> xscale[d.chr](d.pos))
+                      .attr("cy", (d) -> yscale(d.lod))
+                      .attr("id", (d) -> d.name)
+                      .attr("r", d3.max([pointsize*2, 3]))
+                      .attr("opacity", 0)
+                      .attr("fill", pointcolor)
+                      .attr("stroke", "black")
+                      .attr("stroke-width", "1")
+                      .on "mouseover.paneltip", (d) ->
+                         d3.select(this).attr("opacity", 1)
+                         markertip.show(d)
+                      .on "mouseout.paneltip", ->
+                         d3.select(this).attr("opacity", 0)
+                                        .call(markertip.hide)
 
       # title
       titlegrp = g.append("g").attr("class", "title")
@@ -321,9 +309,9 @@ lodchart = () ->
     pad4heatmap = value
     chart
 
-  chart.plotAll = (value) ->
-    return plotAll unless arguments.length
-    plotAll = value
+  chart.pointsAtMarkers = (value) ->
+    return pointsAtMarkers unless arguments.length
+    pointsAtMarkers = value
     chart
 
   chart.yscale = () ->

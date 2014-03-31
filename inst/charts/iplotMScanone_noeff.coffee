@@ -58,7 +58,7 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
                          .darkrect(darkrect)
                          .lightrect(lightrect)
                          .ylim([0, d3.max(mylodheatmap.zlim())])
-                         .plotAll(true)
+                         .pointsAtMarkers(false)
 
   g_lodchart = svg.append("g")
                   .attr("transform", "translate(0,#{htop+margin.top+margin.bottom})")
@@ -66,11 +66,28 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
                   .datum(lod_data)
                   .call(mylodchart)
 
+  lodcurve = (chr, lodcolumn) ->
+          d3.svg.line()
+            .x((d) -> mylodchart.xscale()[chr](d)+margin.left)
+            .y((d,i) -> mylodchart.yscale()(lod_data.lodByChr[chr][i][lodcolumn])+margin.top)
+
+  lodchart_curves = null
+  plotLodCurve = (lodcolumn) ->
+    lodchart_curves = g_lodchart.append("g").attr("id", "lodcurves")
+    for chr in lod_data.chrnames
+        lodchart_curves.append("path")
+                       .datum(lod_data.posByChr[chr])
+                       .attr("d", lodcurve(chr, lodcolumn))
+                       .attr("stroke", linecolor)
+                       .attr("fill", "none")
+                       .attr("stroke-width", linewidth)
+                       .style("pointer-events", "none")
+
   # rearrange data for curves of time x LOD
   lod4curves = {data:[]}
   for pos of lod_data.pos
-    y = (+i for i of lod_data.lodnames)
-    x = (lod_data[lodcolumn][pos] for lodcolumn in lod_data.lodnames)
+    y = (lod_data[lodcolumn][pos] for lodcolumn in lod_data.lodnames)
+    x = (+i for i of lod_data.lodnames)
     lod4curves.data.push({x:x, y:y})
 
   mycurvechart = curvechart().height(htop)
@@ -78,14 +95,16 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
                              .margin(margin)
                              .axispos(axispos)
                              .titlepos(titlepos)
-                             .xlab("LOD score")
-                             .ylab("")
+                             .xlab("")
+                             .ylab("LOD score")
                              .strokecolor("none")
                              .rectcolor(lightrect)
-                             .ylim([-0.5, lod_data.lodnames.length-0.5])
-                             .xlim([0, d3.max(mylodheatmap.zlim())])
-                             .nyticks(0)
+                             .xlim([-0.5, lod_data.lodnames.length-0.5])
+                             .ylim([0, d3.max(mylodheatmap.zlim())])
+                             .nxticks(0)
                              .commonX(false)
+
+
 
   g_curvechart = svg.append("g")
                     .attr("transform", "translate(#{wleft+margin.top+margin.bottom},0)")
@@ -107,13 +126,10 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
 
   mylodheatmap.cellSelect()
               .on "mouseover", (d) ->
-                       g_lodchart.selectAll("path.lodcurve#{d.lodindex}")
-                                 .attr("opacity", 1)
-                                 .attr("stroke", linecolor)
+                       plotLodCurve(d.lodindex)
                        g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}")
                                    .attr("opacity", 1)
               .on "mouseout", (d) ->
-                       g_lodchart.selectAll("path.lodcurve#{d.lodindex}")
-                                 .attr("opacity", 0)
+                       g_lodchart.select("g#lodcurves").remove()
                        g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}")
                                    .attr("opacity", 0)

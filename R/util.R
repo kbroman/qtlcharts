@@ -71,3 +71,18 @@ function(cross, pheno.col)
 
   as.matrix(phe)
 }
+
+# signed LOD scores
+calcSignedLOD <-
+function(scanoneOutput, effects)
+{
+  stopifnot(length(effects) == nrow(scanoneOutput))
+  stopifnot(all(vapply(effects, nrow, 1) == ncol(scanoneOutput)-2))
+
+  for(i in seq(along=effects)) {
+    if(colnames(effects[[i]])[1] == "a")
+      scanoneOutput[i,-(1:2)] <- scanoneOutput[i,-(1:2)]*ifelse(effects[[i]][,1] < 0, -1, +1)
+  }
+
+  scanoneOutput
+}

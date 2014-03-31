@@ -60,3 +60,21 @@ test_that("extractPheno works", {
   expect_equivalent( extractPheno(grav, qtl::phenames(grav) == "T240"), as.matrix(grav$pheno[,"T240",drop=FALSE]) )
 
 })
+
+test_that("calcSignedLOD works", {
+
+  scanout <- data.frame(chr=c("1", "2", "3"), pos=rep(0,3),
+                        lod1=1:3, lod2=4:6, lod3=7:9)
+  class(scanout) <- c("scanone", "data.frame")
+
+  eff <- list(cbind("a"=c(1, -1,  0.0), "d"=c(0, 1, 0)),
+              cbind("a"=c(-1, 1, -0.2)),
+              cbind("a"=c(1, -1,  0.2)))
+
+  signedscanout <- data.frame(chr=c("1", "2", "3"), pos=rep(0,3),
+                              lod1=c(1,-2,3), lod2=c(-4,5,-6), lod3=c(7,-8,9))
+  class(signedscanout) <- c("scanone", "data.frame")
+
+  expect_equal( calcSignedLOD(scanout, eff), signedscanout )
+
+})

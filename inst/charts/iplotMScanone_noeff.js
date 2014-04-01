@@ -116,7 +116,7 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
     g_curvechart.select("g.title text").text("" + d.chr + "@" + p);
     return g_curvechart.select("text#xaxis" + d.lodindex).attr("opacity", 1);
   }).on("mouseout", function(d) {
-    g_lodchart.select("g#lodcurves").remove();
+    lodchart_curves.remove();
     g_lodchart.select("g.title text").text("");
     g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("opacity", 0);
     g_curvechart.select("g.title text").text("");

@@ -66,11 +66,13 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
                   .datum(lod_data)
                   .call(mylodchart)
 
+  # function for lod curve path
   lodcurve = (chr, lodcolumn) ->
           d3.svg.line()
             .x((d) -> mylodchart.xscale()[chr](d))
             .y((d,i) -> mylodchart.yscale()(lod_data.lodByChr[chr][i][lodcolumn]))
 
+  # plot lod curves for selected lod column
   lodchart_curves = null
   plotLodCurve = (lodcolumn) ->
     lodchart_curves = g_lodchart.append("g").attr("id", "lodcurves")
@@ -145,7 +147,7 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
                        g_curvechart.select("g.title text").text("#{d.chr}@#{p}")
                        g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 1)
               .on "mouseout", (d) ->
-                       g_lodchart.select("g#lodcurves").remove()
+                       lodchart_curves.remove()
                        g_lodchart.select("g.title text").text("")
                        g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}")
                                    .attr("opacity", 0)

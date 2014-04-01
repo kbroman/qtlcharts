@@ -211,17 +211,19 @@ function(effects, ...)
   names(effects) <- NULL
   for(i in seq(along=effects)) {
     cn <- colnames(effects[[i]])
+    nr <- nrow(effects[[i]])
 
     # make sure it's not a scalar
     if(length(cn)==1) cn <- list(cn)
 
-    dimnames(effects[[i]]) <- NULL
-    effects[[i]] <- t(effects[[i]])
+    eff <- effects[[i]]
+    dimnames(eff) <- NULL
+    eff <- t(eff)
 
-    # make sure we don't lose the rows
-    if(nrow(effects[[i]]) == 1) effects[[i]] <- list(effects[[i]])
+    # make sure it's not a scalar
+    if(all(dim(eff)==1)) eff <- list(eff)
 
-    effects[[i]] <- list(effects=effects[[i]], names=cn)
+    effects[[i]] <- list(data=eff, x=(1:nr)-1, names=cn)
   }
 
   RJSONIO::toJSON(effects, ...)

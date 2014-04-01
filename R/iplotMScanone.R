@@ -96,7 +96,7 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
     crosstype <- class(cross)[1]
     handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid") # handled for add/dom effects
     what <- ifelse(crosstype %in% handled_crosses, "effects", "means")
-    effects <- estQTLEffects(cross, pheno.col, what=what)
+    effects <- estQTLeffects(cross, pheno.col, what=what)
   }
 
   stopifnot(length(effects) == nrow(scanoneOutput))

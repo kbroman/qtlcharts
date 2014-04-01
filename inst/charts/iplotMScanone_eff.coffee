@@ -1,7 +1,7 @@
 # iplotMScanone_eff: image of lod curves linked to plot of lod curves
 # Karl W Broman
 
-mycurvechart = null
+plotLines = null
 
 iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
 
@@ -19,8 +19,12 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
   colors = chartOpts?.colors ? ["slateblue", "white", "crimson"]
   zlim = chartOpts?.zlim ? null
   zthresh = chartOpts?.zthresh ? null
+  eff_ylim = chartOpts?.eff_ylim ? null
+  eff_ylab = chartOpts?.eff_ylab ? ""
   linecolor = chartOpts?.linecolor ? "darkslateblue"
+  eff_linecolor = chartOpts?.eff_linearcolor ? null
   linewidth = chartOpts?.linewidth ? 2
+  eff_linecolors = chartOpts?.eff_linecolors ? null
   # chartOpts end
 
   totalh = htop + hbot + 2*(margin.top + margin.bottom)
@@ -66,11 +70,13 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
                   .datum(lod_data)
                   .call(mylodchart)
 
+  # function for lod curve path
   lodcurve = (chr, lodcolumn) ->
           d3.svg.line()
             .x((d) -> mylodchart.xscale()[chr](d))
             .y((d,i) -> mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn])))
 
+  # plot lod curves for selected LOD column
   lodchart_curves = null
   plotLodCurve = (lodcolumn) ->
     lodchart_curves = g_lodchart.append("g").attr("id", "lodcurves")
@@ -83,12 +89,9 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
                        .attr("stroke-width", linewidth)
                        .style("pointer-events", "none")
 
-  # rearrange data for curves of time x LOD
-  lod4curves = {data:[]}
-  for pos of lod_data.pos
-    y = (Math.abs(lod_data[lodcolumn][pos]) for lodcolumn in lod_data.lodnames)
-    x = (+i for i of lod_data.lodnames)
-    lod4curves.data.push({x:x, y:y})
+  eff_ylim = eff_ylim ? matrixExtent(eff_data.map((d) -> matrixExtent(d.data)))
+  eff_nlines = d3.max(eff_data.map((d) -> d.names.length))
+  eff_linecolor = eff_linecolor ? selectGroupColors(eff_nlines, "dark")
 
   mycurvechart = curvechart().height(htop)
                              .width(wright)
@@ -96,19 +99,37 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
                              .axispos(axispos)
                              .titlepos(titlepos)
                              .xlab("")
-                             .ylab("LOD score")
+                             .ylab(eff_ylab)
                              .strokecolor("none")
                              .rectcolor(lightrect)
                              .xlim([-0.5, lod_data.lodnames.length-0.5])
-                             .ylim([0, d3.max(mylodheatmap.zlim())])
+                             .ylim(eff_ylim)
                              .nxticks(0)
-                             .commonX(false)
+                             .commonX(true)
 
   g_curvechart = svg.append("g")
                     .attr("transform", "translate(#{wleft+margin.top+margin.bottom},0)")
-                    .attr("id", "curvehart")
-                    .datum(lod4curves)
+                    .attr("id", "curvechart")
+                    .datum(eff_data[0])
                     .call(mycurvechart)
+
+  # function for eff curve path
+  effcurve = (posindex, column) ->
+          d3.svg.line()
+            .x((d) -> mycurvechart.xscale()(d))
+            .y((d,i) -> mycurvechart.yscale()(eff_data[posindex].data[column][i]))
+
+  # plot effect curves for a given position
+  effchart_curves = null
+  plotEffCurves = (posindex) ->
+    effchart_curves = g_curvechart.append("g").attr("id", "curves")
+    for curveindex of eff_data[posindex].names
+      effchart_curves.append("path")
+            .datum(eff_data[posindex].x)
+            .attr("d", effcurve(posindex,curveindex))
+            .attr("fill", "none")
+            .attr("stroke", eff_linecolor[curveindex])
+            .attr("stroke-width", linewidth)
 
   # add X axis
   curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
@@ -122,6 +143,7 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
                                  .text((d) -> d)
                                  .attr("opacity", 0)
 
+  # hash for [chr][pos] -> posindex
   posindex = {}
   curindex = 0
   for chr in lod_data.chrnames
@@ -138,15 +160,13 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
               .on "mouseover", (d) ->
                        plotLodCurve(d.lodindex)
                        g_lodchart.select("g.title text").text("#{lod_data.lodnames[d.lodindex]}")
-                       g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}")
-                                   .attr("opacity", 1)
+                       plotEffCurves(posindex[d.chr][d.pos])
                        p = d3.format(".1f")(d.pos)
                        g_curvechart.select("g.title text").text("#{d.chr}@#{p}")
                        g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 1)
               .on "mouseout", (d) ->
-                       g_lodchart.select("g#lodcurves").remove()
+                       lodchart_curves.remove()
                        g_lodchart.select("g.title text").text("")
-                       g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}")
-                                   .attr("opacity", 0)
+                       effchart_curves.remove()
                        g_curvechart.select("g.title text").text("")
                        g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 0)

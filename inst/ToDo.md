@@ -2,11 +2,7 @@
 
 ### In process
 
-- iplotMScanone: chr rectangles slightly off
-- iplotMScanone_noeff: axis labels on upper-right panel
-- iplotMScanone_eff (need haley-knott version of effectscan in R/qtl?)
 - iplotMScanone: qualitative vs quantitative axes
-
 
 
 ### Bugs

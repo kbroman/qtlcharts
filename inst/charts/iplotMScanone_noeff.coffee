@@ -122,6 +122,7 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
                                  .text((d) -> d)
                                  .attr("opacity", 0)
 
+  # hash for [chr][pos] -> posindex
   posindex = {}
   curindex = 0
   for chr in lod_data.chrnames

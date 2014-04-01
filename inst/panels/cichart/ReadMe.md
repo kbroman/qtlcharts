@@ -1,6 +1,6 @@
-### Reusable CI chart (plot of estimates and confidence intervals for a set of categories)
+### Reusable CI chart
 
-A reusable chart for making a CI chart, following
+A reusable chart for making a CI chart (plot of estimates and confidence intervals for a set of categories), following
 [Mike Bostock](http://bost.ocks.org/mike)'s
 [Towards Reuseable Charts](http://bost.ocks.org/mike/chart/).
 

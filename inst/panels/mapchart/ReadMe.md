@@ -1,4 +1,4 @@
-### Reusable mapchart
+### Reusable marker map chart
 
 A reusable chart for making a genetic marker map,
 following

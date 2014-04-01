@@ -1,4 +1,4 @@
-### Reusable scatterplot
+### Reusable curve chart
 
 A reusable chart for making a chart with multiple curves
 following

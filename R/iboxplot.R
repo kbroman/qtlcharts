@@ -1,4 +1,4 @@
-## manyboxplots
+## iboxplot
 ## Karl W Broman
 
 #' Modern boxplot linked to underlying histrograms
@@ -26,7 +26,7 @@
 #' @return Character string with the name of the file created.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{corr_w_scatter}}
+#' @seealso \code{\link{iplotCorr}}
 #'
 #' @examples
 #' n.ind <- 500
@@ -34,11 +34,11 @@
 #' expr <- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
 #' dimnames(expr) <- list(paste0("ind", 1:n.ind),
 #'                        paste0("gene", 1:n.gene))
-#' manyboxplots(expr, title="manyboxplots example",
+#' iboxplot(expr, title="iboxplot example",
 #'              chartOpts=list(xlab="Mice", ylab="Gene expression"))
 #'
 #' @export
-manyboxplots <-
+iboxplot <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
          file, onefile=FALSE, openfile=TRUE, title="Many box plots",
          caption, chartOpts=NULL)
@@ -50,7 +50,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
   if(file.exists(file))
     stop('The file already exists; please remove it first: ', file)
 
-  json <- convert4manyboxplots(dat, qu, orderByMedian, breaks)
+  json <- convert4iboxplot(dat, qu, orderByMedian, breaks)
 
   # start writing
   write_html_top(file, title=title)
@@ -58,7 +58,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
   link_d3(file, onefile=onefile)
   link_d3tip(file, onefile=onefile)
   link_panelutil(file, onefile=onefile)
-  link_chart('manyboxplots', file, onefile=onefile)
+  link_chart('iboxplot', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')
 
@@ -72,7 +72,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
 
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)
-  append_html_jscode(file, 'manyboxplots(data, chartOpts);')
+  append_html_jscode(file, 'iboxplot(data, chartOpts);')
 
   append_html_bottom(file)
 

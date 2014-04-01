@@ -48,7 +48,7 @@
 - iplotScanone_pxg: same jitter values throughout; animate transitions
   if same chromosome class (same x-axis): need a redraw function
 
-- curves_w_scatter
+- iplotCurves
   - allow either brush or mouseover
 
 
@@ -65,9 +65,9 @@
 - Set of QTL intervals on a genetic map plot, linked to the LOD curves
 - cis/trans figure, with slider for selecting a band of LOD scores
 - Interactive 2d scan plot
-- curves_w_heatmap: heatmap of multiple curves linked to curvechart
+- iheatmapCurves: heatmap of multiple curves linked to curvechart
 - heat map with slices
-- corr_w_scatter: also include plots with slices of the correlation matrix?
+- iplotCorr: also include plots with slices of the correlation matrix?
 
 
 

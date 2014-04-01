@@ -1,9 +1,9 @@
-# corr_w_scatter.coffee
+# iplotCorr.coffee
 #
 # Left panel is a heat map of a correlation matrix; hover over pixels
 # to see the values; click to see the corresponding scatterplot on the right
 
-corr_w_scatter = (data, chartOpts) ->
+iplotCorr = (data, chartOpts) ->
 
   # chartOpts start
   height = chartOpts?.height ? 450

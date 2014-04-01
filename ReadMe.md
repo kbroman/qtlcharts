@@ -62,7 +62,7 @@ out <- scanone(hyper)
 iplotScanone(out, hyper)
 ```
 
-Also try `corr_w_scatter`, an image of a correlation matrix (for the
+Also try `iplotCorr`, an image of a correlation matrix (for the
 gene expression of a set of 100 genes) linked to the underlying
 scatterplots, with the points in the scatterplot colored by their
 genotype at a QTL:
@@ -70,10 +70,10 @@ genotype at a QTL:
 ```S
 library(qtlcharts)
 data(geneExpr)
-corr_w_scatter(geneExpr$expr, geneExpr$genotype)
+iplotCorr(geneExpr$expr, geneExpr$genotype)
 ```
 
-Finally, try `manyboxplots`, a plot of the quantiles of many
+Finally, try `iboxplot`, a plot of the quantiles of many
 distributions, linked to the underlying histograms.
 
 ```S
@@ -85,7 +85,7 @@ expr <- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
 dimnames(expr) <- list(paste0("ind", 1:n.ind),
                        paste0("gene", 1:n.gene))
 # generate the plot
-manyboxplots(expr)
+iboxplot(expr)
 ```
 
 #### Licenses

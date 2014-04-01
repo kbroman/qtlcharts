@@ -51,12 +51,12 @@ ${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
 json: ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json ${HEATMAP_TESTDIR}/data.json ${LODHEATMAP_TESTDIR}/data.json
 
 ${PANEL_DIR}/%/test/data.json: ${PANEL_DIR}/%/test/create_test_data.R
-	cd $(@D);R CMD BATCH $(<F)
+	cd $(@D);R CMD BATCH --no-save $(<F)
 
 #------------------------------------------------------------
 
 # javascript for the real charts
-jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${CHART_DIR}/iplotScanone_ci.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/corr_w_scatter.js ${CHART_DIR}/manyboxplots.js ${CHART_DIR}/curves_w_scatter.js ${CHART_DIR}/iplotMap.js ${CHART_DIR}/iplotMScanone_noeff.js ${CHART_DIR}/iplotMScanone_eff.js
+jscharts: ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js ${CHART_DIR}/iplotScanone_ci.js ${CHART_DIR}/iplotPXG.js ${CHART_DIR}/iplotCorr.js ${CHART_DIR}/iboxplot.js ${CHART_DIR}/iplotCurves.js ${CHART_DIR}/iplotMap.js ${CHART_DIR}/iplotMScanone_noeff.js ${CHART_DIR}/iplotMScanone_eff.js
 
 ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
 	coffee ${COFFEE_ARGS} -b $^

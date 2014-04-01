@@ -1,7 +1,7 @@
-## convert4manyboxplots
+## convert4iboxplot
 ## Karl W Broman
 
-# Convert data to JSON format for manyboxplots vis
+# Convert data to JSON format for iboxplot vis
 #
 # @param dat Data matrix (individuals x variables)
 # @param qu Quantiles to plot (All with 0 < qu < 0.5)
@@ -13,7 +13,7 @@
 #' @importFrom RJSONIO toJSON
 #
 # @keywords interface
-# @seealso \code{\link{manyboxplots}}
+# @seealso \code{\link{iboxplot}}
 #
 # @examples
 # \dontrun{
@@ -22,9 +22,9 @@
 # expr <- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
 # dimnames(expr) <- list(paste0("ind", 1:n.ind),
 #                        paste0("gene", 1:n.gene))
-# geneExpr_as_json <- convert4manyboxplots(expr)
+# geneExpr_as_json <- convert4iboxplot(expr)
 # }
-convert4manyboxplots <-
+convert4iboxplot <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
          breaks=251)
 {

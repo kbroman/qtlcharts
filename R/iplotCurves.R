@@ -1,4 +1,4 @@
-## curves_w_scatter.R
+## iplotCurves.R
 ## Karl W Broman
 
 #' Plot of a bunch of curves, linked to points in scatterplots
@@ -33,7 +33,7 @@
 #' @return Character string with the name of the file created.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{corr_w_scatter}}
+#' @seealso \code{\link{iplotCorr}}
 #'
 #' @examples
 #' # random growth curves, based on some data
@@ -51,15 +51,15 @@
 #' y <- y + rnorm(prod(dim(y)), 0, 0.35)
 #'
 #' # Make the plot
-#' curves_w_scatter(y, times, y[,c(1,5)], y[,c(5,16)],
-#'                  title = "curves_w_scatter example",
+#' iplotCurves(y, times, y[,c(1,5)], y[,c(5,16)],
+#'                  title = "iplotCurves example",
 #'                  chartOpts=list(curves_xlab="Time", curves_ylab="Size",
 #'                                 scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
 #'                                 scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))
 #'
 #' @export
 #' @importFrom RJSONIO toJSON
-curves_w_scatter <- 
+iplotCurves <- 
 function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          chartOpts=NULL, ...)
@@ -102,7 +102,7 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
   link_panelutil(file, onefile=onefile)
   link_panel('curvechart', file, onefile=onefile)
   link_panel('scatterplot', file, onefile=onefile)
-  link_chart('curves_w_scatter', file, onefile=onefile)
+  link_chart('iplotCurves', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')
 
@@ -129,7 +129,7 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
   append_html_jscode(file, 'scatter2_data = ', scat2_json, ';')
   append_html_chartopts(file, chartOpts)
 
-  append_html_jscode(file, 'curves_w_scatter(curve_data, scatter1_data, scatter2_data, chartOpts)')
+  append_html_jscode(file, 'iplotCurves(curve_data, scatter1_data, scatter2_data, chartOpts)')
 
   append_html_bottom(file)
 

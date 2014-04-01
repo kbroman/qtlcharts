@@ -1,4 +1,4 @@
-## corr_w_scatter
+## iplotCorr
 ## Karl W Broman
 
 #' Image of correlation matrix with linked scatterplot
@@ -41,16 +41,16 @@
 #' \code{names(group)}.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{curves_w_scatter}}
+#' @seealso \code{\link{iplotCurves}}
 #' 
 #' @examples
 #' data(geneExpr)
-#' corr_w_scatter(geneExpr$expr, geneExpr$genotype,
-#'                title = "corr_w_scatter example",
+#' iplotCorr(geneExpr$expr, geneExpr$genotype,
+#'                title = "iplotCorr example",
 #'                chartOpts=list(cortitle="Correlation matrix",
 #'                               scattitle="Scatterplot"))
 #' @export
-corr_w_scatter <-
+iplotCorr <-
 function(mat, group, rows, cols, reorder=TRUE, corr=cor(mat, use="pairwise.complete.obs"),
          file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot",
          caption, chartOpts=NULL)
@@ -82,7 +82,7 @@ function(mat, group, rows, cols, reorder=TRUE, corr=cor(mat, use="pairwise.compl
     corr_was_presubset <- FALSE
   }
  
-  json <- convert4corrwscatter(mat, group, rows, cols, reorder, corr, corr_was_presubset)
+  json <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset)
 
   # start writing
   write_html_top(file, title=title)
@@ -91,7 +91,7 @@ function(mat, group, rows, cols, reorder=TRUE, corr=cor(mat, use="pairwise.compl
   link_d3(file, onefile=onefile)
   link_d3tip(file, onefile=onefile)
   link_panelutil(file, onefile=onefile)
-  link_chart('corr_w_scatter', file, onefile=onefile)
+  link_chart('iplotCorr', file, onefile=onefile)
 
   append_html_middle(file, title, 'chart')
 
@@ -103,7 +103,7 @@ function(mat, group, rows, cols, reorder=TRUE, corr=cor(mat, use="pairwise.compl
 
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)
-  append_html_jscode(file, 'corr_w_scatter(data, chartOpts);')
+  append_html_jscode(file, 'iplotCorr(data, chartOpts);')
 
   append_html_bottom(file)
 

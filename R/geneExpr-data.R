@@ -17,8 +17,7 @@
 #' @keywords datasets
 #'
 #' @examples
-#' \dontrun{
 #' data(geneExpr)
-#' corr_w_scatter(geneExpr$expr, geneExpr$genotype)
-#' }
+#' iplotCorr(geneExpr$expr, geneExpr$genotype,
+#'           title="geneExpr correlations linked to scatterplots")
 NULL

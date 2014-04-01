@@ -1,7 +1,7 @@
-## convert4corrwscatter
+## convert4iplotcorr
 ## Karl W Broman
 
-# Convert data to JSON format for corr_w_scatter vis
+# Convert data to JSON format for iplotCorr vis
 #
 # @param dat Data matrix (individuals x variables)
 # @param group Optional vector of groups of individuals (e.g., a genotype)
@@ -15,14 +15,14 @@
 #' @importFrom RJSONIO toJSON
 #
 # @keywords interface
-# @seealso \code{\link{corr_w_scatter}}
+# @seealso \code{\link{iplotCorr}}
 #
 # @examples
 # \dontrun{
 # data(geneExpr)
-# geneExpr_as_json <- convert4corrwscatter(geneExpr$expr, geneExpr$genotype)
+# geneExpr_as_json <- convert4iplotcorr(geneExpr$expr, geneExpr$genotype)
 # }
-convert4corrwscatter <-
+convert4iplotcorr <-
 function(dat, group, rows, cols, reorder=TRUE, corr, corr_was_presubset=FALSE)
 {
   indID <- rownames(dat)

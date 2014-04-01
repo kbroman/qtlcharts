@@ -1,7 +1,7 @@
-# curves_w_scatter: Plot of a bunch of curves, linked to points in 0, 1, or 2 scatterplots
+# iplotCurves: Plot of a bunch of curves, linked to points in 0, 1, or 2 scatterplots
 # Karl W Broman
 
-curves_w_scatter = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
+iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
 
   # chartOpts start
   htop = chartOpts?.htop ? 500 # height of curves chart

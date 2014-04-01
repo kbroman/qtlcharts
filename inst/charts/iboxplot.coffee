@@ -1,4 +1,4 @@
-# manyboxplots.coffee
+# iboxplot.coffee
 #
 # Top panel is like a set of n box plots:
 #   lines are drawn at the 0.1, 1, 10, 25, 50, 75, 90, 99, 99.9 percentiles
@@ -7,7 +7,7 @@
 #   is show below; click for it to persist; click again to make it go away.
 #
 
-manyboxplots = (data, chartOpts) ->
+iboxplot = (data, chartOpts) ->
 
   # chartOpts start
   width = chartOpts?.width ? 1000

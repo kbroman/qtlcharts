@@ -14,10 +14,9 @@ genes all influenced by a common locus, plus a vector of genotypes
 for the 491 individuals.
 }
 \examples{
-\dontrun{
 data(geneExpr)
-corr_w_scatter(geneExpr$expr, geneExpr$genotype)
-}
+iplotCorr(geneExpr$expr, geneExpr$genotype,
+          title="geneExpr correlations linked to scatterplots")
 }
 \author{
 Karl W Broman, 2013-05-16

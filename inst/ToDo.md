@@ -2,7 +2,9 @@
 
 ### In process
 
+- iplotMScanone w/ effects: label effect curves (in right margin?)
 - iplotMScanone: qualitative vs quantitative axes
+
 
 
 ### Bugs

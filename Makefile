@@ -1,10 +1,22 @@
-# Makefile for moving stuff from qtlcharts to kbroman.github.io/qtlcharts
+
+all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer
+
+# Examples
+CHARTEX = assets/chartexamples
+
+chartexamples: ${CHARTEX}/iboxplot_example.html
+
+${CHARTEX}/iboxplot_example.html: ${CHARTEX}/R/iboxplot_example.R ${CHARTEX}/R/hypo.RData
+	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+
+#------------------------------------------------------------
+
+# All of the stuff below is for moving stuff from qtlcharts to its web page
 #     This is the gh-pages branch
 #     I assume that ../qtlcharts is the master (or devel) branch
 
 # This is probably overly complicated, but it seems to work.
 
-all: jspanels jspaneltests json testhtml d3 d3tip colorbrewer
 
 THIS = assets/panels
 QTLCHARTS = ../qtlcharts/inst/panels

@@ -1,6 +1,6 @@
 Package: qtlcharts
-Version: 0.2-2
-Date: 1 Apr 2014
+Version: 0.2-3
+Date: 2 Apr 2014
 Title: Interactive graphics for QTL experiments
 Author: Karl W Broman <kbroman@biostat.wisc.edu>
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
@@ -19,4 +19,4 @@ Suggests:
     roxygen2,
     testthat
 License: MIT + file LICENSE
-URL: http://github.com/kbroman/qtlcharts
+URL: http://kbroman.github.io/qtlcharts

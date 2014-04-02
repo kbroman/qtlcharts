@@ -43,6 +43,16 @@
 
 ### Enhancements to current charts
 
+- Allow separate inner margins on top and bottom (and left and right?)
+
+  something like this:
+
+      inner_bottom = (margin, value=5) -> margin?.inner_bottom ? margin?.inner ? value
+      margin.inner_bottom = inner_bottom(margin)
+      margin.inner_bottom = inner_bottom(margin, 0)
+      
+      also make inner_top, inner_left, inner_right functions
+
 - lodchart: optional inclusion of ticks at markers
 
 - iplotScanone_pxg: same jitter values throughout; animate transitions

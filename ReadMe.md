@@ -8,7 +8,7 @@ with the [R/qtl](http://www.rqtl.org) package.
 
 This
 [gh-pages branch](https://github.com/kbroman/qtlcharts/tree/gh-pages)
-is the source for the corresponding web site.
+is the source for the corresponding [web site](http://kbroman.github.io/qtlcharts).
 
 R/qtlcharts source: [github.com/kbroman/qtlcharts](http://github.com/kbroman/qtlcharts)
 

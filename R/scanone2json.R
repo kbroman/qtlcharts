@@ -22,8 +22,8 @@
 #
 # @examples
 # data(hyper)
-# hyper <- calc.genoprob(hyper)
-# out <- scanone(hyper, method="hk")
+# hyper <- calc.genoprob(hyper, step=1)
+# out <- scanone(hyper)
 # out_as_json <- scanone2json(out)
 scanone2json <-
 function(output, ...)

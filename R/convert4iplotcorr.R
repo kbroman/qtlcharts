@@ -18,10 +18,8 @@
 # @seealso \code{\link{iplotCorr}}
 #
 # @examples
-# \dontrun{
 # data(geneExpr)
 # geneExpr_as_json <- convert4iplotcorr(geneExpr$expr, geneExpr$genotype)
-# }
 convert4iplotcorr <-
 function(dat, group, rows, cols, reorder=TRUE, corr, corr_was_presubset=FALSE)
 {

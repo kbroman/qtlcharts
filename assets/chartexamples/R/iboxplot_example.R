@@ -13,7 +13,8 @@ file <- "../iboxplot_example.html"
 if(file.exists(file)) unlink(file)
 
 # onefile=TRUE makes the resulting html file all-inclusive (javascript + css + data)
+#     this is a bit wasteful of space, but it's easy
 iboxplot(hypo, title="iboxplot example", chartOpts=list(xlab="Mice", ylab="Gene expression"),
-         orderByMedian=FALSE, onefile=TRUE, openfile=TRUE, file=file,
+         orderByMedian=FALSE, onefile=TRUE, openfile=FALSE, file=file,
          qu=c(0.01, 0.1, 0.25))
          

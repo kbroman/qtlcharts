@@ -18,6 +18,10 @@ author :
 
 production_url : http://kbroman.github.io/qtlcharts
 
+# Tell Github to use the Kramdown markdown interpreter
+# (see https://help.github.com/articles/migrating-your-pages-site-from-maruku)
+markdown: kramdown
+
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
 JB :

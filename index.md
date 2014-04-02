@@ -1,7 +1,7 @@
 ---
 layout: page
 title: R/qtlcharts
-tagline: D3-based interactive charts for xQTL data
+tagline: Interactive charts for xQTL data
 ---
 
 R/qtlcharts is an [R](http://www.r-project.org) package to create

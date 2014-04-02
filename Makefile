@@ -68,22 +68,3 @@ clean:
 	rm ${PANEL_DIR}/*/*.js ${PANEL_DIR}/*/test/*.js ${PANEL_DIR}/*/test/*.json ${CHART_DIR}/*.js
 
 #------------------------------------------------------------
-
-web:
-	scp ${PANEL_DIR}/panelutil.* broman-2:public_html/D3/panels/
-	scp ${LODCHART_DIR}/lodchart.* broman-2:public_html/D3/panels/lodchart/
-	cd ${LODCHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/lodchart/test/
-	scp ${SCATTERPLOT_DIR}/scatterplot.* broman-2:public_html/D3/panels/scatterplot/
-	cd ${SCATTERPLOT_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/scatterplot/test/
-	scp ${DOTCHART_DIR}/dotchart.* broman-2:public_html/D3/panels/dotchart/
-	cd ${DOTCHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/dotchart/test/
-	scp ${CICHART_DIR}/cichart.* broman-2:public_html/D3/panels/cichart/
-	cd ${CICHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/cichart/test/
-	scp ${CURVECHART_DIR}/curvechart.* broman-2:public_html/D3/panels/curvechart/
-	cd ${CURVECHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/curvechart/test/
-	scp ${MAPCHART_DIR}/mapchart.* broman-2:public_html/D3/panels/mapchart/
-	cd ${MAPCHART_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/mapchart/test/
-	scp ${HEATMAP_DIR}/heatmap.* broman-2:public_html/D3/panels/heatmap/
-	cd ${HEATMAP_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/heatmap/test/
-	scp ${LODHEATMAP_DIR}/lodheatmap.* broman-2:public_html/D3/panels/lodheatmap/
-	cd ${LODHEATMAP_TESTDIR};scp *.js *.json index.html broman-2:public_html/D3/panels/lodheatmap/test/

@@ -20,33 +20,31 @@ For example charts, see the [R/qtlcharts web page](http://kbroman.github.io/qtlc
 
 #### Installation
 
-You first need to install [R/qtl](http://www.rqtl.org) and the
-[RJSONIO](http://cran.r-project.org/web/packages/RJSONIO/index.html)
-package:
+R/qtlcharts is early in development and so is not yet available on
+[CRAN](http://cran.r-project.org).
+
+You can install R/qtlcharts from its
+[GitHub repository](http://github.com/kbroman/qtlcharts). You first need to
+install the [R/qtl](http://www.rqtl.org),
+[RJSONIO](http://cran.r-project.org/web/packages/RJSONIO),
+and [devtools](https://github.com/hadley/devtools) packages.
 
 ```S
-if(!require(qtl)) install.packages("qtl")
-if(!require(RJSONIO)) install.packages("RJSONIO")
+install.packages(c("qtl", "RJSONIO", "devtools"))
 ```
 
-You also need the `install_github` function in
-[Hadley Wickham](http://had.co.nz/)'s [devtools](http://github.com/hadley/devtools) package. So install
-and load devtools:
+Then install R/qtlcharts using the `install_github` function in the
+[devtools](http://github.com/hadley/devtools) package.
 
 ```S
-if(!require(devtools)) install.packages("devtools")
 library(devtools)
-```
-
-Finally, use `install_github` function to install R/qtlcharts:
-
-```S
 install_github("kbroman/qtlcharts")
 ```
 
 If that doesn't work, you might have an older version of devtools, so try:
 
 ```S
+library(devtools)
 install_github("qtlcharts", "kbroman")
 ```
 
@@ -98,4 +96,3 @@ R/qtlcharts incorporates [D3.js](http://d3js.org)
 [d3.tip](http://github.com/Caged/d3-tip)
 ([see its license](inst/d3-tip/LICENSE)), and
 [ColorBrewer](http://colorbrewer2.org) ([see its license](inst/colorbrewer/LICENSE)).
-

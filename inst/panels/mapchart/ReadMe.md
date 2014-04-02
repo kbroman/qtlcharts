@@ -8,7 +8,7 @@ following
 For an illustration of its use, see [test_mapchart.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/panels/dotchart/test/test_dotchart.coffee).
 
 Add see it in action
-[here](http://www.biostat.wisc.edu/~kbroman/D3/panels/mapchart/test).
+[here](http://kbroman.github.io/qtlcharts/assets/panels/mapchart/test).
 
 Here are all of the options:
 

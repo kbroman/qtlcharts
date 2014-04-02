@@ -7,7 +7,7 @@ across a genome, following
 
 For an illustration of its use, see [test_lodchart.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/panels/lodchart/test/test_lodchart.coffee).
 
-Add see it in action [here](http://www.biostat.wisc.edu/~kbroman/D3/panels/lodchart/test).
+Add see it in action [here](http://kbroman.github.io/qtlcharts/assets/panels/lodchart/test).
 
 Here are all of the options:
 

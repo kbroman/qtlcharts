@@ -7,7 +7,7 @@ A reusable chart for making a CI chart (plot of estimates and confidence interva
 For an illustration of its use, see [test_cichart.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/panels/cichart/test/test_cichart.coffee).
 
 Add see it in action
-[here](http://www.biostat.wisc.edu/~kbroman/D3/panels/cichart/test).
+[here](http://kbroman.github.io/qtlcharts/assets/panels/cichart/test).
 
 Here are all of the options:
 

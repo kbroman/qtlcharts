@@ -8,7 +8,7 @@ following
 For an illustration of its use, see [test_lodheatmap.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/panels/lodheatmap/test/test_lodheatmap.coffee).
 
 Add see it in action
-[here](http://www.biostat.wisc.edu/~kbroman/D3/panels/lodheatmap/test).
+[here](http://kbroman.github.io/qtlcharts/assets/panels/lodheatmap/test).
 
 Here are all of the options:
 

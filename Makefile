@@ -4,9 +4,24 @@ all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer
 # Examples
 CHARTEX = assets/chartexamples
 
-chartexamples: ${CHARTEX}/iboxplot_example.html
+chartexamples: ${CHARTEX}/iboxplot_example.html ${CHARTEX}/iplotCorr_example.html ${CHARTEX}/iplotCurves_example.html ${CHARTEX}/iplotMScanone_example.html ${CHARTEX}/iplotMap_example.html ${CHARTEX}/iplotScanone_example.html
 
 ${CHARTEX}/iboxplot_example.html: ${CHARTEX}/R/iboxplot_example.R ${CHARTEX}/R/hypo.RData
+	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+
+${CHARTEX}/iplotCorr_example.html: ${CHARTEX}/R/iplotCorr_example.R
+	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+
+${CHARTEX}/iplotCurves_example.html: ${CHARTEX}/R/iplotCurves_example.R
+	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+
+${CHARTEX}/iplotMScanone_example.html: ${CHARTEX}/R/iplotMScanone_example.R
+	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+
+${CHARTEX}/iplotMap_example.html: ${CHARTEX}/R/iplotMap_example.R
+	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+
+${CHARTEX}/iplotScanone_example.html: ${CHARTEX}/R/iplotScanone_example.R
 	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
 
 #------------------------------------------------------------

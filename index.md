@@ -6,7 +6,7 @@ tagline: Interactive charts for xQTL data
 
 R/qtlcharts is an [R](http://www.r-project.org) package to create
 [D3](http://d3js.org)-based interactive charts for xQTL data, for use
-with the [R/qtl](http://www.rqtl.org) package.
+with [R/qtl](http://www.rqtl.org).
 
 A QTL is a _quantitative trait locus_: a genetic locus that
 contributes to variation in a quantitative trait. There is
@@ -15,8 +15,8 @@ expression levels (ie, mRNA abundances), and also pQTL, which
 influence protein levels, and mQTL, which influence
 metabolites. There's a plethora of such terms for QTL influencing
 genome-scale phenotypes; we refer to them collectively as xQTL. The
-goal of R/qtlcharts is to provide interactive data visualizations xQTL
-analyses, and to make these visualizations available from R.
+goal of R/qtlcharts is to provide interactive data visualizations for xQTL
+analyses, and to make these visualizations available from [R](http://www.r-project.org).
 
 The interactive visualizations are built with the JavaScript library
 [D3](http://d3js.org), and are viewed in a web browser. We are

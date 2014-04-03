@@ -1,8 +1,8 @@
-### R/qtlcharts: Interactive graphics for QTL experiments
+### [R/qtlcharts](http://kbroman.github.io/qtlcharts): Interactive graphics for QTL experiments
 
 [Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
 
-R/qtlcharts is an [R](http://www.r-project.org) package to create
+[R/qtlcharts](http://kbroman.github.io/qtlcharts) is an [R](http://www.r-project.org) package to create
 [D3](http://d3js.org)-based interactive charts for xQTL data, for use
 with the [R/qtl](http://www.rqtl.org) package.
 

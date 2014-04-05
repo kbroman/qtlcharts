@@ -12,9 +12,9 @@ To use R/qtlcharts, you'll first need to
 [RJSONIO](http://cran.r-project.org/web/packages/RJSONIO) will also be
 loaded.
 
-### iplotMap
+### `iplotMap`
 
-iplotMap creates a (slightly) interactive genetic map. Hover over a
+`iplotMap` creates a (slightly) interactive genetic map. Hover over a
 marker position to view the marker name.
 
     data(hyper)
@@ -23,9 +23,9 @@ marker position to view the marker name.
     iplotMap(map, title="iplotMap example")
 
 
-### iplotScanone
+### `iplotScanone`
 
-iplotScanone creates an interactive chart with LOD
+`iplotScanone` creates an interactive chart with LOD
 curves linked to estimated QTL effects.
 
 
@@ -36,9 +36,9 @@ curves linked to estimated QTL effects.
     iplotScanone(out, hyper, title="iplotScanone example")
 
 
-### iplotMScanone
+### `iplotMScanone`
 
-iplotMScanone creates a heatmap of LOD curves for a set of genome
+`iplotMScanone` creates a heatmap of LOD curves for a set of genome
 scans (for each, for each of a time course of phenotypes), linked to a
 plot of the individual genome scans, and also to the QTL effects.
 
@@ -54,9 +54,9 @@ plot of the individual genome scans, and also to the QTL effects.
                   chartOpts=list(eff_ylab="QTL effect"))
 
 
-### iplotCorr
+### `iplotCorr`
 
-iplotCorr creates an heat map of a correlation matrix, linked to the
+`iplotCorr` creates an heat map of a correlation matrix, linked to the
 underlying scatterplots.
 
     data(geneExpr)
@@ -67,9 +67,9 @@ underlying scatterplots.
                              scattitle="Scatterplot"))
 
 
-### iplotCurves
+### `iplotCurves`
 
-iplotCurves creates a plot of a set of curves linked to one or two
+`iplotCurves` creates a plot of a set of curves linked to one or two
 scatterplots.
 
     data(grav)
@@ -83,9 +83,9 @@ scatterplots.
                                scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 6 hrs"))
 
 
-### iboxplot
+### `iboxplot`
 
-iboxplot creates an interactive graph for a large set of box plots
+`iboxplot` creates an interactive graph for a large set of box plots
 (rendered as lines connecting the quantiles), linked to underlying
 histograms.
 

@@ -67,6 +67,11 @@
 
 - panel of inferred QTL (like a scatterplot) (for cis/trans plot)
 - lod curve for one chromosome (argument to current panel?)
+- classic boxchart (format like cichart)
+- histogram (or function to make path for curvechart)
+- dotchart with beeswarm-type dots; look at underlying code in
+  beeswarm: is it easy to grab or re-write? How is the package licensed?
+- dotchart with force-directed placement of dots
 
 
 

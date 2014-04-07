@@ -123,6 +123,7 @@ function(scanoneOutput,
 
   link_d3(file, onefile=onefile)
   link_d3tip(file, onefile=onefile)
+  link_colorbrewer(file, onefile=onefile)
   link_panelutil(file, onefile=onefile)
   link_panel('lodheatmap', file, onefile=onefile)
   link_panel('lodchart', file, onefile=onefile)

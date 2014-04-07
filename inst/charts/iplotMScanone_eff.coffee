@@ -24,7 +24,7 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
   linecolor = chartOpts?.linecolor ? "darkslateblue"
   eff_linecolor = chartOpts?.eff_linecolor ? null
   linewidth = chartOpts?.linewidth ? 2
-  eff_linecolors = chartOpts?.eff_linecolors ? null
+  eff_linewidth = chartOpts?.eff_linewidth ? 2
   # chartOpts end
 
   totalh = htop + hbot + 2*(margin.top + margin.bottom)
@@ -129,7 +129,7 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
             .attr("d", effcurve(posindex,curveindex))
             .attr("fill", "none")
             .attr("stroke", eff_linecolor[curveindex])
-            .attr("stroke-width", linewidth)
+            .attr("stroke-width", eff_linewidth)
 
   # add X axis
   curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")

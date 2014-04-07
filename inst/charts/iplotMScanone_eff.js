@@ -32,7 +32,7 @@ iplotMScanone_eff = function(lod_data, eff_data, chartOpts) {
   eff_ylim = (_ref13 = chartOpts != null ? chartOpts.eff_ylim : void 0) != null ? _ref13 : null;
   eff_ylab = (_ref14 = chartOpts != null ? chartOpts.eff_ylab : void 0) != null ? _ref14 : "";
   linecolor = (_ref15 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? _ref15 : "darkslateblue";
-  eff_linecolor = (_ref16 = chartOpts != null ? chartOpts.eff_linearcolor : void 0) != null ? _ref16 : null;
+  eff_linecolor = (_ref16 = chartOpts != null ? chartOpts.eff_linecolor : void 0) != null ? _ref16 : null;
   linewidth = (_ref17 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? _ref17 : 2;
   eff_linecolors = (_ref18 = chartOpts != null ? chartOpts.eff_linecolors : void 0) != null ? _ref18 : null;
   totalh = htop + hbot + 2 * (margin.top + margin.bottom);

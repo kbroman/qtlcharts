@@ -22,7 +22,7 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
   eff_ylim = chartOpts?.eff_ylim ? null
   eff_ylab = chartOpts?.eff_ylab ? ""
   linecolor = chartOpts?.linecolor ? "darkslateblue"
-  eff_linecolor = chartOpts?.eff_linearcolor ? null
+  eff_linecolor = chartOpts?.eff_linecolor ? null
   linewidth = chartOpts?.linewidth ? 2
   eff_linecolors = chartOpts?.eff_linecolors ? null
   # chartOpts end

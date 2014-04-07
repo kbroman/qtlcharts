@@ -4,7 +4,7 @@ var iplotMScanone_eff, plotLines;
 plotLines = null;
 
 iplotMScanone_eff = function(lod_data, eff_data, chartOpts) {
-  var axispos, chr, chrGap, colors, curindex, curvechart_xaxis, darkrect, eff_linecolor, eff_linecolors, eff_nlines, eff_ylab, eff_ylim, effchart_curves, effcurve, g_curvechart, g_heatmap, g_lodchart, hbot, htop, lightrect, linecolor, linewidth, lodchart_curves, lodcurve, margin, mycurvechart, mylodchart, mylodheatmap, plotEffCurves, plotLodCurve, pos, posindex, svg, titlepos, totalh, totalw, wleft, wright, zlim, zthresh, _i, _j, _len, _len1, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, chr, chrGap, colors, curindex, curvechart_xaxis, darkrect, eff_linecolor, eff_linewidth, eff_nlines, eff_ylab, eff_ylim, effchart_curves, effcurve, g_curvechart, g_heatmap, g_lodchart, hbot, htop, lightrect, linecolor, linewidth, lodchart_curves, lodcurve, margin, mycurvechart, mylodchart, mylodheatmap, plotEffCurves, plotLodCurve, pos, posindex, svg, titlepos, totalh, totalw, wleft, wright, zlim, zthresh, _i, _j, _len, _len1, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   wleft = (_ref = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref : 650;
   wright = (_ref1 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref1 : 350;
   htop = (_ref2 = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref2 : 350;
@@ -34,7 +34,7 @@ iplotMScanone_eff = function(lod_data, eff_data, chartOpts) {
   linecolor = (_ref15 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? _ref15 : "darkslateblue";
   eff_linecolor = (_ref16 = chartOpts != null ? chartOpts.eff_linecolor : void 0) != null ? _ref16 : null;
   linewidth = (_ref17 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? _ref17 : 2;
-  eff_linecolors = (_ref18 = chartOpts != null ? chartOpts.eff_linecolors : void 0) != null ? _ref18 : null;
+  eff_linewidth = (_ref18 = chartOpts != null ? chartOpts.eff_linewidth : void 0) != null ? _ref18 : 2;
   totalh = htop + hbot + 2 * (margin.top + margin.bottom);
   totalw = wleft + wright + 2 * (margin.left + margin.right);
   mylodheatmap = lodheatmap().height(htop).width(wleft).margin(margin).axispos(axispos).titlepos(titlepos).chrGap(chrGap).rectcolor(lightrect).colors(colors).zlim(zlim).zthresh(zthresh);
@@ -83,7 +83,7 @@ iplotMScanone_eff = function(lod_data, eff_data, chartOpts) {
     effchart_curves = g_curvechart.append("g").attr("id", "curves");
     _results = [];
     for (curveindex in eff_data[posindex].names) {
-      _results.push(effchart_curves.append("path").datum(eff_data[posindex].x).attr("d", effcurve(posindex, curveindex)).attr("fill", "none").attr("stroke", eff_linecolor[curveindex]).attr("stroke-width", linewidth));
+      _results.push(effchart_curves.append("path").datum(eff_data[posindex].x).attr("d", effcurve(posindex, curveindex)).attr("fill", "none").attr("stroke", eff_linecolor[curveindex]).attr("stroke-width", eff_linewidth));
     }
     return _results;
   };

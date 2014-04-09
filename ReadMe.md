@@ -1,4 +1,4 @@
-### R/qlcharts: Interactive graphics for QTL experiments
+### R/qtlcharts: Interactive graphics for QTL experiments
 
 [Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
 

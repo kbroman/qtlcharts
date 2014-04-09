@@ -89,7 +89,7 @@ iboxplot(expr)
 
 #### Licenses
 
-Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License).)
+Licensed under the [MIT license](LICENSE). ([More information here](http://en.wikipedia.org/wiki/MIT_License).)
 
 R/qtlcharts incorporates [D3.js](http://d3js.org)
 ([see its license](inst/d3/LICENSE)),

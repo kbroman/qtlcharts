@@ -73,15 +73,18 @@ function(cross, pheno.col)
 }
 
 # signed LOD scores
+#
+# If columns==1 and the first column is not "a", we don't change signs
+# If columns has values != 1, take the average across these columns to determine the sign
 calcSignedLOD <-
-function(scanoneOutput, effects)
+function(scanoneOutput, effects, columns=1)
 {
   stopifnot(length(effects) == nrow(scanoneOutput))
   stopifnot(all(vapply(effects, nrow, 1) == ncol(scanoneOutput)-2))
 
-  signs <- t(vapply(effects, function(a) {
-      if(colnames(a)[1]!="a") return(rep(1, nrow(a)))
-      (a[,1]>=0)*2-1
+  signs <- t(sapply(effects, function(a) {
+      if(all(columns==1) && colnames(a)[1]!="a") return(rep(1, nrow(a)))
+      (rowMeans(a[,columns,drop=FALSE], na.rm=TRUE)>=0)*2-1
     }, effects[[1]][,1]))
 
   scanoneOutput[,-(1:2)] <- signs * scanoneOutput[,-(1:2)]

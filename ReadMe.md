@@ -6,7 +6,7 @@
 interactive charts for xQTL data, for use
 with [R/qtl](http://www.rqtl.org).
 
-It is built with [D3](http://d3js.org), using the following reuseable components:
+It is built with [D3](http://d3js.org), using the following reusable components:
 - [lodchart](inst/panels/lodchart): LOD curve panel
 - [scatterplot](inst/panels/scatterplot): scatter plot panel
 - [dotchart](inst/panels/dotchart): dot plot panel

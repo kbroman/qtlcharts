@@ -3,10 +3,10 @@
 [Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
 
 [R/qtlcharts](http://kbroman.github.io/qtlcharts) is an [R](http://www.r-project.org) package to create
-[D3](http://d3js.org)-based interactive charts for xQTL data, for use
+interactive charts for xQTL data, for use
 with [R/qtl](http://www.rqtl.org).
 
-It is built on the following reuseable components:
+It is built with [D3](http://d3js.org), using the following reuseable components:
 - [lodchart](inst/panels/lodchart): LOD curve panel
 - [scatterplot](inst/panels/scatterplot): scatter plot panel
 - [dotchart](inst/panels/dotchart): dot plot panel

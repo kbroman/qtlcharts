@@ -5,7 +5,7 @@ tagline: Interactive charts for xQTL data
 ---
 
 R/qtlcharts is an [R](http://www.r-project.org) package to create
-[D3](http://d3js.org)-based interactive charts for xQTL data, for use
+interactive charts for xQTL data, for use
 with [R/qtl](http://www.rqtl.org).
 
 A QTL is a _quantitative trait locus_: a genetic locus that

@@ -3,10 +3,10 @@ var iheatmap;
 
 iheatmap = function(data, chartOpts) {
   var axispos, colors, g_heatmap, g_horslice, g_verslice, hbot, horslice, htop, margin, myheatmap, nxticks, nyticks, nzticks, rectcolor, shiftdown, shiftright, strokecolor, strokewidth, svg, title, titlepos, totalh, totalw, verslice, wleft, wright, xlab, xlim, xticks, ylab, ylim, yticks, zlab, zlim, zthresh, zticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
-  htop = (_ref = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref : 400;
-  hbot = (_ref1 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref1 : 400;
-  wleft = (_ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref2 : 400;
-  wright = (_ref3 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref3 : 400;
+  htop = (_ref = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref : 500;
+  hbot = (_ref1 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref1 : 500;
+  wleft = (_ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref2 : 500;
+  wright = (_ref3 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref3 : 500;
   margin = (_ref4 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref4 : {
     left: 60,
     top: 40,

@@ -85,7 +85,9 @@ heatmap = function() {
             data.cells.push({
               x: data.x[i],
               y: data.y[j],
-              z: data.z[i][j]
+              z: data.z[i][j],
+              i: i,
+              j: j
             });
           }
         }

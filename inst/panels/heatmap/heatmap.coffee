@@ -43,7 +43,7 @@ heatmap = () ->
         data.cells = []
         for i of data.z
           for j of data.z[i]
-            data.cells.push({x:data.x[i], y:data.y[j], z:data.z[i][j]})
+            data.cells.push({x:data.x[i], y:data.y[j], z:data.z[i][j], i:i, j:j})
         data.allz = (cell.z for cell in data.cells)
 
       # sort the x and y values

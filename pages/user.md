@@ -111,4 +111,5 @@ pixels linked to plots of horizontal and vertical slices.
     for(i in seq(along=x))
       for(j in seq(along=y))
         z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
+
     iheatmap(z, x, y, title = "iheatmap example")

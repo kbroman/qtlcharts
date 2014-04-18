@@ -2,7 +2,7 @@
 var lodheatmap;
 
 lodheatmap = function() {
-  var axispos, cellSelect, chart, chrGap, colors, height, margin, rectcolor, title, titlepos, width, xlab, xscale, ylab, yscale, zlim, zscale, zthresh;
+  var axispos, cellSelect, chart, chrGap, colors, height, margin, rectcolor, rotate_ylab, title, titlepos, width, xlab, xscale, ylab, yscale, zlim, zscale, zthresh;
   width = 1200;
   height = 600;
   margin = {
@@ -24,6 +24,7 @@ lodheatmap = function() {
   title = "";
   xlab = "Chromosome";
   ylab = "";
+  rotate_ylab = null;
   zlim = null;
   zthresh = null;
   xscale = d3.scale.linear();
@@ -111,8 +112,9 @@ lodheatmap = function() {
         return d;
       });
       xaxis.append("text").attr("class", "title").attr("x", margin.left + width / 2).attr("y", margin.top + height + axispos.xtitle).text(xlab);
+      rotate_ylab = rotate_ylab != null ? rotate_ylab : ylab.length > 1;
       yaxis = g.append("g").attr("class", "y axis");
-      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
+      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", rotate_ylab ? "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")" : "");
       yaxis.selectAll("empty").data(data.lodnames).enter().append("text").attr("id", function(d, i) {
         return "yaxis" + i;
       }).attr("y", function(d, i) {
@@ -226,6 +228,13 @@ lodheatmap = function() {
       return ylab;
     }
     ylab = value;
+    return chart;
+  };
+  chart.rotate_ylab = function(value) {
+    if (!arguments.length) {
+      return rotate_ylab;
+    }
+    rotate_ylab = value;
     return chart;
   };
   chart.zthresh = function(value) {

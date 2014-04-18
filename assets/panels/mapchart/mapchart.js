@@ -2,7 +2,7 @@
 var mapchart;
 
 mapchart = function() {
-  var axispos, chart, height, linecolor, linecolorhilit, linewidth, margin, markerSelect, nyticks, rectcolor, tickwidth, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
+  var axispos, chart, height, linecolor, linecolorhilit, linewidth, margin, markerSelect, nyticks, rectcolor, rotate_ylab, tickwidth, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
   width = 1000;
   height = 600;
   margin = {
@@ -30,6 +30,7 @@ mapchart = function() {
   title = "";
   xlab = "Chromosome";
   ylab = "Position (cM)";
+  rotate_ylab = null;
   xscale = d3.scale.ordinal();
   yscale = d3.scale.linear();
   markerSelect = null;
@@ -94,6 +95,7 @@ mapchart = function() {
         return d;
       });
       xaxis.append("text").attr("class", "title").attr("x", margin.left + width / 2).attr("y", margin.top + height + axispos.xtitle).text(xlab);
+      rotate_ylab = rotate_ylab != null ? rotate_ylab : ylab.length > 1;
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.selectAll("empty").data(yticks).enter().append("line").attr("y1", function(d) {
         return yscale(d);
@@ -105,7 +107,7 @@ mapchart = function() {
       }).attr("x", margin.left - axispos.ylabel).text(function(d) {
         return formatAxis(yticks)(d);
       });
-      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
+      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", rotate_ylab ? "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")" : "");
       g.append("g").attr("id", "chromosomes").selectAll("empty").data(data.chr).enter().append("line").attr("x1", function(d) {
         return xscale(d);
       }).attr("x2", function(d) {
@@ -268,6 +270,13 @@ mapchart = function() {
       return ylab;
     }
     ylab = value;
+    return chart;
+  };
+  chart.rotate_ylab = function(value) {
+    if (!arguments.length) {
+      return rotate_ylab;
+    }
+    rotate_ylab = value;
     return chart;
   };
   chart.yscale = function() {

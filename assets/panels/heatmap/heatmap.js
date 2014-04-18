@@ -2,7 +2,7 @@
 var heatmap;
 
 heatmap = function() {
-  var axispos, cellSelect, chart, colors, dataByCell, height, margin, nxticks, nyticks, rectcolor, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks, zlim, zscale, zthresh;
+  var axispos, cellSelect, chart, colors, dataByCell, height, margin, nxticks, nyticks, rectcolor, rotate_ylab, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks, zlim, zscale, zthresh;
   width = 400;
   height = 500;
   margin = {
@@ -29,6 +29,7 @@ heatmap = function() {
   title = "";
   xlab = "X";
   ylab = "Y";
+  rotate_ylab = null;
   zlim = null;
   zthresh = null;
   xscale = d3.scale.linear();
@@ -167,6 +168,7 @@ heatmap = function() {
         return formatAxis(xticks)(d);
       });
       xaxis.append("text").attr("class", "title").attr("x", margin.left + width / 2).attr("y", margin.top + height + axispos.xtitle).text(xlab);
+      rotate_ylab = rotate_ylab != null ? rotate_ylab : ylab.length > 1;
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.selectAll("empty").data(yticks).enter().append("line").attr("y1", function(d) {
         return yscale(d);
@@ -178,7 +180,7 @@ heatmap = function() {
       }).attr("x", margin.left - axispos.ylabel).text(function(d) {
         return formatAxis(yticks)(d);
       });
-      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
+      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", rotate_ylab ? "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")" : "");
       celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
         var x, y, z;
         x = formatAxis(data.x)(d.x);
@@ -327,6 +329,13 @@ heatmap = function() {
       return ylab;
     }
     ylab = value;
+    return chart;
+  };
+  chart.rotate_ylab = function(value) {
+    if (!arguments.length) {
+      return rotate_ylab;
+    }
+    rotate_ylab = value;
     return chart;
   };
   chart.zthresh = function(value) {

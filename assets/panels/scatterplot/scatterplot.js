@@ -2,7 +2,7 @@
 var scatterplot;
 
 scatterplot = function() {
-  var axispos, chart, dataByInd, height, margin, nxticks, nyticks, pointcolor, pointsSelect, pointsize, pointstroke, rectcolor, title, titlepos, width, xNA, xlab, xlim, xscale, xticks, xvar, yNA, ylab, ylim, yscale, yticks, yvar;
+  var axispos, chart, dataByInd, height, margin, nxticks, nyticks, pointcolor, pointsSelect, pointsize, pointstroke, rectcolor, rotate_ylab, title, titlepos, width, xNA, xlab, xlim, xscale, xticks, xvar, yNA, ylab, ylim, yscale, yticks, yvar;
   width = 800;
   height = 500;
   margin = {
@@ -44,6 +44,7 @@ scatterplot = function() {
   title = "";
   xlab = "X";
   ylab = "Y";
+  rotate_ylab = null;
   yscale = d3.scale.linear();
   xscale = d3.scale.linear();
   xvar = 0;
@@ -174,6 +175,7 @@ scatterplot = function() {
       if (xNA.handle) {
         xaxis.append("text").attr("x", margin.left + xNA.width / 2).attr("y", margin.top + height + axispos.xlabel).text("N/A");
       }
+      rotate_ylab = rotate_ylab != null ? rotate_ylab : ylab.length > 1;
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.selectAll("empty").data(yticks).enter().append("line").attr("y1", function(d) {
         return yscale(d);
@@ -185,7 +187,7 @@ scatterplot = function() {
       }).attr("x", margin.left - axispos.ylabel).text(function(d) {
         return formatAxis(yticks)(d);
       });
-      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
+      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", rotate_ylab ? "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")" : "");
       if (yNA.handle) {
         yaxis.append("text").attr("x", margin.left - axispos.ylabel).attr("y", margin.top + height - yNA.width / 2).text("N/A");
       }
@@ -351,6 +353,13 @@ scatterplot = function() {
       return ylab;
     }
     ylab = value;
+    return chart;
+  };
+  chart.rotate_ylab = function(value) {
+    if (!arguments.length) {
+      return rotate_ylab;
+    }
+    rotate_ylab = value;
     return chart;
   };
   chart.xvar = function(value) {

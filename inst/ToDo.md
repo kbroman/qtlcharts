@@ -81,7 +81,6 @@
 - cis/trans figure, with slider for selecting a band of LOD scores
 - Interactive 2d scan plot
 - iheatmapCurves: heatmap of multiple curves linked to curvechart
-- heat map with slices
 - iplotCorr: also include plots with slices of the correlation matrix?
 
 

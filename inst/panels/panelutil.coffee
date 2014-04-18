@@ -181,4 +181,11 @@ matrixMax = (mat) ->
       result = mat[i][j] if result < mat[i][j]
   result      
 
+matrixMaxAbs = (mat) ->
+  result = Math.abs(mat[0][0])
+  for i of mat
+    for j of mat[i]
+      result = Math.abs(mat[i][j]) if result < mat[i][j]
+  result      
+
 matrixExtent = (mat) -> [matrixMin(mat), matrixMax(mat)]

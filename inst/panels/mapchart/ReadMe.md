@@ -29,6 +29,7 @@ mychart = mapchart().width(400)                                              # i
                     .title("")                                               # panel title
                     .xlab("Chromosome")                                      # x-axis label
                     .ylab("Position (cM)")                                   # y-axis label
+                    .rotate_ylab(null)                                       # rotate y-axis label
 ```
 
 Additional accessors:

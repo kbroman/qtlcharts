@@ -31,6 +31,7 @@ mychart = cichart().xvar("x")                                               # va
                    .title("")                                               # panel title
                    .xlab("Group")                                           # x-axis label
                    .ylab("Response")                                        # y-axis label
+                   .rotate_ylab(null)                                       # rotate y-axis label
 ```
 
 Organization of data:

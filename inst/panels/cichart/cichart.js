@@ -2,7 +2,7 @@
 var cichart;
 
 cichart = function() {
-  var axispos, chart, height, margin, nyticks, rectcolor, segcolor, segstrokewidth, segwidth, title, titlepos, vertsegcolor, width, xcatlabels, xlab, xscale, ylab, ylim, yscale, yticks;
+  var axispos, chart, height, margin, nyticks, rectcolor, rotate_ylab, segcolor, segstrokewidth, segwidth, title, titlepos, vertsegcolor, width, xcatlabels, xlab, xscale, ylab, ylim, yscale, yticks;
   width = 400;
   height = 500;
   margin = {
@@ -31,6 +31,7 @@ cichart = function() {
   title = "";
   xlab = "Group";
   ylab = "Response";
+  rotate_ylab = null;
   xscale = d3.scale.ordinal();
   yscale = d3.scale.linear();
   chart = function(selection) {
@@ -79,6 +80,7 @@ cichart = function() {
         return xcatlabels[i];
       });
       xaxis.append("text").attr("class", "title").attr("x", margin.left + width / 2).attr("y", margin.top + height + axispos.xtitle).text(xlab);
+      rotate_ylab = rotate_ylab != null ? rotate_ylab : ylab.length > 1;
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.selectAll("empty").data(yticks).enter().append("line").attr("y1", function(d) {
         return yscale(d);
@@ -90,7 +92,7 @@ cichart = function() {
       }).attr("x", margin.left - axispos.ylabel).text(function(d) {
         return formatAxis(yticks)(d);
       });
-      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
+      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", rotate_ylab ? "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")" : "");
       tip = d3.tip().attr('class', 'd3-tip').html(function(d, i) {
         var f, index;
         index = i % means.length;
@@ -247,6 +249,13 @@ cichart = function() {
       return ylab;
     }
     ylab = value;
+    return chart;
+  };
+  chart.rotate_ylab = function(value) {
+    if (!arguments.length) {
+      return rotate_ylab;
+    }
+    rotate_ylab = value;
     return chart;
   };
   chart.yscale = function() {

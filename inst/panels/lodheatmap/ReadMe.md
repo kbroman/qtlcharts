@@ -24,6 +24,7 @@ mychart = lodheatmap().width(1200)                                             #
                       .title("")                                               # panel title
                       .xlab("X")                                               # x-axis label
                       .ylab("Y")                                               # y-axis label
+                      .rotate_ylab(null)                                       # rotate y-axis label
                       .zthresh(null)                                           # plot cells with z >= zthresh or <= -zthresh
                       .chrGap(5)                                               # gap between chromosomes (in pixels)
 ```

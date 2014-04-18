@@ -32,6 +32,7 @@ mychart = cichart().width(800)                                              # in
                    .title("")                                               # panel title
                    .xlab("X")                                               # x-axis label
                    .ylab("Y")                                               # y-axis label
+                   .rotate_ylab(null)                                       # rotate y-axis label
                    .commonX(true)                                           # Do all curves have a common set of X's?
 ```
 

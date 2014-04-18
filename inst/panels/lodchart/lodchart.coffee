@@ -19,6 +19,7 @@ lodchart = () ->
   title = ""
   xlab = "Chromosome"
   ylab = "LOD score"
+  rotate_ylab = null
   yscale = d3.scale.linear()
   xscale = null
   pad4heatmap = false
@@ -106,6 +107,7 @@ lodchart = () ->
            .text(xlab)
 
       # y-axis
+      rotate_ylab = rotate_ylab ? (ylab.length > 1)
       yaxis = g.append("g").attr("class", "y axis")
       yaxis.selectAll("empty")
            .data(yticks)
@@ -130,7 +132,7 @@ lodchart = () ->
            .attr("y", margin.top+height/2)
            .attr("x", margin.left-axispos.ytitle)
            .text(ylab)
-           .attr("transform", "rotate(270,#{margin.left-axispos.ytitle},#{margin.top+height/2})")
+           .attr("transform", if rotate_ylab then "rotate(270,#{margin.left-axispos.ytitle},#{margin.top+height/2})" else "")
 
       # lod curves by chr
       lodcurve = (chr, lodcolumn) ->
@@ -300,6 +302,11 @@ lodchart = () ->
   chart.ylab = (value) ->
     return ylab unless arguments.length
     ylab = value
+    chart
+
+  chart.rotate_ylab = (value) ->
+    return rotate_ylab if !arguments.length
+    rotate_ylab = value
     chart
 
   chart.lodvarname = (value) ->

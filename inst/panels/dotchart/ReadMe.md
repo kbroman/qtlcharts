@@ -33,6 +33,7 @@ mychart = dotchart().xvar("x")                                               # v
                     .title("")                                               # panel title
                     .xlab("Group")                                           # x-axis label
                     .ylab("Response")                                        # y-axis label
+                    .rotate_ylab(null)                                       # rotate y-axis label
                     .yNA({handle:true, force:false, width:15, gap:10})       # treatment of missing y values
                     .dataByInd(true)                                         # is data organized by individual?
 ```

@@ -17,6 +17,7 @@ mapchart = () ->
   title = ""
   xlab = "Chromosome"
   ylab = "Position (cM)"
+  rotate_ylab = null
   xscale = d3.scale.ordinal()
   yscale = d3.scale.linear()
   markerSelect = null
@@ -97,6 +98,7 @@ mapchart = () ->
            .text(xlab)
 
       # y-axis
+      rotate_ylab = rotate_ylab ? (ylab.length > 1)
       yaxis = g.append("g").attr("class", "y axis")
       yaxis.selectAll("empty")
            .data(yticks)
@@ -118,7 +120,7 @@ mapchart = () ->
            .attr("y", margin.top+height/2)
            .attr("x", margin.left-axispos.ytitle)
            .text(ylab)
-           .attr("transform", "rotate(270,#{margin.left-axispos.ytitle},#{margin.top+height/2})")
+           .attr("transform", if rotate_ylab then "rotate(270,#{margin.left-axispos.ytitle},#{margin.top+height/2})" else "")
 
       # vertical lines for each chromosome
       g.append("g").attr("id", "chromosomes").selectAll("empty")
@@ -259,6 +261,11 @@ mapchart = () ->
   chart.ylab = (value) ->
     return ylab if !arguments.length
     ylab = value
+    chart
+
+  chart.rotate_ylab = (value) ->
+    return rotate_ylab if !arguments.length
+    rotate_ylab = value
     chart
 
   chart.yscale = () ->

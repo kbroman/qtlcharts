@@ -31,6 +31,7 @@ mychart = lodchart().lodvarname("lod")                                       # v
                     .title("")                                               # panel title
                     .xlab("Chromosome")                                      # x-axis label
                     .ylab("LOD score")                                       # y-axis label
+                    .rotate_ylab(null)                                       # rotate y-axis label
 ```
 
 Additional accessors:

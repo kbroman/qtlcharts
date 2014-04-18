@@ -2,7 +2,7 @@
 var curvechart;
 
 curvechart = function() {
-  var axispos, chart, commonX, curvesSelect, height, margin, nxticks, nyticks, rectcolor, strokecolor, strokecolorhilit, strokewidth, strokewidthhilit, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks;
+  var axispos, chart, commonX, curvesSelect, height, margin, nxticks, nyticks, rectcolor, rotate_ylab, strokecolor, strokecolorhilit, strokewidth, strokewidthhilit, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks;
   width = 800;
   height = 500;
   margin = {
@@ -33,6 +33,7 @@ curvechart = function() {
   title = "";
   xlab = "X";
   ylab = "Y";
+  rotate_ylab = null;
   yscale = d3.scale.linear();
   xscale = d3.scale.linear();
   curvesSelect = null;
@@ -123,6 +124,7 @@ curvechart = function() {
         return formatAxis(xticks)(d);
       });
       xaxis.append("text").attr("class", "title").attr("x", margin.left + width / 2).attr("y", margin.top + height + axispos.xtitle).text(xlab);
+      rotate_ylab = rotate_ylab != null ? rotate_ylab : ylab.length > 1;
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.selectAll("empty").data(yticks).enter().append("line").attr("y1", function(d) {
         return yscale(d);
@@ -134,7 +136,7 @@ curvechart = function() {
       }).attr("x", margin.left - axispos.ylabel).text(function(d) {
         return formatAxis(yticks)(d);
       });
-      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")");
+      yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", rotate_ylab ? "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")" : "");
       indtip = d3.tip().attr('class', 'd3-tip').html(function(d) {
         return indID[d];
       }).direction('e').offset([0, 10]);
@@ -334,6 +336,13 @@ curvechart = function() {
       return ylab;
     }
     ylab = value;
+    return chart;
+  };
+  chart.rotate_ylab = function(value) {
+    if (!arguments.length) {
+      return rotate_ylab;
+    }
+    rotate_ylab = value;
     return chart;
   };
   chart.yscale = function() {

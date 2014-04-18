@@ -34,6 +34,7 @@ mychart = scatterplot().xvar("x")                                               
                        .title("")                                               # panel title
                        .xlab("X")                                               # x-axis label
                        .ylab("Y")                                               # y-axis label
+                       .rotate_ylab(null)                                       # rotate y-axis label
                        .xNA({handle:true, force:false, width:15, gap:10})       # treatment of missing x values
                        .yNA({handle:true, force:false, width:15, gap:10})       # treatment of missing y values
                        .dataByInd(true)                                         # is data organized by individual?

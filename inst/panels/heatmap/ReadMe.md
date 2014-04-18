@@ -30,6 +30,7 @@ mychart = heatmap().width(400)                                              # in
                    .title("")                                               # panel title
                    .xlab("X")                                               # x-axis label
                    .ylab("Y")                                               # y-axis label
+                   .rotate_ylab(null)                                       # rotate y-axis label
                    .zthresh(null)                                           # plot cells with z >= zthresh or <= -zthresh
                    .dataByCell(false)                                       # is data organized by cell?
 ```

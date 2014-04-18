@@ -12,7 +12,7 @@ iheatmap = (data, chartOpts) ->
   axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
   titlepos = chartOpts?.titlepos ? 20
   rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
-  strokecolor = chartOpts?.strokecolor ? null
+  strokecolor = chartOpts?.strokecolor ? "slateblue"
   strokewidth = chartOpts?.strokewidth ? 2
   xlim = chartOpts?xlim ? d3.range(data.x)
   ylim = chartOpts?xlim ? d3.range(data.y)
@@ -104,11 +104,15 @@ iheatmap = (data, chartOpts) ->
 
   cells = myheatmap.cellSelect()
                    .on "mouseover", (d,i) ->
-                           g_horslice.select("g.title text").text("X = #{formatX(d.x)}")
-                           g_verslice.select("g.title text").text("Y = #{formatY(d.y)}")
+                           g_verslice.select("g.title text").text("X = #{formatX(d.x)}")
+                           g_horslice.select("g.title text").text("Y = #{formatY(d.y)}")
+                           plotVer(d.i)
+                           plotHor(d.j)
                    .on "mouseout", (d,i) ->
-                           g_horslice.select("g.title text").text("")
                            g_verslice.select("g.title text").text("")
+                           g_horslice.select("g.title text").text("")
+                           removeVer()
+                           removeHor()
 
   shiftdown = htop+margin.top+margin.bottom
   g_horslice = svg.append("g")
@@ -123,3 +127,41 @@ iheatmap = (data, chartOpts) ->
                   .attr("transform", "translate(#{shiftright},0)")
                   .datum({x:data.y, data:data.z[0]})
                   .call(verslice)
+
+  # functions for paths
+  horcurvefunc = (j) ->
+          d3.svg.line()
+            .x((d) -> horslice.xscale()(d))
+            .y((d,i) -> horslice.yscale()(data.z[i][j]))
+  vercurvefunc = (i) ->
+          d3.svg.line()
+            .x((d) -> verslice.xscale()(d))
+            .y((d,j) -> verslice.yscale()(data.z[i][j]))
+
+
+  plotHor = (j) ->
+    console.log(strokecolor)
+    g_horslice.append("g").attr("id", "horcurve")
+              .append("path")
+              .datum(data.x)
+              .attr("d", horcurvefunc(j))
+              .attr("stroke", strokecolor)
+              .attr("fill", "none")
+              .attr("stroke-width", strokewidth)
+              .attr("style", "pointer-events", "none")
+
+  removeHor = () ->
+    g_horslice.selectAll("g#horcurve").remove()
+
+  plotVer = (i) ->
+    g_verslice.append("g").attr("id", "vercurve")
+              .append("path")
+              .datum(data.y)
+              .attr("d", vercurvefunc(i))
+              .attr("stroke", strokecolor)
+              .attr("fill", "none")
+              .attr("stroke-width", strokewidth)
+              .attr("style", "pointer-events", "none")
+
+  removeVer = () ->
+    g_verslice.selectAll("g#vercurve").remove()

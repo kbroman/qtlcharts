@@ -2,7 +2,7 @@
 var iheatmap;
 
 iheatmap = function(data, chartOpts) {
-  var axispos, cells, colors, formatX, formatY, g_heatmap, g_horslice, g_verslice, hbot, horslice, htop, margin, myheatmap, nxticks, nyticks, nzticks, rectcolor, shiftdown, shiftright, strokecolor, strokewidth, svg, title, titlepos, totalh, totalw, verslice, wleft, wright, xlab, xlim, xticks, ylab, ylim, yticks, zlab, zlim, zthresh, zticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, cells, colors, formatX, formatY, g_heatmap, g_horslice, g_verslice, hbot, horcurvefunc, horslice, htop, margin, myheatmap, nxticks, nyticks, nzticks, plotHor, plotVer, rectcolor, removeHor, removeVer, shiftdown, shiftright, strokecolor, strokewidth, svg, title, titlepos, totalh, totalw, vercurvefunc, verslice, wleft, wright, xlab, xlim, xticks, ylab, ylim, yticks, zlab, zlim, zthresh, zticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   htop = (_ref = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref : 500;
   hbot = (_ref1 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref1 : 500;
   wleft = (_ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref2 : 500;
@@ -22,7 +22,7 @@ iheatmap = function(data, chartOpts) {
   };
   titlepos = (_ref6 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? _ref6 : 20;
   rectcolor = (_ref7 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref7 : d3.rgb(230, 230, 230);
-  strokecolor = (_ref8 = chartOpts != null ? chartOpts.strokecolor : void 0) != null ? _ref8 : null;
+  strokecolor = (_ref8 = chartOpts != null ? chartOpts.strokecolor : void 0) != null ? _ref8 : "slateblue";
   strokewidth = (_ref9 = chartOpts != null ? chartOpts.strokewidth : void 0) != null ? _ref9 : 2;
   xlim = typeof chartOpts === "function" ? chartOpts(xlim != null ? xlim : d3.range(data.x)) : void 0;
   ylim = typeof chartOpts === "function" ? chartOpts(xlim != null ? xlim : d3.range(data.y)) : void 0;
@@ -49,11 +49,15 @@ iheatmap = function(data, chartOpts) {
   formatX = formatAxis(data.x);
   formatY = formatAxis(data.y);
   cells = myheatmap.cellSelect().on("mouseover", function(d, i) {
-    g_horslice.select("g.title text").text("X = " + (formatX(d.x)));
-    return g_verslice.select("g.title text").text("Y = " + (formatY(d.y)));
+    g_verslice.select("g.title text").text("X = " + (formatX(d.x)));
+    g_horslice.select("g.title text").text("Y = " + (formatY(d.y)));
+    plotVer(d.i);
+    return plotHor(d.j);
   }).on("mouseout", function(d, i) {
+    g_verslice.select("g.title text").text("");
     g_horslice.select("g.title text").text("");
-    return g_verslice.select("g.title text").text("");
+    removeVer();
+    return removeHor();
   });
   shiftdown = htop + margin.top + margin.bottom;
   g_horslice = svg.append("g").attr("id", "horslice").attr("transform", "translate(0," + shiftdown + ")").datum({
@@ -61,8 +65,35 @@ iheatmap = function(data, chartOpts) {
     data: pullVarAsArray(data.z, 0)
   }).call(horslice);
   shiftright = wleft + margin.left + margin.right;
-  return g_verslice = svg.append("g").attr("id", "verslice").attr("transform", "translate(" + shiftright + ",0)").datum({
+  g_verslice = svg.append("g").attr("id", "verslice").attr("transform", "translate(" + shiftright + ",0)").datum({
     x: data.y,
     data: data.z[0]
   }).call(verslice);
+  horcurvefunc = function(j) {
+    return d3.svg.line().x(function(d) {
+      return horslice.xscale()(d);
+    }).y(function(d, i) {
+      return horslice.yscale()(data.z[i][j]);
+    });
+  };
+  vercurvefunc = function(i) {
+    return d3.svg.line().x(function(d) {
+      return verslice.xscale()(d);
+    }).y(function(d, j) {
+      return verslice.yscale()(data.z[i][j]);
+    });
+  };
+  plotHor = function(j) {
+    console.log(strokecolor);
+    return g_horslice.append("g").attr("id", "horcurve").append("path").datum(data.x).attr("d", horcurvefunc(j)).attr("stroke", strokecolor).attr("fill", "none").attr("stroke-width", strokewidth).attr("style", "pointer-events", "none");
+  };
+  removeHor = function() {
+    return g_horslice.selectAll("g#horcurve").remove();
+  };
+  plotVer = function(i) {
+    return g_verslice.append("g").attr("id", "vercurve").append("path").datum(data.y).attr("d", vercurvefunc(i)).attr("stroke", strokecolor).attr("fill", "none").attr("stroke-width", strokewidth).attr("style", "pointer-events", "none");
+  };
+  return removeVer = function() {
+    return g_verslice.selectAll("g#vercurve").remove();
+  };
 };

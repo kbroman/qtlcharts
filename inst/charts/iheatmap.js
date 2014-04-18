@@ -2,7 +2,7 @@
 var iheatmap;
 
 iheatmap = function(data, chartOpts) {
-  var axispos, colors, g_heatmap, g_horslice, g_verslice, hbot, horslice, htop, margin, myheatmap, nxticks, nyticks, nzticks, rectcolor, shiftdown, shiftright, strokecolor, strokewidth, svg, title, titlepos, totalh, totalw, verslice, wleft, wright, xlab, xlim, xticks, ylab, ylim, yticks, zlab, zlim, zthresh, zticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, cells, colors, formatX, formatY, g_heatmap, g_horslice, g_verslice, hbot, horslice, htop, margin, myheatmap, nxticks, nyticks, nzticks, rectcolor, shiftdown, shiftright, strokecolor, strokewidth, svg, title, titlepos, totalh, totalw, verslice, wleft, wright, xlab, xlim, xticks, ylab, ylim, yticks, zlab, zlim, zthresh, zticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   htop = (_ref = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref : 500;
   hbot = (_ref1 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref1 : 500;
   wleft = (_ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref2 : 500;
@@ -46,6 +46,15 @@ iheatmap = function(data, chartOpts) {
   horslice = curvechart().width(wleft).height(hbot).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).xlim(xlim).ylim([zlim[0], zlim[2]]).nxticks(nxticks).xticks(xticks).nyticks(nzticks).yticks(zticks).xlab(xlab).ylab(zlab).strokecolor("").commonX(true);
   verslice = curvechart().width(wright).height(htop).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).xlim(ylim).ylim([zlim[0], zlim[2]]).nxticks(nyticks).xticks(yticks).nyticks(nzticks).yticks(zticks).xlab(ylab).ylab(zlab).strokecolor("").commonX(true);
   g_heatmap = svg.append("g").attr("id", "heatmap").datum(data).call(myheatmap);
+  formatX = formatAxis(data.x);
+  formatY = formatAxis(data.y);
+  cells = myheatmap.cellSelect().on("mouseover", function(d, i) {
+    g_horslice.select("g.title text").text("X = " + (formatX(d.x)));
+    return g_verslice.select("g.title text").text("Y = " + (formatY(d.y)));
+  }).on("mouseout", function(d, i) {
+    g_horslice.select("g.title text").text("");
+    return g_verslice.select("g.title text").text("");
+  });
   shiftdown = htop + margin.top + margin.bottom;
   g_horslice = svg.append("g").attr("id", "horslice").attr("transform", "translate(0," + shiftdown + ")").datum({
     x: data.x,

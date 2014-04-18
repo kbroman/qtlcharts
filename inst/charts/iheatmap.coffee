@@ -99,6 +99,17 @@ iheatmap = (data, chartOpts) ->
                  .datum(data)
                  .call(myheatmap)
 
+  formatX = formatAxis(data.x)
+  formatY = formatAxis(data.y)
+
+  cells = myheatmap.cellSelect()
+                   .on "mouseover", (d,i) ->
+                           g_horslice.select("g.title text").text("X = #{formatX(d.x)}")
+                           g_verslice.select("g.title text").text("Y = #{formatY(d.y)}")
+                   .on "mouseout", (d,i) ->
+                           g_horslice.select("g.title text").text("")
+                           g_verslice.select("g.title text").text("")
+
   shiftdown = htop+margin.top+margin.bottom
   g_horslice = svg.append("g")
                   .attr("id", "horslice")

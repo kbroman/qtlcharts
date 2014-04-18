@@ -41,7 +41,7 @@
 #' \code{names(group)}.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotCurves}}
+#' @seealso \code{\link{iheatmap}}, \code{\link{iplotCurves}}
 #' 
 #' @examples
 #' data(geneExpr)

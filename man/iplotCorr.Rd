@@ -72,7 +72,7 @@ iplotCorr(geneExpr$expr, geneExpr$genotype,
                               scattitle="Scatterplot"))
 }
 \seealso{
-\code{\link{iplotCurves}}
+\code{\link{iheatmap}}, \code{\link{iplotCurves}}
 }
 \keyword{hplot}
 

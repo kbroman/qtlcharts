@@ -43,7 +43,8 @@ Click on a chart for the corresponding interactive version.
 | :---------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: |
 | [![iplotScanone example](assets/pics/charts/iplotScanone.png)](assets/chartexamples/iplotScanone_example.html)    | [![iplotCorr example](assets/pics/charts/iplotCorr.png)](assets/chartexamples/iplotCorr_example.html) |
 | [![iplotMScanone example](assets/pics/charts/iplotMScanone.png)](assets/chartexamples/iplotMScanone_example.html) | [![iplotMap example](assets/pics/charts/iplotMap.png)](assets/chartexamples/iplotMap_example.html)    |
-| [![iplotCurves example](assets/pics/charts/iplotCurves.png)](assets/chartexamples/iplotCurves_example.html)       | [![iboxplot example](assets/pics/charts/iboxplot.png)](assets/chartexamples/iboxplot_example.html)    |
+| [![iplotCurves example](assets/pics/charts/iplotCurves.png)](assets/chartexamples/iplotCurves_example.html)       | [![iheatmap example](assets/pics/charts/iheatmap.png)](assets/chartexamples/iheatmap_example.html)    |
+| [![iboxplot example](assets/pics/charts/iboxplot.png)](assets/chartexamples/iboxplot_example.html)                |                                                                                                       |
 
 
 ---

@@ -16,5 +16,9 @@ if(file.exists(file)) unlink(file)
 #     this is a bit wasteful of space, but it's easy
 iboxplot(hypo, title="iboxplot example", chartOpts=list(xlab="Mice", ylab="Gene expression"),
          orderByMedian=FALSE, onefile=TRUE, openfile=FALSE, file=file,
-         qu=c(0.01, 0.1, 0.25))
-         
+         qu=c(0.01, 0.1, 0.25),
+         caption=c("The top panel is like a set of 494 box plots: lines are drawn at a series ",
+           "of percentiles for each of the distributions. Hover over a column in the top panel ",
+           "and the corresponding distribution is show below; click for it to persist; click ",
+           "again to make it go away.<br><br>\n",
+           "[<a style=\"text-decoration:none;\" href=\"http://kbroman.github.io/qtlcharts\">Main page</a>]

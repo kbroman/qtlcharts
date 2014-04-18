@@ -20,4 +20,7 @@ if(file.exists(file)) unlink(file)
 # onefile=TRUE makes the resulting html file all-inclusive (javascript + css + data)
 #     this is a bit wasteful of space, but it's easy
 iheatmap(z, x, y, title = "iheatmap example", onefile=TRUE, openfile=FALSE,
-         file=file)
+         file=file,
+         caption=c("Hover over pixels in the heatmap on the top-left to see the values ",
+           "and to see the horizontal slice (below) and the vertical slice (to the right).<br><br>\n",
+           "[<a style=\"text-decoration:none;\" href=\"http://kbroman.github.io/qtlcharts\">Main page</a>]"))

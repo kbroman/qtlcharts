@@ -98,3 +98,17 @@ histograms.
 
     iboxplot(expr, title="iboxplot example",
              chartOpts=list(xlab="Mice", ylab="Gene expression"))
+
+### `iheatmap`
+
+`iheatmap` creates an interactive heatmap of a numeric matrix, with
+pixels linked to plots of horizontal and vertical slices.
+
+    # data to display
+    n <- 101
+    x <- y <- seq(-2, 2, len=n)
+    z <- matrix(ncol=n, nrow=n)
+    for(i in seq(along=x))
+      for(j in seq(along=y))
+        z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
+    iheatmap(z, x, y, title = "iheatmap example")

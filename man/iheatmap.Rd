@@ -47,11 +47,11 @@ which positive cells are colored white to red.
 }
 \examples{
 n <- 101
-x <- y <- seq(-pi, pi, len=n)
+x <- y <- seq(-2, 2, len=n)
 z <- matrix(ncol=n, nrow=n)
 for(i in seq(along=x))
   for(j in seq(along=y))
-    z[i,j] <- sin(x[i]) + cos(y[j])
+    z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
 iheatmap(z, x, y, title = "iheatmap example")
 }
 \seealso{

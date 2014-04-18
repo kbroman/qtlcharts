@@ -2,7 +2,7 @@
 var heatmap;
 
 heatmap = function() {
-  var axispos, cellSelect, chart, colors, dataByCell, height, margin, nxticks, nyticks, rectcolor, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks, zscale, zthresh;
+  var axispos, cellSelect, chart, colors, dataByCell, height, margin, nxticks, nyticks, rectcolor, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks, zlim, zscale, zthresh;
   width = 400;
   height = 500;
   margin = {
@@ -29,6 +29,7 @@ heatmap = function() {
   title = "";
   xlab = "X";
   ylab = "Y";
+  zlim = null;
   zthresh = null;
   xscale = d3.scale.linear();
   yscale = d3.scale.linear();
@@ -37,7 +38,7 @@ heatmap = function() {
   dataByCell = false;
   chart = function(selection) {
     return selection.each(function(data) {
-      var cell, cells, celltip, g, gEnter, i, j, nx, ny, svg, titlegrp, xLR, xaxis, xrange, yLR, yaxis, yrange, zlim, zmax, zmin, _i, _len, _ref;
+      var cell, cells, celltip, g, gEnter, i, j, nx, ny, svg, titlegrp, xLR, xaxis, xrange, yLR, yaxis, yrange, zmax, zmin, _i, _len, _ref;
       if (dataByCell) {
         data.x = (function() {
           var _i, _len, _ref, _results;
@@ -334,7 +335,6 @@ heatmap = function() {
     return chart;
   };
   chart.zlim = function(value) {
-    var zlim;
     if (!arguments.length) {
       return zlim;
     }

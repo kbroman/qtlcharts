@@ -17,6 +17,7 @@ heatmap = () ->
   title = ""
   xlab = "X"
   ylab = "Y"
+  zlim = null
   zthresh = null
   xscale = d3.scale.linear()
   yscale = d3.scale.linear()

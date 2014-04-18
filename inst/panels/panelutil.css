@@ -75,3 +75,13 @@ circle.selected {
 .d3-tip.e:after {
   color: darkslateblue;
 }
+
+a {
+  color: #08c;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #333;
+  text-decoration: underline;
+}

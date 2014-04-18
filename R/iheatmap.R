@@ -31,6 +31,8 @@
 #' @keywords hplot
 #' @seealso \code{\link{iplotCorr}}
 #' 
+#  Example function from Dmitry Pelinovsky
+#  http://dmpeli.mcmaster.ca/Matlab/Math1J03/LectureNotes/Lecture2_5.htm
 #' @examples
 #' n <- 101
 #' x <- y <- seq(-2, 2, len=n)
@@ -53,9 +55,11 @@ function(z, x, y,
   if(file.exists(file))
     stop('The file already exists; please remove it first: ', file)
 
-  if(missing(x)) x <- 1:nrow(z)
-  if(missing(y)) y <- 1:ncol(z)
   z <- as.matrix(z)
+  if(missing(x)) x <- 1:nrow(z)
+  else stopifnot(length(x) == nrow(z))
+  if(missing(y)) y <- 1:ncol(z)
+  else stopifnot(length(y) == ncol(z))
   names(x) <- names(y) <- dimnames(z) <- NULL
   json <- toJSON(list(x=x, y=y, z=z))
 

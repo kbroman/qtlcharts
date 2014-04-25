@@ -51,7 +51,7 @@
 #'                               scattitle="Scatterplot"))
 #' @export
 iplotCorr <-
-function(mat, group, rows, cols, reorder=TRUE, corr=cor(mat, use="pairwise.complete.obs"),
+function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.complete.obs"),
          file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot",
          caption, chartOpts=NULL)
 {

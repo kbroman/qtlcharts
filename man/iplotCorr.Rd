@@ -3,7 +3,7 @@
 \alias{iplotCorr}
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
-iplotCorr(mat, group, rows, cols, reorder = TRUE, corr = cor(mat, use =
+iplotCorr(mat, group, rows, cols, reorder = FALSE, corr = cor(mat, use =
   "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
   title = "Correlation matrix with linked scatterplot", caption,
   chartOpts = NULL)

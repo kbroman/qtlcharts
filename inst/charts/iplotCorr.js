@@ -122,7 +122,16 @@ iplotCorr = function(data, chartOpts) {
       return xScale(data.dat[data.cols[i]][d]);
     }).attr("cy", function(d) {
       return yScale(data.dat[data.rows[j]][d]);
-    }).attr("r", 3).attr("stroke", "black").attr("stroke-width", 1).attr("fill", function(d) {
+    }).attr("r", function(d) {
+      var x, y;
+      x = data.dat[data.cols[i]][d];
+      y = data.dat[data.rows[j]][d];
+      if ((x != null) && (y != null)) {
+        return 3;
+      } else {
+        return null;
+      }
+    }).attr("stroke", "black").attr("stroke-width", 1).attr("fill", function(d) {
       return colors[data.group[d] - 1];
     }).on("mouseover", scat_tip.show).on("mouseout", scat_tip.hide);
   };

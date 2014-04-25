@@ -204,7 +204,10 @@ iplotCorr = (data, chartOpts) ->
                .attr("class", "points")
                .attr("cx", (d) -> xScale(data.dat[data.cols[i]][d]))
                .attr("cy", (d) -> yScale(data.dat[data.rows[j]][d]))
-               .attr("r", 3)
+               .attr("r", (d) ->
+                     x = data.dat[data.cols[i]][d]
+                     y = data.dat[data.rows[j]][d]
+                     if x? and y? then 3 else null)
                .attr("stroke", "black")
                .attr("stroke-width", 1)
                .attr("fill", (d) -> colors[data.group[d]-1])

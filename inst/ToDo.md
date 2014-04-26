@@ -3,7 +3,10 @@
 ### In process
 
 - iplotMScanone w/ effects: label effect curves (in right margin?)
+
 - iplotMScanone: qualitative vs quantitative axes
+
+- iplotCorr: use heatmap and scatterplot functions
 
 
 
@@ -12,8 +15,6 @@
 - iplotPXG behaves badly if the chosen phenotype is non-numeric
   (e.g., a factor)
 
-- iplotMScanone: LOD curves in lower panel are slightly outside frame
-  on the right side. Maybe just the outer rectangle isn't quite right?
 
 
 ### General things

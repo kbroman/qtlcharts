@@ -208,7 +208,7 @@ lodchart = () ->
        .attr("x", margin.left)
        .attr("y", margin.top)
        .attr("height", height)
-       .attr("width", width)
+       .attr("width", data.chrEnd[-1..]-margin.left) # x[-1..] gives last element
        .attr("fill", "none")
        .attr("stroke", "black")
        .attr("stroke-width", "none")

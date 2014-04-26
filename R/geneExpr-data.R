@@ -18,6 +18,6 @@
 #'
 #' @examples
 #' data(geneExpr)
-#' iplotCorr(geneExpr$expr, geneExpr$genotype,
+#' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
 #'           title="geneExpr correlations linked to scatterplots")
 NULL

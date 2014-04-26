@@ -45,7 +45,7 @@
 #' 
 #' @examples
 #' data(geneExpr)
-#' iplotCorr(geneExpr$expr, geneExpr$genotype,
+#' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
 #'                title = "iplotCorr example",
 #'                chartOpts=list(cortitle="Correlation matrix",
 #'                               scattitle="Scatterplot"))

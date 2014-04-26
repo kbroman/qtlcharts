@@ -20,3 +20,4 @@ Suggests:
     testthat
 License: MIT + file LICENSE
 URL: http://kbroman.github.io/qtlcharts
+Roxygen: list(wrap=FALSE)

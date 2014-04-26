@@ -9,9 +9,6 @@
 
 ### Bugs
 
-- iplotCorr not handling missing values in the scatterplot; need to
-  just omit those.  Also, should make reorder=FALSE the default.
-
 - iplotPXG behaves badly if the chosen phenotype is non-numeric
   (e.g., a factor)
 

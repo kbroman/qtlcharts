@@ -6,10 +6,9 @@
 cbindQTLeffects(..., labels)
 }
 \arguments{
-  \item{...}{Results of \code{\link{estQTLeffects}}}
+\item{...}{Results of \code{\link{estQTLeffects}}}
 
-  \item{labels}{Vector of labels to use in the
-  combination.}
+\item{labels}{Vector of labels to use in the combination.}
 }
 \value{
 list of matrices; each component corresponds to a position

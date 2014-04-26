@@ -6,14 +6,14 @@
 estQTLeffects(cross, pheno.col = 1, what = c("means", "effects"))
 }
 \arguments{
-  \item{cross}{(Optional) Object of class \code{"cross"},
-  see \code{\link[qtl]{read.cross}}.}
+\item{cross}{(Optional) Object of class \code{"cross"}, see
+\code{\link[qtl]{read.cross}}.}
 
-  \item{pheno.col}{Phenotype columns in cross object.}
+\item{pheno.col}{Phenotype columns in cross object.}
 
-  \item{what}{Indicates whether to calculate phenotype
-  averages for each genotype group or to turn these into
-  additive and dominance effects.}
+\item{what}{Indicates whether to calculate phenotype averages for
+each genotype group or to turn these into additive and dominance
+effects.}
 }
 \value{
 list of matrices; each component corresponds to a position

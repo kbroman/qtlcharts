@@ -9,43 +9,39 @@ iplotCorr(mat, group, rows, cols, reorder = FALSE, corr = cor(mat, use =
   chartOpts = NULL)
 }
 \arguments{
-  \item{mat}{Data matrix (individuals x variables)}
+\item{mat}{Data matrix (individuals x variables)}
 
-  \item{group}{Optional vector of groups of individuals
-  (e.g., a genotype)}
+\item{group}{Optional vector of groups of individuals (e.g., a genotype)}
 
-  \item{rows}{Selected rows of the correlation matrix to
-  include in the image. Ignored if \code{corr} is
-  provided.}
+\item{rows}{Selected rows of the correlation matrix to include in
+the image. Ignored if \code{corr} is provided.}
 
-  \item{cols}{Selected columns of the correlation matrix to
-  include in the image. Ignored if \code{corr} is
-  provided.}
+\item{cols}{Selected columns of the correlation matrix to include
+in the image. Ignored if \code{corr} is provided.}
 
-  \item{reorder}{If TRUE, reorder the variables by
-  clustering. Ignored if \code{corr} is provided as a
-  subset of the overall correlation matrix}
+\item{reorder}{If TRUE, reorder the variables by
+clustering. Ignored if \code{corr} is provided as a subset of the
+overall correlation matrix}
 
-  \item{corr}{Correlation matrix (optional).}
+\item{corr}{Correlation matrix (optional).}
 
-  \item{file}{Optional character vector with file to
-  contain the output}
+\item{file}{Optional character vector with file to contain the
+output}
 
-  \item{onefile}{If TRUE, have output file contain all
-  necessary javascript/css code}
+\item{onefile}{If TRUE, have output file contain all necessary
+javascript/css code}
 
-  \item{openfile}{If TRUE, open the plot in the default web
-  browser}
+\item{openfile}{If TRUE, open the plot in the default web browser}
 
-  \item{title}{Character string with title for plot}
+\item{title}{Character string with title for plot}
 
-  \item{caption}{Character vector with text for a caption
-  (to be combined to one string with
-  \code{\link[base]{paste}}, with \code{collapse=''})}
+\item{caption}{Character vector with text for a caption (to be
+combined to one string with \code{\link[base]{paste}}, with
+\code{collapse=''})}
 
-  \item{chartOpts}{A list of options for configuring the
-  chart (see the coffeescript code). Each element must be
-  named using the corresponding option.}
+\item{chartOpts}{A list of options for configuring the chart (see
+  the coffeescript code). Each element must be named using the
+  corresponding option.}
 }
 \value{
 Character string with the name of the file created.

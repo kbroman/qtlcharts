@@ -8,36 +8,34 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
   marker[1]), fillgenoArgs = NULL, ...)
 }
 \arguments{
-  \item{cross}{Object of class \code{"cross"}, see
-  \code{\link[qtl]{read.cross}}.}
+\item{cross}{Object of class \code{"cross"}, see
+\code{\link[qtl]{read.cross}}.}
 
-  \item{marker}{Character string with marker name.}
+\item{marker}{Character string with marker name.}
 
-  \item{pheno.col}{Phenotype column in cross object.}
+\item{pheno.col}{Phenotype column in cross object.}
 
-  \item{file}{Optional character vector with file to
-  contain the output.}
+\item{file}{Optional character vector with file to contain the
+output.}
 
-  \item{onefile}{If TRUE, have output file contain all
-  necessary javascript/css code.}
+\item{onefile}{If TRUE, have output file contain all necessary
+javascript/css code.}
 
-  \item{openfile}{If TRUE, open the plot in the default web
-  browser.}
+\item{openfile}{If TRUE, open the plot in the default web browser.}
 
-  \item{title}{Character string with title for plot.}
+\item{title}{Character string with title for plot.}
 
-  \item{caption}{Character vector with text for a caption
-  (to be combined to one string with
-  \code{\link[base]{paste}}, with \code{collapse=''})}
+\item{caption}{Character vector with text for a caption (to be
+combined to one string with \code{\link[base]{paste}}, with
+\code{collapse=''})}
 
-  \item{chartOpts}{A list of options for configuring the
-  chart.  Each element must be named using the
-  corresponding option. See details.}
+\item{chartOpts}{A list of options for configuring the chart.  Each
+element must be named using the corresponding option. See details.}
 
-  \item{fillgenoArgs}{List of named arguments to pass to
-  \code{\link[qtl]{fill.geno}}, if needed.}
+\item{fillgenoArgs}{List of named arguments to pass to
+\code{\link[qtl]{fill.geno}}, if needed.}
 
-  \item{...}{Passed to \cite{\link[RJSONIO]{toJSON}}.}
+\item{...}{Passed to \cite{\link[RJSONIO]{toJSON}}.}
 }
 \value{
 Character string with the name of the file created.

@@ -8,33 +8,31 @@ iboxplot(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian = TRUE,
   title = "Many box plots", caption, chartOpts = NULL)
 }
 \arguments{
-  \item{dat}{Data matrix (individuals x variables)}
+\item{dat}{Data matrix (individuals x variables)}
 
-  \item{qu}{Quantiles to plot (All with 0 < qu < 0.5)}
+\item{qu}{Quantiles to plot (All with 0 < qu < 0.5)}
 
-  \item{orderByMedian}{If TRUE, reorder individuals by
-  their median}
+\item{orderByMedian}{If TRUE, reorder individuals by their median}
 
-  \item{breaks}{Number of break points in the histogram}
+\item{breaks}{Number of break points in the histogram}
 
-  \item{file}{Optional character vector with file to
-  contain the output}
+\item{file}{Optional character vector with file to contain the
+output}
 
-  \item{onefile}{If TRUE, have output file contain all
-  necessary javascript/css code}
+\item{onefile}{If TRUE, have output file contain all necessary
+javascript/css code}
 
-  \item{openfile}{If TRUE, open the plot in the default web
-  browser}
+\item{openfile}{If TRUE, open the plot in the default web browser}
 
-  \item{title}{Character string with title for plot}
+\item{title}{Character string with title for plot}
 
-  \item{caption}{Character vector with text for a caption
-  (to be combined to one string with
-  \code{\link[base]{paste}}, with \code{collapse=''})}
+\item{caption}{Character vector with text for a caption (to be
+combined to one string with \code{\link[base]{paste}}, with
+\code{collapse=''})}
 
-  \item{chartOpts}{A list of options for configuring the
-  chart (see the coffeescript code). Each element must be
-  named using the corresponding option.}
+\item{chartOpts}{A list of options for configuring the chart (see
+  the coffeescript code). Each element must be named using the
+  corresponding option.}
 }
 \value{
 Character string with the name of the file created.

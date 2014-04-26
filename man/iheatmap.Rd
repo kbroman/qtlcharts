@@ -7,31 +7,29 @@ iheatmap(z, x, y, file, onefile = FALSE, openfile = TRUE, title = "",
   caption, chartOpts = NULL)
 }
 \arguments{
-  \item{x}{Vector of numeric values for the x-axis}
+\item{x}{Vector of numeric values for the x-axis}
 
-  \item{y}{Vector of numeric values for the y-axis}
+\item{y}{Vector of numeric values for the y-axis}
 
-  \item{z}{Numeric matrix of dim \code{length(x)} x
-  \code{length(y)}}
+\item{z}{Numeric matrix of dim \code{length(x)} x \code{length(y)}}
 
-  \item{file}{Optional character vector with file to
-  contain the output}
+\item{file}{Optional character vector with file to contain the
+output}
 
-  \item{onefile}{If TRUE, have output file contain all
-  necessary javascript/css code}
+\item{onefile}{If TRUE, have output file contain all necessary
+javascript/css code}
 
-  \item{openfile}{If TRUE, open the plot in the default web
-  browser}
+\item{openfile}{If TRUE, open the plot in the default web browser}
 
-  \item{title}{Character string with title for plot}
+\item{title}{Character string with title for plot}
 
-  \item{caption}{Character vector with text for a caption
-  (to be combined to one string with
-  \code{\link[base]{paste}}, with \code{collapse=''})}
+\item{caption}{Character vector with text for a caption (to be
+combined to one string with \code{\link[base]{paste}}, with
+\code{collapse=''})}
 
-  \item{chartOpts}{A list of options for configuring the
-  chart (see the coffeescript code). Each element must be
-  named using the corresponding option.}
+\item{chartOpts}{A list of options for configuring the chart (see
+  the coffeescript code). Each element must be named using the
+  corresponding option.}
 }
 \value{
 Character string with the name of the file created.

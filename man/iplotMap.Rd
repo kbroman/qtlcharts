@@ -7,32 +7,30 @@ iplotMap(map, shift = FALSE, file, onefile = FALSE, openfile = TRUE,
   title = "Genetic map", caption, chartOpts = NULL, ...)
 }
 \arguments{
-  \item{map}{Object of class \code{"map"}, a list with each
-  component being a vector of marker positions.}
+\item{map}{Object of class \code{"map"}, a list with each component
+being a vector of marker positions.}
 
-  \item{shift}{If TRUE, shift each chromsome so that the
-  initial marker is at position 0.}
+\item{shift}{If TRUE, shift each chromsome so that the initial marker
+is at position 0.}
 
-  \item{file}{Optional character vector with file to
-  contain the output.}
+\item{file}{Optional character vector with file to contain the
+output.}
 
-  \item{onefile}{If TRUE, have output file contain all
-  necessary javascript/css code.}
+\item{onefile}{If TRUE, have output file contain all necessary
+javascript/css code.}
 
-  \item{openfile}{If TRUE, open the plot in the default web
-  browser.}
+\item{openfile}{If TRUE, open the plot in the default web browser.}
 
-  \item{title}{Character string with title for plot.}
+\item{title}{Character string with title for plot.}
 
-  \item{caption}{Character vector with text for a caption
-  (to be combined to one string with
-  \code{\link[base]{paste}}, with \code{collapse=''})}
+\item{caption}{Character vector with text for a caption (to be
+combined to one string with \code{\link[base]{paste}}, with
+\code{collapse=''})}
 
-  \item{chartOpts}{A list of options for configuring the
-  chart.  Each element must be named using the
-  corresponding option. See details.}
+\item{chartOpts}{A list of options for configuring the chart.  Each
+element must be named using the corresponding option. See details.}
 
-  \item{...}{Passed to \cite{\link[RJSONIO]{toJSON}}.}
+\item{...}{Passed to \cite{\link[RJSONIO]{toJSON}}.}
 }
 \value{
 Character string with the name of the file created.

@@ -8,41 +8,38 @@ iplotCurves(curveMatrix, times, scatter1 = NULL, scatter2 = NULL,
   caption, chartOpts = NULL, ...)
 }
 \arguments{
-  \item{curveMatrix}{Matrix (dim n_ind x n_times) with
-  outcomes}
+\item{curveMatrix}{Matrix (dim n_ind x n_times) with outcomes}
 
-  \item{times}{Vector (length n_times) with time points for
-  the columns of curveMatrix}
+\item{times}{Vector (length n_times) with time points for the
+columns of curveMatrix}
 
-  \item{scatter1}{Matrix (dim n_ind x 2) with data for the
-  first scatterplot}
+\item{scatter1}{Matrix (dim n_ind x 2) with data for the first
+scatterplot}
 
-  \item{scatter2}{Matrix (dim n_ind x 2) with data for the
-  second scatterplot}
+\item{scatter2}{Matrix (dim n_ind x 2) with data for the second
+scatterplot}
 
-  \item{group}{Optional vector of groups of individuals
-  (e.g., a genotype)}
+\item{group}{Optional vector of groups of individuals (e.g., a genotype)}
 
-  \item{file}{Optional character vector with file to
-  contain the output}
+\item{file}{Optional character vector with file to contain the
+output}
 
-  \item{onefile}{If TRUE, have output file contain all
-  necessary javascript/css code}
+\item{onefile}{If TRUE, have output file contain all necessary
+javascript/css code}
 
-  \item{openfile}{If TRUE, open the plot in the default web
-  browser}
+\item{openfile}{If TRUE, open the plot in the default web browser}
 
-  \item{title}{Character string with title for plot}
+\item{title}{Character string with title for plot}
 
-  \item{caption}{Character vector with text for a caption
-  (to be combined to one string with
-  \code{\link[base]{paste}}, with \code{collapse=''})}
+\item{caption}{Character vector with text for a caption (to be
+combined to one string with \code{\link[base]{paste}}, with
+\code{collapse=''})}
 
-  \item{chartOpts}{A list of options for configuring the
-  chart (see the coffeescript code). Each element must be
-  named using the corresponding option.}
+\item{chartOpts}{A list of options for configuring the chart (see
+the coffeescript code). Each element must be named using the
+corresponding option.}
 
-  \item{...}{Additional arguments passed to the
+\item{...}{Additional arguments passed to the
   \code{\link[RJSONIO]{toJSON}} function}
 }
 \value{

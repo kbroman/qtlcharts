@@ -1,22 +1,5 @@
 ## To Do list for R/qtlcharts
 
-### In process
-
-- iplotMScanone w/ effects: label effect curves (in right margin?)
-
-- iplotMScanone: qualitative vs quantitative axes
-
-- iplotCorr: use heatmap and scatterplot functions
-
-
-
-### Bugs
-
-- iplotPXG behaves badly if the chosen phenotype is non-numeric
-  (e.g., a factor)
-
-
-
 ### General things
 
 - standard ways to give axis labels
@@ -45,6 +28,12 @@
 
 
 ### Enhancements to current charts
+
+- iplotMScanone w/ effects: label effect curves (in right margin?)
+
+- iplotMScanone: qualitative vs quantitative axes
+
+- iplotCorr: use heatmap and scatterplot functions
 
 - Allow separate inner margins on top and bottom (and left and right?)
 

@@ -34,13 +34,15 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
   geno_filled <- getImputedGenotypes(cross, fillgenoArgs=fillgenoArgs, imputed_negative=TRUE)
 
   phe <- qtl::pull.pheno(cross, pheno.col)
+  if(!is.numeric(phe))
+    stop("phenotype ", pheno.col, " is not numeric: ", paste(head(phe), collapse=" "))
 
   # marker names
   markers <- markernames(cross)
 
   # chr types
   sexpgm <- qtl::getsex(cross)
-  chrtype <- sapply(cross$geno, class)
+  chrtype <- vapply(cross$geno, class, "")
   names(chrtype) <- qtl::chrnames(cross)
   uchrtype <- unique(chrtype)
 
@@ -85,7 +87,7 @@ function(cross, fillgenoArgs=NULL, imputed_negative=TRUE)
 
   # on X chr, revise genotypes
   chr <- qtl::chrnames(cross)
-  chrtype <- sapply(cross$geno, class)
+  chrtype <- vapply(cross$geno, class, "")
   sexpgm <- qtl::getsex(cross)
   if(any(chrtype == "X")) {
     for(i in chr[chrtype=="X"]) {

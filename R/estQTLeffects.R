@@ -41,7 +41,7 @@ function(cross, pheno.col=1, what=c("means", "effects"))
   if(!("cross" %in% class(cross)))
     stop("Input cross object should have class \"cross\".")
   crosstype <- class(cross)[1]
-  chrtype <- sapply(cross$geno, class)
+  chrtype <- vapply(cross$geno, class, "")
   
   what <- match.arg(what)
   handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid")
@@ -65,7 +65,7 @@ function(cross, pheno.col=1, what=c("means", "effects"))
                                   prob=pr[[i]], cross.attr=attributes(cross))
   }
 
-  eff <- vector("list", sum(sapply(pr, ncol)))
+  eff <- vector("list", sum(vapply(pr, ncol, 1)))
   cur <- 0
   for(i in seq(along=pr)) {
     for(j in 1:ncol(pr[[i]])) {
@@ -124,7 +124,7 @@ function(..., labels)
 
   for(i in 2:length(dots)) {
     if(length(dots[[i]]) != length(result))
-      stop("Not all inputs are the sample length: ", paste(sapply(dots, length), sep=" "))
+      stop("Not all inputs are the sample length: ", paste(vapply(dots, length, 1), sep=" "))
     for(j in seq(along=result)) {
       colnames(dots[[i]][[j]]) <- paste(labels[i], colnames(dots[[i]][[j]]), sep=".")
       result[[j]] <- cbind(result[[j]], dots[[i]][[j]])

@@ -64,7 +64,7 @@ function(cross, pheno.col)
   pheno.col <- (1:nphe(cross))[pheno.col]
 
   phe <- cross$pheno[,pheno.col,drop=FALSE]
-  isnum <- sapply(phe, is.numeric)
+  isnum <- vapply(phe, is.numeric, TRUE)
   if(!all(isnum))
     stop("Some phenotypes not numeric: ",
          paste(phenames(cross)[pheno.col[!isnum]], collapse=" "))

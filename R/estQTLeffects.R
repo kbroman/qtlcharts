@@ -28,6 +28,8 @@
 #' @seealso \code{\link{iplotMScanone}}, \code{\link[qtl]{effectscan}}
 #' \code{\link{cbindQTLeffects}}
 #'
+#' @importFrom stats lm
+#'
 #' @examples
 #' data(grav)
 #' grav <- reduce2grid(calc.genoprob(grav, step=1))

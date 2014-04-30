@@ -11,6 +11,8 @@
 # @return Character string with the input data in JSON format
 #
 #' @importFrom RJSONIO toJSON
+#' @importFrom stats quantile
+#' @importFrom graphics hist
 #
 # @keywords interface
 # @seealso \code{\link{iboxplot}}

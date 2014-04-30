@@ -54,6 +54,8 @@
 #' input \code{cross} object, using the \code{\link[qtl]{getid}}
 #' function in R/qtl.
 #'
+#' @importFrom utils browseURL
+#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotMScanone}}, \code{\link{iplotPXG}}, \code{\link{iplotMap}}
 #'

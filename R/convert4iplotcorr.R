@@ -13,6 +13,7 @@
 # @return Character string with the input data in JSON format
 #
 #' @importFrom RJSONIO toJSON
+#' @importFrom stats hclust
 #
 # @keywords interface
 # @seealso \code{\link{iplotCorr}}

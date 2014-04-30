@@ -25,6 +25,8 @@
 #'
 #' @return Character string with the name of the file created.
 #'
+#' @importFrom utils browseURL
+#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotCorr}}
 #'

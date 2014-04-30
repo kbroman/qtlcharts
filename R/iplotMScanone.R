@@ -41,6 +41,8 @@
 #' @details If \code{cross} is provided, Haley-Knott regression is
 #' used to estimate QTL effects at each pseudomarker.
 #'
+#' @importFrom utils browseURL
+#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotScanone}}
 #'

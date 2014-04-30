@@ -40,6 +40,9 @@
 #' Individual IDs are taken from \code{rownames(mat)}; they must match
 #' \code{names(group)}.
 #'
+#' @importFrom stats cor
+#' @importFrom utils browseURL
+#'
 #' @keywords hplot
 #' @seealso \code{\link{iheatmap}}, \code{\link{iplotCurves}}
 #' 

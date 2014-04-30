@@ -28,6 +28,8 @@
 #' to \code{max(abs(z))}, and negative cells are colored blue to white
 #' which positive cells are colored white to red.
 #'
+#' @importFrom utils browseURL
+#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotCorr}}
 #' 

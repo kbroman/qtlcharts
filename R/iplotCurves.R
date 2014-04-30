@@ -64,7 +64,7 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          chartOpts=NULL, ...)
 {    
-  if(missing(file))
+  if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
   else file <- path.expand(file)
 

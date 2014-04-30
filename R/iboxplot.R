@@ -45,7 +45,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
          file, onefile=FALSE, openfile=TRUE, title="Many box plots",
          caption, chartOpts=NULL)
 {
-  if(missing(file))
+  if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
   else file <- path.expand(file)
 
@@ -64,7 +64,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
 
   append_html_middle(file, title, 'chart')
 
-  if(missing(caption))
+  if(missing(caption) || is.null(caption))
     caption <- c('The top panel is like a set of ', nrow(dat), ' box plots: ',
                 'lines are drawn at a series of percentiles for each of the distributions. ',
                 'Hover over a column in the top panel and the corresponding distribution ',

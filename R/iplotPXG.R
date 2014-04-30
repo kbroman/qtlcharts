@@ -52,7 +52,7 @@ function(cross, marker, pheno.col=1,
          caption, chartOpts=list(title=marker[1]),
          fillgenoArgs=NULL, ...)
 {    
-  if(missing(file))
+  if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
   else file <- path.expand(file)
 
@@ -78,7 +78,7 @@ function(cross, marker, pheno.col=1,
 
   append_html_middle(file, title, 'chart')
   
-  if(missing(caption))
+  if(missing(caption) || is.null(caption))
     caption <- c('Pink points correspond to individuals with imputed genotypes at this marker. ',
                 'Click on a point for a bit of gratuitous animation.')
   append_caption(caption, file)

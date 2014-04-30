@@ -39,7 +39,7 @@ iplotMap <-
 function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic map",
          caption, chartOpts=NULL, ...)
 {    
-  if(missing(file))
+  if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
   else file <- path.expand(file)
 
@@ -56,7 +56,7 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic ma
 
   append_html_middle(file, title, 'chart')
   
-  if(missing(caption))
+  if(missing(caption) || is.null(caption))
     caption <- 'Hover over marker positions to view the marker names.'
   append_caption(caption, file)
 

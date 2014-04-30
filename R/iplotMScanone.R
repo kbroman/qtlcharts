@@ -64,7 +64,7 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          chartOpts=NULL, ...)
 {    
-  if(missing(file))
+  if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
   else file <- path.expand(file)
   if(file.exists(file))
@@ -73,26 +73,26 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
   if(!any(class(scanoneOutput) == "scanone"))
     stop('"scanoneOutput" should have class "scanone".')
 
-  if(!missing(chr)) {
+  if(!missing(chr) && !is.null(chr)) {
     rn <- rownames(scanoneOutput)
     scanoneOutput <- subset(scanoneOutput, chr=chr)
-    if(!missing(effects)) effects <- effects[match(rownames(scanoneOutput), rn)]
-    if(!missing(cross)) cross <- subset(cross, chr=chr)
+    if(!missing(effects) && !is.null(effects)) effects <- effects[match(rownames(scanoneOutput), rn)]
+    if(!missing(cross) && !is.null(cross)) cross <- subset(cross, chr=chr)
    }
 
-  if(missing(caption)) caption <- NULL
+  if(missing(caption) || is.null(caption)) caption <- NULL
 
-  if(missing(lodcolumn)) lodcolumn <- 1:(ncol(scanoneOutput)-2)
+  if(missing(lodcolumn) || is.null(lodcolumn)) lodcolumn <- 1:(ncol(scanoneOutput)-2)
   stopifnot(all(lodcolumn >= 1 & lodcolumn <= ncol(scanoneOutput)-2))
   scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2),drop=FALSE]
 
-  if(missing(pheno.col)) pheno.col <- seq(along=lodcolumn)
-  if(missing(cross) && missing(effects))
+  if(missing(pheno.col) || is.null(pheno.col)) pheno.col <- seq(along=lodcolumn)
+  if((missing(cross) || is.null(cross)) && (missing(effects) || is.null(effects)))
      return(iplotMScanone_noeff(scanoneOutput,
                                 file=file, onefile=onefile, openfile=openfile, title=title,
                                 caption=caption, chartOpts=chartOpts, ...))
 
-  if(missing(effects)) {
+  if(missing(effects) || is.null(effects)) {
     stopifnot(length(pheno.col) == length(lodcolumn))
     stopifnot(class(cross)[2] == "cross")
 

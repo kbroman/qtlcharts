@@ -58,16 +58,16 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
          file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot",
          caption, chartOpts=NULL)
 {
-  if(missing(file))
+  if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
   else file <- path.expand(file)
 
   if(file.exists(file))
     stop('The file already exists; please remove it first: ', file)
 
-  if(missing(group)) group <- rep(1, nrow(mat))
+  if(missing(group) || is.null(group)) group <- rep(1, nrow(mat))
 
-  if(!missing(corr)) {
+  if(!missing(corr) && !is.null(corr)) {
     if(!missing(rows) || !missing(cols)) warning("rows and cols ignored.")
     dn <- dimnames(corr)
     if(any(is.na(match(c(dn[[1]], dn[[2]]), colnames(mat)))))
@@ -78,9 +78,9 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
     corr_was_presubset <- TRUE
   }
   else {    
-    if(missing(rows)) rows <- (1:ncol(mat))
+    if(missing(rows) || is.null(rows)) rows <- (1:ncol(mat))
     else rows <- selectMatrixColumns(mat, rows)
-    if(missing(cols)) cols <- (1:ncol(mat))
+    if(missing(cols) || is.null(cols)) cols <- (1:ncol(mat))
     else cols <- selectMatrixColumns(mat, cols)
     corr_was_presubset <- FALSE
   }
@@ -98,7 +98,7 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
 
   append_html_middle(file, title, 'chart')
 
-  if(missing(caption))
+  if(missing(caption) || is.null(caption))
     caption <- c('The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
                 'Hover over pixels in the correlation matrix on the left to see the ',
                 'values; click to see the corresponding scatterplot on the right.')

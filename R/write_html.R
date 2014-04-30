@@ -60,14 +60,14 @@ function(file, jsfile, charset, onefile)
 {
   if(!onefile) {
     text <- '    <script '
-    if(!missing(charset)) text <- c(text, 'charset="', charset, '" ')
+    if(!missing(charset) && !is.null(charset)) text <- c(text, 'charset="', charset, '" ')
     text <- c(text, 'type="text/javascript" src="', jsfile, '"></script>\n') 
 
     cat(text, file=file, append=TRUE, sep='')
   }
   else {
     text <- '    <script '
-    if(!missing(charset)) text <- c(text, 'charset="', charset, '" ')
+    if(!missing(charset) && !is.null(charset)) text <- c(text, 'charset="', charset, '" ')
     text <- c(text, 'type="text/javascript">\n')
     cat(text, file=file, append=TRUE, sep='')
 
@@ -109,9 +109,9 @@ append_html_middle <-
 function(file, title, div)
 {
   text <- '</head>\n\n<body>\n'
-  if(!missing(title)) text <- c(text, '<h3>', title, '</h3>\n\n')
+  if(!missing(title) && !is.null(title)) text <- c(text, '<h3>', title, '</h3>\n\n')
   text <- c(text, '<p id="loading">Loading...</p>\n\n')
-  if(!missing(div)) text <- c(text, '<div id="', div, '"></div>\n\n')
+  if(!missing(div) && !is.null(div)) text <- c(text, '<div id="', div, '"></div>\n\n')
 
   cat(text, file=file, append=TRUE, sep='')
 
@@ -150,8 +150,8 @@ append_html_p <-
 function(file, ..., tag="p", id, class, style)
 {
   text <- c('<', tag)
-  if(!missing(id)) text <- c(text, ' id="', id, '"')
-  if(!missing(class)) text <- c(text, ' class="', class, '"')
+  if(!missing(id) || is.null(id)) text <- c(text, ' id="', id, '"')
+  if(!missing(class) || is.null(class)) text <- c(text, ' class="', class, '"')
   text <- c(text, '>')
   cat(text, file=file, append=TRUE, sep='')
   cat(..., file=file, append=TRUE, sep='')

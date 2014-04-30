@@ -73,7 +73,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          fillgenoArgs=NULL, chartOpts=NULL, ...)
 {    
-  if(missing(file))
+  if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
   else file <- path.expand(file)
   if(file.exists(file))
@@ -82,9 +82,9 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
   if(!any(class(scanoneOutput) == "scanone"))
     stop('"scanoneOutput" should have class "scanone".')
 
-  if(!missing(chr)) {
+  if(!missing(chr) && !is.null(chr)) {
      scanoneOutput <- subset(scanoneOutput, chr=chr)
-    if(!missing(cross)) cross <- subset(cross, chr=chr)
+    if(!missing(cross) && !is.null(cross)) cross <- subset(cross, chr=chr)
    }
 
   pxgtype <- match.arg(pxgtype)
@@ -101,7 +101,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 
   if(missing(caption)) caption <- NULL
 
-  if(missing(cross))
+  if(missing(cross) || is.null(cross))
     return(iplotScanone_noeff(scanoneOutput=scanoneOutput, file=file, onefile=onefile,
                               openfile=openfile, title=title, caption=caption,
                               chartOpts=chartOpts, ...))

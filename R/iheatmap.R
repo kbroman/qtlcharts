@@ -50,7 +50,7 @@ function(z, x, y,
          file, onefile=FALSE, openfile=TRUE, title="",
          caption, chartOpts=NULL)
 {
-  if(missing(file))
+  if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
   else file <- path.expand(file)
 
@@ -58,9 +58,9 @@ function(z, x, y,
     stop('The file already exists; please remove it first: ', file)
 
   z <- as.matrix(z)
-  if(missing(x)) x <- 1:nrow(z)
+  if(missing(x) || is.null(x)) x <- 1:nrow(z)
   else stopifnot(length(x) == nrow(z))
-  if(missing(y)) y <- 1:ncol(z)
+  if(missing(y) || is.null(y)) y <- 1:ncol(z)
   else stopifnot(length(y) == ncol(z))
   names(x) <- names(y) <- dimnames(z) <- NULL
   json <- toJSON(list(x=x, y=y, z=z))
@@ -77,7 +77,7 @@ function(z, x, y,
 
   append_html_middle(file, title, 'chart')
 
-  if(missing(caption))
+  if(missing(caption) || is.null(caption))
     caption <- c('Hover over pixels in the heatmap on the top-left to see the values and to see ',
                  'the horizontal slice (below) and the vertical slice (to the right).')
   append_caption(caption, file)

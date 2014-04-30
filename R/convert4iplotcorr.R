@@ -30,7 +30,7 @@ function(dat, group, rows, cols, reorder=TRUE, corr, corr_was_presubset=FALSE)
   variables <- colnames(dat)
   if(is.null(variables)) variable <- paste0("var", 1:ncol(dat))
 
-  if(missing(group)) group <- rep(1, nrow(dat))
+  if(missing(group) || is.null(group)) group <- rep(1, nrow(dat))
 
   if(nrow(dat) != length(group))
     stop("nrow(dat) != length(group)")

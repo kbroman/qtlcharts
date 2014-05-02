@@ -73,6 +73,7 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
 
   n.ind <- nrow(curveMatrix)
   n.times <- ncol(curveMatrix)
+  if(missing(times) || is.null(times)) times <- 1:ncol(curveMatrix)
   if(length(times) != n.times)
     stop("length(times) != ncol(curveMatrix)")
   if(!is.null(scatter1) && nrow(scatter1) != n.ind)

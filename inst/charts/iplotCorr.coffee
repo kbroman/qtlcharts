@@ -13,6 +13,7 @@ iplotCorr = (data, chartOpts) ->
   rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
   cortitle = chartOpts?.cortitle ? ""
   scattitle = chartOpts?.scattitle ? ""
+  scatcolors = chartOpts?.scatcolors ? null
   # chartOpts end
 
   totalh = height + margin.top + margin.bottom
@@ -103,16 +104,17 @@ iplotCorr = (data, chartOpts) ->
 
   # colors for scatterplot
   nGroup = d3.max(data.group)
-  if nGroup == 1
-    colors = [ d3.rgb(150, 150, 150) ]
-  else if nGroup <= 3
-    colors = ["crimson", "green", "darkslateblue"]
-  else 
-    if nGroup <= 10
-      colorScale = d3.scale.category10()
-    else
-      colorScale = d3.scale.category20()
-    colors = (colorScale(i) for i of d3.range(nGroup))
+  if !(scatcolors?) or scatcolors.length < nGroup
+    if nGroup == 1
+      scatcolors = [ d3.rgb(150, 150, 150) ]
+    else if nGroup <= 3
+      scatcolors = ["crimson", "green", "darkslateblue"]
+    else 
+      if nGroup <= 10
+        colorScale = d3.scale.category10()
+      else
+        colorScale = d3.scale.category20()
+      scatcolors = (colorScale(i) for i of d3.range(nGroup))
 
   scat_tip = d3.tip()
               .attr('class', 'd3-tip')
@@ -210,7 +212,7 @@ iplotCorr = (data, chartOpts) ->
                      if x? and y? then 3 else null)
                .attr("stroke", "black")
                .attr("stroke-width", 1)
-               .attr("fill", (d) -> colors[data.group[d]-1])
+               .attr("fill", (d) -> scatcolors[data.group[d]-1])
                .on("mouseover", scat_tip.show)
                .on("mouseout", scat_tip.hide)
 

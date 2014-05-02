@@ -2,7 +2,7 @@
 var iplotCorr;
 
 iplotCorr = function(data, chartOpts) {
-  var cells, colorScale, colors, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, nGroup, ncorrX, ncorrY, nind, nvar, pixel_height, pixel_width, rectcolor, scat_tip, scatterplot, scattitle, svg, totalh, totalw, width, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6;
+  var cells, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, nGroup, ncorrX, ncorrY, nind, nvar, pixel_height, pixel_width, rectcolor, scat_tip, scatcolors, scatterplot, scattitle, svg, totalh, totalw, width, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7;
   height = (_ref = chartOpts != null ? chartOpts.height : void 0) != null ? _ref : 450;
   width = (_ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? _ref1 : height;
   margin = (_ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref2 : {
@@ -16,6 +16,7 @@ iplotCorr = function(data, chartOpts) {
   rectcolor = (_ref4 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref4 : d3.rgb(230, 230, 230);
   cortitle = (_ref5 = chartOpts != null ? chartOpts.cortitle : void 0) != null ? _ref5 : "";
   scattitle = (_ref6 = chartOpts != null ? chartOpts.scattitle : void 0) != null ? _ref6 : "";
+  scatcolors = (_ref7 = chartOpts != null ? chartOpts.scatcolors : void 0) != null ? _ref7 : null;
   totalh = height + margin.top + margin.bottom;
   totalw = (width + margin.left + margin.right) * 2;
   svg = d3.select("div#chart").append("svg").attr("height", totalh).attr("width", totalw);
@@ -64,24 +65,26 @@ iplotCorr = function(data, chartOpts) {
     return drawScatter(d.col, d.row);
   });
   nGroup = d3.max(data.group);
-  if (nGroup === 1) {
-    colors = [d3.rgb(150, 150, 150)];
-  } else if (nGroup <= 3) {
-    colors = ["crimson", "green", "darkslateblue"];
-  } else {
-    if (nGroup <= 10) {
-      colorScale = d3.scale.category10();
+  if (!(scatcolors != null) || scatcolors.length < nGroup) {
+    if (nGroup === 1) {
+      scatcolors = [d3.rgb(150, 150, 150)];
+    } else if (nGroup <= 3) {
+      scatcolors = ["crimson", "green", "darkslateblue"];
     } else {
-      colorScale = d3.scale.category20();
-    }
-    colors = (function() {
-      var _results;
-      _results = [];
-      for (i in d3.range(nGroup)) {
-        _results.push(colorScale(i));
+      if (nGroup <= 10) {
+        colorScale = d3.scale.category10();
+      } else {
+        colorScale = d3.scale.category20();
       }
-      return _results;
-    })();
+      scatcolors = (function() {
+        var _results;
+        _results = [];
+        for (i in d3.range(nGroup)) {
+          _results.push(colorScale(i));
+        }
+        return _results;
+      })();
+    }
   }
   scat_tip = d3.tip().attr('class', 'd3-tip').html(function(d, i) {
     return data.indID[i];
@@ -132,7 +135,7 @@ iplotCorr = function(data, chartOpts) {
         return null;
       }
     }).attr("stroke", "black").attr("stroke-width", 1).attr("fill", function(d) {
-      return colors[data.group[d] - 1];
+      return scatcolors[data.group[d] - 1];
     }).on("mouseover", scat_tip.show).on("mouseout", scat_tip.hide);
   };
   corrplot.append("rect").attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", 1).attr("pointer-events", "none");

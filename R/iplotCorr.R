@@ -67,6 +67,8 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
 
   if(missing(group) || is.null(group)) group <- rep(1, nrow(mat))
 
+  if(is.data.frame(mat)) mat <- as.matrix(mat)
+
   if(!missing(corr) && !is.null(corr)) {
     if(!missing(rows) || !missing(cols)) warning("rows and cols ignored.")
     dn <- dimnames(corr)
@@ -89,7 +91,6 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
 
   # start writing
   write_html_top(file, title=title)
-
 
   link_d3(file, onefile=onefile)
   link_d3tip(file, onefile=onefile)

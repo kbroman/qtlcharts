@@ -10,8 +10,8 @@
 - function to write CSS styles
 
 - write a guide to the use of chartOpts
-  - How to use the options, and what they are, and fill out the
-    comments
+  (How to use the options, and what they are, and fill out the
+  comments)
 
     ```
     # start of chartOpts
@@ -36,14 +36,13 @@
 - iplotCorr: use heatmap and scatterplot functions
 
 - Allow separate inner margins on top and bottom (and left and right?)
+  also make `inner_top`, `inner_left`, `inner_right` functions
 
-  something like this:
-
-      inner_bottom = (margin, value=5) -> margin?.inner_bottom ? margin?.inner ? value
-      margin.inner_bottom = inner_bottom(margin)
-      margin.inner_bottom = inner_bottom(margin, 0)
-      
-      also make inner_top, inner_left, inner_right functions
+  ```
+  inner_bottom = (margin, value=5) -> margin?.inner_bottom ? margin?.inner ? value
+  margin.inner_bottom = inner_bottom(margin)
+  margin.inner_bottom = inner_bottom(margin, 0)
+  ```
 
 - lodchart: optional inclusion of ticks at markers
 

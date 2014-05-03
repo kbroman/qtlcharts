@@ -20,7 +20,9 @@
 #
 # @examples
 # data(geneExpr)
-# geneExpr_as_json <- convert4iplotcorr(geneExpr$expr, geneExpr$genotype)
+# geneExpr_as_json <- convert4iplotcorr(geneExpr$expr, geneExpr$genotype,
+#                                       rows=1:ncol(geneExpr$expr), cols=1:ncol(geneExpr$expr),
+#                                       corr=cor(geneExpr$expr, use="pair"))
 convert4iplotcorr <-
 function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE)
 {

@@ -22,7 +22,7 @@
 # data(geneExpr)
 # geneExpr_as_json <- convert4iplotcorr(geneExpr$expr, geneExpr$genotype)
 convert4iplotcorr <-
-function(dat, group, rows, cols, reorder=TRUE, corr, corr_was_presubset=FALSE)
+function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE)
 {
   indID <- rownames(dat)
   if(is.null(indID)) indID <- paste(1:nrow(dat))

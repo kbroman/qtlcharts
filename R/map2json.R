@@ -26,5 +26,10 @@
 # map <- pull.map(hyper)
 # map_as_json <- map2json(map)
 map2json <-
-function(map, ...)
-  jsonlite::toJSON(list(chr=names(map), map=map), ...)
+function(map, ...) {
+  chrnames <- names(map)
+  # force use of hash with single numeric values
+  map <- lapply(map, function(a) lapply(a, jsonlite::unbox))
+  
+  jsonlite::toJSON(list(chr=chrnames, map=map), ...)
+}

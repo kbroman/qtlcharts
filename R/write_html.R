@@ -247,3 +247,7 @@ function(caption, file)
   append_html_p(file, paste(caption, collapse=""),
                 tag='p', class='caption', id='caption')
 }
+
+strip_whitespace <-
+function(x)
+  gsub("\\s", "", x, perl=TRUE)

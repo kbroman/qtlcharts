@@ -183,24 +183,34 @@ function(file, chartOpts, digits=2)
   invisible(NULL)
 }
       
-# chartOpts to JSON
+# reformat chartOpts, to prepare for export as JSON object
 #
-# names vector -> lists
+# named vector -> list
 # vectors of length 1 "unboxed" (scalar rather than array)
+# NULL -> unbox(NA) [converted to null]
 #
 #' @importFrom jsonlite unbox
 #
 opts4json <-
 function(opts)
 {
+  # NULL -> unbox(NA)
+  if(is.null(opts)) return(jsonlite::unbox(NA))
+
+  # NA -> unbox(NA)
+  if(!is.list(opts) && length(opts)==1 && is.null(names(opts)))
+    return(jsonlite::unbox(opts))
+
   if(!is.null(names(opts)))
     opts <- as.list(opts)
+
   for(i in seq(along=opts)) {
     if(!is.list(opts[[i]]) && length(opts[[i]])==1)
       opts[[i]] <- jsonlite::unbox(opts[[i]])
     else
       opts[[i]] <- opts4json(opts[[i]])
   }
+
   opts
 }
 

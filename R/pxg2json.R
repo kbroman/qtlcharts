@@ -12,8 +12,8 @@
 # @param pheno.col Phenotype column
 # @param fillgenoArgs List of named arguments to pass to
 #   \code{\link[qtl]{fill.geno}}, if needed.
-# @param ... Additional arguments passed to the
-#   \code{\link[jsonlite]{toJSON}} function
+# @param digits Number of digits in JSON; passed to
+#   \code{\link[jsonlite]{toJSON}}
 #
 # @return A character string with the input in JSON format.
 #
@@ -29,7 +29,7 @@
 # data(hyper)
 # pxg_as_json <- pxg2json(hyper)
 pxg2json <-
-function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
+function(cross, pheno.col=1, fillgenoArgs=NULL, digits=4)
 {
   geno_filled <- getImputedGenotypes(cross, fillgenoArgs=fillgenoArgs, imputed_negative=TRUE)
 
@@ -66,7 +66,7 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
                        chrByMarkers=chrByMarkers,
                        indID=id,
                        chrtype=chrtype,
-                       genonames=genonames))
+                       genonames=genonames), digits=digits)
 }
 
 

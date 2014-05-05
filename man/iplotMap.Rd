@@ -4,7 +4,7 @@
 \title{Interactive genetic map plot}
 \usage{
 iplotMap(map, shift = FALSE, file, onefile = FALSE, openfile = TRUE,
-  title = "Genetic map", caption, chartOpts = NULL, ...)
+  title = "Genetic map", caption, chartOpts = NULL, digits = 4)
 }
 \arguments{
 \item{map}{Object of class \code{"map"}, a list with each component
@@ -30,7 +30,7 @@ combined to one string with \code{\link[base]{paste}}, with
 \item{chartOpts}{A list of options for configuring the chart.  Each
 element must be named using the corresponding option. See details.}
 
-\item{...}{Passed to \cite{\link[jsonlite]{toJSON}}.}
+\item{digits}{Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.}
 }
 \value{
 Character string with the name of the file created.

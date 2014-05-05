@@ -10,7 +10,7 @@
 #
 # @param output An object of class \code{"scanone"}, as output by
 #   \code{\link[qtl]{scanone}}.
-# @param ... Additional arguments passed to
+# @param digits Number of digits in JSON; passed to
 #   \code{\link[jsonlite]{toJSON}}.
 #
 # @return A character string with the input in JSON format.
@@ -26,7 +26,7 @@
 # out <- scanone(hyper)
 # out_as_json <- scanone2json(out)
 scanone2json <-
-function(output, ...)
+function(output, digits=4)
 {
   # marker names: replace pseudomarkers with blanks
   mnames <- rownames(output)
@@ -42,5 +42,5 @@ function(output, ...)
     warning("lod column names are not unique")
 
   jsonlite::toJSON(c(list(chrnames = chrnames, lodnames=lodnames),
-                     as.list(output), list(markernames = mnames)), ...)
+                     as.list(output), list(markernames = mnames)), digits=digits)
 }

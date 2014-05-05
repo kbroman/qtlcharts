@@ -33,8 +33,8 @@
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
-#' @param ... Additional arguments passed to the
-#'   \code{\link[jsonlite]{toJSON}} function
+#' @param digits Number of digits in JSON; passed to
+#'   \code{\link[jsonlite]{toJSON}}
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -62,7 +62,7 @@ iplotMScanone <-
 function(scanoneOutput, cross, lodcolumn, pheno.col,
          effects, chr,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
-         chartOpts=NULL, ...)
+         chartOpts=NULL, digits=4)
 {    
   if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -90,7 +90,7 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
   if((missing(cross) || is.null(cross)) && (missing(effects) || is.null(effects)))
      return(iplotMScanone_noeff(scanoneOutput,
                                 file=file, onefile=onefile, openfile=openfile, title=title,
-                                caption=caption, chartOpts=chartOpts, ...))
+                                caption=caption, chartOpts=chartOpts, digits=digits))
 
   if(missing(effects) || is.null(effects)) {
     stopifnot(length(pheno.col) == length(lodcolumn))
@@ -109,7 +109,7 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
 
   iplotMScanone_eff(scanoneOutput, effects,
                     file=file, onefile=onefile, openfile=openfile, title=title,
-                    caption=caption, chartOpts=chartOpts, ...)
+                    caption=caption, chartOpts=chartOpts, digits=digits)
 }
 
 
@@ -117,9 +117,9 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
 iplotMScanone_noeff <-
 function(scanoneOutput,
          file, onefile=FALSE, openfile=TRUE,
-         title="", caption, chartOpts=NULL, ...)
+         title="", caption, chartOpts=NULL, digits=4)
 {
-  scanone_json <- scanone2json(scanoneOutput, ...)
+  scanone_json <- scanone2json(scanoneOutput, digits=digits)
 
   write_html_top(file, title=title)
 
@@ -153,10 +153,10 @@ function(scanoneOutput,
 iplotMScanone_eff <-
 function(scanoneOutput, effects,
          file, onefile=FALSE, openfile=TRUE,
-         title="", caption, chartOpts=NULL, ...)
+         title="", caption, chartOpts=NULL, digits=4)
 {
-  scanone_json <- scanone2json(scanoneOutput, ...)
-  effects_json <- effects2json(effects, ...)
+  scanone_json <- scanone2json(scanoneOutput, digits=digits)
+  effects_json <- effects2json(effects, digits=digits)
 
   write_html_top(file, title=title)
 

@@ -20,7 +20,7 @@
 #'   \code{collapse=''})
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option. See details.
-#' @param ... Passed to \cite{\link[jsonlite]{toJSON}}.
+#' @param digits Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -37,7 +37,7 @@
 #' @export
 iplotMap <-
 function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic map",
-         caption, chartOpts=NULL, ...)
+         caption, chartOpts=NULL, digits=4)
 {    
   if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -61,7 +61,7 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic ma
   append_caption(caption, file)
 
   if(shift) map <- shiftmap(map)
-  json <- map2json(map, ...)
+  json <- map2json(map, digits=digits)
 
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)

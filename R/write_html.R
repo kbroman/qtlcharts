@@ -164,21 +164,47 @@ function(file, ..., tag="p", id, class, style)
 #
 # @param file File to which to write
 # @param chartOpts The options (a list)
+# @param digits Number of digits in JSON; passed to \code{\link[jsonlite]{toJSON}}
+#
 # @return None (invisible NULL)
 # @keywords IO
+#' @importFrom jsonlite toJSON
+#
 append_html_chartopts <-
-function(file, chartOpts)
+function(file, chartOpts, digits=2)
 {
   if(is.null(chartOpts))
     chartOpts <- list("null" = NULL)
   
   cat('\n<script type="text/javascript">\n', file=file, append=TRUE)
-  cat('chartOpts = ', toJSON(chartOpts), ';', file=file, append=TRUE, sep='')
+  cat('chartOpts = ', toJSON(opts4json(chartOpts), digits=digits), ';', file=file, append=TRUE, sep='')
   cat('\n</script>\n', file=file, append=TRUE)
 
   invisible(NULL)
 }
       
+# chartOpts to JSON
+#
+# names vector -> lists
+# vectors of length 1 "unboxed" (scalar rather than array)
+#
+#' @importFrom jsonlite unbox
+#
+opts4json <-
+function(opts)
+{
+  if(!is.null(names(opts)))
+    opts <- as.list(opts)
+  for(i in seq(along=opts)) {
+    if(!is.list(opts[[i]]) && length(opts[[i]])==1)
+      opts[[i]] <- jsonlite::unbox(opts[[i]])
+    else
+      opts[[i]] <- opts4json(opts[[i]])
+  }
+  opts
+}
+
+
 # functions to simplify linking/incorporating js/css code
 link_d3 <-
 function(file, onefile=FALSE)

@@ -7,6 +7,7 @@
 # @param qu Quantiles to plot (All with 0 < qu < 0.5)
 # @param orderByMedian If TRUE, reorder individuals by their median
 # @param breaks Number of break points in the histogram
+# @param digits Number of digits in JSON file; passed to \code{\link[jsonlite]{toJSON}}
 #
 # @return Character string with the input data in JSON format
 #
@@ -26,7 +27,7 @@
 # geneExpr_as_json <- convert4iboxplot(expr)
 convert4iboxplot <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
-         breaks=251)
+         breaks=251, digits=4)
 {
   if(is.null(rownames(dat)))
     rownames(dat) <- paste0(1:nrow(dat))
@@ -61,8 +62,8 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
   # data structure for JSON
   output <- list("ind" = jsonlite::toJSON(ind),
                  "qu" = jsonlite::toJSON(qu),
-                 "breaks" = jsonlite::toJSON(breaks),
-                 "quant" = jsonlite::toJSON(quant),
+                 "breaks" = jsonlite::toJSON(breaks, digits=digits),
+                 "quant" = jsonlite::toJSON(quant, digits=digits),
                  "counts" = jsonlite::toJSON(t(counts)))
   paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
 }

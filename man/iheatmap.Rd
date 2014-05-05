@@ -4,7 +4,7 @@
 \title{Interactive heat map}
 \usage{
 iheatmap(z, x, y, file, onefile = FALSE, openfile = TRUE, title = "",
-  caption, chartOpts = NULL)
+  caption, chartOpts = NULL, digits = 4)
 }
 \arguments{
 \item{x}{Vector of numeric values for the x-axis}
@@ -28,8 +28,10 @@ combined to one string with \code{\link[base]{paste}}, with
 \code{collapse=''})}
 
 \item{chartOpts}{A list of options for configuring the chart (see
-  the coffeescript code). Each element must be named using the
-  corresponding option.}
+the coffeescript code). Each element must be named using the
+corresponding option.}
+
+\item{digits}{Number of digits in JSON; passed to \code{\link[jsonlite]{toJSON}}}
 }
 \value{
 Character string with the name of the file created.

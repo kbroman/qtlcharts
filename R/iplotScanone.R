@@ -38,8 +38,8 @@
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
-#' @param ... Additional arguments passed to the
-#'   \code{\link[jsonlite]{toJSON}} function
+#' @param digits Number of digits in JSON; pass to
+#'   \code{\link[jsonlite]{toJSON}}
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -71,7 +71,7 @@ iplotScanone <-
 function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
          pxgtype = c("ci", "raw"),
          file, onefile=FALSE, openfile=TRUE, title="", caption,
-         fillgenoArgs=NULL, chartOpts=NULL, ...)
+         fillgenoArgs=NULL, chartOpts=NULL, digits=4)
 {    
   if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -104,7 +104,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
   if(missing(cross) || is.null(cross))
     return(iplotScanone_noeff(scanoneOutput=scanoneOutput, file=file, onefile=onefile,
                               openfile=openfile, title=title, caption=caption,
-                              chartOpts=chartOpts, ...))
+                              chartOpts=chartOpts, digits=digits))
 
   if(length(pheno.col) > 1) {
     pheno.col <- pheno.col[1]
@@ -117,12 +117,12 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
   if(pxgtype == "raw")
     return(iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
                             file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
-                            fillgenoArgs=fillgenoArgs,  chartOpts=chartOpts, ...))
+                            fillgenoArgs=fillgenoArgs,  chartOpts=chartOpts, digits=digits))
 
   else
     return(iplotScanone_ci(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
                            file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
-                           fillgenoArgs=fillgenoArgs, chartOpts=chartOpts, ...))
+                           fillgenoArgs=fillgenoArgs, chartOpts=chartOpts, digits=digits))
 
   invisible(file)
 }
@@ -130,7 +130,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 
 # iplotScanone: LOD curves with nothing else
 iplotScanone_noeff <-
-function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", caption, chartOpts=NULL, ...)
+function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", caption, chartOpts=NULL, digits=4)
 {    
   write_html_top(file, title=title)
 
@@ -147,7 +147,7 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", caption, c
                 'Click on a marker for a bit of gratuitous animation.')
   append_caption(caption, file)
 
-  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, ...), ';')
+  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, digits=digits), ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotScanone_noeff(data, chartOpts);')
 
@@ -162,10 +162,10 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", caption, c
 # iplotScanone_pxg: LOD curves with linked phe x gen plot
 iplotScanone_pxg <-
 function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
-         title="", caption, fillgenoArgs=NULL, chartOpts=NULL, ...)
+         title="", caption, fillgenoArgs=NULL, chartOpts=NULL, digits=4)
 {    
-  scanone_json <- scanone2json(scanoneOutput, ...)
-  pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, ...)
+  scanone_json <- scanone2json(scanoneOutput, digits=digits)
+  pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
   write_html_top(file, title=title)
 
@@ -199,10 +199,10 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
 # iplotScanone_ci: LOD curves with linked phe mean +/- 2 SE x gen plot
 iplotScanone_ci <-
 function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
-         title="", caption, fillgenoArgs=NULL, chartOpts=NULL, ...)
+         title="", caption, fillgenoArgs=NULL, chartOpts=NULL, digits=4)
 {    
-  scanone_json <- scanone2json(scanoneOutput, ...)
-  pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, ...)
+  scanone_json <- scanone2json(scanoneOutput, digits=digits)
+  pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
   write_html_top(file, title=title)
 

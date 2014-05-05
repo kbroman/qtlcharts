@@ -22,7 +22,7 @@
 #'   element must be named using the corresponding option. See details.
 #' @param fillgenoArgs List of named arguments to pass to
 #'   \code{\link[qtl]{fill.geno}}, if needed.
-#' @param ... Passed to \cite{\link[jsonlite]{toJSON}}.
+#' @param digits Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -50,7 +50,7 @@ iplotPXG <-
 function(cross, marker, pheno.col=1,
          file, onefile=FALSE, openfile=TRUE, title="",
          caption, chartOpts=list(title=marker[1]),
-         fillgenoArgs=NULL, ...)
+         fillgenoArgs=NULL, digits=4)
 {    
   if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -83,7 +83,7 @@ function(cross, marker, pheno.col=1,
                 'Click on a point for a bit of gratuitous animation.')
   append_caption(caption, file)
 
-  json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, ...)
+  json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
   # use phenotype name as y-axis label, unless ylab is already provided
   chartOpts <- add2chartOpts(chartOpts, ylab=getPhename(cross, pheno.col))

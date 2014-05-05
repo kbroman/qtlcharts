@@ -27,8 +27,8 @@
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
-#' @param ... Additional arguments passed to the
-#'   \code{\link[jsonlite]{toJSON}} function
+#' @param digits Number of digits in JSON; passed to
+#'   \code{\link[jsonlite]{toJSON}}
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -57,12 +57,12 @@
 #'                                 scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
 #'                                 scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))
 #'
+#' @importFrom jsonlite toJSON unbox
 #' @export
-#' @importFrom jsonlite toJSON
 iplotCurves <- 
 function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
-         chartOpts=NULL, ...)
+         chartOpts=NULL, digits=4)
 {    
   if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -121,13 +121,9 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
   }
   append_caption(caption, file)
 
-  append_html_jscode(file, 'curve_data = ', toJSON(list(x=times, data=curveMatrix, group=group, indID=indID), ...), ';')
-  scat1_json <- ifelse(is.null(scatter1), toJSON(NULL, container=FALSE),
-                       toJSON(list(data=scatter1, group=group, indID=indID), ...))
-  append_html_jscode(file, 'scatter1_data = ', scat1_json, ';')
-  scat2_json <- ifelse(is.null(scatter2), toJSON(NULL, container=FALSE),
-                       toJSON(list(data=scatter2, group=group, indID=indID), ...))
-  append_html_jscode(file, 'scatter2_data = ', scat2_json, ';')
+  append_html_jscode(file, 'curve_data = ', curves2json(times, curveMatrix, group, indID, digits=digits), ';')
+  append_html_jscode(file, 'scatter1_data = ', scat2json(scatter1, group, indID, digits=digits), ';')
+  append_html_jscode(file, 'scatter2_data = ', scat2json(scatter2, group, indID, digits=digits), ';')
   append_html_chartopts(file, chartOpts)
 
   append_html_jscode(file, 'iplotCurves(curve_data, scatter1_data, scatter2_data, chartOpts)')
@@ -137,4 +133,27 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
   if(openfile) browseURL(file)
 
   invisible(file)
+}
+
+curves2json <-
+function(times, curvedata, group, indID, digits=4)
+{
+  # NULL -> NA so treated properly by JSON
+  if(is.null(times)) times <- unbox(NA)
+  if(is.null(group)) group <- unbox(NA)
+  if(is.null(indID)) indID <- unbox(NA)
+
+  toJSON(list(x=times, data=curvedata, group=group, indID=indID), digits=digits)
+}
+
+scat2json <-
+function(scatdata, group, indID, digits=4)
+{
+  if(is.null(scatdata)) return("null")
+
+  # NULL -> NA so treated properly by JSON
+  if(is.null(group)) group <- unbox(NA)
+  if(is.null(indID)) indID <- unbox(NA)
+
+  toJSON(list(data=scatdata, group=group, indID=indID), digits=digits)
 }

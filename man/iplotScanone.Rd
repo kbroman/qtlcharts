@@ -5,7 +5,8 @@
 \usage{
 iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
   pxgtype = c("ci", "raw"), file, onefile = FALSE, openfile = TRUE,
-  title = "", caption, fillgenoArgs = NULL, chartOpts = NULL, ...)
+  title = "", caption, fillgenoArgs = NULL, chartOpts = NULL,
+  digits = 4)
 }
 \arguments{
 \item{scanoneOutput}{Object of class \code{"scanone"}, as output
@@ -50,8 +51,8 @@ combined to one string with \code{\link[base]{paste}}, with
 the coffeescript code). Each element must be named using the
 corresponding option.}
 
-\item{...}{Additional arguments passed to the
-  \code{\link[jsonlite]{toJSON}} function}
+\item{digits}{Number of digits in JSON; pass to
+  \code{\link[jsonlite]{toJSON}}}
 }
 \value{
 Character string with the name of the file created.

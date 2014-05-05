@@ -21,6 +21,7 @@
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
+#' @param digits Number of digits in JSON; passed to \code{\link[jsonlite]{toJSON}}
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -48,7 +49,7 @@
 iheatmap <-
 function(z, x, y,
          file, onefile=FALSE, openfile=TRUE, title="",
-         caption, chartOpts=NULL)
+         caption, chartOpts=NULL, digits=4)
 {
   if(missing(file) || is.null(file))
     file <- tempfile(tmpdir=tempdir(), fileext='.html')
@@ -63,7 +64,7 @@ function(z, x, y,
   if(missing(y) || is.null(y)) y <- 1:ncol(z)
   else stopifnot(length(y) == ncol(z))
   names(x) <- names(y) <- dimnames(z) <- NULL
-  json <- toJSON(list(x=x, y=y, z=z))
+  json <- toJSON(list(x=x, y=y, z=z), digits=digits)
 
   # start writing
   write_html_top(file, title=title)

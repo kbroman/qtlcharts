@@ -5,7 +5,7 @@
 \usage{
 iplotCurves(curveMatrix, times, scatter1 = NULL, scatter2 = NULL,
   group = NULL, file, onefile = FALSE, openfile = TRUE, title = "",
-  caption, chartOpts = NULL, ...)
+  caption, chartOpts = NULL, digits = 4)
 }
 \arguments{
 \item{curveMatrix}{Matrix (dim n_ind x n_times) with outcomes}
@@ -39,8 +39,8 @@ combined to one string with \code{\link[base]{paste}}, with
 the coffeescript code). Each element must be named using the
 corresponding option.}
 
-\item{...}{Additional arguments passed to the
-  \code{\link[jsonlite]{toJSON}} function}
+\item{digits}{Number of digits in JSON; passed to
+  \code{\link[jsonlite]{toJSON}}}
 }
 \value{
 Character string with the name of the file created.

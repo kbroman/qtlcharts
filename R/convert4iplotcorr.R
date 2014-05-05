@@ -9,6 +9,7 @@
 # @param cols Columns of correlation matrix to keep in image
 # @param reorder If TRUE, reorder the variables by clustering
 # @param corr Correlation matrix
+# @param digits Number of digits in JSON; passed to \code{\link[jsonlite]{toJSON}}
 #
 # @return Character string with the input data in JSON format
 #
@@ -24,7 +25,8 @@
 #                                       rows=1:ncol(geneExpr$expr), cols=1:ncol(geneExpr$expr),
 #                                       corr=cor(geneExpr$expr, use="pair"))
 convert4iplotcorr <-
-function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE)
+function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
+         digits=4)
 {
   indID <- rownames(dat)
   if(is.null(indID)) indID <- paste(1:nrow(dat))
@@ -70,10 +72,10 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE)
 
   output <- list("indID" = toJSON(indID),
                  "var" = toJSON(variables),
-                 "corr" = toJSON(corr[rows,cols]),
+                 "corr" = toJSON(corr[rows,cols], digits=digits),
                  "rows" = toJSON(rows-1),
                  "cols" = toJSON(cols-1),
-                 "dat" =  toJSON(t(dat)), # columns as rows
+                 "dat" =  toJSON(t(dat), digits=digits), # columns as rows
                  "group" = toJSON(group))
   paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
 }

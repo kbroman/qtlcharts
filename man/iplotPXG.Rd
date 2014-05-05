@@ -5,7 +5,7 @@
 \usage{
 iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
   openfile = TRUE, title = "", caption, chartOpts = list(title =
-  marker[1]), fillgenoArgs = NULL, ...)
+  marker[1]), fillgenoArgs = NULL, digits = 4)
 }
 \arguments{
 \item{cross}{Object of class \code{"cross"}, see
@@ -35,7 +35,7 @@ element must be named using the corresponding option. See details.}
 \item{fillgenoArgs}{List of named arguments to pass to
 \code{\link[qtl]{fill.geno}}, if needed.}
 
-\item{...}{Passed to \cite{\link[jsonlite]{toJSON}}.}
+\item{digits}{Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.}
 }
 \value{
 Character string with the name of the file created.

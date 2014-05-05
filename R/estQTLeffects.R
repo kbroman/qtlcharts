@@ -208,7 +208,7 @@ function(effects, crosstype, chrtype)
 #' @importFrom jsonlite toJSON
 #
 effects2json <-
-function(effects, ...)
+function(effects, digits=4)
 {
   names(effects) <- NULL
   for(i in seq(along=effects)) {
@@ -228,5 +228,5 @@ function(effects, ...)
     effects[[i]] <- list(data=eff, x=(1:nr)-1, names=cn)
   }
 
-  jsonlite::toJSON(effects, ...)
+  jsonlite::toJSON(effects, digits=digits)
 }

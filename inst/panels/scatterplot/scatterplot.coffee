@@ -51,7 +51,7 @@ scatterplot = () ->
       group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
 
       # colors of the points in the different groups
-      pointcolor = data?.pointcolor ? selectGroupColors(ngroup, "dark")
+      pointcolor = pointcolor ? selectGroupColors(ngroup, "dark")
       pointcolor = expand2vector(pointcolor, ngroup)
 
       # if all (x,y) not null

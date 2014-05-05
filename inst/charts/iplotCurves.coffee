@@ -14,6 +14,8 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
   pointcolor = chartOpts?.pointcolor ? null
   pointstroke = chartOpts?.pointstroke ? "black"
   pointsize = chartOpts?.pointsize ? 3
+  pointcolorhilit = chartOpts?.pointcolorhilit ? null
+  pointsizehilit = chartOpts?.pointsizehilit ? 6
   strokecolor = chartOpts?.strokecolor ? null
   strokecolorhilit = chartOpts?.strokecolorhilit ? null
   strokewidth = chartOpts?.strokewidth ? 2
@@ -66,6 +68,17 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)
+
+
+  # groups of colors
+  nind = curve_data.data.length
+  group = curve_data?.group ? (1 for i in curve_data.data)
+  ngroup = d3.max(group)
+  group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
+
+  # colors of the points in the different groups
+  pointcolor = pointcolor ? selectGroupColors(ngroup, "light")
+  pointcolorhilit = pointcolorhilit ? selectGroupColors(ngroup, "dark")
 
   ## configure the three charts
   mycurvechart = curvechart().width(width)
@@ -158,19 +171,26 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
   allpoints = [points1, points2] if nscatter == 2
   curves = mycurvechart.curvesSelect()
 
+  # expand pointcolor and pointcolorhilit to length of group
+  pointcolor = expand2vector(pointcolor, ngroup)
+  pointcolorhilit = expand2vector(pointcolorhilit, ngroup)
+
   curves.on "mouseover", (d,i) ->
                            d3.select(this).attr("opacity", 1)
-                           d3.selectAll("circle.pt#{i}").attr("r", pointsize*2) if nscatter > 0
+                           d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit) if nscatter > 0
+                           d3.selectAll("circle.pt#{i}").attr("fill", pointcolorhilit[group[i]]) if nscatter > 0
         .on "mouseout", (d,i) ->
                            d3.select(this).attr("opacity", 0)
                            d3.selectAll("circle.pt#{i}").attr("r", pointsize) if nscatter > 0
+                           d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]]) if nscatter > 0
 
-  
   if nscatter > 0
     allpoints.forEach (points) ->
       points.on "mouseover", (d,i) ->
-                               d3.selectAll("circle.pt#{i}").attr("r", pointsize*2)
+                               d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit)
+                               d3.selectAll("circle.pt#{i}").attr("fill", pointcolorhilit[group[i]])
                                d3.selectAll("path.path#{i}").attr("opacity", 1)
             .on "mouseout", (d,i) ->
                                d3.selectAll("circle.pt#{i}").attr("r", pointsize)
+                               d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]])
                                d3.selectAll("path.path#{i}").attr("opacity", 0)

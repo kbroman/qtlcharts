@@ -13,14 +13,14 @@
 # @param fillgenoArgs List of named arguments to pass to
 #   \code{\link[qtl]{fill.geno}}, if needed.
 # @param ... Additional arguments passed to the
-#   \code{\link[RJSONIO]{toJSON}} function
+#   \code{\link[jsonlite]{toJSON}} function
 #
 # @return A character string with the input in JSON format.
 #
 # @details Genotypes are encoded as integers; negative integers are used to indicate imputed values.
 #
 #' @importFrom qtl pull.pheno markernames getsex chrnames getgenonames getid nmar
-#' @importFrom RJSONIO toJSON
+#' @importFrom jsonlite toJSON
 #
 # @keywords interface
 # @seealso \code{\link{scanone2json}}
@@ -61,7 +61,7 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, ...)
   chrByMarkers <- rep(qtl::chrnames(cross), qtl::nmar(cross))
   names(chrByMarkers) <- markers
 
-  RJSONIO::toJSON(list(geno=t(geno_filled),
+  jsonlite::toJSON(list(geno=t(geno_filled),
                        pheno=phe,
                        chrByMarkers=chrByMarkers,
                        indID=id,

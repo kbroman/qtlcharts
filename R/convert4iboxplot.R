@@ -10,7 +10,7 @@
 #
 # @return Character string with the input data in JSON format
 #
-#' @importFrom RJSONIO toJSON
+#' @importFrom jsonlite toJSON
 #' @importFrom stats quantile
 #' @importFrom graphics hist
 #
@@ -59,10 +59,10 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
   dimnames(quant) <- dimnames(counts) <- NULL
 
   # data structure for JSON
-  output <- list("ind" = RJSONIO::toJSON(ind),
-                 "qu" = RJSONIO::toJSON(qu),
-                 "breaks" = RJSONIO::toJSON(breaks),
-                 "quant" = RJSONIO::toJSON(quant),
-                 "counts" = RJSONIO::toJSON(t(counts)))
+  output <- list("ind" = jsonlite::toJSON(ind),
+                 "qu" = jsonlite::toJSON(qu),
+                 "breaks" = jsonlite::toJSON(breaks),
+                 "quant" = jsonlite::toJSON(quant),
+                 "counts" = jsonlite::toJSON(t(counts)))
   paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
 }

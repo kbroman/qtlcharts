@@ -11,7 +11,7 @@ Depends:
     R (>= 2.15),
     qtl (>= 1.30-4)
 Imports:
-    RJSONIO,
+    jsonlite,
     graphics,
     stats,
     utils

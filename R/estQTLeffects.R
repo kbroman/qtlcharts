@@ -205,7 +205,7 @@ function(effects, crosstype, chrtype)
 }
 
 # strip off names; save colnames within the lists
-#' @importFrom RJSONIO toJSON
+#' @importFrom jsonlite toJSON
 #
 effects2json <-
 function(effects, ...)
@@ -228,5 +228,5 @@ function(effects, ...)
     effects[[i]] <- list(data=eff, x=(1:nr)-1, names=cn)
   }
 
-  RJSONIO::toJSON(effects, ...)
+  jsonlite::toJSON(effects, ...)
 }

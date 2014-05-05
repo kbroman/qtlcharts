@@ -28,7 +28,7 @@
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
 #' @param ... Additional arguments passed to the
-#'   \code{\link[RJSONIO]{toJSON}} function
+#'   \code{\link[jsonlite]{toJSON}} function
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -58,7 +58,7 @@
 #'                                 scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))
 #'
 #' @export
-#' @importFrom RJSONIO toJSON
+#' @importFrom jsonlite toJSON
 iplotCurves <- 
 function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
          file, onefile=FALSE, openfile=TRUE, title="", caption,

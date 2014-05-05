@@ -26,11 +26,11 @@ R/qtlcharts is early in development and so is not yet available on
 You can install R/qtlcharts from its
 [GitHub repository](http://github.com/kbroman/qtlcharts). You first need to
 install the [R/qtl](http://www.rqtl.org),
-[RJSONIO](http://cran.r-project.org/web/packages/RJSONIO),
+[jsonlite](http://cran.r-project.org/web/packages/jsonlite),
 and [devtools](https://github.com/hadley/devtools) packages.
 
 ```S
-install.packages(c("qtl", "RJSONIO", "devtools"))
+install.packages(c("qtl", "jsonlite", "devtools"))
 ```
 
 Then install R/qtlcharts using the `install_github` function in the

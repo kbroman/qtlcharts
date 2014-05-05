@@ -34,7 +34,7 @@
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
 #' @param ... Additional arguments passed to the
-#'   \code{\link[RJSONIO]{toJSON}} function
+#'   \code{\link[jsonlite]{toJSON}} function
 #'
 #' @return Character string with the name of the file created.
 #'

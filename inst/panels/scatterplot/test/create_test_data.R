@@ -15,5 +15,5 @@ dat <- matrix(rnorm(n*p), ncol=p) %*% D +
 dat[1:4,3] <- NA
 dat[4:9,2] <- NA
 
-library(RJSONIO)
-cat(RJSONIO::toJSON(dat), file="data.json")
+library(jsonlite)
+cat(jsonlite::toJSON(dat), file="data.json")

@@ -20,7 +20,7 @@
 #'   \code{collapse=''})
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option. See details.
-#' @param ... Passed to \cite{\link[RJSONIO]{toJSON}}.
+#' @param ... Passed to \cite{\link[jsonlite]{toJSON}}.
 #'
 #' @return Character string with the name of the file created.
 #'

@@ -12,7 +12,7 @@
 #
 # @return Character string with the input data in JSON format
 #
-#' @importFrom RJSONIO toJSON
+#' @importFrom jsonlite toJSON
 #' @importFrom stats hclust
 #
 # @keywords interface

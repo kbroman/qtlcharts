@@ -30,7 +30,7 @@ combined to one string with \code{\link[base]{paste}}, with
 \item{chartOpts}{A list of options for configuring the chart.  Each
 element must be named using the corresponding option. See details.}
 
-\item{...}{Passed to \cite{\link[RJSONIO]{toJSON}}.}
+\item{...}{Passed to \cite{\link[jsonlite]{toJSON}}.}
 }
 \value{
 Character string with the name of the file created.

@@ -35,7 +35,7 @@ element must be named using the corresponding option. See details.}
 \item{fillgenoArgs}{List of named arguments to pass to
 \code{\link[qtl]{fill.geno}}, if needed.}
 
-\item{...}{Passed to \cite{\link[RJSONIO]{toJSON}}.}
+\item{...}{Passed to \cite{\link[jsonlite]{toJSON}}.}
 }
 \value{
 Character string with the name of the file created.

@@ -28,5 +28,5 @@ group <- rbinom(n, 1, prob=means/max(means))+1
 
 dat <- list(x=times, data=y, group=group)
 
-library(RJSONIO)
-cat(RJSONIO::toJSON(dat), file="data.json")
+library(jsonlite)
+cat(jsonlite::toJSON(dat), file="data.json")

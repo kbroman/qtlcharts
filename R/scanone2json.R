@@ -11,11 +11,11 @@
 # @param output An object of class \code{"scanone"}, as output by
 #   \code{\link[qtl]{scanone}}.
 # @param ... Additional arguments passed to
-#   \code{\link[RJSONIO]{toJSON}}.
+#   \code{\link[jsonlite]{toJSON}}.
 #
 # @return A character string with the input in JSON format.
 #
-#' @importFrom RJSONIO toJSON
+#' @importFrom jsonlite toJSON
 #
 # @keywords interface
 # @seealso \code{\link{pxg2json}}
@@ -41,6 +41,6 @@ function(output, ...)
   if(length(lodnames) != length(unique(lodnames)))
     warning("lod column names are not unique")
 
-  RJSONIO::toJSON(c(list(chrnames = chrnames, lodnames=lodnames),
-                    as.list(output), list(markernames = mnames)), ...)
+  jsonlite::toJSON(c(list(chrnames = chrnames, lodnames=lodnames),
+                     as.list(output), list(markernames = mnames)), ...)
 }

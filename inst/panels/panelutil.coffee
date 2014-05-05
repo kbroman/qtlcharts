@@ -189,3 +189,11 @@ matrixMaxAbs = (mat) ->
   result      
 
 matrixExtent = (mat) -> [matrixMin(mat), matrixMax(mat)]
+
+d3.selection.prototype.moveToFront = () ->
+  this.each () -> this.parentNode.appendChild(this)
+  
+d3.selection.prototype.moveToBack = () ->
+  this.each () ->
+    firstChild = this.parentNode.firstchild
+    this.parentNode.insertBefore(this, firstChild) if firstChild

@@ -294,3 +294,19 @@ matrixMaxAbs = function(mat) {
 matrixExtent = function(mat) {
   return [matrixMin(mat), matrixMax(mat)];
 };
+
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function() {
+    return this.parentNode.appendChild(this);
+  });
+};
+
+d3.selection.prototype.moveToBack = function() {
+  return this.each(function() {
+    var firstChild;
+    firstChild = this.parentNode.firstchild;
+    if (firstChild) {
+      return this.parentNode.insertBefore(this, firstChild);
+    }
+  });
+};

@@ -169,15 +169,25 @@ curvechart = () ->
                .x((d) -> xscale(d.x))
                .y((d) -> yscale(d.y))
 
-      g.selectAll("empty").append("g")
+      curves = g.append("g").attr("id", "curves")
+      curvesSelect =
+         curves.selectAll("empty")
            .data(d3.range(data.length))
            .enter()
            .append("path")
            .datum((d) -> data[d])
            .attr("d", curve)
+           .attr("class", (d,i) -> "path#{i}")
            .attr("fill", "none")
            .attr("stroke", (d,i) -> strokecolor[group[i]])
            .attr("stroke-width", strokewidth)
+           .on "mouseover.panel", (d,i) ->
+                  d3.select(this).attr("stroke", strokecolorhilit[group[i]]).moveToFront()
+                  circle = d3.select("circle#hiddenpoint#{i}")
+                  indtip.show(i, circle.node())
+           .on "mouseout.panel", (d,i) ->
+                  d3.select(this).attr("stroke", strokecolor[group[i]]).moveToBack()
+                  indtip.hide()  
 
       # grab the last non-null point from each curve
       lastpoint = ({x:null, y:null} for i of data)
@@ -195,27 +205,6 @@ curvechart = () ->
                 .attr("cy", (d) -> yscale(d.y))
                 .attr("r", 1)
                 .attr("opacity", 0)
-
-      curves = g.append("g").attr("id", "curves")
-      curvesSelect =
-        curves.selectAll("empty")
-              .data(d3.range(data.length))
-              .enter()
-              .append("path")
-              .datum((d) -> data[d])
-              .attr("d", curve)
-              .attr("class", (d,i) -> "path#{i}")
-              .attr("fill", "none")
-              .attr("stroke", (d,i) -> strokecolorhilit[group[i]])
-              .attr("stroke-width", strokewidthhilit)
-              .attr("opacity", 0)
-              .on "mouseover.panel", (d,i) ->
-                     d3.select(this).attr("opacity", 1)
-                     circle = d3.select("circle#hiddenpoint#{i}")
-                     indtip.show(i, circle.node())
-              .on "mouseout.panel", () ->
-                     d3.select(this).attr("opacity", 0)
-                     indtip.hide()  
 
       # box
       g.append("rect")

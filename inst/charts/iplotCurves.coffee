@@ -79,6 +79,8 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
   # colors of the points in the different groups
   pointcolor = pointcolor ? selectGroupColors(ngroup, "light")
   pointcolorhilit = pointcolorhilit ? selectGroupColors(ngroup, "dark")
+  strokecolor = strokecolor ? selectGroupColors(ngroup, "light")
+  strokecolorhilit = strokecolorhilit ? selectGroupColors(ngroup, "dark")
 
   ## configure the three charts
   mycurvechart = curvechart().width(width)
@@ -174,23 +176,26 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
   # expand pointcolor and pointcolorhilit to length of group
   pointcolor = expand2vector(pointcolor, ngroup)
   pointcolorhilit = expand2vector(pointcolorhilit, ngroup)
+  strokecolor = expand2vector(strokecolor, ngroup)
+  strokecolorhilit = expand2vector(strokecolorhilit, ngroup)
 
   curves.on "mouseover", (d,i) ->
-                           d3.select(this).attr("opacity", 1)
+                           d3.select(this).attr("stroke", strokecolorhilit[group[i]]).moveToFront()
                            d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit) if nscatter > 0
                            d3.selectAll("circle.pt#{i}").attr("fill", pointcolorhilit[group[i]]) if nscatter > 0
         .on "mouseout", (d,i) ->
-                           d3.select(this).attr("opacity", 0)
+                           d3.select(this).attr("stroke", strokecolor[group[i]]).moveToBack()
                            d3.selectAll("circle.pt#{i}").attr("r", pointsize) if nscatter > 0
                            d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]]) if nscatter > 0
+
 
   if nscatter > 0
     allpoints.forEach (points) ->
       points.on "mouseover", (d,i) ->
                                d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit)
                                d3.selectAll("circle.pt#{i}").attr("fill", pointcolorhilit[group[i]])
-                               d3.selectAll("path.path#{i}").attr("opacity", 1)
+                               d3.select("path.path#{i}").attr("stroke", strokecolorhilit[group[i]]).moveToFront()
             .on "mouseout", (d,i) ->
                                d3.selectAll("circle.pt#{i}").attr("r", pointsize)
                                d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]])
-                               d3.selectAll("path.path#{i}").attr("opacity", 0)
+                               d3.select("path.path#{i}").attr("stroke", strokecolor[group[i]]).moveToBack()

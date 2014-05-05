@@ -109,6 +109,8 @@ iplotCurves = function(curve_data, scatter1_data, scatter2_data, chartOpts) {
   })();
   pointcolor = pointcolor != null ? pointcolor : selectGroupColors(ngroup, "light");
   pointcolorhilit = pointcolorhilit != null ? pointcolorhilit : selectGroupColors(ngroup, "dark");
+  strokecolor = strokecolor != null ? strokecolor : selectGroupColors(ngroup, "light");
+  strokecolorhilit = strokecolorhilit != null ? strokecolorhilit : selectGroupColors(ngroup, "dark");
   mycurvechart = curvechart().width(width).height(htop).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).strokecolor(strokecolor).strokecolorhilit(strokecolorhilit).strokewidth(strokewidth).strokewidthhilit(strokewidthhilit).xlim(curves_xlim).ylim(curves_ylim).nxticks(curves_nxticks).xticks(curves_xticks).nyticks(curves_nyticks).yticks(curves_yticks).title(curves_title).xlab(curves_xlab).ylab(curves_ylab);
   if (nscatter > 0) {
     myscatterplot1 = scatterplot().width(wbot).height(hbot).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).pointcolor(pointcolor).pointstroke(pointstroke).pointsize(pointsize).xlim(scat1_xlim).ylim(scat1_ylim).xNA(scat1_xNA).yNA(scat1_yNA).nxticks(scat1_nxticks).xticks(scat1_xticks).nyticks(scat1_nyticks).yticks(scat1_yticks).title(scat1_title).xlab(scat1_xlab).ylab(scat1_ylab);
@@ -139,8 +141,10 @@ iplotCurves = function(curve_data, scatter1_data, scatter2_data, chartOpts) {
   curves = mycurvechart.curvesSelect();
   pointcolor = expand2vector(pointcolor, ngroup);
   pointcolorhilit = expand2vector(pointcolorhilit, ngroup);
+  strokecolor = expand2vector(strokecolor, ngroup);
+  strokecolorhilit = expand2vector(strokecolorhilit, ngroup);
   curves.on("mouseover", function(d, i) {
-    d3.select(this).attr("opacity", 1);
+    d3.select(this).attr("stroke", strokecolorhilit[group[i]]).moveToFront();
     if (nscatter > 0) {
       d3.selectAll("circle.pt" + i).attr("r", pointsizehilit);
     }
@@ -148,7 +152,7 @@ iplotCurves = function(curve_data, scatter1_data, scatter2_data, chartOpts) {
       return d3.selectAll("circle.pt" + i).attr("fill", pointcolorhilit[group[i]]);
     }
   }).on("mouseout", function(d, i) {
-    d3.select(this).attr("opacity", 0);
+    d3.select(this).attr("stroke", strokecolor[group[i]]).moveToBack();
     if (nscatter > 0) {
       d3.selectAll("circle.pt" + i).attr("r", pointsize);
     }
@@ -161,11 +165,11 @@ iplotCurves = function(curve_data, scatter1_data, scatter2_data, chartOpts) {
       return points.on("mouseover", function(d, i) {
         d3.selectAll("circle.pt" + i).attr("r", pointsizehilit);
         d3.selectAll("circle.pt" + i).attr("fill", pointcolorhilit[group[i]]);
-        return d3.selectAll("path.path" + i).attr("opacity", 1);
+        return d3.select("path.path" + i).attr("stroke", strokecolorhilit[group[i]]).moveToFront();
       }).on("mouseout", function(d, i) {
         d3.selectAll("circle.pt" + i).attr("r", pointsize);
         d3.selectAll("circle.pt" + i).attr("fill", pointcolor[group[i]]);
-        return d3.selectAll("path.path" + i).attr("opacity", 0);
+        return d3.select("path.path" + i).attr("stroke", strokecolor[group[i]]).moveToBack();
       });
     });
   }

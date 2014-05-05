@@ -141,15 +141,13 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
               .on "mouseover", (d) ->
                        plotLodCurve(d.lodindex)
                        g_lodchart.select("g.title text").text("#{lod_data.lodnames[d.lodindex]}")
-                       g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}")
-                                   .attr("opacity", 1)
+                       g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}").attr("stroke", linecolor)
                        p = d3.format(".1f")(d.pos)
                        g_curvechart.select("g.title text").text("#{d.chr}@#{p}")
                        g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 1)
               .on "mouseout", (d) ->
                        lodchart_curves.remove()
                        g_lodchart.select("g.title text").text("")
-                       g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}")
-                                   .attr("opacity", 0)
+                       g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}").attr("stroke", null)
                        g_curvechart.select("g.title text").text("")
                        g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 0)

@@ -111,14 +111,14 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
     var p;
     plotLodCurve(d.lodindex);
     g_lodchart.select("g.title text").text("" + lod_data.lodnames[d.lodindex]);
-    g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("opacity", 1);
+    g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("stroke", linecolor);
     p = d3.format(".1f")(d.pos);
     g_curvechart.select("g.title text").text("" + d.chr + "@" + p);
     return g_curvechart.select("text#xaxis" + d.lodindex).attr("opacity", 1);
   }).on("mouseout", function(d) {
     lodchart_curves.remove();
     g_lodchart.select("g.title text").text("");
-    g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("opacity", 0);
+    g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("stroke", null);
     g_curvechart.select("g.title text").text("");
     return g_curvechart.select("text#xaxis" + d.lodindex).attr("opacity", 0);
   });

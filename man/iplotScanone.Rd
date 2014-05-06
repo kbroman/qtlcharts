@@ -81,7 +81,11 @@ data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
 out <- scanone(hyper)
 iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
-             title="iplotScanone example")
+             title="iplotScanone example (CIs)")
+
+iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
+             title="iplotScanone example (raw phe x gen)",
+             pxgtype='raw')
 }
 \seealso{
 \code{\link{iplotMScanone}}, \code{\link{iplotPXG}}, \code{\link{iplotMap}}

@@ -39,7 +39,7 @@
 #'
 #' @export
 iplotMap <-
-function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic map",
+function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
          chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
   if(missing(file)) file <- NULL

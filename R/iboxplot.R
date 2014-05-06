@@ -45,7 +45,7 @@
 #' @export
 iboxplot <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
-         file, onefile=FALSE, openfile=TRUE, title="Many box plots",
+         file, onefile=FALSE, openfile=TRUE, title="",
          chartdivid='chart', caption, chartOpts=NULL, print=FALSE)
 {
   if(missing(file)) file <- NULL

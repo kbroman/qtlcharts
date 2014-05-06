@@ -79,6 +79,9 @@ function(cross, marker, pheno.col=1,
   # use phenotype name as y-axis label, unless ylab is already provided
   chartOpts <- add2chartOpts(chartOpts, ylab=getPhename(cross, pheno.col))
 
+  # add chartdivid to chartOpts
+  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotPXG(data,chartOpts);')

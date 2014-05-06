@@ -27,6 +27,7 @@ iplotPXG = (data, chartOpts) ->
   pointstroke = chartOpts?.pointstroke ? "black"
   yNA = chartOpts?.yNA ? {handle:true, force:false, width:15, gap:10}
   # chartOpts end
+  chartdivid = chartOpts?.chartdivid ? 'chart'
 
   mychart = dotchart().height(height)
                       .width(width)
@@ -51,7 +52,7 @@ iplotPXG = (data, chartOpts) ->
                       .pointstroke(pointstroke)
                       .yNA(yNA)
 
-  d3.select("div#chart")
+  d3.select("div##{chartdivid}")
     .datum({geno:gen, pheno:phe, indID:data.indID})
     .call(mychart)
 

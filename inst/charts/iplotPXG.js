@@ -2,7 +2,7 @@
 var iplotPXG;
 
 iplotPXG = function(data, chartOpts) {
-  var axispos, gen, gnames, height, inferred, margin, mychart, nyticks, phe, pointcolor, pointsize, pointstroke, rectcolor, title, titlepos, width, x, xjitter, xlab, y, yNA, ylab, ylim, yticks, _i, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9, _results;
+  var axispos, chartdivid, gen, gnames, height, inferred, margin, mychart, nyticks, phe, pointcolor, pointsize, pointstroke, rectcolor, title, titlepos, width, x, xjitter, xlab, y, yNA, ylab, ylim, yticks, _i, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9, _results;
   gen = (function() {
     var _i, _len, _ref, _results;
     _ref = data.geno[0];
@@ -65,12 +65,13 @@ iplotPXG = function(data, chartOpts) {
     width: 15,
     gap: 10
   };
+  chartdivid = (_ref17 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref17 : 'chart';
   mychart = dotchart().height(height).width(width).margin(margin).xcategories((function() {
     _results = [];
-    for (var _i = 1, _ref17 = gnames.length; 1 <= _ref17 ? _i <= _ref17 : _i >= _ref17; 1 <= _ref17 ? _i++ : _i--){ _results.push(_i); }
+    for (var _i = 1, _ref18 = gnames.length; 1 <= _ref18 ? _i <= _ref18 : _i >= _ref18; 1 <= _ref18 ? _i++ : _i--){ _results.push(_i); }
     return _results;
   }).apply(this)).xcatlabels(gnames).dataByInd(false).xlab(xlab).ylab(ylab).xvar('geno').yvar('pheno').title(title).axispos(axispos).titlepos(titlepos).xjitter(xjitter).ylim(ylim).yticks(yticks).nyticks(nyticks).rectcolor(rectcolor).pointcolor(pointcolor).pointsize(pointsize).pointstroke(pointstroke).yNA(yNA);
-  d3.select("div#chart").datum({
+  d3.select("div#" + chartdivid).datum({
     geno: gen,
     pheno: phe,
     indID: data.indID

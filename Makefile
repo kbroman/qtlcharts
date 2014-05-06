@@ -1,5 +1,5 @@
 
-all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer
+all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vignettes
 
 # Examples
 CHARTEX = assets/chartexamples
@@ -115,3 +115,10 @@ colorbrewer: ${THIS_BREWER}/colorbrewer.js ${THIS_BREWER}/colorbrewer.css ${THIS
 
 ${THIS_BREWER}/%: ${QTLCHARTS_BREWER}/%
 	cp $< $@
+
+#------------------------------------------------------------
+
+vignettes: assets/vignettes/Rmarkdown.html
+
+assets/vignettes/Rmarkdown.html: ../qtlcharts/vignettes/Rmarkdown.Rmd
+	R -e 'library(knitr);knit2html("$<", "$@")'

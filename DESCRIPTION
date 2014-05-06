@@ -16,9 +16,11 @@ Imports:
     stats,
     utils
 Suggests:
+    knitr,
     devtools,
     roxygen2,
     testthat
 License: MIT + file LICENSE
 URL: http://kbroman.github.io/qtlcharts
+VignetteBuilder: knitr
 Roxygen: list(wrap=FALSE)

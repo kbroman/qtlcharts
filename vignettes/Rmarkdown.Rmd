@@ -1,0 +1,162 @@
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Interactive QTL charts within R Markdown}
+
+## Interactive QTL charts within R Markdown
+
+[R/qtlcharts](http://kbroman.github.io/qtlcharts) is an R package to
+create interactive charts for xQTL data, for use with
+[R/qtl](http://www.rqtl.org).
+While its interactive QTL charts are particularly useful for
+exploratory data analysis within R, they may also be included within 
+[R Markdown](https://www.rstudio.com/ide/docs/r_markdown)-based reports.
+
+[R Markdown](https://www.rstudio.com/ide/docs/r_markdown) is a
+extension of [Markdown](http://daringfireball.net/projects/markdown/),
+using [knitr](http://yihui.name/knitr/), to write simply-marked-up
+text with R code chunks that are converted to an html file, for
+viewing in the browser. Code chunks are processed by knitr and
+replaced with the results or graphs produced. 
+
+For more information on R Markdown and knitr, see the
+[knitr in a knutshell](http://kbroman.github.io/knitr_knutshell/)
+tutorial.
+
+To include [R/qtlcharts](http://kbroman.github.io/qtlcharts)-based
+interactive charts within an R Markdown document, you include the
+relevant calls to the R function within a code chunk, using the chunk
+option `results="asis"`. Also, include `print=TRUE` and likely
+`onefile=TRUE` in the function call. Below, I'll illustrate how it's
+done.
+
+### An example
+
+As an example, we'll consider the `grav` dataset included with
+R/qtlcharts. These are data from
+[Moore et al. Genetics 195:1077-1086, 2013](http://www.ncbi.nlm.nih.gov/pubmed/23979570),
+on a QTL experiment on gravitropism in Arabidopsis, with data on 162
+recombinant inbred lines (Ler &times; Cvi). Seedlings were sprouted
+and then rotated 90 degrees with respect to gravity; the growth of the
+seedlings was then recorded on video. The outcome is the root tip
+angle (in degrees) at two-minute increments over eight hours.
+
+We'll first load the R/qtlcharts package and the data set.
+
+```{r load_data, message=FALSE}
+library(qtlcharts)
+data(grav)
+```
+
+For this illustration, we'll reduce the size of the data set, by
+retaining only every 5th phenotype value.
+
+```{r subset_pheno}
+grav$pheno <- grav$pheno[,seq(1, nphe(grav), by=5)]
+```
+
+The times at which the measurements were made are recorded (in
+minutes) in the phenotype names. We'll grab those times and convert
+them to hours.
+
+```{r grab_times}
+times <- as.numeric(sub("T", "", phenames(grav)))/60
+```
+
+Let's further run a single-QTL genome scan with each individual time
+point, using Haley-Knott regression.
+
+```{r scanone}
+grav <- calc.genoprob(grav, step=1)
+out.hk <- scanone(grav, pheno.col=1:nphe(grav), method="hk") 
+```
+
+### Interactive charts
+
+To use the interactive charts from R/qtlcharts within an R Markdown
+document, you must first load all of the javascript-based
+resources. (When the charts are created from within R, this is done
+separately, and automatically, with each function call. But within an
+R Markdown document, we want to do it just once.)
+
+This is done by calling `print_qtlcharts_resources()` within a code
+chunk, using the chunk option `results="asis"`. I would generally
+suppress the code using `echo=FALSE`, but here we'll show the
+details.
+
+```{r print_qtlcharts_resources, results="asis"}
+print_qtlcharts_resources()
+```
+
+We're now free to begin making charts. With each, you'll want to use
+`print=TRUE`. And you **don't** want to do that within R. You may be
+sitting watching a megabyte of text fly (or crawl) by.
+
+In addition, you want to use the argument `chartdivid` to define some
+unique character string for each interactive plot. These are sort of
+like the names of code chunks with knitr.
+
+Finally, each of these code chunks is with `results="asis"`.
+
+
+### Now, the charts
+
+
+First, let's make an interactive chart of the genetic map of markers
+for these data, just because it's easy. `iplotMap` will take either a
+map object or the cross object `grav`; in the latter case, it uses
+the R/qtl function `pull.map` to pull out the map.
+
+```{r iplotMap, results="asis"}
+iplotMap(grav, print=TRUE)
+```
+
+Now, let's use `iplotCorr` to plot a heat map of the correlation
+matrix for the phenotype at all pairs of times, linked to scatterplots
+of the phenotypes.
+
+```{r iplotCorr, results="asis"}
+iplotCorr(grav$pheno, title="", chartdivid="iplotCorr",
+          print=TRUE)
+```
+
+Next, let's use `plotCurves` to create an interactive plot of the
+phenotype traces, linked to scatterplots of two cross-sections.
+We use `chartOpts` to specify the axis labels.
+
+```{r iplotCurves, results="asis"}
+iplotCurves(grav$pheno, times,
+            grav$pheno[,c("T30", "T240")],
+            grav$pheno[,c("T240", "T480")],
+            chartdivid="iplotCurves",
+            print=TRUE,
+            chartOpts=list(curves_xlab="Time", curves_ylab="Root tip angle",
+              scat1_xlab="Angle at 30 min", scat1_ylab="Angle at 4 hrs",
+              scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 8 hrs"))
+```
+
+
+Finally, `iplotMScanone` produces a heat map of the LOD scores for
+each individual time point at each genomic position, linked to the
+individual LOD curves and to a plot of the estimated QTL effect over
+time.
+
+```{r iplotMScanone, results="asis"}
+iplotMScanone(out.hk, grav, chartdivid="iplotMScanone",
+              print=TRUE, chartOpts=list(eff_ylab="QTL effect"))
+```
+
+Finally, I'm including a bit of CSS code to revise the left margin for
+the document that's produced.
+
+```
+<style type="text/css">
+body {
+  margin-left: 100px;
+}
+</style>
+```
+
+<style type="text/css">
+body {
+  margin-left: 100px;
+}
+</style>

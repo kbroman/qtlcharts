@@ -136,7 +136,7 @@ lodchart = function() {
         });
       }
       titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + width / 2).attr("y", margin.top - titlepos).text(title);
-      return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", data.chrEnd.slice(-1) - margin.left).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
+      return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", data.chrEnd.slice(-1)[0] + chrGap / 2 - margin.left).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });
   };
   chart.width = function(value) {

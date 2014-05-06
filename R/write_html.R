@@ -286,4 +286,4 @@ function(caption, file)
 
 strip_whitespace <-
 function(x)
-  gsub("\\s", "", x, perl=TRUE)
+  gsub("\\s", "", x)

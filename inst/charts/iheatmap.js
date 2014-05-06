@@ -84,7 +84,6 @@ iheatmap = function(data, chartOpts) {
     });
   };
   plotHor = function(j) {
-    console.log(strokecolor);
     return g_horslice.append("g").attr("id", "horcurve").append("path").datum(data.x).attr("d", horcurvefunc(j)).attr("stroke", strokecolor).attr("fill", "none").attr("stroke-width", strokewidth).attr("style", "pointer-events", "none");
   };
   removeHor = function() {

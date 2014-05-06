@@ -140,7 +140,6 @@ iheatmap = (data, chartOpts) ->
 
 
   plotHor = (j) ->
-    console.log(strokecolor)
     g_horslice.append("g").attr("id", "horcurve")
               .append("path")
               .datum(data.x)

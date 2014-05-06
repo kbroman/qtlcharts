@@ -2,6 +2,14 @@
 
 ### General things
 
+- Allow use of charts within RMarkdown doc
+  - pass chartdivid to chart code
+  - separate print of resources (all, via directory search, or just
+    those specified); this function needs a helpfile and needs to be
+    exported
+  - wrap chart code within chartdivid-specific call (to allow multiple
+    charts of a particular type within a single RMarkdown doc)
+    
 - standard ways to give axis labels
   (draw axis labels from data?)
 

@@ -41,6 +41,8 @@ function(output, digits=4)
   if(length(lodnames) != length(unique(lodnames)))
     warning("lod column names are not unique")
 
-  jsonlite::toJSON(c(list(chrnames = chrnames, lodnames=lodnames),
-                     as.list(output), list(markernames = mnames)), digits=digits)
+  output <- jsonlite::toJSON(c(list(chrnames = chrnames, lodnames=lodnames),
+                               as.list(output), list(markernames = mnames)), digits=digits)
+
+  strip_whitespace( output )
 }

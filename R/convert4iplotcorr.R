@@ -77,5 +77,6 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
                  "cols" = toJSON(cols-1),
                  "dat" =  toJSON(t(dat), digits=digits), # columns as rows
                  "group" = toJSON(group))
-  paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
+  output <- paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
+  strip_whitespace(output)
 }

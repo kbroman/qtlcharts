@@ -64,7 +64,7 @@ function(z, x, y,
   if(missing(y) || is.null(y)) y <- 1:ncol(z)
   else stopifnot(length(y) == ncol(z))
   names(x) <- names(y) <- dimnames(z) <- NULL
-  json <- toJSON(list(x=x, y=y, z=z), digits=digits)
+  json <- strip_whitespace( toJSON(list(x=x, y=y, z=z), digits=digits) )
 
   # start writing
   write_html_top(file, title=title)

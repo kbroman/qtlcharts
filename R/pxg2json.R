@@ -61,12 +61,14 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, digits=4)
   chrByMarkers <- rep(qtl::chrnames(cross), qtl::nmar(cross))
   names(chrByMarkers) <- markers
 
-  jsonlite::toJSON(list(geno=t(geno_filled),
-                       pheno=phe,
-                       chrByMarkers=chrByMarkers,
-                       indID=id,
-                       chrtype=chrtype,
-                       genonames=genonames), digits=digits)
+  output <- jsonlite::toJSON(list(geno=t(geno_filled),
+                                  pheno=phe,
+                                  chrByMarkers=chrByMarkers,
+                                  indID=id,
+                                  chrtype=chrtype,
+                                  genonames=genonames), digits=digits)
+
+  strip_whitespace( output )
 }
 
 

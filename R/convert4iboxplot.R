@@ -65,5 +65,6 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
                  "breaks" = jsonlite::toJSON(breaks, digits=digits),
                  "quant" = jsonlite::toJSON(quant, digits=digits),
                  "counts" = jsonlite::toJSON(t(counts)))
-  paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
+  output <- paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
+  strip_whitespace(output)
 }

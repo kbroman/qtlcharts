@@ -176,8 +176,10 @@ function(file, chartOpts, digits=2)
   if(is.null(chartOpts))
     chartOpts <- list("null" = NULL)
   
+  opts_json <- strip_whitespace( toJSON( opts4json(chartOpts), digits=4) )
+
   cat('\n<script type="text/javascript">\n', file=file, append=TRUE)
-  cat('chartOpts = ', toJSON(opts4json(chartOpts), digits=digits), ';', file=file, append=TRUE, sep='')
+  cat('chartOpts = ', opts_json, ';', file=file, append=TRUE, sep='')
   cat('\n</script>\n', file=file, append=TRUE)
 
   invisible(NULL)

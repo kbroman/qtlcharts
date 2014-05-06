@@ -21,6 +21,7 @@
 #'   javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
+#' @param chartdivid Character string for id of div to hold the chart
 #' @param caption Character vector with text for a caption (to be
 #'   combined to one string with \code{\link[base]{paste}}, with
 #'   \code{collapse=''})
@@ -29,6 +30,8 @@
 #'   corresponding option.
 #' @param digits Number of digits in JSON; passed to
 #'   \code{\link[jsonlite]{toJSON}}
+#' @param print If TRUE, print the output, rather than writing it to a file,
+#' for use within an R Markdown document.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -61,8 +64,8 @@
 #' @export
 iplotCurves <-
 function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
-         file, onefile=FALSE, openfile=TRUE, title="", caption,
-         chartOpts=NULL, digits=4)
+         file, onefile=FALSE, openfile=TRUE, title="", chartdivid='chart',
+         caption, chartOpts=NULL, digits=4, print=FALSE)
 {
   if(missing(file)) file <- NULL
 
@@ -105,7 +108,7 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "colorbrewer", "panelutil"),
                     panels=c("curvechart", "scatterplot"), charts="iplotCurves",
-                    chartname='chart', caption=caption)
+                    chartdivid=chartdivid, caption=caption, print=print)
 
   append_html_jscode(file, 'curve_data = ', curves2json(times, curveMatrix, group, indID, digits=digits), ';')
   append_html_jscode(file, 'scatter1_data = ', scat2json(scatter1, group, indID, digits=digits), ';')
@@ -114,9 +117,9 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
 
   append_html_jscode(file, 'iplotCurves(curve_data, scatter1_data, scatter2_data, chartOpts)')
 
-  append_html_bottom(file)
+  append_html_bottom(file, print=print)
 
-  if(openfile) browseURL(file)
+  if(openfile & !print) browseURL(file)
 
   invisible(file)
 }

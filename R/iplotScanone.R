@@ -30,6 +30,7 @@
 #'   javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
+#' @param chartdivid Character string for id of div to hold the chart
 #' @param caption Character vector with text for a caption (to be
 #'   combined to one string with \code{\link[base]{paste}}, with
 #'   \code{collapse=''})
@@ -40,6 +41,8 @@
 #'   corresponding option.
 #' @param digits Number of digits in JSON; pass to
 #'   \code{\link[jsonlite]{toJSON}}
+#' @param print If TRUE, print the output, rather than writing it to a file,
+#' for use within an R Markdown document.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -76,8 +79,8 @@
 iplotScanone <-
 function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
          pxgtype = c("ci", "raw"),
-         file, onefile=FALSE, openfile=TRUE, title="", caption,
-         fillgenoArgs=NULL, chartOpts=NULL, digits=4)
+         file, onefile=FALSE, openfile=TRUE, title="", chartdivid='chart',
+         caption, fillgenoArgs=NULL, chartOpts=NULL, digits=4, print=FALSE)
 {
   if(missing(file)) file <- NULL
 
@@ -105,8 +108,9 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 
   if(missing(cross) || is.null(cross))
     return(iplotScanone_noeff(scanoneOutput=scanoneOutput, file=file, onefile=onefile,
-                              openfile=openfile, title=title, caption=caption,
-                              chartOpts=chartOpts, digits=digits))
+                              openfile=openfile, title=title, chartdivid=chartdivid,
+                              caption=caption,
+                              chartOpts=chartOpts, digits=digits, print=print))
 
   if(length(pheno.col) > 1) {
     pheno.col <- pheno.col[1]
@@ -118,13 +122,15 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 
   if(pxgtype == "raw")
     return(iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
-                            file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
-                            fillgenoArgs=fillgenoArgs,  chartOpts=chartOpts, digits=digits))
+                            file=file, onefile=onefile, openfile=openfile, title=title,
+                            chartdivid=chartdivid, caption=caption, fillgenoArgs=fillgenoArgs,
+                            chartOpts=chartOpts, digits=digits, print=print))
 
   else
     return(iplotScanone_ci(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
-                           file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
-                           fillgenoArgs=fillgenoArgs, chartOpts=chartOpts, digits=digits))
+                           file=file, onefile=onefile, openfile=openfile, title=title,
+                           chartdivid=chartdivid, caption=caption, fillgenoArgs=fillgenoArgs,
+                           chartOpts=chartOpts, digits=digits, print=print))
 
   invisible(file)
 }
@@ -132,23 +138,24 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 
 # iplotScanone: LOD curves with nothing else
 iplotScanone_noeff <-
-function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", caption, chartOpts=NULL, digits=4)
+function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", chartdivid='chart',
+         caption, chartOpts=NULL, digits=4, print=FALSE)
 {
   if(missing(caption) || is.null(caption))
     caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker for a bit of gratuitous animation.')
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels="lodchart", charts="iplotScanone_noeff", chartname='chart',
-                    caption=caption)
+                    panels="lodchart", charts="iplotScanone_noeff", chart=chartdivid,
+                    caption=caption, print=print)
 
   append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, digits=digits), ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotScanone_noeff(data, chartOpts);')
 
-  append_html_bottom(file)
+  append_html_bottom(file, print=print)
 
-  if(openfile) browseURL(file)
+  if(openfile && !print) browseURL(file)
 
   invisible(file)
 }
@@ -157,7 +164,8 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", caption, c
 # iplotScanone_pxg: LOD curves with linked phe x gen plot
 iplotScanone_pxg <-
 function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
-         title="", caption, fillgenoArgs=NULL, chartOpts=NULL, digits=4)
+         title="", chartdivid=chartdivid, caption, fillgenoArgs=NULL,
+         chartOpts=NULL, digits=4, print=FALSE)
 {
   scanone_json <- scanone2json(scanoneOutput, digits=digits)
   pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
@@ -169,16 +177,16 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
                     panels=c("lodchart", "dotchart"), charts="iplotScanone_pxg",
-                    chartname='chart', caption=caption)
+                    chartdivid=chartdivid, caption=caption, print=print)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotScanone_pxg(scanoneData, pxgData, chartOpts);')
 
-  append_html_bottom(file)
+  append_html_bottom(file, print=print)
 
-  if(openfile) browseURL(file)
+  if(openfile && !print) browseURL(file)
 
   invisible(file)
 }
@@ -186,7 +194,8 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
 # iplotScanone_ci: LOD curves with linked phe mean +/- 2 SE x gen plot
 iplotScanone_ci <-
 function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
-         title="", caption, fillgenoArgs=NULL, chartOpts=NULL, digits=4)
+         title="", chartdivid='chart', caption, fillgenoArgs=NULL, chartOpts=NULL,
+         digits=4, print=FALSE)
 {
   scanone_json <- scanone2json(scanoneOutput, digits=digits)
   pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
@@ -198,16 +207,16 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
                     panels=c("lodchart", "cichart"), charts="iplotScanone_ci",
-                    chartname='chart', caption=caption)
+                    chartdivid=chartdivid, caption=caption, print=print)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotScanone_ci(scanoneData, pxgData, chartOpts);')
 
-  append_html_bottom(file)
+  append_html_bottom(file, print=print)
 
-  if(openfile) browseURL(file)
+  if(openfile && !print) browseURL(file)
 
   invisible(file)
 }

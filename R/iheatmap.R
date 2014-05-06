@@ -15,6 +15,7 @@
 #'   javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
+#' @param chartdivid Character string for id of div to hold the chart
 #' @param caption Character vector with text for a caption (to be
 #'   combined to one string with \code{\link[base]{paste}}, with
 #'   \code{collapse=''})
@@ -22,6 +23,8 @@
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
 #' @param digits Number of digits in JSON; passed to \code{\link[jsonlite]{toJSON}}
+#' @param print If TRUE, print the output, rather than writing it to a file,
+#' for use within an R Markdown document.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -49,7 +52,8 @@
 iheatmap <-
 function(z, x, y,
          file, onefile=FALSE, openfile=TRUE, title="",
-         caption, chartOpts=NULL, digits=4)
+         chartdivid='chart',
+         caption, chartOpts=NULL, digits=4, print=FALSE)
 {
   if(missing(file)) file <- NULL
 
@@ -67,15 +71,15 @@ function(z, x, y,
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
                     panels=c("curvechart", "heatmap"), charts="iheatmap",
-                    chartname='chart', caption=caption)
+                    chartdivid=chartdivid, caption=caption, print=print)
 
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iheatmap(data, chartOpts);')
 
-  append_html_bottom(file)
+  append_html_bottom(file, print=print)
 
-  if(openfile) browseURL(file)
+  if(openfile && !print) browseURL(file)
 
   invisible(file)
 }

@@ -5,8 +5,8 @@
 \usage{
 iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
   pxgtype = c("ci", "raw"), file, onefile = FALSE, openfile = TRUE,
-  title = "", caption, fillgenoArgs = NULL, chartOpts = NULL,
-  digits = 4)
+  title = "", chartdivid = "chart", caption, fillgenoArgs = NULL,
+  chartOpts = NULL, digits = 4, print = FALSE)
 }
 \arguments{
 \item{scanoneOutput}{Object of class \code{"scanone"}, as output
@@ -40,6 +40,8 @@ javascript/css code}
 
 \item{title}{Character string with title for plot}
 
+\item{chartdivid}{Character string for id of div to hold the chart}
+
 \item{caption}{Character vector with text for a caption (to be
 combined to one string with \code{\link[base]{paste}}, with
 \code{collapse=''})}
@@ -52,7 +54,10 @@ the coffeescript code). Each element must be named using the
 corresponding option.}
 
 \item{digits}{Number of digits in JSON; pass to
-  \code{\link[jsonlite]{toJSON}}}
+\code{\link[jsonlite]{toJSON}}}
+
+\item{print}{If TRUE, print the output, rather than writing it to a file,
+for use within an R Markdown document.}
 }
 \value{
 Character string with the name of the file created.

@@ -4,7 +4,8 @@
 \title{Interactive genetic map plot}
 \usage{
 iplotMap(map, shift = FALSE, file, onefile = FALSE, openfile = TRUE,
-  title = "Genetic map", caption, chartOpts = NULL, digits = 4)
+  title = "Genetic map", chartdivid = "chart", caption, chartOpts = NULL,
+  digits = 4, print = FALSE)
 }
 \arguments{
 \item{map}{Object of class \code{"map"}, a list with each component
@@ -23,6 +24,8 @@ javascript/css code.}
 
 \item{title}{Character string with title for plot.}
 
+\item{chartdivid}{Character string for id of div to hold the chart}
+
 \item{caption}{Character vector with text for a caption (to be
 combined to one string with \code{\link[base]{paste}}, with
 \code{collapse=''})}
@@ -31,6 +34,9 @@ combined to one string with \code{\link[base]{paste}}, with
 element must be named using the corresponding option. See details.}
 
 \item{digits}{Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.}
+
+\item{print}{If TRUE, print the output, rather than writing it to a file,
+for use within an R Markdown document.}
 }
 \value{
 Character string with the name of the file created.

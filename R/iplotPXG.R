@@ -15,6 +15,7 @@
 #'   javascript/css code.
 #' @param openfile If TRUE, open the plot in the default web browser.
 #' @param title Character string with title for plot.
+#' @param chartdivid Character string for id of div to hold the chart
 #' @param caption Character vector with text for a caption (to be
 #'   combined to one string with \code{\link[base]{paste}}, with
 #'   \code{collapse=''})
@@ -23,6 +24,8 @@
 #' @param fillgenoArgs List of named arguments to pass to
 #'   \code{\link[qtl]{fill.geno}}, if needed.
 #' @param digits Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.
+#' @param print If TRUE, print the output, rather than writing it to a file,
+#' for use within an R Markdown document.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -49,8 +52,9 @@
 iplotPXG <-
 function(cross, marker, pheno.col=1,
          file, onefile=FALSE, openfile=TRUE, title="",
+         chartdivid='chart',
          caption, chartOpts=list(title=marker[1]),
-         fillgenoArgs=NULL, digits=4)
+         fillgenoArgs=NULL, digits=4, print=FALSE)
 {
   if(class(cross)[2] != "cross")
     stop('"cross" should have class "cross".')
@@ -67,8 +71,8 @@ function(cross, marker, pheno.col=1,
                 'Click on a point for a bit of gratuitous animation.')
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels="dotchart", charts="iplotPXG", chartname='chart',
-                    caption=caption)
+                    panels="dotchart", charts="iplotPXG", chartdivid=chartdivid,
+                    caption=caption, print=print)
 
   json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
@@ -79,9 +83,9 @@ function(cross, marker, pheno.col=1,
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotPXG(data,chartOpts);')
 
-  append_html_bottom(file)
+  append_html_bottom(file, print=print)
 
-  if(openfile) browseURL(file)
+  if(openfile && !print) browseURL(file)
 
   invisible(file)
 }

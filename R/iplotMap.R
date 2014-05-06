@@ -15,12 +15,15 @@
 #'   javascript/css code.
 #' @param openfile If TRUE, open the plot in the default web browser.
 #' @param title Character string with title for plot.
+#' @param chartdivid Character string for id of div to hold the chart
 #' @param caption Character vector with text for a caption (to be
 #'   combined to one string with \code{\link[base]{paste}}, with
 #'   \code{collapse=''})
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option. See details.
 #' @param digits Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.
+#' @param print If TRUE, print the output, rather than writing it to a file,
+#' for use within an R Markdown document.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -37,7 +40,7 @@
 #' @export
 iplotMap <-
 function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic map",
-         caption, chartOpts=NULL, digits=4)
+         chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
   if(missing(file)) file <- NULL
 
@@ -45,8 +48,8 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic ma
     caption <- 'Hover over marker positions to view the marker names.'
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels="mapchart", charts="iplotMap", chartname='chart',
-                    caption=caption)
+                    panels="mapchart", charts="iplotMap", chartdivid=chartdivid,
+                    caption=caption, print=print)
 
   if(shift) map <- shiftmap(map)
   json <- map2json(map, digits=digits)
@@ -55,9 +58,9 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic ma
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotMap(data,chartOpts);')
 
-  append_html_bottom(file)
+  append_html_bottom(file, print=print)
 
-  if(openfile) browseURL(file)
+  if(openfile && !print) browseURL(file)
 
   invisible(file)
 }

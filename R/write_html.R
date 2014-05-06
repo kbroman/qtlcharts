@@ -5,27 +5,30 @@
 write_top <-
 function(file, onefile=FALSE, title='',
          links=NULL, panels=NULL, charts=NULL,
-         chartname='chart', caption='')
+         chartdivid='chart', caption='', print=FALSE)
 {
-  if(missing(file) || is.null(file))
-    file <- tempfile(tmpdir=tempdir(), fileext='.html')
-  else file <- path.expand(file)
+  if(print) file <- ""
+  else {
+    if(missing(file) || is.null(file))
+      file <- tempfile(tmpdir=tempdir(), fileext='.html')
+    else file <- path.expand(file)
 
-  if(file.exists(file))
-    stop('The file already exists; please remove it first: ', file)
+    if(file.exists(file))
+      stop('The file already exists; please remove it first: ', file)
+  }
 
-  write_html_top(file, title=title)
+  if(!print) write_html_top(file, title=title)
 
-  if("d3" %in% links) link_d3(file, onefile=onefile)
-  if("d3tip" %in% links) link_d3tip(file, onefile=onefile)
-  if("colorbrewer" %in% links) link_colorbrewer(file, onefile=onefile)
-  if("panelutil" %in% links) link_panelutil(file, onefile=onefile)
+  if("d3" %in% links) link_d3(file, onefile=onefile, print=print)
+  if("d3tip" %in% links) link_d3tip(file, onefile=onefile, print=print)
+  if("colorbrewer" %in% links) link_colorbrewer(file, onefile=onefile, print=print)
+  if("panelutil" %in% links) link_panelutil(file, onefile=onefile, print=print)
   for(panel in panels)
-    link_panel(panel, file, onefile=onefile)
+    link_panel(panel, file, onefile=onefile, print=print)
   for(chart in charts)
-    link_chart(chart, file, onefile=onefile)
+    link_chart(chart, file, onefile=onefile, print=print)
 
-  append_html_middle(file, title, chartname)
+  append_html_middle(file, title, chartdivid, print=print)
 
   append_caption(caption, file)
 
@@ -38,6 +41,7 @@ function(file, onefile=FALSE, title='',
 #
 # @param file Character vector with file name, will be over-written
 # @param title Character vector with title for html page
+# @param print If TRUE, print rather than writing to file
 # @return Returns the file name (invisibly)
 # @keywords IO
 # @examples
@@ -62,16 +66,22 @@ function(file=tempfile(tmpdir=tempdir(), fileext=".html"), title="qtlcharts char
 # @return None (invisible NULL)
 # @keywords IO
 append_html_csslink <-
-function(file, cssfile, onefile=FALSE)
+function(file, cssfile, onefile=FALSE, print=FALSE)
 {
   if(!onefile) { # just include link
-    text <- c('    <link rel="stylesheet" type="text/css" ',
+    text <- c('<link rel="stylesheet" type="text/css" ',
               'href="', cssfile, '">\n')
     cat(text, file=file, append=TRUE, sep='')
   }
   else {
     cat('<style type="text/css">\n', file=file, append=TRUE)
-    file.append(file, cssfile)
+
+    if(print) {
+      cat(readLines(cssfile, warn=FALSE), sep="\n")
+    } else {
+      file.append(file, cssfile)
+    }
+
     cat('</style>\n', file=file, append=TRUE)
   }
 
@@ -89,22 +99,26 @@ function(file, cssfile, onefile=FALSE)
 # @examples
 # \dontrun{append_html_jslink("index.html", "d3.min.js", "utf-8")}
 append_html_jslink <-
-function(file, jsfile, charset, onefile)
+function(file, jsfile, charset, onefile, print=FALSE)
 {
   if(!onefile) {
-    text <- '    <script '
+    text <- '<script '
     if(!missing(charset) && !is.null(charset)) text <- c(text, 'charset="', charset, '" ')
     text <- c(text, 'type="text/javascript" src="', jsfile, '"></script>\n')
 
     cat(text, file=file, append=TRUE, sep='')
   }
   else {
-    text <- '    <script '
+    text <- '<script '
     if(!missing(charset) && !is.null(charset)) text <- c(text, 'charset="', charset, '" ')
     text <- c(text, 'type="text/javascript">\n')
     cat(text, file=file, append=TRUE, sep='')
 
-    file.append(file, jsfile)
+    if(print) {
+      cat(readLines(jsfile, warn=FALSE), sep="\n")
+    } else {
+      file.append(file, jsfile)
+    }
 
     cat('</script>\n', file=file, append=TRUE)
   }
@@ -139,11 +153,14 @@ function(file, ...)
 # \examples
 # \dontrun{append_html_middle("index.html", "QTL chart", "chart")}
 append_html_middle <-
-function(file, title, div)
+function(file, title, div, print=print)
 {
-  text <- '</head>\n\n<body>\n'
-  if(!missing(title) && !is.null(title)) text <- c(text, '<h3>', title, '</h3>\n\n')
-  text <- c(text, '<p id="loading">Loading...</p>\n\n')
+  if(print) text <- ''
+  else {
+    text <- '</head>\n\n<body>\n'
+    if(!missing(title) && !is.null(title)) text <- c(text, '<h3>', title, '</h3>\n\n')
+    text <- c(text, '<p id="loading">Loading...</p>\n\n')
+  }
   if(!missing(div) && !is.null(div)) text <- c(text, '<div id="', div, '"></div>\n\n')
 
   cat(text, file=file, append=TRUE, sep='')
@@ -159,10 +176,10 @@ function(file, title, div)
 # @examples
 # \dontrun{append_html_bottom("index.html")}
 append_html_bottom <-
-function(file)
+function(file, print=FALSE)
 {
   cat('<script type="text/javascript">d3.select("p#loading").remove();</script>\n\n', file=file, append=TRUE)
-  cat('</body>\n</html>\n', file=file, append=TRUE)
+  if(!print) cat('</body>\n</html>\n', file=file, append=TRUE)
 
   invisible(NULL)
 }
@@ -252,64 +269,64 @@ function(opts)
 
 # functions to simplify linking/incorporating js/css code
 link_d3 <-
-function(file, onefile=FALSE)
+function(file, onefile=FALSE, print=FALSE)
 {
-  append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'),
-                     charset='utf-8', onefile=onefile)
+  suppressWarnings(append_html_jslink(file, system.file('d3', 'd3.min.js', package='qtlcharts'),
+                     charset='utf-8', onefile=onefile, print=print))
 }
 
 link_d3tip <-
-function(file, onefile=FALSE)
+function(file, onefile=FALSE, print=FALSE)
 {
   append_html_csslink(file, system.file('d3-tip', 'd3-tip.min.css', package='qtlcharts'),
-                     onefile=onefile)
+                      onefile=onefile, print=print)
   append_html_jslink(file, system.file('d3-tip', 'd3-tip.min.js', package='qtlcharts'),
-                     onefile=onefile)
+                     onefile=onefile, print=print)
 }
 
 link_colorbrewer <-
-function(file, onefile=FALSE)
+function(file, onefile=FALSE, print=FALSE)
 {
   append_html_csslink(file, system.file('colorbrewer', 'colorbrewer.css', package='qtlcharts'),
-                     onefile=onefile)
+                     onefile=onefile, print=print)
   append_html_jslink(file, system.file('colorbrewer', 'colorbrewer.js', package='qtlcharts'),
-                     onefile=onefile)
+                     onefile=onefile, print=print)
 }
 
 link_panelutil <-
-function(file, onefile=FALSE)
+function(file, onefile=FALSE, print=FALSE)
 {
   cssfile <- system.file('panels', 'panelutil.css', package='qtlcharts')
   if(file.exists(cssfile))
-    append_html_csslink(file, cssfile, onefile=onefile)
+    append_html_csslink(file, cssfile, onefile=onefile, print=print)
 
   jsfile <- system.file('panels', 'panelutil.js', package='qtlcharts')
   if(file.exists(jsfile))
-    append_html_jslink(file, jsfile, onefile=onefile)
+    append_html_jslink(file, jsfile, onefile=onefile, print=print)
 }
 
 link_panel <-
-function(panel, file, onefile=FALSE)
+function(panel, file, onefile=FALSE, print=FALSE)
 {
   jsfile <- system.file('panels', panel, paste0(panel, '.js'), package='qtlcharts')
   if(file.exists(jsfile))
-    append_html_jslink(file, jsfile, onefile=onefile)
+    append_html_jslink(file, jsfile, onefile=onefile, print=print)
 }
 
 link_chart <-
-function(chart, file, onefile=FALSE)
+function(chart, file, onefile=FALSE, print=print)
 {
   cssfile <- system.file('charts', 'charts.css', package='qtlcharts')
   if(file.exists(cssfile))
-    append_html_csslink(file, cssfile, onefile=onefile)
+    append_html_csslink(file, cssfile, onefile=onefile, print=print)
 
   cssfile <- system.file('charts', paste0(chart, '.css'), package='qtlcharts')
   if(file.exists(cssfile))
-    append_html_csslink(file, cssfile, onefile=onefile)
+    append_html_csslink(file, cssfile, onefile=onefile, print=print)
 
   jsfile <- system.file('charts', paste0(chart, '.js'), package='qtlcharts')
   if(file.exists(jsfile))
-    append_html_jslink(file, jsfile, onefile=onefile)
+    append_html_jslink(file, jsfile, onefile=onefile, print=print)
 }
 
 append_caption <-

@@ -27,6 +27,7 @@
 #'   javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
+#' @param chartdivid Character string for id of div to hold the chart
 #' @param caption Character vector with text for a caption (to be
 #'   combined to one string with \code{\link[base]{paste}}, with
 #'   \code{collapse=''})
@@ -35,6 +36,8 @@
 #'   corresponding option.
 #' @param digits Number of digits in JSON; passed to
 #'   \code{\link[jsonlite]{toJSON}}
+#' @param print If TRUE, print the output, rather than writing it to a file,
+#' for use within an R Markdown document.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -61,8 +64,8 @@
 iplotMScanone <-
 function(scanoneOutput, cross, lodcolumn, pheno.col,
          effects, chr,
-         file, onefile=FALSE, openfile=TRUE, title="", caption,
-         chartOpts=NULL, digits=4)
+         file, onefile=FALSE, openfile=TRUE, title="", chartdivid='chart',
+         caption, chartOpts=NULL, digits=4, print=FALSE)
 {
   if(missing(file)) file <- NULL
 
@@ -86,7 +89,8 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
   if((missing(cross) || is.null(cross)) && (missing(effects) || is.null(effects)))
      return(iplotMScanone_noeff(scanoneOutput,
                                 file=file, onefile=onefile, openfile=openfile, title=title,
-                                caption=caption, chartOpts=chartOpts, digits=digits))
+                                chartdivid=chartdivid,
+                                caption=caption, chartOpts=chartOpts, digits=digits, print=print))
 
   if(missing(effects) || is.null(effects)) {
     stopifnot(length(pheno.col) == length(lodcolumn))
@@ -105,7 +109,8 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
 
   iplotMScanone_eff(scanoneOutput, effects,
                     file=file, onefile=onefile, openfile=openfile, title=title,
-                    caption=caption, chartOpts=chartOpts, digits=digits)
+                    chartdivid=chartdivid,
+                    caption=caption, chartOpts=chartOpts, digits=digits, print=print)
 }
 
 
@@ -113,7 +118,7 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
 iplotMScanone_noeff <-
 function(scanoneOutput,
          file, onefile=FALSE, openfile=TRUE,
-         title="", caption, chartOpts=NULL, digits=4)
+         title="", chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
   scanone_json <- scanone2json(scanoneOutput, digits=digits)
 
@@ -123,16 +128,16 @@ function(scanoneOutput,
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
                     panels=c("lodheatmap", "lodchart", "curvechart"),
-                    charts="iplotMScanone_noeff", chartname='chart',
-                    caption=caption)
+                    charts="iplotMScanone_noeff", chartdivid=chartdivid,
+                    caption=caption, print=print)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotMScanone_noeff(scanoneData, chartOpts);')
 
-  append_html_bottom(file)
+  append_html_bottom(file, print=print)
 
-  if(openfile) browseURL(file)
+  if(openfile && !print) browseURL(file)
 
   invisible(file)
 }
@@ -141,7 +146,8 @@ function(scanoneOutput,
 iplotMScanone_eff <-
 function(scanoneOutput, effects,
          file, onefile=FALSE, openfile=TRUE,
-         title="", caption, chartOpts=NULL, digits=4)
+         title="", chartdivid=chartdivid,
+         caption, chartOpts=NULL, digits=4, print=FALSE)
 {
   scanone_json <- scanone2json(scanoneOutput, digits=digits)
   effects_json <- effects2json(effects, digits=digits)
@@ -152,17 +158,17 @@ function(scanoneOutput, effects,
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "colorbrewer", "panelutil"),
                     panels=c("lodheatmap", "lodchart", "curvechart"),
-                    charts="iplotMScanone_eff", chartname='chart',
-                    caption=caption)
+                    charts="iplotMScanone_eff", chartdivid=chartdivid,
+                    caption=caption, print=print)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'effectsData = ', effects_json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotMScanone_eff(scanoneData, effectsData, chartOpts);')
 
-  append_html_bottom(file)
+  append_html_bottom(file, print=print)
 
-  if(openfile) browseURL(file)
+  if(openfile && !print) browseURL(file)
 
   invisible(file)
 }

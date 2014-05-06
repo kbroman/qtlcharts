@@ -146,7 +146,7 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", chartdivid
                 'Click on a marker for a bit of gratuitous animation.')
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels="lodchart", charts="iplotScanone_noeff", chart=chartdivid,
+                    panels="lodchart", charts="iplotScanone_noeff", chartdivid=chartdivid,
                     caption=caption, print=print)
 
   append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, digits=digits), ';')

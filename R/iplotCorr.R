@@ -45,7 +45,7 @@
 #'
 #' @keywords hplot
 #' @seealso \code{\link{iheatmap}}, \code{\link{iplotCurves}}
-#' 
+#'
 #' @examples
 #' data(geneExpr)
 #' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
@@ -74,14 +74,14 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
     reorder <- FALSE
     corr_was_presubset <- TRUE
   }
-  else {    
+  else {
     if(missing(rows) || is.null(rows)) rows <- (1:ncol(mat))
     else rows <- selectMatrixColumns(mat, rows)
     if(missing(cols) || is.null(cols)) cols <- (1:ncol(mat))
     else cols <- selectMatrixColumns(mat, cols)
     corr_was_presubset <- FALSE
   }
- 
+
   json <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset)
 
   if(missing(caption) || is.null(caption))

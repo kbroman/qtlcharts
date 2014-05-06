@@ -8,7 +8,7 @@
 #' provided, the LOD curves are linked to a phenotype x genotype plot
 #' for a marker: Click on a marker on the LOD curve and see the
 #' corresponding phenotype x genotype plot.
-#' 
+#'
 #' @param scanoneOutput Object of class \code{"scanone"}, as output
 #'   from \code{\link[qtl]{scanone}}.
 #' @param cross (Optional) Object of class \code{"cross"}, see
@@ -76,7 +76,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
          pxgtype = c("ci", "raw"),
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          fillgenoArgs=NULL, chartOpts=NULL, digits=4)
-{    
+{
   if(missing(file)) file <- NULL
 
   if(!any(class(scanoneOutput) == "scanone"))
@@ -113,7 +113,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 
   if(class(cross)[2] != "cross")
     stop('"cross" should have class "cross".')
-  
+
   if(pxgtype == "raw")
     return(iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
                             file=file, onefile=onefile, openfile=openfile, title=title, caption=caption,
@@ -131,7 +131,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 # iplotScanone: LOD curves with nothing else
 iplotScanone_noeff <-
 function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", caption, chartOpts=NULL, digits=4)
-{    
+{
   if(missing(caption) || is.null(caption))
     caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker for a bit of gratuitous animation.')
@@ -156,7 +156,7 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", caption, c
 iplotScanone_pxg <-
 function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
          title="", caption, fillgenoArgs=NULL, chartOpts=NULL, digits=4)
-{    
+{
   scanone_json <- scanone2json(scanoneOutput, digits=digits)
   pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
@@ -185,7 +185,7 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
 iplotScanone_ci <-
 function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
          title="", caption, fillgenoArgs=NULL, chartOpts=NULL, digits=4)
-{    
+{
   scanone_json <- scanone2json(scanoneOutput, digits=digits)
   pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 

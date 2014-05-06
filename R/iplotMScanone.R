@@ -7,7 +7,7 @@
 #' calculated by \code{\link[qtl]{scanone}}. If \code{cross} or
 #' \code{effects} are provide, LOD curves will be linked to a panel
 #' with estimated QTL effects.
-#' 
+#'
 #' @param scanoneOutput Object of class \code{"scanone"}, as output
 #'   from \code{\link[qtl]{scanone}}.
 #' @param cross (Optional) Object of class \code{"cross"}, see
@@ -63,7 +63,7 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
          effects, chr,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          chartOpts=NULL, digits=4)
-{    
+{
   if(missing(file)) file <- NULL
 
   if(!any(class(scanoneOutput) == "scanone"))

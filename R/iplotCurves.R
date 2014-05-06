@@ -6,7 +6,7 @@
 #' Creates an interactive graph with a panel having a number of curves
 #' (say, a phenotype measured over time) linked to one or two (or no) scatter plots
 #' (say, of the first vs middle and middle vs last times).
-#' 
+#'
 #' @param curveMatrix Matrix (dim n_ind x n_times) with outcomes
 #' @param times Vector (length n_times) with time points for the
 #'   columns of curveMatrix
@@ -59,11 +59,11 @@
 #'
 #' @importFrom jsonlite toJSON unbox
 #' @export
-iplotCurves <- 
+iplotCurves <-
 function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          chartOpts=NULL, digits=4)
-{    
+{
   if(missing(file)) file <- NULL
 
   n.ind <- nrow(curveMatrix)
@@ -84,7 +84,7 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
     if(any(group <= 0)) stop("group values should be >= 0")
   }
   indID <- rownames(curveMatrix)
-  
+
   if(is.data.frame(curveMatrix)) curveMatrix <- as.matrix(curveMatrix)
   if(is.data.frame(scatter1)) scatter1 <- as.matrix(scatter1)
   if(is.data.frame(scatter2)) scatter2 <- as.matrix(scatter2)

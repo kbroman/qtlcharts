@@ -6,7 +6,7 @@
 #' Calculates the effects of QTL at each position across the genome
 #' using Haley-Knott regression, much like \code{\link[qtl]{effectscan}},
 #' but considering multiple phenotypes and not plotting the results
-#' 
+#'
 #' @param cross (Optional) Object of class \code{"cross"}, see
 #'   \code{\link[qtl]{read.cross}}.
 #' @param pheno.col Phenotype columns in cross object.
@@ -17,7 +17,7 @@
 #' @return list of matrices; each component corresponds to a position
 #' in the genome and is a matrix with phenotypes x effects
 #'
-#' @details One should first run \code{\link[qtl]{calc.genoprob}}; 
+#' @details One should first run \code{\link[qtl]{calc.genoprob}};
 #' if not, it is run with the default arguments.
 #'
 #' The estimated effects will be poorly estimated in the case of
@@ -39,12 +39,12 @@
 #' @export
 estQTLeffects <-
 function(cross, pheno.col=1, what=c("means", "effects"))
-{    
+{
   if(!("cross" %in% class(cross)))
     stop("Input cross object should have class \"cross\".")
   crosstype <- class(cross)[1]
   chrtype <- vapply(cross$geno, class, "")
-  
+
   what <- match.arg(what)
   handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid")
   if(what == "effects" && !(crosstype %in% handled_crosses)) {
@@ -89,7 +89,7 @@ function(cross, pheno.col=1, what=c("means", "effects"))
 #'
 #' Combine multiple runs of estQTLeffects by applying cbind to each
 #' component
-#' 
+#'
 #' @param ... Results of \code{\link{estQTLeffects}}
 #' @param labels Vector of labels to use in the combination.
 #'

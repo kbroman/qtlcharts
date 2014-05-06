@@ -111,4 +111,3 @@ function(cross, fillgenoArgs=NULL, imputed_negative=TRUE)
 
   geno_imp
 }
-

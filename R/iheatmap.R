@@ -33,7 +33,7 @@
 #'
 #' @keywords hplot
 #' @seealso \code{\link{iplotCorr}}
-#' 
+#'
 #  Example function from Dmitry Pelinovsky
 #  http://dmpeli.mcmaster.ca/Matlab/Math1J03/LectureNotes/Lecture2_5.htm
 #' @examples

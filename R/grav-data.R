@@ -19,7 +19,7 @@
 #' time axis to a quantitative trait map of a plant growth
 #' response. Genetics 195:1077-1086
 #' (\href{http://www.ncbi.nlm.nih.gov/pubmed/23979570}{PubMed})
-#' 
+#'
 #' @source \href{http://qtlarchive.org/db/q?pg=projdetails&proj=moore_2013b}{QTL Archive}
 #'
 #' @examples

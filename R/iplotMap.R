@@ -38,7 +38,7 @@
 iplotMap <-
 function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic map",
          caption, chartOpts=NULL, digits=4)
-{    
+{
   if(missing(file)) file <- NULL
 
   if(missing(caption) || is.null(caption))

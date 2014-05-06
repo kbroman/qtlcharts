@@ -51,10 +51,10 @@ function(cross, marker, pheno.col=1,
          file, onefile=FALSE, openfile=TRUE, title="",
          caption, chartOpts=list(title=marker[1]),
          fillgenoArgs=NULL, digits=4)
-{    
+{
   if(class(cross)[2] != "cross")
     stop('"cross" should have class "cross".')
-  
+
   if(length(marker) > 1) {
     marker <- marker[1]
     warning('marker should have length 1; using "', marker, '"')

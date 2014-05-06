@@ -94,7 +94,7 @@ function(file, jsfile, charset, onefile)
   if(!onefile) {
     text <- '    <script '
     if(!missing(charset) && !is.null(charset)) text <- c(text, 'charset="', charset, '" ')
-    text <- c(text, 'type="text/javascript" src="', jsfile, '"></script>\n') 
+    text <- c(text, 'type="text/javascript" src="', jsfile, '"></script>\n')
 
     cat(text, file=file, append=TRUE, sep='')
   }
@@ -106,7 +106,7 @@ function(file, jsfile, charset, onefile)
 
     file.append(file, jsfile)
 
-    cat('</script>\n', file=file, append=TRUE) 
+    cat('</script>\n', file=file, append=TRUE)
   }
 
   invisible(NULL)
@@ -208,7 +208,7 @@ function(file, chartOpts, digits=2)
 {
   if(is.null(chartOpts))
     chartOpts <- list("null" = NULL)
-  
+
   opts_json <- strip_whitespace( toJSON( opts4json(chartOpts), digits=4) )
 
   cat('\n<script type="text/javascript">\n', file=file, append=TRUE)
@@ -217,7 +217,7 @@ function(file, chartOpts, digits=2)
 
   invisible(NULL)
 }
-      
+
 # reformat chartOpts, to prepare for export as JSON object
 #
 # named vector -> list
@@ -279,11 +279,11 @@ function(file, onefile=FALSE)
 link_panelutil <-
 function(file, onefile=FALSE)
 {
-  cssfile <- system.file('panels', 'panelutil.css', package='qtlcharts') 
+  cssfile <- system.file('panels', 'panelutil.css', package='qtlcharts')
   if(file.exists(cssfile))
     append_html_csslink(file, cssfile, onefile=onefile)
 
-  jsfile <- system.file('panels', 'panelutil.js', package='qtlcharts') 
+  jsfile <- system.file('panels', 'panelutil.js', package='qtlcharts')
   if(file.exists(jsfile))
     append_html_jslink(file, jsfile, onefile=onefile)
 }
@@ -291,7 +291,7 @@ function(file, onefile=FALSE)
 link_panel <-
 function(panel, file, onefile=FALSE)
 {
-  jsfile <- system.file('panels', panel, paste0(panel, '.js'), package='qtlcharts') 
+  jsfile <- system.file('panels', panel, paste0(panel, '.js'), package='qtlcharts')
   if(file.exists(jsfile))
     append_html_jslink(file, jsfile, onefile=onefile)
 }
@@ -299,15 +299,15 @@ function(panel, file, onefile=FALSE)
 link_chart <-
 function(chart, file, onefile=FALSE)
 {
-  cssfile <- system.file('charts', 'charts.css', package='qtlcharts') 
+  cssfile <- system.file('charts', 'charts.css', package='qtlcharts')
   if(file.exists(cssfile))
     append_html_csslink(file, cssfile, onefile=onefile)
 
-  cssfile <- system.file('charts', paste0(chart, '.css'), package='qtlcharts') 
+  cssfile <- system.file('charts', paste0(chart, '.css'), package='qtlcharts')
   if(file.exists(cssfile))
     append_html_csslink(file, cssfile, onefile=onefile)
 
-  jsfile <- system.file('charts', paste0(chart, '.js'), package='qtlcharts') 
+  jsfile <- system.file('charts', paste0(chart, '.js'), package='qtlcharts')
   if(file.exists(jsfile))
     append_html_jslink(file, jsfile, onefile=onefile)
 }

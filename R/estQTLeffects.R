@@ -225,7 +225,7 @@ function(effects, digits=4)
     # make sure it's not a scalar
     if(all(dim(eff)==1)) eff <- list(eff)
 
-    effects[[i]] <- list(data=eff, x=(1:nr)-1, names=cn)
+    effects[[i]] <- list(data=eff, x=(1:nr)-1, names=as.character(cn))
   }
 
   strip_whitespace( jsonlite::toJSON(effects, digits=digits) )

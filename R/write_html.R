@@ -17,16 +17,17 @@ function(file, onefile=FALSE, title='',
       stop('The file already exists; please remove it first: ', file)
   }
 
-  if(!print) write_html_top(file, title=title)
-
-  if("d3" %in% links) link_d3(file, onefile=onefile, print=print)
-  if("d3tip" %in% links) link_d3tip(file, onefile=onefile, print=print)
-  if("colorbrewer" %in% links) link_colorbrewer(file, onefile=onefile, print=print)
-  if("panelutil" %in% links) link_panelutil(file, onefile=onefile, print=print)
-  for(panel in panels)
-    link_panel(panel, file, onefile=onefile, print=print)
-  for(chart in charts)
-    link_chart(chart, file, onefile=onefile, print=print)
+  if(!print) {
+    write_html_top(file, title=title)
+    if("d3" %in% links) link_d3(file, onefile=onefile, print=print)
+    if("d3tip" %in% links) link_d3tip(file, onefile=onefile, print=print)
+    if("colorbrewer" %in% links) link_colorbrewer(file, onefile=onefile, print=print)
+    if("panelutil" %in% links) link_panelutil(file, onefile=onefile, print=print)
+    for(panel in panels)
+      link_panel(panel, file, onefile=onefile, print=print)
+    for(chart in charts)
+      link_chart(chart, file, onefile=onefile, print=print)
+  }
 
   append_html_middle(file, title, chartdivid, print=print)
 
@@ -159,8 +160,8 @@ function(file, title, div, print=print)
   else {
     text <- '</head>\n\n<body>\n'
     if(!missing(title) && !is.null(title)) text <- c(text, '<h3>', title, '</h3>\n\n')
-    text <- c(text, '<p id="loading">Loading...</p>\n\n')
   }
+  text <- c(text, '<p id="loading">Loading...</p>\n\n')
   if(!missing(div) && !is.null(div)) text <- c(text, '<div id="', div, '"></div>\n\n')
 
   cat(text, file=file, append=TRUE, sep='')

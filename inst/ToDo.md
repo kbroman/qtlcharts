@@ -3,9 +3,6 @@
 ### General things
 
 - Allow use of charts within RMarkdown doc
-  - separate print of resources (all, via directory search, or just
-    those specified); this function needs a helpfile and needs to be
-    exported
   - prepend chartdivid on data objects, including chartOpts?
     
 - standard ways to give axis labels

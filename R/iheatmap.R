@@ -76,9 +76,9 @@ function(z, x, y,
   # add chartdivid to chartOpts
   chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, 'data = ', json, ';')
-  append_html_chartopts(file, chartOpts)
-  append_html_jscode(file, 'iheatmap(data, chartOpts);')
+  append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
+  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+  append_html_jscode(file, paste0('iheatmap(', chartdivid, '_data, ', chartdivid, '_chartOpts);'))
 
   append_html_bottom(file, print=print)
 

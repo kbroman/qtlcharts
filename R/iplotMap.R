@@ -57,9 +57,10 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic ma
   # add chartdivid to chartOpts
   chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, 'data = ', json, ';')
-  append_html_chartopts(file, chartOpts)
-  append_html_jscode(file, 'iplotMap(data,chartOpts);')
+  append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
+  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+  append_html_jscode(file, paste0('iplotMap(', chartdivid, '_data,',
+                                  chartdivid, '_chartOpts);'))
 
   append_html_bottom(file, print=print)
 

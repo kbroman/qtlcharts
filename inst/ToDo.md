@@ -2,9 +2,6 @@
 
 ### General things
 
-- Allow use of charts within RMarkdown doc
-  - prepend chartdivid on data objects, including chartOpts?
-    
 - standard ways to give axis labels
   (draw axis labels from data?)
 
@@ -31,8 +28,6 @@
 
 
 ### Enhancements to current charts
-
-- iplotMScanone w/ effects: label effect curves (in right margin?)
 
 - iplotMScanone: qualitative vs quantitative axes
 

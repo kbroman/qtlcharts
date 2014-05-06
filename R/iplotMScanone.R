@@ -134,9 +134,10 @@ function(scanoneOutput,
   # add chartdivid to chartOpts
   chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
-  append_html_chartopts(file, chartOpts)
-  append_html_jscode(file, 'iplotMScanone_noeff(scanoneData, chartOpts);')
+  append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
+  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+  append_html_jscode(file, paste0('iplotMScanone_noeff(', chartdivid, '_scanoneData, ',
+                                  chartdivid, '_chartOpts);'))
 
   append_html_bottom(file, print=print)
 
@@ -167,10 +168,12 @@ function(scanoneOutput, effects,
   # add chartdivid to chartOpts
   chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
-  append_html_jscode(file, 'effectsData = ', effects_json, ';')
-  append_html_chartopts(file, chartOpts)
-  append_html_jscode(file, 'iplotMScanone_eff(scanoneData, effectsData, chartOpts);')
+  append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
+  append_html_jscode(file, paste0(chartdivid, '_effectsData = '), effects_json, ';')
+  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+  append_html_jscode(file, paste0('iplotMScanone_eff(', chartdivid, '_scanoneData, ',
+                                  chartdivid, '_effectsData, ',
+                                  chartdivid, '_chartOpts);'))
 
   append_html_bottom(file, print=print)
 

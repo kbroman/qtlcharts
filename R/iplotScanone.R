@@ -152,9 +152,11 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", chartdivid
   # add chartdivid to chartOpts
   chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, digits=digits), ';')
-  append_html_chartopts(file, chartOpts)
-  append_html_jscode(file, 'iplotScanone_noeff(data, chartOpts);')
+  append_html_jscode(file, paste0(chartdivid, '_data = '),
+                     scanone2json(scanoneOutput, digits=digits), ';')
+  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+  append_html_jscode(file, paste0('iplotScanone_noeff(', chartdivid, '_data, ',
+                                  chartdivid, '_chartOpts);'))
 
   append_html_bottom(file, print=print)
 
@@ -185,10 +187,11 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
   # add chartdivid to chartOpts
   chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
-  append_html_jscode(file, 'pxgData = ', pxg_json, ';')
-  append_html_chartopts(file, chartOpts)
-  append_html_jscode(file, 'iplotScanone_pxg(scanoneData, pxgData, chartOpts);')
+  append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
+  append_html_jscode(file, paste0(chartdivid, '_pxgData = '), pxg_json, ';')
+  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+  append_html_jscode(file, paste0('iplotScanone_pxg(', chartdivid, '_scanoneData, ',
+                                  chartdivid, '_pxgData, ', chartdivid, '_chartOpts);'))
 
   append_html_bottom(file, print=print)
 
@@ -218,10 +221,11 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
   # add chartdivid to chartOpts
   chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
-  append_html_jscode(file, 'pxgData = ', pxg_json, ';')
-  append_html_chartopts(file, chartOpts)
-  append_html_jscode(file, 'iplotScanone_ci(scanoneData, pxgData, chartOpts);')
+  append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
+  append_html_jscode(file, paste0(chartdivid, '_pxgData = '), pxg_json, ';')
+  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+  append_html_jscode(file, paste0('iplotScanone_ci(', chartdivid, '_scanoneData, ',
+                                  chartdivid, '_pxgData, ', chartdivid, '_chartOpts);'))
 
   append_html_bottom(file, print=print)
 

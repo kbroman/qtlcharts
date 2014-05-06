@@ -113,12 +113,18 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
   # add chartdivid to chartOpts
   chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, 'curve_data = ', curves2json(times, curveMatrix, group, indID, digits=digits), ';')
-  append_html_jscode(file, 'scatter1_data = ', scat2json(scatter1, group, indID, digits=digits), ';')
-  append_html_jscode(file, 'scatter2_data = ', scat2json(scatter2, group, indID, digits=digits), ';')
-  append_html_chartopts(file, chartOpts)
+  append_html_jscode(file, paste0(chartdivid, '_curve_data = '),
+                     curves2json(times, curveMatrix, group, indID, digits=digits), ';')
+  append_html_jscode(file, paste0(chartdivid, '_scatter1_data = '),
+                     scat2json(scatter1, group, indID, digits=digits), ';')
+  append_html_jscode(file, paste0(chartdivid, '_scatter2_data = '),
+                     scat2json(scatter2, group, indID, digits=digits), ';')
+  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, 'iplotCurves(curve_data, scatter1_data, scatter2_data, chartOpts)')
+  append_html_jscode(file, paste0('iplotCurves(', chartdivid, '_curve_data, ',
+                                  chartdivid, '_scatter1_data, ',
+                                  chartdivid, '_scatter2_data, ',
+                                  chartdivid, '_chartOpts)'))
 
   append_html_bottom(file, print=print)
 

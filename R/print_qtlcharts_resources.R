@@ -1,4 +1,4 @@
-## print_qtlchart_resources.R
+## print_qtlcharts_resources.R
 ## Karl Broman
 
 #' Print javascript resources for qtlcharts
@@ -35,10 +35,10 @@
 #' @keywords utilities
 #'
 #' @examples
-#' \dontrun{print_resources(panels=c("curvechart", "heatmap"), charts="iheatmap")}
+#' \dontrun{print_qtlcharts_resources(panels=c("curvechart", "heatmap"), charts="iheatmap")}
 #'
 #' @export
-print_qtlchart_resources <-
+print_qtlcharts_resources <-
 function(main, panels, charts, onefile=FALSE)
 {
   if(missing(main) || is.null(main)) {

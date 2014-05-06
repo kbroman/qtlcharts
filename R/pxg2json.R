@@ -63,9 +63,9 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, digits=4)
 
   output <- jsonlite::toJSON(list(geno=t(geno_filled),
                                   pheno=phe,
-                                  chrByMarkers=chrByMarkers,
+                                  chrByMarkers=as.list(chrByMarkers),
                                   indID=id,
-                                  chrtype=chrtype,
+                                  chrtype=as.list(chrtype),
                                   genonames=genonames), digits=digits)
 
   strip_whitespace( output )

@@ -58,7 +58,7 @@
 #' @export
 iplotCorr <-
 function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.complete.obs"),
-         file, onefile=FALSE, openfile=TRUE, title="Correlation matrix with linked scatterplot",
+         file, onefile=FALSE, openfile=TRUE, title="",
          chartdivid='chart', caption, chartOpts=NULL, print=FALSE)
 {
   if(missing(file)) file <- NULL

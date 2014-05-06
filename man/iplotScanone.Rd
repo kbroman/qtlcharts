@@ -87,7 +87,7 @@ iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
              title="iplotScanone example (raw phe x gen)",
              pxgtype='raw')
 
-\dontshow{Sys.sleep(0.2) # wait 0.2 sec so file can be opened}
+\dontshow{Sys.sleep(0.3) # wait 0.3 sec so file can be opened}
 }
 \seealso{
 \code{\link{iplotMScanone}}, \code{\link{iplotPXG}}, \code{\link{iplotMap}}

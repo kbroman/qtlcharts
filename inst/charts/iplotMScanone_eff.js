@@ -83,11 +83,20 @@ iplotMScanone_eff = function(lod_data, eff_data, chartOpts) {
     effchart_curves = g_curvechart.append("g").attr("id", "curves");
     _results = [];
     for (curveindex in eff_data[posindex].names) {
-      _results.push(effchart_curves.append("path").datum(eff_data[posindex].x).attr("d", effcurve(posindex, curveindex)).attr("fill", "none").attr("stroke", eff_linecolor[curveindex]).attr("stroke-width", eff_linewidth));
+      effchart_curves.append("path").datum(eff_data[posindex].x).attr("d", effcurve(posindex, curveindex)).attr("fill", "none").attr("stroke", eff_linecolor[curveindex]).attr("stroke-width", eff_linewidth);
+      _results.push(effchart_curves.selectAll("empty").data(eff_data[posindex].names).enter().append("text").text(function(d) {
+        return d;
+      }).attr("x", function(d, i) {
+        return margin.left + wright + axispos.ylabel;
+      }).attr("y", function(d, i) {
+        var z;
+        z = eff_data[posindex].data[i];
+        return mycurvechart.yscale()(z[z.length - 1]);
+      }).style("dominant-baseline", "middle").style("text-anchor", "start"));
     }
     return _results;
   };
-  curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis").selectAll("empty").data(lod_data.lodnames).enter().append("text").attr("id", function(d, i) {
+  curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis").selectAll("empty").data(lod_data.lodnames).enter().append("text").attr("class", "y axis").attr("id", function(d, i) {
     return "xaxis" + i;
   }).attr("x", function(d, i) {
     return mycurvechart.xscale()(i);

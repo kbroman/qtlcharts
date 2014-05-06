@@ -130,6 +130,17 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
             .attr("fill", "none")
             .attr("stroke", eff_linecolor[curveindex])
             .attr("stroke-width", eff_linewidth)
+      effchart_curves.selectAll("empty")
+                     .data(eff_data[posindex].names)
+                     .enter()
+                     .append("text")
+                     .text((d) -> d)
+                     .attr("x", (d,i) -> margin.left + wright + axispos.ylabel)
+                     .attr("y", (d,i) ->
+                              z = eff_data[posindex].data[i]
+                              mycurvechart.yscale()(z[z.length-1]))
+                     .style("dominant-baseline", "middle")
+                     .style("text-anchor", "start")
 
   # add X axis
   curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
@@ -137,6 +148,7 @@ iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
                                  .data(lod_data.lodnames)
                                  .enter()
                                  .append("text")
+                                 .attr("class", "y axis")
                                  .attr("id", (d,i) -> "xaxis#{i}")
                                  .attr("x", (d,i) -> mycurvechart.xscale()(i))
                                  .attr("y", margin.top+htop+axispos.xlabel)

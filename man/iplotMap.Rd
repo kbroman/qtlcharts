@@ -4,7 +4,7 @@
 \title{Interactive genetic map plot}
 \usage{
 iplotMap(map, shift = FALSE, file, onefile = FALSE, openfile = TRUE,
-  title = "Genetic map", chartdivid = "chart", caption, chartOpts = NULL,
+  title = "", chartdivid = "chart", caption, chartOpts = NULL,
   digits = 4, print = FALSE)
 }
 \arguments{

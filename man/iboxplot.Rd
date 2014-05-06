@@ -4,9 +4,8 @@
 \title{Modern boxplot linked to underlying histrograms}
 \usage{
 iboxplot(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian = TRUE,
-  breaks = 251, file, onefile = FALSE, openfile = TRUE,
-  title = "Many box plots", chartdivid = "chart", caption,
-  chartOpts = NULL, print = FALSE)
+  breaks = 251, file, onefile = FALSE, openfile = TRUE, title = "",
+  chartdivid = "chart", caption, chartOpts = NULL, print = FALSE)
 }
 \arguments{
 \item{dat}{Data matrix (individuals x variables)}

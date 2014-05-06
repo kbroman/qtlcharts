@@ -5,8 +5,8 @@
 \usage{
 iplotCorr(mat, group, rows, cols, reorder = FALSE, corr = cor(mat, use =
   "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
-  title = "Correlation matrix with linked scatterplot",
-  chartdivid = "chart", caption, chartOpts = NULL, print = FALSE)
+  title = "", chartdivid = "chart", caption, chartOpts = NULL,
+  print = FALSE)
 }
 \arguments{
 \item{mat}{Data matrix (individuals x variables)}

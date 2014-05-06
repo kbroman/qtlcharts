@@ -3,7 +3,7 @@
 \alias{print_qtlcharts_resources}
 \title{Print javascript resources for qtlcharts}
 \usage{
-print_qtlcharts_resources(main, panels, charts, onefile = FALSE)
+print_qtlcharts_resources(main, panels, charts, onefile = TRUE)
 }
 \arguments{
 \item{main}{Vector of character strings with the main resources to use

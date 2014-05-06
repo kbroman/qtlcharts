@@ -28,6 +28,7 @@
 #' @return Character string with the name of the file created.
 #'
 #' @importFrom utils browseURL
+#' @importFrom qtl pull.map
 #'
 #' @keywords hplot
 #' @seealso \code{\link{iplotScanone}}, \code{\link{iplotPXG}}
@@ -42,6 +43,8 @@ iplotMap <-
 function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
          chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
+  if("cross" %in% class(map)) map <- pull.map(map)
+
   if(missing(file)) file <- NULL
 
   if(missing(caption) || is.null(caption))

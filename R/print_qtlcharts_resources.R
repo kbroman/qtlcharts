@@ -39,7 +39,7 @@
 #'
 #' @export
 print_qtlcharts_resources <-
-function(main, panels, charts, onefile=FALSE)
+function(main, panels, charts, onefile=TRUE)
 {
   if(missing(main) || is.null(main)) {
     main <- c("d3", "d3tip", "colorbrewer", "panelutil")

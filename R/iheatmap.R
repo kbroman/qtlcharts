@@ -51,12 +51,7 @@ function(z, x, y,
          file, onefile=FALSE, openfile=TRUE, title="",
          caption, chartOpts=NULL, digits=4)
 {
-  if(missing(file) || is.null(file))
-    file <- tempfile(tmpdir=tempdir(), fileext='.html')
-  else file <- path.expand(file)
-
-  if(file.exists(file))
-    stop('The file already exists; please remove it first: ', file)
+  if(missing(file)) file <- NULL
 
   z <- as.matrix(z)
   if(missing(x) || is.null(x)) x <- 1:nrow(z)
@@ -66,22 +61,13 @@ function(z, x, y,
   names(x) <- names(y) <- dimnames(z) <- NULL
   json <- strip_whitespace( toJSON(list(x=x, y=y, z=z), digits=digits) )
 
-  # start writing
-  write_html_top(file, title=title)
-
-  link_d3(file, onefile=onefile)
-  link_d3tip(file, onefile=onefile)
-  link_panelutil(file, onefile=onefile)
-  link_panel('curvechart', file, onefile=onefile)
-  link_panel('heatmap', file, onefile=onefile)
-  link_chart('iheatmap', file, onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
-
   if(missing(caption) || is.null(caption))
     caption <- c('Hover over pixels in the heatmap on the top-left to see the values and to see ',
                  'the horizontal slice (below) and the vertical slice (to the right).')
-  append_caption(caption, file)
+
+  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                    panels=c("curvechart", "heatmap"), charts="iheatmap",
+                    chartname='chart', caption=caption)
 
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)

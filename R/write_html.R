@@ -1,6 +1,39 @@
 ## write_html (all internal functions)
 ## Karl W Broman
 
+# Write the entire initial part of the file
+write_top <-
+function(file, onefile=FALSE, title='',
+         links=NULL, panels=NULL, charts=NULL,
+         chartname='chart', caption='')
+{
+  if(missing(file) || is.null(file))
+    file <- tempfile(tmpdir=tempdir(), fileext='.html')
+  else file <- path.expand(file)
+
+  if(file.exists(file))
+    stop('The file already exists; please remove it first: ', file)
+
+  write_html_top(file, title=title)
+
+  if("d3" %in% links) link_d3(file, onefile=onefile)
+  if("d3tip" %in% links) link_d3tip(file, onefile=onefile)
+  if("colorbrewer" %in% links) link_colorbrewer(file, onefile=onefile)
+  if("panelutil" %in% links) link_panelutil(file, onefile=onefile)
+  for(panel in panels)
+    link_panel(panel, file, onefile=onefile)
+  for(chart in charts)
+    link_chart(chart, file, onefile=onefile)
+
+  append_html_middle(file, title, chartname)
+
+  append_caption(caption, file)
+
+  file
+}
+
+
+
 # Write the initial part of an html file
 #
 # @param file Character vector with file name, will be over-written

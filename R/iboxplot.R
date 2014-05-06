@@ -45,24 +45,9 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
          file, onefile=FALSE, openfile=TRUE, title="Many box plots",
          caption, chartOpts=NULL)
 {
-  if(missing(file) || is.null(file))
-    file <- tempfile(tmpdir=tempdir(), fileext='.html')
-  else file <- path.expand(file)
-
-  if(file.exists(file))
-    stop('The file already exists; please remove it first: ', file)
+  if(missing(file)) file <- NULL
 
   json <- convert4iboxplot(dat, qu, orderByMedian, breaks)
-
-  # start writing
-  write_html_top(file, title=title)
-
-  link_d3(file, onefile=onefile)
-  link_d3tip(file, onefile=onefile)
-  link_panelutil(file, onefile=onefile)
-  link_chart('iboxplot', file, onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
 
   if(missing(caption) || is.null(caption))
     caption <- c('The top panel is like a set of ', nrow(dat), ' box plots: ',
@@ -70,7 +55,9 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
                 'Hover over a column in the top panel and the corresponding distribution ',
                 'is show below; click for it to persist; click again to make it go away.')
 
-  append_caption(caption, file)
+  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                    panels=NULL, charts="iboxplot", chartname='chart',
+                    caption=caption)
 
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)

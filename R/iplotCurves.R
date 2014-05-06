@@ -64,12 +64,7 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          chartOpts=NULL, digits=4)
 {    
-  if(missing(file) || is.null(file))
-    file <- tempfile(tmpdir=tempdir(), fileext='.html')
-  else file <- path.expand(file)
-
-  if(file.exists(file))
-    stop('The file already exists; please remove it first: ', file)
+  if(missing(file)) file <- NULL
 
   n.ind <- nrow(curveMatrix)
   n.times <- ncol(curveMatrix)
@@ -95,18 +90,6 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
   if(is.data.frame(scatter2)) scatter2 <- as.matrix(scatter2)
   dimnames(curveMatrix) <- dimnames(scatter1) <- dimnames(scatter2) <- names(group) <- names(times) <- NULL
 
-  write_html_top(file, title=title)
-
-  link_d3(file, onefile=onefile)
-  link_d3tip(file, onefile=onefile)
-  link_colorbrewer(file, onefile=onefile)
-  link_panelutil(file, onefile=onefile)
-  link_panel('curvechart', file, onefile=onefile)
-  link_panel('scatterplot', file, onefile=onefile)
-  link_chart('iplotCurves', file, onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
-
   if(missing(caption) || is.null(caption)) {
     if(is.null(scatter1)) # no scatterplots
       caption <- 'Hover over a curve to have it highlighted.'
@@ -119,7 +102,10 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
                   'hover over an element in one panel, ',
                   'and the corresponding elements in the other panels will be highlighted.')
   }
-  append_caption(caption, file)
+
+  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "colorbrewer", "panelutil"),
+                    panels=c("curvechart", "scatterplot"), charts="iplotCurves",
+                    chartname='chart', caption=caption)
 
   append_html_jscode(file, 'curve_data = ', curves2json(times, curveMatrix, group, indID, digits=digits), ';')
   append_html_jscode(file, 'scatter1_data = ', scat2json(scatter1, group, indID, digits=digits), ';')

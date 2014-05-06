@@ -64,7 +64,11 @@
 #' hyper <- calc.genoprob(hyper, step=1)
 #' out <- scanone(hyper)
 #' iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
-#'              title="iplotScanone example")
+#'              title="iplotScanone example (CIs)")
+#'
+#' iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
+#'              title="iplotScanone example (raw phe x gen)",
+#'              pxgtype='raw')
 #'
 #' @export
 iplotScanone <-
@@ -73,11 +77,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          fillgenoArgs=NULL, chartOpts=NULL, digits=4)
 {    
-  if(missing(file) || is.null(file))
-    file <- tempfile(tmpdir=tempdir(), fileext='.html')
-  else file <- path.expand(file)
-  if(file.exists(file))
-    stop('The file already exists; please remove it first: ', file)
+  if(missing(file)) file <- NULL
 
   if(!any(class(scanoneOutput) == "scanone"))
     stop('"scanoneOutput" should have class "scanone".')
@@ -132,20 +132,13 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 iplotScanone_noeff <-
 function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", caption, chartOpts=NULL, digits=4)
 {    
-  write_html_top(file, title=title)
-
-  link_d3(file, onefile=onefile)
-  link_d3tip(file, onefile=onefile)
-  link_panelutil(file, onefile=onefile)
-  link_panel('lodchart', file, onefile=onefile)
-  link_chart('iplotScanone_noeff', file, onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
-  
   if(missing(caption) || is.null(caption))
     caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker for a bit of gratuitous animation.')
-  append_caption(caption, file)
+
+  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                    panels="lodchart", charts="iplotScanone_noeff", chartname='chart',
+                    caption=caption)
 
   append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, digits=digits), ';')
   append_html_chartopts(file, chartOpts)
@@ -167,22 +160,14 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
   scanone_json <- scanone2json(scanoneOutput, digits=digits)
   pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
-  write_html_top(file, title=title)
-
-  link_d3(file, onefile=onefile)
-  link_d3tip(file, onefile=onefile)
-  link_panelutil(file, onefile=onefile)
-  link_panel('lodchart', file, onefile=onefile)
-  link_panel('dotchart', file, onefile=onefile)
-  link_chart('iplotScanone_pxg', file, onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
-  
   if(missing(caption) || is.null(caption))
     caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker to view the phenotype &times; genotype plot on the right. ',
                 'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
-  append_caption(caption, file)
+
+  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                    panels="lodchart", charts="iplotScanone_pxg", chartname='chart',
+                    caption=caption)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';')
@@ -204,22 +189,14 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
   scanone_json <- scanone2json(scanoneOutput, digits=digits)
   pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
-  write_html_top(file, title=title)
-
-  link_d3(file, onefile=onefile)
-  link_d3tip(file, onefile=onefile)
-  link_panelutil(file, onefile=onefile)
-  link_panel('lodchart', file, onefile=onefile)
-  link_panel('cichart', file, onefile=onefile)
-  link_chart('iplotScanone_ci', file, onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
-  
   if(missing(caption) || is.null(caption))
     caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
                 'Click on a marker to view the phenotype &times; genotype plot on the right. ',
                 'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
-  append_caption(caption, file)
+
+  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                    panels="lodchart", charts="iplotScanone_ci", chartname='chart',
+                    caption=caption)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';')

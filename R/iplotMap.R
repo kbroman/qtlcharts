@@ -39,26 +39,14 @@ iplotMap <-
 function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="Genetic map",
          caption, chartOpts=NULL, digits=4)
 {    
-  if(missing(file) || is.null(file))
-    file <- tempfile(tmpdir=tempdir(), fileext='.html')
-  else file <- path.expand(file)
+  if(missing(file)) file <- NULL
 
-  if(file.exists(file))
-    stop('The file already exists; please remove it first: ', file)
-
-  write_html_top(file, title=title)
-
-  link_d3(file, onefile=onefile)
-  link_d3tip(file, onefile=onefile)
-  link_panelutil(file, onefile=onefile)
-  link_panel('mapchart', file, onefile=onefile)
-  link_chart('iplotMap', file, onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
-  
   if(missing(caption) || is.null(caption))
     caption <- 'Hover over marker positions to view the marker names.'
-  append_caption(caption, file)
+
+  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                    panels="mapchart", charts="iplotMap", chartname='chart',
+                    caption=caption)
 
   if(shift) map <- shiftmap(map)
   json <- map2json(map, digits=digits)

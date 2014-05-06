@@ -64,11 +64,7 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
          file, onefile=FALSE, openfile=TRUE, title="", caption,
          chartOpts=NULL, digits=4)
 {    
-  if(missing(file) || is.null(file))
-    file <- tempfile(tmpdir=tempdir(), fileext='.html')
-  else file <- path.expand(file)
-  if(file.exists(file))
-    stop('The file already exists; please remove it first: ', file)
+  if(missing(file)) file <- NULL
 
   if(!any(class(scanoneOutput) == "scanone"))
     stop('"scanoneOutput" should have class "scanone".')
@@ -121,22 +117,14 @@ function(scanoneOutput,
 {
   scanone_json <- scanone2json(scanoneOutput, digits=digits)
 
-  write_html_top(file, title=title)
-
-  link_d3(file, onefile=onefile)
-  link_d3tip(file, onefile=onefile)
-  link_panelutil(file, onefile=onefile)
-  link_panel('lodheatmap', file, onefile=onefile)
-  link_panel('lodchart', file, onefile=onefile)
-  link_panel('curvechart', file, onefile=onefile)
-  link_chart('iplotMScanone_noeff', file, onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
-  
   if(missing(caption) || is.null(caption))
     caption <- c('Hover over rows in the LOD image at top to see the individual curves below and, ',
                  'to the right, a plot of LOD score for each column at that genomic position.')
-  append_caption(caption, file)
+
+  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                    panels=c("lodheatmap", "lodchart", "curvechart"),
+                    charts="iplotMScanone_noeff", chartname='chart',
+                    caption=caption)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_chartopts(file, chartOpts)
@@ -158,23 +146,14 @@ function(scanoneOutput, effects,
   scanone_json <- scanone2json(scanoneOutput, digits=digits)
   effects_json <- effects2json(effects, digits=digits)
 
-  write_html_top(file, title=title)
-
-  link_d3(file, onefile=onefile)
-  link_d3tip(file, onefile=onefile)
-  link_colorbrewer(file, onefile=onefile)
-  link_panelutil(file, onefile=onefile)
-  link_panel('lodheatmap', file, onefile=onefile)
-  link_panel('lodchart', file, onefile=onefile)
-  link_panel('curvechart', file, onefile=onefile)
-  link_chart('iplotMScanone_eff', file, onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
-  
   if(missing(caption) || is.null(caption))
     caption <- c('Hover over LOD heat map to view individual curves below and ',
                 'estimated QTL effects to the right.')
-  append_caption(caption, file)
+
+  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "colorbrewer", "panelutil"),
+                    panels=c("lodheatmap", "lodchart", "curvechart"),
+                    charts="iplotMScanone_eff", chartname='chart',
+                    caption=caption)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'effectsData = ', effects_json, ';')

@@ -52,13 +52,6 @@ function(cross, marker, pheno.col=1,
          caption, chartOpts=list(title=marker[1]),
          fillgenoArgs=NULL, digits=4)
 {    
-  if(missing(file) || is.null(file))
-    file <- tempfile(tmpdir=tempdir(), fileext='.html')
-  else file <- path.expand(file)
-
-  if(file.exists(file))
-    stop('The file already exists; please remove it first: ', file)
-
   if(class(cross)[2] != "cross")
     stop('"cross" should have class "cross".')
   
@@ -67,21 +60,15 @@ function(cross, marker, pheno.col=1,
     warning('marker should have length 1; using "', marker, '"')
   }
 
-  filetitle <- ifelse(title=="", marker, title)
-  write_html_top(file, title=filetitle)
+  if(missing(file)) file <- NULL
 
-  link_d3(file, onefile=onefile)
-  link_d3tip(file, onefile=onefile)
-  link_panelutil(file, onefile=onefile)
-  link_panel('dotchart', file, onefile=onefile)
-  link_chart('iplotPXG', file, onefile=onefile)
-
-  append_html_middle(file, title, 'chart')
-  
   if(missing(caption) || is.null(caption))
     caption <- c('Pink points correspond to individuals with imputed genotypes at this marker. ',
                 'Click on a point for a bit of gratuitous animation.')
-  append_caption(caption, file)
+
+  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                    panels="dotchart", charts="iplotPXG", chartname='chart',
+                    caption=caption)
 
   json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 

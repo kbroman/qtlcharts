@@ -21,6 +21,7 @@ iplotMap = (data, chartOpts) ->
   xlab = chartOpts?.xlab ? "Chromosome"
   ylab = chartOpts?.ylab ? "Position (cM)"
   # chartOpts end
+  chartdivid = chartOpts?.chartdivid ? 'chart'
 
   mychart = mapchart().height(height)
                       .width(width)
@@ -39,6 +40,6 @@ iplotMap = (data, chartOpts) ->
                       .xlab(xlab)
                       .ylab(ylab)
 
-  d3.select("div#chart")
+  d3.select("div##{chartdivid}")
     .datum(data)
     .call(mychart)

@@ -131,6 +131,9 @@ function(scanoneOutput,
                     charts="iplotMScanone_noeff", chartdivid=chartdivid,
                     caption=caption, print=print)
 
+  # add chartdivid to chartOpts
+  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotMScanone_noeff(scanoneData, chartOpts);')
@@ -160,6 +163,9 @@ function(scanoneOutput, effects,
                     panels=c("lodheatmap", "lodchart", "curvechart"),
                     charts="iplotMScanone_eff", chartdivid=chartdivid,
                     caption=caption, print=print)
+
+  # add chartdivid to chartOpts
+  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'effectsData = ', effects_json, ';')

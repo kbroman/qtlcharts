@@ -15,11 +15,12 @@ iplotCorr = (data, chartOpts) ->
   scattitle = chartOpts?.scattitle ? ""
   scatcolors = chartOpts?.scatcolors ? null
   # chartOpts end
+  chartdivid = chartOpts?.chartdivid ? 'chart'
 
   totalh = height + margin.top + margin.bottom
   totalw = (width + margin.left + margin.right)*2
 
-  svg = d3.select("div#chart")
+  svg = d3.select("div##{chartdivid}")
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)

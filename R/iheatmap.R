@@ -73,6 +73,9 @@ function(z, x, y,
                     panels=c("curvechart", "heatmap"), charts="iheatmap",
                     chartdivid=chartdivid, caption=caption, print=print)
 
+  # add chartdivid to chartOpts
+  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iheatmap(data, chartOpts);')

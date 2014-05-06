@@ -22,6 +22,7 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
   linecolor = chartOpts?.linecolor ? "darkslateblue"
   linewidth = chartOpts?.linewidth ? 2
   # chartOpts end
+  chartdivid = chartOpts?.chartdivid ? 'chart'
 
   totalh = htop + hbot + 2*(margin.top + margin.bottom)
   totalw = wleft + wright + 2*(margin.left + margin.right)
@@ -37,7 +38,7 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
                              .zlim(zlim)
                              .zthresh(zthresh)
 
-  svg = d3.select("div#chart")
+  svg = d3.select("div##{chartdivid}")
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)

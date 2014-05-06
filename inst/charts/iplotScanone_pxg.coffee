@@ -13,6 +13,7 @@ iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
   pointcolor = chartOpts?.pointcolor ? "slateblue"
   pointcolorhilit = chartOpts?.pointcolorhilit ? "Orchid"
   # chartOpts end
+  chartdivid = chartOpts?.chartdivid ? 'chart'
 
   totalh = height + margin.top + margin.bottom
   totalw = wleft + wright + (margin.left + margin.right)*2
@@ -23,7 +24,7 @@ iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
                          .width(wleft)
                          .margin(margin)
 
-  svg = d3.select("div#chart")
+  svg = d3.select("div##{chartdivid}")
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)

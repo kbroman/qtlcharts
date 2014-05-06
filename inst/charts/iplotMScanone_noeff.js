@@ -4,7 +4,7 @@ var iplotMScanone_noeff, mycurvechart;
 mycurvechart = null;
 
 iplotMScanone_noeff = function(lod_data, chartOpts) {
-  var axispos, chr, chrGap, colors, curindex, curvechart_xaxis, darkrect, g_curvechart, g_heatmap, g_lodchart, hbot, htop, i, lightrect, linecolor, linewidth, lod4curves, lodchart_curves, lodcolumn, lodcurve, margin, mylodchart, mylodheatmap, plotLodCurve, pos, posindex, svg, titlepos, totalh, totalw, wleft, wright, x, y, zlim, zthresh, _i, _j, _len, _len1, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, chartdivid, chr, chrGap, colors, curindex, curvechart_xaxis, darkrect, g_curvechart, g_heatmap, g_lodchart, hbot, htop, i, lightrect, linecolor, linewidth, lod4curves, lodchart_curves, lodcolumn, lodcurve, margin, mylodchart, mylodheatmap, plotLodCurve, pos, posindex, svg, titlepos, totalh, totalw, wleft, wright, x, y, zlim, zthresh, _i, _j, _len, _len1, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   wleft = (_ref = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref : 650;
   wright = (_ref1 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref1 : 350;
   htop = (_ref2 = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref2 : 350;
@@ -31,10 +31,11 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
   zthresh = (_ref12 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? _ref12 : null;
   linecolor = (_ref13 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? _ref13 : "darkslateblue";
   linewidth = (_ref14 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? _ref14 : 2;
+  chartdivid = (_ref15 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref15 : 'chart';
   totalh = htop + hbot + 2 * (margin.top + margin.bottom);
   totalw = wleft + wright + 2 * (margin.left + margin.right);
   mylodheatmap = lodheatmap().height(htop).width(wleft).margin(margin).axispos(axispos).titlepos(titlepos).chrGap(chrGap).rectcolor(lightrect).colors(colors).zlim(zlim).zthresh(zthresh);
-  svg = d3.select("div#chart").append("svg").attr("height", totalh).attr("width", totalw);
+  svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   g_heatmap = svg.append("g").attr("id", "heatmap").datum(lod_data).call(mylodheatmap);
   mylodchart = lodchart().height(hbot).width(wleft).margin(margin).axispos(axispos).titlepos(titlepos).chrGap(chrGap).linecolor("none").pad4heatmap(true).darkrect(darkrect).lightrect(lightrect).ylim([0, d3.max(mylodheatmap.zlim())]).pointsAtMarkers(false);
   g_lodchart = svg.append("g").attr("transform", "translate(0," + (htop + margin.top + margin.bottom) + ")").attr("id", "lodchart").datum(lod_data).call(mylodchart);
@@ -47,12 +48,12 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
   };
   lodchart_curves = null;
   plotLodCurve = function(lodcolumn) {
-    var chr, _i, _len, _ref15, _results;
+    var chr, _i, _len, _ref16, _results;
     lodchart_curves = g_lodchart.append("g").attr("id", "lodcurves");
-    _ref15 = lod_data.chrnames;
+    _ref16 = lod_data.chrnames;
     _results = [];
-    for (_i = 0, _len = _ref15.length; _i < _len; _i++) {
-      chr = _ref15[_i];
+    for (_i = 0, _len = _ref16.length; _i < _len; _i++) {
+      chr = _ref16[_i];
       _results.push(lodchart_curves.append("path").datum(lod_data.posByChr[chr]).attr("d", lodcurve(chr, lodcolumn)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none"));
     }
     return _results;
@@ -62,11 +63,11 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
   };
   for (pos in lod_data.pos) {
     y = (function() {
-      var _i, _len, _ref15, _results;
-      _ref15 = lod_data.lodnames;
+      var _i, _len, _ref16, _results;
+      _ref16 = lod_data.lodnames;
       _results = [];
-      for (_i = 0, _len = _ref15.length; _i < _len; _i++) {
-        lodcolumn = _ref15[_i];
+      for (_i = 0, _len = _ref16.length; _i < _len; _i++) {
+        lodcolumn = _ref16[_i];
         _results.push(lod_data[lodcolumn][pos]);
       }
       return _results;
@@ -95,13 +96,13 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
   }).attr("opacity", 0);
   posindex = {};
   curindex = 0;
-  _ref15 = lod_data.chrnames;
-  for (_i = 0, _len = _ref15.length; _i < _len; _i++) {
-    chr = _ref15[_i];
+  _ref16 = lod_data.chrnames;
+  for (_i = 0, _len = _ref16.length; _i < _len; _i++) {
+    chr = _ref16[_i];
     posindex[chr] = {};
-    _ref16 = lod_data.posByChr[chr];
-    for (_j = 0, _len1 = _ref16.length; _j < _len1; _j++) {
-      pos = _ref16[_j];
+    _ref17 = lod_data.posByChr[chr];
+    for (_j = 0, _len1 = _ref17.length; _j < _len1; _j++) {
+      pos = _ref17[_j];
       posindex[chr][pos] = curindex;
       curindex += 1;
     }

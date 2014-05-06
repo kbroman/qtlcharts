@@ -2,7 +2,7 @@
 var iplotCurves;
 
 iplotCurves = function(curve_data, scatter1_data, scatter2_data, chartOpts) {
-  var allpoints, axispos, curves, curves_nxticks, curves_nyticks, curves_title, curves_xlab, curves_xlim, curves_xticks, curves_ylab, curves_ylim, curves_yticks, g, g_curves, g_scat1, g_scat2, group, hbot, htop, i, margin, mycurvechart, myscatterplot1, myscatterplot2, ngroup, nind, nscatter, pointcolor, pointcolorhilit, points1, points2, pointsize, pointsizehilit, pointstroke, rectcolor, scat1_nxticks, scat1_nyticks, scat1_title, scat1_xNA, scat1_xlab, scat1_xlim, scat1_xticks, scat1_yNA, scat1_ylab, scat1_ylim, scat1_yticks, scat2_nxticks, scat2_nyticks, scat2_title, scat2_xNA, scat2_xlab, scat2_xlim, scat2_xticks, scat2_yNA, scat2_ylab, scat2_ylim, scat2_yticks, shiftdown, strokecolor, strokecolorhilit, strokewidth, strokewidthhilit, svg, titlepos, totalh, totalw, wbot, width, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref25, _ref26, _ref27, _ref28, _ref29, _ref3, _ref30, _ref31, _ref32, _ref33, _ref34, _ref35, _ref36, _ref37, _ref38, _ref39, _ref4, _ref40, _ref41, _ref42, _ref43, _ref44, _ref45, _ref46, _ref47, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var allpoints, axispos, chartdivid, curves, curves_nxticks, curves_nyticks, curves_title, curves_xlab, curves_xlim, curves_xticks, curves_ylab, curves_ylim, curves_yticks, g, g_curves, g_scat1, g_scat2, group, hbot, htop, i, margin, mycurvechart, myscatterplot1, myscatterplot2, ngroup, nind, nscatter, pointcolor, pointcolorhilit, points1, points2, pointsize, pointsizehilit, pointstroke, rectcolor, scat1_nxticks, scat1_nyticks, scat1_title, scat1_xNA, scat1_xlab, scat1_xlim, scat1_xticks, scat1_yNA, scat1_ylab, scat1_ylim, scat1_yticks, scat2_nxticks, scat2_nyticks, scat2_title, scat2_xNA, scat2_xlab, scat2_xlim, scat2_xticks, scat2_yNA, scat2_ylab, scat2_ylim, scat2_yticks, shiftdown, strokecolor, strokecolorhilit, strokewidth, strokewidthhilit, svg, titlepos, totalh, totalw, wbot, width, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref25, _ref26, _ref27, _ref28, _ref29, _ref3, _ref30, _ref31, _ref32, _ref33, _ref34, _ref35, _ref36, _ref37, _ref38, _ref39, _ref4, _ref40, _ref41, _ref42, _ref43, _ref44, _ref45, _ref46, _ref47, _ref48, _ref5, _ref6, _ref7, _ref8, _ref9;
   htop = (_ref = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref : 500;
   hbot = (_ref1 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref1 : 500;
   width = (_ref2 = chartOpts != null ? chartOpts.width : void 0) != null ? _ref2 : 1000;
@@ -81,18 +81,19 @@ iplotCurves = function(curve_data, scatter1_data, scatter2_data, chartOpts) {
   scat2_title = (_ref44 = chartOpts != null ? chartOpts.scat2_title : void 0) != null ? _ref44 : "";
   scat2_xlab = (_ref45 = chartOpts != null ? chartOpts.scat2_xlab : void 0) != null ? _ref45 : "X";
   scat2_ylab = (_ref46 = chartOpts != null ? chartOpts.scat2_ylab : void 0) != null ? _ref46 : "Y";
+  chartdivid = (_ref47 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref47 : 'chart';
   nscatter = (scatter1_data != null) + (scatter2_data != null);
   totalh = nscatter === 0 ? htop + margin.top + margin.bottom : htop + hbot + 2 * (margin.top + margin.bottom);
   totalw = width + margin.left + margin.right;
   wbot = (width - margin.left - margin.right) / 2;
-  svg = d3.select("div#chart").append("svg").attr("height", totalh).attr("width", totalw);
+  svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   nind = curve_data.data.length;
-  group = (_ref47 = curve_data != null ? curve_data.group : void 0) != null ? _ref47 : (function() {
-    var _i, _len, _ref48, _results;
-    _ref48 = curve_data.data;
+  group = (_ref48 = curve_data != null ? curve_data.group : void 0) != null ? _ref48 : (function() {
+    var _i, _len, _ref49, _results;
+    _ref49 = curve_data.data;
     _results = [];
-    for (_i = 0, _len = _ref48.length; _i < _len; _i++) {
-      i = _ref48[_i];
+    for (_i = 0, _len = _ref49.length; _i < _len; _i++) {
+      i = _ref49[_i];
       _results.push(1);
     }
     return _results;

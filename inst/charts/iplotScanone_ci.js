@@ -2,7 +2,7 @@
 var iplotScanone_ci;
 
 iplotScanone_ci = function(lod_data, pxg_data, chartOpts) {
-  var g_lod, height, margin, markers, mylodchart, plotCI, svg, totalh, totalw, wleft, wright, x, ylim, _ref, _ref1, _ref2, _ref3;
+  var chartdivid, g_lod, height, margin, markers, mylodchart, plotCI, svg, totalh, totalw, wleft, wright, x, ylim, _ref, _ref1, _ref2, _ref3, _ref4;
   markers = (function() {
     var _results;
     _results = [];
@@ -21,14 +21,15 @@ iplotScanone_ci = function(lod_data, pxg_data, chartOpts) {
     bottom: 40,
     inner: 5
   };
+  chartdivid = (_ref4 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref4 : 'chart';
   totalh = height + margin.top + margin.bottom;
   totalw = wleft + wright + (margin.left + margin.right) * 2;
   mylodchart = lodchart().lodvarname("lod").height(height).width(wleft).margin(margin);
-  svg = d3.select("div#chart").append("svg").attr("height", totalh).attr("width", totalw);
+  svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   g_lod = svg.append("g").attr("id", "lodchart").datum(lod_data).call(mylodchart);
   ylim = null;
   plotCI = function(markername, markerindex) {
-    var ave, chr, chrtype, g, gabs, genonames, high, i, j, low, means, mycichart, p, phesub, range, se, variance, _i, _ref4;
+    var ave, chr, chrtype, g, gabs, genonames, high, i, j, low, means, mycichart, p, phesub, range, se, variance, _i, _ref5;
     svg.select("g#cichart").remove();
     g = pxg_data.geno[markerindex];
     gabs = (function() {
@@ -45,13 +46,13 @@ iplotScanone_ci = function(lod_data, pxg_data, chartOpts) {
     genonames = pxg_data.genonames[chrtype];
     means = [];
     se = [];
-    for (j = _i = 1, _ref4 = genonames.length; 1 <= _ref4 ? _i <= _ref4 : _i >= _ref4; j = 1 <= _ref4 ? ++_i : --_i) {
+    for (j = _i = 1, _ref5 = genonames.length; 1 <= _ref5 ? _i <= _ref5 : _i >= _ref5; j = 1 <= _ref5 ? ++_i : --_i) {
       phesub = (function() {
-        var _j, _len, _ref5, _results;
-        _ref5 = pxg_data.pheno;
+        var _j, _len, _ref6, _results;
+        _ref6 = pxg_data.pheno;
         _results = [];
-        for (i = _j = 0, _len = _ref5.length; _j < _len; i = ++_j) {
-          p = _ref5[i];
+        for (i = _j = 0, _len = _ref6.length; _j < _len; i = ++_j) {
+          p = _ref6[i];
           if (gabs[i] === j) {
             _results.push(p);
           }

@@ -2,7 +2,7 @@
 var iplotScanone_pxg;
 
 iplotScanone_pxg = function(lod_data, pxg_data, chartOpts) {
-  var g_lod, height, margin, markers, mylodchart, plotPXG, pointcolor, pointcolorhilit, svg, totalh, totalw, wleft, wright, x, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+  var chartdivid, g_lod, height, margin, markers, mylodchart, plotPXG, pointcolor, pointcolorhilit, svg, totalh, totalw, wleft, wright, x, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6;
   markers = (function() {
     var _results;
     _results = [];
@@ -23,13 +23,14 @@ iplotScanone_pxg = function(lod_data, pxg_data, chartOpts) {
   };
   pointcolor = (_ref4 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? _ref4 : "slateblue";
   pointcolorhilit = (_ref5 = chartOpts != null ? chartOpts.pointcolorhilit : void 0) != null ? _ref5 : "Orchid";
+  chartdivid = (_ref6 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref6 : 'chart';
   totalh = height + margin.top + margin.bottom;
   totalw = wleft + wright + (margin.left + margin.right) * 2;
   mylodchart = lodchart().lodvarname("lod").height(height).width(wleft).margin(margin);
-  svg = d3.select("div#chart").append("svg").attr("height", totalh).attr("width", totalw);
+  svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   g_lod = svg.append("g").attr("id", "lodchart").datum(lod_data).call(mylodchart);
   plotPXG = function(markername, markerindex) {
-    var chr, chrtype, g, gabs, genonames, inferred, mypxgchart, _i, _ref6, _results;
+    var chr, chrtype, g, gabs, genonames, inferred, mypxgchart, _i, _ref7, _results;
     svg.select("g#pxgchart").remove();
     g = pxg_data.geno[markerindex];
     gabs = (function() {
@@ -55,7 +56,7 @@ iplotScanone_pxg = function(lod_data, pxg_data, chartOpts) {
     genonames = pxg_data.genonames[chrtype];
     mypxgchart = dotchart().height(height).width(wright).margin(margin).xcategories((function() {
       _results = [];
-      for (var _i = 1, _ref6 = genonames.length; 1 <= _ref6 ? _i <= _ref6 : _i >= _ref6; 1 <= _ref6 ? _i++ : _i--){ _results.push(_i); }
+      for (var _i = 1, _ref7 = genonames.length; 1 <= _ref7 ? _i <= _ref7 : _i >= _ref7; 1 <= _ref7 ? _i++ : _i--){ _results.push(_i); }
       return _results;
     }).apply(this)).xcatlabels(genonames).dataByInd(false).title(markername).xlab("Genotype").ylab("Phenotype").xvar('geno').yvar('pheno');
     svg.append("g").attr("id", "pxgchart").attr("transform", "translate(" + (wleft + margin.left + margin.right) + ",0)").datum({

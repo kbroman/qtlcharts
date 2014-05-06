@@ -2,7 +2,7 @@
 var iboxplot;
 
 iboxplot = function(data, chartOpts) {
-  var Baxis, BaxisData, Laxis, LaxisData, botylim, br2, circles, clickStatus, colindex, curves, d, fix4hist, grp4BkgdHist, height, hi, hist, histColors, histline, i, indRect, indRectGrp, indindex, indtip, j, lo, longRect, longRectGrp, lowBaxis, lowBaxisData, lowsvg, lowxScale, lowyScale, margin, midQuant, nQuant, qucolors, quline, randomInd, recWidth, rectcolor, rightAxis, svg, tmp, topylim, width, x, xScale, xlab, yScale, ylab, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _o, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var Baxis, BaxisData, Laxis, LaxisData, botylim, br2, chartdivid, circles, clickStatus, colindex, curves, d, fix4hist, grp4BkgdHist, height, hi, hist, histColors, histline, i, indRect, indRectGrp, indindex, indtip, j, lo, longRect, longRectGrp, lowBaxis, lowBaxisData, lowsvg, lowxScale, lowyScale, margin, midQuant, nQuant, qucolors, quline, randomInd, recWidth, rectcolor, rightAxis, svg, tmp, topylim, width, x, xScale, xlab, yScale, ylab, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _o, _ref, _ref1, _ref10, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   width = (_ref = chartOpts != null ? chartOpts.width : void 0) != null ? _ref : 1000;
   height = (_ref1 = chartOpts != null ? chartOpts.height : void 0) != null ? _ref1 : 450;
   margin = (_ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref2 : {
@@ -14,11 +14,12 @@ iboxplot = function(data, chartOpts) {
   ylab = (_ref3 = chartOpts != null ? chartOpts.ylab : void 0) != null ? _ref3 : "Response";
   xlab = (_ref4 = chartOpts != null ? chartOpts.xlab : void 0) != null ? _ref4 : "Individuals";
   rectcolor = (_ref5 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref5 : d3.rgb(230, 230, 230);
+  chartdivid = (_ref6 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref6 : 'chart';
   topylim = [data.quant[0][0], data.quant[0][1]];
   for (i in data.quant) {
-    _ref6 = data.quant[i];
-    for (_i = 0, _len = _ref6.length; _i < _len; _i++) {
-      x = _ref6[_i];
+    _ref7 = data.quant[i];
+    for (_i = 0, _len = _ref7.length; _i < _len; _i++) {
+      x = _ref7[_i];
       if (x < topylim[0]) {
         topylim[0] = x;
       }
@@ -31,9 +32,9 @@ iboxplot = function(data, chartOpts) {
   topylim[1] = Math.ceil(topylim[1]);
   botylim = [0, data.counts[0][1]];
   for (i in data.counts) {
-    _ref7 = data.counts[i];
-    for (_j = 0, _len1 = _ref7.length; _j < _len1; _j++) {
-      x = _ref7[_j];
+    _ref8 = data.counts[i];
+    for (_j = 0, _len1 = _ref8.length; _j < _len1; _j++) {
+      x = _ref8[_j];
       if (x > botylim[1]) {
         botylim[1] = x;
       }
@@ -41,9 +42,9 @@ iboxplot = function(data, chartOpts) {
   }
   indindex = d3.range(data.ind.length);
   br2 = [];
-  _ref8 = data.breaks;
-  for (_k = 0, _len2 = _ref8.length; _k < _len2; _k++) {
-    i = _ref8[_k];
+  _ref9 = data.breaks;
+  for (_k = 0, _len2 = _ref9.length; _k < _len2; _k++) {
+    i = _ref9[_k];
     br2.push(i);
     br2.push(i);
   }
@@ -73,7 +74,7 @@ iboxplot = function(data, chartOpts) {
       return yScale(data.quant[j][d]);
     });
   };
-  svg = d3.select("div#chart").append("svg").attr("width", width).attr("height", height);
+  svg = d3.select("div#" + chartdivid).append("svg").attr("width", width).attr("height", height);
   svg.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height - margin.top - margin.bottom).attr("width", width - margin.left - margin.right).attr("stroke", "none").attr("fill", rectcolor).attr("pointer-events", "none");
   LaxisData = yScale.ticks(6);
   Laxis = svg.append("g").attr("id", "Laxis");
@@ -107,9 +108,9 @@ iboxplot = function(data, chartOpts) {
     qucolors.push(tmp(j));
   }
   qucolors.push("black");
-  _ref9 = colindex.reverse();
-  for (_m = 0, _len4 = _ref9.length; _m < _len4; _m++) {
-    j = _ref9[_m];
+  _ref10 = colindex.reverse();
+  for (_m = 0, _len4 = _ref10.length; _m < _len4; _m++) {
+    j = _ref10[_m];
     qucolors.push(tmp(j));
   }
   curves = svg.append("g").attr("id", "curves");
@@ -150,7 +151,7 @@ iboxplot = function(data, chartOpts) {
     return qucolors[i];
   }).attr("text-anchor", "end").attr("dominant-baseline", "middle");
   svg.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height - margin.top - margin.bottom).attr("width", width - margin.left - margin.right).attr("stroke", "black").attr("stroke-width", 2).attr("fill", "none");
-  lowsvg = d3.select("div#chart").append("svg").attr("height", height).attr("width", width);
+  lowsvg = d3.select("div#" + chartdivid).append("svg").attr("height", height).attr("width", width);
   lo = data.breaks[0] - (data.breaks[1] - data.breaks[0]);
   hi = data.breaks[data.breaks.length - 1] + (data.breaks[1] - data.breaks[0]);
   lowxScale = d3.scale.linear().domain([lo, hi]).range([margin.left, width - margin.right]);

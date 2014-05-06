@@ -2,7 +2,7 @@
 var iplotScanone_noeff;
 
 iplotScanone_noeff = function(data, chartOpts) {
-  var halfh, height, margin, mylodchart, totalh, totalw, width, _ref, _ref1, _ref2;
+  var chartdivid, halfh, height, margin, mylodchart, totalh, totalw, width, _ref, _ref1, _ref2, _ref3;
   height = (_ref = chartOpts != null ? chartOpts.height : void 0) != null ? _ref : 450;
   width = (_ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? _ref1 : 900;
   margin = (_ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref2 : {
@@ -12,11 +12,12 @@ iplotScanone_noeff = function(data, chartOpts) {
     bottom: 40,
     inner: 5
   };
+  chartdivid = (_ref3 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref3 : 'chart';
   halfh = height + margin.top + margin.bottom;
   totalh = halfh * 2;
   totalw = width + margin.left + margin.right;
   mylodchart = lodchart().lodvarname("lod").height(height).width(width).margin(margin);
-  d3.select("div#chart").datum(data).call(mylodchart);
+  d3.select("div#" + chartdivid).datum(data).call(mylodchart);
   return mylodchart.markerSelect().on("click", function(d) {
     var r;
     r = d3.select(this).attr("r");

@@ -8,6 +8,7 @@ iplotScanone_noeff = (data, chartOpts) ->
   width = chartOpts?.width ? 900
   margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5}
   # chartOpts end
+  chartdivid = chartOpts?.chartdivid ? 'chart'
 
   halfh = (height+margin.top+margin.bottom)
   totalh = halfh*2
@@ -18,7 +19,7 @@ iplotScanone_noeff = (data, chartOpts) ->
                          .width(width)
                          .margin(margin)
 
-  d3.select("div#chart")
+  d3.select("div##{chartdivid}")
     .datum(data)
     .call(mylodchart)
 

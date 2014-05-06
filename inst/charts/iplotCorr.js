@@ -2,7 +2,7 @@
 var iplotCorr;
 
 iplotCorr = function(data, chartOpts) {
-  var cells, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, nGroup, ncorrX, ncorrY, nind, nvar, pixel_height, pixel_width, rectcolor, scat_tip, scatcolors, scatterplot, scattitle, svg, totalh, totalw, width, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7;
+  var cells, chartdivid, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, nGroup, ncorrX, ncorrY, nind, nvar, pixel_height, pixel_width, rectcolor, scat_tip, scatcolors, scatterplot, scattitle, svg, totalh, totalw, width, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
   height = (_ref = chartOpts != null ? chartOpts.height : void 0) != null ? _ref : 450;
   width = (_ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? _ref1 : height;
   margin = (_ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref2 : {
@@ -17,9 +17,10 @@ iplotCorr = function(data, chartOpts) {
   cortitle = (_ref5 = chartOpts != null ? chartOpts.cortitle : void 0) != null ? _ref5 : "";
   scattitle = (_ref6 = chartOpts != null ? chartOpts.scattitle : void 0) != null ? _ref6 : "";
   scatcolors = (_ref7 = chartOpts != null ? chartOpts.scatcolors : void 0) != null ? _ref7 : null;
+  chartdivid = (_ref8 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref8 : 'chart';
   totalh = height + margin.top + margin.bottom;
   totalw = (width + margin.left + margin.right) * 2;
-  svg = d3.select("div#chart").append("svg").attr("height", totalh).attr("width", totalw);
+  svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   corrplot = svg.append("g").attr("id", "corplot").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   scatterplot = svg.append("g").attr("id", "scatterplot").attr("transform", "translate(" + (margin.left * 2 + margin.right + width) + "," + margin.top + ")");
   nind = data.indID.length;

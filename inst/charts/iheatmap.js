@@ -2,7 +2,7 @@
 var iheatmap;
 
 iheatmap = function(data, chartOpts) {
-  var axispos, cells, colors, formatX, formatY, g_heatmap, g_horslice, g_verslice, hbot, horcurvefunc, horslice, htop, margin, myheatmap, nxticks, nyticks, nzticks, plotHor, plotVer, rectcolor, removeHor, removeVer, shiftdown, shiftright, strokecolor, strokewidth, svg, title, titlepos, totalh, totalw, vercurvefunc, verslice, wleft, wright, xlab, xlim, xticks, ylab, ylim, yticks, zlab, zlim, zthresh, zticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, cells, chartdivid, colors, formatX, formatY, g_heatmap, g_horslice, g_verslice, hbot, horcurvefunc, horslice, htop, margin, myheatmap, nxticks, nyticks, nzticks, plotHor, plotVer, rectcolor, removeHor, removeVer, shiftdown, shiftright, strokecolor, strokewidth, svg, title, titlepos, totalh, totalw, vercurvefunc, verslice, wleft, wright, xlab, xlim, xticks, ylab, ylim, yticks, zlab, zlim, zthresh, zticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   htop = (_ref = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref : 500;
   hbot = (_ref1 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref1 : 500;
   wleft = (_ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref2 : 500;
@@ -39,9 +39,10 @@ iheatmap = function(data, chartOpts) {
   zthresh = (_ref20 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? _ref20 : null;
   zlim = (_ref21 = chartOpts != null ? chartOpts.zlim : void 0) != null ? _ref21 : [-matrixMaxAbs(data.z), 0, matrixMaxAbs(data.z)];
   colors = (_ref22 = chartOpts != null ? chartOpts.colors : void 0) != null ? _ref22 : ["slateblue", "white", "crimson"];
+  chartdivid = (_ref23 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref23 : 'chart';
   totalh = htop + hbot + 2 * (margin.top + margin.bottom);
   totalw = wleft + wright + 2 * (margin.left + margin.right);
-  svg = d3.select("div#chart").append("svg").attr("height", totalh).attr("width", totalw);
+  svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   myheatmap = heatmap().width(wleft).height(htop).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).xlim(xlim).ylim(ylim).nxticks(nxticks).xticks(xticks).nyticks(nyticks).yticks(yticks).xlab(xlab).ylab(ylab).zlim(zlim).zthresh(zthresh).colors(colors);
   horslice = curvechart().width(wleft).height(hbot).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).xlim(xlim).ylim([zlim[0], zlim[2]]).nxticks(nxticks).xticks(xticks).nyticks(nzticks).yticks(zticks).xlab(xlab).ylab(zlab).strokecolor("").commonX(true);
   verslice = curvechart().width(wright).height(htop).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).xlim(ylim).ylim([zlim[0], zlim[2]]).nxticks(nyticks).xticks(yticks).nyticks(nzticks).yticks(zticks).xlab(ylab).ylab(zlab).strokecolor("").commonX(true);

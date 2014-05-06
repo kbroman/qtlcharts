@@ -17,6 +17,7 @@ iboxplot = (data, chartOpts) ->
   xlab = chartOpts?.xlab ? "Individuals"
   rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
   # chartOpts end
+  chartdivid = chartOpts?.chartdivid ? 'chart'
 
   # y-axis limits for top figure
   topylim = [data.quant[0][0], data.quant[0][1]]
@@ -74,7 +75,7 @@ iboxplot = (data, chartOpts) ->
         .x((d) -> xScale(d))
         .y((d) -> yScale(data.quant[j][d]))
 
-  svg = d3.select("div#chart")
+  svg = d3.select("div##{chartdivid}")
           .append("svg")
           .attr("width", width)
           .attr("height", height)
@@ -247,7 +248,7 @@ iboxplot = (data, chartOpts) ->
      .attr("fill", "none")
 
   # lower svg
-  lowsvg = d3.select("div#chart").append("svg")
+  lowsvg = d3.select("div##{chartdivid}").append("svg")
              .attr("height", height)
              .attr("width", width)
 

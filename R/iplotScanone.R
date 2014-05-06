@@ -149,6 +149,9 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", chartdivid
                     panels="lodchart", charts="iplotScanone_noeff", chartdivid=chartdivid,
                     caption=caption, print=print)
 
+  # add chartdivid to chartOpts
+  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+
   append_html_jscode(file, 'data = ', scanone2json(scanoneOutput, digits=digits), ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotScanone_noeff(data, chartOpts);')
@@ -179,6 +182,9 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
                     panels=c("lodchart", "dotchart"), charts="iplotScanone_pxg",
                     chartdivid=chartdivid, caption=caption, print=print)
 
+  # add chartdivid to chartOpts
+  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';')
   append_html_chartopts(file, chartOpts)
@@ -208,6 +214,9 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
                     panels=c("lodchart", "cichart"), charts="iplotScanone_ci",
                     chartdivid=chartdivid, caption=caption, print=print)
+
+  # add chartdivid to chartOpts
+  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';')

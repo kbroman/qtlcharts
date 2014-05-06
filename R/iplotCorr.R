@@ -96,6 +96,9 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
                     panels=NULL, charts="iplotCorr", chartdivid=chartdivid,
                     caption=caption, print=print)
 
+  # add chartdivid to chartOpts
+  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+
   append_html_jscode(file, 'data = ', json, ';')
   append_html_chartopts(file, chartOpts)
   append_html_jscode(file, 'iplotCorr(data, chartOpts);')

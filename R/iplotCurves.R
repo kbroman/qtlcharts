@@ -110,6 +110,9 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
                     panels=c("curvechart", "scatterplot"), charts="iplotCurves",
                     chartdivid=chartdivid, caption=caption, print=print)
 
+  # add chartdivid to chartOpts
+  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+
   append_html_jscode(file, 'curve_data = ', curves2json(times, curveMatrix, group, indID, digits=digits), ';')
   append_html_jscode(file, 'scatter1_data = ', scat2json(scatter1, group, indID, digits=digits), ';')
   append_html_jscode(file, 'scatter2_data = ', scat2json(scatter2, group, indID, digits=digits), ';')

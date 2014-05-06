@@ -11,6 +11,7 @@ iplotScanone_ci = (lod_data, pxg_data, chartOpts) ->
   wright = chartOpts?.wright ? 300
   margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5}
   # chartOpts end
+  chartdivid = chartOpts?.chartdivid ? 'chart'
 
   totalh = height + margin.top + margin.bottom
   totalw = wleft + wright + (margin.left + margin.right)*2
@@ -20,7 +21,7 @@ iplotScanone_ci = (lod_data, pxg_data, chartOpts) ->
                          .width(wleft)
                          .margin(margin)
 
-  svg = d3.select("div#chart")
+  svg = d3.select("div##{chartdivid}")
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)

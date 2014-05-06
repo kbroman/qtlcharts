@@ -55,6 +55,7 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
   scat2_xlab = chartOpts?.scat2_xlab ? "X"
   scat2_ylab = chartOpts?.scat2_ylab ? "Y"
   # chartOpts end
+  chartdivid = chartOpts?.chartdivid ? 'chart'
 
   # number of scatterplots
   nscatter = (scatter1_data?) + (scatter2_data?)
@@ -64,7 +65,7 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
   wbot = (width - margin.left - margin.right)/2
 
   # Select the svg element, if it exists.
-  svg = d3.select("div#chart")
+  svg = d3.select("div##{chartdivid}")
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)

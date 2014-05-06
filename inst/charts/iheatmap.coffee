@@ -30,12 +30,13 @@ iheatmap = (data, chartOpts) ->
   zlim = chartOpts?.zlim ? [-matrixMaxAbs(data.z), 0, matrixMaxAbs(data.z)]
   colors = chartOpts?.colors ? ["slateblue", "white", "crimson"]
   # chartOpts end
+  chartdivid = chartOpts?.chartdivid ? 'chart'
 
   totalh = htop + hbot + 2*(margin.top + margin.bottom)
   totalw = wleft + wright + 2*(margin.left + margin.right)
 
   # Select the svg element, if it exists.
-  svg = d3.select("div#chart")
+  svg = d3.select("div##{chartdivid}")
           .append("svg")
           .attr("height", totalh)
           .attr("width", totalw)

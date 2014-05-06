@@ -2,7 +2,7 @@
 var iplotMap;
 
 iplotMap = function(data, chartOpts) {
-  var axispos, height, linecolor, linecolorhilit, linewidth, margin, mychart, nyticks, rectcolor, tickwidth, title, titlepos, width, xlab, ylab, ylim, yticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, chartdivid, height, linecolor, linecolorhilit, linewidth, margin, mychart, nyticks, rectcolor, tickwidth, title, titlepos, width, xlab, ylab, ylim, yticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   width = (_ref = chartOpts != null ? chartOpts.height : void 0) != null ? _ref : 1000;
   height = (_ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? _ref1 : 600;
   margin = (_ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref2 : {
@@ -30,6 +30,7 @@ iplotMap = function(data, chartOpts) {
   title = (_ref13 = chartOpts != null ? chartOpts.title : void 0) != null ? _ref13 : "";
   xlab = (_ref14 = chartOpts != null ? chartOpts.xlab : void 0) != null ? _ref14 : "Chromosome";
   ylab = (_ref15 = chartOpts != null ? chartOpts.ylab : void 0) != null ? _ref15 : "Position (cM)";
+  chartdivid = (_ref16 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref16 : 'chart';
   mychart = mapchart().height(height).width(width).margin(margin).axispos(axispos).titlepos(titlepos).ylim(ylim).yticks(yticks).nyticks(nyticks).tickwidth(tickwidth).rectcolor(rectcolor).linecolor(linecolor).linecolorhilit(linecolorhilit).linewidth(linewidth).title(title).xlab(xlab).ylab(ylab);
-  return d3.select("div#chart").datum(data).call(mychart);
+  return d3.select("div#" + chartdivid).datum(data).call(mychart);
 };

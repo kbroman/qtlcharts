@@ -70,6 +70,8 @@
 #'              title="iplotScanone example (raw phe x gen)",
 #'              pxgtype='raw')
 #'
+#' \dontshow{Sys.sleep(0.2) # wait 0.2 sec so file can be opened}
+#'
 #' @export
 iplotScanone <-
 function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
@@ -166,8 +168,8 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
                 'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels="lodchart", charts="iplotScanone_pxg", chartname='chart',
-                    caption=caption)
+                    panels=c("lodchart", "dotchart"), charts="iplotScanone_pxg",
+                    chartname='chart', caption=caption)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';')
@@ -195,8 +197,8 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
                 'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
 
   file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels="lodchart", charts="iplotScanone_ci", chartname='chart',
-                    caption=caption)
+                    panels=c("lodchart", "cichart"), charts="iplotScanone_ci",
+                    chartname='chart', caption=caption)
 
   append_html_jscode(file, 'scanoneData = ', scanone_json, ';')
   append_html_jscode(file, 'pxgData = ', pxg_json, ';')

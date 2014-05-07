@@ -70,4 +70,18 @@ test_that("More tests of chartOpts to JSON", {
   output12 <- "{ \"x\" : \"x\", \"y\" : \"y\", \"chartdivid\" : \"chart\" }"
   expect_equal( tmpf(input12), output12)
 
+  input13 <- c(x="x", y="y")
+  input13 <- add2chartOpts(input13, chartdivid="chart")
+  output13 <- output12
+  expect_equal( tmpf(input13), output13)
+
+  input14 <- list(x="x", y="y")
+  input14 <- add2chartOpts(input14, title="blah", chartdivid="chart")
+  output14 <- "{ \"x\" : \"x\", \"y\" : \"y\", \"title\" : \"blah\", \"chartdivid\" : \"chart\" }"
+  expect_equal( tmpf(input14), output14)
+
+  input15 <- c(x="x", y="y")
+  input15 <- add2chartOpts(input15, title="blah", chartdivid="chart")
+  output15 <- output14
+  expect_equal( tmpf(input15), output15)
 })

@@ -1,10 +1,11 @@
 
 context("chartOpts")
 
-test_that("conversion of chartOpts to JSON", {
+tmpf <- function(opts, digits=2) toJSON( opts4json(opts), digits=digits)
+addquotes <- function(x) paste0("\"", x, "\"")
 
-  tmpf <- function(opts, digits=2) toJSON( opts4json(opts), digits=digits)
-  addquotes <- function(x) paste0("\"", x, "\"")
+
+test_that("conversion of chartOpts to JSON", {
 
   expect_equal( tmpf(NULL), "null")
 
@@ -19,6 +20,10 @@ test_that("conversion of chartOpts to JSON", {
   input03 <- list(xlab="x axis label", ylab="y axis label", zlab=NULL, margins=list(left=2, right=50))
   output03 <- "{ \"xlab\" : \"x axis label\", \"ylab\" : \"y axis label\", \"zlab\" : null, \"margins\" : { \"left\" : 2, \"right\" : 50 } }"  
   expect_equal( tmpf(input03), output03 )
+
+})
+
+test_that("convert simple things to JSON", {
 
   input04 <- list(x="a", y=NA)
   output04 <- "{ \"x\" : \"a\", \"y\" : null }"
@@ -58,3 +63,11 @@ test_that("conversion of chartOpts to JSON", {
 
 })
 
+test_that("More tests of chartOpts to JSON", {
+
+  input12 <- list(x="x", y="y")
+  input12 <- add2chartOpts(input12, chartdivid="chart")
+  output12 <- "{ \"x\" : \"x\", \"y\" : \"y\", \"chartdivid\" : \"chart\" }"
+  expect_equal( tmpf(input12), output12)
+
+})

@@ -23,64 +23,63 @@ test_that("conversion of chartOpts to JSON", {
 
 })
 
-test_that("convert simple things to JSON", {
+test_that("use of add2chartOpts", {
 
-  input04 <- list(x="a", y=NA)
-  output04 <- "{ \"x\" : \"a\", \"y\" : null }"
+  input04 <- list(x="x", y="y")
+  input04 <- add2chartOpts(input04, chartdivid="chart")
+  output04 <- "{ \"x\" : \"x\", \"y\" : \"y\", \"chartdivid\" : \"chart\" }"
   expect_equal(tmpf(input04), output04)
 
-  input05 <- list(x=NA, y="a")
-  output05 <- "{ \"x\" : null, \"y\" : \"a\" }"
+  input05 <- c(x="x", y="y")
+  input05 <- add2chartOpts(input05, chartdivid="chart")
+  output05 <- output04
   expect_equal(tmpf(input05), output05)
 
-  input06 <- list(x=NA, y=1)
-  output06 <- "{ \"x\" : null, \"y\" : 1 }"
+  input06 <- list(x="x", y="y")
+  input06 <- add2chartOpts(input06, title="blah", chartdivid="chart")
+  output06 <- "{ \"x\" : \"x\", \"y\" : \"y\", \"title\" : \"blah\", \"chartdivid\" : \"chart\" }"
   expect_equal(tmpf(input06), output06)
 
-  input07 <- list(x=1, y=NA)
-  output07 <- "{ \"x\" : 1, \"y\" : null }"
+  input07 <- c(x="x", y="y")
+  input07 <- add2chartOpts(input07, title="blah", chartdivid="chart")
+  output07 <- output06
   expect_equal(tmpf(input07), output07)
 
-  input08 <- c(x="a", y=NA)
+})
+
+test_that("small things", {
+
+  input08 <- list(x="a", y=NA)
   output08 <- "{ \"x\" : \"a\", \"y\" : null }"
   expect_equal(tmpf(input08), output08)
 
-  input09 <- c(x=NA, y="a")
+  input09 <- list(x=NA, y="a")
   output09 <- "{ \"x\" : null, \"y\" : \"a\" }"
   expect_equal(tmpf(input09), output09)
 
-  input10 <- c(x=1, y=NA)
-  output10 <- "{ \"x\" : 1, \"y\" : \"NA\" }"
+  input10 <- list(x=1, y=NA)
+  output10 <- "{ \"x\" : 1, \"y\" : null }"
   expect_equal(tmpf(input10), output10)
 
-  input11 <- c(x=NA, y=1)
-  output11 <- "{ \"x\" : \"NA\", \"y\" : 1 }"
+  input11 <- list(x=NA, y=1)
+  output11 <- "{ \"x\" : null, \"y\" : 1 }"
   expect_equal(tmpf(input11), output11)
 
-  # I don't understand this NA -> "NA" if numeric and null if character
-  expect_equal(toJSON(lapply(c(a=1,   b=NA), unbox)), "{ \"a\" : 1, \"b\" : \"NA\" }")
-  expect_equal(toJSON(lapply(c(a="1", b=NA), unbox)), "{ \"a\" : \"1\", \"b\" : null }")
-
-})
-
-test_that("More tests of chartOpts to JSON", {
-  input12 <- list(x="x", y="y")
-  input12 <- add2chartOpts(input12, chartdivid="chart")
-  output12 <- "{ \"x\" : \"x\", \"y\" : \"y\", \"chartdivid\" : \"chart\" }"
+  input12 <- c(x="a", y=NA)
+  output12 <- output08
   expect_equal(tmpf(input12), output12)
 
-  input13 <- c(x="x", y="y")
-  input13 <- add2chartOpts(input13, chartdivid="chart")
-  output13 <- output12
+  input13 <- c(x=NA, y="a")
+  output13 <- output09
   expect_equal(tmpf(input13), output13)
 
-  input14 <- list(x="x", y="y")
-  input14 <- add2chartOpts(input14, title="blah", chartdivid="chart")
-  output14 <- "{ \"x\" : \"x\", \"y\" : \"y\", \"title\" : \"blah\", \"chartdivid\" : \"chart\" }"
+  input14 <- c(x=1, y=NA)
+  output14 <- "{ \"x\" : 1, \"y\" : \"NA\" }"
   expect_equal(tmpf(input14), output14)
 
-  input15 <- c(x="x", y="y")
-  input15 <- add2chartOpts(input15, title="blah", chartdivid="chart")
-  output15 <- output14
+  input15 <- c(x=NA, y=1)
+  output15 <- "{ \"x\" : \"NA\", \"y\" : 1 }"
   expect_equal(tmpf(input15), output15)
+
 })
+

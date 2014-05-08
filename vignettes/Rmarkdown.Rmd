@@ -144,19 +144,19 @@ iplotMScanone(out.hk, grav, chartdivid="iplotMScanone",
               print=TRUE, chartOpts=list(eff_ylab="QTL effect"))
 ```
 
-Finally, I'm including a bit of CSS code to revise the left margin for
-the document that's produced.
+### A bit of CSS
+
+One final detail: I'm including a bit of
+[CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) code to
+revise the left margin for the document that's produced. This is done
+as straight text, not inside a code chunk.
 
 ```
 <style type="text/css">
-body {
-  margin-left: 100px;
-}
+body { margin-left: 100px; }
 </style>
 ```
 
 <style type="text/css">
-body {
-  margin-left: 100px;
-}
+body { margin-left: 100px; }
 </style>

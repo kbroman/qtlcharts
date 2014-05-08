@@ -161,8 +161,8 @@ function(file, title, div, print=print)
     text <- '</head>\n\n<body>\n'
     if(!missing(title) && !is.null(title)) text <- c(text, '<h3>', title, '</h3>\n\n')
   }
-  text <- c(text, '<p id="loading">Loading...</p>\n\n')
-  if(!missing(div) && !is.null(div)) text <- c(text, '<div id="', div, '"></div>\n\n')
+  text <- c(text, '<p class="loading">Loading...</p>\n\n')
+  if(!missing(div) && !is.null(div)) text <- c(text, '<div id="', div, '" class="qtlcharts"></div>\n\n')
 
   cat(text, file=file, append=TRUE, sep='')
 
@@ -179,7 +179,7 @@ function(file, title, div, print=print)
 append_html_bottom <-
 function(file, print=FALSE)
 {
-  cat('<script type="text/javascript">d3.select("p#loading").remove();</script>\n\n', file=file, append=TRUE)
+  cat('<script type="text/javascript">d3.selectAll("p.loading").remove();</script>\n\n', file=file, append=TRUE)
   if(!print) cat('</body>\n</html>\n', file=file, append=TRUE)
 
   invisible(NULL)
@@ -201,8 +201,8 @@ append_html_p <-
 function(file, ..., tag="p", id, class, style)
 {
   text <- c('<', tag)
-  if(!missing(id) || is.null(id)) text <- c(text, ' id="', id, '"')
-  if(!missing(class) || is.null(class)) text <- c(text, ' class="', class, '"')
+  if(!missing(id) && !is.null(id)) text <- c(text, ' id="', id, '"')
+  if(!missing(class) && !is.null(class)) text <- c(text, ' class="', class, '"')
   text <- c(text, '>')
   cat(text, file=file, append=TRUE, sep='')
   cat(..., file=file, append=TRUE, sep='')
@@ -334,7 +334,7 @@ append_caption <-
 function(caption, file)
 {
   append_html_p(file, paste(caption, collapse=""),
-                tag='p', class='caption', id='caption')
+                tag='p', class='caption')#, id=NULL)
 }
 
 strip_whitespace <-

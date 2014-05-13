@@ -71,7 +71,7 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
   lodcurve = (chr, lodcolumn) ->
           d3.svg.line()
             .x((d) -> mylodchart.xscale()[chr](d))
-            .y((d,i) -> mylodchart.yscale()(lod_data.lodByChr[chr][i][lodcolumn]))
+            .y((d,i) -> mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn])))
 
   # plot lod curves for selected lod column
   lodchart_curves = null
@@ -89,7 +89,7 @@ iplotMScanone_noeff = (lod_data, chartOpts) ->
   # rearrange data for curves of time x LOD
   lod4curves = {data:[]}
   for pos of lod_data.pos
-    y = (lod_data[lodcolumn][pos] for lodcolumn in lod_data.lodnames)
+    y = (Math.abs(lod_data[lodcolumn][pos]) for lodcolumn in lod_data.lodnames)
     x = (+i for i of lod_data.lodnames)
     lod4curves.data.push({x:x, y:y})
 

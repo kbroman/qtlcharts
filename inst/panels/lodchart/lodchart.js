@@ -43,8 +43,18 @@ lodchart = function() {
   pointsAtMarkers = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var chr, curves, g, gEnter, hiddenpoints, lodvarnum, markerpoints, markertip, svg, titlegrp, xaxis, yaxis, _i, _len, _ref;
+      var chr, curves, g, gEnter, hiddenpoints, lodvarnum, markerpoints, markertip, svg, titlegrp, x, xaxis, yaxis, _i, _len, _ref;
       lodvarname = lodvarname != null ? lodvarname : data.lodnames[0];
+      data[lodvarname] = (function() {
+        var _i, _len, _ref, _results;
+        _ref = data[lodvarname];
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          x = _ref[_i];
+          _results.push(Math.abs(x));
+        }
+        return _results;
+      })();
       ylim = ylim != null ? ylim : [0, d3.max(data[lodvarname])];
       lodvarnum = data.lodnames.indexOf(lodvarname);
       svg = d3.select(this).selectAll("svg").data([data]);

@@ -43,7 +43,7 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
     return d3.svg.line().x(function(d) {
       return mylodchart.xscale()[chr](d);
     }).y(function(d, i) {
-      return mylodchart.yscale()(lod_data.lodByChr[chr][i][lodcolumn]);
+      return mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn]));
     });
   };
   lodchart_curves = null;
@@ -68,7 +68,7 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
       _results = [];
       for (_i = 0, _len = _ref16.length; _i < _len; _i++) {
         lodcolumn = _ref16[_i];
-        _results.push(lod_data[lodcolumn][pos]);
+        _results.push(Math.abs(lod_data[lodcolumn][pos]));
       }
       return _results;
     })();

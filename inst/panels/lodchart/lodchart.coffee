@@ -33,6 +33,7 @@ lodchart = () ->
   chart = (selection) ->
     selection.each (data) ->
       lodvarname = lodvarname ? data.lodnames[0]
+      data[lodvarname] = (Math.abs(x) for x in data[lodvarname]) # take absolute values
       ylim = ylim ? [0, d3.max(data[lodvarname])]
       lodvarnum = data.lodnames.indexOf(lodvarname)
 

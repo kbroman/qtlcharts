@@ -23,7 +23,7 @@ iplotMScanone_noeff = function(lod_data, chartOpts) {
     ylabel: 5
   };
   titlepos = (_ref6 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? _ref6 : 20;
-  chrGap = (_ref7 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref7 : 5;
+  chrGap = (_ref7 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref7 : 8;
   darkrect = (_ref8 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? _ref8 : d3.rgb(200, 200, 200);
   lightrect = (_ref9 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? _ref9 : d3.rgb(230, 230, 230);
   colors = (_ref10 = chartOpts != null ? chartOpts.colors : void 0) != null ? _ref10 : ["slateblue", "white", "crimson"];

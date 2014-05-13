@@ -82,35 +82,47 @@ test_that("calcSignedLOD works", {
 test_that("strip_whitespace works", {
 
   input <- "This is some text:\"blah blah blah\tblah\"\tAnd here is more:\t \"blah blah\"."
-  output <- "Thisissometext:'blah blah blah\tblah'Andhereismore:'blah blah'."
-  expect_equal(strip_whitespace(input), output)
-
-  input <- "This is some text:\'blah blah blah\tblah\'\tAnd here is more:\t \'blah blah\'."
-  output <- "Thisissometext:'blah blah blah\tblah'Andhereismore:'blah blah'."
-  expect_equal(strip_whitespace(input), output)
-
-  input <- "This is some text:\'blah blah blah\tblah\'\tAnd here is more:\t \'blah blah\'."
-  output <- "Thisissometext:'blah blah blah\tblah'Andhereismore:'blah blah'."
+  output <- "Thisissometext:\"blah blah blah\tblah\"Andhereismore:\"blah blah\"."
   expect_equal(strip_whitespace(input), output)
 
   opt <- list(xlab="x-axis label", ylab="y-axis label")
   json <- strip_whitespace(toJSON(opt))
-  output <- "{'xlab':['x-axis label'],'ylab':['y-axis label']}"
+  output <- "{\"xlab\":[\"x-axis label\"],\"ylab\":[\"y-axis label\"]}"
   expect_equal(json, output)
 
   opt <- list(xlab='x-axis label', ylab='y-axis label')
   json <- strip_whitespace(toJSON(opt))
-  output <- "{'xlab':['x-axis label'],'ylab':['y-axis label']}"
+  output <- "{\"xlab\":[\"x-axis label\"],\"ylab\":[\"y-axis label\"]}"
   expect_equal(json, output)
 
   opt <- list(xlab="x-axis label", ylab="y-axis label")
   json <- strip_whitespace(toJSON(opts4json(opt)))
-  output <- "{'xlab':'x-axis label','ylab':'y-axis label'}"
+  output <- "{\"xlab\":\"x-axis label\",\"ylab\":\"y-axis label\"}"
   expect_equal(json, output)
 
   opt <- list(xlab='x-axis label', ylab='y-axis label')
   json <- strip_whitespace(toJSON(opts4json(opt)))
-  output <- "{'xlab':'x-axis label','ylab':'y-axis label'}"
+  output <- "{\"xlab\":\"x-axis label\",\"ylab\":\"y-axis label\"}"
   expect_equal(json, output)
+
+  opt <- c(xlab="Don't try this at home", ylab="y-axis label")
+  json <- toJSON(opts4json(opt))
+  output <- "{\"xlab\":\"Don't try this at home\",\"ylab\":\"y-axis label\"}"
+  expect_equal(strip_whitespace(json), output)
+
+  opt <- c(xlab="Don't try this at home", ylab="Don't try this either")
+  json <- toJSON(opts4json(opt))
+  output <- "{\"xlab\":\"Don't try this at home\",\"ylab\":\"Don't try this either\"}"
+  expect_equal(strip_whitespace(json), output)
+
+  # things get messed up with nested double-quotes, or use of single-quotes
+  input <- "Can't use single quotes, like this 'blah blah blah'"
+  output <- "Can'tusesinglequotes,likethis'blahblahblah'"
+  expect_equal(strip_whitespace(input), output)
+
+  opt <- c(xlab="Can't use \"double-quotes\".", ylab="blah")
+  json <- toJSON(opts4json(opt))
+  output <- "{\"xlab\":\"Can't use \\\"double-quotes\\\".\",\"ylab\":\"blah\"}"
+  expect_equal(strip_whitespace(json), output)
 
 })

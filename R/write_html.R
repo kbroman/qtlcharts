@@ -344,13 +344,13 @@ function(x)
     return(vapply(x, strip_whitespace, ""))
 
   # if no quotes:
-  if(length(grep("[\'\"]", x)) == 0)
+  if(length(grep('"', x)) == 0)
     return(gsub("\\s", "", x))
 
   # otherwise, double-quotes get converted to \'
-  spl <- strsplit(x, "[\"\']")[[1]]
+  spl <- strsplit(x, '"')[[1]]
   tosub <- seq(1, length(spl), by=2)
   spl[tosub] <- vapply(spl[tosub], function(a) gsub("\\s", "", a), "")
 
-  paste(spl, collapse="\'")
+  paste(spl, collapse='"')
 }

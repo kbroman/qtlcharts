@@ -30,5 +30,5 @@ function(map, digits=4) {
   # force use of hash with single numeric values
   map <- lapply(map, function(a) lapply(a, jsonlite::unbox))
 
-  strip_whitespace( jsonlite::toJSON(list(chr=chrnames, map=map), digits=digits) )
+  strip_whitespace( jsonlite::toJSON(list(chr=chrnames, map=map), digits=digits, na="null") )
 }

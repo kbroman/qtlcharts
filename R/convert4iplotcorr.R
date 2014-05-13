@@ -70,13 +70,13 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
   dimnames(corr) <- dimnames(dat) <- NULL
   names(group) <- NULL
 
-  output <- list("indID" = toJSON(indID),
-                 "var" = toJSON(variables),
-                 "corr" = toJSON(corr[rows,cols], digits=digits),
-                 "rows" = toJSON(rows-1),
-                 "cols" = toJSON(cols-1),
-                 "dat" =  toJSON(t(dat), digits=digits), # columns as rows
-                 "group" = toJSON(group))
+  output <- list("indID" = toJSON(indID, na="null"),
+                 "var" = toJSON(variables, na="null"),
+                 "corr" = toJSON(corr[rows,cols], digits=digits, na="null"),
+                 "rows" = toJSON(rows-1, na="null"),
+                 "cols" = toJSON(cols-1, na="null"),
+                 "dat" =  toJSON(t(dat), digits=digits, na="null"), # columns as rows
+                 "group" = toJSON(group, na="null"))
   output <- paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
   strip_whitespace(output)
 }

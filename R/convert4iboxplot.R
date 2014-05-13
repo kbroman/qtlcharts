@@ -60,11 +60,11 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
   dimnames(quant) <- dimnames(counts) <- NULL
 
   # data structure for JSON
-  output <- list("ind" = jsonlite::toJSON(ind),
-                 "qu" = jsonlite::toJSON(qu),
-                 "breaks" = jsonlite::toJSON(breaks, digits=digits),
-                 "quant" = jsonlite::toJSON(quant, digits=digits),
-                 "counts" = jsonlite::toJSON(t(counts)))
+  output <- list("ind" = jsonlite::toJSON(ind, na="null"),
+                 "qu" = jsonlite::toJSON(qu, na="null"),
+                 "breaks" = jsonlite::toJSON(breaks, digits=digits, na="null"),
+                 "quant" = jsonlite::toJSON(quant, digits=digits, na="null"),
+                 "counts" = jsonlite::toJSON(t(counts)), na="null")
   output <- paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
   strip_whitespace(output)
 }

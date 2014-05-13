@@ -141,7 +141,7 @@ function(times, curvedata, group, indID, digits=4)
   if(is.null(group)) group <- unbox(NA)
   if(is.null(indID)) indID <- unbox(NA)
 
-  strip_whitespace( toJSON(list(x=times, data=curvedata, group=group, indID=indID), digits=digits) )
+  strip_whitespace( toJSON(list(x=times, data=curvedata, group=group, indID=indID), digits=digits, na="null") )
 }
 
 scat2json <-
@@ -153,5 +153,5 @@ function(scatdata, group, indID, digits=4)
   if(is.null(group)) group <- unbox(NA)
   if(is.null(indID)) indID <- unbox(NA)
 
-  strip_whitespace( toJSON(list(data=scatdata, group=group, indID=indID), digits=digits) )
+  strip_whitespace( toJSON(list(data=scatdata, group=group, indID=indID), digits=digits, na="null") )
 }

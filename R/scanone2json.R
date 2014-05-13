@@ -42,7 +42,7 @@ function(output, digits=4)
     warning("lod column names are not unique")
 
   output <- jsonlite::toJSON(c(list(chrnames = chrnames, lodnames=lodnames),
-                               as.list(output), list(markernames = mnames)), digits=digits)
+                               as.list(output), list(markernames = mnames)), digits=digits, na="null")
 
   strip_whitespace( output )
 }

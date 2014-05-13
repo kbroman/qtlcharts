@@ -222,5 +222,5 @@ function(effects, digits=4)
     effects[[i]] <- list(data=eff, x=(1:nr)-1, names=cn)
   }
 
-  strip_whitespace( jsonlite::toJSON(effects, digits=digits) )
+  strip_whitespace( jsonlite::toJSON(effects, digits=digits, na="null") )
 }

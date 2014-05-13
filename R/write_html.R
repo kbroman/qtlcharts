@@ -227,7 +227,7 @@ function(file, chartOpts, chartdivid='chart', digits=2)
   if(is.null(chartOpts))
     chartOpts <- list("null" = NULL)
 
-  opts_json <- toJSON( opts4json(chartOpts), digits=digits)
+  opts_json <- toJSON( opts4json(chartOpts), digits=digits, na="null")
 
   cat('\n<script type="text/javascript">\n', file=file, append=TRUE)
   cat(chartdivid, '_chartOpts = ', opts_json, ';', file=file, append=TRUE, sep='')

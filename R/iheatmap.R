@@ -63,7 +63,7 @@ function(z, x, y,
   if(missing(y) || is.null(y)) y <- 1:ncol(z)
   else stopifnot(length(y) == ncol(z))
   names(x) <- names(y) <- dimnames(z) <- NULL
-  json <- strip_whitespace( toJSON(list(x=x, y=y, z=z), digits=digits) )
+  json <- strip_whitespace( toJSON(list(x=x, y=y, z=z), digits=digits, na="null") )
 
   if(missing(caption) || is.null(caption))
     caption <- c('Hover over pixels in the heatmap on the top-left to see the values and to see ',

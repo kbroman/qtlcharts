@@ -78,3 +78,39 @@ test_that("calcSignedLOD works", {
   expect_equal( calcSignedLOD(scanout, eff), signedscanout )
 
 })
+
+test_that("strip_whitespace works", {
+
+  input <- "This is some text:\"blah blah blah\tblah\"\tAnd here is more:\t \"blah blah\"."
+  output <- "Thisissometext:'blah blah blah\tblah'Andhereismore:'blah blah'."
+  expect_equal(strip_whitespace(input), output)
+
+  input <- "This is some text:\'blah blah blah\tblah\'\tAnd here is more:\t \'blah blah\'."
+  output <- "Thisissometext:'blah blah blah\tblah'Andhereismore:'blah blah'."
+  expect_equal(strip_whitespace(input), output)
+
+  input <- "This is some text:\'blah blah blah\tblah\'\tAnd here is more:\t \'blah blah\'."
+  output <- "Thisissometext:'blah blah blah\tblah'Andhereismore:'blah blah'."
+  expect_equal(strip_whitespace(input), output)
+
+  opt <- list(xlab="x-axis label", ylab="y-axis label")
+  json <- strip_whitespace(toJSON(opt))
+  output <- "{'xlab':['x-axis label'],'ylab':['y-axis label']}"
+  expect_equal(json, output)
+
+  opt <- list(xlab='x-axis label', ylab='y-axis label')
+  json <- strip_whitespace(toJSON(opt))
+  output <- "{'xlab':['x-axis label'],'ylab':['y-axis label']}"
+  expect_equal(json, output)
+
+  opt <- list(xlab="x-axis label", ylab="y-axis label")
+  json <- strip_whitespace(toJSON(opts4json(opt)))
+  output <- "{'xlab':'x-axis label','ylab':'y-axis label'}"
+  expect_equal(json, output)
+
+  opt <- list(xlab='x-axis label', ylab='y-axis label')
+  json <- strip_whitespace(toJSON(opts4json(opt)))
+  output <- "{'xlab':'x-axis label','ylab':'y-axis label'}"
+  expect_equal(json, output)
+
+})

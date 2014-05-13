@@ -75,7 +75,7 @@ lodchart = function() {
         }
         return data.chrStart[i] - chrGap / 2;
       }).attr("width", function(d, i) {
-        if (i + 1 === data.chrnames.length && pad4heatmap) {
+        if ((i === 0 || i + 1 === data.chrnames.length) && pad4heatmap) {
           return data.chrEnd[i] - data.chrStart[i] + chrGap / 2;
         }
         return data.chrEnd[i] - data.chrStart[i] + chrGap;
@@ -146,7 +146,12 @@ lodchart = function() {
         });
       }
       titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + width / 2).attr("y", margin.top - titlepos).text(title);
-      return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", data.chrEnd.slice(-1)[0] + chrGap / 2 - margin.left).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
+      return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", function() {
+        if (pad4heatmap) {
+          return data.chrEnd.slice(-1)[0] - margin.left;
+        }
+        return data.chrEnd.slice(-1)[0] - margin.left + chrGap / 2;
+      }).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });
   };
   chart.width = function(value) {

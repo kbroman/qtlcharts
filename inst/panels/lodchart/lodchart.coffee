@@ -84,7 +84,7 @@ lodchart = () ->
                    return data.chrStart[i] if i==0 and pad4heatmap
                    data.chrStart[i]-chrGap/2)
                  .attr("width", (d,i) ->
-                    return data.chrEnd[i] - data.chrStart[i]+chrGap/2 if i+1 == data.chrnames.length and pad4heatmap
+                    return data.chrEnd[i] - data.chrStart[i]+chrGap/2 if (i==0 or i+1 == data.chrnames.length) and pad4heatmap
                     data.chrEnd[i] - data.chrStart[i]+chrGap)
                  .attr("y", margin.top)
                  .attr("height", height)
@@ -209,7 +209,9 @@ lodchart = () ->
        .attr("x", margin.left)
        .attr("y", margin.top)
        .attr("height", height)
-       .attr("width", data.chrEnd[-1..][0]+chrGap/2-margin.left) # x[-1..] gives last element
+       .attr("width", () ->
+          return(data.chrEnd[-1..][0]-margin.left) if pad4heatmap
+          data.chrEnd[-1..][0]-margin.left+chrGap/2)
        .attr("fill", "none")
        .attr("stroke", "black")
        .attr("stroke-width", "none")

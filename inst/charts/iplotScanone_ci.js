@@ -2,7 +2,7 @@
 var iplotScanone_ci;
 
 iplotScanone_ci = function(lod_data, pxg_data, chartOpts) {
-  var chartdivid, g_lod, height, margin, markers, mylodchart, plotCI, svg, totalh, totalw, wleft, wright, x, ylim, _ref, _ref1, _ref2, _ref3, _ref4;
+  var chartdivid, chrGap, darkrect, eff_axispos, eff_linecolor, eff_linewidth, eff_nyticks, eff_rotate_ylab, eff_segwidth, eff_titlepos, eff_xlab, eff_ylab, eff_ylim, eff_yticks, g_lod, height, lightrect, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_pointcolor, lod_pointsize, lod_pointstroke, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, markers, mylodchart, plotCI, svg, totalh, totalw, wleft, wright, x, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref25, _ref26, _ref27, _ref28, _ref29, _ref3, _ref30, _ref31, _ref32, _ref33, _ref34, _ref35, _ref36, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   markers = (function() {
     var _results;
     _results = [];
@@ -21,15 +21,52 @@ iplotScanone_ci = function(lod_data, pxg_data, chartOpts) {
     bottom: 40,
     inner: 5
   };
-  chartdivid = (_ref4 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref4 : 'chart';
+  lod_axispos = (_ref4 = (_ref5 = chartOpts != null ? chartOpts.lod_axispos : void 0) != null ? _ref5 : chartOpts != null ? chartOpts.axispos : void 0) != null ? _ref4 : {
+    xtitle: 25,
+    ytitle: 30,
+    xlabel: 5,
+    ylabel: 5
+  };
+  lod_titlepos = (_ref6 = (_ref7 = chartOpts != null ? chartOpts.lod_titlepos : void 0) != null ? _ref7 : chartOpts != null ? chartOpts.titlepos : void 0) != null ? _ref6 : 20;
+  chrGap = (_ref8 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref8 : 8;
+  darkrect = (_ref9 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? _ref9 : d3.rgb(200, 200, 200);
+  lightrect = (_ref10 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? _ref10 : d3.rgb(230, 230, 230);
+  lod_ylim = (_ref11 = chartOpts != null ? chartOpts.lod_ylim : void 0) != null ? _ref11 : null;
+  lod_nyticks = (_ref12 = chartOpts != null ? chartOpts.lod_nyticks : void 0) != null ? _ref12 : 5;
+  lod_yticks = (_ref13 = chartOpts != null ? chartOpts.lod_yticks : void 0) != null ? _ref13 : null;
+  lod_linecolor = (_ref14 = chartOpts != null ? chartOpts.lod_linecolor : void 0) != null ? _ref14 : "darkslateblue";
+  lod_linewidth = (_ref15 = chartOpts != null ? chartOpts.lod_linewidth : void 0) != null ? _ref15 : 2;
+  lod_pointcolor = (_ref16 = chartOpts != null ? chartOpts.lod_pointcolor : void 0) != null ? _ref16 : "#E9CFEC";
+  lod_pointsize = (_ref17 = chartOpts != null ? chartOpts.lod_pointsize : void 0) != null ? _ref17 : 0;
+  lod_pointstroke = (_ref18 = chartOpts != null ? chartOpts.lod_pointstroke : void 0) != null ? _ref18 : "black";
+  lod_title = (_ref19 = chartOpts != null ? chartOpts.lod_title : void 0) != null ? _ref19 : "";
+  lod_xlab = (_ref20 = chartOpts != null ? chartOpts.lod_xlab : void 0) != null ? _ref20 : "Chromosome";
+  lod_ylab = (_ref21 = chartOpts != null ? chartOpts.lod_ylab : void 0) != null ? _ref21 : "LOD score";
+  lod_rotate_ylab = (_ref22 = chartOpts != null ? chartOpts.lod_rotate_ylab : void 0) != null ? _ref22 : null;
+  eff_ylim = (_ref23 = chartOpts != null ? chartOpts.eff_ylim : void 0) != null ? _ref23 : null;
+  eff_nyticks = (_ref24 = chartOpts != null ? chartOpts.eff_nyticks : void 0) != null ? _ref24 : 5;
+  eff_yticks = (_ref25 = chartOpts != null ? chartOpts.eff_yticks : void 0) != null ? _ref25 : null;
+  eff_linecolor = (_ref26 = chartOpts != null ? chartOpts.eff_linecolor : void 0) != null ? _ref26 : "slateblue";
+  eff_linewidth = (_ref27 = chartOpts != null ? chartOpts.eff_linewidth : void 0) != null ? _ref27 : "3";
+  eff_xlab = (_ref28 = chartOpts != null ? chartOpts.eff_xlab : void 0) != null ? _ref28 : "Genotype";
+  eff_ylab = (_ref29 = chartOpts != null ? chartOpts.eff_ylab : void 0) != null ? _ref29 : "Phenotype";
+  eff_rotate_ylab = (_ref30 = chartOpts != null ? chartOpts.eff_rotate_ylab : void 0) != null ? _ref30 : null;
+  eff_segwidth = (_ref31 = chartOpts != null ? chartOpts.eff_segwidth : void 0) != null ? _ref31 : null;
+  eff_axispos = (_ref32 = (_ref33 = chartOpts != null ? chartOpts.eff_axispos : void 0) != null ? _ref33 : chartOpts != null ? chartOpts.axispos : void 0) != null ? _ref32 : {
+    xtitle: 25,
+    ytitle: 30,
+    xlabel: 5,
+    ylabel: 5
+  };
+  eff_titlepos = (_ref34 = (_ref35 = chartOpts != null ? chartOpts.eff_titlepos : void 0) != null ? _ref35 : chartOpts != null ? chartOpts.titlepos : void 0) != null ? _ref34 : 20;
+  chartdivid = (_ref36 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref36 : 'chart';
   totalh = height + margin.top + margin.bottom;
   totalw = wleft + wright + (margin.left + margin.right) * 2;
-  mylodchart = lodchart().lodvarname("lod").height(height).width(wleft).margin(margin);
+  mylodchart = lodchart().lodvarname("lod").height(height).width(wleft).margin(margin).axispos(lod_axispos).titlepos(lod_titlepos).chrGap(chrGap).darkrect(darkrect).lightrect(lightrect).ylim(lod_ylim).nyticks(lod_nyticks).yticks(lod_yticks).linecolor(lod_linecolor).linewidth(lod_linewidth).pointcolor(lod_pointcolor).pointsize(lod_pointsize).pointstroke(lod_pointstroke).title(lod_title).xlab(lod_xlab).ylab(lod_ylab).rotate_ylab(lod_rotate_ylab);
   svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   g_lod = svg.append("g").attr("id", "lodchart").datum(lod_data).call(mylodchart);
-  ylim = null;
   plotCI = function(markername, markerindex) {
-    var ave, chr, chrtype, g, gabs, genonames, high, i, j, low, means, mycichart, p, phesub, range, se, variance, _i, _ref5;
+    var ave, chr, chrtype, g, gabs, genonames, high, i, j, low, means, mycichart, p, phesub, range, se, variance, _i, _ref37;
     svg.select("g#cichart").remove();
     g = pxg_data.geno[markerindex];
     gabs = (function() {
@@ -46,13 +83,13 @@ iplotScanone_ci = function(lod_data, pxg_data, chartOpts) {
     genonames = pxg_data.genonames[chrtype];
     means = [];
     se = [];
-    for (j = _i = 1, _ref5 = genonames.length; 1 <= _ref5 ? _i <= _ref5 : _i >= _ref5; j = 1 <= _ref5 ? ++_i : --_i) {
+    for (j = _i = 1, _ref37 = genonames.length; 1 <= _ref37 ? _i <= _ref37 : _i >= _ref37; j = 1 <= _ref37 ? ++_i : --_i) {
       phesub = (function() {
-        var _j, _len, _ref6, _results;
-        _ref6 = pxg_data.pheno;
+        var _j, _len, _ref38, _results;
+        _ref38 = pxg_data.pheno;
         _results = [];
-        for (i = _j = 0, _len = _ref6.length; _j < _len; i = ++_j) {
-          p = _ref6[i];
+        for (i = _j = 0, _len = _ref38.length; _j < _len; i = ++_j) {
+          p = _ref38[i];
           if (gabs[i] === j) {
             _results.push(p);
           }
@@ -93,12 +130,12 @@ iplotScanone_ci = function(lod_data, pxg_data, chartOpts) {
       return _results;
     })();
     range = [d3.min(low), d3.max(high)];
-    if (ylim === null) {
-      ylim = range;
+    if (eff_ylim != null) {
+      eff_ylim = [d3.min([range[0], eff_ylim[0]]), d3.max([range[1], eff_ylim[1]])];
     } else {
-      ylim = [d3.min([range[0], ylim[0]]), d3.max([range[1], ylim[1]])];
+      eff_ylim = range;
     }
-    mycichart = cichart().height(height).width(wright).margin(margin).title(markername).xlab("Genotype").ylab("Phenotype").ylim(ylim);
+    mycichart = cichart().height(height).width(wright).margin(margin).axispos(eff_axispos).titlepos(eff_titlepos).title(markername).xlab(eff_xlab).ylab(eff_ylab).rotate_ylab(eff_rotate_ylab).ylim(eff_ylim).nyticks(eff_nyticks).yticks(eff_yticks).segcolor(eff_linecolor).vertsegcolor(eff_linecolor).segstrokewidth(eff_linewidth).segwidth(eff_segwidth).rectcolor(lightrect);
     return svg.append("g").attr("id", "cichart").attr("transform", "translate(" + (wleft + margin.left + margin.right) + ",0)").datum({
       'means': means,
       'low': low,

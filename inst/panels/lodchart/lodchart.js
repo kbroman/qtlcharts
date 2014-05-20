@@ -2,7 +2,7 @@
 var lodchart;
 
 lodchart = function() {
-  var axispos, chart, chrGap, chrSelect, darkrect, height, lightrect, linecolor, linewidth, lodcurve, lodvarname, margin, markerSelect, nyticks, pad4heatmap, pointcolor, pointsAtMarkers, pointsize, rotate_ylab, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
+  var axispos, chart, chrGap, chrSelect, darkrect, height, lightrect, linecolor, linewidth, lodcurve, lodvarname, margin, markerSelect, nyticks, pad4heatmap, pointcolor, pointsAtMarkers, pointsize, pointstroke, rotate_ylab, title, titlepos, width, xlab, xscale, ylab, ylim, yscale, yticks;
   width = 800;
   height = 500;
   margin = {
@@ -29,6 +29,7 @@ lodchart = function() {
   linewidth = 2;
   pointcolor = "#E9CFEC";
   pointsize = 0;
+  pointstroke = "black";
   title = "";
   xlab = "Chromosome";
   ylab = "LOD score";
@@ -124,7 +125,7 @@ lodchart = function() {
           return xscale[d.chr](d.pos);
         }).attr("cy", function(d) {
           return yscale(d.lod);
-        }).attr("r", pointsize).attr("fill", pointcolor).attr("pointer-events", "hidden");
+        }).attr("r", pointsize).attr("fill", pointcolor).attr("stroke", pointstroke).attr("pointer-events", "hidden");
       }
       if (pointsAtMarkers) {
         hiddenpoints = g.append("g").attr("id", "markerpoints_hidden");
@@ -138,7 +139,7 @@ lodchart = function() {
           return yscale(d.lod);
         }).attr("id", function(d) {
           return d.name;
-        }).attr("r", d3.max([pointsize * 2, 3])).attr("opacity", 0).attr("fill", pointcolor).attr("stroke", "black").attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
+        }).attr("r", d3.max([pointsize * 2, 3])).attr("opacity", 0).attr("fill", pointcolor).attr("stroke", pointstroke).attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
           d3.select(this).attr("opacity", 1);
           return markertip.show(d);
         }).on("mouseout.paneltip", function() {
@@ -257,6 +258,13 @@ lodchart = function() {
       return pointsize;
     }
     pointsize = value;
+    return chart;
+  };
+  chart.pointstroke = function(value) {
+    if (!arguments.length) {
+      return pointstroke;
+    }
+    pointstroke = value;
     return chart;
   };
   chart.title = function(value) {

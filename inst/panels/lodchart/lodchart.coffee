@@ -16,6 +16,7 @@ lodchart = () ->
   linewidth = 2
   pointcolor = "#E9CFEC" # pink
   pointsize = 0 # default = no visible points at markers
+  pointstroke = "black"
   title = ""
   xlab = "Chromosome"
   ylab = "LOD score"
@@ -163,6 +164,7 @@ lodchart = () ->
                     .attr("cy", (d) -> yscale(d.lod))
                     .attr("r", pointsize)
                     .attr("fill", pointcolor)
+                    .attr("stroke", pointstroke)
                     .attr("pointer-events", "hidden")
 
       if pointsAtMarkers
@@ -188,7 +190,7 @@ lodchart = () ->
                       .attr("r", d3.max([pointsize*2, 3]))
                       .attr("opacity", 0)
                       .attr("fill", pointcolor)
-                      .attr("stroke", "black")
+                      .attr("stroke", pointstroke)
                       .attr("stroke-width", "1")
                       .on "mouseover.paneltip", (d) ->
                          d3.select(this).attr("opacity", 1)
@@ -290,6 +292,11 @@ lodchart = () ->
   chart.pointsize = (value) ->
     return pointsize unless arguments.length
     pointsize = value
+    chart
+
+  chart.pointstroke = (value) ->
+    return pointstroke unless arguments.length
+    pointstroke = value
     chart
 
   chart.title = (value) ->

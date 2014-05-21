@@ -46,7 +46,7 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
       stop("corr matrix should be ", ncol(dat), " x ", ncol(dat))
 
     if(reorder) {
-      ord <- hclust(dist(corr), method="ward")$order
+      ord <- hclust(dist(corr), method="average")$order
       variables <- variables[ord]
       dat <- dat[,ord]
 

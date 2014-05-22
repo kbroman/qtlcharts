@@ -82,10 +82,9 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
     scatter1 <- scatter2
     scatter2 <- NULL
   }
-  if(!is.null(group) && length(group) != n.ind) {
-    stop("length(group) != nrow(curveMatrix)")
-    if(any(group <= 0)) stop("group values should be >= 0")
-  }
+  if(missing(group) || is.null(group)) group <- rep(1, n.ind)
+  stopifnot(length(group) == n.ind)
+  group <- group2numeric(group)
   indID <- rownames(curveMatrix)
 
   if(is.data.frame(curveMatrix)) curveMatrix <- as.matrix(curveMatrix)

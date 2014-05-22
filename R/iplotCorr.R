@@ -64,8 +64,9 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
   if(missing(file)) file <- NULL
 
   if(missing(group) || is.null(group)) group <- rep(1, nrow(mat))
-
   if(is.data.frame(mat)) mat <- as.matrix(mat)
+  stopifnot(length(group) == nrow(mat))
+  group <- group2numeric(group)
 
   if(!missing(corr) && !is.null(corr)) {
     if(!missing(rows) || !missing(cols)) warning("rows and cols ignored.")
@@ -108,4 +109,13 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
   if(openfile && !print) browseURL(file)
 
   invisible(file)
+}
+
+# ensure that a "group" vector is really the numbers 1, 2, ..., k
+group2numeric <-
+function(group)
+{
+  if(is.factor(group)) return(as.numeric(group))
+
+  match(group, sort(unique(group)))
 }

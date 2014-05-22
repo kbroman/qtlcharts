@@ -21,7 +21,12 @@ iplotScanone_pxg = function(lod_data, pxg_data, chartOpts) {
     bottom: 40,
     inner: 5
   };
-  lod_axispos = (_ref4 = (_ref5 = chartOpts != null ? chartOpts.lod_axispos : void 0) != null ? _ref5 : chartOpts != null ? chartOpts.axispos : void 0) != null ? _ref4 : 20;
+  lod_axispos = (_ref4 = (_ref5 = chartOpts != null ? chartOpts.lod_axispos : void 0) != null ? _ref5 : chartOpts != null ? chartOpts.axispos : void 0) != null ? _ref4 : {
+    xtitle: 25,
+    ytitle: 30,
+    xlabel: 5,
+    ylabel: 5
+  };
   lod_titlepos = (_ref6 = (_ref7 = chartOpts != null ? chartOpts.lod_titlepos : void 0) != null ? _ref7 : chartOpts != null ? chartOpts.titlepos : void 0) != null ? _ref6 : 20;
   chrGap = (_ref8 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref8 : 8;
   darkrect = (_ref9 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? _ref9 : d3.rgb(200, 200, 200);

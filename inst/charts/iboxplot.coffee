@@ -16,6 +16,7 @@ iboxplot = (data, chartOpts) ->
   ylab = chartOpts?.ylab ? "Response"
   xlab = chartOpts?.xlab ? "Individuals"
   rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
+  qucolors = chartOpts?.qucolors ? null
   # chartOpts end
   chartdivid = chartOpts?.chartdivid ? 'chart'
 
@@ -151,14 +152,18 @@ iboxplot = (data, chartOpts) ->
      .attr("text-anchor", "middle")
 
   # colors for quantile curves
-  colindex = d3.range((nQuant-1)/2)
-  tmp = d3.scale.category10().domain(colindex)
-  qucolors = []
-  for j in colindex
-    qucolors.push(tmp(j))
-  qucolors.push("black")
-  for j in colindex.reverse()
-    qucolors.push(tmp(j))
+  unless qucolors? and qucolors.length >= (nQuant-1)/2+1
+    if qucolors.length < (nQuant-1)/2+1
+      console.log("Not enough quantile colors: #{qucolors.length} but need #{(nQuant-1)/2+1}")
+    colindex = d3.range((nQuant-1)/2)
+    tmp = d3.scale.category10().domain(colindex)
+    qucolors = ["black"]
+    for j in colindex
+      qucolors.push(tmp(j))
+  qucolors = qucolors[0...(nQuant-1)/2+1] if qucolors.length > (nQuant-1)/2+1
+  qucolors = qucolors.reverse()
+  for color in qucolors[...-1].reverse()
+    qucolors.push(color)
 
   # curves for quantiles
   curves = svg.append("g").attr("id", "curves")

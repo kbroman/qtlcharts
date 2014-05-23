@@ -197,3 +197,7 @@ d3.selection.prototype.moveToBack = () ->
   this.each () ->
     firstChild = this.parentNode.firstchild
     this.parentNode.insertBefore(this, firstChild) if firstChild
+
+forceAsArray = (x) ->
+  return x if Array.isArray(x)
+  [x]

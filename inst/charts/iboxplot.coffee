@@ -17,8 +17,13 @@ iboxplot = (data, chartOpts) ->
   xlab = chartOpts?.xlab ? "Individuals"
   rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
   qucolors = chartOpts?.qucolors ? null
+  histcolors = chartOpts?.histcolors ? ["blue", "red", "green", "MediumVioletRed", "black"]
   # chartOpts end
   chartdivid = chartOpts?.chartdivid ? 'chart'
+
+  # make sure histcolors and qucolors are arrays
+  histcolors = forceAsArray(histcolors)
+  qucolors = forceAsArray(qucolors)
 
   # y-axis limits for top figure
   topylim = [data.quant[0][0], data.quant[0][1]]
@@ -152,9 +157,10 @@ iboxplot = (data, chartOpts) ->
      .attr("text-anchor", "middle")
 
   # colors for quantile curves
-  unless qucolors? and qucolors.length >= (nQuant-1)/2+1
-    if qucolors.length < (nQuant-1)/2+1
-      console.log("Not enough quantile colors: #{qucolors.length} but need #{(nQuant-1)/2+1}")
+  if qucolors? and qucolors.length < (nQuant-1)/2+1
+    console.log("Not enough quantile colors: #{qucolors.length} but need #{(nQuant-1)/2+1}")
+    qucolors = null
+  unless qucolors?
     colindex = d3.range((nQuant-1)/2)
     tmp = d3.scale.category10().domain(colindex)
     qucolors = ["black"]
@@ -323,8 +329,6 @@ iboxplot = (data, chartOpts) ->
        .attr("stroke-width", "2")
 
 
-  histColors = ["blue", "red", "green", "MediumVioletRed", "black"]
-
   clickStatus = []
   for d in indindex
     clickStatus.push(0)
@@ -349,8 +353,8 @@ iboxplot = (data, chartOpts) ->
               clickStatus[d] = 1 - clickStatus[d]
               d3.select("rect#rect#{data.ind[d]}").attr("opacity", clickStatus[d])
               if clickStatus[d]
-                curcolor = histColors.shift()
-                histColors.push(curcolor)
+                curcolor = histcolors.shift()
+                histcolors.push(curcolor)
 
                 d3.select("rect#rect#{data.ind[d]}").attr("fill", curcolor)
 

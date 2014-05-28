@@ -87,9 +87,18 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
   }
 
   json <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset)
-
+  
+  colcode = character()
+  for (i in 1:length(corcolors)){
+    if (i<length(corcolors)){
+      colcode = paste(colcode, " ", corcolors[i], "=", cordomain[i], ",", sep="")
+    }else{
+      colcode = paste(colcode, " and ", corcolors[i], " = ", cordomain[i], ".", sep="")
+    }
+  }
+  
   if(missing(caption) || is.null(caption))
-    caption <- c('The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
+    caption <- c(paste('The left panel is an image of a correlation matrix, with', colcode),
                 'Hover over pixels in the correlation matrix on the left to see the ',
                 'values; click to see the corresponding scatterplot on the right.')
 

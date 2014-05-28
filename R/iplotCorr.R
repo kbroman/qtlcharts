@@ -88,6 +88,7 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
 
   json <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset)
   
+  #caption is no longer correct when using non-default colors and domain
   if(missing(caption) || is.null(caption))
     caption <- c('The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
                 'Hover over pixels in the correlation matrix on the left to see the ',

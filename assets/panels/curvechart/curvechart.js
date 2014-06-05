@@ -146,11 +146,22 @@ curvechart = function() {
       }).y(function(d) {
         return yscale(d.y);
       });
-      g.selectAll("empty").append("g").data(d3.range(data.length)).enter().append("path").datum(function(d) {
+      curves = g.append("g").attr("id", "curves");
+      curvesSelect = curves.selectAll("empty").data(d3.range(data.length)).enter().append("path").datum(function(d) {
         return data[d];
-      }).attr("d", curve).attr("fill", "none").attr("stroke", function(d, i) {
+      }).attr("d", curve).attr("class", function(d, i) {
+        return "path" + i;
+      }).attr("fill", "none").attr("stroke", function(d, i) {
         return strokecolor[group[i]];
-      }).attr("stroke-width", strokewidth);
+      }).attr("stroke-width", strokewidth).on("mouseover.panel", function(d, i) {
+        var circle;
+        d3.select(this).attr("stroke", strokecolorhilit[group[i]]).moveToFront();
+        circle = d3.select("circle#hiddenpoint" + i);
+        return indtip.show(i, circle.node());
+      }).on("mouseout.panel", function(d, i) {
+        d3.select(this).attr("stroke", strokecolor[group[i]]).moveToBack();
+        return indtip.hide();
+      });
       lastpoint = (function() {
         var _results1;
         _results1 = [];
@@ -179,22 +190,6 @@ curvechart = function() {
       }).attr("cy", function(d) {
         return yscale(d.y);
       }).attr("r", 1).attr("opacity", 0);
-      curves = g.append("g").attr("id", "curves");
-      curvesSelect = curves.selectAll("empty").data(d3.range(data.length)).enter().append("path").datum(function(d) {
-        return data[d];
-      }).attr("d", curve).attr("class", function(d, i) {
-        return "path" + i;
-      }).attr("fill", "none").attr("stroke", function(d, i) {
-        return strokecolorhilit[group[i]];
-      }).attr("stroke-width", strokewidthhilit).attr("opacity", 0).on("mouseover.panel", function(d, i) {
-        var circle;
-        d3.select(this).attr("opacity", 1);
-        circle = d3.select("circle#hiddenpoint" + i);
-        return indtip.show(i, circle.node());
-      }).on("mouseout.panel", function() {
-        d3.select(this).attr("opacity", 0);
-        return indtip.hide();
-      });
       return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });
   };

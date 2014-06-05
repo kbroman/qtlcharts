@@ -17,7 +17,7 @@ lodheatmap = function() {
     xlabel: 5,
     ylabel: 5
   };
-  chrGap = 5;
+  chrGap = 8;
   titlepos = 20;
   rectcolor = d3.rgb(230, 230, 230);
   colors = ["slateblue", "white", "crimson"];

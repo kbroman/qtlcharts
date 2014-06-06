@@ -35,7 +35,7 @@ mychart = heatmap().width(400)                                              # in
                    .dataByCell(false)                                       # is data organized by cell?
 ```
 
-Organization of data:
+#### Organization of data
 
   If `dataByCell == true`, we expect the data to be like `[{x:x, y:y, z:z}]
 
@@ -43,7 +43,10 @@ Organization of data:
   like `{x:[x1, ..., xn], y:[y1, ..., ym], z:[[z11, ..., z1n], ...,
   [zm1, ..., zmn]]}
 
-Additional accessors:
+  Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/heatmap/test/data.json).
+
+
+#### Additional accessors
 
 ```coffeescript
 # x-axis scale

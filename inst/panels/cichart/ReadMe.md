@@ -34,13 +34,13 @@ mychart = cichart().xvar("x")                                               # va
                    .rotate_ylab(null)                                       # rotate y-axis label
 ```
 
-#### Organization of data:
+#### Organization of data
 
 We expect `{means, low, high, categories}`, each a vector of common
 length. Here's an example:
 [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/cichart/test/data.json).
 
-#### Additional accessors:
+#### Additional accessors
 
 ```coffeescript
 # x-axis scale

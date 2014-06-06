@@ -36,7 +36,7 @@ mychart = cichart().width(800)                                              # in
                    .commonX(true)                                           # Do all curves have a common set of X's?
 ```
 
-Organization of data:
+#### Organization of data
 
   If `commonX == true` (the default), we expect the data to be like `{x:[x1, x2, ..., xt], data:[[y11, y12, .. y1t]...[yn1, .. ynt]]}`.
                        
@@ -44,7 +44,9 @@ Organization of data:
   
   The data can also contain a vector `groups` with length equal to the number of individuals, taking values in `(1, 2, ..., k)`, for specifying colors. 
 
-Additional accessors:
+  Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/curvechart/test/data.json).
+
+#### Additional accessors
 
 ```coffeescript
 # x-axis scale

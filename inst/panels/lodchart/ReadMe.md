@@ -34,7 +34,11 @@ mychart = lodchart().lodvarname("lod")                                       # v
                     .rotate_ylab(null)                                       # rotate y-axis label
 ```
 
-Additional accessors:
+#### Organization of data *(needs to be explained)*
+
+  Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/lodchart/test/data.json).
+
+#### Additional accessors:
 
 ```coffeescript
 # x-axis scale

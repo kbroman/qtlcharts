@@ -29,10 +29,12 @@ mychart = lodheatmap().width(1200)                                             #
                       .chrGap(5)                                               # gap between chromosomes (in pixels)
 ```
 
-Organization of data *(needs to be explained)*
+#### Organization of data *(needs to be explained)*
+
+  Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/lodheatmap/test/data.json).
 
 
-Additional accessors:
+#### Additional accessors
 
 ```coffeescript
 # x-axis scale

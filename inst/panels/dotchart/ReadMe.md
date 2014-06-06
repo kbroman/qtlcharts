@@ -38,27 +38,29 @@ mychart = dotchart().xvar("x")                                               # v
                     .dataByInd(true)                                         # is data organized by individual?
 ```
 
-Treatment of missing values through `yNA`:
+#### Treatment of missing values through `yNA`
 
     handle: if true, plot missing values in separated area; if false, omit missing values
     force:  force handle==true (with separate area for missing values) even if there are no missing values
     width:  width of space reserved for missing values
     gap:    gap between space for missing values and the main panel
 
-Treatment of horizontal jittering (move points horizontally to avoid overlap):
+#### Treatment of horizontal jittering (move points horizontally to avoid overlap)
 
     xjitter(null):   (Default) results in random horizontal jittering
     xjitter(0):      No jittering
     xjitter(vector): vector must be numeric with same length as data; these values (in pixels)
                      are used for the jittering
 
-Organization of data:
+#### Organization of data
 
   If `dataByInd == true` (the default), we expect the data to be like `[[x1,y1], [x2,y2], ..., [xn,yn]]`
 
   Alternatively, if `dataByInd == false` we expect the data to be like `[[x1,x2, ..., xn], [y1,y2, ..., yn]]`
 
-Additional accessors:
+  Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/dotchart/test/data.json).
+
+#### Additional accessors
 
 ```coffeescript
 # x-axis scale

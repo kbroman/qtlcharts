@@ -32,7 +32,17 @@ mychart = mapchart().width(400)                                              # i
                     .rotate_ylab(null)                                       # rotate y-axis label
 ```
 
-#### Organization of data *(needs to be explained)*
+#### Organization of data
+
+  The data is a hash with two components: 
+  
+  - `"chr"`, an ordered list of chromosomes, like
+    `["1", "2", "3", ..., "X"]`
+  - `"map"`, a hash with components being chromosomes, each of which
+    is a hash with marker names as keys and positions as values.
+
+        {"1": {"D1Mit1:0, "D1Mit2: 19.7, ..., D1Mit8: 100.3},
+         "2": {"D2Mit1:0, "D2Mit5: 7.8, ..., "D2Mit10: 110}}, ..., }
 
   Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/mapchart/test/data.json).
 

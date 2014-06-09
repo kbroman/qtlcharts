@@ -16,4 +16,4 @@ dat[1:4,3] <- NA
 dat[4:9,2] <- NA
 
 library(jsonlite)
-cat(jsonlite::toJSON(dat), file="data.json")
+cat(jsonlite::toJSON(dat, na="null"), file="data.json")

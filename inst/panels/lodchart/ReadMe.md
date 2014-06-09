@@ -34,9 +34,22 @@ mychart = lodchart().lodvarname("lod")                                       # v
                     .rotate_ylab(null)                                       # rotate y-axis label
 ```
 
-#### Organization of data *(needs to be explained)*
+#### Organization of data
 
-  Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/lodchart/test/data.json).
+The data is a hash with a number of components:
+
+- `"chrnames`" is an ordered list of chromosome names
+- `"lodnames"` is an ordered list of the names of LOD score columns
+- `"chr"` is an ordered list of chromosome IDs for the markers/pseudomarkers
+  at which LOD scores were calculated (length `n`)
+- `"pos"` is an ordered list of numeric positions for the markers/pseudomarkers
+  at which LOD scores were calculated (length `n`)
+- additional ordered lists, named as in `"lodnames"`, containing LOD
+  scores, each also of length `n`.
+- `"markernames"` vector of marker names, of length `n`. pseudomarkers
+  should have empty name (`""`)
+
+Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/lodchart/test/data.json).
 
 #### Additional accessors:
 

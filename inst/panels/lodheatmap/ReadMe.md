@@ -41,8 +41,8 @@ The data is organized as for the [lodchart panel](../lodchart):  a hash with a n
   at which LOD scores were calculated (length `n`)
 - additional ordered lists, named as in `"lodnames"`, containing LOD
   scores, each also of length `n`.
-- `"markernames"` vector of marker names, of length `n`. pseudomarkers
-  should have empty name (`""`)
+- `"markernames"` vector of marker names, of length `n`. Pseudomarkers
+  should have an empty string (`""`).
 
 Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/lodheatmap/test/data.json).
 

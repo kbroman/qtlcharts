@@ -2,7 +2,7 @@
 var iplotCorr;
 
 iplotCorr = function(data, chartOpts) {
-  var cells, chartdivid, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, nGroup, ncorrX, ncorrY, nind, nvar, pixel_height, pixel_width, rectcolor, scat_tip, scatcolors, scatterplot, scattitle, svg, totalh, totalw, width, zlim, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
+  var cells, chartdivid, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, nGroup, ncorrX, ncorrY, nind, nvar, pixel_height, pixel_width, rectcolor, scat_tip, scatcolors, scatterplot, scattitle, svg, totalh, totalw, width, zlim, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   height = (_ref = chartOpts != null ? chartOpts.height : void 0) != null ? _ref : 450;
   width = (_ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? _ref1 : height;
   margin = (_ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref2 : {
@@ -13,12 +13,12 @@ iplotCorr = function(data, chartOpts) {
     inner: 5
   };
   corcolors = (_ref3 = chartOpts != null ? chartOpts.corcolors : void 0) != null ? _ref3 : ["darkslateblue", "white", "crimson"];
-  zlim = typeof chartOpts === "function" ? chartOpts(zlim != null ? zlim : [-1, 0, 1]) : void 0;
-  rectcolor = (_ref4 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref4 : d3.rgb(230, 230, 230);
-  cortitle = (_ref5 = chartOpts != null ? chartOpts.cortitle : void 0) != null ? _ref5 : "";
-  scattitle = (_ref6 = chartOpts != null ? chartOpts.scattitle : void 0) != null ? _ref6 : "";
-  scatcolors = (_ref7 = chartOpts != null ? chartOpts.scatcolors : void 0) != null ? _ref7 : null;
-  chartdivid = (_ref8 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref8 : 'chart';
+  zlim = (_ref4 = chartOpts != null ? chartOpts.zlim : void 0) != null ? _ref4 : [-1, 0, 1];
+  rectcolor = (_ref5 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref5 : d3.rgb(230, 230, 230);
+  cortitle = (_ref6 = chartOpts != null ? chartOpts.cortitle : void 0) != null ? _ref6 : "";
+  scattitle = (_ref7 = chartOpts != null ? chartOpts.scattitle : void 0) != null ? _ref7 : "";
+  scatcolors = (_ref8 = chartOpts != null ? chartOpts.scatcolors : void 0) != null ? _ref8 : null;
+  chartdivid = (_ref9 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref9 : 'chart';
   totalh = height + margin.top + margin.bottom;
   totalw = (width + margin.left + margin.right) * 2;
   svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);

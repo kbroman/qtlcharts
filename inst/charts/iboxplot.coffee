@@ -10,14 +10,14 @@
 iboxplot = (data, chartOpts) ->
 
   # chartOpts start
-  width = chartOpts?.width ? 1000
-  height = chartOpts?.height ? 450
-  margin = chartOpts?.margin ? {left:60, top:20, right:60, bottom: 40}
-  ylab = chartOpts?.ylab ? "Response"
-  xlab = chartOpts?.xlab ? "Individuals"
-  rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
-  qucolors = chartOpts?.qucolors ? null
-  histcolors = chartOpts?.histcolors ? ["blue", "red", "green", "MediumVioletRed", "black"]
+  width = chartOpts?.width ? 1000 # width of image in pixels
+  height = chartOpts?.height ? 450 # height of image in pixels
+  margin = chartOpts?.margin ? {left:60, top:20, right:60, bottom: 40} # margins in pixels (left, top, right, bottom)
+  ylab = chartOpts?.ylab ? "Response" # y-axis label
+  xlab = chartOpts?.xlab ? "Individuals" # x-axis label
+  rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230) # color of background rectangle
+  qucolors = chartOpts?.qucolors ? null # vector of colors for the quantile curves
+  histcolors = chartOpts?.histcolors ? ["blue", "red", "green", "MediumVioletRed", "black"] # vector of colors for selected histograms
   # chartOpts end
   chartdivid = chartOpts?.chartdivid ? 'chart'
 

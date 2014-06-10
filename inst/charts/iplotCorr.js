@@ -2,7 +2,7 @@
 var iplotCorr;
 
 iplotCorr = function(data, chartOpts) {
-  var cells, chartdivid, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, nGroup, ncorrX, ncorrY, nind, nvar, pixel_height, pixel_width, rectcolor, scat_tip, scatcolors, scatterplot, scattitle, svg, totalh, totalw, width, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
+  var cells, chartdivid, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, nGroup, ncorrX, ncorrY, nind, nvar, pixel_height, pixel_width, rectcolor, scat_tip, scatcolors, scatterplot, scattitle, svg, totalh, totalw, width, zlim, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
   height = (_ref = chartOpts != null ? chartOpts.height : void 0) != null ? _ref : 450;
   width = (_ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? _ref1 : height;
   margin = (_ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref2 : {
@@ -13,6 +13,7 @@ iplotCorr = function(data, chartOpts) {
     inner: 5
   };
   corcolors = (_ref3 = chartOpts != null ? chartOpts.corcolors : void 0) != null ? _ref3 : ["darkslateblue", "white", "crimson"];
+  zlim = typeof chartOpts === "function" ? chartOpts(zlim != null ? zlim : [-1, 0, 1]) : void 0;
   rectcolor = (_ref4 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref4 : d3.rgb(230, 230, 230);
   cortitle = (_ref5 = chartOpts != null ? chartOpts.cortitle : void 0) != null ? _ref5 : "";
   scattitle = (_ref6 = chartOpts != null ? chartOpts.scattitle : void 0) != null ? _ref6 : "";
@@ -29,7 +30,7 @@ iplotCorr = function(data, chartOpts) {
   ncorrY = data.rows.length;
   corXscale = d3.scale.ordinal().domain(d3.range(ncorrX)).rangeBands([0, width]);
   corYscale = d3.scale.ordinal().domain(d3.range(ncorrY)).rangeBands([height, 0]);
-  corZscale = d3.scale.linear().domain([-1, 0, 1]).range(corcolors);
+  corZscale = d3.scale.linear().domain(zlim).range(corcolors);
   pixel_width = corXscale(1) - corXscale(0);
   pixel_height = corYscale(0) - corYscale(1);
   corr = [];

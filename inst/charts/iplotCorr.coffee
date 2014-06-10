@@ -10,6 +10,7 @@ iplotCorr = (data, chartOpts) ->
   width = chartOpts?.width ? height
   margin = chartOpts?.margin ? {left:70, top:40, right:5, bottom: 70, inner:5}
   corcolors = chartOpts?.corcolors ? ["darkslateblue", "white", "crimson"]
+  zlim = chartOpts?zlim ? [-1, 0, 1]
   rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
   cortitle = chartOpts?.cortitle ? ""
   scattitle = chartOpts?.scattitle ? ""
@@ -43,7 +44,7 @@ iplotCorr = (data, chartOpts) ->
 
   corXscale = d3.scale.ordinal().domain(d3.range(ncorrX)).rangeBands([0, width])
   corYscale = d3.scale.ordinal().domain(d3.range(ncorrY)).rangeBands([height, 0])
-  corZscale = d3.scale.linear().domain([-1, 0, 1]).range(corcolors)
+  corZscale = d3.scale.linear().domain(zlim).range(corcolors)
   pixel_width = corXscale(1)-corXscale(0)
   pixel_height = corYscale(0)-corYscale(1)
 

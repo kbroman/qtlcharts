@@ -201,3 +201,7 @@ d3.selection.prototype.moveToBack = () ->
 forceAsArray = (x) ->
   return x if Array.isArray(x)
   [x]
+
+# any values in vec that appear in missing are made null
+missing2null = (vec, missingvalues=['NA', '']) ->
+  vec.map (value) -> if missingvalues.indexOf(value) > -1 then null else value

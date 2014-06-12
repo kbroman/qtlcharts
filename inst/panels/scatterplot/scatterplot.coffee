@@ -40,6 +40,10 @@ scatterplot = () ->
         x = data.data[xvar]
         y = data.data[yvar]
 
+      # missing values can be any of null, "NA", or ""; replacing with nulls
+      x = missing2null(x, ["NA", ""])
+      y = missing2null(y, ["NA", ""])
+
       # grab indID if it's there
       # if no indID, create a vector of them
       indID = data?.indID ? null

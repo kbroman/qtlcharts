@@ -65,6 +65,8 @@ scatterplot = function() {
         x = data.data[xvar];
         y = data.data[yvar];
       }
+      x = missing2null(x, ["NA", ""]);
+      y = missing2null(y, ["NA", ""]);
       indID = (_ref = data != null ? data.indID : void 0) != null ? _ref : null;
       indID = indID != null ? indID : (function() {
         _results = [];

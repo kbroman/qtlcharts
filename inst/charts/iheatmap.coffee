@@ -4,10 +4,10 @@
 iheatmap = (data, chartOpts) ->
 
   # chartOpts start
-  htop = chartOpts?.htop ? 500 # height of top charts
-  hbot = chartOpts?.hbot ? 500 # height of bottom chart
-  wleft = chartOpts?.wleft ? 500 # width of left charts
-  wright = chartOpts?.wright ? 500 # width of right chart
+  htop = chartOpts?.htop ? 500 # height of top charts in pixels
+  hbot = chartOpts?.hbot ? 500 # height of bottom chart in pixels
+  wleft = chartOpts?.wleft ? 500 # width of left charts in pixels
+  wright = chartOpts?.wright ? 500 # width of right chart in pixels
   margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
   axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
   titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels

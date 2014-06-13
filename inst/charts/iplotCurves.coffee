@@ -4,56 +4,56 @@
 iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
 
   # chartOpts start
-  htop = chartOpts?.htop ? 500 # height of curves chart
-  hbot = chartOpts?.hbot ? 500 # height of scatter plots
-  width = chartOpts?.width ? 1000 # width of chart
-  margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5}
-  axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
-  titlepos = chartOpts?.titlepos ? 20
-  rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
-  pointcolor = chartOpts?.pointcolor ? null
-  pointstroke = chartOpts?.pointstroke ? "black"
-  pointsize = chartOpts?.pointsize ? 3
-  pointcolorhilit = chartOpts?.pointcolorhilit ? null
-  pointsizehilit = chartOpts?.pointsizehilit ? 6
-  strokecolor = chartOpts?.strokecolor ? null
-  strokecolorhilit = chartOpts?.strokecolorhilit ? null
-  strokewidth = chartOpts?.strokewidth ? 2
-  strokewidthhilit = chartOpts?.strokewidthhilit ? 2
+  htop = chartOpts?.htop ? 500 # height of curves chart in pixels
+  hbot = chartOpts?.hbot ? 500 # height of scatterplots in pixels
+  width = chartOpts?.width ? 1000 # width of chart in pixels
+  margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
+  axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+  titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
+  rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230) # color of background rectangle
+  pointcolor = chartOpts?.pointcolor ? null # vector of colors for points in scatterplots
+  pointstroke = chartOpts?.pointstroke ? "black" # color of line outline for points in scatterplots
+  pointsize = chartOpts?.pointsize ? 3 # size of points in scatterplots
+  pointcolorhilit = chartOpts?.pointcolorhilit ? null # vector of colors for points in scatterplots, when highlighted
+  pointsizehilit = chartOpts?.pointsizehilit ? 6 # zie of points in scatterplot, when highlighted
+  strokecolor = chartOpts?.strokecolor ? null # vector of colors of curves
+  strokecolorhilit = chartOpts?.strokecolorhilit ? null # vector of colors of curves, when highlighted
+  strokewidth = chartOpts?.strokewidth ? 2 # line width of curves
+  strokewidthhilit = chartOpts?.strokewidthhilit ? 2 # line widths of curves, when highlighted
 
-  curves_xlim = chartOpts?.curves_xlim ? null
-  curves_ylim = chartOpts?.curves_ylim ? null
-  curves_nxticks = chartOpts?.curves_nxticks ? 5
-  curves_xticks = chartOpts?.curves_xticks ? null
-  curves_nyticks = chartOpts?.curves_nyticks ? 5
-  curves_yticks = chartOpts?.curves_yticks ? null
-  curves_title = chartOpts?.curves_title ? ""
-  curves_xlab = chartOpts?.curves_xlab ? "X"
-  curves_ylab = chartOpts?.curves_ylab ? "Y"
+  curves_xlim = chartOpts?.curves_xlim ? null # x-axis limits in curve plot
+  curves_ylim = chartOpts?.curves_ylim ? null # y-axis limits in curve plot
+  curves_nxticks = chartOpts?.curves_nxticks ? 5 # no. ticks on x-axis in curve plot
+  curves_xticks = chartOpts?.curves_xticks ? null # vector of tick positions on x-axis in curve plot
+  curves_nyticks = chartOpts?.curves_nyticks ? 5 # no. ticks on y-axis in curve plot
+  curves_yticks = chartOpts?.curves_yticks ? null # vector of tick positions on y-axis in curve plot
+  curves_title = chartOpts?.curves_title ? "" # title for curve plot
+  curves_xlab = chartOpts?.curves_xlab ? "X" # x-axis label for curve plot
+  curves_ylab = chartOpts?.curves_ylab ? "Y" # y-axis label for curve plot
 
-  scat1_xlim = chartOpts?.scat1_xlim ? null
-  scat1_ylim = chartOpts?.scat1_ylim ? null
-  scat1_xNA = chartOpts?.scat1_xNA ? {handle:true, force:false, width:15, gap:10}
-  scat1_yNA = chartOpts?.scat1_yNA ? {handle:true, force:false, width:15, gap:10}
-  scat1_nxticks = chartOpts?.scat1_nxticks ? 5
-  scat1_xticks = chartOpts?.scat1_xticks ? null
-  scat1_nyticks = chartOpts?.scat1_nyticks ? 5
-  scat1_yticks = chartOpts?.scat1_yticks ? null
-  scat1_title = chartOpts?.scat1_title ? ""
-  scat1_xlab = chartOpts?.scat1_xlab ? "X"
-  scat1_ylab = chartOpts?.scat1_ylab ? "Y"
+  scat1_xlim = chartOpts?.scat1_xlim ? null # x-axis limits in first scatterplot
+  scat1_ylim = chartOpts?.scat1_ylim ? null # y-axis limits in first scatterplot
+  scat1_xNA = chartOpts?.scat1_xNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values for x variable in first scatterplot (handle=T/F, force=T/F, width, gap)
+  scat1_yNA = chartOpts?.scat1_yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values for x variable in first scatterplot (handle=T/F, force=T/F, width, gap)
+  scat1_nxticks = chartOpts?.scat1_nxticks ? 5 # no. ticks on x-axis in first scatterplot
+  scat1_xticks = chartOpts?.scat1_xticks ? null # vector of tick positions on x-axis in first scatterplot
+  scat1_nyticks = chartOpts?.scat1_nyticks ? 5 # no. ticks on y-axis in first scatterplot
+  scat1_yticks = chartOpts?.scat1_yticks ? null # vector of tick positions on y-axis in first scatterplot
+  scat1_title = chartOpts?.scat1_title ? "" # title for first scatterplot
+  scat1_xlab = chartOpts?.scat1_xlab ? "X" # x-axis label for first scatterplot
+  scat1_ylab = chartOpts?.scat1_ylab ? "Y" # y-axis label for first scatterplot
 
-  scat2_xlim = chartOpts?.scat2_xlim ? null
-  scat2_ylim = chartOpts?.scat2_ylim ? null
-  scat2_xNA = chartOpts?.scat2_xNA ? {handle:true, force:false, width:15, gap:10}
-  scat2_yNA = chartOpts?.scat2_yNA ? {handle:true, force:false, width:15, gap:10}
-  scat2_nxticks = chartOpts?.scat2_nxticks ? 5
-  scat2_xticks = chartOpts?.scat2_xticks ? null
-  scat2_nyticks = chartOpts?.scat2_nyticks ? 5
-  scat2_yticks = chartOpts?.scat2_yticks ? null
-  scat2_title = chartOpts?.scat2_title ? ""
-  scat2_xlab = chartOpts?.scat2_xlab ? "X"
-  scat2_ylab = chartOpts?.scat2_ylab ? "Y"
+  scat2_xlim = chartOpts?.scat2_xlim ? null # x-axis limits in second scatterplot
+  scat2_ylim = chartOpts?.scat2_ylim ? null # y-axis limits in second scatterplot
+  scat2_xNA = chartOpts?.scat2_xNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values for x variable in second scatterplot (handle=T/F, force=T/F, width, gap)
+  scat2_yNA = chartOpts?.scat2_yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values for x variable in second scatterplot (handle=T/F, force=T/F, width, gap)
+  scat2_nxticks = chartOpts?.scat2_nxticks ? 5 # no. ticks on x-axis in second scatterplot
+  scat2_xticks = chartOpts?.scat2_xticks ? null # vector of tick positions on x-axis in second scatterplot
+  scat2_nyticks = chartOpts?.scat2_nyticks ? 5 # no. ticks on y-axis in second scatterplot
+  scat2_yticks = chartOpts?.scat2_yticks ? null # vector of tick positions on y-axis in second scatterplot
+  scat2_title = chartOpts?.scat2_title ? "" # title for second scatterplot
+  scat2_xlab = chartOpts?.scat2_xlab ? "X" # x-axis label for second scatterplot
+  scat2_ylab = chartOpts?.scat2_ylab ? "Y" # y-axis label for second scatterplot
   # chartOpts end
   chartdivid = chartOpts?.chartdivid ? 'chart'
 

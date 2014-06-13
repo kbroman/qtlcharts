@@ -6,15 +6,15 @@
 iplotCorr = (data, chartOpts) ->
 
   # chartOpts start
-  height = chartOpts?.height ? 450
-  width = chartOpts?.width ? height
-  margin = chartOpts?.margin ? {left:70, top:40, right:5, bottom: 70, inner:5}
-  corcolors = chartOpts?.corcolors ? ["darkslateblue", "white", "crimson"]
-  zlim = chartOpts?.zlim ? [-1, 0, 1]
-  rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
-  cortitle = chartOpts?.cortitle ? ""
-  scattitle = chartOpts?.scattitle ? ""
-  scatcolors = chartOpts?.scatcolors ? null
+  height = chartOpts?.height ? 450 # height of each panel in pixels
+  width = chartOpts?.width ? height # width of each panel in pixels
+  margin = chartOpts?.margin ? {left:70, top:40, right:5, bottom: 70, inner:5} # margins in pixels (left, top, right, bottom, inner)
+  corcolors = chartOpts?.corcolors ? ["darkslateblue", "white", "crimson"] # heat map colors (same length as `zlim`)
+  zlim = chartOpts?.zlim ? [-1, 0, 1] # z-axis limits
+  rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230) # color of background rectangle
+  cortitle = chartOpts?.cortitle ? "" # title for heatmap panel
+  scattitle = chartOpts?.scattitle ? "" # title for scatterplot panel
+  scatcolors = chartOpts?.scatcolors ? null # vector of point colors for scatterplot
   # chartOpts end
   chartdivid = chartOpts?.chartdivid ? 'chart'
 

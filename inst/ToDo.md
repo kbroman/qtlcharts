@@ -25,7 +25,14 @@
   - the panels: what, where, how
   - the basic method I'm using for creating a chart
 
-
+  - writing coffeescript
+  - panels
+  - charts
+  - panelutil.coffee; panelutil.css
+  - D3, D3tip, colorbrewer (as distributed with D3)
+  - R code: with onefile=TRUE and with onefile=FALSE
+  - chartOpts
+  
 
 ### Enhancements to current charts
 

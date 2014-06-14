@@ -4,22 +4,22 @@
 iplotMap = (data, chartOpts) ->
 
   # chartOpts start
-  width = chartOpts?.height ? 1000
-  height = chartOpts?.width ? 600
-  margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:10}
-  axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
-  titlepos = chartOpts?.titlepos ? 20
-  ylim = chartOpts?.ylim ? null
-  nyticks = chartOpts?.nyticks ? 5
-  yticks = chartOpts?.yticks ? null
-  tickwidth = chartOpts?.tickwidth ? 10
-  rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230)
-  linecolor = chartOpts?.linecolor ? "slateblue"
-  linecolorhilit = chartOpts?.linecolorhilit ? "Orchid"
-  linewidth = chartOpts?.linewidth ? 3
-  title = chartOpts?.title ? ""
-  xlab = chartOpts?.xlab ? "Chromosome"
-  ylab = chartOpts?.ylab ? "Position (cM)"
+  width = chartOpts?.height ? 1000 # width of chart in pixels
+  height = chartOpts?.width ? 600 # height of chart in pixels
+  margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:10} # margins in pixels (left, top, right, bottom, inner)
+  axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+  titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
+  ylim = chartOpts?.ylim ? null # y-axis limits
+  nyticks = chartOpts?.nyticks ? 5 # no. ticks on y-axis
+  yticks = chartOpts?.yticks ? null # vector of tick positions on y-axis
+  tickwidth = chartOpts?.tickwidth ? 10 # width of tick marks at markers, in pixels
+  rectcolor = chartOpts?.rectcolor ? d3.rgb(230, 230, 230) # color of background rectangle
+  linecolor = chartOpts?.linecolor ? "slateblue" # color of lines
+  linecolorhilit = chartOpts?.linecolorhilit ? "Orchid" # color of lines, when highlighted
+  linewidth = chartOpts?.linewidth ? 3 # width of lines
+  title = chartOpts?.title ? "" # title for chart
+  xlab = chartOpts?.xlab ? "Chromosome" # x-axis label
+  ylab = chartOpts?.ylab ? "Position (cM)" # y-axis label
   # chartOpts end
   chartdivid = chartOpts?.chartdivid ? 'chart'
 

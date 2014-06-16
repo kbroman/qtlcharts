@@ -9,7 +9,7 @@ here are some examples of the use of each of the charts.
 To use R/qtlcharts, you'll first need to
 [install the package](installation.html), and load it with
 `library(qtlcharts)`. The [R/qtl](http://www.rqtl.org) and
-[RJSONIO](http://cran.r-project.org/web/packages/RJSONIO) will also be
+[jsonlite](http://cran.r-project.org/web/packages/jsonlite) will also be
 loaded.
 
 ### `iplotMap`

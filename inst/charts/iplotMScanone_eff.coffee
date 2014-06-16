@@ -6,25 +6,25 @@ plotLines = null
 iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
 
   # chartOpts start
-  wleft = chartOpts?.wleft ? 650
-  wright = chartOpts?.wright ? 350
-  htop = chartOpts?.htop ? 350
-  hbot = chartOpts?.hbot ? 350
-  margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5}
-  axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
-  titlepos = chartOpts?.titlepos ? 20
-  chrGap = chartOpts?.chrGap ? 8
-  darkrect = chartOpts?.darkrect ? d3.rgb(200, 200, 200)
-  lightrect = chartOpts?.lightrect ? d3.rgb(230, 230, 230)
-  colors = chartOpts?.colors ? ["slateblue", "white", "crimson"]
-  zlim = chartOpts?.zlim ? null
-  zthresh = chartOpts?.zthresh ? null
-  eff_ylim = chartOpts?.eff_ylim ? null
-  eff_ylab = chartOpts?.eff_ylab ? ""
-  linecolor = chartOpts?.linecolor ? "darkslateblue"
-  eff_linecolor = chartOpts?.eff_linecolor ? null
-  linewidth = chartOpts?.linewidth ? 2
-  eff_linewidth = chartOpts?.eff_linewidth ? 2
+  wleft = chartOpts?.wleft ? 650 # width of left panels in pixels
+  wright = chartOpts?.wright ? 350 # width of right panel in pixels
+  htop = chartOpts?.htop ? 350 # height of top panels in pixels
+  hbot = chartOpts?.hbot ? 350 # height of bottom panel in pixels
+  margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
+  axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+  titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
+  chrGap = chartOpts?.chrGap ? 8 # gap between chromosomes in pixels
+  darkrect = chartOpts?.darkrect ? d3.rgb(200, 200, 200) # color of darker background rectangle
+  lightrect = chartOpts?.lightrect ? d3.rgb(230, 230, 230) # color of lighter background rectangle
+  colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors
+  zlim = chartOpts?.zlim ? null # z-axis limits
+  zthresh = chartOpts?.zthresh ? null # lower z-axis threshold for display in heat map
+  eff_ylim = chartOpts?.eff_ylim ? null # y-axis limits for effect plot (right panel)
+  eff_ylab = chartOpts?.eff_ylab ? "" # y-axis label for effect plot (right panel)
+  linecolor = chartOpts?.linecolor ? "darkslateblue" # line color for LOD curves (lower panel)
+  eff_linecolor = chartOpts?.eff_linecolor ? null # line color for effect plot (right panel)
+  linewidth = chartOpts?.linewidth ? 2 # line width for LOD curves (lower panel)
+  eff_linewidth = chartOpts?.eff_linewidth ? 2 # width of line for effect plot (right panel)
   # chartOpts end
   chartdivid = chartOpts?.chartdivid ? 'chart'
 

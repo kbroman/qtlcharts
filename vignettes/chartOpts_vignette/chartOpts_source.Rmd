@@ -9,7 +9,7 @@ interactive graphs produced by
 colors or axis labels. Our main approach to allow such customization
 is through a function argument, `chartOpts`.
 
-
+<<insert_chartOpts_here>>
 
 <style type="text/css">
 body {

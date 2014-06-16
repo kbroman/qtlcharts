@@ -73,5 +73,5 @@ clean:
 
 chartOpts_vignette: vignettes/chartOpts.Rmd
 
-vignettes/chartOpts.Rmd: vignettes/chartOpt_vignette/grab_chartOpt_info.rb vignettes/chartOpt_vignette/chartOpts_source.Rmd jscharts
+vignettes/chartOpts.Rmd: vignettes/chartOpts_vignette/grab_chartOpt_info.rb vignettes/chartOpts_vignette/chartOpts_source.Rmd jscharts
 	$<

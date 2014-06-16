@@ -1,0 +1,28 @@
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{chartOpts to customize R/qtlcharts}
+
+## Use of `chartOpts` to customize R/qtlcharts interactive graphs
+
+There are a number of ways in which one may wish to customize the
+interactive graphs produced by
+[R/qtlcharts](http://kbroman.github.io/qtlcharts), such as different
+colors or axis labels. Our main approach to allow such customization
+is through a function argument, `chartOpts`.
+
+
+
+<style type="text/css">
+body {
+    margin-left: 100px;
+}
+code {
+    padding: 0;
+    font-size: 90%;
+    color: black;
+    background-color: white;
+    border: 0px solid white;
+}
+pre code {
+    border: 1px solid #ccc;    
+}
+</style>

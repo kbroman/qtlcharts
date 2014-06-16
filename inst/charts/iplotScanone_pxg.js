@@ -48,7 +48,7 @@ iplotScanone_pxg = function(lod_data, pxg_data, chartOpts) {
   eff_pointstroke = (_ref27 = (_ref28 = chartOpts != null ? chartOpts.eff_pointstroke : void 0) != null ? _ref28 : chartOpts != null ? chartOpts.pointstroke : void 0) != null ? _ref27 : "black";
   eff_pointsize = (_ref29 = (_ref30 = chartOpts != null ? chartOpts.eff_pointsize : void 0) != null ? _ref30 : chartOpts != null ? chartOpts.pointsize : void 0) != null ? _ref29 : 3;
   eff_ylim = (_ref31 = chartOpts != null ? chartOpts.eff_ylim : void 0) != null ? _ref31 : null;
-  eff_nyticks = (_ref32 = chartOpts != null ? chartOpts.eff_nyticks : void 0) != null ? _ref32 : null;
+  eff_nyticks = (_ref32 = chartOpts != null ? chartOpts.eff_nyticks : void 0) != null ? _ref32 : 5;
   eff_yticks = (_ref33 = chartOpts != null ? chartOpts.eff_yticks : void 0) != null ? _ref33 : null;
   eff_xlab = (_ref34 = chartOpts != null ? chartOpts.eff_xlab : void 0) != null ? _ref34 : "Genotype";
   eff_ylab = (_ref35 = chartOpts != null ? chartOpts.eff_ylab : void 0) != null ? _ref35 : "Phenotype";

@@ -167,4 +167,7 @@ code {
    background-color: white;
    border: 0px solid white;
 }
+pre code {
+  border: 1px solid #ccc;
+}
 </style>

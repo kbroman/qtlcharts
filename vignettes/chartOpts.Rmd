@@ -9,6 +9,513 @@ interactive graphs produced by
 colors or axis labels. Our main approach to allow such customization
 is through a function argument, `chartOpts`.
 
+### `iboxplot`
+
+`width`: width of image in pixels
+
+`height`: height of image in pixels
+
+`margin`: margins in pixels (left, top, right, bottom)
+
+`ylab`: y-axis label
+
+`xlab`: x-axis label
+
+`rectcolor`: color of background rectangle
+
+`qucolors`: vector of colors for the quantile curves
+
+`histcolors`: vector of colors for selected histograms
+
+### `iheatmap`
+
+`htop`: height of top charts in pixels
+
+`hbot`: height of bottom chart in pixels
+
+`wleft`: width of left charts in pixels
+
+`wright`: width of right chart in pixels
+
+`margin`: margins in pixels (left, top, right, bottom, inner)
+
+`axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos`: position of chart title in pixels
+
+`rectcolor`: color of background rectangle
+
+`strokecolor`: line color
+
+`strokewidth`: line width
+
+`xlim`: x-axis limits
+
+`ylim`: y-axis limits
+
+`nxticks`: no. ticks on x-axis
+
+`xticks`: vector of tick positions on x-axis
+
+`nyticks`: no. ticks on y-axis
+
+`yticks`: vector of tick positions on y-axis
+
+`nzticks`: no. ticks on z-axis
+
+`zticks`: vector of tick positions on z-axis
+
+`title`: title for chart
+
+`xlab`: x-axis label
+
+`ylab`: y-axis label
+
+`zlab`: z-axis label
+
+`zthresh`: lower threshold for z-axis for plotting in heat map
+
+`zlim`: z-axis limits
+
+`colors`: heat map colors (same length as `zlim`)
+
+### `iplotCorr`
+
+`height`: height of each panel in pixels
+
+`width`: width of each panel in pixels
+
+`margin`: margins in pixels (left, top, right, bottom, inner)
+
+`corcolors`: heat map colors (same length as `zlim`)
+
+`zlim`: z-axis limits
+
+`rectcolor`: color of background rectangle
+
+`cortitle`: title for heatmap panel
+
+`scattitle`: title for scatterplot panel
+
+`scatcolors`: vector of point colors for scatterplot
+
+### `iplotCurves`
+
+`htop`: height of curves chart in pixels
+
+`hbot`: height of scatterplots in pixels
+
+`width`: width of chart in pixels
+
+`margin`: margins in pixels (left, top, right, bottom, inner)
+
+`axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos`: position of chart title in pixels
+
+`rectcolor`: color of background rectangle
+
+`pointcolor`: vector of colors for points in scatterplots
+
+`pointstroke`: color of line outline for points in scatterplots
+
+`pointsize`: size of points in scatterplots
+
+`pointcolorhilit`: vector of colors for points in scatterplots, when highlighted
+
+`pointsizehilit`: zie of points in scatterplot, when highlighted
+
+`strokecolor`: vector of colors of curves
+
+`strokecolorhilit`: vector of colors of curves, when highlighted
+
+`strokewidth`: line width of curves
+
+`strokewidthhilit`: line widths of curves, when highlighted
+
+`curves_xlim`: x-axis limits in curve plot
+
+`curves_ylim`: y-axis limits in curve plot
+
+`curves_nxticks`: no. ticks on x-axis in curve plot
+
+`curves_xticks`: vector of tick positions on x-axis in curve plot
+
+`curves_nyticks`: no. ticks on y-axis in curve plot
+
+`curves_yticks`: vector of tick positions on y-axis in curve plot
+
+`curves_title`: title for curve plot
+
+`curves_xlab`: x-axis label for curve plot
+
+`curves_ylab`: y-axis label for curve plot
+
+`scat1_xlim`: x-axis limits in first scatterplot
+
+`scat1_ylim`: y-axis limits in first scatterplot
+
+`scat1_xNA`: treatment of missing values for x variable in first scatterplot (handle=T/F, force=T/F, width, gap)
+
+`scat1_yNA`: treatment of missing values for x variable in first scatterplot (handle=T/F, force=T/F, width, gap)
+
+`scat1_nxticks`: no. ticks on x-axis in first scatterplot
+
+`scat1_xticks`: vector of tick positions on x-axis in first scatterplot
+
+`scat1_nyticks`: no. ticks on y-axis in first scatterplot
+
+`scat1_yticks`: vector of tick positions on y-axis in first scatterplot
+
+`scat1_title`: title for first scatterplot
+
+`scat1_xlab`: x-axis label for first scatterplot
+
+`scat1_ylab`: y-axis label for first scatterplot
+
+`scat2_xlim`: x-axis limits in second scatterplot
+
+`scat2_ylim`: y-axis limits in second scatterplot
+
+`scat2_xNA`: treatment of missing values for x variable in second scatterplot (handle=T/F, force=T/F, width, gap)
+
+`scat2_yNA`: treatment of missing values for x variable in second scatterplot (handle=T/F, force=T/F, width, gap)
+
+`scat2_nxticks`: no. ticks on x-axis in second scatterplot
+
+`scat2_xticks`: vector of tick positions on x-axis in second scatterplot
+
+`scat2_nyticks`: no. ticks on y-axis in second scatterplot
+
+`scat2_yticks`: vector of tick positions on y-axis in second scatterplot
+
+`scat2_title`: title for second scatterplot
+
+`scat2_xlab`: x-axis label for second scatterplot
+
+`scat2_ylab`: y-axis label for second scatterplot
+
+### `iplotMap`
+
+`width`: width of chart in pixels
+
+`height`: height of chart in pixels
+
+`margin`: margins in pixels (left, top, right, bottom, inner)
+
+`axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos`: position of chart title in pixels
+
+`ylim`: y-axis limits
+
+`nyticks`: no. ticks on y-axis
+
+`yticks`: vector of tick positions on y-axis
+
+`tickwidth`: width of tick marks at markers, in pixels
+
+`rectcolor`: color of background rectangle
+
+`linecolor`: color of lines
+
+`linecolorhilit`: color of lines, when highlighted
+
+`linewidth`: width of lines
+
+`title`: title for chart
+
+`xlab`: x-axis label
+
+`ylab`: y-axis label
+
+### `iplotScanone` (no effects)
+
+`height`: height of image in pixels
+
+`width`: width of image in pixels
+
+`margin`: margins in pixels (left, top, right, bottom, inner)
+
+`axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos`: position of chart title in pixels
+
+`ylim`: y-axis limits
+
+`nyticks`: number of ticks in y-axis
+
+`yticks`: vector of tick positions for y-axis
+
+`chrGap`: gap between chromosomes in pixels
+
+`darkrect`: color of darker background rectangle
+
+`lightrect`: color of lighter background rectangle
+
+`linecolor`: line color for LOD curves
+
+`linewidth`: line width for LOD curves
+
+`pointcolor`: E9CFEC"
+
+`pointsize`: size of points at markers (default = 0 corresponding to no visible points at markers)
+
+`pointstroke`: color of outer circle for points at markers
+
+`title`: title of chart
+
+`xlab`: x-axis label
+
+`ylab`: y-axis label
+
+`rotate_ylab`: indicates whether to rotate the y-axis label 90 degrees
+
+### `iplotScanone` (`pxgtype="ci"`)
+
+`height`: height of image in pixels
+
+`wleft`: width of left panel in pixels
+
+`wright`: width of right panel in pixels
+
+`margin`: margins in pixels (left, top, right, bottom, inner)
+
+`lod_axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
+
+`lod_titlepos`: position of title for LOD curve panel, in pixels
+
+`chrGap`: gap between chromosomes
+
+`darkrect`: color of darker background rectangle
+
+`lightrect`: color of lighter background rectangle
+
+`lod_ylim`: y-axis limits in LOD curve panel
+
+`lod_nyticks`: number of ticks in y-axis in LOD curve panel
+
+`lod_yticks`: vector of tick positions for y-axis in LOD curve panel
+
+`lod_linecolor`: line color for LOD curves
+
+`lod_linewidth`: line width for LOD curves
+
+`lod_pointcolor`: E9CFEC"
+
+`lod_pointsize`: size of points at markers (default = 0 corresponding to no visible points at markers)
+
+`lod_pointstroke`: color of outer circle for points at markers in LOD curve panel
+
+`lod_title`: title of LOD curve panel
+
+`lod_xlab`: x-axis label for LOD curve panel
+
+`lod_ylab`: y-axis label for LOD curve panel
+
+`lod_rotate_ylab`: indicates whether to rotate the y-axis label 90 degrees, in LOD curve panel
+
+`eff_ylim`: y-axis limits in effect plot panel
+
+`eff_nyticks`: number of ticks in y-axis in effect plot panel
+
+`eff_yticks`: vector of tick positions for y-axis in effect plot panel
+
+`eff_linecolor`: line color in effect plot panel
+
+`eff_linewidth`: line width in effect plot panel
+
+`eff_xlab`: x-axis label in effect plot panel
+
+`eff_ylab`: y-axis label in effect plot panel
+
+`eff_rotate_ylab`: indicates whether to rotate the y-axis label 90 degrees, in effect plot panel
+
+`eff_segwidth`: width of line segments in effect plot panel, in pixels
+
+`eff_axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in effect plot panel
+
+`eff_titlepos`: position of title for effect plot panel, in pixels
+
+### `iplotScanone` (`pxgtype="raw"`)
+
+`height`: height of image in pixels
+
+`wleft`: width of left panel in pixels
+
+`wright`: width of right panel in pixels
+
+`margin`: margins in pixels (left, top, right, bottom, inner)
+
+`lod_axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
+
+`lod_titlepos`: position of title for LOD curve panel, in pixels
+
+`chrGap`: gap between chromosomes
+
+`darkrect`: color of darker background rectangle
+
+`lightrect`: color of lighter background rectangle
+
+`lod_ylim`: y-axis limits in LOD curve panel
+
+`lod_nyticks`: number of ticks in y-axis in LOD curve panel
+
+`lod_yticks`: vector of tick positions for y-axis in LOD curve panel
+
+`lod_linecolor`: line color for LOD curves
+
+`lod_linewidth`: line width for LOD curves
+
+`lod_pointcolor`: E9CFEC"
+
+`lod_pointsize`: size of points at markers (default = 0 corresponding to no visible points at markers)
+
+`lod_pointstroke`: color of outer circle for points at markers in LOD curve panel
+
+`lod_title`: title of LOD curve panel
+
+`lod_xlab`: x-axis label for LOD curve panel
+
+`lod_ylab`: y-axis label for LOD curve panel
+
+`lod_rotate_ylab`: indicates whether to rotate the y-axis label 90 degrees, in LOD curve panel
+
+`eff_pointcolor`: point color in phe-by-gen panel
+
+`eff_pointcolorhilit`: point color, when highlighted, in phe-by-gen panel
+
+`eff_pointstroke`: color of outer circle for points, in phe-by-gen panel
+
+`eff_pointsize`: point size in phe-by-gen paenl
+
+`eff_ylim`: y-axis limits in phe-by-gen panel
+
+`eff_nyticks`: number of ticks in y-axis in phe-by-gen panel
+
+`eff_yticks`: vector of tick positions for y-axis in phe-by-gen panel
+
+`eff_xlab`: x-axis label in phe-by-gen panel
+
+`eff_ylab`: y-axis label in phe-by-gen panel
+
+`eff_rotate_ylab`: indicates whether to rotate the y-axis label 90 degrees, in phe-by-gen panel
+
+`eff_xjitter`: amount of horizontal jittering in phe-by-gen panel
+
+`eff_axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
+
+`eff_titlepos`: position of title for phe-by-gen panel, in pixels
+
+`eff_yNA`: treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
+
+### `iplotPXG`
+
+`height`: height of chart in pixels
+
+`width`: width of chart in pixels
+
+`title`: title for chart
+
+`margin`: margins in pixels (left, top, right, bottom, inner)
+
+`xlab`: x-axis label
+
+`ylab`: y-axis label
+
+`axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos`: position of chart title in pixels
+
+`xjitter`: amount of horizontal jittering in pixels
+
+`ylim`: y-axis limits
+
+`yticks`: vector of tick positions on y-axis
+
+`nyticks`: no. ticks on y-axis
+
+`rectcolor`: color of background rectangle
+
+`pointcolor`: color for points
+
+`pointsize`: size of points in pixels
+
+`pointstroke`: color of outer circle for points
+
+`yNA`: treatment of missing values (handle=T/F, force=T/F, width, gap)
+
+### `iplotMScanone` (no effects)
+
+`wleft`: width of left panels in pixels
+
+`wright`: width of right panel in pixels
+
+`htop`: height of top panels in pixels
+
+`hbot`: height of bottom panel in pixels
+
+`margin`: margins in pixels (left, top, right, bottom, inner)
+
+`axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos`: position of chart title in pixels
+
+`chrGap`: gap between chromosomes in pixels
+
+`darkrect`: color of darker background rectangle
+
+`lightrect`: color of lighter background rectangle
+
+`colors`: heat map colors
+
+`zlim`: z-axis limits
+
+`zthresh`: lower z-axis threshold for display in heat map
+
+`linecolor`: color of lines
+
+`linewidth`: width of lines
+
+### `iplotMScanone` (with effects)
+
+`wleft`: width of left panels in pixels
+
+`wright`: width of right panel in pixels
+
+`htop`: height of top panels in pixels
+
+`hbot`: height of bottom panel in pixels
+
+`margin`: margins in pixels (left, top, right, bottom, inner)
+
+`axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos`: position of chart title in pixels
+
+`chrGap`: gap between chromosomes in pixels
+
+`darkrect`: color of darker background rectangle
+
+`lightrect`: color of lighter background rectangle
+
+`colors`: heat map colors
+
+`zlim`: z-axis limits
+
+`zthresh`: lower z-axis threshold for display in heat map
+
+`eff_ylim`: y-axis limits for effect plot (right panel)
+
+`eff_ylab`: y-axis label for effect plot (right panel)
+
+`linecolor`: line color for LOD curves (lower panel)
+
+`eff_linecolor`: line color for effect plot (right panel)
+
+`linewidth`: line width for LOD curves (lower panel)
+
+`eff_linewidth`: width of line for effect plot (right panel)
 
 
 <style type="text/css">

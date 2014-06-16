@@ -70,7 +70,7 @@ end
         
 
 # pull off the first part of the coffeescript file name
-def get_file_stem (csfile)
+def get_filestem (csfile)
     return $1 if csfile =~ /^(.+)\.coffee$/
     print "unexpected name for coffeescript file: #{csfile}"
     csfile
@@ -84,31 +84,50 @@ end
 
 def write_chartOpts (ofile, chartOpts, mvcomments)
 
-    chartOpts.each do |csfile, opts|
-        filestem = get_file_stem(csfile)
+    keys = chartOpts.keys
+    mvkeys = mvcomments.keys
+
+    # sort the coffeescript files
+    keys.sort! { |a,b|
+        if mvkeys.include?(a) and mvkeys.include?(b)
+        then mvkeys.find_index(a) <=> mvkeys.find_index(b)
+        else keys.find_index(a) <=> keys.find_index(b) end }
+
+    keys.each do |filestem|
         func = get_func_name(filestem)
 
         ofile.print "### `#{func}`"
         ofile.print " (#{mvcomments[filestem]})" unless mvcomments[filestem].nil?
         ofile.print "\n\n"
+
+        chartOpts[filestem].each do |opt, comment|
+            ofile.print "`#{opt}`: #{comment}\n\n"
+        end
+
     end
 
 end
 
-# now to the real work
+##############################
+### now to the real work
+##############################
+# directory and file names
 chart_dir = "inst/charts"
 ifile = "vignettes/chartOpts_vignette/chartOpts_source.Rmd"
 ofile = "vignettes/chartOpts.Rmd"
 mvfile = "vignettes/chartOpts_vignette/multiversions.csv"
 
+# find coffeescript files
 coffee_files = find_coffeescript_files(chart_dir)
-mvcomments = load_multiversions(mvfile)
-mvcomments.each { |func,comment| print "#{func}: #{comment}\n" }
 
+# multi-version functions: get comment information
+mvcomments = load_multiversions(mvfile)
+
+# parse the chartOpts in the coffeescript files
 chartOpts = {}
 coffee_files.each do |file|
-    puts "Reading from #{file}"
-    chartOpts[file] = parse_coffeescript_file("#{chart_dir}/#{file}")
+    chartOpts[get_filestem(file)] = parse_coffeescript_file("#{chart_dir}/#{file}")
 end
 
+# add the chartOpts to the Rmd vignette
 add_chartOpts_to_Rmd(ifile, ofile, chartOpts, mvcomments)

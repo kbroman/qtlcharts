@@ -37,7 +37,7 @@ iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
   eff_xlab = chartOpts?.eff_xlab ? "Genotype" # x-axis label in phe-by-gen panel
   eff_ylab = chartOpts?.eff_ylab ? "Phenotype" # y-axis label in phe-by-gen panel
   eff_rotate_ylab = chartOpts?.eff_rotate_ylab ? null # indicates whether to rotate the y-axis label 90 degrees, in phe-by-gen panel
-  eff_xjitter = chartOpts?.xjitter ? null # amount of horizontal jittering in phe-by-gen panel
+  xjitter = chartOpts?.xjitter ? chartOpts?.eff_xjitter ? null # amount of horizontal jittering in phe-by-gen panel
   eff_axispos = chartOpts?.eff_axispos ? chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel 
   eff_titlepos = chartOpts?.eff_titlepos ? chartOpts?.titlepos ? 20 # position of title for phe-by-gen panel, in pixels
   eff_yNA = chartOpts?.eff_yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
@@ -112,7 +112,7 @@ iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
                            .pointstroke(eff_pointstroke)
                            .pointsize(eff_pointsize)
                            .rectcolor(lightrect)
-                           .xjitter(eff_xjitter)
+                           .xjitter(xjitter)
                            .yNA(eff_yNA)
   
     svg.append("g")

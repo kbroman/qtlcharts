@@ -9,21 +9,21 @@ iplotScanone_noeff = (data, chartOpts) ->
   margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
   axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
   titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
-  ylim = chartOpts?.lod_ylim ? chartOpts?.ylim ? null # y-axis limits
-  nyticks = chartOpts?.lod_nyticks ? chartOpts?.nyticks ? 5 # number of ticks in y-axis
-  yticks = chartOpts?.lod_yticks ? chartOpts?.yticks ? null # vector of tick positions for y-axis
+  ylim = chartOpts?.ylim ? chartOpts?.lod_ylim ? null # y-axis limits
+  nyticks = chartOpts?.nyticks ? chartOpts?.lod_nyticks ? 5 # number of ticks in y-axis
+  yticks = chartOpts?.yticks ? chartOpts?.lod_yticks ? null # vector of tick positions for y-axis
   chrGap = chartOpts?.chrGap ? 8 # gap between chromosomes in pixels
   darkrect = chartOpts?.darkrect ? d3.rgb(200, 200, 200) # color of darker background rectangle
   lightrect = chartOpts?.lightrect ? d3.rgb(230, 230, 230) # color of lighter background rectangle
-  linecolor = chartOpts?.lod_linecolor ? chartOpts?.linecolor ? "darkslateblue" # line color for LOD curves
-  linewidth = chartOpts?.lod_linewidth ? chartOpts?.linewidth ? 2 # line width for LOD curves
-  pointcolor = chartOpts?.lod_pointcolor ? chartOpts?.pointcolor ? "#E9CFEC" # color for points at markers
-  pointsize = chartOpts?.lod_pointsize ? chartOpts?.pointsize ? 0 # size of points at markers (default = 0 corresponding to no visible points at markers)
-  pointstroke = chartOpts?.lod_pointstroke ? chartOpts?.pointstroke ? "black" # color of outer circle for points at markers
-  title = chartOpts?.lod_title ? chartOpts?.title ? "" # title of chart
-  xlab = chartOpts?.lod_xlab ? chartOpts?.xlab ? "Chromosome" # x-axis label
-  ylab = chartOpts?.lod_ylab ? chartOpts?.ylab ? "LOD score" # y-axis label
-  rotate_ylab = chartOpts?.lod_rotate_ylab ? chartOpts?.rotate_ylab ? null # indicates whether to rotate the y-axis label 90 degrees
+  linecolor = chartOpts?.linecolor ? chartOpts?.lod_linecolor ? "darkslateblue" # line color for LOD curves
+  linewidth = chartOpts?.linewidth ? chartOpts?.lod_linewidth ? 2 # line width for LOD curves
+  pointcolor = chartOpts?.pointcolor ? chartOpts?.lod_pointcolor ? "#E9CFEC" # color for points at markers
+  pointsize = chartOpts?.pointsize ? chartOpts?.lod_pointsize ? 0 # size of points at markers (default = 0 corresponding to no visible points at markers)
+  pointstroke = chartOpts?.pointstroke ? chartOpts?.lod_pointstroke ? "black" # color of outer circle for points at markers
+  title = chartOpts?.title ? chartOpts?.lod_title ? "" # title of chart
+  xlab = chartOpts?.xlab ? chartOpts?.lod_xlab ? "Chromosome" # x-axis label
+  ylab = chartOpts?.ylab ? chartOpts?.lod_ylab ? "LOD score" # y-axis label
+  rotate_ylab = chartOpts?.rotate_ylab ? chartOpts?.lod_rotate_ylab ? null # indicates whether to rotate the y-axis label 90 degrees
   # chartOpts end
   chartdivid = chartOpts?.chartdivid ? 'chart'
 

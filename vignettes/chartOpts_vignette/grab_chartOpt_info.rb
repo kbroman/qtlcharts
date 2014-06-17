@@ -12,6 +12,21 @@ def find_coffeescript_files (directory)
     files
 end
 
+def default2R (value)
+    if value == "null"
+        return "NULL"
+    elsif value =~ /^{.+:.+}$/
+        value.sub!(/^{/, 'list(')
+        value.sub!(/}$/, ')')
+        value.gsub!(/\s*:\s*/, '=')
+    elsif value =~ /^\[.+\]$/
+        value.sub!(/\[/, 'c(')
+        value.sub!(/\]/, ')')
+    end
+
+    value
+end
+
 # parse the chartOpts lines in a coffeescript file
 def parse_coffeescript_file (filename)
     file = File.open(filename)
@@ -19,8 +34,7 @@ def parse_coffeescript_file (filename)
     # skip past header
     file.each { |line| break if line =~ /# chartOpts start/ }
 
-    variables = []
-    comments = {}
+    chartOpts = {}
     file.each do |line|
         break if line =~ /# chartOpts end/
 
@@ -28,17 +42,19 @@ def parse_coffeescript_file (filename)
         next if line == ""
 
         variable = line.split(/\=/)[0].strip()
-        comment = line.split(/\#/)[1].strip()
+        comment = line.split(/\s\#\s/)[1].strip()
 
         opts_variable = line.strip.split[2]
         print "Inconsistent chartOpt: #{filename}: #{line}\n" if opts_variable != "chartOpts?.#{variable}"
 
-        comments[variable] = comment
+        default = line.split(/\s[\#\?]\s/)[-2]
+
+        chartOpts[variable] = {comment: comment, default: default}
     end
 
     file.close
 
-    comments
+    chartOpts
 end
 
 
@@ -103,8 +119,8 @@ def write_chartOpts (ofile, chartOpts, mvcomments)
         ofile.print " (#{mvcomments[filestem]})" unless mvcomments[filestem].nil?
         ofile.print "\n\n"
 
-        chartOpts[filestem].each do |opt, comment|
-            ofile.print "`#{opt}`: #{comment}\n\n"
+        chartOpts[filestem].each do |key, value|
+            ofile.print "`#{key} = #{default2R(value[:default])}`: #{value[:comment]}\n\n"
         end
 
     end

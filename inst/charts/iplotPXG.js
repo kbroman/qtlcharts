@@ -55,7 +55,7 @@ iplotPXG = function(data, chartOpts) {
   ylim = (_ref9 = chartOpts != null ? chartOpts.ylim : void 0) != null ? _ref9 : null;
   yticks = (_ref10 = chartOpts != null ? chartOpts.yticks : void 0) != null ? _ref10 : null;
   nyticks = (_ref11 = chartOpts != null ? chartOpts.nyticks : void 0) != null ? _ref11 : 5;
-  rectcolor = (_ref12 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref12 : d3.rgb(230, 230, 230);
+  rectcolor = (_ref12 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref12 : "#E6E6E6";
   pointcolor = (_ref13 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? _ref13 : "slateblue";
   pointsize = (_ref14 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? _ref14 : 3;
   pointstroke = (_ref15 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? _ref15 : "black";

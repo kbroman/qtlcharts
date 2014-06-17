@@ -13,7 +13,7 @@ iboxplot = function(data, chartOpts) {
   };
   ylab = (_ref3 = chartOpts != null ? chartOpts.ylab : void 0) != null ? _ref3 : "Response";
   xlab = (_ref4 = chartOpts != null ? chartOpts.xlab : void 0) != null ? _ref4 : "Individuals";
-  rectcolor = (_ref5 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref5 : d3.rgb(230, 230, 230);
+  rectcolor = (_ref5 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref5 : "#E6E6E6";
   qucolors = (_ref6 = chartOpts != null ? chartOpts.qucolors : void 0) != null ? _ref6 : null;
   histcolors = (_ref7 = chartOpts != null ? chartOpts.histcolors : void 0) != null ? _ref7 : ["blue", "red", "green", "MediumVioletRed", "black"];
   chartdivid = (_ref8 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref8 : 'chart';

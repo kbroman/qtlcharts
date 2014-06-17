@@ -23,7 +23,7 @@ iplotMap = function(data, chartOpts) {
   nyticks = (_ref6 = chartOpts != null ? chartOpts.nyticks : void 0) != null ? _ref6 : 5;
   yticks = (_ref7 = chartOpts != null ? chartOpts.yticks : void 0) != null ? _ref7 : null;
   tickwidth = (_ref8 = chartOpts != null ? chartOpts.tickwidth : void 0) != null ? _ref8 : 10;
-  rectcolor = (_ref9 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref9 : d3.rgb(230, 230, 230);
+  rectcolor = (_ref9 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref9 : "#E6E6E6";
   linecolor = (_ref10 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? _ref10 : "slateblue";
   linecolorhilit = (_ref11 = chartOpts != null ? chartOpts.linecolorhilit : void 0) != null ? _ref11 : "Orchid";
   linewidth = (_ref12 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? _ref12 : 3;

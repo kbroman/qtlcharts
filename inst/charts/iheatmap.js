@@ -21,7 +21,7 @@ iheatmap = function(data, chartOpts) {
     ylabel: 5
   };
   titlepos = (_ref6 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? _ref6 : 20;
-  rectcolor = (_ref7 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref7 : d3.rgb(230, 230, 230);
+  rectcolor = (_ref7 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref7 : "#E6E6E6";
   strokecolor = (_ref8 = chartOpts != null ? chartOpts.strokecolor : void 0) != null ? _ref8 : "slateblue";
   strokewidth = (_ref9 = chartOpts != null ? chartOpts.strokewidth : void 0) != null ? _ref9 : 2;
   xlim = (_ref10 = chartOpts != null ? chartOpts.xlim : void 0) != null ? _ref10 : d3.range(data.x);

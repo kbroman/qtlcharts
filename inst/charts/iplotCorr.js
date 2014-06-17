@@ -14,7 +14,7 @@ iplotCorr = function(data, chartOpts) {
   };
   corcolors = (_ref3 = chartOpts != null ? chartOpts.corcolors : void 0) != null ? _ref3 : ["darkslateblue", "white", "crimson"];
   zlim = (_ref4 = chartOpts != null ? chartOpts.zlim : void 0) != null ? _ref4 : [-1, 0, 1];
-  rectcolor = (_ref5 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref5 : d3.rgb(230, 230, 230);
+  rectcolor = (_ref5 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref5 : "#E6E6E6";
   cortitle = (_ref6 = chartOpts != null ? chartOpts.cortitle : void 0) != null ? _ref6 : "";
   scattitle = (_ref7 = chartOpts != null ? chartOpts.scattitle : void 0) != null ? _ref7 : "";
   scatcolors = (_ref8 = chartOpts != null ? chartOpts.scatcolors : void 0) != null ? _ref8 : null;

@@ -20,7 +20,7 @@ iplotCurves = function(curve_data, scatter1_data, scatter2_data, chartOpts) {
     ylabel: 5
   };
   titlepos = (_ref5 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? _ref5 : 20;
-  rectcolor = (_ref6 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref6 : d3.rgb(230, 230, 230);
+  rectcolor = (_ref6 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref6 : "#E6E6E6";
   pointcolor = (_ref7 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? _ref7 : null;
   pointstroke = (_ref8 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? _ref8 : "black";
   pointsize = (_ref9 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? _ref9 : 3;

@@ -29,8 +29,8 @@ iplotScanone_pxg = function(lod_data, pxg_data, chartOpts) {
   };
   lod_titlepos = (_ref6 = (_ref7 = chartOpts != null ? chartOpts.lod_titlepos : void 0) != null ? _ref7 : chartOpts != null ? chartOpts.titlepos : void 0) != null ? _ref6 : 20;
   chrGap = (_ref8 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref8 : 8;
-  darkrect = (_ref9 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? _ref9 : d3.rgb(200, 200, 200);
-  lightrect = (_ref10 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? _ref10 : d3.rgb(230, 230, 230);
+  darkrect = (_ref9 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? _ref9 : "#C8C8C8";
+  lightrect = (_ref10 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? _ref10 : "#E6E6E6";
   lod_ylim = (_ref11 = chartOpts != null ? chartOpts.lod_ylim : void 0) != null ? _ref11 : null;
   lod_nyticks = (_ref12 = chartOpts != null ? chartOpts.lod_nyticks : void 0) != null ? _ref12 : 5;
   lod_yticks = (_ref13 = chartOpts != null ? chartOpts.lod_yticks : void 0) != null ? _ref13 : null;

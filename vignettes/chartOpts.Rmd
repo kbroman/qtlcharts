@@ -401,7 +401,7 @@ is through a function argument, `chartOpts`.
 
 `eff_rotate_ylab`: indicates whether to rotate the y-axis label 90 degrees, in phe-by-gen panel
 
-`eff_xjitter`: amount of horizontal jittering in phe-by-gen panel
+`xjitter`: amount of horizontal jittering in phe-by-gen panel
 
 `eff_axispos`: position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
 

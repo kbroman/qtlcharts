@@ -1,15 +1,19 @@
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{chartOpts to customize R/qtlcharts}
+%\VignetteIndexEntry{R/qtlcharts User Guide}
 
-## Use of `chartOpts` to customize R/qtlcharts interactive graphs
+## R/qtlcharts User Guide
+
+### Full list of `chartOpts` options
 
 There are a number of ways in which one may wish to customize the
 interactive graphs produced by
 [R/qtlcharts](http://kbroman.github.io/qtlcharts), such as different
 colors or axis labels. Our main approach to allow such customization
-is through a function argument, `chartOpts`.
+is through a function argument, `chartOpts`. We touched on this
+briefly above. The following is a complete listing of the
+customization options for each chart.
 
-### `iboxplot`
+#### `iboxplot`
 
 `width = 1000`: width of image in pixels
 
@@ -27,7 +31,7 @@ is through a function argument, `chartOpts`.
 
 `histcolors = c("blue", "red", "green", "MediumVioletRed", "black")`: vector of colors for selected histograms
 
-### `iheatmap`
+#### `iheatmap`
 
 `htop = 500`: height of top charts in pixels
 
@@ -79,7 +83,7 @@ is through a function argument, `chartOpts`.
 
 `colors = c("slateblue", "white", "crimson")`: heat map colors (same length as `zlim`)
 
-### `iplotCorr`
+#### `iplotCorr`
 
 `height = 450`: height of each panel in pixels
 
@@ -99,7 +103,7 @@ is through a function argument, `chartOpts`.
 
 `scatcolors = NULL`: vector of point colors for scatterplot
 
-### `iplotCurves`
+#### `iplotCurves`
 
 `htop = 500`: height of curves chart in pixels
 
@@ -195,7 +199,7 @@ is through a function argument, `chartOpts`.
 
 `scat2_ylab = "Y"`: y-axis label for second scatterplot
 
-### `iplotMap`
+#### `iplotMap`
 
 `width = 1000`: width of chart in pixels
 
@@ -229,7 +233,7 @@ is through a function argument, `chartOpts`.
 
 `ylab = "Position (cM)"`: y-axis label
 
-### `iplotScanone` (no effects)
+#### `iplotScanone` (no effects)
 
 `height = 450`: height of image in pixels
 
@@ -271,7 +275,7 @@ is through a function argument, `chartOpts`.
 
 `rotate_ylab = NULL`: indicates whether to rotate the y-axis label 90 degrees
 
-### `iplotScanone` (`pxgtype="ci"`)
+#### `iplotScanone` (`pxgtype="ci"`)
 
 `height = 450`: height of image in pixels
 
@@ -337,7 +341,7 @@ is through a function argument, `chartOpts`.
 
 `eff_titlepos = 20`: position of title for effect plot panel, in pixels
 
-### `iplotScanone` (`pxgtype="raw"`)
+#### `iplotScanone` (`pxgtype="raw"`)
 
 `height = 450`: height of image in pixels
 
@@ -409,7 +413,7 @@ is through a function argument, `chartOpts`.
 
 `eff_yNA = list(handle=true, force=false, width=15, gap=10)`: treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
 
-### `iplotPXG`
+#### `iplotPXG`
 
 `height = 450`: height of chart in pixels
 
@@ -445,7 +449,7 @@ is through a function argument, `chartOpts`.
 
 `yNA = list(handle=true, force=false, width=15, gap=10)`: treatment of missing values (handle=T/F, force=T/F, width, gap)
 
-### `iplotMScanone` (no effects)
+#### `iplotMScanone` (no effects)
 
 `wleft = 650`: width of left panels in pixels
 
@@ -477,7 +481,7 @@ is through a function argument, `chartOpts`.
 
 `linewidth = 2`: width of lines
 
-### `iplotMScanone` (with effects)
+#### `iplotMScanone` (with effects)
 
 `wleft = 650`: width of left panels in pixels
 

@@ -7,7 +7,7 @@
 create interactive charts for xQTL data, for use with
 [R/qtl](http://www.rqtl.org).
 While its interactive QTL charts are particularly useful for
-exploratory data analysis within R, they may also be included within 
+exploratory data analysis within R, they may also be included within
 [R Markdown](https://www.rstudio.com/ide/docs/r_markdown)-based reports.
 
 [R Markdown](https://www.rstudio.com/ide/docs/r_markdown) is a
@@ -15,7 +15,7 @@ extension of [Markdown](http://daringfireball.net/projects/markdown/),
 using [knitr](http://yihui.name/knitr/), to write simply-marked-up
 text with R code chunks that are converted to an html file, for
 viewing in the browser. Code chunks are processed by knitr and
-replaced with the results or graphs produced. 
+replaced with the results or graphs produced.
 
 For more information on R Markdown and knitr, see the
 [knitr in a knutshell](http://kbroman.github.io/knitr_knutshell/)
@@ -66,7 +66,7 @@ point, using Haley-Knott regression.
 
 ```{r scanone}
 grav <- calc.genoprob(grav, step=1)
-out.hk <- scanone(grav, pheno.col=1:nphe(grav), method="hk") 
+out.hk <- scanone(grav, pheno.col=1:nphe(grav), method="hk")
 ```
 
 ### Interactive charts
@@ -129,8 +129,8 @@ iplotCurves(grav$pheno, times,
             chartdivid="iplotCurves",
             print=TRUE,
             chartOpts=list(curves_xlab="Time", curves_ylab="Root tip angle",
-              scat1_xlab="Angle at 30 min", scat1_ylab="Angle at 4 hrs",
-              scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 8 hrs"))
+                           scat1_xlab="Angle at 30 min", scat1_ylab="Angle at 4 hrs",
+                           scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 8 hrs"))
 ```
 
 
@@ -158,16 +158,18 @@ body { margin-left: 100px; }
 ```
 
 <style type="text/css">
-body { margin-left: 100px; }
+body {
+    margin-left: 100px;
+}
 
 code {
-   padding: 0;
-   font-size: 90%;
-   color: black;
-   background-color: white;
-   border: 0px solid white;
+    padding: 0;
+    font-size: 90%;
+    color: black;
+    background-color: white;
+    border: 0px solid white;
 }
 pre code {
-  border: 1px solid #ccc;
+    border: 1px solid #ccc;
 }
 </style>

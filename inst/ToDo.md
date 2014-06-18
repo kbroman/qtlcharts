@@ -2,6 +2,9 @@
 
 ### General things
 
+- errors in coffeescript printed to browser
+  (insert before svg?)
+
 - standard ways to give axis labels
   (draw axis labels from data?)
 

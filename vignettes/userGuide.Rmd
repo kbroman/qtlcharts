@@ -1,7 +1,179 @@
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{R/qtlcharts User Guide}
 
+```{r knitr_options, include=FALSE}
+# R chunks will not be run 
+library(knitr)
+opts_chunk$set(eval=FALSE, results="hide")
+```
+
 ## R/qtlcharts User Guide
+
+[R/qtlcharts](http://kbroman.github.io/qtlcharts) is an
+[R](http://www.r-project.org) package to create interactive charts for
+QTL data, for use with [R/qtl](http://www.rqtl.org). The charts are
+saved to a temporary file and opened in a web browser, though you may also
+save them to a specific file, to be viewed later.
+
+We are focusing development on the
+[Chrome](http://www.google.com/chrome/browser) and
+[Safari](https://www.apple.com/safari/) browsers. The graphs may also
+be viewed in other browsers, such [Opera](http://www.opera.com/) and
+[Firefox](http://www.mozilla.org/en-US/firefox/new/), but it can be
+hard to accommodate all possible browser differences.
+
+Information on installing R/qtlcharts is available
+[here](http://kbroman.github.io/qtlcharts/pages/installation.html); it
+requires installation of the packages [R/qtl](http://www.rqtl.org),
+[jsonlite](http://cran.r-project.org/web/packages/jsonlite/), and
+[devtools](https://github.com/hadley/devtools).
+
+### Basic use
+
+You first need to load the package.
+
+```{r load_library, eval=TRUE}
+library(qtlcharts)
+```
+
+Now let's begin by considering the function `iplotCorr`, which creates
+a heatmap of a correlation matrix, linked to scatterplots of the
+underlying variables.
+
+We'll first load the `geneExpr` dataset included with the package.
+
+```{r geneExpr_data, eval=TRUE}
+data(geneExpr)
+```
+
+This is a list with two components. The first, `geneExpr$expr`, is an
+`r nrow(geneExpr$expr)`&times;`r ncol(geneExpr$expr)` matrix of gene
+expression data.
+
+You can use `iplotCorr` as follows:
+
+```{r iplotCorr_reordered}
+iplotCorr(geneExpr$expr, reorder=TRUE)
+```
+
+
+### Examples of the use of other charts
+
+#### `iplotMap`
+
+`iplotMap` creates a (slightly) interactive genetic map. Hover over a
+marker position to view the marker name.
+
+```{r iplotMap_example}
+data(hyper)
+map(hyper)
+
+iplotMap(map, title="iplotMap example")
+```
+
+#### `iplotScanone`
+
+`iplotScanone` creates an interactive chart with LOD
+curves linked to estimated QTL effects.
+
+
+```{r iplotScanone_example}
+data(hyper)
+hyper <- calc.genoprob(hyper, step=1)
+out <- scanone(hyper)
+
+iplotScanone(out, hyper, title="iplotScanone example")
+```
+
+#### `iplotMScanone`
+
+`iplotMScanone` creates a heatmap of LOD curves for a set of genome
+scans (for each, for each of a time course of phenotypes), linked to a
+plot of the individual genome scans, and also to the QTL effects.
+
+```{r iplotMScanone_example}
+data(grav)
+grav <- calc.genoprob(grav, step=1)
+grav <- reduce2grid(grav)
+phecol <- seq(1, nphe(grav), by=5)
+out <- scanone(grav, phe=phecol)
+eff <- estQTLeffects(grav, phe=phecol, what="effects")
+
+iplotMScanone(out, effects=eff,
+              title="iplotMScanone example",
+              chartOpts=list(eff_ylab="QTL effect"))
+```
+
+
+#### `iplotCorr`
+
+`iplotCorr` creates an heat map of a correlation matrix, linked to the
+underlying scatterplots.
+
+```{r iplotCorr_example}
+data(geneExpr)
+
+iplotCorr(geneExpr$expr, geneExpr$genotype,
+          title = "iplotCorr example",
+          chartOpts=list(cortitle="Correlation matrix",
+                         scattitle="Scatterplot"))
+```
+
+
+#### `iplotCurves`
+
+`iplotCurves` creates a plot of a set of curves linked to one or two
+scatterplots.
+
+```{r iplotCurves_example}
+data(grav)
+times <- attr(grav, "time")
+phe <- grav$pheno
+
+iplotCurves(phe, times, phe[,times==2 | times==4], phe[,times==4 | times==6],
+            title="iplotCurves example",
+            chartOpts=list(curves_xlab="Time (hours)", curves_ylab="Root tip angle (degrees)",
+                           scat1_xlab="Angle at 2 hrs", scat1_ylab="Angle at 4 hrs",
+                           scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 6 hrs"))
+```
+
+#### `iboxplot`
+
+`iboxplot` creates an interactive graph for a large set of box plots
+(rendered as lines connecting the quantiles), linked to underlying
+histograms.
+
+```{r iboxplot_example}
+# simulated data
+n.ind <- 500
+n.gene <- 10000
+expr <- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
+dimnames(expr) <- list(paste0("ind", 1:n.ind),
+                       paste0("gene", 1:n.gene))
+
+iboxplot(expr, title="iboxplot example",
+         chartOpts=list(xlab="Mice", ylab="Gene expression"))
+```
+
+#### `iheatmap`
+
+`iheatmap` creates an interactive heatmap of a numeric matrix, with
+pixels linked to plots of horizontal and vertical slices.
+
+```{r iheatmap_example}
+# data to display
+n <- 101
+x <- y <- seq(-2, 2, len=n)
+z <- matrix(ncol=n, nrow=n)
+for(i in seq(along=x))
+  for(j in seq(along=y))
+    z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
+
+iheatmap(z, x, y, title = "iheatmap example")
+```
+
+
+
 
 ### Full list of `chartOpts` options
 

@@ -65,7 +65,7 @@ d3.json "data.json", (data) ->
                 .attr("transform", "translate(0, #{halfh})")
 
     chart1.datum(data)
-      .call(mychart_em)
+          .call(mychart_em)
 
     chart2.datum(data)
-      .call(mychart_hk)
+          .call(mychart_hk)

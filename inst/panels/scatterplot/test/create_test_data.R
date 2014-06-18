@@ -10,7 +10,7 @@ mu <- c(2, 5, 10)
 p <- length(mu)
 n <- 200
 dat <- matrix(rnorm(n*p), ncol=p) %*% D +
-  rep(mu, rep(n,p))
+                rep(mu, rep(n,p))
 
 dat[1:4,3] <- NA
 dat[4:9,2] <- NA

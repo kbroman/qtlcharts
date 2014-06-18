@@ -26,9 +26,9 @@
 # map_as_json <- map2json(map)
 map2json <-
 function(map, digits=4) {
-  chrnames <- names(map)
-  # force use of hash with single numeric values
-  map <- lapply(map, function(a) lapply(a, jsonlite::unbox))
+    chrnames <- names(map)
+    # force use of hash with single numeric values
+    map <- lapply(map, function(a) lapply(a, jsonlite::unbox))
 
-  strip_whitespace( jsonlite::toJSON(list(chr=chrnames, map=map), digits=digits, na="null") )
+    strip_whitespace( jsonlite::toJSON(list(chr=chrnames, map=map), digits=digits, na="null") )
 }

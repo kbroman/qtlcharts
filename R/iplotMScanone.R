@@ -67,50 +67,50 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
          file, onefile=FALSE, openfile=TRUE, title="", chartdivid='chart',
          caption, chartOpts=NULL, digits=4, print=FALSE)
 {
-  if(missing(file)) file <- NULL
+    if(missing(file)) file <- NULL
 
-  if(!any(class(scanoneOutput) == "scanone"))
-    stop('"scanoneOutput" should have class "scanone".')
+    if(!any(class(scanoneOutput) == "scanone"))
+        stop('"scanoneOutput" should have class "scanone".')
 
-  if(!missing(chr) && !is.null(chr)) {
-    rn <- rownames(scanoneOutput)
-    scanoneOutput <- subset(scanoneOutput, chr=chr)
-    if(!missing(effects) && !is.null(effects)) effects <- effects[match(rownames(scanoneOutput), rn)]
-    if(!missing(cross) && !is.null(cross)) cross <- subset(cross, chr=chr)
-   }
+    if(!missing(chr) && !is.null(chr)) {
+        rn <- rownames(scanoneOutput)
+        scanoneOutput <- subset(scanoneOutput, chr=chr)
+        if(!missing(effects) && !is.null(effects)) effects <- effects[match(rownames(scanoneOutput), rn)]
+        if(!missing(cross) && !is.null(cross)) cross <- subset(cross, chr=chr)
+    }
 
-  if(missing(caption) || is.null(caption)) caption <- NULL
+    if(missing(caption) || is.null(caption)) caption <- NULL
 
-  if(missing(lodcolumn) || is.null(lodcolumn)) lodcolumn <- 1:(ncol(scanoneOutput)-2)
-  stopifnot(all(lodcolumn >= 1 & lodcolumn <= ncol(scanoneOutput)-2))
-  scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2),drop=FALSE]
+    if(missing(lodcolumn) || is.null(lodcolumn)) lodcolumn <- 1:(ncol(scanoneOutput)-2)
+    stopifnot(all(lodcolumn >= 1 & lodcolumn <= ncol(scanoneOutput)-2))
+    scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2),drop=FALSE]
 
-  if(missing(pheno.col) || is.null(pheno.col)) pheno.col <- seq(along=lodcolumn)
-  if((missing(cross) || is.null(cross)) && (missing(effects) || is.null(effects)))
-     return(iplotMScanone_noeff(scanoneOutput,
-                                file=file, onefile=onefile, openfile=openfile, title=title,
-                                chartdivid=chartdivid,
-                                caption=caption, chartOpts=chartOpts, digits=digits, print=print))
+    if(missing(pheno.col) || is.null(pheno.col)) pheno.col <- seq(along=lodcolumn)
+    if((missing(cross) || is.null(cross)) && (missing(effects) || is.null(effects)))
+        return(iplotMScanone_noeff(scanoneOutput,
+                                   file=file, onefile=onefile, openfile=openfile, title=title,
+                                   chartdivid=chartdivid,
+                                   caption=caption, chartOpts=chartOpts, digits=digits, print=print))
 
-  if(missing(effects) || is.null(effects)) {
-    stopifnot(length(pheno.col) == length(lodcolumn))
-    stopifnot(class(cross)[2] == "cross")
+    if(missing(effects) || is.null(effects)) {
+        stopifnot(length(pheno.col) == length(lodcolumn))
+        stopifnot(class(cross)[2] == "cross")
 
-    crosstype <- class(cross)[1]
-    handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid") # handled for add/dom effects
-    what <- ifelse(crosstype %in% handled_crosses, "effects", "means")
-    effects <- estQTLeffects(cross, pheno.col, what=what)
-  }
+        crosstype <- class(cross)[1]
+        handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid") # handled for add/dom effects
+        what <- ifelse(crosstype %in% handled_crosses, "effects", "means")
+        effects <- estQTLeffects(cross, pheno.col, what=what)
+    }
 
-  stopifnot(length(effects) == nrow(scanoneOutput))
-  stopifnot(all(vapply(effects, nrow, 1) == ncol(scanoneOutput)-2))
+    stopifnot(length(effects) == nrow(scanoneOutput))
+    stopifnot(all(vapply(effects, nrow, 1) == ncol(scanoneOutput)-2))
 
-  scanoneOutput <- calcSignedLOD(scanoneOutput, effects)
+    scanoneOutput <- calcSignedLOD(scanoneOutput, effects)
 
-  iplotMScanone_eff(scanoneOutput, effects,
-                    file=file, onefile=onefile, openfile=openfile, title=title,
-                    chartdivid=chartdivid,
-                    caption=caption, chartOpts=chartOpts, digits=digits, print=print)
+    iplotMScanone_eff(scanoneOutput, effects,
+                      file=file, onefile=onefile, openfile=openfile, title=title,
+                      chartdivid=chartdivid,
+                      caption=caption, chartOpts=chartOpts, digits=digits, print=print)
 }
 
 
@@ -120,30 +120,30 @@ function(scanoneOutput,
          file, onefile=FALSE, openfile=TRUE,
          title="", chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
-  scanone_json <- scanone2json(scanoneOutput, digits=digits)
+    scanone_json <- scanone2json(scanoneOutput, digits=digits)
 
-  if(missing(caption) || is.null(caption))
-    caption <- c('Hover over rows in the LOD image at top to see the individual curves below and, ',
-                 'to the right, a plot of LOD score for each column at that genomic position.')
+    if(missing(caption) || is.null(caption))
+        caption <- c('Hover over rows in the LOD image at top to see the individual curves below and, ',
+                     'to the right, a plot of LOD score for each column at that genomic position.')
 
-  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels=c("lodheatmap", "lodchart", "curvechart"),
-                    charts="iplotMScanone_noeff", chartdivid=chartdivid,
-                    caption=caption, print=print)
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                      panels=c("lodheatmap", "lodchart", "curvechart"),
+                      charts="iplotMScanone_noeff", chartdivid=chartdivid,
+                      caption=caption, print=print)
 
-  # add chartdivid to chartOpts
-  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    # add chartdivid to chartOpts
+    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
-  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-  append_html_jscode(file, paste0('iplotMScanone_noeff(', chartdivid, '_scanoneData, ',
-                                  chartdivid, '_chartOpts);'))
+    append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
+    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+    append_html_jscode(file, paste0('iplotMScanone_noeff(', chartdivid, '_scanoneData, ',
+                                    chartdivid, '_chartOpts);'))
 
-  append_html_bottom(file, print=print)
+    append_html_bottom(file, print=print)
 
-  if(openfile && !print) browseURL(file)
+    if(openfile && !print) browseURL(file)
 
-  invisible(file)
+    invisible(file)
 }
 
 # iplotMScanone_eff: multiple LOD curves + QTL effects
@@ -153,31 +153,31 @@ function(scanoneOutput, effects,
          title="", chartdivid=chartdivid,
          caption, chartOpts=NULL, digits=4, print=FALSE)
 {
-  scanone_json <- scanone2json(scanoneOutput, digits=digits)
-  effects_json <- effects2json(effects, digits=digits)
+    scanone_json <- scanone2json(scanoneOutput, digits=digits)
+    effects_json <- effects2json(effects, digits=digits)
 
-  if(missing(caption) || is.null(caption))
-    caption <- c('Hover over LOD heat map to view individual curves below and ',
-                'estimated QTL effects to the right.')
+    if(missing(caption) || is.null(caption))
+        caption <- c('Hover over LOD heat map to view individual curves below and ',
+                     'estimated QTL effects to the right.')
 
-  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "colorbrewer", "panelutil"),
-                    panels=c("lodheatmap", "lodchart", "curvechart"),
-                    charts="iplotMScanone_eff", chartdivid=chartdivid,
-                    caption=caption, print=print)
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "colorbrewer", "panelutil"),
+                      panels=c("lodheatmap", "lodchart", "curvechart"),
+                      charts="iplotMScanone_eff", chartdivid=chartdivid,
+                      caption=caption, print=print)
 
-  # add chartdivid to chartOpts
-  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    # add chartdivid to chartOpts
+    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
-  append_html_jscode(file, paste0(chartdivid, '_effectsData = '), effects_json, ';')
-  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-  append_html_jscode(file, paste0('iplotMScanone_eff(', chartdivid, '_scanoneData, ',
-                                  chartdivid, '_effectsData, ',
-                                  chartdivid, '_chartOpts);'))
+    append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
+    append_html_jscode(file, paste0(chartdivid, '_effectsData = '), effects_json, ';')
+    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+    append_html_jscode(file, paste0('iplotMScanone_eff(', chartdivid, '_scanoneData, ',
+                                    chartdivid, '_effectsData, ',
+                                    chartdivid, '_chartOpts);'))
 
-  append_html_bottom(file, print=print)
+    append_html_bottom(file, print=print)
 
-  if(openfile && !print) browseURL(file)
+    if(openfile && !print) browseURL(file)
 
-  invisible(file)
+    invisible(file)
 }

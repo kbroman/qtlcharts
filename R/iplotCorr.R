@@ -58,64 +58,64 @@
 #' @export
 iplotCorr <-
 function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.complete.obs"),
-         file, onefile=FALSE, openfile=TRUE, title="",
-         chartdivid='chart', caption, chartOpts=NULL, print=FALSE)
+             file, onefile=FALSE, openfile=TRUE, title="",
+             chartdivid='chart', caption, chartOpts=NULL, print=FALSE)
 {
-  if(missing(file)) file <- NULL
+    if(missing(file)) file <- NULL
 
-  if(missing(group) || is.null(group)) group <- rep(1, nrow(mat))
-  if(is.data.frame(mat)) mat <- as.matrix(mat)
-  stopifnot(length(group) == nrow(mat))
-  group <- group2numeric(group)
+    if(missing(group) || is.null(group)) group <- rep(1, nrow(mat))
+    if(is.data.frame(mat)) mat <- as.matrix(mat)
+    stopifnot(length(group) == nrow(mat))
+    group <- group2numeric(group)
 
-  if(!missing(corr) && !is.null(corr)) {
-    if(!missing(rows) || !missing(cols)) warning("rows and cols ignored.")
-    dn <- dimnames(corr)
-    if(any(is.na(match(c(dn[[1]], dn[[2]]), colnames(mat)))))
-      stop("Mismatch between dimnames(corr) and colnames(mat).")
-    rows <- 1:nrow(corr)
-    cols <- 1:ncol(corr)
-    reorder <- FALSE
-    corr_was_presubset <- TRUE
-  }
-  else {
-    if(missing(rows) || is.null(rows)) rows <- (1:ncol(mat))
-    else rows <- selectMatrixColumns(mat, rows)
-    if(missing(cols) || is.null(cols)) cols <- (1:ncol(mat))
-    else cols <- selectMatrixColumns(mat, cols)
-    corr_was_presubset <- FALSE
-  }
+    if(!missing(corr) && !is.null(corr)) {
+        if(!missing(rows) || !missing(cols)) warning("rows and cols ignored.")
+        dn <- dimnames(corr)
+        if(any(is.na(match(c(dn[[1]], dn[[2]]), colnames(mat)))))
+            stop("Mismatch between dimnames(corr) and colnames(mat).")
+        rows <- 1:nrow(corr)
+        cols <- 1:ncol(corr)
+        reorder <- FALSE
+        corr_was_presubset <- TRUE
+    }
+    else {
+        if(missing(rows) || is.null(rows)) rows <- (1:ncol(mat))
+        else rows <- selectMatrixColumns(mat, rows)
+        if(missing(cols) || is.null(cols)) cols <- (1:ncol(mat))
+        else cols <- selectMatrixColumns(mat, cols)
+        corr_was_presubset <- FALSE
+    }
 
-  json <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset)
+    json <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset)
 
-  if(missing(caption) || is.null(caption))
-    caption <- c('The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
-                'Hover over pixels in the correlation matrix on the left to see the ',
-                'values; click to see the corresponding scatterplot on the right.')
+    if(missing(caption) || is.null(caption))
+        caption <- c('The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
+                     'Hover over pixels in the correlation matrix on the left to see the ',
+                     'values; click to see the corresponding scatterplot on the right.')
 
-  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels=NULL, charts="iplotCorr", chartdivid=chartdivid,
-                    caption=caption, print=print)
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                      panels=NULL, charts="iplotCorr", chartdivid=chartdivid,
+                      caption=caption, print=print)
 
-  # add chartdivid to chartOpts
-  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    # add chartdivid to chartOpts
+    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
-  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-  append_html_jscode(file, paste0('iplotCorr(', chartdivid, '_data, ', chartdivid, '_chartOpts);'))
+    append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
+    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+    append_html_jscode(file, paste0('iplotCorr(', chartdivid, '_data, ', chartdivid, '_chartOpts);'))
 
-  append_html_bottom(file, print=print)
+    append_html_bottom(file, print=print)
 
-  if(openfile && !print) browseURL(file)
+    if(openfile && !print) browseURL(file)
 
-  invisible(file)
+    invisible(file)
 }
 
 # ensure that a "group" vector is really the numbers 1, 2, ..., k
 group2numeric <-
 function(group)
 {
-  if(is.factor(group)) return(as.numeric(group))
+    if(is.factor(group)) return(as.numeric(group))
 
-  match(group, sort(unique(group)))
+    match(group, sort(unique(group)))
 }

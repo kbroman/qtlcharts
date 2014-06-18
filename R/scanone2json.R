@@ -28,21 +28,21 @@
 scanone2json <-
 function(output, digits=4)
 {
-  # marker names: replace pseudomarkers with blanks
-  mnames <- rownames(output)
-  pmarkers <- grep("^c.+\\.loc-*[0-9]+", mnames)
-  mnames[pmarkers] <- ""
+    # marker names: replace pseudomarkers with blanks
+    mnames <- rownames(output)
+    pmarkers <- grep("^c.+\\.loc-*[0-9]+", mnames)
+    mnames[pmarkers] <- ""
 
-  # chromosome names
-  chrnames <- as.character(unique(output[,1]))
+    # chromosome names
+    chrnames <- as.character(unique(output[,1]))
 
-  # lod column names
-  lodnames <- names(output)[-(1:2)]
-  if(length(lodnames) != length(unique(lodnames)))
-    warning("lod column names are not unique")
+    # lod column names
+    lodnames <- names(output)[-(1:2)]
+    if(length(lodnames) != length(unique(lodnames)))
+        warning("lod column names are not unique")
 
-  output <- jsonlite::toJSON(c(list(chrnames = chrnames, lodnames=lodnames),
-                               as.list(output), list(markernames = mnames)), digits=digits, na="null")
+    output <- jsonlite::toJSON(c(list(chrnames = chrnames, lodnames=lodnames),
+                                 as.list(output), list(markernames = mnames)), digits=digits, na="null")
 
-  strip_whitespace( output )
+    strip_whitespace( output )
 }

@@ -5,10 +5,10 @@
 add2chartOpts <-
 function(chartOpts, ...)
 {
-  dots <- list(...)
-  for(newarg in names(dots)) {
-    if(!(newarg %in% names(chartOpts)))
-      chartOpts <- c(chartOpts, dots[newarg])
-  }
-  chartOpts
+    dots <- list(...)
+    for(newarg in names(dots)) {
+        if(!(newarg %in% names(chartOpts)))
+          chartOpts <- c(chartOpts, dots[newarg])
+    }
+    chartOpts
 }

@@ -56,39 +56,39 @@ function(cross, marker, pheno.col=1,
          caption, chartOpts=list(title=marker[1]),
          fillgenoArgs=NULL, digits=4, print=FALSE)
 {
-  if(class(cross)[2] != "cross")
-    stop('"cross" should have class "cross".')
+    if(class(cross)[2] != "cross")
+        stop('"cross" should have class "cross".')
 
-  if(length(marker) > 1) {
-    marker <- marker[1]
-    warning('marker should have length 1; using "', marker, '"')
-  }
+    if(length(marker) > 1) {
+        marker <- marker[1]
+        warning('marker should have length 1; using "', marker, '"')
+    }
 
-  if(missing(file)) file <- NULL
+    if(missing(file)) file <- NULL
 
-  if(missing(caption) || is.null(caption))
-    caption <- c('Pink points correspond to individuals with imputed genotypes at this marker. ',
-                'Click on a point for a bit of gratuitous animation.')
+    if(missing(caption) || is.null(caption))
+        caption <- c('Pink points correspond to individuals with imputed genotypes at this marker. ',
+                     'Click on a point for a bit of gratuitous animation.')
 
-  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels="dotchart", charts="iplotPXG", chartdivid=chartdivid,
-                    caption=caption, print=print)
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                      panels="dotchart", charts="iplotPXG", chartdivid=chartdivid,
+                      caption=caption, print=print)
 
-  json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
+    json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
-  # use phenotype name as y-axis label, unless ylab is already provided
-  chartOpts <- add2chartOpts(chartOpts, ylab=getPhename(cross, pheno.col))
+    # use phenotype name as y-axis label, unless ylab is already provided
+    chartOpts <- add2chartOpts(chartOpts, ylab=getPhename(cross, pheno.col))
 
-  # add chartdivid to chartOpts
-  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    # add chartdivid to chartOpts
+    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
-  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-  append_html_jscode(file, paste0('iplotPXG(', chartdivid, '_data,', chartdivid, '_chartOpts);'))
+    append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
+    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+    append_html_jscode(file, paste0('iplotPXG(', chartdivid, '_data,', chartdivid, '_chartOpts);'))
 
-  append_html_bottom(file, print=print)
+    append_html_bottom(file, print=print)
 
-  if(openfile && !print) browseURL(file)
+    if(openfile && !print) browseURL(file)
 
-  invisible(file)
+    invisible(file)
 }

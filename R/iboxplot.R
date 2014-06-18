@@ -48,30 +48,30 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
          file, onefile=FALSE, openfile=TRUE, title="",
          chartdivid='chart', caption, chartOpts=NULL, print=FALSE)
 {
-  if(missing(file)) file <- NULL
+    if(missing(file)) file <- NULL
 
-  json <- convert4iboxplot(dat, qu, orderByMedian, breaks)
+    json <- convert4iboxplot(dat, qu, orderByMedian, breaks)
 
-  if(missing(caption) || is.null(caption))
-    caption <- c('The top panel is like a set of ', nrow(dat), ' box plots: ',
-                'lines are drawn at a series of percentiles for each of the distributions. ',
-                'Hover over a column in the top panel and the corresponding distribution ',
-                'is show below; click for it to persist; click again to make it go away.')
+    if(missing(caption) || is.null(caption))
+        caption <- c('The top panel is like a set of ', nrow(dat), ' box plots: ',
+                     'lines are drawn at a series of percentiles for each of the distributions. ',
+                     'Hover over a column in the top panel and the corresponding distribution ',
+                     'is show below; click for it to persist; click again to make it go away.')
 
-  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels=NULL, charts="iboxplot", chartdivid=chartdivid,
-                    caption=caption, print=print)
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                      panels=NULL, charts="iboxplot", chartdivid=chartdivid,
+                      caption=caption, print=print)
 
-  # add chartdivid to chartOpts
-  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    # add chartdivid to chartOpts
+    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
-  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-  append_html_jscode(file, paste0('iboxplot(', chartdivid, '_data, ', chartdivid, '_chartOpts);'))
+    append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
+    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+    append_html_jscode(file, paste0('iboxplot(', chartdivid, '_data, ', chartdivid, '_chartOpts);'))
 
-  append_html_bottom(file, print=print)
+    append_html_bottom(file, print=print)
 
-  if(openfile && !print) browseURL(file)
+    if(openfile && !print) browseURL(file)
 
-  invisible(file)
+    invisible(file)
 }

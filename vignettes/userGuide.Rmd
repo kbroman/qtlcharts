@@ -66,7 +66,7 @@ marker position to view the marker name.
 
 ```{r iplotMap_example}
 data(hyper)
-map(hyper)
+map <- pull.map(hyper)
 
 iplotMap(map, title="iplotMap example")
 ```

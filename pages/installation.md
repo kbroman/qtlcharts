@@ -10,7 +10,7 @@ which provides a very nice
 [user interface for R](http://www.rstudio.com/products/rstudio/download/).
 
 R/qtlcharts is early in development and is not yet available on
-[CRAN](http://cran.r-project.org).
+the [Comprehensive R Archive Network (CRAN)](http://cran.r-project.org).
 
 You can install R/qtlcharts from its
 [GitHub repository](http://github.com/kbroman/qtlcharts). You first need to

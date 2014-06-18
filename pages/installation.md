@@ -3,6 +3,12 @@ layout: page
 title: Installing R/qtlcharts
 ---
 
+R/qtlcharts is a package for [R](http://www.r-project.org). To use it,
+you first need to [download](http://cran.r-project.org/) and install
+R. We also recommend the use of [RStudio](http://www.rstudio.com/),
+which provides a very nice
+[user interface for R](http://www.rstudio.com/products/rstudio/download/).
+
 R/qtlcharts is early in development and is not yet available on
 [CRAN](http://cran.r-project.org).
 

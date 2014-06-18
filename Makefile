@@ -1,4 +1,4 @@
-all: jspanels jspaneltests jscharts json doc inst/ToDo.html chartOpts_vignette
+all: jspanels jspaneltests jscharts json doc inst/ToDo.html userGuide
 
 PANEL_DIR = inst/panels
 LODCHART_DIR = ${PANEL_DIR}/lodchart
@@ -69,9 +69,9 @@ clean:
 
 #------------------------------------------------------------
 
-# chartOpts vignette
+# Add chartOpts to userGuide vignette
 
-chartOpts_vignette: vignettes/chartOpts.Rmd
+userGuide: vignettes/userGuide.Rmd
 
-vignettes/chartOpts.Rmd: vignettes/chartOpts_vignette/grab_chartOpt_info.rb vignettes/chartOpts_vignette/chartOpts_source.Rmd jscharts
+vignettes/userGuide.Rmd: vignettes/chartOpts/grab_chartOpts.rb vignettes/chartOpts/userGuide_source.Rmd vignettes/chartOpts/multiversions.csv jscharts
 	$<

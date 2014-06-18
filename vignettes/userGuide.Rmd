@@ -49,9 +49,9 @@ is through a function argument, `chartOpts`.
 
 `strokewidth = 2`: line width
 
-`xlim = NULL`: x-axis limits
+`xlim = d3.extent(data.x)`: x-axis limits
 
-`ylim = NULL`: y-axis limits
+`ylim = d3.extent(data.y)`: y-axis limits
 
 `nxticks = 5`: no. ticks on x-axis
 

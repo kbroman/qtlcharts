@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #
 # parse the chartOpts options from inst/charts/*.coffee
-# and add that information to the chartOpts vignette
+# and add that information to the userGuide vignette
 
 # find all of the coffeescript files in a directory
 def find_coffeescript_files (directory)
@@ -132,9 +132,9 @@ end
 ##############################
 # directory and file names
 chart_dir = "inst/charts"
-ifile = "vignettes/chartOpts_vignette/chartOpts_source.Rmd"
-ofile = "vignettes/chartOpts.Rmd"
-mvfile = "vignettes/chartOpts_vignette/multiversions.csv"
+ifile = "vignettes/chartOpts/userGuide_source.Rmd"
+ofile = "vignettes/userGuide.Rmd"
+mvfile = "vignettes/chartOpts/multiversions.csv"
 
 # find coffeescript files
 coffee_files = find_coffeescript_files(chart_dir)

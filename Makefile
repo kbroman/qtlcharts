@@ -1,5 +1,5 @@
 
-all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vignettes userGuide
+all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vignettes
 
 # Examples
 CHARTEX = assets/chartexamples
@@ -118,20 +118,22 @@ ${THIS_BREWER}/%: ${QTLCHARTS_BREWER}/%
 
 #------------------------------------------------------------
 
-vignettes: assets/vignettes/Rmarkdown.html
+VIGNETTES= assets/vignettes
+QTLCHARTS_VIGNETTES = ../qtlcharts/vignettes
 
-assets/vignettes/Rmarkdown.html: ../qtlcharts/vignettes/Rmarkdown.Rmd
+vignettes: ${VIGNETTES}/Rmarkdown.html ${VIGNETTES}/userGuide.html ${VIGNETTES}/chartOpts.html
+
+${VIGNETTES}/Rmarkdown.html: ${QTLCHARTS_VIGNETTES}/Rmarkdown.Rmd
 	R -e 'library(knitr);knit2html("$<", "$@")'
 
-#------------------------------------------------------------
+${VIGNETTES}/chartOpts.html: ${QTLCHARTS_VIGNETTES}/chartOpts.Rmd
+	R -e 'library(knitr);knit2html("$<", "$@")'
 
-userGuide: pages/userGuide.md
-
-pages/userGuide.md: ../qtlcharts/vignettes/userGuide.Rmd
+${VIGNETTES}/userGuide.html: ${QTLCHARTS_VIGNETTES}/userGuide.Rmd
 	mkdir tmp
 	mkdir tmp/Figs
 	cp $< tmp/userGuide.Rmd
-	cp ../qtlcharts/vignettes/Figs/* tmp/Figs/
+	cp ${QTLCHARTS_VIGNETTES}/Figs/* tmp/Figs/
 	cd tmp;R -e 'library(knitr);knit2html("userGuide.Rmd")'
-	mv tmp/userGuide.html assets/vignettes/
+	mv tmp/userGuide.html ${VIGNETTES}/
 	rm -r tmp

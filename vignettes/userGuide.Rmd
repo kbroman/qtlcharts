@@ -76,7 +76,7 @@ iplotCorr(geneExpr$expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html")
 The chart will still be opened in the browser; to create the file
 without opening it, use the argument `openfile=FALSE`, as follows:
 
-```{r iplotCorr_specify_file, eval=FALSE}
+```{r iplotCorr_specify_file_dont_open, eval=FALSE}
 iplotCorr(geneExpr$expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html",
           openfile=FALSE)
 ```

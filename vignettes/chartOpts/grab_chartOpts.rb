@@ -135,8 +135,8 @@ end
 ##############################
 # directory and file names
 chart_dir = "inst/charts"
-ifile = "vignettes/chartOpts/userGuide_source.Rmd"
-ofile = "vignettes/userGuide.Rmd"
+ifile = "vignettes/chartOpts/chartOpts_source.Rmd"
+ofile = "vignettes/chartOpts.Rmd"
 mvfile = "vignettes/chartOpts/multiversions.csv"
 
 # find coffeescript files

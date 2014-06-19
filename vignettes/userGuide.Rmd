@@ -103,7 +103,7 @@ may be transferred and viewed on any computer.
 
 The interactive charts may be included within an
 [R Markdown](https://www.rstudio.com/ide/docs/r_markdown)-based
-report. See the separate `Rmarkdown` vignette:
+report. See the separate [`Rmarkdown` vignette](http://kbroman.github.io/qtlcharts/assets/vignettes/Rmarkdown.html):
 
 ```{r Rmarkdown_vignette, eval=FALSE}
 vignette("Rmarkdown", "qtlcharts")

@@ -40,48 +40,48 @@
 estQTLeffects <-
 function(cross, pheno.col=1, what=c("means", "effects"))
 {
-  if(!("cross" %in% class(cross)))
-    stop("Input cross object should have class \"cross\".")
-  crosstype <- class(cross)[1]
-  chrtype <- vapply(cross$geno, class, "")
+    if(!("cross" %in% class(cross)))
+        stop("Input cross object should have class \"cross\".")
+    crosstype <- class(cross)[1]
+    chrtype <- vapply(cross$geno, class, "")
 
-  what <- match.arg(what)
-  handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid")
-  if(what == "effects" && !(crosstype %in% handled_crosses)) {
-    warning("Can't calculate effects for cross type \"", crosstype, "\"; returning means.")
-    what <- "means"
-  }
-
-  phe <- extractPheno(cross, pheno.col)
-
-  if(!("prob" %in% names(cross$geno[[1]]))) {
-    warning("Running calc.genoprob")
-    cross <- qtl::calc.genoprob(cross)
-  }
-
-  pr <- vector("list", nchr(cross))
-  for(i in 1:nchr(cross)) {
-    pr[[i]] <- cross$geno[[i]]$prob
-    if(chrtype[i] == "X")
-      pr[[i]] <- qtl::reviseXdata(crosstype, "full", qtl::getsex(cross),
-                                  prob=pr[[i]], cross.attr=attributes(cross))
-  }
-
-  eff <- vector("list", sum(vapply(pr, ncol, 1)))
-  cur <- 0
-  for(i in seq(along=pr)) {
-    for(j in 1:ncol(pr[[i]])) {
-      cur <- cur + 1
-      # lm to estimate phenotype averages in each genotype group
-      eff[[cur]] <- t(lm(phe ~ -1 + pr[[i]][,j,])$coef)
-      dimnames(eff[[cur]]) <- list(colnames(phe), dimnames(pr[[i]])[[3]])
-
-      if(what == "effects")
-        eff[[cur]] <- convert2effects(eff[[cur]], crosstype, chrtype[i])
+    what <- match.arg(what)
+    handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid")
+    if(what == "effects" && !(crosstype %in% handled_crosses)) {
+        warning("Can't calculate effects for cross type \"", crosstype, "\"; returning means.")
+        what <- "means"
     }
-  }
 
-  eff
+    phe <- extractPheno(cross, pheno.col)
+
+    if(!("prob" %in% names(cross$geno[[1]]))) {
+        warning("Running calc.genoprob")
+        cross <- qtl::calc.genoprob(cross)
+    }
+
+    pr <- vector("list", nchr(cross))
+    for(i in 1:nchr(cross)) {
+        pr[[i]] <- cross$geno[[i]]$prob
+        if(chrtype[i] == "X")
+            pr[[i]] <- qtl::reviseXdata(crosstype, "full", qtl::getsex(cross),
+                                        prob=pr[[i]], cross.attr=attributes(cross))
+    }
+
+    eff <- vector("list", sum(vapply(pr, ncol, 1)))
+    cur <- 0
+    for(i in seq(along=pr)) {
+        for(j in 1:ncol(pr[[i]])) {
+            cur <- cur + 1
+            # lm to estimate phenotype averages in each genotype group
+            eff[[cur]] <- t(lm(phe ~ -1 + pr[[i]][,j,])$coef)
+            dimnames(eff[[cur]]) <- list(colnames(phe), dimnames(pr[[i]])[[3]])
+
+            if(what == "effects")
+                eff[[cur]] <- convert2effects(eff[[cur]], crosstype, chrtype[i])
+        }
+    }
+
+    eff
 }
 
 
@@ -112,27 +112,27 @@ function(cross, pheno.col=1, what=c("means", "effects"))
 cbindQTLeffects <-
 function(..., labels)
 {
-  dots <- list(...)
-  if(missing(labels))
-    labels <- as.character(seq(along=dots))
-  stopifnot(length(labels) == length(dots))
+    dots <- list(...)
+    if(missing(labels))
+        labels <- as.character(seq(along=dots))
+    stopifnot(length(labels) == length(dots))
 
-  if(length(dots) <= 1)
-    stop("need to give at least two sets of effects")
+    if(length(dots) <= 1)
+        stop("need to give at least two sets of effects")
 
-  result <- dots[[1]]
-  for(i in seq(along=result))
-    colnames(result[[i]]) <- paste(labels[1], colnames(result[[i]]), sep=".")
+    result <- dots[[1]]
+    for(i in seq(along=result))
+        colnames(result[[i]]) <- paste(labels[1], colnames(result[[i]]), sep=".")
 
-  for(i in 2:length(dots)) {
-    if(length(dots[[i]]) != length(result))
-      stop("Not all inputs are the sample length: ", paste(vapply(dots, length, 1), sep=" "))
-    for(j in seq(along=result)) {
-      colnames(dots[[i]][[j]]) <- paste(labels[i], colnames(dots[[i]][[j]]), sep=".")
-      result[[j]] <- cbind(result[[j]], dots[[i]][[j]])
+    for(i in 2:length(dots)) {
+        if(length(dots[[i]]) != length(result))
+            stop("Not all inputs are the sample length: ", paste(vapply(dots, length, 1), sep=" "))
+        for(j in seq(along=result)) {
+            colnames(dots[[i]][[j]]) <- paste(labels[i], colnames(dots[[i]][[j]]), sep=".")
+            result[[j]] <- cbind(result[[j]], dots[[i]][[j]])
+        }
     }
-  }
-  result
+    result
 }
 
 
@@ -140,68 +140,68 @@ function(..., labels)
 convert2effects <-
 function(effects, crosstype, chrtype)
 {
-  if(chrtype == "X") { # damned X chromosome
-    if(crosstype=="bc") {
-      if(ncol(effects) == 2) { # just one sex
-        effects[,1] <- effects[,2] - effects[,1]
-        effects <- effects[,1,drop=FALSE]
-        colnames(effects) <- "a"
-      }
-      if(ncol(effects) == 4) { # both sexes
-        effects[,1] <- effects[,2] - effects[,1]
-        effects[,2] <- effects[,4] - effects[,3]
-        effects <- effects[,1:2,drop=FALSE]
-        colnames(effects) <- c("a.female", "a.male")
-      }
+    if(chrtype == "X") { # damned X chromosome
+        if(crosstype=="bc") {
+            if(ncol(effects) == 2) { # just one sex
+                effects[,1] <- effects[,2] - effects[,1]
+                effects <- effects[,1,drop=FALSE]
+                colnames(effects) <- "a"
+            }
+            if(ncol(effects) == 4) { # both sexes
+                effects[,1] <- effects[,2] - effects[,1]
+                effects[,2] <- effects[,4] - effects[,3]
+                effects <- effects[,1:2,drop=FALSE]
+                colnames(effects) <- c("a.female", "a.male")
+            }
+        }
+        else if(crosstype=="f2") {
+            if(ncol(effects) == 2) { # just one sex
+                effects[,1] <- effects[,2] - effects[,1]
+                effects <- effects[,1,drop=FALSE]
+                colnames(effects) <- "a"
+            }
+            if(ncol(effects) == 6) { # both sexes, both directions
+                effects[,1] <- effects[,2] - effects[,1]
+                effects[,2] <- effects[,4] - effects[,3]
+                effects[,3] <- effects[,6] - effects[,5]
+                effects <- effects[,1:3,drop=FALSE]
+                colnames(effects) <- c("a.femaleForw", "a.femaleRev", "a.male")
+            }
+            if(ncol(effects) == 4) { # both sexes, both directions
+                effects[,1] <- effects[,2] - effects[,1]
+                effects[,2] <- effects[,4] - effects[,3]
+                effects <- effects[,1:2,drop=FALSE]
+                if(length(grep("Y$", colnames(effects)[3:4])) > 0) # has males
+                    colnames(effects) <- c("a.female", "a.male")
+                else
+                    colnames(effects) <- c("a.femaleForw", "a.femaleRev")
+            }
+        }
+        else {} # can't handle this case
+    } # end of X chr
+    else { # autosome
+        if(crosstype=="bc" || crosstype=="haploid") {
+            effects[,1] <- effects[,2] - effects[,1]
+            effects <- effects[,1,drop=FALSE]
+            colnames(effects) <- "a"
+        }
+        else if(crosstype=="f2" || crosstype=="bcsft") {
+            a <- (effects[,3] - effects[,1])/2
+            d <- (effects[,2] - (effects[,3] + effects[,1])/2)
+            effects[,1] <- a
+            effects[,2] <- d
+            effects <- effects[,1:2,drop=FALSE]
+            colnames(effects) <- c("a", "d")
+        }
+        else if(crosstype=="riself" || crosstype=="risib" || crosstype=="dh") {
+            effects[,1] <- (effects[,2] - effects[,1])/2
+            effects <- effects[,1,drop=FALSE]
+            colnames(effects) <- "a"
+        }
+        else {} # can't handle other cases
     }
-    else if(crosstype=="f2") {
-      if(ncol(effects) == 2) { # just one sex
-        effects[,1] <- effects[,2] - effects[,1]
-        effects <- effects[,1,drop=FALSE]
-        colnames(effects) <- "a"
-      }
-      if(ncol(effects) == 6) { # both sexes, both directions
-        effects[,1] <- effects[,2] - effects[,1]
-        effects[,2] <- effects[,4] - effects[,3]
-        effects[,3] <- effects[,6] - effects[,5]
-        effects <- effects[,1:3,drop=FALSE]
-        colnames(effects) <- c("a.femaleForw", "a.femaleRev", "a.male")
-      }
-      if(ncol(effects) == 4) { # both sexes, both directions
-        effects[,1] <- effects[,2] - effects[,1]
-        effects[,2] <- effects[,4] - effects[,3]
-        effects <- effects[,1:2,drop=FALSE]
-        if(length(grep("Y$", colnames(effects)[3:4])) > 0) # has males
-          colnames(effects) <- c("a.female", "a.male")
-        else
-          colnames(effects) <- c("a.femaleForw", "a.femaleRev")
-      }
-    }
-    else {} # can't handle this case
-  } # end of X chr
-  else { # autosome
-    if(crosstype=="bc" || crosstype=="haploid") {
-      effects[,1] <- effects[,2] - effects[,1]
-      effects <- effects[,1,drop=FALSE]
-      colnames(effects) <- "a"
-    }
-    else if(crosstype=="f2" || crosstype=="bcsft") {
-      a <- (effects[,3] - effects[,1])/2
-      d <- (effects[,2] - (effects[,3] + effects[,1])/2)
-      effects[,1] <- a
-      effects[,2] <- d
-      effects <- effects[,1:2,drop=FALSE]
-      colnames(effects) <- c("a", "d")
-    }
-    else if(crosstype=="riself" || crosstype=="risib" || crosstype=="dh") {
-      effects[,1] <- (effects[,2] - effects[,1])/2
-      effects <- effects[,1,drop=FALSE]
-      colnames(effects) <- "a"
-    }
-    else {} # can't handle other cases
-  }
 
-  effects
+    effects
 }
 
 # strip off names; save colnames within the lists
@@ -210,17 +210,17 @@ function(effects, crosstype, chrtype)
 effects2json <-
 function(effects, digits=4)
 {
-  names(effects) <- NULL
-  for(i in seq(along=effects)) {
-    cn <- colnames(effects[[i]])
-    nr <- nrow(effects[[i]])
+    names(effects) <- NULL
+    for(i in seq(along=effects)) {
+        cn <- colnames(effects[[i]])
+        nr <- nrow(effects[[i]])
 
-    eff <- effects[[i]]
-    dimnames(eff) <- NULL
-    eff <- t(eff)
+        eff <- effects[[i]]
+        dimnames(eff) <- NULL
+        eff <- t(eff)
 
-    effects[[i]] <- list(data=eff, x=(1:nr)-1, names=cn)
-  }
+        effects[[i]] <- list(data=eff, x=(1:nr)-1, names=cn)
+    }
 
-  strip_whitespace( jsonlite::toJSON(effects, digits=digits, na="null") )
+    strip_whitespace( jsonlite::toJSON(effects, digits=digits, na="null") )
 }

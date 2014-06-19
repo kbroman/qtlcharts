@@ -44,8 +44,8 @@
 #' x <- y <- seq(-2, 2, len=n)
 #' z <- matrix(ncol=n, nrow=n)
 #' for(i in seq(along=x))
-#'   for(j in seq(along=y))
-#'     z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
+#'     for(j in seq(along=y))
+#'         z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
 #' iheatmap(z, x, y, title = "iheatmap example")
 #' @importFrom jsonlite toJSON
 #' @export
@@ -55,34 +55,34 @@ function(z, x, y,
          chartdivid='chart',
          caption, chartOpts=NULL, digits=4, print=FALSE)
 {
-  if(missing(file)) file <- NULL
+    if(missing(file)) file <- NULL
 
-  z <- as.matrix(z)
-  if(missing(x) || is.null(x)) x <- 1:nrow(z)
-  else stopifnot(length(x) == nrow(z))
-  if(missing(y) || is.null(y)) y <- 1:ncol(z)
-  else stopifnot(length(y) == ncol(z))
-  names(x) <- names(y) <- dimnames(z) <- NULL
-  json <- strip_whitespace( toJSON(list(x=x, y=y, z=z), digits=digits, na="null") )
+    z <- as.matrix(z)
+    if(missing(x) || is.null(x)) x <- 1:nrow(z)
+    else stopifnot(length(x) == nrow(z))
+    if(missing(y) || is.null(y)) y <- 1:ncol(z)
+    else stopifnot(length(y) == ncol(z))
+    names(x) <- names(y) <- dimnames(z) <- NULL
+    json <- strip_whitespace( toJSON(list(x=x, y=y, z=z), digits=digits, na="null") )
 
-  if(missing(caption) || is.null(caption))
-    caption <- c('Hover over pixels in the heatmap on the top-left to see the values and to see ',
-                 'the horizontal slice (below) and the vertical slice (to the right).')
+    if(missing(caption) || is.null(caption))
+        caption <- c('Hover over pixels in the heatmap on the top-left to see the values and to see ',
+                     'the horizontal slice (below) and the vertical slice (to the right).')
 
-  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels=c("curvechart", "heatmap"), charts="iheatmap",
-                    chartdivid=chartdivid, caption=caption, print=print)
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                      panels=c("curvechart", "heatmap"), charts="iheatmap",
+                      chartdivid=chartdivid, caption=caption, print=print)
 
-  # add chartdivid to chartOpts
-  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    # add chartdivid to chartOpts
+    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
-  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-  append_html_jscode(file, paste0('iheatmap(', chartdivid, '_data, ', chartdivid, '_chartOpts);'))
+    append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
+    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+    append_html_jscode(file, paste0('iheatmap(', chartdivid, '_data, ', chartdivid, '_chartOpts);'))
 
-  append_html_bottom(file, print=print)
+    append_html_bottom(file, print=print)
 
-  if(openfile && !print) browseURL(file)
+    if(openfile && !print) browseURL(file)
 
-  invisible(file)
+    invisible(file)
 }

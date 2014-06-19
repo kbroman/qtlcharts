@@ -40,7 +40,7 @@
 #' dimnames(expr) <- list(paste0("ind", 1:n.ind),
 #'                        paste0("gene", 1:n.gene))
 #' iboxplot(expr, title="iboxplot example",
-#'              chartOpts=list(xlab="Mice", ylab="Gene expression"))
+#'          chartOpts=list(xlab="Mice", ylab="Gene expression"))
 #'
 #' @export
 iboxplot <-

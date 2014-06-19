@@ -29,42 +29,42 @@ convert4iboxplot <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
          breaks=251, digits=4)
 {
-  if(is.null(rownames(dat)))
-    rownames(dat) <- paste0(1:nrow(dat))
+    if(is.null(rownames(dat)))
+        rownames(dat) <- paste0(1:nrow(dat))
 
-  if(orderByMedian)
-    dat <- dat[order(apply(dat, 1, median, na.rm=TRUE)),,drop=FALSE]
+    if(orderByMedian)
+        dat <- dat[order(apply(dat, 1, median, na.rm=TRUE)),,drop=FALSE]
 
-  # check quantiles
-  if(any(qu <= 0)) {
-    warning("qu should all be > 0")
-    qu <- qu[qu > 0]
-  }
+    # check quantiles
+    if(any(qu <= 0)) {
+        warning("qu should all be > 0")
+        qu <- qu[qu > 0]
+    }
 
-  if(any(qu >= 0.5)) {
-    warning("qu should all by < 0.5")
-    qu <- qu[qu < 0.5]
-  }
+    if(any(qu >= 0.5)) {
+        warning("qu should all by < 0.5")
+        qu <- qu[qu < 0.5]
+    }
 
-  qu <- c(qu, 0.5, rev(1-qu))
-  quant <- apply(dat, 1, quantile, qu, na.rm=TRUE)
+    qu <- c(qu, 0.5, rev(1-qu))
+    quant <- apply(dat, 1, quantile, qu, na.rm=TRUE)
 
-  # counts for histograms
-  if(length(breaks) == 1)
-    breaks <- seq(min(dat, na.rm=TRUE), max(dat, na.rm=TRUE), length=breaks)
+    # counts for histograms
+    if(length(breaks) == 1)
+        breaks <- seq(min(dat, na.rm=TRUE), max(dat, na.rm=TRUE), length=breaks)
 
-  counts <- apply(dat, 1, function(a) hist(a, breaks=breaks, plot=FALSE)$counts)
+    counts <- apply(dat, 1, function(a) hist(a, breaks=breaks, plot=FALSE)$counts)
 
-  ind <- rownames(dat)
+    ind <- rownames(dat)
 
-  dimnames(quant) <- dimnames(counts) <- NULL
+    dimnames(quant) <- dimnames(counts) <- NULL
 
-  # data structure for JSON
-  output <- list("ind" = jsonlite::toJSON(ind, na="null"),
-                 "qu" = jsonlite::toJSON(qu, na="null"),
-                 "breaks" = jsonlite::toJSON(breaks, digits=digits, na="null"),
-                 "quant" = jsonlite::toJSON(quant, digits=digits, na="null"),
-                 "counts" = jsonlite::toJSON(t(counts)), na="null")
-  output <- paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
-  strip_whitespace(output)
+    # data structure for JSON
+    output <- list("ind" = jsonlite::toJSON(ind, na="null"),
+                   "qu" = jsonlite::toJSON(qu, na="null"),
+                   "breaks" = jsonlite::toJSON(breaks, digits=digits, na="null"),
+                   "quant" = jsonlite::toJSON(quant, digits=digits, na="null"),
+                   "counts" = jsonlite::toJSON(t(counts)), na="null")
+    output <- paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
+    strip_whitespace(output)
 }

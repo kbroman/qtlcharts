@@ -12,8 +12,8 @@
 qtlchartsversion <-
 function()
 {
-  version <- unlist(packageVersion("qtlcharts"))
+    version <- unlist(packageVersion("qtlcharts"))
 
-  # make it like #.#-#
-  paste(c(version,".","-")[c(1,4,2,5,3)], collapse="")
+    # make it like #.#-#
+    paste(c(version,".","-")[c(1,4,2,5,3)], collapse="")
 }

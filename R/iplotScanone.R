@@ -82,57 +82,57 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
          file, onefile=FALSE, openfile=TRUE, title="", chartdivid='chart',
          caption, fillgenoArgs=NULL, chartOpts=NULL, digits=4, print=FALSE)
 {
-  if(missing(file)) file <- NULL
+    if(missing(file)) file <- NULL
 
-  if(!any(class(scanoneOutput) == "scanone"))
-    stop('"scanoneOutput" should have class "scanone".')
+    if(!any(class(scanoneOutput) == "scanone"))
+        stop('"scanoneOutput" should have class "scanone".')
 
-  if(!missing(chr) && !is.null(chr)) {
-     scanoneOutput <- subset(scanoneOutput, chr=chr)
-    if(!missing(cross) && !is.null(cross)) cross <- subset(cross, chr=chr)
-   }
+    if(!missing(chr) && !is.null(chr)) {
+        scanoneOutput <- subset(scanoneOutput, chr=chr)
+        if(!missing(cross) && !is.null(cross)) cross <- subset(cross, chr=chr)
+    }
 
-  pxgtype <- match.arg(pxgtype)
+    pxgtype <- match.arg(pxgtype)
 
-  if(length(lodcolumn) > 1) {
-    lodcolumn <- lodcolumn[1]
-    warning("lodcolumn should have length 1; using first value")
-  }
-  if(lodcolumn < 1 || lodcolumn > ncol(scanoneOutput)-2)
-    stop('lodcolumn must be between 1 and ', ncol(scanoneOutput)-2)
+    if(length(lodcolumn) > 1) {
+        lodcolumn <- lodcolumn[1]
+        warning("lodcolumn should have length 1; using first value")
+    }
+    if(lodcolumn < 1 || lodcolumn > ncol(scanoneOutput)-2)
+        stop('lodcolumn must be between 1 and ', ncol(scanoneOutput)-2)
 
-  scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2), drop=FALSE]
-  colnames(scanoneOutput)[3] <- 'lod'
+    scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2), drop=FALSE]
+    colnames(scanoneOutput)[3] <- 'lod'
 
-  if(missing(caption)) caption <- NULL
+    if(missing(caption)) caption <- NULL
 
-  if(missing(cross) || is.null(cross))
-    return(iplotScanone_noeff(scanoneOutput=scanoneOutput, file=file, onefile=onefile,
-                              openfile=openfile, title=title, chartdivid=chartdivid,
-                              caption=caption,
-                              chartOpts=chartOpts, digits=digits, print=print))
+    if(missing(cross) || is.null(cross))
+        return(iplotScanone_noeff(scanoneOutput=scanoneOutput, file=file, onefile=onefile,
+                                  openfile=openfile, title=title, chartdivid=chartdivid,
+                                  caption=caption,
+                                  chartOpts=chartOpts, digits=digits, print=print))
 
-  if(length(pheno.col) > 1) {
-    pheno.col <- pheno.col[1]
-    warning("pheno.col should have length 1; using first value")
-  }
+    if(length(pheno.col) > 1) {
+        pheno.col <- pheno.col[1]
+        warning("pheno.col should have length 1; using first value")
+    }
 
-  if(class(cross)[2] != "cross")
-    stop('"cross" should have class "cross".')
+    if(class(cross)[2] != "cross")
+        stop('"cross" should have class "cross".')
 
-  if(pxgtype == "raw")
-    return(iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
-                            file=file, onefile=onefile, openfile=openfile, title=title,
-                            chartdivid=chartdivid, caption=caption, fillgenoArgs=fillgenoArgs,
-                            chartOpts=chartOpts, digits=digits, print=print))
+    if(pxgtype == "raw")
+        return(iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
+                                file=file, onefile=onefile, openfile=openfile, title=title,
+                                chartdivid=chartdivid, caption=caption, fillgenoArgs=fillgenoArgs,
+                                chartOpts=chartOpts, digits=digits, print=print))
 
-  else
-    return(iplotScanone_ci(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
-                           file=file, onefile=onefile, openfile=openfile, title=title,
-                           chartdivid=chartdivid, caption=caption, fillgenoArgs=fillgenoArgs,
-                           chartOpts=chartOpts, digits=digits, print=print))
+    else
+        return(iplotScanone_ci(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
+                               file=file, onefile=onefile, openfile=openfile, title=title,
+                               chartdivid=chartdivid, caption=caption, fillgenoArgs=fillgenoArgs,
+                               chartOpts=chartOpts, digits=digits, print=print))
 
-  invisible(file)
+    invisible(file)
 }
 
 
@@ -141,28 +141,28 @@ iplotScanone_noeff <-
 function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", chartdivid='chart',
          caption, chartOpts=NULL, digits=4, print=FALSE)
 {
-  if(missing(caption) || is.null(caption))
-    caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
-                'Click on a marker for a bit of gratuitous animation.')
+    if(missing(caption) || is.null(caption))
+        caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
+                     'Click on a marker for a bit of gratuitous animation.')
 
-  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels="lodchart", charts="iplotScanone_noeff", chartdivid=chartdivid,
-                    caption=caption, print=print)
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                      panels="lodchart", charts="iplotScanone_noeff", chartdivid=chartdivid,
+                      caption=caption, print=print)
 
-  # add chartdivid to chartOpts
-  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    # add chartdivid to chartOpts
+    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, paste0(chartdivid, '_data = '),
-                     scanone2json(scanoneOutput, digits=digits), ';')
-  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-  append_html_jscode(file, paste0('iplotScanone_noeff(', chartdivid, '_data, ',
-                                  chartdivid, '_chartOpts);'))
+    append_html_jscode(file, paste0(chartdivid, '_data = '),
+                       scanone2json(scanoneOutput, digits=digits), ';')
+    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+    append_html_jscode(file, paste0('iplotScanone_noeff(', chartdivid, '_data, ',
+                                    chartdivid, '_chartOpts);'))
 
-  append_html_bottom(file, print=print)
+    append_html_bottom(file, print=print)
 
-  if(openfile && !print) browseURL(file)
+    if(openfile && !print) browseURL(file)
 
-  invisible(file)
+    invisible(file)
 }
 
 
@@ -172,32 +172,32 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
          title="", chartdivid=chartdivid, caption, fillgenoArgs=NULL,
          chartOpts=NULL, digits=4, print=FALSE)
 {
-  scanone_json <- scanone2json(scanoneOutput, digits=digits)
-  pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
+    scanone_json <- scanone2json(scanoneOutput, digits=digits)
+    pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
-  if(missing(caption) || is.null(caption))
-    caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
-                'Click on a marker to view the phenotype &times; genotype plot on the right. ',
-                'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
+    if(missing(caption) || is.null(caption))
+        caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
+                     'Click on a marker to view the phenotype &times; genotype plot on the right. ',
+                     'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
 
-  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels=c("lodchart", "dotchart"), charts="iplotScanone_pxg",
-                    chartdivid=chartdivid, caption=caption, print=print)
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                      panels=c("lodchart", "dotchart"), charts="iplotScanone_pxg",
+                      chartdivid=chartdivid, caption=caption, print=print)
 
-  # add chartdivid to chartOpts
-  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    # add chartdivid to chartOpts
+    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
-  append_html_jscode(file, paste0(chartdivid, '_pxgData = '), pxg_json, ';')
-  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-  append_html_jscode(file, paste0('iplotScanone_pxg(', chartdivid, '_scanoneData, ',
-                                  chartdivid, '_pxgData, ', chartdivid, '_chartOpts);'))
+    append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
+    append_html_jscode(file, paste0(chartdivid, '_pxgData = '), pxg_json, ';')
+    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+    append_html_jscode(file, paste0('iplotScanone_pxg(', chartdivid, '_scanoneData, ',
+                                    chartdivid, '_pxgData, ', chartdivid, '_chartOpts);'))
 
-  append_html_bottom(file, print=print)
+    append_html_bottom(file, print=print)
 
-  if(openfile && !print) browseURL(file)
+    if(openfile && !print) browseURL(file)
 
-  invisible(file)
+    invisible(file)
 }
 
 # iplotScanone_ci: LOD curves with linked phe mean +/- 2 SE x gen plot
@@ -206,30 +206,30 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
          title="", chartdivid='chart', caption, fillgenoArgs=NULL, chartOpts=NULL,
          digits=4, print=FALSE)
 {
-  scanone_json <- scanone2json(scanoneOutput, digits=digits)
-  pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
+    scanone_json <- scanone2json(scanoneOutput, digits=digits)
+    pxg_json <- pxg2json(cross, pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
-  if(missing(caption) || is.null(caption))
-    caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
-                'Click on a marker to view the phenotype &times; genotype plot on the right. ',
-                'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
+    if(missing(caption) || is.null(caption))
+        caption <- c('Hover over marker positions on the LOD curve to see the marker names. ',
+                     'Click on a marker to view the phenotype &times; genotype plot on the right. ',
+                     'In the phenotype &times; genotype plot, the intervals indicate the mean &plusmn; 2 SE.')
 
-  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels=c("lodchart", "cichart"), charts="iplotScanone_ci",
-                    chartdivid=chartdivid, caption=caption, print=print)
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                      panels=c("lodchart", "cichart"), charts="iplotScanone_ci",
+                      chartdivid=chartdivid, caption=caption, print=print)
 
-  # add chartdivid to chartOpts
-  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    # add chartdivid to chartOpts
+    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
-  append_html_jscode(file, paste0(chartdivid, '_pxgData = '), pxg_json, ';')
-  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-  append_html_jscode(file, paste0('iplotScanone_ci(', chartdivid, '_scanoneData, ',
-                                  chartdivid, '_pxgData, ', chartdivid, '_chartOpts);'))
+    append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
+    append_html_jscode(file, paste0(chartdivid, '_pxgData = '), pxg_json, ';')
+    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+    append_html_jscode(file, paste0('iplotScanone_ci(', chartdivid, '_scanoneData, ',
+                                    chartdivid, '_pxgData, ', chartdivid, '_chartOpts);'))
 
-  append_html_bottom(file, print=print)
+    append_html_bottom(file, print=print)
 
-  if(openfile && !print) browseURL(file)
+    if(openfile && !print) browseURL(file)
 
-  invisible(file)
+    invisible(file)
 }

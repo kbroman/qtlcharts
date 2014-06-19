@@ -43,31 +43,31 @@ iplotMap <-
 function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
          chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
-  if("cross" %in% class(map)) map <- pull.map(map)
+    if("cross" %in% class(map)) map <- pull.map(map)
 
-  if(missing(file)) file <- NULL
+    if(missing(file)) file <- NULL
 
-  if(missing(caption) || is.null(caption))
-    caption <- 'Hover over marker positions to view the marker names.'
+    if(missing(caption) || is.null(caption))
+        caption <- 'Hover over marker positions to view the marker names.'
 
-  file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                    panels="mapchart", charts="iplotMap", chartdivid=chartdivid,
-                    caption=caption, print=print)
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+                      panels="mapchart", charts="iplotMap", chartdivid=chartdivid,
+                      caption=caption, print=print)
 
-  if(shift) map <- shiftmap(map)
-  json <- map2json(map, digits=digits)
+    if(shift) map <- shiftmap(map)
+    json <- map2json(map, digits=digits)
 
-  # add chartdivid to chartOpts
-  chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    # add chartdivid to chartOpts
+    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
-  append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
-  append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-  append_html_jscode(file, paste0('iplotMap(', chartdivid, '_data,',
-                                  chartdivid, '_chartOpts);'))
+    append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
+    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
+    append_html_jscode(file, paste0('iplotMap(', chartdivid, '_data,',
+                                    chartdivid, '_chartOpts);'))
 
-  append_html_bottom(file, print=print)
+    append_html_bottom(file, print=print)
 
-  if(openfile && !print) browseURL(file)
+    if(openfile && !print) browseURL(file)
 
-  invisible(file)
+    invisible(file)
 }

@@ -52,9 +52,9 @@
 #' @examples
 #' data(geneExpr)
 #' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
-#'                title = "iplotCorr example",
-#'                chartOpts=list(cortitle="Correlation matrix",
-#'                               scattitle="Scatterplot"))
+#'           title = "iplotCorr example",
+#'           chartOpts=list(cortitle="Correlation matrix",
+#'                          scattitle="Scatterplot"))
 #' @export
 iplotCorr <-
 function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.complete.obs"),

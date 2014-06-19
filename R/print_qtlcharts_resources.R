@@ -41,27 +41,27 @@
 print_qtlcharts_resources <-
 function(main, panels, charts, onefile=TRUE)
 {
-  if(missing(main) || is.null(main)) {
-    main <- c("d3", "d3tip", "colorbrewer", "panelutil")
-  }
-  if(missing(panels) || is.null(panels)) {
-    paneldir <- system.file("panels", package="qtlcharts")
-    panels <- list.files(paneldir)
-    g <- grep("\\.", panels) # throw out names with a dot
-    if(length(g) > 0) panels <- panels[-g]
-  }
-  if(missing(charts) || is.null(charts)) {
-    chartdir <- system.file("charts", package="qtlcharts")
-    charts <- gsub(".js$", "", list.files(chartdir, pattern=".js$"))
-  }
+    if(missing(main) || is.null(main)) {
+        main <- c("d3", "d3tip", "colorbrewer", "panelutil")
+    }
+    if(missing(panels) || is.null(panels)) {
+        paneldir <- system.file("panels", package="qtlcharts")
+        panels <- list.files(paneldir)
+        g <- grep("\\.", panels) # throw out names with a dot
+        if(length(g) > 0) panels <- panels[-g]
+    }
+    if(missing(charts) || is.null(charts)) {
+        chartdir <- system.file("charts", package="qtlcharts")
+        charts <- gsub(".js$", "", list.files(chartdir, pattern=".js$"))
+    }
 
-  if("d3" %in% main) link_d3(file='', onefile=onefile, print=TRUE)
-  if("d3tip" %in% main) link_d3tip(file='', onefile=onefile, print=TRUE)
-  if("colorbrewer" %in% main) link_colorbrewer(file='', onefile=onefile, print=TRUE)
-  if("panelutil" %in% main) link_panelutil(file='', onefile=onefile, print=TRUE)
-  
-  for(panel in panels)
-    link_panel(panel, file='', onefile=onefile, print=TRUE)
-  for(chart in charts)
-    link_chart(chart, file='', onefile=onefile, print=TRUE)
+    if("d3" %in% main) link_d3(file='', onefile=onefile, print=TRUE)
+    if("d3tip" %in% main) link_d3tip(file='', onefile=onefile, print=TRUE)
+    if("colorbrewer" %in% main) link_colorbrewer(file='', onefile=onefile, print=TRUE)
+    if("panelutil" %in% main) link_panelutil(file='', onefile=onefile, print=TRUE)
+
+    for(panel in panels)
+        link_panel(panel, file='', onefile=onefile, print=TRUE)
+    for(chart in charts)
+        link_chart(chart, file='', onefile=onefile, print=TRUE)
 }

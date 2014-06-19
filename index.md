@@ -27,9 +27,9 @@ for the larger visualizations.
 
 ---
 
-|                                         |                               |                                      |                                              |
-| :-------------------------------------: | :---------------------------: | :----------------------------------: | :------------------------------------------: |
-| [Installation](pages/installation.html) | [User guide](pages/user.html) | Developer guide (<em>planned</em>)   | [Reusable graphic panels](pages/panels.html) |
+|                                         |                                               |                                      |                                              |
+| :-------------------------------------: | :-------------------------------------------: | :----------------------------------: | :------------------------------------------: |
+| [Installation](pages/installation.html) | [User guide](assets/vignettes/userGuide.html) | Developer guide (<em>planned</em>)   | [Reusable graphic panels](pages/panels.html) |
 
 ---
 

@@ -1,5 +1,5 @@
 
-all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vignettes
+all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vignettes userGuide
 
 # Examples
 CHARTEX = assets/chartexamples
@@ -122,3 +122,16 @@ vignettes: assets/vignettes/Rmarkdown.html
 
 assets/vignettes/Rmarkdown.html: ../qtlcharts/vignettes/Rmarkdown.Rmd
 	R -e 'library(knitr);knit2html("$<", "$@")'
+
+#------------------------------------------------------------
+
+userGuide: pages/userGuide.md
+
+pages/userGuide.md: ../qtlcharts/vignettes/userGuide.Rmd
+	mkdir tmp
+	mkdir tmp/Figs
+	cp $< tmp/userGuide.Rmd
+	cp ../qtlcharts/vignettes/Figs/* tmp/Figs/
+	cd tmp;R -e 'library(knitr);knit2html("userGuide.Rmd")'
+	mv tmp/userGuide.html assets/vignettes/
+	rm -r tmp

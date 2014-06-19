@@ -1,13 +1,7 @@
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{R/qtlcharts User Guide}
 
-```{r knitr_options, include=FALSE}
-# R chunks will not be run 
-library(knitr)
-opts_chunk$set(eval=FALSE, results="hide")
-```
-
-## R/qtlcharts User Guide
+# R/qtlcharts User Guide
 
 [R/qtlcharts](http://kbroman.github.io/qtlcharts) is an
 [R](http://www.r-project.org) package to create interactive charts for
@@ -28,11 +22,11 @@ requires installation of the packages [R/qtl](http://www.rqtl.org),
 [jsonlite](http://cran.r-project.org/web/packages/jsonlite/), and
 [devtools](https://github.com/hadley/devtools).
 
-### Basic use
+## Basic use
 
 You first need to load the package.
 
-```{r load_library, eval=TRUE}
+```{r load_library}
 library(qtlcharts)
 ```
 
@@ -40,44 +34,54 @@ Now let's begin by considering the function `iplotCorr`, which creates
 a heatmap of a correlation matrix, linked to scatterplots of the
 underlying variables.
 
-We'll first load the `geneExpr` dataset included with the package.
+We'll first load the `geneExpr` dataset included with the R/qtlcharts package.
 
-```{r geneExpr_data, eval=TRUE}
+```{r geneExpr_data}
 data(geneExpr)
 ```
 
-This is a list with two components. The first, `geneExpr$expr`, is an
-`r nrow(geneExpr$expr)`&times;`r ncol(geneExpr$expr)` matrix of gene
-expression data.
+This is a list with two components. The first, `geneExpr$expr`, is a
+`r nrow(geneExpr$expr)` &times; `r ncol(geneExpr$expr)` matrix of gene
+expression data. We can use `iplotCorr` with these data, as follows:
 
-You can use `iplotCorr` as follows:
-
-```{r iplotCorr_reordered}
+```{r iplotCorr_reordered, eval=FALSE}
 iplotCorr(geneExpr$expr, reorder=TRUE)
 ```
 
+This will open ...
 
-### Examples of the use of other charts
+![iplotCorr example](Figs/iplotCorr1.png)
 
-#### `iplotMap`
+
+Scatterplot colored by genotype, contained in the vector `geneExpr$genotype`.
+
+```{r iplotCorr_reordered_with_genotype, eval=FALSE}
+iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE)
+```
+
+![iplotCorr example with scatterplot colored by genotype](Figs/iplotCorr2.png)
+
+## Examples of the use of other charts
+
+### `iplotMap`
 
 `iplotMap` creates a (slightly) interactive genetic map. Hover over a
 marker position to view the marker name.
 
-```{r iplotMap_example}
+```{r iplotMap_example, eval=FALSE}
 data(hyper)
 map <- pull.map(hyper)
 
 iplotMap(map, title="iplotMap example")
 ```
 
-#### `iplotScanone`
+### `iplotScanone`
 
 `iplotScanone` creates an interactive chart with LOD
 curves linked to estimated QTL effects.
 
 
-```{r iplotScanone_example}
+```{r iplotScanone_example, eval=FALSE}
 data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
 out <- scanone(hyper)
@@ -85,13 +89,13 @@ out <- scanone(hyper)
 iplotScanone(out, hyper, title="iplotScanone example")
 ```
 
-#### `iplotMScanone`
+### `iplotMScanone`
 
 `iplotMScanone` creates a heatmap of LOD curves for a set of genome
 scans (for each, for each of a time course of phenotypes), linked to a
 plot of the individual genome scans, and also to the QTL effects.
 
-```{r iplotMScanone_example}
+```{r iplotMScanone_example, eval=FALSE}
 data(grav)
 grav <- calc.genoprob(grav, step=1)
 grav <- reduce2grid(grav)
@@ -105,12 +109,12 @@ iplotMScanone(out, effects=eff,
 ```
 
 
-#### `iplotCorr`
+### `iplotCorr`
 
 `iplotCorr` creates an heat map of a correlation matrix, linked to the
 underlying scatterplots.
 
-```{r iplotCorr_example}
+```{r iplotCorr_example, eval=FALSE}
 data(geneExpr)
 
 iplotCorr(geneExpr$expr, geneExpr$genotype,
@@ -120,12 +124,12 @@ iplotCorr(geneExpr$expr, geneExpr$genotype,
 ```
 
 
-#### `iplotCurves`
+### `iplotCurves`
 
 `iplotCurves` creates a plot of a set of curves linked to one or two
 scatterplots.
 
-```{r iplotCurves_example}
+```{r iplotCurves_example, eval=FALSE}
 data(grav)
 times <- attr(grav, "time")
 phe <- grav$pheno
@@ -137,13 +141,13 @@ iplotCurves(phe, times, phe[,times==2 | times==4], phe[,times==4 | times==6],
                            scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 6 hrs"))
 ```
 
-#### `iboxplot`
+### `iboxplot`
 
 `iboxplot` creates an interactive graph for a large set of box plots
 (rendered as lines connecting the quantiles), linked to underlying
 histograms.
 
-```{r iboxplot_example}
+```{r iboxplot_example, eval=FALSE}
 # simulated data
 n.ind <- 500
 n.gene <- 10000
@@ -155,12 +159,12 @@ iboxplot(expr, title="iboxplot example",
          chartOpts=list(xlab="Mice", ylab="Gene expression"))
 ```
 
-#### `iheatmap`
+### `iheatmap`
 
 `iheatmap` creates an interactive heatmap of a numeric matrix, with
 pixels linked to plots of horizontal and vertical slices.
 
-```{r iheatmap_example}
+```{r iheatmap_example, eval=FALSE}
 # data to display
 n <- 101
 x <- y <- seq(-2, 2, len=n)
@@ -175,7 +179,7 @@ iheatmap(z, x, y, title = "iheatmap example")
 
 
 
-### Full list of `chartOpts` options
+## Full list of `chartOpts` options
 
 There are a number of ways in which one may wish to customize the
 interactive graphs produced by
@@ -185,7 +189,7 @@ is through a function argument, `chartOpts`. We touched on this
 briefly above. The following is a complete listing of the
 customization options for each chart.
 
-#### `iboxplot`
+### `iboxplot`
 
 `width = 1000`: width of image in pixels
 
@@ -203,7 +207,7 @@ customization options for each chart.
 
 `histcolors = c("blue", "red", "green", "MediumVioletRed", "black")`: vector of colors for selected histograms
 
-#### `iheatmap`
+### `iheatmap`
 
 `htop = 500`: height of top charts in pixels
 
@@ -225,9 +229,9 @@ customization options for each chart.
 
 `strokewidth = 2`: line width
 
-`xlim = d3.extent(data.x)`: x-axis limits
+`xlim = range(x)`: x-axis limits
 
-`ylim = d3.extent(data.y)`: y-axis limits
+`ylim = range(y)`: y-axis limits
 
 `nxticks = 5`: no. ticks on x-axis
 
@@ -251,11 +255,11 @@ customization options for each chart.
 
 `zthresh = NULL`: lower threshold for z-axis for plotting in heat map
 
-`zlim = c(-matrixMaxAbs(data.z), 0, matrixMaxAbs(data.z))`: z-axis limits
+`zlim = c(-max(z), 0, max(z))`: z-axis limits
 
 `colors = c("slateblue", "white", "crimson")`: heat map colors (same length as `zlim`)
 
-#### `iplotCorr`
+### `iplotCorr`
 
 `height = 450`: height of each panel in pixels
 
@@ -275,7 +279,7 @@ customization options for each chart.
 
 `scatcolors = NULL`: vector of point colors for scatterplot
 
-#### `iplotCurves`
+### `iplotCurves`
 
 `htop = 500`: height of curves chart in pixels
 
@@ -371,7 +375,7 @@ customization options for each chart.
 
 `scat2_ylab = "Y"`: y-axis label for second scatterplot
 
-#### `iplotMap`
+### `iplotMap`
 
 `width = 1000`: width of chart in pixels
 
@@ -405,7 +409,7 @@ customization options for each chart.
 
 `ylab = "Position (cM)"`: y-axis label
 
-#### `iplotScanone` (no effects)
+### `iplotScanone` (no effects)
 
 `height = 450`: height of image in pixels
 
@@ -447,7 +451,7 @@ customization options for each chart.
 
 `rotate_ylab = NULL`: indicates whether to rotate the y-axis label 90 degrees
 
-#### `iplotScanone` (`pxgtype="ci"`)
+### `iplotScanone` (`pxgtype="ci"`)
 
 `height = 450`: height of image in pixels
 
@@ -513,7 +517,7 @@ customization options for each chart.
 
 `eff_titlepos = 20`: position of title for effect plot panel, in pixels
 
-#### `iplotScanone` (`pxgtype="raw"`)
+### `iplotScanone` (`pxgtype="raw"`)
 
 `height = 450`: height of image in pixels
 
@@ -585,7 +589,7 @@ customization options for each chart.
 
 `eff_yNA = list(handle=true, force=false, width=15, gap=10)`: treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
 
-#### `iplotPXG`
+### `iplotPXG`
 
 `height = 450`: height of chart in pixels
 
@@ -621,7 +625,7 @@ customization options for each chart.
 
 `yNA = list(handle=true, force=false, width=15, gap=10)`: treatment of missing values (handle=T/F, force=T/F, width, gap)
 
-#### `iplotMScanone` (no effects)
+### `iplotMScanone` (no effects)
 
 `wleft = 650`: width of left panels in pixels
 
@@ -653,7 +657,7 @@ customization options for each chart.
 
 `linewidth = 2`: width of lines
 
-#### `iplotMScanone` (with effects)
+### `iplotMScanone` (with effects)
 
 `wleft = 650`: width of left panels in pixels
 

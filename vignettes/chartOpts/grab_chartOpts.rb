@@ -24,6 +24,9 @@ def default2R (value)
         value.sub!(/\]/, ')')
     end
 
+    value.sub!(/d3\.extent\(data\./, 'range(')
+    value.gsub!(/matrixMaxAbs\(data\./, 'max(')
+
     value
 end
 
@@ -115,7 +118,7 @@ def write_chartOpts (ofile, chartOpts, mvcomments)
     keys.each do |filestem|
         func = get_func_name(filestem)
 
-        ofile.print "#### `#{func}`"
+        ofile.print "### `#{func}`"
         ofile.print " (#{mvcomments[filestem]})" unless mvcomments[filestem].nil?
         ofile.print "\n\n"
 

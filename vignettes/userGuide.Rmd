@@ -30,34 +30,63 @@ You first need to load the package.
 library(qtlcharts)
 ```
 
-Now let's begin by considering the function `iplotCorr`, which creates
+Let's begin by considering the function `iplotCorr`, which creates
 a heatmap of a correlation matrix, linked to scatterplots of the
 underlying variables.
 
-We'll first load the `geneExpr` dataset included with the R/qtlcharts package.
+We'll first load the `geneExpr` dataset, example data included with
+the R/qtlcharts package.
 
 ```{r geneExpr_data}
 data(geneExpr)
 ```
 
-This is a list with two components. The first, `geneExpr$expr`, is a
-`r nrow(geneExpr$expr)` &times; `r ncol(geneExpr$expr)` matrix of gene
-expression data. We can use `iplotCorr` with these data, as follows:
+This is a list with two components. The first, `geneExpr$expr`, which is a
+`r nrow(expr)` &times; `r ncol(geneExpr$expr)` matrix of gene
+expression data, and `geneExpr$genotype`, which is a vector of
+genotypes (of length `r length(geneExpr$genotype)`) at a QTL that
+influences those `r ncol(geneExpr$expr)` genes' expression
+values. (The genes were selected from a larger expression QTL study,
+on that basis: that they are all influenced by this QTL.)
 
-```{r iplotCorr_reordered, eval=FALSE}
-iplotCorr(geneExpr$expr, reorder=TRUE)
+Let's pull out those two components of `geneExpr` as separate objects,
+`expr` and `geno`.
+
+```{r split_geneExpr}
+expr <- geneExpr$expr
+geno <- geneExpr$genotype
 ```
 
-This will open ...
+The simplest use of `iplotCorr` is with a numeric matrix, as with
+these data. For example:
+
+```{r iplotCorr_reordered, eval=FALSE}
+iplotCorr(expr, reorder=TRUE)
+```
+
+This will open an interactive figure in a web browser, with a heat map
+of the correlation matrix of the genes on the left linked to
+the underlying scatterplots. The argument `reorder=TRUE`, the genes
+are reordered (by hierarchical clustering with the R function
+`hclust`) to bring genes with similar expression patterns next to each
+other.
+
+The following is a snapshot.
 
 ![iplotCorr example](Figs/iplotCorr1.png)
 
+The left panel is a heat map of the correlation matrix. If you hover
+over a pixel the panel, the individual correlations are shown. If you
+click on a pixel, the corresponding scatterplot is shown on the right.
 
-Scatterplot colored by genotype, contained in the vector `geneExpr$genotype`.
+We can have the scatterplot colored by the QTL genotype contained in
+the vector `geno`, throught the `group` argument.
 
 ```{r iplotCorr_reordered_with_genotype, eval=FALSE}
-iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE)
+iplotCorr(expr, geno, reorder=TRUE)
 ```
+
+Here's a snapshot of the result.
 
 ![iplotCorr example with scatterplot colored by genotype](Figs/iplotCorr2.png)
 

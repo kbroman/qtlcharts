@@ -146,8 +146,8 @@ iplotMScanone(out.hk, grav, chartdivid="iplotMScanone",
 
 ### A bit of CSS
 
-One final detail: I link to several
-[CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) files to
+One final detail: I link to a
+[CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) file to
 revise the style of the document that's produced. This is done
 as straight text, not inside a code chunk. Look at the
 [source for this vignette](https://github.com/kbroman/qtlcharts/blob/master/vignettes/Rmarkdown.Rmd) to see the code.

@@ -343,6 +343,28 @@ an object becomes a hash (i.e., associative array) or an array (i.e.,
 vector or list), or that a single value becomes a scalar or an array
 of length 1.</p>
 
+<p>Things that are to be converted to hashes should first be made into
+lists, as regular vectors in R will be converted to ordered arrays,
+with any <code>names</code> ignored.</p>
+
+<p>The other bit of trickiness regards vectors of length 1. R does not
+have a scalar data type; one uses a vector of length 1. But in JSON
+and JavaScript, these are different, and it can be annoying to deal
+with a vector of length 1 where a scalar would do. The function
+<code>jsonlite::unbox</code> can be used to force a vector of length 1 to be made
+a scalar.</p>
+
+<p>We mess around with these things particularly in dealing with the
+<code>chartOpts</code> options. The function <code>opts4json</code> (see
+<a href="https://github.com/kbroman/qtlcharts/blob/master/R/write_html.R"><code>write_html.R</code></a>)
+is the main utility for ensuring that <code>chartOpts</code> get turned into the
+expected JSON format.</p>
+
+<p>A further annoyance regards the treatment of missing values: in some
+cases jsonlite will convert missing values to <code>&quot;NA&quot;</code> strings, and in
+some cases will be made <code>null</code> values. Use of <code>na=&quot;null&quot;</code> in calls to
+<code>jsonlite::toJSON</code> will force the use of <code>null</code> values.</p>
+
 <p>An additional difficulty with jsonlite concerns the number of digits that are
 retained in the JSON object. jsonlite is currently using <code>round</code> (see
 <a href="https://github.com/jeroenooms/jsonlite/blob/master/R/asJSON.numeric.R"><code>asJSON.numeric.R</code></a>),
@@ -353,9 +375,23 @@ JSON objects. We want sufficient digits to keep things from looking
 too discrete in the chart, but too many digits results in large files
 and load times.</p>
 
+<p>Originally, jsonlite produced JSON objects with a great deal of white
+space, and so R/qtlcharts contains a function <code>strip_whitespace</code> (see
+<a href="https://github.com/kbroman/qtlcharts/blob/master/R/write_html.R"><code>write_html.R</code></a>),
+but it&#39;s a bit tricky to deal with strings with nested quotes.  In the
+most recent version of jsonlite, this seems to no longer be an issue,
+and so <code>strip_whitespace</code> could probably be omitted from R/qtlcharts.</p>
+
 <h2>Roxygen</h2>
 
 <p>Using Roxygen to create R help files</p>
+
+<h2>Tests</h2>
+
+<p>tricky to automatically test graphics, and particularly interactive
+graphics</p>
+
+<p>mention <code>tests/</code> and <code>inst/tests/</code> and the testthat package.</p>
 
 <h2>Licenses</h2>
 

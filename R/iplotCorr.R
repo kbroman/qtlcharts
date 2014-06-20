@@ -29,8 +29,10 @@
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
+#' @param digits Number of digits in JSON; pass to
+#'   \code{\link[jsonlite]{toJSON}}
 #' @param print If TRUE, print the output, rather than writing it to a file,
-#' for use within an R Markdown document.
+#'   for use within an R Markdown document.
 #'
 #' @return Character string with the name of the file created.
 #'
@@ -59,7 +61,7 @@
 iplotCorr <-
 function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.complete.obs"),
          file, onefile=FALSE, openfile=TRUE, title="",
-         chartdivid='chart', caption, chartOpts=NULL, print=FALSE)
+         chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
     if(missing(file)) file <- NULL
 
@@ -86,7 +88,8 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
         corr_was_presubset <- FALSE
     }
 
-    json <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset)
+    json <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset,
+                              digits)
 
     if(missing(caption) || is.null(caption))
         caption <- c('The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',

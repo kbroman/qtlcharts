@@ -9,6 +9,7 @@
 # @param cols Columns of correlation matrix to keep in image
 # @param reorder If TRUE, reorder the variables by clustering
 # @param corr Correlation matrix
+# @param corr_was_presubset: If TRUE, no need to subset with selected rows and columns
 # @param digits Number of digits in JSON; passed to \code{\link[jsonlite]{toJSON}}
 #
 # @return Character string with the input data in JSON format

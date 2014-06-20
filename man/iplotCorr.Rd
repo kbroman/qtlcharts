@@ -6,7 +6,7 @@
 iplotCorr(mat, group, rows, cols, reorder = FALSE, corr = cor(mat, use =
   "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
   title = "", chartdivid = "chart", caption, chartOpts = NULL,
-  print = FALSE)
+  digits = 4, print = FALSE)
 }
 \arguments{
 \item{mat}{Data matrix (individuals x variables)}
@@ -45,8 +45,11 @@ combined to one string with \code{\link[base]{paste}}, with
 the coffeescript code). Each element must be named using the
 corresponding option.}
 
+\item{digits}{Number of digits in JSON; pass to
+\code{\link[jsonlite]{toJSON}}}
+
 \item{print}{If TRUE, print the output, rather than writing it to a file,
-for use within an R Markdown document.}
+  for use within an R Markdown document.}
 }
 \value{
 Character string with the name of the file created.

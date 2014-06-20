@@ -525,5 +525,4 @@ customization options for each chart.
 
 
 <!-- the following to make it look nicer -->
-<link href="http://kbroman.github.io/qtlcharts/assets/vignettes/markdown_modified.css" rel="stylesheet"></link>
 <link href="http://kbroman.github.io/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

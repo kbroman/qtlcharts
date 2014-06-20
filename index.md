@@ -27,9 +27,12 @@ for the larger visualizations.
 
 ---
 
-|                                         |                                               |                                      |                                              |
-| :-------------------------------------: | :-------------------------------------------: | :----------------------------------: | :------------------------------------------: |
-| [Installation](pages/installation.html) | [User guide](assets/vignettes/userGuide.html) | Developer guide (<em>planned</em>)   | [Reusable graphic panels](pages/panels.html) |
+- [Installation](pages/installation.html) 
+- [User guide](assets/vignettes/userGuide.html) 
+- [Developer guide](assets/vignettes/develGuide.html)
+- [Reusable graphic panels](pages/panels.html)
+- [Use with R Markdown](assets/vignettes/Rmarkdown.html)
+- [List of chart customization options](assets/vignettes/chartOpts.html)
 
 ---
 

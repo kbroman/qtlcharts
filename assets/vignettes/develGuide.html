@@ -384,7 +384,19 @@ and so <code>strip_whitespace</code> could probably be omitted from R/qtlcharts.
 
 <h2>Roxygen</h2>
 
-<p>Using Roxygen to create R help files</p>
+<p>R help files are created using
+<a href="https://github.com/klutometis/roxygen">Roxygen2</a>: structured comments
+in the R code are converted to the R manual page format with the
+<code>devtools::document</code> function (see the
+<a href="http://github.com/kbroman/qtlcharts/tree/master/Makefile"><code>Makefile</code></a>).</p>
+
+<p>For further information on Roxygen2, see
+<a href="http://adv-r.had.co.nz/Documenting-functions.html">Documenting Functions</a>
+in <a href="http://had.co.nz/">Hadley Wickham</a>&#39;s <a href="http://adv-r.had.co.nz/">Advanced R Programming</a>
+or the <a href="http://cran.r-project.org/web/packages/roxygen2/">Roxygen2 vignettes</a>, such as
+<a href="http://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html">Getting started with Roxygen2</a>
+and 
+<a href="http://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html">Generating Rd files</a>.</p>
 
 <h2>Tests</h2>
 

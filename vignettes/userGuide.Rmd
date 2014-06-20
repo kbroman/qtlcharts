@@ -42,7 +42,7 @@ data(geneExpr)
 ```
 
 This is a list with two components. The first, `geneExpr$expr`, which is a
-`r nrow(expr)` &times; `r ncol(geneExpr$expr)` matrix of gene
+`r nrow(geneExpr$expr)` &times; `r ncol(geneExpr$expr)` matrix of gene
 expression data, and `geneExpr$genotype`, which is a vector of
 genotypes (of length `r length(geneExpr$genotype)`) at a QTL that
 influences those `r ncol(geneExpr$expr)` genes' expression

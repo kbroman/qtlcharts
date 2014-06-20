@@ -1,4 +1,4 @@
-all: jspanels jspaneltests jscharts json doc inst/ToDo.html vignettes/chartOpts
+all: jspanels jspaneltests jscharts json doc inst/ToDo.html vignettes/chartOpts.Rmd
 
 PANEL_DIR = inst/panels
 LODCHART_DIR = ${PANEL_DIR}/lodchart

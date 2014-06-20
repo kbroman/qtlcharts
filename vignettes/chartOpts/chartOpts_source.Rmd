@@ -1,7 +1,7 @@
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Full list of chartOpts options}
+%\VignetteIndexEntry{List of chart customization options}
 
-# Full list of `chartOpts` options
+# List of chart customization options
 
 There are a number of ways in which one may wish to customize the
 interactive graphs produced by

@@ -153,6 +153,6 @@ as straight text, not inside a code chunk. Look at the
 [source for this vignette](https://github.com/kbroman/qtlcharts/blob/master/vignettes/Rmarkdown.Rmd) to see the code.
 
 <!-- the following to make it look nicer -->
-<link href="http://kbroman.github.io/assets/vignettes/markdown.css" rel="stylesheet"></link>
-<link href="http://kbroman.github.io/assets/vignettes/markdown_modified.css" rel="stylesheet"></link>
-<link href="http://kbroman.github.io/assets/vignettes/vignette.css" rel="stylesheet"></link>
+<link href="http://kbroman.github.io/qtlcharts/assets/vignettes/markdown.css" rel="stylesheet"></link>
+<link href="http://kbroman.github.io/qtlcharts/assets/vignettes/markdown_modified.css" rel="stylesheet"></link>
+<link href="http://kbroman.github.io/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

@@ -256,21 +256,7 @@ for(i in seq(along=x))
 iheatmap(z, x, y, title = "iheatmap example")
 ```
 
-
-
-
-<style type="text/css">
-body {
-    margin-left: 100px;
-}
-code {
-    padding: 0;
-    font-size: 90%;
-    color: black;
-    background-color: white;
-    border: 0px solid white;
-}
-pre code {
-    border: 1px solid #ccc;    
-}
-</style>
+<!-- the following to make it look nicer -->
+<link href="http://kbroman.github.io/assets/vignettes/markdown.css" rel="stylesheet"></link>
+<link href="http://kbroman.github.io/assets/vignettes/markdown_modified.css" rel="stylesheet"></link>
+<link href="http://kbroman.github.io/assets/vignettes/vignette.css" rel="stylesheet"></link>

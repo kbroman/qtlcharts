@@ -146,30 +146,13 @@ iplotMScanone(out.hk, grav, chartdivid="iplotMScanone",
 
 ### A bit of CSS
 
-One final detail: I'm including a bit of
-[CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) code to
-revise the left margin for the document that's produced. This is done
-as straight text, not inside a code chunk.
+One final detail: I link to several
+[CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) files to
+revise the style of the document that's produced. This is done
+as straight text, not inside a code chunk. Look at the
+[source for this vignette](https://github.com/kbroman/qtlcharts/blob/master/vignettes/Rmarkdown.Rmd) to see the code.
 
-```
-<style type="text/css">
-body { margin-left: 100px; }
-</style>
-```
-
-<style type="text/css">
-body {
-    margin-left: 100px;
-}
-
-code {
-    padding: 0;
-    font-size: 90%;
-    color: black;
-    background-color: white;
-    border: 0px solid white;
-}
-pre code {
-    border: 1px solid #ccc;
-}
-</style>
+<!-- the following to make it look nicer -->
+<link href="http://kbroman.github.io/assets/vignettes/markdown.css" rel="stylesheet"></link>
+<link href="http://kbroman.github.io/assets/vignettes/markdown_modified.css" rel="stylesheet"></link>
+<link href="http://kbroman.github.io/assets/vignettes/vignette.css" rel="stylesheet"></link>

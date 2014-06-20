@@ -123,7 +123,7 @@ def write_chartOpts (ofile, chartOpts, mvcomments)
         ofile.print "\n\n"
 
         chartOpts[filestem].each do |key, value|
-            ofile.print "`#{key} = #{default2R(value[:default])}`: #{value[:comment]}\n\n"
+            ofile.print "`#{key} = #{default2R(value[:default])}` &mdash; #{value[:comment]}\n\n"
         end
 
     end

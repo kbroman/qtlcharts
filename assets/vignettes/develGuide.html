@@ -159,7 +159,7 @@ R/qtlcharts is written in
 <a href="http://coffeescript.org">CoffeeScript</a>, making use of the JavaScript
 libraries <a href="http://d3js.org">D3</a> and
 <a href="https://github.com/caged/d3-tip">d3-tip</a>, as well as
-(ColorBrewer](<a href="http://colorbrewer2.org">http://colorbrewer2.org</a>).</p>
+<a href="http://colorbrewer2.org">ColorBrewer</a>.</p>
 
 <p>The aim of this guide is to explain the basic strategy of the package
 and the organization of the code, in the hope that others may wish to
@@ -293,7 +293,7 @@ of the default.</p>
 <p>The allowable options are maintained in one place: the CoffeeScript
 code in which they are used. These need to be listed at the top of the
 file in a format like the following (taken from
-<a href="https://github.com/kbroman/qtlcharts/tree/master/inst/charts/iplotCorr.coffee"><code>iplotCorr.coffee</code></a>.</p>
+<a href="https://github.com/kbroman/qtlcharts/tree/master/inst/charts/iplotCorr.coffee"><code>iplotCorr.coffee</code></a>).</p>
 
 <pre><code># chartOpts start
 height = chartOpts?.height ? 450 # height of each panel in pixels
@@ -319,7 +319,7 @@ which provides a list of all possible options.</p>
 
 <p>Some charts have multiple versions (e.g., <code>iplotScanone</code> with no
 effects, with confidence intervals, or with raw phenotype &times;
-genotype.  The file <a href="https://github.com/kbroman/qtlcharts/blob/master/vignettes/chartOpts/multiversions.csv"><code>multiversions.csv</code></a>
+genotype).  The file <a href="https://github.com/kbroman/qtlcharts/blob/master/vignettes/chartOpts/multiversions.csv"><code>multiversions.csv</code></a>
 lists the chart name and a bit of Markdown code to describe the
 version. Also, the order of the charts in the
 <a href="http://kbroman.github.io/qtlcharts/assets/vignettes/chartOpts.html">chartOpts vignette</a>

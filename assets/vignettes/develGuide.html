@@ -169,8 +169,9 @@ the software.</p>
 <h2>Basic layout of source</h2>
 
 <p>The source for the package is at
-<a href="http://github.com/kbroman/qtlcharts">GitHub</a>.  The
-<a href="https://github.com/kbroman/qtlcharts/tree/devel"><code>devel</code> branch</a>
+<a href="http://github.com/kbroman/qtlcharts">GitHub</a>:
+<a href="http://github.com/kbroman/qtlcharts"><code>http://github.com/kbroman/qtlcharts</code></a>.
+The <a href="https://github.com/kbroman/qtlcharts/tree/devel"><code>devel</code> branch</a>
 contains the current development version, but it is not far ahead (if
 at all) from the
 <a href="https://github.com/kbroman/qtlcharts/tree/master"><code>master</code> branch</a>.</p>
@@ -195,7 +196,7 @@ These were designed following
 <a href="http://bost.ocks.org/mike">Mike Bostock</a>&#39;s
 <a href="http://bost.ocks.org/mike/chart/">Towards Reuseable Charts</a>.
 <a href="https://github.com/kbroman/qtlcharts/tree/master/inst/panels/panelutil.coffee"><code>panelutil.coffee</code></a>
-contains various utility functions used by one or more panels and
+contains various utility functions used by one or more panels, and
 <a href="https://github.com/kbroman/qtlcharts/tree/master/inst/panels/panelutil.css"><code>panelutil.css</code></a>
 contains CSS code for the panels. The actual panels are in
 subdirectories of
@@ -204,23 +205,26 @@ and each contains a <code>test</code> subdirectory with test code.</p>
 
 <p>The higher-level charts are located in
 <a href="https://github.com/kbroman/qtlcharts/tree/master/inst/charts"><code>inst/charts</code></a>.
-This is where most of the interactivity is encoded.
+This is where most of the interactivity is encoded: a chart basically
+passes data to individual panels and sets up the interactions among
+the panels.
 <a href="https://github.com/kbroman/qtlcharts/blob/master/inst/charts/charts.css"><code>charts.css</code></a>
 contains a bit of CSS code for the charts.</p>
 
 <h2>CoffeeScript</h2>
 
-<p>I&#39;ve chosen to develop the charts in
+<p>R/qtlcharts is being developed in
 <a href="http://coffeescript.org">CoffeeScript</a> rather than JavaScript,
-thought the CoffeeScript code is translated to JavaScript and it is
+though the CoffeeScript code is translated to JavaScript and it is
 the JavaScript that is ultimately used.</p>
 
 <p>The CoffeeScript code is not that far from JavaScript: the bulk of the
 code is basically not different. So why add this extra layer, with
-CoffeeScript? I just like it better. CoffeeScript is a nicer language
-and is more fun to code.</p>
+CoffeeScript? CoffeeScript is a nicer language
+and is more fun to code, and a number of things are easier or more
+compact than JavaScript.</p>
 
-<p><a href="http://d3js.org">D3</a> code generally includes a lot of anonymous
+<p>For example, <a href="http://d3js.org">D3</a> code generally includes a lot of anonymous
 functions, like</p>
 
 <pre><code>blah.attr(&quot;x&quot;, function(d) { return xscale(d); });
@@ -244,16 +248,19 @@ example:</p>
 
 <p>For each chart there is an R function that writes to an html file (by
 default, a temporary file in a temporary directory, defined with
-<code>tempfile()</code> and <code>tempdir()</code>), which is then opened in a browser.</p>
+<a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/tempfile.html"><code>tempfile()</code></a>
+and
+<a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/tempfile.html"><code>tempdir()</code></a>),
+which is then opened in a browser.</p>
 
 <p>The data are simply pasted into the html file in
 <a href="http://json.org">JSON</a> format. This may make the chart slow to load,
 but it allows us to get around browser security settings which
-generally disallow access local files.</p>
+generally disallow access to local files.</p>
 
 <p>The basic functions for writing html are in
 <a href="https://github.com/kbroman/qtlcharts/blob/master/R/write_html.R"><code>write_html.R</code></a>.
-The R function <code>system.file</code> is used to define links to the JavaScript
+The R function <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/system.file.html"><code>system.file</code></a> is used to define links to the JavaScript
 and CSS code that are contained within the package. For example, the
 location of the <code>d3.min.js</code> file is determined through</p>
 
@@ -262,8 +269,9 @@ location of the <code>d3.min.js</code> file is determined through</p>
 
 <p>We&#39;re generally using temporary files and writing links to the
 JavaScript code, but if the argument <code>onefile=TRUE</code>, we paste the code
-directly using the R function <code>file.append</code>. (The resulting file is
-then self-contained and so portable.)</p>
+directly using the R function
+<a href="http://stat.ethz.ch/R-manual/R-patched/library/base/html/files.html"><code>file.append</code></a>. (The
+resulting file is then self-contained and so portable.)</p>
 
 <p>For creating interactive charts within R Markdown documents (see
 <a href="http://kbroman.github.io/qtlcharts/assets/vignettes/Rmarkdown.html">the related vignette</a>),
@@ -283,12 +291,11 @@ avoid conflicts among multiple charts, particularly within
 
 <p>For each chart, there are numerous possible customizations that one
 may wish to apply. To simplify the maintenance of these options, the R
-function for each chart takes an argument <code>chartOpts</code>, that should be
-a named list (though in simple cases, a named vector will do). This is
-passed to the corresponding CoffeeScript function for the chart, which
-looks for specific named components. If a specific option (e.g.,
-<code>height</code> or <code>width</code>) is named, the specified option is used in place
-of the default.</p>
+function for each chart takes an argument <code>chartOpts</code>, that is a named
+list (in simple cases, a named vector will do). This is passed to the
+corresponding CoffeeScript function for the chart, which looks for
+specific named components. If a specific option (e.g., <code>height</code> or
+<code>width</code>) is named, the option is used in place of the default.</p>
 
 <p>The allowable options are maintained in one place: the CoffeeScript
 code in which they are used. These need to be listed at the top of the
@@ -327,9 +334,24 @@ is determined from the order in this file.</p>
 
 <h2>R &rarr; JSON</h2>
 
-<p>Converting R data to JSON using jsonlite.</p>
+<p>Data is pasted into the chart file as <a href="http://json.org">JSON</a>; they are converted from R
+objects to JSON using the
+<a href="https://github.com/jeroenooms/jsonlite">jsonlite</a> package.</p>
 
-<p>Difficulties: hash vs array, array vs scalar, and number of digits</p>
+<p>There are some occasional annoyances, particularly in ensuring that
+an object becomes a hash (i.e., associative array) or an array (i.e.,
+vector or list), or that a single value becomes a scalar or an array
+of length 1.</p>
+
+<p>An additional difficulty with jsonlite concerns the number of digits that are
+retained in the JSON object. jsonlite is currently using <code>round</code> (see
+<a href="https://github.com/jeroenooms/jsonlite/blob/master/R/asJSON.numeric.R"><code>asJSON.numeric.R</code></a>),
+though <code>formatC</code> would probably be better.
+Most chart functions in R/qtlcharts take a <code>digits</code> argument which is
+passed to the <code>toJSON</code> to control the number of digits retained in the
+JSON objects. We want sufficient digits to keep things from looking
+too discrete in the chart, but too many digits results in large files
+and load times.</p>
 
 <h2>Roxygen</h2>
 

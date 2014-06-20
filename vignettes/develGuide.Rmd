@@ -21,8 +21,9 @@ the software.
 ## Basic layout of source
 
 The source for the package is at
-[GitHub](http://github.com/kbroman/qtlcharts).  The
-[`devel` branch](https://github.com/kbroman/qtlcharts/tree/devel)
+[GitHub](http://github.com/kbroman/qtlcharts):
+[`http://github.com/kbroman/qtlcharts`](http://github.com/kbroman/qtlcharts).
+The [`devel` branch](https://github.com/kbroman/qtlcharts/tree/devel)
 contains the current development version, but it is not far ahead (if
 at all) from the
 [`master` branch](https://github.com/kbroman/qtlcharts/tree/master).
@@ -47,7 +48,7 @@ These were designed following
 [Mike Bostock](http://bost.ocks.org/mike)'s
 [Towards Reuseable Charts](http://bost.ocks.org/mike/chart/).
 [`panelutil.coffee`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels/panelutil.coffee)
-contains various utility functions used by one or more panels and
+contains various utility functions used by one or more panels, and
 [`panelutil.css`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels/panelutil.css)
 contains CSS code for the panels. The actual panels are in
 subdirectories of
@@ -56,24 +57,27 @@ and each contains a `test` subdirectory with test code.
 
 The higher-level charts are located in
 [`inst/charts`](https://github.com/kbroman/qtlcharts/tree/master/inst/charts).
-This is where most of the interactivity is encoded.
+This is where most of the interactivity is encoded: a chart basically
+passes data to individual panels and sets up the interactions among
+the panels.
 [`charts.css`](https://github.com/kbroman/qtlcharts/blob/master/inst/charts/charts.css)
 contains a bit of CSS code for the charts.
 
 
 ## CoffeeScript
 
-I've chosen to develop the charts in
+R/qtlcharts is being developed in
 [CoffeeScript](http://coffeescript.org) rather than JavaScript,
-thought the CoffeeScript code is translated to JavaScript and it is
+though the CoffeeScript code is translated to JavaScript and it is
 the JavaScript that is ultimately used.
 
 The CoffeeScript code is not that far from JavaScript: the bulk of the
 code is basically not different. So why add this extra layer, with
-CoffeeScript? I just like it better. CoffeeScript is a nicer language
-and is more fun to code.
+CoffeeScript? CoffeeScript is a nicer language
+and is more fun to code, and a number of things are easier or more
+compact than JavaScript.
 
-[D3](http://d3js.org) code generally includes a lot of anonymous
+For example, [D3](http://d3js.org) code generally includes a lot of anonymous
 functions, like
 
     blah.attr("x", function(d) { return xscale(d); });
@@ -95,16 +99,19 @@ The JavaScript version of this is cumbersome and ugly.
 
 For each chart there is an R function that writes to an html file (by
 default, a temporary file in a temporary directory, defined with
-`tempfile()` and `tempdir()`), which is then opened in a browser.
+[`tempfile()`](http://stat.ethz.ch/R-manual/R-devel/library/base/html/tempfile.html)
+and
+[`tempdir()`](http://stat.ethz.ch/R-manual/R-devel/library/base/html/tempfile.html)),
+which is then opened in a browser.
 
 The data are simply pasted into the html file in
 [JSON](http://json.org) format. This may make the chart slow to load,
 but it allows us to get around browser security settings which
-generally disallow access local files.
+generally disallow access to local files.
 
 The basic functions for writing html are in
 [`write_html.R`](https://github.com/kbroman/qtlcharts/blob/master/R/write_html.R).
-The R function `system.file` is used to define links to the JavaScript
+The R function [`system.file`](http://stat.ethz.ch/R-manual/R-devel/library/base/html/system.file.html) is used to define links to the JavaScript
 and CSS code that are contained within the package. For example, the
 location of the `d3.min.js` file is determined through
 
@@ -112,8 +119,9 @@ location of the `d3.min.js` file is determined through
 
 We're generally using temporary files and writing links to the
 JavaScript code, but if the argument `onefile=TRUE`, we paste the code
-directly using the R function `file.append`. (The resulting file is
-then self-contained and so portable.)
+directly using the R function
+[`file.append`](http://stat.ethz.ch/R-manual/R-patched/library/base/html/files.html). (The
+resulting file is then self-contained and so portable.)
 
 For creating interactive charts within R Markdown documents (see
 [the related vignette](http://kbroman.github.io/qtlcharts/assets/vignettes/Rmarkdown.html)),
@@ -133,12 +141,11 @@ avoid conflicts among multiple charts, particularly within
 
 For each chart, there are numerous possible customizations that one
 may wish to apply. To simplify the maintenance of these options, the R
-function for each chart takes an argument `chartOpts`, that should be
-a named list (though in simple cases, a named vector will do). This is
-passed to the corresponding CoffeeScript function for the chart, which
-looks for specific named components. If a specific option (e.g.,
-`height` or `width`) is named, the specified option is used in place
-of the default.
+function for each chart takes an argument `chartOpts`, that is a named
+list (in simple cases, a named vector will do). This is passed to the
+corresponding CoffeeScript function for the chart, which looks for
+specific named components. If a specific option (e.g., `height` or
+`width`) is named, the option is used in place of the default.
 
 The allowable options are maintained in one place: the CoffeeScript
 code in which they are used. These need to be listed at the top of the
@@ -178,9 +185,25 @@ is determined from the order in this file.
 
 ## R &rarr; JSON
 
-Converting R data to JSON using jsonlite.
+Data is pasted into the chart file as [JSON](http://json.org); they are converted from R
+objects to JSON using the
+[jsonlite](https://github.com/jeroenooms/jsonlite) package.
 
-Difficulties: hash vs array, array vs scalar, and number of digits
+There are some occasional annoyances, particularly in ensuring that
+an object becomes a hash (i.e., associative array) or an array (i.e.,
+vector or list), or that a single value becomes a scalar or an array
+of length 1.
+
+An additional difficulty with jsonlite concerns the number of digits that are
+retained in the JSON object. jsonlite is currently using `round` (see
+[`asJSON.numeric.R`](https://github.com/jeroenooms/jsonlite/blob/master/R/asJSON.numeric.R)),
+though `formatC` would probably be better.
+Most chart functions in R/qtlcharts take a `digits` argument which is
+passed to the `toJSON` to control the number of digits retained in the
+JSON objects. We want sufficient digits to keep things from looking
+too discrete in the chart, but too many digits results in large files
+and load times.
+
 
 
 ## Roxygen

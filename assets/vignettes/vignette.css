@@ -23,3 +23,15 @@ a:hover
   color: purple;
   background: #CAFFFF;
 }
+a code
+{
+  color: purple;
+  text-decoration: none;
+  background-color: transparent;
+}
+a:hover code
+{
+  color: purple;
+  text-decoration: none;
+  background-color: transparent;
+}

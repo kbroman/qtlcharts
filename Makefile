@@ -121,12 +121,15 @@ ${THIS_BREWER}/%: ${QTLCHARTS_BREWER}/%
 VIGNETTES= assets/vignettes
 QTLCHARTS_VIGNETTES = ../qtlcharts/vignettes
 
-vignettes: ${VIGNETTES}/Rmarkdown.html ${VIGNETTES}/userGuide.html ${VIGNETTES}/chartOpts.html
+vignettes: ${VIGNETTES}/Rmarkdown.html ${VIGNETTES}/userGuide.html ${VIGNETTES}/chartOpts.html ${VIGNETTES}/develGuide.html
 
 ${VIGNETTES}/Rmarkdown.html: ${QTLCHARTS_VIGNETTES}/Rmarkdown.Rmd
 	R -e 'library(knitr);knit2html("$<", "$@")'
 
 ${VIGNETTES}/chartOpts.html: ${QTLCHARTS_VIGNETTES}/chartOpts.Rmd
+	R -e 'library(knitr);knit2html("$<", "$@")'
+
+${VIGNETTES}/develGuide.html: ${QTLCHARTS_VIGNETTES}/develGuide.Rmd
 	R -e 'library(knitr);knit2html("$<", "$@")'
 
 ${VIGNETTES}/userGuide.html: ${QTLCHARTS_VIGNETTES}/userGuide.Rmd

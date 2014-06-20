@@ -5,7 +5,8 @@
 \usage{
 iboxplot(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian = TRUE,
   breaks = 251, file, onefile = FALSE, openfile = TRUE, title = "",
-  chartdivid = "chart", caption, chartOpts = NULL, print = FALSE)
+  chartdivid = "chart", caption, chartOpts = NULL, digits = 4,
+  print = FALSE)
 }
 \arguments{
 \item{dat}{Data matrix (individuals x variables)}
@@ -35,6 +36,9 @@ combined to one string with \code{\link[base]{paste}}, with
 \item{chartOpts}{A list of options for configuring the chart (see
 the coffeescript code). Each element must be named using the
 corresponding option.}
+
+\item{digits}{Number of digits in JSON; pass to
+\code{\link[jsonlite]{toJSON}}}
 
 \item{print}{If TRUE, print the output, rather than writing it to a file,
 for use within an R Markdown document.}

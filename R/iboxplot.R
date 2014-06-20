@@ -23,6 +23,8 @@
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
+#' @param digits Number of digits in JSON; pass to
+#'   \code{\link[jsonlite]{toJSON}}
 #' @param print If TRUE, print the output, rather than writing it to a file,
 #' for use within an R Markdown document.
 #'
@@ -46,11 +48,11 @@
 iboxplot <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
          file, onefile=FALSE, openfile=TRUE, title="",
-         chartdivid='chart', caption, chartOpts=NULL, print=FALSE)
+         chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
     if(missing(file)) file <- NULL
 
-    json <- convert4iboxplot(dat, qu, orderByMedian, breaks)
+    json <- convert4iboxplot(dat, qu, orderByMedian, breaks, digits)
 
     if(missing(caption) || is.null(caption))
         caption <- c('The top panel is like a set of ', nrow(dat), ' box plots: ',

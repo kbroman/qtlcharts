@@ -1,0 +1,49 @@
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{R/qtlcharts Developer Guide}
+
+# R/qtlcharts Developer Guide
+
+[R/qtlcharts](http://kbroman.github.io/qtlcharts) is an R package 
+[R](http://www.r-project.org) package to create interactive charts for
+QTL data, for use with [R/qtl](http://www.rqtl.org). 
+R/qtlcharts is written in
+[R](http://www.r-project.org) and
+[CoffeeScript](http://coffeescript.org), making use of the JavaScript
+libraries [D3](http://d3js.org) and
+[d3-tip](https://github.com/caged/d3-tip), as well as
+(ColorBrewer](http://colorbrewer2.org).
+
+The aim of this guide is to explain the basic strategy of the package
+and the organization of the code, in the hope that others may wish to
+contribute to its development or to make use of different pieces of
+the software.
+
+
+## Licenses
+
+Licensed under the
+[MIT license](LICENSE). ([More information here](http://en.wikipedia.org/wiki/MIT_License).)
+
+R/qtlcharts incorporates [D3.js](http://d3js.org)
+([see its license](https://github.com/kbroman/qtlcharts/blob/master/inst/d3/LICENSE)),
+[d3.tip](http://github.com/Caged/d3-tip)
+([see its license](https://github.com/kbroman/qtlcharts/blob/master/inst/d3-tip/LICENSE)),
+and [ColorBrewer](http://colorbrewer2.org)
+([see its license](https://github.com/kbroman/qtlcharts/blob/master/inst/colorbrewer/LICENSE)).
+
+
+<style type="text/css">
+body {
+    margin-left: 100px;
+}
+code {
+    padding: 0;
+    font-size: 90%;
+    color: black;
+    background-color: white;
+    border: 0px solid white;
+}
+pre code {
+    border: 1px solid #ccc;    
+}
+</style>

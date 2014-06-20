@@ -18,6 +18,126 @@ and the organization of the code, in the hope that others may wish to
 contribute to its development or to make use of different pieces of
 the software.
 
+## Basic layout of source
+
+The source for the package is at
+[GitHub](http://github.com/kbroman/qtlcharts).  The
+[`devel` branch](https://github.com/kbroman/qtlcharts/tree/devel)
+contains the current development version, but it is not far ahead (if
+at all) from the
+[`master` branch](https://github.com/kbroman/qtlcharts/tree/master).
+
+JavaScript and CoffeeScript code are within the
+[`inst/`](https://github.com/kbroman/qtlcharts/tree/master/inst)
+subdirectory. (When the package is _installed_, the contents of the
+`inst` directory are moved up one level, and there is no `inst`
+directory anymore.)
+
+The three main libraries are in
+[`inst/d3`](https://github.com/kbroman/qtlcharts/tree/master/inst/d3),
+[`inst/d3-tip`](https://github.com/kbroman/qtlcharts/tree/master/inst/d3-tip)
+and
+[`inst/colorbrewer`](https://github.com/kbroman/qtlcharts/tree/master/inst/colorbrewer).
+
+The interactive charts are built on a set of
+[reuseable D3-based graphic panels](http://kbroman.github.io/qtlcharts/pages/panels.html),
+contained in
+[`inst/panels`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels).
+These were designed following
+[Mike Bostock](http://bost.ocks.org/mike)'s
+[Towards Reuseable Charts](http://bost.ocks.org/mike/chart/).
+[`panelutil.coffee`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels/panelutil.coffee)
+contains various utility functions used by one or more panels and
+[`panelutil.css`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels/panelutil.css)
+contains CSS code for the panels. The actual panels are in
+subdirectories of
+[`inst/panels`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels),
+and each contains a `test` subdirectory with test code.
+
+The higher-level charts are located in
+[`inst/charts`](https://github.com/kbroman/qtlcharts/tree/master/inst/charts). 
+This is where most of the interactivity is encoded.
+[`charts.css`](https://github.com/kbroman/qtlcharts/blob/master/inst/charts/charts.css)
+contains a bit of CSS code for the charts.
+
+
+## CoffeeScript
+
+I've chosen to develop the charts in
+[CoffeeScript](http://coffeescript.org) rather than JavaScript,
+thought the CoffeeScript code is translated to JavaScript and it is
+the JavaScript that is ultimately used.
+
+The CoffeeScript code is not that far from JavaScript: the bulk of the
+code is basically not different. So why add this extra layer, with
+CoffeeScript? I just like it better. CoffeeScript is a nicer language
+and is more fun to code.
+
+[D3](http://d3js.org) code generally includes a lot of anonymous
+functions, like 
+
+    blah.attr("x", function(d) { return xscale(d); });
+    
+In CoffeeScript, this becomes
+
+    blah.attr("x", (d) -> xscale(d))
+
+Also, in dealing with missing values, or with default values,
+CoffeeScript has some features that make life easier. Here's an
+example:
+ 
+    height = chartOpts?.height ? 450
+
+The JavaScript version of this is cumbersome and ugly.
+
+
+## Basic strategy
+
+Explain what I'm doing: writing html file, with data directly
+inserted, as JSON. 
+
+Using links to charts/panels/libraries.
+
+Useful R functions: temp file, link to resource
+
+Basic functions for writing to html.
+
+div with qtlcharts class
+
+## Roxygen
+
+Using Roxygen to create R help files
+
+## Customization options
+
+strategy with chartOpts, so that I don't have to know in advance what
+options are available.
+
+placement within chart code, so that I can create the 
+[chartOpts vignette](http://kbroman.github.io/qtlcharts/assets/vignettes/chartOpts.html).
+using the ruby script
+[`grab_chartOpts.rb`](https://github.com/kbroman/qtlcharts/blob/master/vignettes/chartOpts/grab_chartOpts.rb).
+
+Some charts have multiple versions; the file [`multiversions.csv`](https://github.com/kbroman/qtlcharts/blob/master/vignettes/chartOpts/multiversions.csv)
+lists the chart name and a bit of Markdown code to describe the
+version. Also, the order of the charts in the
+[chartOpts vignette](http://kbroman.github.io/qtlcharts/assets/vignettes/chartOpts.html)
+is determined from the order in this file.
+
+
+
+## R Markdown documents
+
+Strategy for charts within R Markdown documents
+
+
+
+## R &rarr; JSON
+
+Converting R data to JSON using jsonlite.
+
+Difficulties: hash vs array, array vs scalar, and number of digits 
+
 
 ## Licenses
 

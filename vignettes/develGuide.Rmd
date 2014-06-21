@@ -252,10 +252,19 @@ and
 
 ## Tests
 
-tricky to automatically test graphics, and particularly interactive
-graphics
+It is tricky to test graphics, and particularly interactive
+graphics. Use of `R CMD CHECK` will run all of the examples in the
+help files, and as a result an example of each interactive chart will
+be opened in a browser. A brief inspection of the results can help to
+identify problems.
 
-mention `tests/` and `inst/tests/` and the testthat package.
+Each of type of graphic panel has a corresponding test. These are
+more illustrations than proper tests. Live versions are at
+[`kbroman.github.io/qtlcharts/pages/panels.html`](http://kbroman.github.io/qtlcharts/pages/panels.html).
+
+Tests of some of the R utility functions are in
+[`tests/testthat`](https://github.com/kbroman/qtlcharts/tree/master/tests/testthat). We're
+using the R package [testthat](https://github.com/hadley/testthat).
 
 
 

@@ -400,10 +400,19 @@ and
 
 <h2>Tests</h2>
 
-<p>tricky to automatically test graphics, and particularly interactive
-graphics</p>
+<p>It is tricky to test graphics, and particularly interactive
+graphics. Use of <code>R CMD CHECK</code> will run all of the examples in the
+help files, and as a result an example of each interactive chart will
+be opened in a browser. A brief inspection of the results can help to
+identify problems.</p>
 
-<p>mention <code>tests/</code> and <code>inst/tests/</code> and the testthat package.</p>
+<p>Each of type of graphic panel has a corresponding test. These are
+more illustrations than proper tests. Live versions are at
+<a href="http://kbroman.github.io/qtlcharts/pages/panels.html"><code>kbroman.github.io/qtlcharts/pages/panels.html</code></a>.</p>
+
+<p>Tests of some of the R utility functions are in
+<a href="https://github.com/kbroman/qtlcharts/tree/master/tests/testthat"><code>tests/testthat</code></a>. We&#39;re
+using the R package <a href="https://github.com/hadley/testthat">testthat</a>.</p>
 
 <h2>Licenses</h2>
 

@@ -95,14 +95,14 @@ Here's a snapshot of the result.
 
 The interactive graphs produced by R/qtlcharts are, by default, saved
 to a temporary file and then opened in the default web browser. If you
-want to save a chart to a _particular_ file, just use the `file`
+want to save a chart to a _particular_ file, use the `file`
 argument, as follows:
 
 ```{r iplotCorr_specify_file, eval=FALSE}
 iplotCorr(geneExpr$expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html")
 ```
 
-The chart will still be opened in the browser; to create the file
+The chart will still be opened in the browser. To create the file
 without opening it, use the argument `openfile=FALSE`, as follows:
 
 ```{r iplotCorr_specify_file_dont_open, eval=FALSE}
@@ -111,9 +111,9 @@ iplotCorr(geneExpr$expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html",
 ```
 
 Charts saved in this way will contain links to resources within the
-R/qtlcharts package, and so will be viewable on the same system but
-will not be portable to another system that doesn't have R/qtlcharts
-installed, or that has the package installed in a different location.
+R/qtlcharts package, and so will not be portable to another system
+that doesn't have R/qtlcharts installed, or that has the package
+installed in a different location.
 
 To make the interactive graph portable to other computers (for
 example, for sharing with collaborators), use the argument
@@ -125,7 +125,19 @@ iplotCorr(geneExpr$expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html",
 ```
 
 The file will be somewhat larger, but it will be self-contained and so
-may be transferred and viewed on any computer.
+may be transferred to and viewed on any computer.
+
+
+## Chart customization options
+
+Explain `chartOpts`. 
+
+A full list of options is available in the
+[`chartOpts` vignette](http://kbroman.githu.b.io/qtlcharts/vignettes/chartOpts.html):
+
+```{r chartOpts_vignette, eval=FALSE}
+vignette("chartOpts", "qtlcharts")
+```
 
 
 ## Including a chart in an R Markdown document

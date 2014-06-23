@@ -71,7 +71,8 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
     group <- group2numeric(group)
 
     if(!missing(corr) && !is.null(corr)) {
-        if(!missing(rows) || !missing(cols)) warning("rows and cols ignored.")
+        if(!missing(rows) || !missing(cols)) warning("rows and cols ignored when corr provided.")
+        if(!missing(reorder)) warning("reorder ignored when corr provided")
         dn <- dimnames(corr)
         if(any(is.na(match(c(dn[[1]], dn[[2]]), colnames(mat)))))
             stop("Mismatch between dimnames(corr) and colnames(mat).")

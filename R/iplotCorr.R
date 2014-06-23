@@ -83,8 +83,8 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
                 stop("Can't match variables mat <-> corr")
         }
         else {
-            if((rownames(corr) != NULL && any(rownames(corr) != cnmat)) ||
-               (colnames(corr) != NULL && any(colnames(corr) != cnmat)))
+            if((!is.null(rownames(corr)) && any(rownames(corr) != cnmat)) ||
+               (!is.null(colnames(corr)) && any(colnames(corr) != cnmat)))
                 warning("Possible mis-alignment of mat and corr")
             rows <- cols <- 1:ncol(mat)
         }

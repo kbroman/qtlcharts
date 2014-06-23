@@ -106,6 +106,7 @@ iplotCorr = (data, chartOpts) ->
  
     # colors for scatterplot
     nGroup = d3.max(data.group)
+    scatcolors = expand2vector(scatcolors) # make sure it's an array (or null)
     if !(scatcolors?) or scatcolors.length < nGroup
         if nGroup == 1
             scatcolors = [ d3.rgb(150, 150, 150) ]

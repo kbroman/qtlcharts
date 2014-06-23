@@ -67,6 +67,7 @@ iplotCorr = function(data, chartOpts) {
     return drawScatter(d.col, d.row);
   });
   nGroup = d3.max(data.group);
+  scatcolors = expand2vector(scatcolors);
   if (!(scatcolors != null) || scatcolors.length < nGroup) {
     if (nGroup === 1) {
       scatcolors = [d3.rgb(150, 150, 150)];

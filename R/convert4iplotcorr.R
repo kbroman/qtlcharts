@@ -65,7 +65,6 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
             # reorder the rows and columns of corr to match
             corr <- corr[ord,ord]
         }
-        corr <- corr[rows,cols]
     }
 
     # get rid of names

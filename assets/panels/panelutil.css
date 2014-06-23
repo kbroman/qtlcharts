@@ -89,3 +89,10 @@ div.qtlcharts a:hover {
 .d3-tip.e:after {
     color: darkslateblue;
 }
+
+div.error p {
+    font-family: sans-serif;
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 5px;
+}

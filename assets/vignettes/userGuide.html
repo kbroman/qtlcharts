@@ -358,7 +358,59 @@ report. See the separate <a href="http://kbroman.github.io/qtlcharts/assets/vign
 <pre><code class="r">vignette(&quot;Rmarkdown&quot;, &quot;qtlcharts&quot;)
 </code></pre>
 
-<h2>Examples of the use of other charts</h2>
+<h2>Examples of the use of the charts</h2>
+
+<h3><code>iplotCorr</code></h3>
+
+<p><code>iplotCorr</code> creates an heat map of a correlation matrix, linked to the
+underlying scatterplots. We&#39;ve shown a few examples above, but there
+are several other features to consider.</p>
+
+<p>By default, <code>iplotCorr</code> will calculate the correlation matrix to be
+displayed, using Pearson&#39;s correlation; this can be sensitive to
+outliers. If you wish to use a different statistic, provide the matrix
+with the argument <code>corr</code>. For example, to use Spearman&#39;s rank correlation:</p>
+
+<pre><code class="r">data(geneExpr)
+expr &lt;- geneExpr$expr
+geno &lt;- geneExpr$genotype
+spearman &lt;- cor(expr, use=&quot;pairwise.complete.obs&quot;, method=&quot;spearman&quot;)
+
+iplotCorr(expr, geno, corr=spearman)
+</code></pre>
+
+<p>If you provide your own correlation measure, the <code>reorder</code> argument is
+ignored. You could use <code>hclust</code> to reorder the genes to bring
+correlated genes together.</p>
+
+<pre><code class="r">ord &lt;- hclust(as.dist(-spearman))$order
+iplotCorr(expr[,ord], geno, corr=spearman[ord,ord])
+</code></pre>
+
+<p>You can view just a portion of the correlation matrix by specifying
+<code>rows</code> and <code>cols</code>. For example, we could fit a regression line for
+each gene, relating the expression pattern to the eQTL genotype, in
+order to identify the genes with positive and negative associations
+with genotype.</p>
+
+<pre><code class="r">beta &lt;- apply(expr, 2, function(y,x) lm(y~x)$coef[2], geno)
+pos &lt;- which(beta &gt; 0)
+neg &lt;- which(beta &lt; 0)
+</code></pre>
+
+<p>We could then look at just the portion of the correlation matrix where
+the rows are genes with positive effects and the columns are genes
+with negative effects.</p>
+
+<pre><code class="r">iplotCorr(expr, geno, rows=pos, cols=neg)
+</code></pre>
+
+<p>If you wish to use a different correlation statistic, you need to do
+the subsetting in advance, as the <code>rows</code> and <code>cols</code> arguments are
+ignored if <code>corr</code> is provided.</p>
+
+<pre><code class="r">iplotCorr(expr, geno, corr=spearman[pos,neg])
+</code></pre>
 
 <h3><code>iplotMap</code></h3>
 
@@ -399,19 +451,6 @@ eff &lt;- estQTLeffects(grav, phe=phecol, what=&quot;effects&quot;)
 iplotMScanone(out, effects=eff,
               title=&quot;iplotMScanone example&quot;,
               chartOpts=list(eff_ylab=&quot;QTL effect&quot;))
-</code></pre>
-
-<h3><code>iplotCorr</code></h3>
-
-<p><code>iplotCorr</code> creates an heat map of a correlation matrix, linked to the
-underlying scatterplots.</p>
-
-<pre><code class="r">data(geneExpr)
-
-iplotCorr(geneExpr$expr, geneExpr$genotype,
-          title = &quot;iplotCorr example&quot;,
-          chartOpts=list(cortitle=&quot;Correlation matrix&quot;,
-                         scattitle=&quot;Scatterplot&quot;))
 </code></pre>
 
 <h3><code>iplotCurves</code></h3>

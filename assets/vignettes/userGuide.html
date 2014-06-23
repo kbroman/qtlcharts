@@ -281,13 +281,13 @@ to a temporary file and then opened in the default web browser. If you
 want to save a chart to a <em>particular</em> file, use the <code>file</code>
 argument, as follows:</p>
 
-<pre><code class="r">iplotCorr(geneExpr$expr, reorder=TRUE, file=&quot;~/Desktop/iplotCorr_example.html&quot;)
+<pre><code class="r">iplotCorr(expr, reorder=TRUE, file=&quot;~/Desktop/iplotCorr_example.html&quot;)
 </code></pre>
 
 <p>The chart will still be opened in the browser. To create the file
 without opening it, use the argument <code>openfile=FALSE</code>, as follows:</p>
 
-<pre><code class="r">iplotCorr(geneExpr$expr, reorder=TRUE, file=&quot;~/Desktop/iplotCorr_example.html&quot;,
+<pre><code class="r">iplotCorr(expr, reorder=TRUE, file=&quot;~/Desktop/iplotCorr_example.html&quot;,
           openfile=FALSE)
 </code></pre>
 
@@ -300,7 +300,7 @@ installed in a different location.</p>
 example, for sharing with collaborators), use the argument
 <code>onefile=TRUE</code>, as follows:</p>
 
-<pre><code class="r">iplotCorr(geneExpr$expr, reorder=TRUE, file=&quot;~/Desktop/iplotCorr_example.html&quot;,
+<pre><code class="r">iplotCorr(expr, reorder=TRUE, file=&quot;~/Desktop/iplotCorr_example.html&quot;,
           onefile=TRUE)
 </code></pre>
 
@@ -309,7 +309,39 @@ may be transferred to and viewed on any computer.</p>
 
 <h2>Chart customization options</h2>
 
-<p>Explain <code>chartOpts</code>. </p>
+<p>There are a number of ways in which one may wish to customize the
+interactive graphs produced by
+<a href="http://kbroman.github.io/qtlcharts">R/qtlcharts</a>, such as different
+colors or axis labels. Our main approach to allow such customization
+is through a function argument, <code>chartOpts</code>. It takes a named list.</p>
+
+<p>For example, to change the dimensions of the image produced by
+<code>iplotCorr</code>, use the <code>height</code> option, which specifies the height of
+each panel in pixels; by default, the images are square, with <code>width =
+height</code>:</p>
+
+<pre><code class="r">iplotCorr(expr, reorder=TRUE, chartOpts=list(height=600))
+</code></pre>
+
+<p>If you want the points in the scatterplot to be different color, use
+<code>scatcolors</code>.</p>
+
+<pre><code class="r">iplotCorr(expr, reorder=TRUE,
+          chartOpts=list(scatcolors=&quot;lightblue&quot;))
+</code></pre>
+
+<p>Of course, you can modify both <code>height</code> and <code>scatcolors</code> at once.</p>
+
+<pre><code class="r">iplotCorr(expr, reorder=TRUE,
+          chartOpts=list(height=600, scatcolors=&quot;lightblue&quot;))
+</code></pre>
+
+<p>If the points are to be colored by genotype, you need to specify the
+same number of colors as there are genotype groups.</p>
+
+<pre><code class="r">iplotCorr(expr, geno, reorder=TRUE,
+          chartOpts=list(scatcolors=c(&quot;lightblue&quot;, &quot;lightgreen&quot;, &quot;pink&quot;)))
+</code></pre>
 
 <p>A full list of options is available in the
 <a href="http://kbroman.githu.b.io/qtlcharts/vignettes/chartOpts.html"><code>chartOpts</code> vignette</a>:</p>

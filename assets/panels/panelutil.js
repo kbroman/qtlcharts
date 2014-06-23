@@ -173,6 +173,9 @@ selectGroupColors = function(ngroup, palette) {
 
 expand2vector = function(input, n) {
   var i;
+  if (input == null) {
+    return input;
+  }
   if (Array.isArray(input) && input.length >= n) {
     return input;
   }

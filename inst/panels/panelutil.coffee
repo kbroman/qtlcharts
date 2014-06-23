@@ -206,3 +206,13 @@ forceAsArray = (x) ->
 # any values in vec that appear in missing are made null
 missing2null = (vec, missingvalues=['NA', '']) ->
     vec.map (value) -> if missingvalues.indexOf(value) > -1 then null else value
+
+# display error at top of page
+displayError = (message) ->
+    if d3.select("div.error").empty() # no errors yet
+        d3.select("body")
+          .insert("div", ":first-child")
+          .attr("class", "error")
+    d3.select("div.error")
+      .append("p")
+      .text(message)

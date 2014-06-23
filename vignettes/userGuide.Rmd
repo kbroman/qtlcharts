@@ -99,14 +99,14 @@ want to save a chart to a _particular_ file, use the `file`
 argument, as follows:
 
 ```{r iplotCorr_specify_file, eval=FALSE}
-iplotCorr(geneExpr$expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html")
+iplotCorr(expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html")
 ```
 
 The chart will still be opened in the browser. To create the file
 without opening it, use the argument `openfile=FALSE`, as follows:
 
 ```{r iplotCorr_specify_file_dont_open, eval=FALSE}
-iplotCorr(geneExpr$expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html",
+iplotCorr(expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html",
           openfile=FALSE)
 ```
 
@@ -120,7 +120,7 @@ example, for sharing with collaborators), use the argument
 `onefile=TRUE`, as follows:
 
 ```{r iplotCorr_make_portable, eval=FALSE}
-iplotCorr(geneExpr$expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html",
+iplotCorr(expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html",
           onefile=TRUE)
 ```
 
@@ -130,7 +130,44 @@ may be transferred to and viewed on any computer.
 
 ## Chart customization options
 
-Explain `chartOpts`. 
+There are a number of ways in which one may wish to customize the
+interactive graphs produced by
+[R/qtlcharts](http://kbroman.github.io/qtlcharts), such as different
+colors or axis labels. Our main approach to allow such customization
+is through a function argument, `chartOpts`. It takes a named list.
+
+For example, to change the dimensions of the image produced by
+`iplotCorr`, use the `height` option, which specifies the height of
+each panel in pixels; by default, the images are square, with `width =
+height`:
+
+
+```{r iplotCorr_height, eval=FALSE}
+iplotCorr(expr, reorder=TRUE, chartOpts=list(height=600))
+```
+
+If you want the points in the scatterplot to be different color, use
+`scatcolors`.
+
+```{r iplotCorr_scatcolors, eval=FALSE}
+iplotCorr(expr, reorder=TRUE,
+          chartOpts=list(scatcolors="lightblue"))
+```
+
+Of course, you can modify both `height` and `scatcolors` at once.
+
+```{r iplotCorr_height_and_scatcolors, eval=FALSE}
+iplotCorr(expr, reorder=TRUE,
+          chartOpts=list(height=600, scatcolors="lightblue"))
+```
+
+If the points are to be colored by genotype, you need to specify the
+same number of colors as there are genotype groups.
+
+```{r iplotCorr_multiscatcolors, eval=FALSE}
+iplotCorr(expr, geno, reorder=TRUE,
+          chartOpts=list(scatcolors=c("lightblue", "lightgreen", "pink")))
+```
 
 A full list of options is available in the
 [`chartOpts` vignette](http://kbroman.githu.b.io/qtlcharts/vignettes/chartOpts.html):

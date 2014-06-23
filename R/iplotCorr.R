@@ -73,12 +73,22 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
     if(!missing(corr) && !is.null(corr)) {
         if(!missing(rows) || !missing(cols)) warning("rows and cols ignored when corr provided.")
         if(!missing(reorder)) warning("reorder ignored when corr provided")
-        dn <- dimnames(corr)
-        if(any(is.na(match(c(dn[[1]], dn[[2]]), colnames(mat)))))
-            stop("Mismatch between dimnames(corr) and colnames(mat).")
-        rows <- 1:nrow(corr)
-        cols <- 1:ncol(corr)
         reorder <- FALSE
+
+        cnmat <- colnames(mat)
+        if(ncol(mat) != nrow(corr) || ncol(mat) != nrow(corr)) { # correlation matrix is a subset
+            rows <- match(rownames(corr), cnmat)
+            cols <- match(colnames(corr), cnmat)
+            if(any(is.na(rows)) || any(is.na(cols)))
+                stop("Can't match variables mat <-> corr")
+        }
+        else {
+            if((rownames(corr) != NULL && any(rownames(corr) != cnmat)) ||
+               (colnames(corr) != NULL && any(colnames(corr) != cnmat)))
+                warning("Possible mis-alignment of mat and corr")
+            rows <- cols <- 1:ncol(mat)
+        }
+
         corr_was_presubset <- TRUE
     }
     else {

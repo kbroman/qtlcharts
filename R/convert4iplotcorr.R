@@ -65,6 +65,8 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
             # reorder the rows and columns of corr to match
             corr <- corr[ord,ord]
         }
+
+        corr <- corr[rows,cols]
     }
 
     # get rid of names
@@ -73,7 +75,7 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
 
     output <- list("indID" = toJSON(indID, na="null"),
                    "var" = toJSON(variables, na="null"),
-                   "corr" = toJSON(corr[rows,cols], digits=digits, na="null"),
+                   "corr" = toJSON(corr, digits=digits, na="null"),
                    "rows" = toJSON(rows-1, na="null"),
                    "cols" = toJSON(cols-1, na="null"),
                    "dat" =  toJSON(t(dat), digits=digits, na="null"), # columns as rows

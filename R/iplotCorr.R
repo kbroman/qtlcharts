@@ -77,15 +77,13 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
 
         cnmat <- colnames(mat)
         if(ncol(mat) != nrow(corr) || ncol(mat) != nrow(corr)) { # correlation matrix is a subset
-            rows <- match(rownames(corr), cnmat)
-            cols <- match(colnames(corr), cnmat)
-            if(any(is.na(rows)) || any(is.na(cols)))
-                stop("Can't match variables mat <-> corr")
+            rows <- selectMatrixColumns(mat, rownames(corr))
+            cols <- selectMatrixColumns(mat, colnames(corr))
         }
         else {
             if((!is.null(rownames(corr)) && any(rownames(corr) != cnmat)) ||
                (!is.null(colnames(corr)) && any(colnames(corr) != cnmat)))
-                warning("Possible mis-alignment of mat and corr")
+                warning("Possible misalignment of mat and corr")
             rows <- cols <- 1:ncol(mat)
         }
 

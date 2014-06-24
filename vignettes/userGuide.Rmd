@@ -213,8 +213,8 @@ iplotCorr(expr, geno, corr=spearman)
 ```
 
 If you provide your own correlation measure, the `reorder` argument is
-ignored. You could use `hclust` to reorder the genes to bring
-correlated genes together.
+ignored. If you want to reorder the genes, to bring correlated genes
+together, you need to do it yourself. You can use `hclust` for this.
 
 ```{r iplotCorr_own_reorder, eval=FALSE}
 ord <- hclust(as.dist(-spearman))$order

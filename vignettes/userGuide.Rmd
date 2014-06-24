@@ -91,6 +91,18 @@ Here's a snapshot of the result.
 ![iplotCorr example with scatterplot colored by genotype](Figs/iplotCorr2.png)
 
 
+Each chart function in R/qtlcharts has `title` and `caption` arguments
+to add a title and caption to the chart. By default, the title is
+empty, while the caption contains a standard description of the
+chart's use.
+
+If you want to add a title but remove the caption, you might do the following:
+
+```{r iplotCorr_title_caption, eval=FALSE}
+iplotCorr(expr, title="Correlation matrix linked to scatterplots",
+          caption="")
+```
+
 ## Saving to a file
 
 The interactive graphs produced by R/qtlcharts are, by default, saved
@@ -260,8 +272,50 @@ marker position to view the marker name.
 data(hyper)
 map <- pull.map(hyper)
 
-iplotMap(map, title="iplotMap example")
+iplotMap(map)
 ```
+
+If you want to shift each chromosome so that the initial marker is at
+0, use `shift=TRUE`.
+
+```{r iplotMap_shift, eval=FALSE}
+iplotMap(map, shift=TRUE)
+```
+
+`iplotMap` will also take a cross object, in which case it uses
+`pull.map` to extract and then plot the map.
+
+```{r iplotMap_w_cross, eval=FALSE}
+iplotMap(hyper)
+```
+
+If you want to change the x- and y-axis labels, you need to use the
+`chartOpts` argument:
+
+```{r iplotMap_xylab, eval=FALSE}
+iplotMap(map, chartOpts=list(xlab="Linkage group", ylab="Position (Mbp)"))
+```
+
+If you want to plot a subset of the chromosomes, you need to select
+them yourself:
+
+```{r iplotMap_selected_chr, eval=FALSE}
+iplotMap(map[c(5, 10, 15, "X")])
+```
+
+The `title` argument gives an overall title for the chart.
+
+```{r iplotMap_title, eval=FALSE}
+iplotMap(map, title="Selected chromosomes")
+```
+
+The `title` argument via `chartOpts` puts a title centered above the
+map panel.
+
+```{r iplotMap_chartOpts_title, eval=FALSE}
+iplotMap(map, chartOpts=list(title="Selected chromosomes"))
+```
+
 
 ### `iplotScanone`
 

@@ -268,10 +268,19 @@ iplotCorr(expr, geno, corr=spearman[pos,neg])
 `iplotMap` creates a (slightly) interactive genetic map. Hover over a
 marker position to view the marker name.
 
-```{r iplotMap_example, eval=FALSE}
+Let's first load the `hyper` data included with
+[R/qtl](http://www.rqtl.org) and pull out the genetic map with
+`pull.map`. 
+
+
+```{r, load_hyper}
 data(hyper)
 map <- pull.map(hyper)
+```
 
+We use `iplotMap` as follows.
+
+```{r iplotMap_example, eval=FALSE}
 iplotMap(map)
 ```
 
@@ -320,16 +329,88 @@ iplotMap(map, chartOpts=list(title="Selected chromosomes"))
 ### `iplotScanone`
 
 `iplotScanone` creates an interactive chart with LOD
-curves linked to estimated QTL effects.
+curves from a genome scan linked to estimated QTL effects.
 
+Let's first load the `hyper` data, included with [R/qtl](http://www.rqtl.org)
 
-```{r iplotScanone_example, eval=FALSE}
+```{r, load_hyper_and_scan}
 data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
 out <- scanone(hyper)
-
-iplotScanone(out, hyper, title="iplotScanone example")
 ```
+
+If you provide just the output from `scanone`, the only interactivity
+is that hovering over marker positions on the LOD curves will give
+information about the marker name, position, and LOD score.
+
+```{r iplotScanone_example, eval=FALSE}
+iplotScanone(out)
+```
+
+You can use the `chr` to plot only selected chromosomes.
+
+```{r iplotScanone_selected_chr, eval=FALSE}
+iplotScanone(out, chr=c(1, 4, 6, 15))
+```
+
+If you also provide the cross object, clicking on the markers will
+generate a QTL effect plot on the right. By default, means with &plusmn; 1
+SE error bars will be shown.
+
+```{r iplotScanone_w_eff, eval=FALSE}
+iplotScanone(out, hyper)
+```
+
+By default, in calculating the means and standard errors, a single
+imputation is used to handle missing genotype information, using the
+[R/qtl](http://www.rqtl.org) function `fill.geno`. Arguments may be
+passed to `fill.geno` as a list, with the argument `fillgenoArgs`. For
+example, to do the imputation by Viterbi, assuming a 1% genotyping
+error rate, do the following:
+
+```{r iplotScanone_fillgenoArgs, eval=FALSE}
+iplotScanone(out, hyper, fillgenoArgs=list(method="argmax", error.prob=0.01))
+```
+
+If you want to plot raw phenotypes vs genotypes, rather than mean
+&plusmn; SE, use `pxgtype="raw"`, as follows:
+
+```{r iplotScanone_rawpxg, eval=FALSE}
+iplotScanone(out, hyper, pxgtype="raw")
+```
+
+In the phenotype &times; genotype plot, pink points indicate that the
+genotype was imputed.
+
+To change the color of the LOD curves, use the `chartOpts` option
+`lod_linecolor`. Colors are named as in html, or with hex RGB codes
+like `"#842DCE"` or `#82C`. (See examples
+[here](http://www.computerhope.com/htmcolor.htm) and a list of named
+colors [here](http://html-color-codes.info/color-names/).)
+
+```{r iplotScanone_linecolor, eval=FALSE}
+iplotScanone(out, hyper, chartOpts=list(lod_linecolor="black"))
+```
+
+You can change the background colors with the `chartOpts` options
+`darkrect` and `lightrect`.
+
+```{r iplotScanone_rectcolor, eval=FALSE}
+iplotScanone(out, hyper, chartOpts=list(darkrect="#CCC", lightrect="#EEE"))
+```
+
+Change the colors of the lines in the mean &plusmn; SE plot with the
+`chartOpts` option `eff_linecolor`.
+
+```{r iplotScanone_rectcolor, eval=FALSE}
+iplotScanone(out, hyper, chartOpts=list(lod_linecolor="DarkViolet",
+                                        eff_linecolor="DarkViolet"))
+```
+
+
+
+
+
 
 ### `iplotMScanone`
 

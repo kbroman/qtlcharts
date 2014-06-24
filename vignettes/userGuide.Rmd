@@ -388,7 +388,7 @@ like `"#842DCE"` or `#82C`. (See examples
 [here](http://www.computerhope.com/htmcolor.htm) and a list of named
 colors [here](http://html-color-codes.info/color-names/).)
 
-```{r iplotScanone_linecolor, eval=FALSE}
+```{r iplotScanone_lodlinecolor, eval=FALSE}
 iplotScanone(out, hyper, chartOpts=list(lod_linecolor="black"))
 ```
 
@@ -402,7 +402,7 @@ iplotScanone(out, hyper, chartOpts=list(darkrect="#CCC", lightrect="#EEE"))
 Change the colors of the lines in the mean &plusmn; SE plot with the
 `chartOpts` option `eff_linecolor`.
 
-```{r iplotScanone_rectcolor, eval=FALSE}
+```{r iplotScanone_efflinecolor, eval=FALSE}
 iplotScanone(out, hyper, chartOpts=list(lod_linecolor="DarkViolet",
                                         eff_linecolor="DarkViolet"))
 ```

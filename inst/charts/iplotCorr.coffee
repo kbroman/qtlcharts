@@ -5,6 +5,19 @@
 
 iplotCorr = (data, chartOpts) ->
 
+    # data is an object with 7 components
+    #   data.indID  vector of character strings, of length n, with IDs for individuals
+    #   data.var    vector of character strings, of length p, with variable names
+    #   data.corr   matrix of correlation values, of dim q x r, with q and r each <= p
+    #   data.rows   vector of indicators, of length q, with values in {0, 1, ..., p-1},
+    #                  for each row in data.corr, it says which is the corresponding column in data.dat
+    #   data.cols   vector of indicators, of length r, with values in {0, 1, ..., p-1}
+    #                  for each column in data.corr, it says which is the corresponding column in data.dat
+    #   data.dat    numeric matrix, of dim n x p, with data to be plotted in scatterplots
+    #                  rows correspond to data.indID and columns to data.var
+    #   data.group  numeric vector, of length n, with values in {1, ..., k},
+    #                  used as categories for coloring points in the scatterplot
+
     # chartOpts start
     height = chartOpts?.height ? 450 # height of each panel in pixels
     width = chartOpts?.width ? height # width of each panel in pixels

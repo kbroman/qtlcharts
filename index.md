@@ -1,21 +1,16 @@
 ---
 layout: page
 title: R/qtlcharts
-tagline: Interactive charts for xQTL data
+tagline: Interactive charts for QTL data
 ---
 
 R/qtlcharts is an [R](http://www.r-project.org) package to create
-interactive charts for xQTL data, for use
+interactive charts for QTL data, for use
 with [R/qtl](http://www.rqtl.org).
 
 A QTL is a _quantitative trait locus_: a genetic locus that
-contributes to variation in a quantitative trait. There is
-considerable recent interest in eQTL, which are QTL that affect gene
-expression levels (ie, mRNA abundances), and also pQTL, which
-influence protein levels, and mQTL, which influence
-metabolites. There's a plethora of such terms for QTL influencing
-genome-scale phenotypes; we refer to them collectively as xQTL. The
-goal of R/qtlcharts is to provide interactive data visualizations for xQTL
+contributes to variation in a quantitative trait. The
+goal of R/qtlcharts is to provide interactive data visualizations for QTL
 analyses, and to make these visualizations available from [R](http://www.r-project.org).
 
 The interactive visualizations are built with the JavaScript library

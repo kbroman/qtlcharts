@@ -3,7 +3,7 @@
 [Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
 
 This directory contains a set of reusable panels for
-[D3](http://d3js.org)-based interactive charts for xQTL data.
+[D3](http://d3js.org)-based interactive charts for QTL data.
 
 - [lodchart](inst/panels/lodchart): LOD curve panel
   (uses [d3.tip](http://github.com/Caged/d3-tip))

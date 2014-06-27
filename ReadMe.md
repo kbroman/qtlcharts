@@ -3,7 +3,7 @@
 [Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
 
 [R/qtlcharts](http://kbroman.github.io/qtlcharts) is an [R](http://www.r-project.org) package to create
-interactive charts for xQTL data, for use
+interactive charts for QTL data, for use
 with [R/qtl](http://www.rqtl.org).
 
 It is built with [D3](http://d3js.org), using the following reusable components:

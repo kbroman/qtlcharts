@@ -472,16 +472,25 @@ iboxplot(expr, title="iboxplot example",
 `iheatmap` creates an interactive heatmap of a numeric matrix, with
 pixels linked to plots of horizontal and vertical slices.
 
-```{r iheatmap_example, eval=FALSE}
-# data to display
+We'll first generate a set of data to plot: 
+$z(x,y) = x y \exp(-x^2 - y^2)$,
+for $x,y \in [-2, 2]$
+
+```{r iheatmap_data}
 n <- 101
 x <- y <- seq(-2, 2, len=n)
 z <- matrix(ncol=n, nrow=n)
 for(i in seq(along=x))
   for(j in seq(along=y))
     z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
+```
 
-iheatmap(z, x, y, title = "iheatmap example")
+We can now call `iheatmap` with these data. The first argument is a
+matrix with the $z$-values. The next two optional arguments are
+vectors that indicate the $x$ and $y$ values.
+
+```{r iheatmap_example, eval=TRUE}
+iheatmap(z, x, y)
 ```
 
 <!-- the following to make it look nicer -->

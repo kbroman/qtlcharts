@@ -604,15 +604,23 @@ iboxplot(expr, title=&quot;iboxplot example&quot;,
 <p><code>iheatmap</code> creates an interactive heatmap of a numeric matrix, with
 pixels linked to plots of horizontal and vertical slices.</p>
 
-<pre><code class="r"># data to display
-n &lt;- 101
+<p>We&#39;ll first generate a set of data to plot: 
+\(z(x,y) = x y \exp(-x^2 - y^2)\),
+for \(x,y \in [-2, 2]\)</p>
+
+<pre><code class="r">n &lt;- 101
 x &lt;- y &lt;- seq(-2, 2, len=n)
 z &lt;- matrix(ncol=n, nrow=n)
 for(i in seq(along=x))
   for(j in seq(along=y))
     z[i,j] &lt;- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
+</code></pre>
 
-iheatmap(z, x, y, title = &quot;iheatmap example&quot;)
+<p>We can now call <code>iheatmap</code> with these data. The first argument is a
+matrix with the \(z\)-values. The next two optional arguments are
+vectors that indicate the \(x\) and \(y\) values.</p>
+
+<pre><code class="r">iheatmap(z, x, y)
 </code></pre>
 
 <!-- the following to make it look nicer -->

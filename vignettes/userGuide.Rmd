@@ -489,7 +489,7 @@ We can now call `iheatmap` with these data. The first argument is a
 matrix with the $z$-values. The next two optional arguments are
 vectors that indicate the $x$ and $y$ values.
 
-```{r iheatmap_example, eval=TRUE}
+```{r iheatmap_example, eval=FALSE}
 iheatmap(z, x, y)
 ```
 

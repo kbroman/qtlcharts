@@ -26,7 +26,7 @@ iheatmap = (data, chartOpts) ->
     xlab = chartOpts?.xlab ? "X" # x-axis label
     ylab = chartOpts?.ylab ? "Y" # y-axis label
     zlab = chartOpts?.zlab ? "Z" # z-axis label
-    zthresh = chartOpts?.zthresh ? null # lower threshold for z-axis for plotting in heat map
+    zthresh = chartOpts?.zthresh ? null # lower threshold for plotting in heat map: only values with |z| > zthresh are shown
     zlim = chartOpts?.zlim ? [-matrixMaxAbs(data.z), 0, matrixMaxAbs(data.z)] # z-axis limits
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors (same length as `zlim`)
     # chartOpts end

@@ -571,15 +571,92 @@ iplotMScanone(out, effects=eff,
 <p><code>iplotCurves</code> creates a plot of a set of curves linked to one or two
 scatterplots.</p>
 
+<p>As an example, we&#39;ll consider the phenotypes in the dataset <code>grav</code>,
+included with R/qtlcharts.</p>
+
 <pre><code class="r">data(grav)
 times &lt;- attr(grav, &quot;time&quot;)
 phe &lt;- grav$pheno
+</code></pre>
 
-iplotCurves(phe, times, phe[,times==2 | times==4], phe[,times==4 | times==6],
-            title=&quot;iplotCurves example&quot;,
-            chartOpts=list(curves_xlab=&quot;Time (hours)&quot;, curves_ylab=&quot;Root tip angle (degrees)&quot;,
+<p>The object <code>phe</code> is an 162&times;241 matrix:
+curves for 162 individuals at 241 time points,
+with the time points specified by <code>times</code>.</p>
+
+<p>The simplest use of <code>iplotCurves</code> is the following.</p>
+
+<pre><code class="r">iplotCurves(phe)
+</code></pre>
+
+<p>This plots the rows of <code>phe</code> as a set of curves. If you hover over a
+curve, it will be highlighted, and the individual ID (taken from the
+rownames) will be displayed on the right. If the input matrix has no
+row names, numeric indices are used.</p>
+
+<p>The values on the x-axis are simply column indices. To use the
+actual values in <code>times</code>, include it as a second argument.</p>
+
+<pre><code class="r">iplotCurves(phe, times)
+</code></pre>
+
+<p>To change the axis labels, pass <code>curves_xlab</code> and <code>curves_ylab</code> using
+<code>chartOpts</code>. </p>
+
+<pre><code class="r">iplotCurves(phe, times, chartOpts=list(curves_xlab=&quot;Time (hrs)&quot;,
+                                       curves_ylab=&quot;Response&quot;))
+</code></pre>
+
+<p>The <code>curves_</code> bit is to distinguish this panel from the
+optional scatterplot panels; more on this below. You can use just
+<code>xlab</code> and <code>ylab</code>, as follows.</p>
+
+<pre><code class="r">iplotCurves(phe, times, chartOpts=list(xlab=&quot;Time (hrs)&quot;,
+                                       ylab=&quot;Response&quot;))
+</code></pre>
+
+<p>More interesting is to have the curves linked to scatterplots, of
+the response at particular times. For example, 2 hrs vs 4 hrs and 4
+hrs vs 6 hrs. This is done by providing two-column matrices whose rows
+correspond to the main matrix.</p>
+
+<pre><code class="r">iplotCurves(phe, times, phe[,times==2 | times==4], phe[,times==4 | times==6],
+            chartOpts=list(curves_xlab=&quot;Time (hours)&quot;, curves_ylab=&quot;Response&quot;,
                            scat1_xlab=&quot;Angle at 2 hrs&quot;, scat1_ylab=&quot;Angle at 4 hrs&quot;,
                            scat2_xlab=&quot;Angle at 4 hrs&quot;, scat2_ylab=&quot;Angle at 6 hrs&quot;))
+</code></pre>
+
+<p>You can also have just one linked scatterplot.</p>
+
+<pre><code class="r">iplotCurves(phe, times, phe[,times==2 | times==4],
+            chartOpts=list(curves_xlab=&quot;Time (hours)&quot;, curves_ylab=&quot;Response&quot;,
+                           scat1_xlab=&quot;Angle at 2 hrs&quot;, scat1_ylab=&quot;Angle at 4 hrs&quot;))
+</code></pre>
+
+<p>You can also include a numeric vector of groups assignments for the
+curves, to have groups of curves and points with common colors. For
+example, we can pull out the genotype for a marker and color the
+curves by their genotype. We&#39;ll use the <code>fill.geno</code> function in
+<a href="http://www.rqtl.org">R/qtl</a> to impute any missing genotypes.</p>
+
+<pre><code class="r">g &lt;- pull.geno(fill.geno(grav))[,&quot;BF.206L-Col&quot;]
+iplotCurves(phe, times, phe[,times==2 | times==4], phe[,times==4 | times==6],
+            group=g,
+            chartOpts=list(curves_xlab=&quot;Time (hours)&quot;, curves_ylab=&quot;Response&quot;,
+                           scat1_xlab=&quot;Angle at 2 hrs&quot;, scat1_ylab=&quot;Angle at 4 hrs&quot;,
+                           scat2_xlab=&quot;Angle at 4 hrs&quot;, scat2_ylab=&quot;Angle at 6 hrs&quot;))
+</code></pre>
+
+<p>To change the colors that are used in the plot, you need to provide a
+vector of colors with the <code>chartOpts</code> options <code>strokecolor</code>, <code>strokecolorhilit</code>,
+<code>pointcolor</code>, and <code>pointcolorhilit</code>. If you want the points and curves
+to be the same, you can just use <code>color</code> and <code>colorhilit</code>.</p>
+
+<pre><code class="r">iplotCurves(phe, times, phe[,times==2 | times==4], phe[,times==4 | times==6],
+            group=g,
+            chartOpts=list(curves_xlab=&quot;Time (hours)&quot;, curves_ylab=&quot;Response&quot;,
+                           scat1_xlab=&quot;Angle at 2 hrs&quot;, scat1_ylab=&quot;Angle at 4 hrs&quot;,
+                           scat2_xlab=&quot;Angle at 4 hrs&quot;, scat2_ylab=&quot;Angle at 6 hrs&quot;,
+                           color=c(&quot;pink&quot;, &quot;lightblue&quot;), colorhilit=c(&quot;red&quot;, &quot;blue&quot;)))
 </code></pre>
 
 <h3><code>iboxplot</code></h3>

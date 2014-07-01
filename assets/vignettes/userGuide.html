@@ -623,6 +623,27 @@ vectors that indicate the \(x\) and \(y\) values.</p>
 <pre><code class="r">iheatmap(z, x, y)
 </code></pre>
 
+<p>By default, the <code>iheatmap</code> takes as the range for the z-axis,
+\([-M, M]\) where \(M = \max |z|\). If you want a different range, you can use the
+option <code>zlim</code> with <code>chartOpts</code>; you need to provide three values: the
+minimum, the center, and the maximum. The color of the heatmap
+can be controlled with the option <code>colors</code>; again this is a vector of
+three values: the color for the minimum, the color for the middle
+value, and the color for the maximum value.</p>
+
+<p>Here&#39;s an example with expanded z-axis limits and different colors.</p>
+
+<pre><code class="r">iheatmap(z, x, y,
+         chartOpts=list(zlim=c(-1, 0, 1),
+                        colors=c(&quot;purple&quot;, &quot;white&quot;, &quot;orangered&quot;)))
+</code></pre>
+
+<p>The labels for the axes can be controlled with the options <code>xlab</code>,
+<code>ylab</code>, and <code>zlab</code>. Here&#39;s an example.</p>
+
+<pre><code class="r">iheatmap(z, x, y, chartOpts=list(xlab=&quot;theta&quot;, ylab=&quot;psi&quot;, zlab=&quot;response&quot;))
+</code></pre>
+
 <!-- the following to make it look nicer -->
 
 <p><link href="http://kbroman.github.io/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link></p>

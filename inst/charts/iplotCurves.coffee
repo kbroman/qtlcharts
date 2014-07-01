@@ -11,13 +11,13 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
     titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
-    pointcolor = chartOpts?.pointcolor ? null # vector of colors for points in scatterplots
+    pointcolor = chartOpts?.pointcolor ? chartOpts?.color ? null # vector of colors for points in scatterplots
     pointstroke = chartOpts?.pointstroke ? "black" # color of line outline for points in scatterplots
     pointsize = chartOpts?.pointsize ? 3 # size of points in scatterplots
-    pointcolorhilit = chartOpts?.pointcolorhilit ? null # vector of colors for points in scatterplots, when highlighted
+    pointcolorhilit = chartOpts?.pointcolorhilit ? chartOpts?.colorhilit ? null # vector of colors for points in scatterplots, when highlighted
     pointsizehilit = chartOpts?.pointsizehilit ? 6 # zie of points in scatterplot, when highlighted
-    strokecolor = chartOpts?.strokecolor ? null # vector of colors of curves
-    strokecolorhilit = chartOpts?.strokecolorhilit ? null # vector of colors of curves, when highlighted
+    strokecolor = chartOpts?.strokecolor ? chartOpts?.color ? null # vector of colors of curves
+    strokecolorhilit = chartOpts?.strokecolorhilit ? chartOpts?.colorhilit ? null # vector of colors of curves, when highlighted
     strokewidth = chartOpts?.strokewidth ? 2 # line width of curves
     strokewidthhilit = chartOpts?.strokewidthhilit ? 2 # line widths of curves, when highlighted
   

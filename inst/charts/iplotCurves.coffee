@@ -28,8 +28,8 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
     curves_nyticks = chartOpts?.curves_nyticks ? 5 # no. ticks on y-axis in curve plot
     curves_yticks = chartOpts?.curves_yticks ? null # vector of tick positions on y-axis in curve plot
     curves_title = chartOpts?.curves_title ? "" # title for curve plot
-    curves_xlab = chartOpts?.curves_xlab ? "X" # x-axis label for curve plot
-    curves_ylab = chartOpts?.curves_ylab ? "Y" # y-axis label for curve plot
+    curves_xlab = chartOpts?.curves_xlab ? chartOpts?.xlab ? "X" # x-axis label for curve plot
+    curves_ylab = chartOpts?.curves_ylab ? chartOpts?.ylab ? "Y" # y-axis label for curve plot
   
     scat1_xlim = chartOpts?.scat1_xlim ? null # x-axis limits in first scatterplot
     scat1_ylim = chartOpts?.scat1_ylim ? null # y-axis limits in first scatterplot

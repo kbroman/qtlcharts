@@ -2,7 +2,7 @@
 var iplotCurves;
 
 iplotCurves = function(curve_data, scatter1_data, scatter2_data, chartOpts) {
-  var allpoints, axispos, chartdivid, curves, curves_nxticks, curves_nyticks, curves_title, curves_xlab, curves_xlim, curves_xticks, curves_ylab, curves_ylim, curves_yticks, g, g_curves, g_scat1, g_scat2, group, hbot, htop, i, margin, mycurvechart, myscatterplot1, myscatterplot2, ngroup, nind, nscatter, pointcolor, pointcolorhilit, points1, points2, pointsize, pointsizehilit, pointstroke, rectcolor, scat1_nxticks, scat1_nyticks, scat1_title, scat1_xNA, scat1_xlab, scat1_xlim, scat1_xticks, scat1_yNA, scat1_ylab, scat1_ylim, scat1_yticks, scat2_nxticks, scat2_nyticks, scat2_title, scat2_xNA, scat2_xlab, scat2_xlim, scat2_xticks, scat2_yNA, scat2_ylab, scat2_ylim, scat2_yticks, shiftdown, strokecolor, strokecolorhilit, strokewidth, strokewidthhilit, svg, titlepos, totalh, totalw, wbot, width, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref25, _ref26, _ref27, _ref28, _ref29, _ref3, _ref30, _ref31, _ref32, _ref33, _ref34, _ref35, _ref36, _ref37, _ref38, _ref39, _ref4, _ref40, _ref41, _ref42, _ref43, _ref44, _ref45, _ref46, _ref47, _ref48, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var allpoints, axispos, chartdivid, curves, curves_nxticks, curves_nyticks, curves_title, curves_xlab, curves_xlim, curves_xticks, curves_ylab, curves_ylim, curves_yticks, g, g_curves, g_scat1, g_scat2, group, hbot, htop, i, margin, mycurvechart, myscatterplot1, myscatterplot2, ngroup, nind, nscatter, pointcolor, pointcolorhilit, points1, points2, pointsize, pointsizehilit, pointstroke, rectcolor, scat1_nxticks, scat1_nyticks, scat1_title, scat1_xNA, scat1_xlab, scat1_xlim, scat1_xticks, scat1_yNA, scat1_ylab, scat1_ylim, scat1_yticks, scat2_nxticks, scat2_nyticks, scat2_title, scat2_xNA, scat2_xlab, scat2_xlim, scat2_xticks, scat2_yNA, scat2_ylab, scat2_ylim, scat2_yticks, shiftdown, strokecolor, strokecolorhilit, strokewidth, strokewidthhilit, svg, titlepos, totalh, totalw, wbot, width, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref25, _ref26, _ref27, _ref28, _ref29, _ref3, _ref30, _ref31, _ref32, _ref33, _ref34, _ref35, _ref36, _ref37, _ref38, _ref39, _ref4, _ref40, _ref41, _ref42, _ref43, _ref44, _ref45, _ref46, _ref47, _ref48, _ref49, _ref5, _ref50, _ref6, _ref7, _ref8, _ref9;
   htop = (_ref = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref : 500;
   hbot = (_ref1 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref1 : 500;
   width = (_ref2 = chartOpts != null ? chartOpts.width : void 0) != null ? _ref2 : 1000;
@@ -37,63 +37,63 @@ iplotCurves = function(curve_data, scatter1_data, scatter2_data, chartOpts) {
   curves_nyticks = (_ref20 = chartOpts != null ? chartOpts.curves_nyticks : void 0) != null ? _ref20 : 5;
   curves_yticks = (_ref21 = chartOpts != null ? chartOpts.curves_yticks : void 0) != null ? _ref21 : null;
   curves_title = (_ref22 = chartOpts != null ? chartOpts.curves_title : void 0) != null ? _ref22 : "";
-  curves_xlab = (_ref23 = chartOpts != null ? chartOpts.curves_xlab : void 0) != null ? _ref23 : "X";
-  curves_ylab = (_ref24 = chartOpts != null ? chartOpts.curves_ylab : void 0) != null ? _ref24 : "Y";
-  scat1_xlim = (_ref25 = chartOpts != null ? chartOpts.scat1_xlim : void 0) != null ? _ref25 : null;
-  scat1_ylim = (_ref26 = chartOpts != null ? chartOpts.scat1_ylim : void 0) != null ? _ref26 : null;
-  scat1_xNA = (_ref27 = chartOpts != null ? chartOpts.scat1_xNA : void 0) != null ? _ref27 : {
+  curves_xlab = (_ref23 = (_ref24 = chartOpts != null ? chartOpts.curves_xlab : void 0) != null ? _ref24 : chartOpts != null ? chartOpts.xlab : void 0) != null ? _ref23 : "X";
+  curves_ylab = (_ref25 = (_ref26 = chartOpts != null ? chartOpts.curves_ylab : void 0) != null ? _ref26 : chartOpts != null ? chartOpts.ylab : void 0) != null ? _ref25 : "Y";
+  scat1_xlim = (_ref27 = chartOpts != null ? chartOpts.scat1_xlim : void 0) != null ? _ref27 : null;
+  scat1_ylim = (_ref28 = chartOpts != null ? chartOpts.scat1_ylim : void 0) != null ? _ref28 : null;
+  scat1_xNA = (_ref29 = chartOpts != null ? chartOpts.scat1_xNA : void 0) != null ? _ref29 : {
     handle: true,
     force: false,
     width: 15,
     gap: 10
   };
-  scat1_yNA = (_ref28 = chartOpts != null ? chartOpts.scat1_yNA : void 0) != null ? _ref28 : {
+  scat1_yNA = (_ref30 = chartOpts != null ? chartOpts.scat1_yNA : void 0) != null ? _ref30 : {
     handle: true,
     force: false,
     width: 15,
     gap: 10
   };
-  scat1_nxticks = (_ref29 = chartOpts != null ? chartOpts.scat1_nxticks : void 0) != null ? _ref29 : 5;
-  scat1_xticks = (_ref30 = chartOpts != null ? chartOpts.scat1_xticks : void 0) != null ? _ref30 : null;
-  scat1_nyticks = (_ref31 = chartOpts != null ? chartOpts.scat1_nyticks : void 0) != null ? _ref31 : 5;
-  scat1_yticks = (_ref32 = chartOpts != null ? chartOpts.scat1_yticks : void 0) != null ? _ref32 : null;
-  scat1_title = (_ref33 = chartOpts != null ? chartOpts.scat1_title : void 0) != null ? _ref33 : "";
-  scat1_xlab = (_ref34 = chartOpts != null ? chartOpts.scat1_xlab : void 0) != null ? _ref34 : "X";
-  scat1_ylab = (_ref35 = chartOpts != null ? chartOpts.scat1_ylab : void 0) != null ? _ref35 : "Y";
-  scat2_xlim = (_ref36 = chartOpts != null ? chartOpts.scat2_xlim : void 0) != null ? _ref36 : null;
-  scat2_ylim = (_ref37 = chartOpts != null ? chartOpts.scat2_ylim : void 0) != null ? _ref37 : null;
-  scat2_xNA = (_ref38 = chartOpts != null ? chartOpts.scat2_xNA : void 0) != null ? _ref38 : {
+  scat1_nxticks = (_ref31 = chartOpts != null ? chartOpts.scat1_nxticks : void 0) != null ? _ref31 : 5;
+  scat1_xticks = (_ref32 = chartOpts != null ? chartOpts.scat1_xticks : void 0) != null ? _ref32 : null;
+  scat1_nyticks = (_ref33 = chartOpts != null ? chartOpts.scat1_nyticks : void 0) != null ? _ref33 : 5;
+  scat1_yticks = (_ref34 = chartOpts != null ? chartOpts.scat1_yticks : void 0) != null ? _ref34 : null;
+  scat1_title = (_ref35 = chartOpts != null ? chartOpts.scat1_title : void 0) != null ? _ref35 : "";
+  scat1_xlab = (_ref36 = chartOpts != null ? chartOpts.scat1_xlab : void 0) != null ? _ref36 : "X";
+  scat1_ylab = (_ref37 = chartOpts != null ? chartOpts.scat1_ylab : void 0) != null ? _ref37 : "Y";
+  scat2_xlim = (_ref38 = chartOpts != null ? chartOpts.scat2_xlim : void 0) != null ? _ref38 : null;
+  scat2_ylim = (_ref39 = chartOpts != null ? chartOpts.scat2_ylim : void 0) != null ? _ref39 : null;
+  scat2_xNA = (_ref40 = chartOpts != null ? chartOpts.scat2_xNA : void 0) != null ? _ref40 : {
     handle: true,
     force: false,
     width: 15,
     gap: 10
   };
-  scat2_yNA = (_ref39 = chartOpts != null ? chartOpts.scat2_yNA : void 0) != null ? _ref39 : {
+  scat2_yNA = (_ref41 = chartOpts != null ? chartOpts.scat2_yNA : void 0) != null ? _ref41 : {
     handle: true,
     force: false,
     width: 15,
     gap: 10
   };
-  scat2_nxticks = (_ref40 = chartOpts != null ? chartOpts.scat2_nxticks : void 0) != null ? _ref40 : 5;
-  scat2_xticks = (_ref41 = chartOpts != null ? chartOpts.scat2_xticks : void 0) != null ? _ref41 : null;
-  scat2_nyticks = (_ref42 = chartOpts != null ? chartOpts.scat2_nyticks : void 0) != null ? _ref42 : 5;
-  scat2_yticks = (_ref43 = chartOpts != null ? chartOpts.scat2_yticks : void 0) != null ? _ref43 : null;
-  scat2_title = (_ref44 = chartOpts != null ? chartOpts.scat2_title : void 0) != null ? _ref44 : "";
-  scat2_xlab = (_ref45 = chartOpts != null ? chartOpts.scat2_xlab : void 0) != null ? _ref45 : "X";
-  scat2_ylab = (_ref46 = chartOpts != null ? chartOpts.scat2_ylab : void 0) != null ? _ref46 : "Y";
-  chartdivid = (_ref47 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref47 : 'chart';
+  scat2_nxticks = (_ref42 = chartOpts != null ? chartOpts.scat2_nxticks : void 0) != null ? _ref42 : 5;
+  scat2_xticks = (_ref43 = chartOpts != null ? chartOpts.scat2_xticks : void 0) != null ? _ref43 : null;
+  scat2_nyticks = (_ref44 = chartOpts != null ? chartOpts.scat2_nyticks : void 0) != null ? _ref44 : 5;
+  scat2_yticks = (_ref45 = chartOpts != null ? chartOpts.scat2_yticks : void 0) != null ? _ref45 : null;
+  scat2_title = (_ref46 = chartOpts != null ? chartOpts.scat2_title : void 0) != null ? _ref46 : "";
+  scat2_xlab = (_ref47 = chartOpts != null ? chartOpts.scat2_xlab : void 0) != null ? _ref47 : "X";
+  scat2_ylab = (_ref48 = chartOpts != null ? chartOpts.scat2_ylab : void 0) != null ? _ref48 : "Y";
+  chartdivid = (_ref49 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref49 : 'chart';
   nscatter = (scatter1_data != null) + (scatter2_data != null);
   totalh = nscatter === 0 ? htop + margin.top + margin.bottom : htop + hbot + 2 * (margin.top + margin.bottom);
   totalw = width + margin.left + margin.right;
   wbot = (width - margin.left - margin.right) / 2;
   svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   nind = curve_data.data.length;
-  group = (_ref48 = curve_data != null ? curve_data.group : void 0) != null ? _ref48 : (function() {
-    var _i, _len, _ref49, _results;
-    _ref49 = curve_data.data;
+  group = (_ref50 = curve_data != null ? curve_data.group : void 0) != null ? _ref50 : (function() {
+    var _i, _len, _ref51, _results;
+    _ref51 = curve_data.data;
     _results = [];
-    for (_i = 0, _len = _ref49.length; _i < _len; _i++) {
-      i = _ref49[_i];
+    for (_i = 0, _len = _ref51.length; _i < _len; _i++) {
+      i = _ref51[_i];
       _results.push(1);
     }
     return _results;

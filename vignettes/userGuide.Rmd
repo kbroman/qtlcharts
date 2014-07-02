@@ -541,17 +541,27 @@ iplotCurves(phe, times, phe[,times==2 | times==4], phe[,times==4 | times==6],
 (rendered as lines connecting the quantiles), linked to underlying
 histograms.
 
-```{r iboxplot_example, eval=FALSE}
+Let's first simulate some data. These data are not particularly
+interesting: 10,000 measurements from 500 normal distributions with a
+common SD but shifts in the mean.
+
+```{r iboxplot_simdata}
 # simulated data
 n.ind <- 500
 n.gene <- 10000
 expr <- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
 dimnames(expr) <- list(paste0("ind", 1:n.ind),
                        paste0("gene", 1:n.gene))
-
-iboxplot(expr, title="iboxplot example",
-         chartOpts=list(xlab="Mice", ylab="Gene expression"))
 ```
+
+`iboxplot` expects a matrix, with the rows corresponding to
+individuals and the columns corresponding to measurements; the plotted
+boxplots will characterize the distributions in each row.
+
+```{r iboxplot_simdata, eval=FALSE}
+iboxplot(expr)
+```
+
 
 ### `iheatmap`
 

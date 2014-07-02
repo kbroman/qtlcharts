@@ -665,15 +665,23 @@ to be the same, you can just use <code>color</code> and <code>colorhilit</code>.
 (rendered as lines connecting the quantiles), linked to underlying
 histograms.</p>
 
+<p>Let&#39;s first simulate some data. These data are not particularly
+interesting: 10,000 measurements from 500 normal distributions with a
+common SD but shifts in the mean.</p>
+
 <pre><code class="r"># simulated data
 n.ind &lt;- 500
 n.gene &lt;- 10000
 expr &lt;- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
 dimnames(expr) &lt;- list(paste0(&quot;ind&quot;, 1:n.ind),
                        paste0(&quot;gene&quot;, 1:n.gene))
+</code></pre>
 
-iboxplot(expr, title=&quot;iboxplot example&quot;,
-         chartOpts=list(xlab=&quot;Mice&quot;, ylab=&quot;Gene expression&quot;))
+<p><code>iboxplot</code> expects a matrix, with the rows corresponding to
+individuals and the columns corresponding to measurements; the plotted
+boxplots will characterize the distributions in each row.</p>
+
+<pre><code class="r">iboxplot(expr)
 </code></pre>
 
 <h3><code>iheatmap</code></h3>

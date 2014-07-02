@@ -558,7 +558,7 @@ dimnames(expr) <- list(paste0("ind", 1:n.ind),
 individuals and the columns corresponding to measurements; the plotted
 boxplots will characterize the distributions in each row.
 
-```{r iboxplot_simdata, eval=FALSE}
+```{r iboxplot_example, eval=FALSE}
 iboxplot(expr)
 ```
 

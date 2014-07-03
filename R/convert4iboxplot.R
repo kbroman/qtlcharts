@@ -46,7 +46,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
         qu <- qu[qu < 0.5]
     }
 
-    qu <- c(qu, 0.5, rev(1-qu))
+    qu <- sort(c(qu, 0.5, rev(1-qu)))
     quant <- apply(dat, 1, quantile, qu, na.rm=TRUE)
 
     # counts for histograms

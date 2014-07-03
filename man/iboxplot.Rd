@@ -15,7 +15,8 @@ iboxplot(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian = TRUE,
 
 \item{orderByMedian}{If TRUE, reorder individuals by their median}
 
-\item{breaks}{Number of break points in the histogram}
+\item{breaks}{Number of bins in the histograms, or a vector of
+locations of the breakpoints between bins (as in \code{\link[graphics]{hist}})}
 
 \item{file}{Optional character vector with file to contain the
 output}
@@ -41,7 +42,7 @@ corresponding option.}
 \code{\link[jsonlite]{toJSON}}}
 
 \item{print}{If TRUE, print the output, rather than writing it to a file,
-for use within an R Markdown document.}
+    for use within an R Markdown document.}
 }
 \value{
 Character string with the name of the file created.

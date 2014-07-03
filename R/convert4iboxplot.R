@@ -6,7 +6,8 @@
 # @param dat Data matrix (individuals x variables)
 # @param qu Quantiles to plot (All with 0 < qu < 0.5)
 # @param orderByMedian If TRUE, reorder individuals by their median
-# @param breaks Number of break points in the histogram
+# @param breaks Number of bins in the histograms, or a vector of
+#     locations of the breakpoints between bins (as in \code{\link[graphics]{hist}})
 # @param digits Number of digits in JSON file; passed to \code{\link[jsonlite]{toJSON}}
 #
 # @return Character string with the input data in JSON format
@@ -51,8 +52,13 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
 
     # counts for histograms
     if(length(breaks) == 1)
-        breaks <- seq(min(dat, na.rm=TRUE), max(dat, na.rm=TRUE), length=breaks)
-
+        breaks <- seq(min(dat, na.rm=TRUE), max(dat, na.rm=TRUE), length=breaks+1)
+    else { # make sure all values are within range
+        if(any(!is.na(dat) & (dat > max(breaks) | dat < min(breaks)))) {
+            warning("breaks do not span the range of the data")
+            dat[dat > max(breaks) | dat < min(breaks)] <- NA
+        }
+    }
     counts <- apply(dat, 1, function(a) hist(a, breaks=breaks, plot=FALSE)$counts)
 
     ind <- rownames(dat)

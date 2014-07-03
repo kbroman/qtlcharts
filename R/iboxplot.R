@@ -9,24 +9,25 @@
 #' @param dat Data matrix (individuals x variables)
 #' @param qu Quantiles to plot (All with 0 < qu < 0.5)
 #' @param orderByMedian If TRUE, reorder individuals by their median
-#' @param breaks Number of break points in the histogram
+#' @param breaks Number of bins in the histograms, or a vector of
+#'     locations of the breakpoints between bins (as in \code{\link[graphics]{hist}})
 #' @param file Optional character vector with file to contain the
-#'   output
+#'     output
 #' @param onefile If TRUE, have output file contain all necessary
-#'   javascript/css code
+#'     javascript/css code
 #' @param openfile If TRUE, open the plot in the default web browser
 #' @param title Character string with title for plot
 #' @param chartdivid Character string for id of div to hold the chart
 #' @param caption Character vector with text for a caption (to be
-#'   combined to one string with \code{\link[base]{paste}}, with
-#'   \code{collapse=''})
+#'     combined to one string with \code{\link[base]{paste}}, with
+#'     \code{collapse=''})
 #' @param chartOpts A list of options for configuring the chart (see
-#'   the coffeescript code). Each element must be named using the
-#'   corresponding option.
+#'     the coffeescript code). Each element must be named using the
+#'     corresponding option.
 #' @param digits Number of digits in JSON; pass to
-#'   \code{\link[jsonlite]{toJSON}}
+#'     \code{\link[jsonlite]{toJSON}}
 #' @param print If TRUE, print the output, rather than writing it to a file,
-#' for use within an R Markdown document.
+#'     for use within an R Markdown document.
 #'
 #' @return Character string with the name of the file created.
 #'

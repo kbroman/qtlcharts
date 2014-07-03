@@ -5,7 +5,7 @@
 
 [R/qtlcharts](http://kbroman.github.io/qtlcharts) is an
 [R](http://www.r-project.org) package to create interactive charts for
-QTL data, for use with [R/qtl](http://www.rqtl.org). 
+QTL data, for use with [R/qtl](http://www.rqtl.org).
 
 The charts are saved to a temporary file and opened in a web browser,
 though you may also save them to a specific file, to be viewed later.
@@ -270,7 +270,7 @@ marker position to view the marker name.
 
 Let's first load the `hyper` data included with
 [R/qtl](http://www.rqtl.org) and pull out the genetic map with
-`pull.map`. 
+`pull.map`.
 
 
 ```{r, load_hyper}
@@ -469,7 +469,7 @@ iplotCurves(phe, times)
 ```
 
 To change the axis labels, pass `curves_xlab` and `curves_ylab` using
-`chartOpts`. 
+`chartOpts`.
 
 ```{r iplotCurves_axislab, eval=FALSE}
 iplotCurves(phe, times, chartOpts=list(curves_xlab="Time (hrs)",
@@ -549,9 +549,9 @@ common SD but shifts in the mean.
 # simulated data
 n.ind <- 500
 n.gene <- 10000
-expr <- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
-dimnames(expr) <- list(paste0("ind", 1:n.ind),
-                       paste0("gene", 1:n.gene))
+mat <- matrix(rnorm(n.ind * n.gene, rnorm(n.ind, 5)), ncol=n.gene)
+dimnames(mat) <- list(paste0("ind", 1:n.ind),
+                      paste0("gene", 1:n.gene))
 ```
 
 `iboxplot` expects a matrix, with the rows corresponding to
@@ -559,16 +559,83 @@ individuals and the columns corresponding to measurements; the plotted
 boxplots will characterize the distributions in each row.
 
 ```{r iboxplot_example, eval=FALSE}
-iboxplot(expr)
+iboxplot(mat)
 ```
 
+In the upper panel, each curve represents a particular quantile
+and connects the values for the different individuals, who are
+arranged along the x-axis. (By default, the individuals are sorted by
+their median; use `orderByMedian=FALSE` to prevent this reordering.)
+Hover over a different individuals and the corresponding histograms
+are shown below. Click to have a particular histogram retained; click
+again (if you can do so precisely!) to remove.
+
+If you want to order the individuals in a different way, you need to
+rearrange the rows of the matrix in advance and then use
+`orderByMedian=FALSE`. For example, to order the individuals by their
+99.9th percentiles, you could do:
+
+```{r iboxplot_orderBy99, eval=FALSE}
+iboxplot(mat[order(apply(mat, 1, quantile, 0.99)),], orderByMedian=FALSE)
+```
+
+By default, the function plots the 0.1, 1, 10, 25, and 50, 75, 90, 99,
+and 99.9th percentiles. To plot a different set of percentiles, use
+the argument `qu`, giving a vector of numeric values between 0 and
+0.5. The median will always be included, and for every quantile $q$,
+the corresponding $1-q$ quantile will be included as well.
+
+To leave off the 0.1 and 99.9 percentiles, do the following.
+
+```{r iboxplot_diff_quant, eval=FALSE}
+iboxplot(mat, qu=c(0.25, 0.05, 0.01))
+```
+
+To use different colors for the quantile curves, include the option
+`qucolors` through the `chartOpts` argument. The vector should have
+length `length(qu)+1` (so, by default, 5). For each quantile $q$, the
+same color is used for the corresponding quantile $1-q$. Here's an
+example. The first color will correspond to the median, and then they
+move from the inside out.
+
+```{r iboxplot_qucolors, eval=FALSE}
+iboxplot(mat, qu=c(0.25, 0.05, 0.01),
+         chartOpts=list(qucolors=c("black", "green", "red", "blue")))
+```
+
+You can change the bins in the histograms in the lower panel through
+the argument `breaks`. If a single numeric value, it indicates the
+number of bins; if a vector, it indicates the endpoints for the bins.
+The vector of breakpoints do not need to span the range of the data,
+but a warning will be issued if they don't.
+
+Here's an example specifying the number of bins.
+
+```{r iboxplot_breaks, eval=FALSE}
+iboxplot(mat, breaks=151)
+```
+
+Here's an example specifying actual bins. (This will issue a warning.)
+
+```{r iboxplot_breaks2, eval=FALSE}
+iboxplot(mat, breaks=seq(2, 8, by=0.1))
+```
+
+To change the axis labels, use the `chartOpts` options `xlab` and
+`ylab`, for the x- and y-axes, respectively, in the top panel. The
+y-axis label in the top panel will be used as the x-axis label in the
+lower panel.
+
+```{r iboxplot_axislab, eval=FALSE}
+iboxplot(mat, chartOpts=list(xlab="Mice", ylab="Expression level"))
+```
 
 ### `iheatmap`
 
 `iheatmap` creates an interactive heatmap of a numeric matrix, with
 pixels linked to plots of horizontal and vertical slices.
 
-We'll first generate a set of data to plot: 
+We'll first generate a set of data to plot:
 $z(x,y) = x y \exp(-x^2 - y^2)$,
 for $x,y \in [-2, 2]$
 

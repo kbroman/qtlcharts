@@ -551,27 +551,70 @@ colors <a href="http://html-color-codes.info/color-names/">here</a>.)</p>
 <h3><code>iplotMScanone</code></h3>
 
 <p><code>iplotMScanone</code> creates a heatmap of LOD curves for a set of genome
-scans (for each, for each of a time course of phenotypes), linked to a
+scans (for example, for each of a time course of phenotypes), linked to a
 plot of the individual genome scans, and also to the QTL effects.</p>
 
-<pre><code class="r">data(grav)
-grav &lt;- calc.genoprob(grav, step=1)
-grav &lt;- reduce2grid(grav)
-phecol &lt;- seq(1, nphe(grav), by=5)
-out &lt;- scanone(grav, phe=phecol)
-eff &lt;- estQTLeffects(grav, phe=phecol, what=&quot;effects&quot;)
+<p>We&#39;ll consider the example dataset <code>grav</code>, included with R/qtlcharts.
+These are data on seedling gravitropism in Arabidopsis recombinant
+inbred lines; see
+<a href="http://www.ncbi.nlm.nih.gov/pubmed/23979570">Moore et al. (2013)</a>. The
+data are also available at the
+<a href="http://qtlarchive.org/db/q?pg=projdetails&amp;proj=moore_2013b">QTL archive</a>.</p>
 
-iplotMScanone(out, effects=eff,
-              title=&quot;iplotMScanone example&quot;,
-              chartOpts=list(eff_ylab=&quot;QTL effect&quot;))
+<p>We first load the data.</p>
+
+<pre><code class="r">data(grav)
 </code></pre>
+
+<p>We calculate QTL genotype probabilities across the genome, but reduce
+these probabilities to a 1 cM grid.</p>
+
+<pre><code class="r">grav &lt;- calc.genoprob(grav, step=1)
+grav &lt;- reduce2grid(grav)
+</code></pre>
+
+<p>We&#39;ll perform a genome scan by Haley-Knott regression at each of the
+241 time points.</p>
+
+<pre><code class="r">phecol &lt;- 1:nphe(grav)
+out &lt;- scanone(grav, phe=phecol)
+</code></pre>
+
+<p>If we pass the <code>scanone</code> output to <code>iplotMScanone</code>, we get a basic
+plot.</p>
+
+<pre><code class="r">iplotMScanone(out)
+</code></pre>
+
+<p>The upper-left panel is a heat map of the genome scans for each time
+point. Hover over this panel, and the LOD curves for horizontal slices
+(at specific time points) are shown below, and the LOD scores for
+vertical slices (at a given genomic position, across time points) are
+shown on the right.</p>
+
+<p>We can use the function <code>estQTLeffects</code> to get estimated QTL effects at
+each putative QTL position and for each time point.</p>
+
+<pre><code class="r">eff &lt;- estQTLeffects(grav, phe=phecol, what=&quot;effects&quot;)
+</code></pre>
+
+<p>If we pass both the genome scan results and the estimated QTL effects,
+the heat map will display signed LOD scores (blue for negative effects
+and red for positive effects) and QTL effects will be shown in the
+upper-right panel.</p>
+
+<pre><code class="r">iplotMScanone(out, effects=eff)
+</code></pre>
+
+<p>As an alternative to first calling <code>estQTLeffects</code>, you can pass the genome-scan
+results and the cross object. You may need to </p>
 
 <h3><code>iplotCurves</code></h3>
 
 <p><code>iplotCurves</code> creates a plot of a set of curves linked to one or two
 scatterplots.</p>
 
-<p>As an example, we&#39;ll consider the phenotypes in the dataset <code>grav</code>,
+<p>As an example, we&#39;ll again consider the phenotypes in the dataset <code>grav</code>,
 included with R/qtlcharts.</p>
 
 <pre><code class="r">data(grav)

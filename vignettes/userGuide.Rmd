@@ -5,7 +5,7 @@
 
 [R/qtlcharts](http://kbroman.github.io/qtlcharts) is an
 [R](http://www.r-project.org) package to create interactive charts for
-QTL data, for use with [R/qtl](http://www.rqtl.org).
+quantitative trait locus (QTL) mapping data, for use with [R/qtl](http://www.rqtl.org).
 
 The charts are saved to a temporary file and opened in a web browser,
 though you may also save them to a specific file, to be viewed later.
@@ -34,19 +34,19 @@ Let's begin by considering the function `iplotCorr`, which creates
 a heatmap of a correlation matrix, linked to scatterplots of the
 underlying variables.
 
-We'll first load the `geneExpr` dataset, example data included with
+We'll first load the `geneExpr` dataset, included with
 the R/qtlcharts package.
 
 ```{r geneExpr_data}
 data(geneExpr)
 ```
 
-This is a list with two components. The first, `geneExpr$expr`, which is a
+This is a list with two components. The first component, `geneExpr$expr`, is a
 `r nrow(geneExpr$expr)` &times; `r ncol(geneExpr$expr)` matrix of gene
-expression data, and `geneExpr$genotype`, which is a vector of
+expression data; the second component, `geneExpr$genotype`, is a vector of
 genotypes (of length `r length(geneExpr$genotype)`) at a QTL that
 influences those `r ncol(geneExpr$expr)` genes' expression
-values. (The genes were selected from a larger expression QTL study,
+values. (The genes were selected from a larger expression genetics study,
 on that basis: that they are all influenced by this QTL.)
 
 Let's pull out those two components of `geneExpr` as separate objects,
@@ -58,7 +58,7 @@ geno <- geneExpr$genotype
 ```
 
 The simplest use of `iplotCorr` is with a numeric matrix, as with
-these data. For example:
+the `expr` dataset. For example:
 
 ```{r iplotCorr_reordered, eval=FALSE}
 iplotCorr(expr, reorder=TRUE)
@@ -76,11 +76,11 @@ The following is a snapshot.
 ![iplotCorr example](Figs/iplotCorr1.png)
 
 The left panel is a heat map of the correlation matrix. If you hover
-over a pixel the panel, the individual correlations are shown. If you
+over a pixel in the panel, the individual correlations are shown. If you
 click on a pixel, the corresponding scatterplot is shown on the right.
 
-We can have the scatterplot colored by the QTL genotype contained in
-the vector `geno`, throught the `group` argument.
+We can have the scatterplot colored by the QTL genotypes contained in
+the vector `geno`, through the `group` argument.
 
 ```{r iplotCorr_reordered_with_genotype, eval=FALSE}
 iplotCorr(expr, geno, reorder=TRUE)
@@ -96,7 +96,7 @@ to add a title and caption to the chart. By default, the title is
 empty, while the caption contains a standard description of the
 chart's use.
 
-If you want to add a title but remove the caption, you might do the following:
+If you want to add a title but remove the caption, you could do the following:
 
 ```{r iplotCorr_title_caption, eval=FALSE}
 iplotCorr(expr, title="Correlation matrix linked to scatterplots",

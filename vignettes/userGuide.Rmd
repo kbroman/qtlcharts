@@ -142,15 +142,15 @@ may be transferred to and viewed on any computer.
 
 ## Chart customization options
 
-There are a number of ways in which one may wish to customize the
+There are a number of ways in which one may customize the
 interactive graphs produced by
 [R/qtlcharts](http://kbroman.github.io/qtlcharts), such as different
-colors or axis labels. Our main approach to allow such customization
-is through a function argument, `chartOpts`. It takes a named list.
+colors or axis labels. The main method for such customization
+is through a function argument, `chartOpts`, which takes a named list.
 
 For example, to change the dimensions of the image produced by
 `iplotCorr`, use the `height` option, which specifies the height of
-each panel in pixels; by default, the images are square, with `width =
+each panel in pixels; by default, each panel is square, with `width =
 height`:
 
 
@@ -158,15 +158,15 @@ height`:
 iplotCorr(expr, reorder=TRUE, chartOpts=list(height=600))
 ```
 
-If you want the points in the scatterplot to be different color, use
-`scatcolors`.
+If you want a different choice of color for the points in the scatterplot,
+use `scatcolors`.
 
 ```{r iplotCorr_scatcolors, eval=FALSE}
 iplotCorr(expr, reorder=TRUE,
           chartOpts=list(scatcolors="lightblue"))
 ```
 
-Of course, you can modify both `height` and `scatcolors` at once.
+You can modify both `height` and `scatcolors` at once.
 
 ```{r iplotCorr_height_and_scatcolors, eval=FALSE}
 iplotCorr(expr, reorder=TRUE,
@@ -260,7 +260,9 @@ ignored if `corr` is provided.
 ```{r iplotCorr_subset_of_spearman_corr, eval=FALSE}
 iplotCorr(expr, geno, corr=spearman[pos,neg])
 ```
-
+The connection between `expr` and `spearman[pos,neg]` is taken from
+the column names of the former and both the row and column names of
+the latter.
 
 
 ### `iplotMap`

@@ -320,28 +320,28 @@ may be transferred to and viewed on any computer.</p>
 
 <h2>Chart customization options</h2>
 
-<p>There are a number of ways in which one may wish to customize the
+<p>There are a number of ways in which one may customize the
 interactive graphs produced by
 <a href="http://kbroman.github.io/qtlcharts">R/qtlcharts</a>, such as different
-colors or axis labels. Our main approach to allow such customization
-is through a function argument, <code>chartOpts</code>. It takes a named list.</p>
+colors or axis labels. The main method for such customization
+is through a function argument, <code>chartOpts</code>, which takes a named list.</p>
 
 <p>For example, to change the dimensions of the image produced by
 <code>iplotCorr</code>, use the <code>height</code> option, which specifies the height of
-each panel in pixels; by default, the images are square, with <code>width =
+each panel in pixels; by default, each panel is square, with <code>width =
 height</code>:</p>
 
 <pre><code class="r">iplotCorr(expr, reorder=TRUE, chartOpts=list(height=600))
 </code></pre>
 
-<p>If you want the points in the scatterplot to be different color, use
-<code>scatcolors</code>.</p>
+<p>If you want a different choice of color for the points in the scatterplot,
+use <code>scatcolors</code>.</p>
 
 <pre><code class="r">iplotCorr(expr, reorder=TRUE,
           chartOpts=list(scatcolors=&quot;lightblue&quot;))
 </code></pre>
 
-<p>Of course, you can modify both <code>height</code> and <code>scatcolors</code> at once.</p>
+<p>You can modify both <code>height</code> and <code>scatcolors</code> at once.</p>
 
 <pre><code class="r">iplotCorr(expr, reorder=TRUE,
           chartOpts=list(height=600, scatcolors=&quot;lightblue&quot;))
@@ -422,6 +422,10 @@ ignored if <code>corr</code> is provided.</p>
 
 <pre><code class="r">iplotCorr(expr, geno, corr=spearman[pos,neg])
 </code></pre>
+
+<p>The connection between <code>expr</code> and <code>spearman[pos,neg]</code> is taken from
+the column names of the former and both the row and column names of
+the latter.</p>
 
 <h3><code>iplotMap</code></h3>
 

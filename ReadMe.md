@@ -4,7 +4,7 @@
 
 [R/qtlcharts](http://kbroman.github.io/qtlcharts) is an [R](http://www.r-project.org) package to create
 interactive charts for QTL data, for use
-with [R/qtl](http://www.rqtl.org). \[Website: [`kbroman.github.io/qtlcharts`](http://kbroman.github.io/qtlcharts)\]
+with [R/qtl](http://www.rqtl.org). \[[website](http://kbroman.github.io/qtlcharts)\]
 
 It is built with [D3](http://d3js.org), using the following reusable components:
 - [lodchart](inst/panels/lodchart): LOD curve panel

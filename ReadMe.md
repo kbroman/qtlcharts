@@ -16,7 +16,7 @@ It is built with [D3](http://d3js.org), using the following reusable components:
 - [heatmap](inst/panels/heatmap): heat map panel
 - [lodheatmap](inst/panels/lodheatmap): panel for heat map of LOD curves
 
-For example charts, see the [R/qtlcharts web page](http://kbroman.github.io/qtlcharts).
+For example charts, see the [R/qtlcharts website](http://kbroman.github.io/qtlcharts).
 
 #### Installation
 

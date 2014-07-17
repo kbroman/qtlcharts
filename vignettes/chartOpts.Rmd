@@ -483,6 +483,10 @@ customization options for each chart.
 
 `linewidth = 2` &mdash; width of lines
 
+`nxticks = 5` &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale
+
+`xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale
+
 ### `iplotMScanone` (with effects)
 
 `wleft = 650` &mdash; width of left panels in pixels

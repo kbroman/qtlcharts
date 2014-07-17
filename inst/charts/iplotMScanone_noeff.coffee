@@ -21,6 +21,8 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
     zthresh = chartOpts?.zthresh ? null # lower z-axis threshold for display in heat map
     linecolor = chartOpts?.linecolor ? "darkslateblue" # color of lines
     linewidth = chartOpts?.linewidth ? 2 # width of lines
+    nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis on right-hand panel, if quantitative scale
+    xticks = chartOpts?.xticks ? null # tick positions in x-axis on right-hand panel, if quantitative scale
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
   
@@ -119,16 +121,40 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                       .call(mycurvechart)
   
     # add X axis
-    curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
-                                   .selectAll("empty")
-                                   .data(lod_labels)
-                                   .enter()
-                                   .append("text")
-                                   .attr("id", (d,i) -> "xaxis#{i}")
-                                   .attr("x", (d,i) -> mycurvechart.xscale()(i))
-                                   .attr("y", margin.top+htop+axispos.xlabel)
-                                   .text((d) -> d)
-                                   .attr("opacity", 0)
+    if times? # use quantitative axis
+        right_xscale = curvechart().xscale().domain([times[0], times[times.length-1]])
+        xticks = xticks ? right_xscale.ticks(xticks)
+        curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
+        curvechart_xaxis.selectAll("empty")
+                        .data(xticks)
+                        .enter()
+                        .append("line")
+                        .attr("x1", (d) -> right_xscale(d))
+                        .attr("x2", (d) -> right_xscale(d))
+                        .attr("y1", margin.top)
+                        .attr("y2", margin.top+htop)
+                        .attr("fill", "none")
+                        .attr("stroke", "white")
+                        .attr("stroke-width", 1)
+                        .style("pointer-events", "none")
+        curvechart_xaxis.selectAll("empty")
+                        .data(xticks)
+                        .enter()
+                        .append("text")
+                        .attr("x", (d) -> right_xscale(d))
+                        .attr("y", margin.top+htop+axispos.xlabel)
+                        .text((d) -> formatAxis(xticks)(d))
+    else # qualitative axis
+        curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
+                                       .selectAll("empty")
+                                       .data(lod_labels)
+                                       .enter()
+                                       .append("text")
+                                       .attr("id", (d,i) -> "xaxis#{i}")
+                                       .attr("x", (d,i) -> mycurvechart.xscale()(i))
+                                       .attr("y", margin.top+htop+axispos.xlabel)
+                                       .text((d) -> d)
+                                       .attr("opacity", 0)
   
     # hash for [chr][pos] -> posindex
     posindex = {}
@@ -150,10 +176,10 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                          g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}").attr("stroke", linecolor)
                          p = d3.format(".1f")(d.pos)
                          g_curvechart.select("g.title text").text("#{d.chr}@#{p}")
-                         g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 1)
+                         g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 1) unless times?
                 .on "mouseout", (d) ->
                          lodchart_curves.remove()
                          g_lodchart.select("g.title text").text("")
                          g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}").attr("stroke", null)
                          g_curvechart.select("g.title text").text("")
-                         g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 0)
+                         g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 0) unless times?

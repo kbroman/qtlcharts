@@ -67,6 +67,7 @@
 - panel of inferred QTL (like a scatterplot) (for cis/trans plot)
 - lod curve for one chromosome (argument to current panel?)
 - classic boxchart (format like cichart)
+- Bang Wong's barcode plot
 - histogram (or function to make path for curvechart)
 - dotchart with beeswarm-type dots; look at underlying code in
   beeswarm: is it easy to grab or re-write? How is the package licensed?
@@ -85,10 +86,17 @@
 
 ### Interactive versions of all R/qtl charts
 
-- plot.est
+- panel: heatmap with chromosome breaks (for scantwo/plot.rf)
+- panel: colorscale for a heatmap (allow horiz/vert; allow scale on
+  top, right, bottom, or left)
+- plot.rf
 - plot.scantwo
 - plot.qtl
-- ...?
+- comparison of two maps
+- effectscan
+- plot.geno (with zoom and pan)
+- geno.image (again, with zoon and pan)
+
 
 ### Annoyances
 

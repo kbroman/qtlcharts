@@ -31,6 +31,12 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
     totalh = htop + hbot + 2*(margin.top + margin.bottom)
     totalw = wleft + wright + 2*(margin.left + margin.right)
   
+    useQuantScale = times? # if times is not null, use a quantitative scale
+                       # for y-axis in lodheatmap and x-axis in right panel
+
+    # if quant scale, use times as labels; otherwise use lod_data.lodnames
+    lod_labels = if useQuantScale then (formatAxis(times, extra_digits=1)(x) for x in times) else lod_data.lodnames
+
     mylodheatmap = lodheatmap().height(htop)
                                .width(wleft)
                                .margin(margin)
@@ -146,7 +152,7 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
     # add X axis
     curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
                                    .selectAll("empty")
-                                   .data(lod_data.lodnames)
+                                   .data(lod_labels)
                                    .enter()
                                    .append("text")
                                    .attr("class", "y axis")
@@ -172,7 +178,7 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
     mylodheatmap.cellSelect()
                 .on "mouseover", (d) ->
                          plotLodCurve(d.lodindex)
-                         g_lodchart.select("g.title text").text("#{lod_data.lodnames[d.lodindex]}")
+                         g_lodchart.select("g.title text").text("#{lod_labels[d.lodindex]}")
                          plotEffCurves(posindex[d.chr][d.pos])
                          p = d3.format(".1f")(d.pos)
                          g_curvechart.select("g.title text").text("#{d.chr}@#{p}")

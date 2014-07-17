@@ -96,6 +96,16 @@ function(scanoneOutput, effects, columns=1)
 is_equally_spaced <-
 function(vec, tol=1e-5)
 {
+    if(length(vec) < 2) {
+        warning("vector has length < 2")
+        return(FALSE)
+    }
+
+    if(!is.numeric(vec)) {
+        warning("vector is not numeric")
+        return(FALSE)
+    }
+
     if(any(is.na(vec))) {
         warning("vector contains missing values")
         return(FALSE)

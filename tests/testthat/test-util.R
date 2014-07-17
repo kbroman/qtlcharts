@@ -146,4 +146,13 @@ test_that("test is_equally_spaced", {
     expect_warning( result <- is_equally_spaced(x), "vector contains missing values")
     expect_false(result)
 
+    expect_warning( result <- is_equally_spaced(1), "vector has length < 2")
+    expect_false(result)
+
+    expect_warning( result <- is_equally_spaced(NULL), "vector has length < 2")
+    expect_false(result)
+
+    expect_warning( result <- is_equally_spaced(c("a", "b", "c")), "vector is not numeric")
+    expect_false(result)
+
 })

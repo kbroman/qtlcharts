@@ -27,11 +27,8 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
     totalh = htop + hbot + 2*(margin.top + margin.bottom)
     totalw = wleft + wright + 2*(margin.left + margin.right)
   
-    useQuantScale = times? # if times is not null, use a quantitative scale
-                       # for y-axis in lodheatmap and x-axis in right panel
-
     # if quant scale, use times as labels; otherwise use lod_data.lodnames
-    lod_labels = if useQuantScale then (formatAxis(times, extra_digits=1)(x) for x in times) else lod_data.lodnames
+    lod_labels = if times? then (formatAxis(times, extra_digits=1)(x) for x in times) else lod_data.lodnames
 
     mylodheatmap = lodheatmap().height(htop)
                                .width(wleft)
@@ -43,6 +40,8 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                                .colors(colors)
                                .zlim(zlim)
                                .zthresh(zthresh)
+                               .quantScale(times)
+                               .lod_labels(lod_labels)
   
     svg = d3.select("div##{chartdivid}")
             .append("svg")

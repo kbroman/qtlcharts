@@ -2,7 +2,7 @@
 var lodheatmap;
 
 lodheatmap = function() {
-  var axispos, cellSelect, chart, chrGap, colors, height, margin, rectcolor, rotate_ylab, title, titlepos, width, xlab, xscale, ylab, yscale, zlim, zscale, zthresh;
+  var axispos, cellSelect, chart, chrGap, colors, height, lod_labels, margin, quantScale, rectcolor, rotate_ylab, title, titlepos, width, xlab, xscale, ylab, yscale, zlim, zscale, zthresh;
   width = 1200;
   height = 600;
   margin = {
@@ -27,6 +27,8 @@ lodheatmap = function() {
   rotate_ylab = null;
   zlim = null;
   zthresh = null;
+  quantScale = null;
+  lod_labels = null;
   xscale = d3.scale.linear();
   yscale = d3.scale.linear();
   zscale = d3.scale.linear();
@@ -91,6 +93,7 @@ lodheatmap = function() {
           }
         }
       }
+      lod_labels = lod_labels != null ? lod_labels : data.lodnames;
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
@@ -115,7 +118,7 @@ lodheatmap = function() {
       rotate_ylab = rotate_ylab != null ? rotate_ylab : ylab.length > 1;
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", rotate_ylab ? "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")" : "");
-      yaxis.selectAll("empty").data(data.lodnames).enter().append("text").attr("id", function(d, i) {
+      yaxis.selectAll("empty").data(lod_labels).enter().append("text").attr("id", function(d, i) {
         return "yaxis" + i;
       }).attr("y", function(d, i) {
         return yscale(i);
@@ -126,7 +129,7 @@ lodheatmap = function() {
         var p, z;
         z = d3.format(".2f")(Math.abs(d.z));
         p = d3.format(".1f")(d.pos);
-        return "" + d.chr + "@" + p + " &rarr; " + z;
+        return "" + d.chr + "@" + p + ", " + lod_labels[d.lodindex] + " &rarr; " + z;
       }).direction('e').offset([0, 10]);
       svg.call(celltip);
       cells = g.append("g").attr("id", "cells");
@@ -256,6 +259,20 @@ lodheatmap = function() {
       return chrGap;
     }
     chrGap = value;
+    return chart;
+  };
+  chart.quantScale = function(value) {
+    if (!arguments.length) {
+      return quantScale;
+    }
+    quantScale = value;
+    return chart;
+  };
+  chart.lod_labels = function(value) {
+    if (!arguments.length) {
+      return lod_labels;
+    }
+    lod_labels = value;
     return chart;
   };
   chart.xscale = function() {

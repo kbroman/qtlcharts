@@ -4,7 +4,7 @@ var iplotMScanone_eff, plotLines;
 plotLines = null;
 
 iplotMScanone_eff = function(lod_data, eff_data, times, chartOpts) {
-  var axispos, chartdivid, chr, chrGap, colors, curindex, curvechart_xaxis, darkrect, eff_linecolor, eff_linewidth, eff_nlines, eff_ylab, eff_ylim, effchart_curves, effcurve, extra_digits, g_curvechart, g_heatmap, g_lodchart, hbot, htop, lightrect, linecolor, linewidth, lod_labels, lodchart_curves, lodcurve, margin, mycurvechart, mylodchart, mylodheatmap, plotEffCurves, plotLodCurve, pos, posindex, svg, titlepos, totalh, totalw, useQuantScale, wleft, wright, x, zlim, zthresh, _i, _j, _len, _len1, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, chartdivid, chr, chrGap, colors, curindex, curvechart_xaxis, darkrect, eff_linecolor, eff_linewidth, eff_nlines, eff_ylab, eff_ylim, effchart_curves, effcurve, extra_digits, g_curvechart, g_heatmap, g_lodchart, hbot, htop, lightrect, linecolor, linewidth, lod_labels, lodchart_curves, lodcurve, margin, mycurvechart, mylodchart, mylodheatmap, plotEffCurves, plotLodCurve, pos, posindex, svg, titlepos, totalh, totalw, wleft, wright, x, zlim, zthresh, _i, _j, _len, _len1, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   wleft = (_ref = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref : 650;
   wright = (_ref1 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref1 : 350;
   htop = (_ref2 = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref2 : 350;
@@ -38,8 +38,7 @@ iplotMScanone_eff = function(lod_data, eff_data, times, chartOpts) {
   chartdivid = (_ref19 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref19 : 'chart';
   totalh = htop + hbot + 2 * (margin.top + margin.bottom);
   totalw = wleft + wright + 2 * (margin.left + margin.right);
-  useQuantScale = times != null;
-  lod_labels = useQuantScale ? (function() {
+  lod_labels = times != null ? (function() {
     var _i, _len, _results;
     _results = [];
     for (_i = 0, _len = times.length; _i < _len; _i++) {
@@ -48,7 +47,7 @@ iplotMScanone_eff = function(lod_data, eff_data, times, chartOpts) {
     }
     return _results;
   })() : lod_data.lodnames;
-  mylodheatmap = lodheatmap().height(htop).width(wleft).margin(margin).axispos(axispos).titlepos(titlepos).chrGap(chrGap).rectcolor(lightrect).colors(colors).zlim(zlim).zthresh(zthresh);
+  mylodheatmap = lodheatmap().height(htop).width(wleft).margin(margin).axispos(axispos).titlepos(titlepos).chrGap(chrGap).rectcolor(lightrect).colors(colors).zlim(zlim).zthresh(zthresh).quantScale(times).lod_labels(lod_labels);
   svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   g_heatmap = svg.append("g").attr("id", "heatmap").datum(lod_data).call(mylodheatmap);
   mylodchart = lodchart().height(hbot).width(wleft).margin(margin).axispos(axispos).titlepos(titlepos).chrGap(chrGap).linecolor("none").pad4heatmap(true).darkrect(darkrect).lightrect(lightrect).ylim([0, d3.max(mylodheatmap.zlim())]).pointsAtMarkers(false);

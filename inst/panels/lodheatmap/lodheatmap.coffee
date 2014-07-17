@@ -15,6 +15,8 @@ lodheatmap = () ->
     rotate_ylab = null
     zlim = null
     zthresh = null
+    quantScale = null # optional vector of numbers, for y-axis scale
+    lod_labels = null # optional vector of strings, for LOD column labels
     xscale = d3.scale.linear()
     yscale = d3.scale.linear()
     zscale = d3.scale.linear()
@@ -58,6 +60,9 @@ lodheatmap = () ->
                         if lod >= zthresh or lod <= -zthresh
                             data.cells.push({z: lod, left: (xscale[chr](pos) + xscale[chr](xLR[chr][pos].left) )/2,
                             right: (xscale[chr](pos) + xscale[chr](xLR[chr][pos].right) )/2, lodindex:j, chr:chr, pos:pos})
+
+            # handle lod_labels, if provided
+            lod_labels = lod_labels ? data.lodnames
 
             # Select the svg element, if it exists.
             svg = d3.select(this).selectAll("svg").data([data])
@@ -114,7 +119,7 @@ lodheatmap = () ->
                  .text(ylab)
                  .attr("transform", if rotate_ylab then "rotate(270,#{margin.left-axispos.ytitle},#{margin.top+height/2})" else "")
             yaxis.selectAll("empty")
-                 .data(data.lodnames)
+                 .data(lod_labels)
                  .enter()
                  .append("text")
                  .attr("id", (d,i) -> "yaxis#{i}")
@@ -128,7 +133,7 @@ lodheatmap = () ->
                        .html((d) ->
                                  z = d3.format(".2f")(Math.abs(d.z))
                                  p = d3.format(".1f")(d.pos)
-                                 "#{d.chr}@#{p} &rarr; #{z}")
+                                 "#{d.chr}@#{p}, #{lod_labels[d.lodindex]} &rarr; #{z}")
                        .direction('e')
                        .offset([0,10])
             svg.call(celltip)
@@ -239,6 +244,16 @@ lodheatmap = () ->
     chart.chrGap = (value) ->
                       return chrGap if !arguments.length
                       chrGap = value
+                      chart
+
+    chart.quantScale = (value) ->
+                      return quantScale if !arguments.length
+                      quantScale = value
+                      chart
+
+    chart.lod_labels = (value) ->
+                      return lod_labels if !arguments.length
+                      lod_labels = value
                       chart
 
     chart.xscale = () ->

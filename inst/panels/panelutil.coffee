@@ -1,11 +1,11 @@
 # A variety of utility functions used by the different panel functions
 
 # determine rounding of axis labels
-formatAxis = (d) ->
+formatAxis = (d, extra_digits=0) ->
     d = d[1] - d[0]
     ndig = Math.floor( Math.log(d % 10) / Math.log(10) )
     ndig = 0 if ndig > 0
-    ndig = Math.abs(ndig)
+    ndig = Math.abs(ndig) + extra_digits
     d3.format(".#{ndig}f")
 
 # unique values of array (ignore nulls)

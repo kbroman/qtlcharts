@@ -83,6 +83,12 @@
 - iplotCorr: also include plots with slices of the correlation matrix?
 
 
+### Interactive versions of all R/qtl charts
+
+- plot.est
+- plot.scantwo
+- plot.qtl
+- ...?
 
 ### Annoyances
 

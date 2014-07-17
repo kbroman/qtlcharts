@@ -3,7 +3,7 @@
 
 # R/qtlcharts User Guide
 
-[R/qtlcharts](http://kbroman.github.io/qtlcharts) is an
+[R/qtlcharts](http://kbroman.org/qtlcharts) is an
 [R](http://www.r-project.org) package to create interactive charts for
 quantitative trait locus (QTL) mapping data, for use with [R/qtl](http://www.rqtl.org).
 
@@ -17,7 +17,7 @@ be viewed in other browsers, such [Opera](http://www.opera.com/) and
 hard to accommodate all possible browser differences.
 
 Information on installing R/qtlcharts is available
-[here](http://kbroman.github.io/qtlcharts/pages/installation.html); it
+[here](http://kbroman.org/qtlcharts/pages/installation.html); it
 requires installation of the packages [R/qtl](http://www.rqtl.org),
 [jsonlite](http://cran.r-project.org/web/packages/jsonlite/), and
 [devtools](https://github.com/hadley/devtools).
@@ -144,7 +144,7 @@ may be transferred to and viewed on any computer.
 
 There are a number of ways in which one may customize the
 interactive graphs produced by
-[R/qtlcharts](http://kbroman.github.io/qtlcharts), such as different
+[R/qtlcharts](http://kbroman.org/qtlcharts), such as different
 colors or axis labels. The main method for such customization
 is through a function argument, `chartOpts`, which takes a named list.
 
@@ -193,7 +193,7 @@ vignette("chartOpts", "qtlcharts")
 
 The interactive charts may be included within an
 [R Markdown](https://www.rstudio.com/ide/docs/r_markdown)-based
-report. See the separate [`Rmarkdown` vignette](http://kbroman.github.io/qtlcharts/assets/vignettes/Rmarkdown.html):
+report. See the separate [`Rmarkdown` vignette](http://kbroman.org/qtlcharts/assets/vignettes/Rmarkdown.html):
 
 ```{r Rmarkdown_vignette, eval=FALSE}
 vignette("Rmarkdown", "qtlcharts")
@@ -736,4 +736,4 @@ iheatmap(z, x, y, chartOpts=list(xlab="theta", ylab="psi", zlab="response"))
 
 
 <!-- the following to make it look nicer -->
-<link href="http://kbroman.github.io/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>
+<link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

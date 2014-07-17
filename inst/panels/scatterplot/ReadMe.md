@@ -8,8 +8,8 @@ following
 For an illustration of its use, see [test_scatterplot.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/panels/scatterplot/test/test_scatterplot.coffee).
 
 Add see it in action
-[here](http://kbroman.github.io/qtlcharts/assets/panels/scatterplot/test),
-including an [example with brushing](http://kbroman.github.io/qtlcharts/assets/panels/scatterplot/test/index.html#ex2).
+[here](http://kbroman.org/qtlcharts/assets/panels/scatterplot/test),
+including an [example with brushing](http://kbroman.org/qtlcharts/assets/panels/scatterplot/test/index.html#ex2).
 
 Here are all of the options:
 

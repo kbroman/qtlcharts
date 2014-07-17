@@ -8,7 +8,7 @@ following
 For an illustration of its use, see [test_mapchart.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/panels/dotchart/test/test_dotchart.coffee).
 
 Add see it in action
-[here](http://kbroman.github.io/qtlcharts/assets/panels/mapchart/test).
+[here](http://kbroman.org/qtlcharts/assets/panels/mapchart/test).
 
 Here are all of the options:
 
@@ -44,7 +44,7 @@ The data is a hash with two components:
       {"1": {"D1Mit1:0, "D1Mit2: 19.7, ..., D1Mit8: 100.3},
        "2": {"D2Mit1:0, "D2Mit5: 7.8, ..., "D2Mit10: 110}}, ..., }
 
-Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/mapchart/test/data.json).
+Here's an example dataset: [`data.json`](http://kbroman.org/qtlcharts/assets/panels/mapchart/test/data.json).
 
 #### Additional accessors
 

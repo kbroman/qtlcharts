@@ -8,7 +8,7 @@ following
 For an illustration of its use, see [test_dotchart.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/panels/dotchart/test/test_dotchart.coffee).
 
 Add see it in action
-[here](http://kbroman.github.io/qtlcharts/assets/panels/dotchart/test).
+[here](http://kbroman.org/qtlcharts/assets/panels/dotchart/test).
 
 Here are all of the options:
 
@@ -58,7 +58,7 @@ mychart = dotchart().xvar("x")                                               # v
 
   Alternatively, if `dataByInd == false` we expect the data to be like `[[x1,x2, ..., xn], [y1,y2, ..., yn]]`
 
-  Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/dotchart/test/data.json).
+  Here's an example dataset: [`data.json`](http://kbroman.org/qtlcharts/assets/panels/dotchart/test/data.json).
 
 #### Additional accessors
 

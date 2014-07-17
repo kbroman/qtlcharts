@@ -7,7 +7,7 @@ A reusable chart for making a CI chart (plot of estimates and confidence interva
 For an illustration of its use, see [test_cichart.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/panels/cichart/test/test_cichart.coffee).
 
 Add see it in action
-[here](http://kbroman.github.io/qtlcharts/assets/panels/cichart/test).
+[here](http://kbroman.org/qtlcharts/assets/panels/cichart/test).
 
 Here are all of the options:
 
@@ -38,7 +38,7 @@ mychart = cichart().xvar("x")                                               # va
 
 We expect `{means, low, high, categories}`, each a vector of common
 length. Here's an example:
-[`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/cichart/test/data.json).
+[`data.json`](http://kbroman.org/qtlcharts/assets/panels/cichart/test/data.json).
 
 #### Additional accessors
 

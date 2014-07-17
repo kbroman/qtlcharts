@@ -5,12 +5,12 @@
 
 There are a number of ways in which one may wish to customize the
 interactive graphs produced by
-[R/qtlcharts](http://kbroman.github.io/qtlcharts), such as different
+[R/qtlcharts](http://kbroman.org/qtlcharts), such as different
 colors or axis labels. Our main approach to allow such customization
 is through a function argument, `chartOpts`. 
 
 Use of these options is described in the
-[R/qtlcharts User Guide](http://kbroman.github.io/qtlcharts/assets/vignettes/userGuide.html).
+[R/qtlcharts User Guide](http://kbroman.org/qtlcharts/assets/vignettes/userGuide.html).
 
 The following is a complete listing of the
 customization options for each chart.
@@ -525,4 +525,4 @@ customization options for each chart.
 
 
 <!-- the following to make it look nicer -->
-<link href="http://kbroman.github.io/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>
+<link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

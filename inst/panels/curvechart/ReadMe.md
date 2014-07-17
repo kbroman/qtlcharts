@@ -8,7 +8,7 @@ following
 For an illustration of its use, see [test_curvechart.coffee](https://github.com/kbroman/qtlcharts/blob/master/inst/panels/curvechart/test/test_curvechart.coffee).
 
 Add see it in action
-[here](http://kbroman.github.io/qtlcharts/assets/panels/curvechart/test).
+[here](http://kbroman.org/qtlcharts/assets/panels/curvechart/test).
 
 Here are all of the options:
 
@@ -44,7 +44,7 @@ mychart = cichart().width(800)                                              # in
   
   The data can also contain a vector `groups` with length equal to the number of individuals, taking values in `(1, 2, ..., k)`, for specifying colors. 
 
-  Here's an example dataset: [`data.json`](http://kbroman.github.io/qtlcharts/assets/panels/curvechart/test/data.json).
+  Here's an example dataset: [`data.json`](http://kbroman.org/qtlcharts/assets/panels/curvechart/test/data.json).
 
 #### Additional accessors
 

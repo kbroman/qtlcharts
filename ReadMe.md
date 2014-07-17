@@ -1,10 +1,10 @@
 ### R/qtlcharts: Interactive graphics for QTL experiments
 
-[Karl W Broman](http://www.biostat.wisc.edu/~kbroman)
+[Karl W Broman](http://kbroman.org)
 
-[R/qtlcharts](http://kbroman.github.io/qtlcharts) is an [R](http://www.r-project.org) package to create
+[R/qtlcharts](http://kbroman.org/qtlcharts) is an [R](http://www.r-project.org) package to create
 interactive charts for QTL data, for use
-with [R/qtl](http://www.rqtl.org). \[[website](http://kbroman.github.io/qtlcharts)\]
+with [R/qtl](http://www.rqtl.org). \[[website](http://kbroman.org/qtlcharts)\]
 
 It is built with [D3](http://d3js.org), using the following reusable components:
 - [lodchart](inst/panels/lodchart): LOD curve panel
@@ -16,7 +16,7 @@ It is built with [D3](http://d3js.org), using the following reusable components:
 - [heatmap](inst/panels/heatmap): heat map panel
 - [lodheatmap](inst/panels/lodheatmap): panel for heat map of LOD curves
 
-For example charts, see the [R/qtlcharts website](http://kbroman.github.io/qtlcharts).
+For example charts, see the [R/qtlcharts website](http://kbroman.org/qtlcharts).
 
 #### Installation
 

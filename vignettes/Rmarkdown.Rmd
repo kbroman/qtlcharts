@@ -3,7 +3,7 @@
 
 ## Interactive QTL charts within R Markdown
 
-[R/qtlcharts](http://kbroman.github.io/qtlcharts) is an R package to
+[R/qtlcharts](http://kbroman.org/qtlcharts) is an R package to
 create interactive charts for QTL data, for use with
 [R/qtl](http://www.rqtl.org).
 While its interactive QTL charts are particularly useful for
@@ -18,10 +18,10 @@ viewing in the browser. Code chunks are processed by knitr and
 replaced with the results or graphs produced.
 
 For more information on R Markdown and knitr, see the
-[knitr in a knutshell](http://kbroman.github.io/knitr_knutshell/)
+[knitr in a knutshell](http://kbroman.org/knitr_knutshell/)
 tutorial.
 
-To include [R/qtlcharts](http://kbroman.github.io/qtlcharts)-based
+To include [R/qtlcharts](http://kbroman.org/qtlcharts)-based
 interactive charts within an R Markdown document, you include the
 relevant calls to the R function within a code chunk, using the chunk
 option `results="asis"`. Also, include `print=TRUE` and likely
@@ -153,4 +153,4 @@ as straight text, not inside a code chunk. Look at the
 [source for this vignette](https://github.com/kbroman/qtlcharts/blob/master/vignettes/Rmarkdown.Rmd) to see the code.
 
 <!-- the following to make it look nicer -->
-<link href="http://kbroman.github.io/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>
+<link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

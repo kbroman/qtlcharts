@@ -3,7 +3,7 @@
 
 # R/qtlcharts Developer Guide
 
-[R/qtlcharts](http://kbroman.github.io/qtlcharts) is an
+[R/qtlcharts](http://kbroman.org/qtlcharts) is an
 [R](http://www.r-project.org) package to create interactive charts for
 QTL data, for use with [R/qtl](http://www.rqtl.org).
 R/qtlcharts is written in
@@ -41,7 +41,7 @@ and
 [`inst/colorbrewer`](https://github.com/kbroman/qtlcharts/tree/master/inst/colorbrewer).
 
 The interactive charts are built on a set of
-[reuseable D3-based graphic panels](http://kbroman.github.io/qtlcharts/pages/panels.html),
+[reuseable D3-based graphic panels](http://kbroman.org/qtlcharts/pages/panels.html),
 contained in
 [`inst/panels`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels).
 These were designed following
@@ -124,7 +124,7 @@ directly using the R function
 resulting file is then self-contained and so portable.)
 
 For creating interactive charts within R Markdown documents (see
-[the related vignette](http://kbroman.github.io/qtlcharts/assets/vignettes/Rmarkdown.html)),
+[the related vignette](http://kbroman.org/qtlcharts/assets/vignettes/Rmarkdown.html)),
 one would use `print=TRUE`, in which case rather than appending code
 to a file, we'd simply print it (with `cat(readLines(file), sep="\n")`).
 
@@ -135,7 +135,7 @@ will be placed within a `<div>` with an ID specific to the chart (by
 default, `chart`. The names of the data objects (including the
 `chartOpts` object) are prepended with this same div ID. This is to
 avoid conflicts among multiple charts, particularly within
-[R Markdown files](http://kbroman.github.io/qtlcharts/assets/vignettes/Rmarkdown.html).
+[R Markdown files](http://kbroman.org/qtlcharts/assets/vignettes/Rmarkdown.html).
 
 ## Customization options
 
@@ -170,7 +170,7 @@ and each line should end with a comment describing the option.
 This is so that a ruby script
 ([`grab_chartOpts.rb`](https://github.com/kbroman/qtlcharts/blob/master/vignettes/chartOpts/grab_chartOpts.rb))
 can parse all of these options and create the
-[chartOpts vignette](http://kbroman.github.io/qtlcharts/assets/vignettes/chartOpts.html),
+[chartOpts vignette](http://kbroman.org/qtlcharts/assets/vignettes/chartOpts.html),
 which provides a list of all possible options.
 
 Some charts have multiple versions (e.g., `iplotScanone` with no
@@ -178,7 +178,7 @@ effects, with confidence intervals, or with raw phenotype &times;
 genotype).  The file [`multiversions.csv`](https://github.com/kbroman/qtlcharts/blob/master/vignettes/chartOpts/multiversions.csv)
 lists the chart name and a bit of Markdown code to describe the
 version. Also, the order of the charts in the
-[chartOpts vignette](http://kbroman.github.io/qtlcharts/assets/vignettes/chartOpts.html)
+[chartOpts vignette](http://kbroman.org/qtlcharts/assets/vignettes/chartOpts.html)
 is determined from the order in this file.
 
 
@@ -260,7 +260,7 @@ identify problems.
 
 Each of type of graphic panel has a corresponding test. These are
 more illustrations than proper tests. Live versions are at
-[`kbroman.github.io/qtlcharts/pages/panels.html`](http://kbroman.github.io/qtlcharts/pages/panels.html).
+[`kbroman.org/qtlcharts/pages/panels.html`](http://kbroman.org/qtlcharts/pages/panels.html).
 
 Tests of some of the R utility functions are in
 [`tests/testthat`](https://github.com/kbroman/qtlcharts/tree/master/tests/testthat). We're
@@ -282,4 +282,4 @@ and [ColorBrewer](http://colorbrewer2.org)
 
 
 <!-- the following to make it look nicer -->
-<link href="http://kbroman.github.io/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>
+<link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

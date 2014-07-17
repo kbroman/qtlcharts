@@ -3,7 +3,7 @@
 
 mycurvechart = null
 
-iplotMScanone_noeff = (lod_data, chartOpts) ->
+iplotMScanone_noeff = (lod_data, times, chartOpts) ->
 
     # chartOpts start
     wleft = chartOpts?.wleft ? 650 # width of left panels in pixels

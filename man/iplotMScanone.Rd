@@ -3,9 +3,10 @@
 \alias{iplotMScanone}
 \title{Interactive LOD curve}
 \usage{
-iplotMScanone(scanoneOutput, cross, lodcolumn, pheno.col, effects, chr, file,
-  onefile = FALSE, openfile = TRUE, title = "", chartdivid = "chart",
-  caption, chartOpts = NULL, digits = 4, print = FALSE)
+iplotMScanone(scanoneOutput, cross, lodcolumn, pheno.col, times = NULL,
+  effects, chr, file, onefile = FALSE, openfile = TRUE, title = "",
+  chartdivid = "chart", caption, chartOpts = NULL, digits = 4,
+  print = FALSE)
 }
 \arguments{
 \item{scanoneOutput}{Object of class \code{"scanone"}, as output
@@ -17,6 +18,13 @@ from \code{\link[qtl]{scanone}}.}
 \item{lodcolumn}{Numeric value indicating LOD score column to plot.}
 
 \item{pheno.col}{(Optional) Phenotype column in cross object.}
+
+\item{times}{(Optional) Vector (length equal to the number of LOD
+score columns) with quantitative values to which the different LOD
+score columns correspond (times of measurements, or something like
+age or dose).  These need to be ordered and equally-spaced. If
+omitted, the names of the columns in \code{scanoneOutput} are used
+and treated as qualitative.}
 
 \item{effects}{(Optional)}
 

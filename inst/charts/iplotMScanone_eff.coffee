@@ -3,7 +3,7 @@
 
 plotLines = null
 
-iplotMScanone_eff = (lod_data, eff_data, chartOpts) ->
+iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
 
     # chartOpts start
     wleft = chartOpts?.wleft ? 650 # width of left panels in pixels

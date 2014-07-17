@@ -3,7 +3,7 @@ var iplotMScanone_eff, plotLines;
 
 plotLines = null;
 
-iplotMScanone_eff = function(lod_data, eff_data, chartOpts) {
+iplotMScanone_eff = function(lod_data, eff_data, times, chartOpts) {
   var axispos, chartdivid, chr, chrGap, colors, curindex, curvechart_xaxis, darkrect, eff_linecolor, eff_linewidth, eff_nlines, eff_ylab, eff_ylim, effchart_curves, effcurve, g_curvechart, g_heatmap, g_lodchart, hbot, htop, lightrect, linecolor, linewidth, lodchart_curves, lodcurve, margin, mycurvechart, mylodchart, mylodheatmap, plotEffCurves, plotLodCurve, pos, posindex, svg, titlepos, totalh, totalw, wleft, wright, zlim, zthresh, _i, _j, _len, _len1, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   wleft = (_ref = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref : 650;
   wright = (_ref1 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref1 : 350;

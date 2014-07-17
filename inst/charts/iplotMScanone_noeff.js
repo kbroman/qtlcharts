@@ -3,7 +3,7 @@ var iplotMScanone_noeff, mycurvechart;
 
 mycurvechart = null;
 
-iplotMScanone_noeff = function(lod_data, chartOpts) {
+iplotMScanone_noeff = function(lod_data, times, chartOpts) {
   var axispos, chartdivid, chr, chrGap, colors, curindex, curvechart_xaxis, darkrect, g_curvechart, g_heatmap, g_lodchart, hbot, htop, i, lightrect, linecolor, linewidth, lod4curves, lodchart_curves, lodcolumn, lodcurve, margin, mylodchart, mylodheatmap, plotLodCurve, pos, posindex, svg, titlepos, totalh, totalw, wleft, wright, x, y, zlim, zthresh, _i, _j, _len, _len1, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   wleft = (_ref = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref : 650;
   wright = (_ref1 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref1 : 350;

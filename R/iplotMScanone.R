@@ -14,6 +14,12 @@
 #'   \code{\link[qtl]{read.cross}}.
 #' @param lodcolumn Numeric value indicating LOD score column to plot.
 #' @param pheno.col (Optional) Phenotype column in cross object.
+#' @param times (Optional) Vector (length equal to the number of LOD
+#'   score columns) with quantitative values to which the different LOD
+#'   score columns correspond (times of measurements, or something like
+#'   age or dose).  These need to be ordered and equally-spaced. If
+#'   omitted, the names of the columns in \code{scanoneOutput} are used
+#'   and treated as qualitative.
 #' @param effects (Optional)
 #' @param chr (Optional) Optional vector indicating the chromosomes
 #'   for which LOD scores should be calculated. This should be a vector
@@ -62,7 +68,7 @@
 #'
 #' @export
 iplotMScanone <-
-function(scanoneOutput, cross, lodcolumn, pheno.col,
+function(scanoneOutput, cross, lodcolumn, pheno.col, times=NULL,
          effects, chr,
          file, onefile=FALSE, openfile=TRUE, title="", chartdivid='chart',
          caption, chartOpts=NULL, digits=4, print=FALSE)
@@ -85,9 +91,25 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
     stopifnot(all(lodcolumn >= 1 & lodcolumn <= ncol(scanoneOutput)-2))
     scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2),drop=FALSE]
 
+    # check times
+    if(!is.null(times)) {
+        if(!is_equally_spaced(times)) {
+            warning("times is not equally spaced; ignored.")
+            times <- NULL
+        }
+        else if(length(times) != ncol(scanoneOutput)-2) {
+            warning("length(times) != no. LOD columns; times will be ignored")
+            times <- NULL
+        }
+        else {
+            names(times) <- NULL # make sure it's plain
+        }
+    }
+    if(is.null(times)) times <- NA # this will get turned into null on the other end
+
     if(missing(pheno.col) || is.null(pheno.col)) pheno.col <- seq(along=lodcolumn)
     if((missing(cross) || is.null(cross)) && (missing(effects) || is.null(effects)))
-        return(iplotMScanone_noeff(scanoneOutput,
+        return(iplotMScanone_noeff(scanoneOutput, times=times,
                                    file=file, onefile=onefile, openfile=openfile, title=title,
                                    chartdivid=chartdivid,
                                    caption=caption, chartOpts=chartOpts, digits=digits, print=print))
@@ -107,7 +129,7 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
 
     scanoneOutput <- calcSignedLOD(scanoneOutput, effects)
 
-    iplotMScanone_eff(scanoneOutput, effects,
+    iplotMScanone_eff(scanoneOutput, effects, times=times,
                       file=file, onefile=onefile, openfile=openfile, title=title,
                       chartdivid=chartdivid,
                       caption=caption, chartOpts=chartOpts, digits=digits, print=print)
@@ -116,7 +138,7 @@ function(scanoneOutput, cross, lodcolumn, pheno.col,
 
 # iplotMScanone_noeff: multiple LOD curves; no QTL effects
 iplotMScanone_noeff <-
-function(scanoneOutput,
+function(scanoneOutput, times=NULL,
          file, onefile=FALSE, openfile=TRUE,
          title="", chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
@@ -135,9 +157,10 @@ function(scanoneOutput,
     chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
 
     append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
+    append_html_jscode(file, paste0(chartdivid, '_times = '), jsonlite::toJSON(times, na="null", auto_unbox=TRUE), ';')
     append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
     append_html_jscode(file, paste0('iplotMScanone_noeff(', chartdivid, '_scanoneData, ',
-                                    chartdivid, '_chartOpts);'))
+                                    chartdivid, '_times, ', chartdivid, '_chartOpts);'))
 
     append_html_bottom(file, print=print)
 
@@ -148,7 +171,7 @@ function(scanoneOutput,
 
 # iplotMScanone_eff: multiple LOD curves + QTL effects
 iplotMScanone_eff <-
-function(scanoneOutput, effects,
+function(scanoneOutput, effects, times=NULL,
          file, onefile=FALSE, openfile=TRUE,
          title="", chartdivid=chartdivid,
          caption, chartOpts=NULL, digits=4, print=FALSE)
@@ -170,9 +193,11 @@ function(scanoneOutput, effects,
 
     append_html_jscode(file, paste0(chartdivid, '_scanoneData = '), scanone_json, ';')
     append_html_jscode(file, paste0(chartdivid, '_effectsData = '), effects_json, ';')
+    append_html_jscode(file, paste0(chartdivid, '_times = '), jsonlite::toJSON(times, na="null", auto_unbox=TRUE), ';')
     append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
     append_html_jscode(file, paste0('iplotMScanone_eff(', chartdivid, '_scanoneData, ',
                                     chartdivid, '_effectsData, ',
+                                    chartdivid, '_times, ',
                                     chartdivid, '_chartOpts);'))
 
     append_html_bottom(file, print=print)

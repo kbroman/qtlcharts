@@ -14,4 +14,4 @@ iplotCorr(geneExpr$expr, geneExpr$genotype, title = "iplotCorr example",
             "blue = -1 and red = +1. Hover over pixels in the correlation matrix ",
             "on the left to see the values; click to see the corresponding ",
             "scatterplot on the right.<br><br>\n",
-            "[<a style=\"text-decoration:none;\" href=\"http://kbroman.github.io/qtlcharts\">Main page</a>]"))
+            "[<a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">Main page</a>]"))

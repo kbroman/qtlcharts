@@ -23,4 +23,4 @@ iheatmap(z, x, y, title = "iheatmap example", onefile=TRUE, openfile=FALSE,
          file=file,
          caption=c("Hover over pixels in the heatmap on the top-left to see the values ",
            "and to see the horizontal slice (below) and the vertical slice (to the right).<br><br>\n",
-           "[<a style=\"text-decoration:none;\" href=\"http://kbroman.github.io/qtlcharts\">Main page</a>]"))
+           "[<a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">Main page</a>]"))

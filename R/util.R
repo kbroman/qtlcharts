@@ -91,3 +91,21 @@ function(scanoneOutput, effects, columns=1)
 
     scanoneOutput
 }
+
+# test if a vector is a set of equally-spaced values
+is_equally_spaced <-
+function(vec, tol=1e-5)
+{
+    if(any(is.na(vec))) {
+        warning("vector contains missing values")
+        return(FALSE)
+    }
+
+    d <- diff(vec)
+    if(!(all(d >= 0) || all(d <= 0))) {
+        warning("vector is not monotonic")
+        return(FALSE)
+    }
+
+    return(sd(d)/abs(median(d)) < tol) # if TRUE, looks equally spaced
+}

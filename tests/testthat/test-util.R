@@ -126,3 +126,24 @@ test_that("strip_whitespace works", {
     expect_equal(strip_whitespace(json), output)
 
 })
+
+test_that("test is_equally_spaced", {
+
+    x <- seq(0, 8, length=241)
+    expect_true( is_equally_spaced(x) )
+
+    x <- 1:10
+    expect_true( is_equally_spaced(x) )
+
+    x <- c(1, 3, 4, 5)
+    expect_false( is_equally_spaced(x) )
+
+    x <- c(1, 3, 2, 4, 5)
+    expect_warning( result <- is_equally_spaced(x), "vector is not monotonic")
+    expect_false(result)
+
+    x <- c(1, 3, NA, 4, 5)
+    expect_warning( result <- is_equally_spaced(x), "vector contains missing values")
+    expect_false(result)
+
+})

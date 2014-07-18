@@ -10,4 +10,4 @@ if(file.exists(file)) unlink(file)
 iplotMap(map, shift=TRUE, title="iplotMap example",
          onefile=TRUE, openfile=FALSE, file=file,
          caption=c("Hover over marker positions to view the marker names.<br><br>\n",
-                   "[<a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">Main page</a>]"))
+                   "<a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">R/qtlcharts</a>"))

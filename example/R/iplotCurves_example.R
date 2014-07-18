@@ -21,4 +21,4 @@ iplotCurves(phe, times, phe[,times==2 | times==4], phe[,times==4 | times==6],
             caption=c("The curves are linked to the two scatterplots below: hover over an ",
               "element in one panel, and the corresponding elements in the other panels will ",
               "be highlighted.<br><br>\n",
-              "[<a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">Main page</a>]"))
+              "<a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">R/qtlcharts</a>"))

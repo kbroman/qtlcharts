@@ -21,4 +21,4 @@ iboxplot(hypo, title="iboxplot example", chartOpts=list(xlab="Mice", ylab="Gene 
            "of percentiles for each of the distributions. Hover over a column in the top panel ",
            "and the corresponding distribution is show below; click for it to persist; click ",
            "again to make it go away.<br><br>\n",
-           "<a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">R/qtlcharts</a>"))
+           "</p><hr/><p class=\"caption\"><a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">R/qtlcharts</a>"))

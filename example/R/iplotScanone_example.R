@@ -16,4 +16,4 @@ iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
                "Click on a marker to view the phenotype &times; genotype plot on the right. ",
                "In the phenotype &times; genotype plot, the intervals indicate the mean ",
                "&plusmn; 2 SE.<br><br>\n",
-               "<a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">R/qtlcharts</a>"))
+               "</p><hr/><p class=\"caption\"><a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">R/qtlcharts</a>"))

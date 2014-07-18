@@ -2,6 +2,7 @@
 # Karl W Broman
 
 mycurvechart = null
+xscale = null
 
 iplotMScanone_noeff = (lod_data, times, chartOpts) ->
 
@@ -116,21 +117,23 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
   
     g_curvechart = svg.append("g")
                       .attr("transform", "translate(#{wleft+margin.top+margin.bottom},0)")
-                      .attr("id", "curvehart")
+                      .attr("id", "curvechart")
                       .datum(lod4curves)
                       .call(mycurvechart)
   
     # add X axis
     if times? # use quantitative axis
-        right_xscale = curvechart().xscale().domain([times[0], times[times.length-1]])
-        xticks = xticks ? right_xscale.ticks(xticks)
-        curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
+        xscale = mycurvechart.xscale()
+        xscale.domain([times[0], times[times.length-1]])
+        xticks = xticks ? xscale.ticks(xticks)
+        curvechart_xaxis = g_curvechart.select("g.x.axis")
+
         curvechart_xaxis.selectAll("empty")
                         .data(xticks)
                         .enter()
                         .append("line")
-                        .attr("x1", (d) -> right_xscale(d))
-                        .attr("x2", (d) -> right_xscale(d))
+                        .attr("x1", (d) -> xscale(d))
+                        .attr("x2", (d) -> xscale(d))
                         .attr("y1", margin.top)
                         .attr("y2", margin.top+htop)
                         .attr("fill", "none")
@@ -141,9 +144,10 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                         .data(xticks)
                         .enter()
                         .append("text")
-                        .attr("x", (d) -> right_xscale(d))
+                        .attr("x", (d) -> xscale(d))
                         .attr("y", margin.top+htop+axispos.xlabel)
                         .text((d) -> formatAxis(xticks)(d))
+        curvechart_xaxis.moveToBack()
     else # qualitative axis
         curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
                                        .selectAll("empty")
@@ -155,7 +159,7 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                                        .attr("y", margin.top+htop+axispos.xlabel)
                                        .text((d) -> d)
                                        .attr("opacity", 0)
-  
+
     # hash for [chr][pos] -> posindex
     posindex = {}
     curindex = 0

@@ -4,27 +4,27 @@ all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vign
 # Examples
 CHARTEX = example
 
-chartexamples: ${CHARTEX}/iboxplot_example.html ${CHARTEX}/iplotCorr_example.html ${CHARTEX}/iplotCurves_example.html ${CHARTEX}/iplotMScanone_example.html ${CHARTEX}/iplotMap_example.html ${CHARTEX}/iplotScanone_example.html ${CHARTEX}/iheatmap_example.html
+chartexamples: ${CHARTEX}/iboxplot.html ${CHARTEX}/iplotCorr.html ${CHARTEX}/iplotCurves.html ${CHARTEX}/iplotMScanone.html ${CHARTEX}/iplotMap.html ${CHARTEX}/iplotScanone.html ${CHARTEX}/iheatmap.html
 
-${CHARTEX}/iboxplot_example.html: ${CHARTEX}/R/iboxplot_example.R ${CHARTEX}/R/hypo.RData
+${CHARTEX}/iboxplot.html: ${CHARTEX}/R/iboxplot_example.R ${CHARTEX}/R/hypo.RData
 	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
 
-${CHARTEX}/iplotCorr_example.html: ${CHARTEX}/R/iplotCorr_example.R
+${CHARTEX}/iplotCorr.html: ${CHARTEX}/R/iplotCorr_example.R
 	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
 
-${CHARTEX}/iplotCurves_example.html: ${CHARTEX}/R/iplotCurves_example.R
+${CHARTEX}/iplotCurves.html: ${CHARTEX}/R/iplotCurves_example.R
 	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
 
-${CHARTEX}/iplotMScanone_example.html: ${CHARTEX}/R/iplotMScanone_example.R
+${CHARTEX}/iplotMScanone.html: ${CHARTEX}/R/iplotMScanone_example.R
 	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
 
-${CHARTEX}/iplotMap_example.html: ${CHARTEX}/R/iplotMap_example.R
+${CHARTEX}/iplotMap.html: ${CHARTEX}/R/iplotMap_example.R
 	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
 
-${CHARTEX}/iplotScanone_example.html: ${CHARTEX}/R/iplotScanone_example.R
+${CHARTEX}/iplotScanone.html: ${CHARTEX}/R/iplotScanone_example.R
 	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
 
-${CHARTEX}/iheatmap_example.html: ${CHARTEX}/R/iheatmap_example.R
+${CHARTEX}/iheatmap.html: ${CHARTEX}/R/iheatmap_example.R
 	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
 
 #------------------------------------------------------------

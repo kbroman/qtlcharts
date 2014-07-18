@@ -13,7 +13,7 @@ file <- "../iplotCurves.html"
 if(file.exists(file)) unlink(file)
 
 iplotCurves(phe, times, phe[,times==2 | times==4], phe[,times==4 | times==6],
-            title="gravitropism curves",
+            title="iplotCurves example",
             chartOpts=list(curves_xlab="Time (hours)", curves_ylab="Root tip angle (degrees)",
               scat1_xlab="Angle at 2 hrs", scat1_ylab="Angle at 4 hrs",
               scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 6 hrs"),

@@ -13,7 +13,7 @@ eff <- estQTLeffects(grav, phe=phecol, what="effects")
 file <- "../iplotMScanone.html"
 if(file.exists(file)) unlink(file)
 
-iplotMScanone(out, effects=eff, times=times, title="iplotMScanone example, with effects",
+iplotMScanone(out, effects=eff, times=times, title="iplotMScanone example",
               chartOpts=list(eff_ylab="QTL effect", lod_ylab="Time (hrs)"),
               onefile=TRUE, openfile=FALSE, file=file,
               caption=c("Hover over LOD heat map to view individual curves ",

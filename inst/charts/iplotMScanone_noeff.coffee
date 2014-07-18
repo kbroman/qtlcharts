@@ -1,8 +1,6 @@
 # iplotMScanone_noeff: image of lod curves linked to plot of lod curves
 # Karl W Broman
 
-mycurvechart = null
-
 iplotMScanone_noeff = (lod_data, times, chartOpts) ->
 
     # chartOpts start

@@ -22,6 +22,7 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
     linewidth = chartOpts?.linewidth ? 2 # width of lines
     nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis on right-hand panel, if quantitative scale
     xticks = chartOpts?.xticks ? null # tick positions in x-axis on right-hand panel, if quantitative scale
+    lod_labels = chartOpts?.lod_labels ? null # optional vector of strings, for LOD column labels
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
   
@@ -29,7 +30,8 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
     totalw = wleft + wright + 2*(margin.left + margin.right)
   
     # if quant scale, use times as labels; otherwise use lod_data.lodnames
-    lod_labels = if times? then (formatAxis(times, extra_digits=1)(x) for x in times) else lod_data.lodnames
+    unless lod_labels?
+        lod_labels = if times? then (formatAxis(times, extra_digits=1)(x) for x in times) else lod_data.lodnames
 
     mylodheatmap = lodheatmap().height(htop)
                                .width(wleft)

@@ -489,6 +489,8 @@ customization options for each chart.
 
 `xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale
 
+`lod_labels = NULL` &mdash; optional vector of strings, for LOD column labels
+
 ### `iplotMScanone` (with effects)
 
 `wleft = 650` &mdash; width of left panels in pixels
@@ -534,6 +536,8 @@ customization options for each chart.
 `nxticks = 5` &mdash; no. ticks in x-axis for effect plot (right panel), if quantitative scale
 
 `xticks = NULL` &mdash; tick positions in x-axis for effect plot (right panel), if quantitative scale
+
+`lod_labels = NULL` &mdash; optional vector of strings, for LOD column labels
 
 
 <!-- the following to make it look nicer -->

@@ -26,6 +26,7 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
     eff_linewidth = chartOpts?.eff_linewidth ? 2 # width of line for effect plot (right panel)
     nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis for effect plot (right panel), if quantitative scale
     xticks = chartOpts?.xticks ? null # tick positions in x-axis for effect plot (right panel), if quantitative scale
+    lod_labels = chartOpts?.lod_labels ? null # optional vector of strings, for LOD column labels
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
   
@@ -33,7 +34,8 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
     totalw = wleft + wright + 2*(margin.left + margin.right)
   
     # if quant scale, use times as labels; otherwise use lod_data.lodnames
-    lod_labels = if times? then (formatAxis(times, extra_digits=1)(x) for x in times) else lod_data.lodnames
+    unless lod_labels?
+        lod_labels = if times? then (formatAxis(times, extra_digits=1)(x) for x in times) else lod_data.lodnames
 
     mylodheatmap = lodheatmap().height(htop)
                                .width(wleft)

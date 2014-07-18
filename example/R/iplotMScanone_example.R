@@ -10,7 +10,7 @@ out <- scanone(grav, phe=phecol, method="hk")
 times <- attr(grav, "time")[phecol]
 eff <- estQTLeffects(grav, phe=phecol, what="effects")
 
-file <- "../iplotMScanone_example.html"
+file <- "../iplotMScanone.html"
 if(file.exists(file)) unlink(file)
 
 iplotMScanone(out, effects=eff, times=times, title="iplotMScanone example, with effects",

@@ -14,7 +14,7 @@ for(i in seq(along=x))
 # http://dmpeli.mcmaster.ca/Matlab/Math1J03/LectureNotes/Lecture2_5.htm
 
 # remove the target file, if it exists
-file <- "../iheatmap_example.html"
+file <- "../iheatmap.html"
 if(file.exists(file)) unlink(file)
 
 # onefile=TRUE makes the resulting html file all-inclusive (javascript + css + data)

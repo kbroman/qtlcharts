@@ -3,7 +3,7 @@
 library(qtlcharts)
 data(geneExpr)
 
-file <- "../iplotCorr_example.html"
+file <- "../iplotCorr.html"
 if(file.exists(file)) unlink(file)
 
 iplotCorr(geneExpr$expr, geneExpr$genotype, title = "iplotCorr example",

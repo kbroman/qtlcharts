@@ -9,7 +9,7 @@ wh <- seq(1, length(times), by=2)
 times <- times[wh]
 phe <- phe[,wh]
 
-file <- "../iplotCurves_example.html"
+file <- "../iplotCurves.html"
 if(file.exists(file)) unlink(file)
 
 iplotCurves(phe, times, phe[,times==2 | times==4], phe[,times==4 | times==6],

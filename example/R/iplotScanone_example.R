@@ -6,7 +6,7 @@ data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
 out <- scanone(hyper)
 
-file <- "../iplotScanone_example.html"
+file <- "../iplotScanone.html"
 if(file.exists(file)) unlink(file)
 
 iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),

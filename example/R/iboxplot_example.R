@@ -9,7 +9,7 @@ med <- apply(hypo, 1, median, na.rm=TRUE)
 hypo <- hypo[order(med, decreasing=TRUE),]
 
 # remove the target file, if it exists
-file <- "../iboxplot_example.html"
+file <- "../iboxplot.html"
 if(file.exists(file)) unlink(file)
 
 # onefile=TRUE makes the resulting html file all-inclusive (javascript + css + data)

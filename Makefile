@@ -2,7 +2,7 @@
 all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vignettes
 
 # Examples
-CHARTEX = assets/chartexamples
+CHARTEX = example
 
 chartexamples: ${CHARTEX}/iboxplot_example.html ${CHARTEX}/iplotCorr_example.html ${CHARTEX}/iplotCurves_example.html ${CHARTEX}/iplotMScanone_example.html ${CHARTEX}/iplotMap_example.html ${CHARTEX}/iplotScanone_example.html ${CHARTEX}/iheatmap_example.html
 

@@ -4,7 +4,7 @@ library(qtlcharts)
 data(hyper)
 map <- pull.map(hyper)
 
-file <- "../iplotMap_example.html"
+file <- "../iplotMap.html"
 if(file.exists(file)) unlink(file)
 
 iplotMap(map, shift=TRUE, title="iplotMap example",

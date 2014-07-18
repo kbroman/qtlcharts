@@ -2,7 +2,6 @@
 # Karl W Broman
 
 mycurvechart = null
-xscale = null
 
 iplotMScanone_noeff = (lod_data, times, chartOpts) ->
 
@@ -127,7 +126,6 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
         xscale.domain([times[0], times[times.length-1]])
         xticks = xticks ? xscale.ticks(xticks)
         curvechart_xaxis = g_curvechart.select("g.x.axis")
-
         curvechart_xaxis.selectAll("empty")
                         .data(xticks)
                         .enter()
@@ -147,9 +145,8 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                         .attr("x", (d) -> xscale(d))
                         .attr("y", margin.top+htop+axispos.xlabel)
                         .text((d) -> formatAxis(xticks)(d))
-        curvechart_xaxis.moveToBack()
     else # qualitative axis
-        curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
+        curvechart_xaxis = g_curvechart.select("g.x.axis")
                                        .selectAll("empty")
                                        .data(lod_labels)
                                        .enter()

@@ -1,8 +1,6 @@
 # iplotMScanone_eff: image of lod curves linked to plot of lod curves
 # Karl W Broman
 
-plotLines = null
-
 iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
 
     # chartOpts start
@@ -25,6 +23,8 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
     eff_linecolor = chartOpts?.eff_linecolor ? null # line color for effect plot (right panel)
     linewidth = chartOpts?.linewidth ? 2 # line width for LOD curves (lower panel)
     eff_linewidth = chartOpts?.eff_linewidth ? 2 # width of line for effect plot (right panel)
+    nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis for effect plot (right panel), if quantitative scale
+    xticks = chartOpts?.xticks ? null # tick positions in x-axis for effect plot (right panel), if quantitative scale
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
   
@@ -149,17 +149,42 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
                            .style("text-anchor", "start")
 
     # add X axis
-    curvechart_xaxis = g_curvechart.append("g").attr("class", "x axis")
-                                   .selectAll("empty")
-                                   .data(lod_labels)
-                                   .enter()
-                                   .append("text")
-                                   .attr("class", "y axis")
-                                   .attr("id", (d,i) -> "xaxis#{i}")
-                                   .attr("x", (d,i) -> mycurvechart.xscale()(i))
-                                   .attr("y", margin.top+htop+axispos.xlabel)
-                                   .text((d) -> d)
-                                   .attr("opacity", 0)
+    if times? # use quantitative axis
+        xscale = mycurvechart.xscale()
+        xscale.domain([times[0], times[times.length-1]])
+        xticks = xticks ? xscale.ticks(nxticks)
+        curvechart_xaxis = g_curvechart.select("g.x.axis")
+        curvechart_xaxis.selectAll("empty")
+                        .data(xticks)
+                        .enter()
+                        .append("line")
+                        .attr("x1", (d) -> xscale(d))
+                        .attr("x2", (d) -> xscale(d))
+                        .attr("y1", margin.top)
+                        .attr("y2", margin.top+htop)
+                        .attr("fill", "none")
+                        .attr("stroke", "white")
+                        .attr("stroke-width", 1)
+                        .style("pointer-events", "none")
+        curvechart_xaxis.selectAll("empty")
+                        .data(xticks)
+                        .enter()
+                        .append("text")
+                        .attr("x", (d) -> xscale(d))
+                        .attr("y", margin.top+htop+axispos.xlabel)
+                        .text((d) -> formatAxis(xticks)(d))
+    else # qualitative axis
+        curvechart_xaxis = g_curvechart.select("g.x.axis")
+                                       .selectAll("empty")
+                                       .data(lod_labels)
+                                       .enter()
+                                       .append("text")
+                                       .attr("class", "y axis")
+                                       .attr("id", (d,i) -> "xaxis#{i}")
+                                       .attr("x", (d,i) -> mycurvechart.xscale()(i))
+                                       .attr("y", margin.top+htop+axispos.xlabel)
+                                       .text((d) -> d)
+                                       .attr("opacity", 0)
 
     # hash for [chr][pos] -> posindex
     posindex = {}

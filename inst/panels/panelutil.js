@@ -318,6 +318,9 @@ d3.selection.prototype.moveToBack = function() {
 };
 
 forceAsArray = function(x) {
+  if (x == null) {
+    return x;
+  }
   if (Array.isArray(x)) {
     return x;
   }

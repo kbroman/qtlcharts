@@ -99,7 +99,7 @@ iplotMScanone_noeff = function(lod_data, times, chartOpts) {
   if (times != null) {
     xscale = mycurvechart.xscale();
     xscale.domain([times[0], times[times.length - 1]]);
-    xticks = xticks != null ? xticks : xscale.ticks(xticks);
+    xticks = xticks != null ? xticks : xscale.ticks(nxticks);
     curvechart_xaxis = g_curvechart.select("g.x.axis");
     curvechart_xaxis.selectAll("empty").data(xticks).enter().append("line").attr("x1", function(d) {
       return xscale(d);

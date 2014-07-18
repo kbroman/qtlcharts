@@ -122,7 +122,7 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
     if times? # use quantitative axis
         xscale = mycurvechart.xscale()
         xscale.domain([times[0], times[times.length-1]])
-        xticks = xticks ? xscale.ticks(xticks)
+        xticks = xticks ? xscale.ticks(nxticks)
         curvechart_xaxis = g_curvechart.select("g.x.axis")
         curvechart_xaxis.selectAll("empty")
                         .data(xticks)

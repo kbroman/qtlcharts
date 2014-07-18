@@ -462,6 +462,27 @@ point. Hover over this panel, and the LOD curves for horizontal slices
 vertical slices (at a given genomic position, across time points) are
 shown on the right.
 
+The phenotypes here are measurements over time. The default result
+uses a qualitative y-axis for the LOD heatmap in the upper-right.
+We could instead have a quantitative y-axis scale by including the
+times at which the phenotypes were measured. Currently, the time
+points must be equally spaced.
+
+The times at which the phenotypes were measured are included in the
+`grav` dataset as an _attribute_, `"time"`.
+
+```{r grab_grav_times}
+times <- attr(grav, "time")
+```
+
+If we call `iplotMScanone` again with the `times` argument, we'll get
+the quantitative y-axis scale. We can also include a y-axis label
+using the chart option `lod_ylab`.
+
+```{r iplotMScanone_w_times, eval=FALSE}
+iplotMScanone(out, times=times, chartOpts=list(lod_ylab="Time (hrs)"))
+```
+
 We can use the function `estQTLeffects` to get estimated QTL effects at
 each putative QTL position and for each time point.
 
@@ -475,14 +496,14 @@ and red for positive effects) and QTL effects will be shown in the
 upper-right panel.
 
 ```{r, iplotMScanone_with_effects, eval=FALSE}
-iplotMScanone(out, effects=eff)
+iplotMScanone(out, effects=eff, times=times)
 ```
 
 As an alternative to first calling `estQTLeffects`, you can pass the genome-scan
 results and the cross object.
 
 ```{r, iplotMScanone_with_effects_alt, eval=FALSE}
-iplotMScanone(out, grav)
+iplotMScanone(out, grav, times=times)
 ```
 
 

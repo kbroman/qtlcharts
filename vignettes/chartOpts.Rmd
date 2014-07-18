@@ -479,6 +479,8 @@ customization options for each chart.
 
 `zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
 
+`lod_ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
+
 `linecolor = "darkslateblue"` &mdash; color of lines
 
 `linewidth = 2` &mdash; width of lines
@@ -514,6 +516,8 @@ customization options for each chart.
 `zlim = NULL` &mdash; z-axis limits
 
 `zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
+
+`lod_ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
 
 `eff_ylim = NULL` &mdash; y-axis limits for effect plot (right panel)
 

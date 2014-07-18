@@ -17,6 +17,7 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors
     zlim = chartOpts?.zlim ? null # z-axis limits
     zthresh = chartOpts?.zthresh ? null # lower z-axis threshold for display in heat map
+    lod_ylab = chartOpts?.lod_ylab ? "" # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
     eff_ylim = chartOpts?.eff_ylim ? null # y-axis limits for effect plot (right panel)
     eff_ylab = chartOpts?.eff_ylab ? "" # y-axis label for effect plot (right panel)
     linecolor = chartOpts?.linecolor ? "darkslateblue" # line color for LOD curves (lower panel)
@@ -46,6 +47,7 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
                                .zthresh(zthresh)
                                .quantScale(times)
                                .lod_labels(lod_labels)
+                               .ylab(lod_ylab)
   
     svg = d3.select("div##{chartdivid}")
             .append("svg")
@@ -104,7 +106,7 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
                                .margin(margin)
                                .axispos(axispos)
                                .titlepos(titlepos)
-                               .xlab("")
+                               .xlab(lod_ylab)
                                .ylab(eff_ylab)
                                .strokecolor("none")
                                .rectcolor(lightrect)
@@ -150,7 +152,7 @@ iplotMScanone_eff = (lod_data, eff_data, times, chartOpts) ->
 
     # add X axis
     if times? # use quantitative axis
-        xscale = mycurvechart.xscale()
+        xscale = d3.scale.linear().range(mycurvechart.xscale().range())
         xscale.domain([times[0], times[times.length-1]])
         xticks = xticks ? xscale.ticks(nxticks)
         curvechart_xaxis = g_curvechart.select("g.x.axis")

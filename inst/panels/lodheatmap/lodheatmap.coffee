@@ -17,6 +17,8 @@ lodheatmap = () ->
     zthresh = null
     quantScale = null # optional vector of numbers, for y-axis scale
     lod_labels = null # optional vector of strings, for LOD column labels
+    nyticks = 5   # no. y-axis ticks if quantitative scale
+    yticks = null # positions of y-axis ticks if quantitative scale
     xscale = d3.scale.linear()
     yscale = d3.scale.linear()
     zscale = d3.scale.linear()
@@ -118,15 +120,27 @@ lodheatmap = () ->
                  .attr("x", margin.left-axispos.ytitle)
                  .text(ylab)
                  .attr("transform", if rotate_ylab then "rotate(270,#{margin.left-axispos.ytitle},#{margin.top+height/2})" else "")
-            yaxis.selectAll("empty")
-                 .data(lod_labels)
-                 .enter()
-                 .append("text")
-                 .attr("id", (d,i) -> "yaxis#{i}")
-                 .attr("y", (d,i) -> yscale(i))
-                 .attr("x", margin.left-axispos.ylabel)
-                 .text((d) -> d)
-                 .attr("opacity", 0)
+            if quantScale? # quantitative y-axis scale
+                quant_y_scale = d3.scale.linear().domain([quantScale[0], quantScale[quantScale.length-1]])
+                                               .range([margin.top+height-rectHeight/2, margin.top+rectHeight/2])
+                yticks = yticks ? quant_y_scale.ticks(nyticks)
+                yaxis.selectAll("empty")
+                     .data(yticks)
+                     .enter()
+                     .append("text")
+                     .attr("y", (d) -> quant_y_scale(d))
+                     .attr("x", margin.left-axispos.ylabel)
+                     .text((d) -> formatAxis(yticks)(d))
+            else
+                yaxis.selectAll("empty")
+                     .data(lod_labels)
+                     .enter()
+                     .append("text")
+                     .attr("id", (d,i) -> "yaxis#{i}")
+                     .attr("y", (d,i) -> yscale(i))
+                     .attr("x", margin.left-axispos.ylabel)
+                     .text((d) -> d)
+                     .attr("opacity", 0)
 
             celltip = d3.tip()
                        .attr('class', 'd3-tip')
@@ -244,6 +258,16 @@ lodheatmap = () ->
     chart.chrGap = (value) ->
                       return chrGap if !arguments.length
                       chrGap = value
+                      chart
+
+    chart.nyticks = (value) ->
+                      return nyticks if !arguments.length
+                      nyticks = value
+                      chart
+
+    chart.yticks = (value) ->
+                      return yticks if !arguments.length
+                      yticks = value
                       chart
 
     chart.quantScale = (value) ->

@@ -27,6 +27,10 @@ mychart = lodheatmap().width(1200)                                             #
                       .rotate_ylab(null)                                       # rotate y-axis label
                       .zthresh(null)                                           # plot cells with z >= zthresh or <= -zthresh
                       .chrGap(5)                                               # gap between chromosomes (in pixels)
+                      .quantScale(null)                                        # optional vector of numbers, for y-axis scale
+                      .lod_labels(null)                                        # optional vector of strings, for LOD column labels
+                      .nyticks(5)                                              # no. y-axis ticks if quantitative scale
+                      .yticks(null)                                            # positions of y-axis ticks if quantitative scale
 ```
 
 #### Organization of data

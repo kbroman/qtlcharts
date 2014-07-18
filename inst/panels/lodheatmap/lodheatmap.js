@@ -2,7 +2,7 @@
 var lodheatmap;
 
 lodheatmap = function() {
-  var axispos, cellSelect, chart, chrGap, colors, height, lod_labels, margin, quantScale, rectcolor, rotate_ylab, title, titlepos, width, xlab, xscale, ylab, yscale, zlim, zscale, zthresh;
+  var axispos, cellSelect, chart, chrGap, colors, height, lod_labels, margin, nyticks, quantScale, rectcolor, rotate_ylab, title, titlepos, width, xlab, xscale, ylab, yscale, yticks, zlim, zscale, zthresh;
   width = 1200;
   height = 600;
   margin = {
@@ -29,13 +29,15 @@ lodheatmap = function() {
   zthresh = null;
   quantScale = null;
   lod_labels = null;
+  nyticks = 5;
+  yticks = null;
   xscale = d3.scale.linear();
   yscale = d3.scale.linear();
   zscale = d3.scale.linear();
   cellSelect = null;
   chart = function(selection) {
     return selection.each(function(data) {
-      var cells, celltip, chr, extent, g, gEnter, i, j, lod, lodcol, nlod, pos, rectHeight, svg, titlegrp, xLR, xaxis, yaxis, zmax, zmin, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
+      var cells, celltip, chr, extent, g, gEnter, i, j, lod, lodcol, nlod, pos, quant_y_scale, rectHeight, svg, titlegrp, xLR, xaxis, yaxis, zmax, zmin, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
       data = reorgLodData(data);
       data = chrscales(data, width, chrGap, margin.left, true);
       xscale = data.xscale;
@@ -118,13 +120,23 @@ lodheatmap = function() {
       rotate_ylab = rotate_ylab != null ? rotate_ylab : ylab.length > 1;
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", rotate_ylab ? "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")" : "");
-      yaxis.selectAll("empty").data(lod_labels).enter().append("text").attr("id", function(d, i) {
-        return "yaxis" + i;
-      }).attr("y", function(d, i) {
-        return yscale(i);
-      }).attr("x", margin.left - axispos.ylabel).text(function(d) {
-        return d;
-      }).attr("opacity", 0);
+      if (quantScale != null) {
+        quant_y_scale = d3.scale.linear().domain([quantScale[0], quantScale[quantScale.length - 1]]).range([margin.top + height - rectHeight / 2, margin.top + rectHeight / 2]);
+        yticks = yticks != null ? yticks : quant_y_scale.ticks(nyticks);
+        yaxis.selectAll("empty").data(yticks).enter().append("text").attr("y", function(d) {
+          return quant_y_scale(d);
+        }).attr("x", margin.left - axispos.ylabel).text(function(d) {
+          return formatAxis(yticks)(d);
+        });
+      } else {
+        yaxis.selectAll("empty").data(lod_labels).enter().append("text").attr("id", function(d, i) {
+          return "yaxis" + i;
+        }).attr("y", function(d, i) {
+          return yscale(i);
+        }).attr("x", margin.left - axispos.ylabel).text(function(d) {
+          return d;
+        }).attr("opacity", 0);
+      }
       celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
         var p, z;
         z = d3.format(".2f")(Math.abs(d.z));
@@ -259,6 +271,20 @@ lodheatmap = function() {
       return chrGap;
     }
     chrGap = value;
+    return chart;
+  };
+  chart.nyticks = function(value) {
+    if (!arguments.length) {
+      return nyticks;
+    }
+    nyticks = value;
+    return chart;
+  };
+  chart.yticks = function(value) {
+    if (!arguments.length) {
+      return yticks;
+    }
+    yticks = value;
     return chart;
   };
   chart.quantScale = function(value) {

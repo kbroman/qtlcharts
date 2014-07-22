@@ -46,6 +46,7 @@ CICHART_DIR = ${PANEL_DIR}/cichart
 CURVECHART_DIR = ${PANEL_DIR}/curvechart
 MAPCHART_DIR = ${PANEL_DIR}/mapchart
 HEATMAP_DIR = ${PANEL_DIR}/heatmap
+CHRHEATMAP_DIR = ${PANEL_DIR}/chrheatmap
 LODHEATMAP_DIR = ${PANEL_DIR}/lodheatmap
 LODCHART_TESTDIR = ${LODCHART_DIR}/test
 SCATTERPLOT_TESTDIR = ${SCATTERPLOT_DIR}/test
@@ -54,6 +55,7 @@ CICHART_TESTDIR = ${CICHART_DIR}/test
 CURVECHART_TESTDIR = ${CURVECHART_DIR}/test
 MAPCHART_TESTDIR = ${MAPCHART_DIR}/test
 HEATMAP_TESTDIR = ${HEATMAP_DIR}/test
+CHRHEATMAP_TESTDIR = ${CHRHEATMAP_DIR}/test
 LODHEATMAP_TESTDIR = ${LODHEATMAP_DIR}/test
 CHART_DIR = inst/charts
 THIS_D3 = assets/d3
@@ -66,7 +68,7 @@ QTLCHARTS_BREWER = ../qtlcharts/inst/colorbrewer
 #------------------------------------------------------------
 
 # javascript of panel tests
-jspaneltests: ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js ${HEATMAP_TESTDIR}/test_heatmap.js ${LODHEATMAP_TESTDIR}/test_lodheatmap.js
+jspaneltests: ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js ${HEATMAP_TESTDIR}/test_heatmap.js ${CHRHEATMAP_TESTDIR}/test_chrheatmap.js ${LODHEATMAP_TESTDIR}/test_lodheatmap.js
 
 ${THIS}/%/test/%.js: ${QTLCHARTS}/%/test/%.js
 	cp $< $@
@@ -74,7 +76,7 @@ ${THIS}/%/test/%.js: ${QTLCHARTS}/%/test/%.js
 #------------------------------------------------------------
 
 # javascript of panels
-jspanels: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js ${CURVECHART_DIR}/curvechart.js ${MAPCHART_DIR}/mapchart.js ${HEATMAP_DIR}/heatmap.js ${LODHEATMAP_DIR}/lodheatmap.js ${PANEL_DIR}/panelutil.js ${PANEL_DIR}/panelutil.css
+jspanels: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js ${CURVECHART_DIR}/curvechart.js ${MAPCHART_DIR}/mapchart.js ${HEATMAP_DIR}/heatmap.js ${CHRHEATMAP_DIR}/chrheatmap.js ${LODHEATMAP_DIR}/lodheatmap.js ${PANEL_DIR}/panelutil.js ${PANEL_DIR}/panelutil.css
 
 ${THIS}/%.js: ${QTLCHARTS}/%.js
 	cp $< $@
@@ -85,7 +87,7 @@ ${THIS}/panelutil.css: ${QTLCHARTS}/panelutil.css
 #------------------------------------------------------------
 
 # test data files
-json: ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json ${HEATMAP_TESTDIR}/data.json ${LODHEATMAP_TESTDIR}/data.json
+json: ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json ${HEATMAP_TESTDIR}/data.json ${CHRHEATMAP_TESTDIR}/data.json ${LODHEATMAP_TESTDIR}/data.json
 
 ${THIS}/%/test/data.json: ${QTLCHARTS}/%/test/data.json
 	cp $< $@
@@ -93,7 +95,7 @@ ${THIS}/%/test/data.json: ${QTLCHARTS}/%/test/data.json
 #------------------------------------------------------------
 
 # test/index.html files
-testhtml: ${LODCHART_TESTDIR}/index.html ${SCATTERPLOT_TESTDIR}/index.html ${DOTCHART_TESTDIR}/index.html ${CICHART_TESTDIR}/index.html ${CURVECHART_TESTDIR}/index.html ${MAPCHART_TESTDIR}/index.html ${HEATMAP_TESTDIR}/index.html ${LODHEATMAP_TESTDIR}/index.html
+testhtml: ${LODCHART_TESTDIR}/index.html ${SCATTERPLOT_TESTDIR}/index.html ${DOTCHART_TESTDIR}/index.html ${CICHART_TESTDIR}/index.html ${CURVECHART_TESTDIR}/index.html ${MAPCHART_TESTDIR}/index.html ${HEATMAP_TESTDIR}/index.html ${CHRHEATMAP_TESTDIR}/index.html ${LODHEATMAP_TESTDIR}/index.html
 
 ${THIS}/%/test/index.html: ${QTLCHARTS}/%/test/index.html
 	cp $< $@

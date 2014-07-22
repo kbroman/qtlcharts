@@ -217,3 +217,6 @@ displayError = (message) ->
     d3.select("div.error")
       .append("p")
       .text(message)
+
+# sum values in an array
+sumArray = (vec) -> (vec.reduce (a,b) -> a+b)

@@ -41,7 +41,7 @@ mychart = heatmap().width(400)                                              # in
 
   Alternatively, if `dataByCell == false` we expect the data to be
   like `{x:[x1, ..., xn], y:[y1, ..., ym], z:[[z11, ..., z1n], ...,
-  [zm1, ..., zmn]]}
+  [zm1, ..., zmn]]}`
 
   Here's an example dataset: [`data.json`](http://kbroman.org/qtlcharts/assets/panels/heatmap/test/data.json).
 

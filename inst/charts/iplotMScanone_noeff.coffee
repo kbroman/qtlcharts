@@ -14,6 +14,7 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
     chrGap = chartOpts?.chrGap ? 8 # gap between chromosomes in pixels
     darkrect = chartOpts?.darkrect ? "#C8C8C8" # color of darker background rectangle
     lightrect = chartOpts?.lightrect ? "#E6E6E6" # color of lighter background rectangle
+    nullcolor = chartOpts?.nullcolor ? "#E6E6E6" # color for pixels with null values
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors
     zlim = chartOpts?.zlim ? null # z-axis limits
     zthresh = chartOpts?.zthresh ? null # lower z-axis threshold for display in heat map
@@ -46,6 +47,7 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                                .quantScale(times)
                                .lod_labels(lod_labels)
                                .ylab(lod_ylab)
+                               .nullcolor(nullcolor)
   
     svg = d3.select("div##{chartdivid}")
             .append("svg")

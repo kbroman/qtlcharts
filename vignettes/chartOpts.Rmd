@@ -51,6 +51,8 @@ customization options for each chart.
 
 `rectcolor = "#E6E6E6"` &mdash; color of background rectangle
 
+`nullcolor = "#E6E6E6"` &mdash; color of pixels with null values
+
 `strokecolor = "slateblue"` &mdash; line color
 
 `strokewidth = 2` &mdash; line width
@@ -473,6 +475,8 @@ customization options for each chart.
 
 `lightrect = "#E6E6E6"` &mdash; color of lighter background rectangle
 
+`nullcolor = "#E6E6E6"` &mdash; color for pixels with null values
+
 `colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
 
 `zlim = NULL` &mdash; z-axis limits
@@ -512,6 +516,8 @@ customization options for each chart.
 `darkrect = "#C8C8C8"` &mdash; color of darker background rectangle
 
 `lightrect = "#E6E6E6"` &mdash; color of lighter background rectangle
+
+`nullcolor = "#E6E6E6"` &mdash; color for pixels with null values
 
 `colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
 

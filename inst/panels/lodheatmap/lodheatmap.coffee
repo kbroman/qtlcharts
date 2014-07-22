@@ -8,6 +8,7 @@ lodheatmap = () ->
     chrGap = 8
     titlepos = 20
     rectcolor = d3.rgb(230, 230, 230)
+    nullcolor = d3.rgb(230, 230, 230)
     colors = ["slateblue", "white", "crimson"]
     title = ""
     xlab = "Chromosome"
@@ -163,7 +164,7 @@ lodheatmap = () ->
                      .attr("width", (d) -> d.right - d.left)
                      .attr("height", rectHeight)
                      .attr("class", (d,i) -> "cell#{i}")
-                     .attr("fill", (d) -> zscale(d.z))
+                     .attr("fill", (d) -> if d.z? then zscale(d.z) else nullcolor)
                      .attr("stroke", "none")
                      .attr("stroke-width", "1")
                      .on("mouseover.paneltip", (d) ->
@@ -218,6 +219,11 @@ lodheatmap = () ->
     chart.rectcolor = (value) ->
                       return rectcolor if !arguments.length
                       rectcolor = value
+                      chart
+
+    chart.nullcolor = (value) ->
+                      return nullcolor if !arguments.length
+                      nullcolor = value
                       chart
 
     chart.colors = (value) ->

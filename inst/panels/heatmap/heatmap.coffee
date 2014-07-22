@@ -13,6 +13,7 @@ heatmap = () ->
     nyticks = 5
     yticks = null
     rectcolor = d3.rgb(230, 230, 230)
+    nullcolor = d3.rgb(230, 230, 230)
     colors = ["slateblue", "white", "crimson"]
     title = ""
     xlab = "X"
@@ -187,7 +188,7 @@ heatmap = () ->
                      .attr("width", (d) -> xscale(d.recRight)-xscale(d.recLeft))
                      .attr("height", (d) -> yscale(d.recBottom) - yscale(d.recTop))
                      .attr("class", (d,i) -> "cell#{i}")
-                     .attr("fill", (d) -> zscale(d.z))
+                     .attr("fill", (d) -> if d.z? then zscale(d.z) else nullcolor)
                      .attr("stroke", "none")
                      .attr("stroke-width", "1")
                      .on("mouseover.paneltip", (d) ->
@@ -266,6 +267,11 @@ heatmap = () ->
     chart.rectcolor = (value) ->
                       return rectcolor if !arguments.length
                       rectcolor = value
+                      chart
+
+    chart.nullcolor = (value) ->
+                      return nullcolor if !arguments.length
+                      nullcolor = value
                       chart
 
     chart.colors = (value) ->

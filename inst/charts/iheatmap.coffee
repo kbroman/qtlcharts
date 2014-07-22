@@ -12,6 +12,7 @@ iheatmap = (data, chartOpts) ->
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
     titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
+    nullcolor = chartOpts?.nullcolor ? "#E6E6E6" # color of pixels with null values
     strokecolor = chartOpts?.strokecolor ? "slateblue" # line color
     strokewidth = chartOpts?.strokewidth ? 2 # line width
     xlim = chartOpts?.xlim ? d3.extent(data.x) # x-axis limits
@@ -59,6 +60,7 @@ iheatmap = (data, chartOpts) ->
                          .zlim(zlim)
                          .zthresh(zthresh)
                          .colors(colors)
+                         .nullcolor(nullcolor)
   
     horslice = curvechart().width(wleft)
                            .height(hbot)

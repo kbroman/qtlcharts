@@ -2,7 +2,7 @@
 var heatmap;
 
 heatmap = function() {
-  var axispos, cellSelect, chart, colors, dataByCell, height, margin, nxticks, nyticks, rectcolor, rotate_ylab, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks, zlim, zscale, zthresh;
+  var axispos, cellSelect, chart, colors, dataByCell, height, margin, nullcolor, nxticks, nyticks, rectcolor, rotate_ylab, title, titlepos, width, xlab, xlim, xscale, xticks, ylab, ylim, yscale, yticks, zlim, zscale, zthresh;
   width = 400;
   height = 500;
   margin = {
@@ -25,6 +25,7 @@ heatmap = function() {
   nyticks = 5;
   yticks = null;
   rectcolor = d3.rgb(230, 230, 230);
+  nullcolor = d3.rgb(230, 230, 230);
   colors = ["slateblue", "white", "crimson"];
   title = "";
   xlab = "X";
@@ -201,7 +202,11 @@ heatmap = function() {
       }).attr("class", function(d, i) {
         return "cell" + i;
       }).attr("fill", function(d) {
-        return zscale(d.z);
+        if (d.z != null) {
+          return zscale(d.z);
+        } else {
+          return nullcolor;
+        }
       }).attr("stroke", "none").attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
         d3.select(this).attr("stroke", "black");
         return celltip.show(d);
@@ -294,6 +299,13 @@ heatmap = function() {
       return rectcolor;
     }
     rectcolor = value;
+    return chart;
+  };
+  chart.nullcolor = function(value) {
+    if (!arguments.length) {
+      return nullcolor;
+    }
+    nullcolor = value;
     return chart;
   };
   chart.colors = function(value) {

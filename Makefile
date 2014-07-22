@@ -10,6 +10,7 @@ MAPCHART_DIR = ${PANEL_DIR}/mapchart
 HEATMAP_DIR = ${PANEL_DIR}/heatmap
 CHRHEATMAP_DIR = ${PANEL_DIR}/chrheatmap
 LODHEATMAP_DIR = ${PANEL_DIR}/lodheatmap
+CROSSTAB_DIR = ${PANEL_DIR}/crosstab
 LODCHART_TESTDIR = ${LODCHART_DIR}/test
 SCATTERPLOT_TESTDIR = ${SCATTERPLOT_DIR}/test
 DOTCHART_TESTDIR = ${DOTCHART_DIR}/test
@@ -19,6 +20,7 @@ MAPCHART_TESTDIR = ${MAPCHART_DIR}/test
 HEATMAP_TESTDIR = ${HEATMAP_DIR}/test
 CHRHEATMAP_TESTDIR = ${CHRHEATMAP_DIR}/test
 LODHEATMAP_TESTDIR = ${LODHEATMAP_DIR}/test
+CROSSTAB_TESTDIR = ${CROSSTAB_DIR}/test
 CHART_DIR = inst/charts
 
 COFFEE_ARGS = -c # use -cm for debugging; -c otherwise
@@ -34,7 +36,7 @@ doc:
 #------------------------------------------------------------
 
 # javascript of panel tests
-jspaneltests: ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js ${HEATMAP_TESTDIR}/test_heatmap.js ${CHRHEATMAP_TESTDIR}/test_chrheatmap.js ${LODHEATMAP_TESTDIR}/test_lodheatmap.js
+jspaneltests: ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js ${HEATMAP_TESTDIR}/test_heatmap.js ${CHRHEATMAP_TESTDIR}/test_chrheatmap.js ${LODHEATMAP_TESTDIR}/test_lodheatmap.js ${CROSSTAB_TESTDIR}/test_crosstab.js
 
 ${PANEL_DIR}/%/test/%.js: ${PANEL_DIR}/%/test/%.coffee
 	coffee ${COFFEE_ARGS} $^
@@ -42,7 +44,7 @@ ${PANEL_DIR}/%/test/%.js: ${PANEL_DIR}/%/test/%.coffee
 #------------------------------------------------------------
 
 # javascript of panels
-jspanels: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js ${CURVECHART_DIR}/curvechart.js ${MAPCHART_DIR}/mapchart.js ${HEATMAP_DIR}/heatmap.js ${CHRHEATMAP_DIR}/chrheatmap.js ${LODHEATMAP_DIR}/lodheatmap.js ${PANEL_DIR}/panelutil.js
+jspanels: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js ${CURVECHART_DIR}/curvechart.js ${MAPCHART_DIR}/mapchart.js ${HEATMAP_DIR}/heatmap.js ${CHRHEATMAP_DIR}/chrheatmap.js ${LODHEATMAP_DIR}/lodheatmap.js ${CROSSTAB_DIR}/crosstab.js ${PANEL_DIR}/panelutil.js
 
 ${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
 	coffee ${COFFEE_ARGS} -b $^
@@ -50,7 +52,7 @@ ${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
 #------------------------------------------------------------
 
 # test data files
-json: ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json ${HEATMAP_TESTDIR}/data.json ${CHRHEATMAP_TESTDIR}/data.json ${LODHEATMAP_TESTDIR}/data.json
+json: ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json ${HEATMAP_TESTDIR}/data.json ${CHRHEATMAP_TESTDIR}/data.json ${LODHEATMAP_TESTDIR}/data.json ${CROSSTAB_TESTDIR}/data.json
 
 ${PANEL_DIR}/%/test/data.json: ${PANEL_DIR}/%/test/create_test_data.R
 	cd $(@D);R CMD BATCH --no-save $(<F)

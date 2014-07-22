@@ -40,6 +40,13 @@ function(cross, chr)
         genoA <- geno[,chrtype=="A"]
         # replace missing values with number for last category
         genoA[is.na(genoA)] <- length(genocat$A)
+        # check for unexpected codes
+        if(any(genoA < 1 | genoA > length(genocat$A))) {
+            badmar <- apply(genoA, 2, function(a) any(a < 1 | a > length(genocat$A)))
+            badmar <- names(badmar)[badmar]
+            warning("Unexpected genotype codes for markers ", paste(badmar, collapse=" "))
+            genoA[genoA < 1 | genoA > length(genocat$A)] <- length(genocat$A)
+        }
         geno[,chrtype=="A"] <- genoA
     }
     if(any(chrtype=="X")) {
@@ -49,6 +56,13 @@ function(cross, chr)
                              cross.attr=cross.attr)
         # replace missing values with number for last category
         genoX[is.na(genoX)] <- length(genocat$X)
+        # check for unexpected codes
+        if(any(genoX < 1 | genoX > length(genocat$X))) {
+            badmar <- apply(genoX, 2, function(a) any(a < 1 | a > length(genocat$X)))
+            badmar <- names(badmar)[badmar]
+            warning("Unexpected genotype codes for markers ", paste(badmar, collapse=" "))
+            genoX[genoX < 1 | genoX > length(genocat$X)] <- length(genocat$X)
+        }
         geno[,chrtype=="X"] <- genoX
     }
     # make it a list, and convert to 0, 1, 2, ...

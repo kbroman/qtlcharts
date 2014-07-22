@@ -1,45 +1,23 @@
 ## To Do list for R/qtlcharts
 
+### Bugs
+
+- Something seems wrong with the x- and y-axis scales in iheatmap
+  (rectangles not taken into account; need to pad xlim and ylim)
+
+
 ### General things
 
 - errors in coffeescript printed to browser
   (insert before svg?)
 
-- standard ways to give axis labels
-  (draw axis labels from data?)
+- Edits to user guide; is it missing anything?
 
-- move colors etc to CSS
-
-- function to write CSS styles
-
-- write a guide to the use of chartOpts
-  (How to use the options, and what they are, and fill out the
-  comments)
-
-    ```
-    # start of chartOpts
-    option = chartOpts?.option? ? default # explanation here
-    # end of chartOpts
-    ```
-
-- write a user guide
-
-- write a developer's guide
-  - the panels: what, where, how
-  - the basic method I'm using for creating a chart
-
-  - writing coffeescript
-  - panels
-  - charts
-  - panelutil.coffee; panelutil.css
-  - D3, D3tip, colorbrewer (as distributed with D3)
-  - R code: with onefile=TRUE and with onefile=FALSE
-  - chartOpts
+- Revise developer's guide
+  - a bit more detail about how the panels and charts work?
   
 
 ### Enhancements to current charts
-
-- iplotMScanone: qualitative vs quantitative axes
 
 - iplotCorr: use heatmap and scatterplot functions
 
@@ -61,7 +39,6 @@
   - allow either brush or mouseover
 
 
-
 ### Panels
 
 - panel of inferred QTL (like a scatterplot) (for cis/trans plot)
@@ -74,23 +51,22 @@
 - dotchart with force-directed placement of dots
 
 
-
 ### Charts
 
 - Set of QTL intervals on a genetic map plot, linked to the LOD curves
 - cis/trans figure, with slider for selecting a band of LOD scores
-- Interactive 2d scan plot
+- Interactive 2d scan plot (iplotScantwo)
+- interactive rec frac plot (iplotRF)
 - iheatmapCurves: heatmap of multiple curves linked to curvechart
 - iplotCorr: also include plots with slices of the correlation matrix?
 
 
 ### Interactive versions of all R/qtl charts
 
-- panel: heatmap with chromosome breaks (for scantwo/plot.rf)
 - panel: colorscale for a heatmap (allow horiz/vert; allow scale on
   top, right, bottom, or left)
-- plot.rf
-- plot.scantwo
+- iplotRF
+- iplotScantwo
 - plot.qtl
 - comparison of two maps
 - effectscan

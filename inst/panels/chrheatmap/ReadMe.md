@@ -14,9 +14,9 @@ Add see it in action
 Here are all of the options:
 
 ```coffeescript
-mychart = chrheatmap().margin({left:60, top:40, right:40, bottom:40})          # margins
+mychart = chrheatmap().pixelPerCell(3)                                         # number of pixels per cell, both width and height
+                      .margin({left:60, top:40, right:40, bottom:40})          # margins
                       .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
-                      .pixelPerCell(3)                                         # number of pixels per cell, both width and height
                       .titlepos(20)                                            # spacing for panel title
                       .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
                       .colors(["slateblue", "white", "crimson"]                # colors

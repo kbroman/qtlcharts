@@ -220,3 +220,25 @@ displayError = (message) ->
 
 # sum values in an array
 sumArray = (vec) -> (vec.reduce (a,b) -> a+b)
+
+# calculate cross-tabulation
+calc_crosstab = (data) ->
+    nrow = data.ycat.length
+    ncol = data.xcat.length
+
+    result = ((0 for col in [1..ncol]) for row in [1..nrow]) # matrix of 0's
+
+    # count things up
+    for i of data.x
+        result[data.y[i]][data.x[i]] += 1
+
+    result
+
+# rowSums: the sums for each row
+rowSums = (mat) -> (sumArray(x) for x in mat)
+
+# transpose: matrix transpose
+transpose = (mat) -> ((mat[i][j] for i in [0...mat.length]) for j in [0...mat[0].length])
+
+# colSums = the sums for each column
+colSums = (mat) -> rowSums(transpose(mat))

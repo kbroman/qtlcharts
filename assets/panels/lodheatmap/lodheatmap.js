@@ -2,7 +2,7 @@
 var lodheatmap;
 
 lodheatmap = function() {
-  var axispos, cellSelect, chart, chrGap, colors, height, lod_labels, margin, nyticks, quantScale, rectcolor, rotate_ylab, title, titlepos, width, xlab, xscale, ylab, yscale, yticks, zlim, zscale, zthresh;
+  var axispos, cellSelect, chart, chrGap, colors, height, lod_labels, margin, nullcolor, nyticks, quantScale, rectcolor, rotate_ylab, title, titlepos, width, xlab, xscale, ylab, yscale, yticks, zlim, zscale, zthresh;
   width = 1200;
   height = 600;
   margin = {
@@ -19,7 +19,8 @@ lodheatmap = function() {
   };
   chrGap = 8;
   titlepos = 20;
-  rectcolor = d3.rgb(230, 230, 230);
+  rectcolor = "#e6e6e6";
+  nullcolor = "#e6e6e6";
   colors = ["slateblue", "white", "crimson"];
   title = "";
   xlab = "Chromosome";
@@ -154,7 +155,11 @@ lodheatmap = function() {
       }).attr("height", rectHeight).attr("class", function(d, i) {
         return "cell" + i;
       }).attr("fill", function(d) {
-        return zscale(d.z);
+        if (d.z != null) {
+          return zscale(d.z);
+        } else {
+          return nullcolor;
+        }
       }).attr("stroke", "none").attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
         yaxis.select("text#yaxis" + d.lodindex).attr("opacity", 1);
         d3.select(this).attr("stroke", "black");
@@ -215,6 +220,13 @@ lodheatmap = function() {
       return rectcolor;
     }
     rectcolor = value;
+    return chart;
+  };
+  chart.nullcolor = function(value) {
+    if (!arguments.length) {
+      return nullcolor;
+    }
+    nullcolor = value;
     return chart;
   };
   chart.colors = function(value) {

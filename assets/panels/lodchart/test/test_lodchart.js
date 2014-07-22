@@ -29,9 +29,9 @@ d3.json("data.json", function(data) {
   }).on("mouseout", function(d, i) {
     return d3.select(this).attr("fill", function() {
       if (i % 2) {
-        return d3.rgb(200, 200, 200);
+        return "#c8c8c8";
       }
-      return d3.rgb(230, 230, 230);
+      return "#e6e6e6";
     });
   });
   return mychart.markerSelect().on("click", function(d) {

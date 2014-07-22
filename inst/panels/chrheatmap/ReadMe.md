@@ -26,6 +26,7 @@ mychart = chrheatmap().pixelPerCell(3)                                         #
                       .ylab("Y")                                               # y-axis label
                       .rotate_ylab(null)                                       # rotate y-axis label
                       .zthresh(null)                                           # plot cells with z >= zthresh or <= -zthresh
+                      .oneAtTop(false)                                         # whether chromosome 1 should be at top (and left) vs bottom (and left)
                       .hover(true)                                             # whether to include mouseover/mouseout with default info
 ```
 

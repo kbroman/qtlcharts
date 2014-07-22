@@ -1,4 +1,4 @@
-### Reusable heatmap panel, broken into chromosomes
+### chrheatmap (Reusable heatmap panel, broken into chromosomes)
 
 A reusable chart for making a heat map image with each dimension
 broken into chromosomes,

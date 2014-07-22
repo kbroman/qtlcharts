@@ -2,7 +2,7 @@
 var chrheatmap;
 
 chrheatmap = function() {
-  var axispos, bordercolor, cellSelect, chart, chrGap, colors, hover, margin, oneAtTop, pixelPerCell, rectcolor, rotate_ylab, title, titlepos, xlab, ylab, zlim, zscale, zthresh;
+  var axispos, bordercolor, cellSelect, chart, chrGap, colors, hover, margin, nullcolor, oneAtTop, pixelPerCell, rectcolor, rotate_ylab, title, titlepos, xlab, ylab, zlim, zscale, zthresh;
   pixelPerCell = 3;
   chrGap = 4;
   margin = {
@@ -19,6 +19,7 @@ chrheatmap = function() {
   };
   titlepos = 20;
   rectcolor = d3.rgb(230, 230, 230);
+  nullcolor = d3.rgb(230, 230, 230);
   bordercolor = "black";
   colors = ["slateblue", "white", "crimson"];
   title = "";
@@ -208,7 +209,11 @@ chrheatmap = function() {
       }).attr("width", pixelPerCell).attr("height", pixelPerCell).attr("class", function(d, i) {
         return "cell" + i;
       }).attr("fill", function(d) {
-        return zscale(d.z);
+        if (d.z != null) {
+          return zscale(d.z);
+        } else {
+          return nullcolor;
+        }
       }).attr("stroke", "none").attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
         d3.select(this).attr("stroke", "black");
         return celltip.show(d);
@@ -259,6 +264,13 @@ chrheatmap = function() {
       return rectcolor;
     }
     rectcolor = value;
+    return chart;
+  };
+  chart.nullcolor = function(value) {
+    if (!arguments.length) {
+      return nullcolor;
+    }
+    nullcolor = value;
     return chart;
   };
   chart.bordercolor = function(value) {

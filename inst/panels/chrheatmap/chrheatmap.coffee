@@ -7,6 +7,7 @@ chrheatmap = () ->
     axispos = {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
     titlepos = 20
     rectcolor = d3.rgb(230, 230, 230)
+    nullcolor = d3.rgb(230, 230, 230)
     bordercolor = "black"
     colors = ["slateblue", "white", "crimson"]
     title = ""
@@ -184,7 +185,7 @@ chrheatmap = () ->
                      .attr("width", pixelPerCell)
                      .attr("height", pixelPerCell)
                      .attr("class", (d,i) -> "cell#{i}")
-                     .attr("fill", (d) -> zscale(d.z))
+                     .attr("fill", (d) -> if d.z? then zscale(d.z) else nullcolor)
                      .attr("stroke", "none")
                      .attr("stroke-width", "1")
                      .on("mouseover.paneltip", (d) ->
@@ -233,6 +234,11 @@ chrheatmap = () ->
     chart.rectcolor = (value) ->
                       return rectcolor if !arguments.length
                       rectcolor = value
+                      chart
+
+    chart.nullcolor = (value) ->
+                      return nullcolor if !arguments.length
+                      nullcolor = value
                       chart
 
     chart.bordercolor = (value) ->

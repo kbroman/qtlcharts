@@ -15,6 +15,7 @@ It is built with [D3](http://d3js.org), using the following reusable components:
 - [mapchart](inst/panels/mapchart): genetic marker map panel
 - [heatmap](inst/panels/heatmap): heat map panel
 - [lodheatmap](inst/panels/lodheatmap): panel for heat map of LOD curves
+- [chrheatmap](inst/panels/chrheatmap): heat map panel broken into chromosomes
 
 For example charts, see the [R/qtlcharts website](http://kbroman.org/qtlcharts).
 

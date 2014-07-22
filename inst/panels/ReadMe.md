@@ -29,6 +29,9 @@ This directory contains a set of reusable panels for
 - [lodheatmap](inst/panels/lodheatmap): panel for heat map of LOD curves
   (uses [d3.tip](http://github.com/Caged/d3-tip))
   \[[Example](http://kbroman.org/qtlcharts/assets/panels/lodheatmap/test)\]
+- [chrheatmap](inst/panels/chrheatmap): heat map panel broken into chromosomes
+  (uses [d3.tip](http://github.com/Caged/d3-tip))
+  \[[Example](http://kbroman.org/qtlcharts/assets/panels/chrheatmap/test)\]
 
 Further utility functions are in [panelutil.coffee](panelutil.coffee).
 

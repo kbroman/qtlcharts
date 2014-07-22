@@ -2,7 +2,8 @@
 
 crosstab = () ->
     cellHeight = 30
-    cellWidth = 100
+    cellWidth = 80
+    cellPad = 20
     margin = {left:60, top:40, right:40, bottom: 40}
     axispos = {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
     titlepos = 20
@@ -25,20 +26,16 @@ crosstab = () ->
                 console.log("data.y should be in range 0-#{nrow-1}")
 
             tab = calc_crosstab(data)
-            xmarg = colSums(tab)
-            ymarg = rowSums(tab)
-            tot = sumArray(xmarg)
-    
-            console.log("tab: #{tab}")
-            console.log("tab.length: #{tab.length}")
-            console.log("tab[0].length: #{tab[0].length}")
-            console.log("xmarg: #{xmarg}")
-            console.log("ymarg: #{ymarg}")
-            console.log("tot: #{tot}")
+
+            # turn it into a vector of cells
+            cells = []
+            for i in [0..nrow]
+                for j in [0..ncol]
+                    cells.push({value:tab[i][j], row:i, col:j})
 
             # svg width and height
-            width = margin.left + margin.right + ncol*cellWidth
-            height = margin.top + margin.bottom + nrow*cellHeight
+            width = margin.left + margin.right + (ncol+1)*cellWidth
+            height = margin.top + margin.bottom + (nrow+1)*cellHeight
 
             # Select the svg element, if it exists.
             svg = d3.select(this).selectAll("svg").data([data])
@@ -56,12 +53,35 @@ crosstab = () ->
             g.append("rect")
              .attr("x", margin.left)
              .attr("y", margin.top)
-             .attr("height", height)
-             .attr("width", width)
+             .attr("height", height-margin.bottom-margin.top)
+             .attr("width", width-margin.left-margin.right)
              .attr("fill", "#e6e6e6")
              .attr("stroke", null)
              .attr("stroke-width", "0")
     
+            g.append("g").attr("id", "value_rect")
+             .selectAll("empty")
+             .data(cells)
+             .enter()
+             .append("rect")
+             .attr("x", (d) -> d.col*cellWidth + margin.left)
+             .attr("y", (d) -> d.row*cellHeight + margin.top)
+             .attr("width", cellWidth)
+             .attr("height", cellHeight)
+             .attr("fill", "none")
+             .attr("stroke", "blue")
+
+            g.append("g").attr("id", "values")
+             .selectAll("empty")
+             .data(cells)
+             .enter()
+             .append("text")
+             .attr("x", (d) -> (d.col+1)*cellWidth - cellPad + margin.left)
+             .attr("y", (d) -> (d.row+1)*cellHeight - cellHeight/2 + margin.top)
+             .text((d) -> d.value)
+             .attr("class", "crosstab")
+             .attr("font-size", d3.min([cellHeight, cellWidth-cellPad*2])*0.8)
+
     ## configuration parameters
     chart.cellHeight = (value) ->
                       return cellHeight if !arguments.length

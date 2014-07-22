@@ -2,9 +2,10 @@
 var crosstab;
 
 crosstab = function() {
-  var axispos, cellHeight, cellWidth, chart, margin, title, titlepos, xlab, ylab;
+  var axispos, cellHeight, cellPad, cellWidth, chart, margin, title, titlepos, xlab, ylab;
   cellHeight = 30;
-  cellWidth = 100;
+  cellWidth = 80;
+  cellPad = 20;
   margin = {
     left: 60,
     top: 40,
@@ -23,7 +24,7 @@ crosstab = function() {
   ylab = "";
   chart = function(selection) {
     return selection.each(function(data) {
-      var g, gEnter, height, n, ncol, nrow, svg, tab, tot, width, xmarg, ymarg;
+      var cells, g, gEnter, height, i, j, n, ncol, nrow, svg, tab, width, _i, _j;
       n = data.x.length;
       if (data.y.length !== n) {
         console.log("data.x.length != data.y.length");
@@ -37,22 +38,35 @@ crosstab = function() {
         console.log("data.y should be in range 0-" + (nrow - 1));
       }
       tab = calc_crosstab(data);
-      xmarg = colSums(tab);
-      ymarg = rowSums(tab);
-      tot = sumArray(xmarg);
-      console.log("tab: " + tab);
-      console.log("tab.length: " + tab.length);
-      console.log("tab[0].length: " + tab[0].length);
-      console.log("xmarg: " + xmarg);
-      console.log("ymarg: " + ymarg);
-      console.log("tot: " + tot);
-      width = margin.left + margin.right + ncol * cellWidth;
-      height = margin.top + margin.bottom + nrow * cellHeight;
+      cells = [];
+      for (i = _i = 0; 0 <= nrow ? _i <= nrow : _i >= nrow; i = 0 <= nrow ? ++_i : --_i) {
+        for (j = _j = 0; 0 <= ncol ? _j <= ncol : _j >= ncol; j = 0 <= ncol ? ++_j : --_j) {
+          cells.push({
+            value: tab[i][j],
+            row: i,
+            col: j
+          });
+        }
+      }
+      width = margin.left + margin.right + (ncol + 1) * cellWidth;
+      height = margin.top + margin.bottom + (nrow + 1) * cellHeight;
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
       g = svg.select("g");
-      return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", "#e6e6e6").attr("stroke", null).attr("stroke-width", "0");
+      g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height - margin.bottom - margin.top).attr("width", width - margin.left - margin.right).attr("fill", "#e6e6e6").attr("stroke", null).attr("stroke-width", "0");
+      g.append("g").attr("id", "value_rect").selectAll("empty").data(cells).enter().append("rect").attr("x", function(d) {
+        return d.col * cellWidth + margin.left;
+      }).attr("y", function(d) {
+        return d.row * cellHeight + margin.top;
+      }).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "none").attr("stroke", "blue");
+      return g.append("g").attr("id", "values").selectAll("empty").data(cells).enter().append("text").attr("x", function(d) {
+        return (d.col + 1) * cellWidth - cellPad + margin.left;
+      }).attr("y", function(d) {
+        return (d.row + 1) * cellHeight - cellHeight / 2 + margin.top;
+      }).text(function(d) {
+        return d.value;
+      }).attr("class", "crosstab").attr("font-size", d3.min([cellHeight, cellWidth - cellPad * 2]) * 0.8);
     });
   };
   chart.cellHeight = function(value) {

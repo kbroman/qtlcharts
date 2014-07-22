@@ -24,7 +24,7 @@ mychart = cichart().width(800)                                              # in
                    .nyticks(5)                                              # no. y-axis ticks
                    .xticks(null)                                            # locations of x-axis ticks
                    .yticks(null)                                            # locations of y-axis ticks
-                   .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
+                   .rectcolor("#e6e6e6")                                    # background rectangle color
                    .strokecolor(null)                                       # color(s) for curves
                    .strokecolorhilit(null)                                  # color(s) for curves when highlighted
                    .strokewidth(2)                                          # line width for curves

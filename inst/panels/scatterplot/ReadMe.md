@@ -27,7 +27,7 @@ mychart = scatterplot().xvar("x")                                               
                        .nyticks(5)                                              # no. y-axis ticks
                        .xticks(null)                                            # locations of x-axis ticks
                        .yticks(null)                                            # locations of y-axis ticks
-                       .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
+                       .rectcolor("#e6e6e6")                                    # background rectangle color
                        .pointcolor(null)                                        # color for points
                        .pointstroke("black")                                    # stroke color for points
                        .pointsize(3)                                            # radius of points at markers

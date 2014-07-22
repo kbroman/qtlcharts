@@ -18,8 +18,8 @@ mychart = chrheatmap().pixelPerCell(3)                                         #
                       .margin({left:60, top:40, right:40, bottom:40})          # margins
                       .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})     # spacing for axis titles and labels
                       .titlepos(20)                                            # spacing for panel title
-                      .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
-                      .nullcolor(d3.rgb(230,230,230))                          # color for pixels with null values
+                      .rectcolor("#e6e6e6")                                    # background rectangle color
+                      .nullcolor("#e6e6e6")                                    # color for pixels with null values
                       .colors(["slateblue", "white", "crimson"]                # colors
                       .zlim(null)                                              # z-axis limits
                       .title("")                                               # panel title

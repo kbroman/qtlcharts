@@ -24,8 +24,8 @@ d3.json "data.json", (data) ->
                                 d3.select(this).attr("fill", "#E9CFEC")
            .on "mouseout", (d,i) ->
                                 d3.select(this).attr("fill", ->
-                                     return d3.rgb(200,200,200) if i % 2
-                                     d3.rgb(230,230,230))
+                                     return "#c8c8c8" if i % 2
+                                     "#e6e6e6")
 
     # animate points at markers on click
     mychart.markerSelect()

@@ -22,8 +22,8 @@ mychart = lodchart().lodvarname("lod")                                       # v
                     .nyticks(5)                                              # no. y-axis ticks
                     .yticks(null)                                            # locations of y-axis ticks
                     .chrGap(8)                                               # gap between chromosomes in pixels
-                    .darkrect(d3.rgb(200,200,200))                           # even chr rectangle color
-                    .lightrect(d3.rgb(230,230,230))                          # odd chr rectangle color
+                    .darkrect("#c8c8c8")                                     # even chr rectangle color
+                    .lightrect("#e6e6e6")                                    # odd chr rectangle color
                     .linecolor("darkslateblue")                              # color for LOD curves
                     .linewidth(2)                                            # width of LOD curves
                     .pointcolor("#E9CFEC")                                   # color of points a markers

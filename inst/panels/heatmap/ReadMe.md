@@ -24,7 +24,7 @@ mychart = heatmap().width(400)                                              # in
                    .ylim(null)                                              # y-axis limits
                    .nyticks(5)                                              # no. y-axis ticks
                    .yticks(null)                                            # locations of y-axis ticks
-                   .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
+                   .rectcolor("#e6e6e6")                                    # background rectangle color
                    .colors(["slateblue", "white", "crimson"]                # colors
                    .zlim(null)                                              # z-axis limits
                    .title("")                                               # panel title

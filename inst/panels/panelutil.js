@@ -162,7 +162,7 @@ selectGroupColors = function(ngroup, palette) {
     return d3.scale.category20().range().slice(0, ngroup);
   } else {
     if (ngroup === 1) {
-      return [d3.rgb(190, 190, 190)];
+      return ["#bebebe"];
     }
     if (ngroup === 2) {
       return ["lightpink", "lightblue"];

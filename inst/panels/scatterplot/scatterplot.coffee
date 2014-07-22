@@ -14,7 +14,7 @@ scatterplot = () ->
     xticks = null
     nyticks = 5
     yticks = null
-    rectcolor = d3.rgb(230, 230, 230)
+    rectcolor = "#e6e6e6"
     pointcolor = null
     pointstroke = "black"
     pointsize = 3 # default = no visible points at markers

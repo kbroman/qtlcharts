@@ -104,7 +104,7 @@ selectGroupColors = (ngroup, palette) ->
         return colorbrewer.Set1[ngroup] if ngroup <= 9
         return d3.scale.category20().range()[0...ngroup]
     else
-        return [d3.rgb(190, 190, 190)] if ngroup == 1
+        return ["#bebebe"] if ngroup == 1
         return ["lightpink", "lightblue"] if ngroup == 2
         return colorbrewer.Pastel1[ngroup] if ngroup <= 9
         # below is rough attempt to make _big_ pastel palette

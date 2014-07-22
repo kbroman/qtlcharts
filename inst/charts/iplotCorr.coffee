@@ -122,7 +122,7 @@ iplotCorr = (data, chartOpts) ->
     scatcolors = expand2vector(scatcolors) # make sure it's an array (or null)
     if !(scatcolors?) or scatcolors.length < nGroup
         if nGroup == 1
-            scatcolors = [ d3.rgb(150, 150, 150) ]
+            scatcolors = [ "#969696" ]
         else if nGroup <= 3
             scatcolors = ["crimson", "green", "darkslateblue"]
         else 

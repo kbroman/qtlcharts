@@ -24,9 +24,9 @@ mychart = cichart().xvar("x")                                               # va
                    .ylim(null)                                              # y-axis limits
                    .nyticks(5)                                              # no. y-axis ticks
                    .yticks(null)                                            # locations of y-axis ticks
-                   .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
+                   .rectcolor("#e6e6e6")                                    # background rectangle color
                    .segcolor("slateblue")                                   # color for horizontal line segments
-                   .vertsegcolor(d3.rgb(100,100,100))                       # color for vertical line segments
+                   .vertsegcolor("slateblue")                               # color for vertical line segments
                    .segstrokewidth("2")                                     # stroke width for horiz line segs
                    .title("")                                               # panel title
                    .xlab("Group")                                           # x-axis label

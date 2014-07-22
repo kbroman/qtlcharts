@@ -18,8 +18,8 @@ chrheatmap = function() {
     ylabel: 5
   };
   titlepos = 20;
-  rectcolor = d3.rgb(230, 230, 230);
-  nullcolor = d3.rgb(230, 230, 230);
+  rectcolor = "#e6e6e6";
+  nullcolor = "#e6e6e6";
   bordercolor = "black";
   colors = ["slateblue", "white", "crimson"];
   title = "";

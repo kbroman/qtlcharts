@@ -22,7 +22,7 @@ mychart = mapchart().width(400)                                              # i
                     .nyticks(5)                                              # no. y-axis ticks
                     .yticks(null)                                            # locations of y-axis ticks
                     .tickwidth(null)                                         # width of tick markers at markers, in pixels
-                    .rectcolor(d3.rgb(230,230,230))                          # background rectangle color
+                    .rectcolor("#e6e6e6")                                    # background rectangle color
                     .linecolor("slateblue")                                  # color for lines
                     .linecolorhilit("Orchid)                                 # color for lines when highlighted
                     .linewidth(3)                                            # line width

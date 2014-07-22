@@ -226,11 +226,26 @@ calc_crosstab = (data) ->
     nrow = data.ycat.length
     ncol = data.xcat.length
 
-    result = ((0 for col in [1..ncol]) for row in [1..nrow]) # matrix of 0's
+    result = ((0 for col in [0..ncol]) for row in [0..nrow]) # matrix of 0's
 
     # count things up
     for i of data.x
         result[data.y[i]][data.x[i]] += 1
+
+    # row and column sums
+    rs = rowSums(result)
+    cs = colSums(result)
+
+    # fill in column sums
+    for i in [0...ncol]
+        result[nrow][i] = cs[i]
+
+    # fill in row sums
+    for i in [0...nrow]
+        result[i][ncol] = rs[i]
+
+    # fill in total
+    result[nrow][ncol] = sumArray(rs)
 
     result
 

@@ -354,17 +354,17 @@ sumArray = function(vec) {
 };
 
 calc_crosstab = function(data) {
-  var col, i, ncol, nrow, result, row;
+  var col, cs, i, ncol, nrow, result, row, rs, _i, _j;
   nrow = data.ycat.length;
   ncol = data.xcat.length;
   result = (function() {
     var _i, _results;
     _results = [];
-    for (row = _i = 1; 1 <= nrow ? _i <= nrow : _i >= nrow; row = 1 <= nrow ? ++_i : --_i) {
+    for (row = _i = 0; 0 <= nrow ? _i <= nrow : _i >= nrow; row = 0 <= nrow ? ++_i : --_i) {
       _results.push((function() {
         var _j, _results1;
         _results1 = [];
-        for (col = _j = 1; 1 <= ncol ? _j <= ncol : _j >= ncol; col = 1 <= ncol ? ++_j : --_j) {
+        for (col = _j = 0; 0 <= ncol ? _j <= ncol : _j >= ncol; col = 0 <= ncol ? ++_j : --_j) {
           _results1.push(0);
         }
         return _results1;
@@ -375,6 +375,15 @@ calc_crosstab = function(data) {
   for (i in data.x) {
     result[data.y[i]][data.x[i]] += 1;
   }
+  rs = rowSums(result);
+  cs = colSums(result);
+  for (i = _i = 0; 0 <= ncol ? _i < ncol : _i > ncol; i = 0 <= ncol ? ++_i : --_i) {
+    result[nrow][i] = cs[i];
+  }
+  for (i = _j = 0; 0 <= nrow ? _j < nrow : _j > nrow; i = 0 <= nrow ? ++_j : --_j) {
+    result[i][ncol] = rs[i];
+  }
+  result[nrow][ncol] = sumArray(rs);
   return result;
 };
 

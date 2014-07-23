@@ -2,7 +2,7 @@
 var crosstab;
 
 crosstab = function() {
-  var axispos, cellHeight, cellPad, cellWidth, chart, margin, title, titlepos, xlab, ylab;
+  var axispos, bordercolor, cellHeight, cellPad, cellWidth, chart, hilitcolor, margin, rectcolor, title, titlepos, xlab, ylab;
   cellHeight = 30;
   cellWidth = 80;
   cellPad = 20;
@@ -22,9 +22,12 @@ crosstab = function() {
   title = "";
   xlab = "";
   ylab = "";
+  rectcolor = "#e6e6e6";
+  hilitcolor = "#e9cfec";
+  bordercolor = "black";
   chart = function(selection) {
     return selection.each(function(data) {
-      var cells, g, gEnter, height, i, j, n, ncol, nrow, svg, tab, width, _i, _j;
+      var cells, g, gEnter, height, i, j, n, ncol, nrow, rect, svg, tab, values, width, xscale, yscale, _i, _j, _k, _l, _ref, _ref1, _results, _results1;
       n = data.x.length;
       if (data.y.length !== n) {
         console.log("data.x.length != data.y.length");
@@ -48,25 +51,48 @@ crosstab = function() {
           });
         }
       }
-      width = margin.left + margin.right + (ncol + 1) * cellWidth;
-      height = margin.top + margin.bottom + (nrow + 1) * cellHeight;
+      width = margin.left + margin.right + (ncol + 2) * cellWidth;
+      height = margin.top + margin.bottom + (nrow + 2) * cellHeight;
+      xscale = d3.scale.ordinal().domain((function() {
+        _results = [];
+        for (var _k = 0, _ref = ncol + 1; 0 <= _ref ? _k <= _ref : _k >= _ref; 0 <= _ref ? _k++ : _k--){ _results.push(_k); }
+        return _results;
+      }).apply(this)).rangeBands([margin.left, width - margin.right], 0, 0);
+      yscale = d3.scale.ordinal().domain((function() {
+        _results1 = [];
+        for (var _l = 0, _ref1 = nrow + 1; 0 <= _ref1 ? _l <= _ref1 : _l >= _ref1; 0 <= _ref1 ? _l++ : _l--){ _results1.push(_l); }
+        return _results1;
+      }).apply(this)).rangeBands([margin.top, height - margin.bottom], 0, 0);
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
       g = svg.select("g");
-      g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height - margin.bottom - margin.top).attr("width", width - margin.left - margin.right).attr("fill", "#e6e6e6").attr("stroke", null).attr("stroke-width", "0");
-      g.append("g").attr("id", "value_rect").selectAll("empty").data(cells).enter().append("rect").attr("x", function(d) {
-        return d.col * cellWidth + margin.left;
+      rect = g.append("g").attr("id", "value_rect");
+      rect.selectAll("empty").data(cells).enter().append("rect").attr("x", function(d) {
+        return xscale(d.col + 1);
       }).attr("y", function(d) {
-        return d.row * cellHeight + margin.top;
-      }).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "none").attr("stroke", "blue");
-      return g.append("g").attr("id", "values").selectAll("empty").data(cells).enter().append("text").attr("x", function(d) {
-        return (d.col + 1) * cellWidth - cellPad + margin.left;
+        return yscale(d.row + 1);
+      }).attr("width", cellWidth).attr("height", cellHeight).attr("fill", function(d) {
+        if (d.col < ncol && d.row < nrow) {
+          return rectcolor;
+        } else {
+          return "none";
+        }
+      }).attr("stroke", function(d) {
+        if (d.col < ncol && d.row < nrow) {
+          return rectcolor;
+        } else {
+          return "none";
+        }
+      }).attr("stroke-width", 0);
+      values = g.append("g").attr("id", "values");
+      return values.selectAll("empty").data(cells).enter().append("text").attr("x", function(d) {
+        return xscale(d.col + 1) + cellWidth - cellPad;
       }).attr("y", function(d) {
-        return (d.row + 1) * cellHeight - cellHeight / 2 + margin.top;
+        return yscale(d.row + 1) + cellHeight / 2;
       }).text(function(d) {
         return d.value;
-      }).attr("class", "crosstab").attr("font-size", d3.min([cellHeight, cellWidth - cellPad * 2]) * 0.8);
+      }).attr("class", "crosstab").attr("font-size", cellHeight * 0.8);
     });
   };
   chart.cellHeight = function(value) {

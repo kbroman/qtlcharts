@@ -10,6 +10,9 @@ crosstab = () ->
     title = ""
     xlab = ""
     ylab = ""
+    rectcolor = "#e6e6e6"
+    hilitcolor = "#e9cfec"
+    bordercolor = "black"
   
     ## the main function
     chart = (selection) ->
@@ -34,8 +37,15 @@ crosstab = () ->
                     cells.push({value:tab[i][j], row:i, col:j})
 
             # svg width and height
-            width = margin.left + margin.right + (ncol+1)*cellWidth
-            height = margin.top + margin.bottom + (nrow+1)*cellHeight
+            width = margin.left + margin.right + (ncol+2)*cellWidth
+            height = margin.top + margin.bottom + (nrow+2)*cellHeight
+
+            xscale = d3.scale.ordinal()
+                             .domain([0..(ncol+1)])
+                             .rangeBands([margin.left, width-margin.right], 0, 0)
+            yscale = d3.scale.ordinal()
+                             .domain([0..(nrow+1)])
+                             .rangeBands([margin.top, height-margin.bottom], 0, 0)
 
             # Select the svg element, if it exists.
             svg = d3.select(this).selectAll("svg").data([data])
@@ -49,38 +59,29 @@ crosstab = () ->
     
             g = svg.select("g")
     
-            # box
-            g.append("rect")
-             .attr("x", margin.left)
-             .attr("y", margin.top)
-             .attr("height", height-margin.bottom-margin.top)
-             .attr("width", width-margin.left-margin.right)
-             .attr("fill", "#e6e6e6")
-             .attr("stroke", null)
-             .attr("stroke-width", "0")
-    
-            g.append("g").attr("id", "value_rect")
-             .selectAll("empty")
-             .data(cells)
-             .enter()
-             .append("rect")
-             .attr("x", (d) -> d.col*cellWidth + margin.left)
-             .attr("y", (d) -> d.row*cellHeight + margin.top)
-             .attr("width", cellWidth)
-             .attr("height", cellHeight)
-             .attr("fill", "none")
-             .attr("stroke", "blue")
+            rect = g.append("g").attr("id", "value_rect")
+            rect.selectAll("empty")
+                .data(cells)
+                .enter()
+                .append("rect")
+                .attr("x", (d) -> xscale(d.col+1))
+                .attr("y", (d) -> yscale(d.row+1))
+                .attr("width", cellWidth)
+                .attr("height", cellHeight)
+                .attr("fill", (d) -> if d.col < ncol and d.row < nrow then rectcolor else "none")
+                .attr("stroke", (d) -> if d.col < ncol and d.row < nrow then rectcolor else "none")
+                .attr("stroke-width", 0)
 
-            g.append("g").attr("id", "values")
-             .selectAll("empty")
-             .data(cells)
-             .enter()
-             .append("text")
-             .attr("x", (d) -> (d.col+1)*cellWidth - cellPad + margin.left)
-             .attr("y", (d) -> (d.row+1)*cellHeight - cellHeight/2 + margin.top)
-             .text((d) -> d.value)
-             .attr("class", "crosstab")
-             .attr("font-size", d3.min([cellHeight, cellWidth-cellPad*2])*0.8)
+            values = g.append("g").attr("id", "values")
+            values.selectAll("empty")
+                  .data(cells)
+                  .enter()
+                  .append("text")
+                  .attr("x", (d) -> xscale(d.col+1) + cellWidth - cellPad)
+                  .attr("y", (d) -> yscale(d.row+1) + cellHeight/2)
+                  .text((d) -> d.value)
+                  .attr("class", "crosstab")
+                  .attr("font-size", cellHeight*0.8)
 
     ## configuration parameters
     chart.cellHeight = (value) ->

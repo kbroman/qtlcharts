@@ -73,22 +73,7 @@ crosstab = () ->
                 .attr("fill", (d) -> if d.col < ncol-1 and d.row < nrow-1 then rectcolor else "none")
                 .attr("stroke", (d) -> if d.col < ncol-1 and d.row < nrow-1 then rectcolor else "none")
                 .attr("stroke-width", 0)
-            # border around central part
-            rect.append("rect")
-                .attr("x", xscale(1))
-                .attr("y", yscale(1))
-                .attr("width", cellWidth*ncol)
-                .attr("height", cellHeight*nrow)
-                .attr("fill", "none")
-                .attr("stroke", bordercolor)
-            # border around overall total
-            rect.append("rect")
-                .attr("x", xscale(ncol+1))
-                .attr("y", yscale(nrow+1))
-                .attr("width", cellWidth)
-                .attr("height", cellHeight)
-                .attr("fill", "none")
-                .attr("stroke", bordercolor)
+                .style("pointer-events", "none")
 
             # text for the body of the table
             values = g.append("g").attr("id", "values")
@@ -101,6 +86,7 @@ crosstab = () ->
                   .text((d) -> d.value)
                   .attr("class", "crosstab")
                   .style("font-size", cellHeight*0.8)
+                  .style("pointer-events", "none")
 
             # rectangles for the column headings
             colrect = g.append("g").attr("id", "colrect")
@@ -112,10 +98,12 @@ crosstab = () ->
                    .attr("y", yscale(0))
                    .attr("width", cellWidth)
                    .attr("height", cellHeight)
-                   .attr("fill", "none")
-                   .attr("stroke", "none")
-                   .on("mouseover", () -> d3.select(this).attr("fill", hilitcolor))
-                   .on("mouseout", () -> d3.select(this).attr("fill", "none"))
+                   .attr("fill", "white")
+                   .attr("stroke", "white")
+                   .on("mouseover", () ->
+                        d3.select(this).attr("fill", hilitcolor).attr("stroke", hilitcolor))
+                   .on("mouseout", () ->
+                        d3.select(this).attr("fill", "white").attr("stroke", "white"))
 
             # labels in the column headings
             collab = g.append("g").attr("id", "collab")
@@ -128,6 +116,59 @@ crosstab = () ->
                   .text((d) -> d)
                   .attr("class", "crosstab")
                   .style("font-size", cellHeight*0.8)
+                  .style("pointer-events", "none")
+
+            # rectangles for the row headings
+            rowrect = g.append("g").attr("id", "rowrect")
+            rowrect.selectAll("empty")
+                   .data(data.ycat)
+                   .enter()
+                   .append("rect")
+                   .attr("x", xscale(0))
+                   .attr("y", (d,i) -> yscale(i+1))
+                   .attr("width", cellWidth)
+                   .attr("height", cellHeight)
+                   .attr("fill", "white")
+                   .attr("stroke", "white")
+                   .on("mouseover", () ->
+                        d3.select(this).attr("fill", hilitcolor).attr("stroke", hilitcolor))
+                   .on("mouseout", () ->
+                        d3.select(this).attr("fill", "white").attr("stroke", "white"))
+
+            # labels in the column headings
+            rowlab = g.append("g").attr("id", "rowlab")
+            rowlab.selectAll("empty")
+                  .data(data.ycat)
+                  .enter()
+                  .append("text")
+                  .attr("x", xscale(0) + cellWidth - cellPad)
+                  .attr("y", (d,i) -> yscale(i+1) + cellHeight/2)
+                  .text((d) -> d)
+                  .attr("class", "crosstab")
+                  .style("font-size", cellHeight*0.8)
+                  .style("pointer-events", "none")
+
+            # border around central part
+            borders = g.append("g").attr("id", "borders")
+            borders.append("rect")
+                   .attr("x", xscale(1))
+                   .attr("y", yscale(1))
+                   .attr("width", cellWidth*ncol)
+                   .attr("height", cellHeight*nrow)
+                   .attr("fill", "none")
+                   .attr("stroke", bordercolor)
+                   .attr("stroke-width", 2)
+                   .style("pointer-events", "none")
+            # border around overall total
+            borders.append("rect")
+                   .attr("x", xscale(ncol+1))
+                   .attr("y", yscale(nrow+1))
+                   .attr("width", cellWidth)
+                   .attr("height", cellHeight)
+                   .attr("fill", "none")
+                   .attr("stroke", bordercolor)
+                   .attr("stroke-width", 2)
+                   .style("pointer-events", "none")
 
     ## configuration parameters
     chart.cellHeight = (value) ->

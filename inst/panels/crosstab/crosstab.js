@@ -27,7 +27,7 @@ crosstab = function() {
   bordercolor = "black";
   chart = function(selection) {
     return selection.each(function(data) {
-      var cells, collab, colrect, g, gEnter, height, i, j, n, ncol, nrow, rect, svg, tab, values, width, xscale, yscale, _i, _j, _k, _l, _ref, _ref1, _results, _results1;
+      var borders, cells, collab, colrect, g, gEnter, height, i, j, n, ncol, nrow, rect, rowlab, rowrect, svg, tab, values, width, xscale, yscale, _i, _j, _k, _l, _ref, _ref1, _results, _results1;
       n = data.x.length;
       if (data.y.length !== n) {
         console.log("data.x.length != data.y.length");
@@ -86,9 +86,7 @@ crosstab = function() {
         } else {
           return "none";
         }
-      }).attr("stroke-width", 0);
-      rect.append("rect").attr("x", xscale(1)).attr("y", yscale(1)).attr("width", cellWidth * ncol).attr("height", cellHeight * nrow).attr("fill", "none").attr("stroke", bordercolor);
-      rect.append("rect").attr("x", xscale(ncol + 1)).attr("y", yscale(nrow + 1)).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "none").attr("stroke", bordercolor);
+      }).attr("stroke-width", 0).style("pointer-events", "none");
       values = g.append("g").attr("id", "values");
       values.selectAll("empty").data(cells).enter().append("text").attr("x", function(d) {
         return xscale(d.col + 1) + cellWidth - cellPad;
@@ -96,21 +94,38 @@ crosstab = function() {
         return yscale(d.row + 1) + cellHeight / 2;
       }).text(function(d) {
         return d.value;
-      }).attr("class", "crosstab").style("font-size", cellHeight * 0.8);
+      }).attr("class", "crosstab").style("font-size", cellHeight * 0.8).style("pointer-events", "none");
       colrect = g.append("g").attr("id", "colrect");
       colrect.selectAll("empty").data(data.xcat).enter().append("rect").attr("x", function(d, i) {
         return xscale(i + 1);
-      }).attr("y", yscale(0)).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "none").attr("stroke", "none").on("mouseover", function() {
-        return d3.select(this).attr("fill", hilitcolor);
+      }).attr("y", yscale(0)).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "white").attr("stroke", "white").on("mouseover", function() {
+        return d3.select(this).attr("fill", hilitcolor).attr("stroke", hilitcolor);
       }).on("mouseout", function() {
-        return d3.select(this).attr("fill", "none");
+        return d3.select(this).attr("fill", "white").attr("stroke", "white");
       });
       collab = g.append("g").attr("id", "collab");
-      return collab.selectAll("empty").data(data.xcat).enter().append("text").attr("x", function(d, i) {
+      collab.selectAll("empty").data(data.xcat).enter().append("text").attr("x", function(d, i) {
         return xscale(i + 1) + cellWidth - cellPad;
       }).attr("y", yscale(0) + cellHeight / 2).text(function(d) {
         return d;
-      }).attr("class", "crosstab").style("font-size", cellHeight * 0.8);
+      }).attr("class", "crosstab").style("font-size", cellHeight * 0.8).style("pointer-events", "none");
+      rowrect = g.append("g").attr("id", "rowrect");
+      rowrect.selectAll("empty").data(data.ycat).enter().append("rect").attr("x", xscale(0)).attr("y", function(d, i) {
+        return yscale(i + 1);
+      }).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "white").attr("stroke", "white").on("mouseover", function() {
+        return d3.select(this).attr("fill", hilitcolor).attr("stroke", hilitcolor);
+      }).on("mouseout", function() {
+        return d3.select(this).attr("fill", "white").attr("stroke", "white");
+      });
+      rowlab = g.append("g").attr("id", "rowlab");
+      rowlab.selectAll("empty").data(data.ycat).enter().append("text").attr("x", xscale(0) + cellWidth - cellPad).attr("y", function(d, i) {
+        return yscale(i + 1) + cellHeight / 2;
+      }).text(function(d) {
+        return d;
+      }).attr("class", "crosstab").style("font-size", cellHeight * 0.8).style("pointer-events", "none");
+      borders = g.append("g").attr("id", "borders");
+      borders.append("rect").attr("x", xscale(1)).attr("y", yscale(1)).attr("width", cellWidth * ncol).attr("height", cellHeight * nrow).attr("fill", "none").attr("stroke", bordercolor).attr("stroke-width", 2).style("pointer-events", "none");
+      return borders.append("rect").attr("x", xscale(ncol + 1)).attr("y", yscale(nrow + 1)).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "none").attr("stroke", bordercolor).attr("stroke-width", 2).style("pointer-events", "none");
     });
   };
   chart.cellHeight = function(value) {

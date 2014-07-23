@@ -96,3 +96,13 @@ div.error p {
     font-weight: bold;
     padding: 5px;
 }
+
+div.qtlcharts text.crosstab {
+    dominant-baseline: middle;
+    text-anchor: end;
+}
+
+div.qtlcharts text.crosstabtitle {
+    dominant-baseline: middle;
+    text-anchor: center;
+}

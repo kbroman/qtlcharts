@@ -27,8 +27,10 @@ mychart = crosstab().cellHeight(30)                                            #
 #### Organization of data
 
   The data should be of the form `{x: [x1, x2, ..., xn], y: [y1, y2, ..., yn],
-  xcat: [xcat1, ..., xcatp], ycat: [ycat1, ..., ycatq]}` where the x's take values in {0, 1, ..., p-1}
-  and the y's take values in {0, 1, ..., q-1}, and xcat and ycat are each vectors of character strings.
+  xcat: [xcat1, ..., xcatp], ycat: [ycat1, ..., ycatq]}` where the `x`'s take values in {0, 1, ..., p-1}
+  and the `y`'s take values in {0, 1, ..., q-1}, and `xcat` and `ycat` are each vectors of character strings.
+  We assume that the last element of each of `xcat` and `ycat`
+  corresponds to missing values.
 
   Here's an example dataset: [`data.json`](http://kbroman.org/qtlcharts/assets/panels/crosstab/test/data.json).
 

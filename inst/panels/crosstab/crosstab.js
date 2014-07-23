@@ -73,13 +73,13 @@ crosstab = function() {
       }).attr("y", function(d) {
         return yscale(d.row + 1);
       }).attr("width", cellWidth).attr("height", cellHeight).attr("fill", function(d) {
-        if (d.col < ncol && d.row < nrow) {
+        if (d.col < ncol - 1 && d.row < nrow - 1) {
           return rectcolor;
         } else {
           return "none";
         }
       }).attr("stroke", function(d) {
-        if (d.col < ncol && d.row < nrow) {
+        if (d.col < ncol - 1 && d.row < nrow - 1) {
           return rectcolor;
         } else {
           return "none";

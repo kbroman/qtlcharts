@@ -68,8 +68,8 @@ crosstab = () ->
                 .attr("y", (d) -> yscale(d.row+1))
                 .attr("width", cellWidth)
                 .attr("height", cellHeight)
-                .attr("fill", (d) -> if d.col < ncol and d.row < nrow then rectcolor else "none")
-                .attr("stroke", (d) -> if d.col < ncol and d.row < nrow then rectcolor else "none")
+                .attr("fill", (d) -> if d.col < ncol-1 and d.row < nrow-1 then rectcolor else "none")
+                .attr("stroke", (d) -> if d.col < ncol-1 and d.row < nrow-1 then rectcolor else "none")
                 .attr("stroke-width", 0)
 
             values = g.append("g").attr("id", "values")

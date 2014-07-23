@@ -216,10 +216,14 @@ chrheatmap = function() {
         }
       }).attr("stroke", "none").attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
         d3.select(this).attr("stroke", "black");
-        return celltip.show(d);
+        if (hover) {
+          return celltip.show(d);
+        }
       }).on("mouseout.paneltip", function() {
         d3.select(this).attr("stroke", "none");
-        return celltip.hide();
+        if (hover) {
+          return celltip.hide();
+        }
       });
       return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });

@@ -190,10 +190,10 @@ chrheatmap = () ->
                      .attr("stroke-width", "1")
                      .on("mouseover.paneltip", (d) ->
                                                    d3.select(this).attr("stroke", "black")
-                                                   celltip.show(d))
+                                                   celltip.show(d) if hover)
                      .on("mouseout.paneltip", () ->
                                                    d3.select(this).attr("stroke", "none")
-                                                   celltip.hide())
+                                                   celltip.hide() if hover)
 
             # box
             g.append("rect")

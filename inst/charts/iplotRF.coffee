@@ -1,8 +1,6 @@
 # iplotRF: interactive plot of pairwise recombination fractions
 # Karl W Broman
 
-Z = null
-
 iplotRF = (rf_data, geno, chartOpts) ->
 
     # chartOpts start
@@ -108,8 +106,6 @@ iplotRF = (rf_data, geno, chartOpts) ->
 
             rf_data.z[row][col] = lodlim[1] if row == col
 
-    Z = rf_data.z
-    
     mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell)
                                .chrGap(chrGap)
                                .axispos(axispos)

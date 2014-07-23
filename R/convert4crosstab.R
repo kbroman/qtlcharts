@@ -30,10 +30,10 @@ function(cross, chr)
     # names of the genotype categories; making missing values the last category
     genocat <- vector("list", 0)
     if(any(chrtype == "A"))
-        genocat$A <- c(getgenonames(crosstype, "A", cross.attr=cross.attr), "-")
+        genocat$A <- c(getgenonames(crosstype, "A", cross.attr=cross.attr), "N/A")
     if(any(chrtype == "X"))
         genocat$X <- c(getgenonames(crosstype, "X", expandX = "standard", sexpgm=sexpgm,
-                                    cross.attr=attributes(cross)), "-")
+                                    cross.attr=attributes(cross)), "N/A")
 
     geno <- pull.geno(cross)
     if(any(chrtype=="A")) {

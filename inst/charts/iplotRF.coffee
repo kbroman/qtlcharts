@@ -125,3 +125,23 @@ iplotRF = (rf_data, geno, chartOpts) ->
                    .attr("id", "chrheatmap")
                    .datum(rf_data)
                    .call(mychrheatmap)
+
+    celltip = d3.tip()
+                .attr('class', 'd3-tip')
+                .html((d) ->
+                        mari = rf_data.labels[d.i]
+                        marj = rf_data.labels[d.j]
+                        rf = if d.i > d.j then rf_data.rf[d.i][d.j] else rf_data.rf[d.j][d.i]
+                        rf = if rf >= 0.1 then d3.format(".2f")(rf) else d3.format(".3f")(rf)
+                        lod = if d.i < d.j then rf_data.rf[d.i][d.j] else rf_data.rf[d.j][d.i]
+                        return mari if d.i == d.j
+                        "(#{mari} #{marj}), LOD = #{d3.format(".1f")(lod)}, rf = #{rf}")
+                .direction('e')
+                .offset([0,10])
+    svg.call(celltip)
+    
+    cells = mychrheatmap.cellSelect()
+    cells.on("mouseover", (d) ->
+                     celltip.show(d))
+         .on("mouseout", () ->
+                     celltip.hide())

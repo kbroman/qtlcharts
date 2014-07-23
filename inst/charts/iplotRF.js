@@ -4,7 +4,7 @@ var Z, iplotRF;
 Z = null;
 
 iplotRF = function(rf_data, geno, chartOpts) {
-  var axispos, bordercolor, cellHeight, cellPad, cellWidth, chartdivid, chrGap, chrtype, col, colors, crosstab_height, crosstab_width, fontsize, g_heatmap, heatmap_height, heatmap_width, hilitcolor, lodlim, lodonly, margin, max_ngeno, mychrheatmap, nullcolor, oneAtTop, pixelPerCell, rectcolor, rflim, rfonly, rftran, row, svg, totalh, totalw, totmar, w, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, bordercolor, cellHeight, cellPad, cellWidth, cells, celltip, chartdivid, chrGap, chrtype, col, colors, crosstab_height, crosstab_width, fontsize, g_heatmap, heatmap_height, heatmap_width, hilitcolor, lodlim, lodonly, margin, max_ngeno, mychrheatmap, nullcolor, oneAtTop, pixelPerCell, rectcolor, rflim, rfonly, rftran, row, svg, totalh, totalw, totmar, w, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   pixelPerCell = (_ref = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? _ref : null;
   chrGap = (_ref1 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref1 : 2;
   cellHeight = (_ref2 = chartOpts != null ? chartOpts.cellHeight : void 0) != null ? _ref2 : 30;
@@ -139,5 +139,24 @@ iplotRF = function(rf_data, geno, chartOpts) {
   }
   Z = rf_data.z;
   mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell).chrGap(chrGap).axispos(axispos).rectcolor(rectcolor).nullcolor(nullcolor).bordercolor(bordercolor).colors(colors).zthresh(lodlim[0]).oneAtTop(oneAtTop).hover(false);
-  return g_heatmap = svg.append("g").attr("id", "chrheatmap").datum(rf_data).call(mychrheatmap);
+  g_heatmap = svg.append("g").attr("id", "chrheatmap").datum(rf_data).call(mychrheatmap);
+  celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+    var lod, mari, marj, rf;
+    mari = rf_data.labels[d.i];
+    marj = rf_data.labels[d.j];
+    rf = d.i > d.j ? rf_data.rf[d.i][d.j] : rf_data.rf[d.j][d.i];
+    rf = rf >= 0.1 ? d3.format(".2f")(rf) : d3.format(".3f")(rf);
+    lod = d.i < d.j ? rf_data.rf[d.i][d.j] : rf_data.rf[d.j][d.i];
+    if (d.i === d.j) {
+      return mari;
+    }
+    return "(" + mari + " " + marj + "), LOD = " + (d3.format(".1f")(lod)) + ", rf = " + rf;
+  }).direction('e').offset([0, 10]);
+  svg.call(celltip);
+  cells = mychrheatmap.cellSelect();
+  return cells.on("mouseover", function(d) {
+    return celltip.show(d);
+  }).on("mouseout", function() {
+    return celltip.hide();
+  });
 };

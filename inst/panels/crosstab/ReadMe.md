@@ -22,6 +22,9 @@ mychart = crosstab().cellHeight(30)                                            #
                     .title("")                                                 # panel title
                     .xlab("")                                                  # x-axis label
                     .ylab("")                                                  # y-axis label
+                    .rectcolor("#e6e6e6")                                      # color of shaded cells
+                    .hilitcolor("#e9cfec")                                     # color of highlighted cells
+                    .bordercolor("black")                                      # color of borders around main table and overall total cell
 ```
 
 #### Organization of data

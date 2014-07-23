@@ -235,5 +235,20 @@ crosstab = () ->
                       ylab = value
                       chart
 
+    chart.rectcolor = (value) ->
+                      return rectcolor if !arguments.length
+                      rectcolor = value
+                      chart
+
+    chart.hilitcolor = (value) ->
+                      return hilitcolor if !arguments.length
+                      hilitcolor = value
+                      chart
+
+    chart.bordercolor = (value) ->
+                      return bordercolor if !arguments.length
+                      bordercolor = value
+                      chart
+
     # return the chart function
     chart

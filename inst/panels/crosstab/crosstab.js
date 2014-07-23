@@ -224,5 +224,26 @@ crosstab = function() {
     ylab = value;
     return chart;
   };
+  chart.rectcolor = function(value) {
+    if (!arguments.length) {
+      return rectcolor;
+    }
+    rectcolor = value;
+    return chart;
+  };
+  chart.hilitcolor = function(value) {
+    if (!arguments.length) {
+      return hilitcolor;
+    }
+    hilitcolor = value;
+    return chart;
+  };
+  chart.bordercolor = function(value) {
+    if (!arguments.length) {
+      return bordercolor;
+    }
+    bordercolor = value;
+    return chart;
+  };
   return chart;
 };

@@ -27,7 +27,7 @@ crosstab = function() {
   bordercolor = "black";
   chart = function(selection) {
     return selection.each(function(data) {
-      var cells, g, gEnter, height, i, j, n, ncol, nrow, rect, svg, tab, values, width, xscale, yscale, _i, _j, _k, _l, _ref, _ref1, _results, _results1;
+      var cells, collab, colrect, g, gEnter, height, i, j, n, ncol, nrow, rect, svg, tab, values, width, xscale, yscale, _i, _j, _k, _l, _ref, _ref1, _results, _results1;
       n = data.x.length;
       if (data.y.length !== n) {
         console.log("data.x.length != data.y.length");
@@ -68,7 +68,9 @@ crosstab = function() {
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
       g = svg.select("g");
       rect = g.append("g").attr("id", "value_rect");
-      rect.selectAll("empty").data(cells).enter().append("rect").attr("x", function(d) {
+      rect.selectAll("empty").data(cells).enter().append("rect").attr("id", function(d) {
+        return "cell_" + d.row + "_" + d.col;
+      }).attr("x", function(d) {
         return xscale(d.col + 1);
       }).attr("y", function(d) {
         return yscale(d.row + 1);
@@ -85,14 +87,30 @@ crosstab = function() {
           return "none";
         }
       }).attr("stroke-width", 0);
+      rect.append("rect").attr("x", xscale(1)).attr("y", yscale(1)).attr("width", cellWidth * ncol).attr("height", cellHeight * nrow).attr("fill", "none").attr("stroke", bordercolor);
+      rect.append("rect").attr("x", xscale(ncol + 1)).attr("y", yscale(nrow + 1)).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "none").attr("stroke", bordercolor);
       values = g.append("g").attr("id", "values");
-      return values.selectAll("empty").data(cells).enter().append("text").attr("x", function(d) {
+      values.selectAll("empty").data(cells).enter().append("text").attr("x", function(d) {
         return xscale(d.col + 1) + cellWidth - cellPad;
       }).attr("y", function(d) {
         return yscale(d.row + 1) + cellHeight / 2;
       }).text(function(d) {
         return d.value;
-      }).attr("class", "crosstab").attr("font-size", cellHeight * 0.8);
+      }).attr("class", "crosstab").style("font-size", cellHeight * 0.8);
+      colrect = g.append("g").attr("id", "colrect");
+      colrect.selectAll("empty").data(data.xcat).enter().append("rect").attr("x", function(d, i) {
+        return xscale(i + 1);
+      }).attr("y", yscale(0)).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "none").attr("stroke", "none").on("mouseover", function() {
+        return d3.select(this).attr("fill", hilitcolor);
+      }).on("mouseout", function() {
+        return d3.select(this).attr("fill", "none");
+      });
+      collab = g.append("g").attr("id", "collab");
+      return collab.selectAll("empty").data(data.xcat).enter().append("text").attr("x", function(d, i) {
+        return xscale(i + 1) + cellWidth - cellPad;
+      }).attr("y", yscale(0) + cellHeight / 2).text(function(d) {
+        return d;
+      }).attr("class", "crosstab").style("font-size", cellHeight * 0.8);
     });
   };
   chart.cellHeight = function(value) {

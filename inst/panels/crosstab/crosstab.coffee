@@ -59,11 +59,13 @@ crosstab = () ->
     
             g = svg.select("g")
     
+            # rectangles for body of table
             rect = g.append("g").attr("id", "value_rect")
             rect.selectAll("empty")
                 .data(cells)
                 .enter()
                 .append("rect")
+                .attr("id", (d) -> "cell_#{d.row}_#{d.col}")
                 .attr("x", (d) -> xscale(d.col+1))
                 .attr("y", (d) -> yscale(d.row+1))
                 .attr("width", cellWidth)
@@ -71,7 +73,24 @@ crosstab = () ->
                 .attr("fill", (d) -> if d.col < ncol-1 and d.row < nrow-1 then rectcolor else "none")
                 .attr("stroke", (d) -> if d.col < ncol-1 and d.row < nrow-1 then rectcolor else "none")
                 .attr("stroke-width", 0)
+            # border around central part
+            rect.append("rect")
+                .attr("x", xscale(1))
+                .attr("y", yscale(1))
+                .attr("width", cellWidth*ncol)
+                .attr("height", cellHeight*nrow)
+                .attr("fill", "none")
+                .attr("stroke", bordercolor)
+            # border around overall total
+            rect.append("rect")
+                .attr("x", xscale(ncol+1))
+                .attr("y", yscale(nrow+1))
+                .attr("width", cellWidth)
+                .attr("height", cellHeight)
+                .attr("fill", "none")
+                .attr("stroke", bordercolor)
 
+            # text for the body of the table
             values = g.append("g").attr("id", "values")
             values.selectAll("empty")
                   .data(cells)
@@ -81,7 +100,34 @@ crosstab = () ->
                   .attr("y", (d) -> yscale(d.row+1) + cellHeight/2)
                   .text((d) -> d.value)
                   .attr("class", "crosstab")
-                  .attr("font-size", cellHeight*0.8)
+                  .style("font-size", cellHeight*0.8)
+
+            # rectangles for the column headings
+            colrect = g.append("g").attr("id", "colrect")
+            colrect.selectAll("empty")
+                   .data(data.xcat)
+                   .enter()
+                   .append("rect")
+                   .attr("x", (d,i) -> xscale(i+1))
+                   .attr("y", yscale(0))
+                   .attr("width", cellWidth)
+                   .attr("height", cellHeight)
+                   .attr("fill", "none")
+                   .attr("stroke", "none")
+                   .on("mouseover", () -> d3.select(this).attr("fill", hilitcolor))
+                   .on("mouseout", () -> d3.select(this).attr("fill", "none"))
+
+            # labels in the column headings
+            collab = g.append("g").attr("id", "collab")
+            collab.selectAll("empty")
+                  .data(data.xcat)
+                  .enter()
+                  .append("text")
+                  .attr("x", (d,i) -> xscale(i+1) + cellWidth - cellPad)
+                  .attr("y", yscale(0)+cellHeight/2)
+                  .text((d) -> d)
+                  .attr("class", "crosstab")
+                  .style("font-size", cellHeight*0.8)
 
     ## configuration parameters
     chart.cellHeight = (value) ->

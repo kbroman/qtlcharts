@@ -32,7 +32,7 @@ This directory contains a set of reusable panels for
 - [chrheatmap](inst/panels/chrheatmap): heat map panel broken into chromosomes
   (uses [d3.tip](http://github.com/Caged/d3-tip))
   \[[Example](http://kbroman.org/qtlcharts/assets/panels/chrheatmap/test)\]
-- [crosstab](inst/panels/crosstab): crosstab panel to display a cross-tabulation
+- [crosstab](inst/panels/crosstab): panel to display a cross-tabulation
   \[[Example](http://kbroman.org/qtlcharts/assets/panels/crosstab/test)\]
 
 Further utility functions are in [panelutil.coffee](panelutil.coffee).

@@ -20,8 +20,6 @@ mychart = crosstab().cellHeight(30)                                            #
                     .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})       # spacing for axis titles and labels
                     .titlepos(20)                                              # spacing for panel title
                     .title("")                                                 # panel title
-                    .xlab("")                                                  # x-axis label
-                    .ylab("")                                                  # y-axis label
                     .rectcolor("#e6e6e6")                                      # color of shaded cells
                     .hilitcolor("#e9cfec")                                     # color of highlighted cells
                     .bordercolor("black")                                      # color of borders around main table and overall total cell
@@ -29,11 +27,15 @@ mychart = crosstab().cellHeight(30)                                            #
 
 #### Organization of data
 
-  The data should be of the form `{x: [x1, x2, ..., xn], y: [y1, y2, ..., yn],
-  xcat: [xcat1, ..., xcatp], ycat: [ycat1, ..., ycatq]}` where the `x`'s take values in {0, 1, ..., p-1}
-  and the `y`'s take values in {0, 1, ..., q-1}, and `xcat` and `ycat` are each vectors of character strings.
-  We assume that the last element of each of `xcat` and `ycat`
-  corresponds to missing values.
+  The data should be of the form `{x: [x1, x2, ..., xn], y:
+  [y1, y2, ..., yn], xcat: [xcat1, ..., xcatp], ycat:
+  [ycat1, ..., ycatq], xlabel: "column heading", ylabel: "row heading"}`
+  where the `x`'s take values in {0, 1, ..., p-1} and the
+  `y`'s take values in {0, 1, ..., q-1}, and `xcat` and `ycat` are
+  each vectors of character strings.  We assume that the last element
+  of each of `xcat` and `ycat` corresponds to missing values.
+  `xlabel` and `ylabel` are character strings for the column and row
+  headings, respectively.
 
   Here's an example dataset: [`data.json`](http://kbroman.org/qtlcharts/assets/panels/crosstab/test/data.json).
 

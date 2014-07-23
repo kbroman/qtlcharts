@@ -2,7 +2,7 @@
 var crosstab;
 
 crosstab = function() {
-  var axispos, bordercolor, cellHeight, cellPad, cellWidth, chart, hilitcolor, margin, rectcolor, title, titlepos, xlab, ylab;
+  var axispos, bordercolor, cellHeight, cellPad, cellWidth, chart, hilitcolor, margin, rectcolor, title, titlepos;
   cellHeight = 30;
   cellWidth = 80;
   cellPad = 20;
@@ -20,8 +20,6 @@ crosstab = function() {
   };
   titlepos = 20;
   title = "";
-  xlab = "";
-  ylab = "";
   rectcolor = "#e6e6e6";
   hilitcolor = "#e9cfec";
   bordercolor = "black";
@@ -208,20 +206,6 @@ crosstab = function() {
       return title;
     }
     title = value;
-    return chart;
-  };
-  chart.xlab = function(value) {
-    if (!arguments.length) {
-      return xlab;
-    }
-    xlab = value;
-    return chart;
-  };
-  chart.ylab = function(value) {
-    if (!arguments.length) {
-      return ylab;
-    }
-    ylab = value;
     return chart;
   };
   chart.rectcolor = function(value) {

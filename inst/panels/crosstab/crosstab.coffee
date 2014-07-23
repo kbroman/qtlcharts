@@ -8,8 +8,6 @@ crosstab = () ->
     axispos = {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
     titlepos = 20
     title = ""
-    xlab = ""
-    ylab = ""
     rectcolor = "#e6e6e6"
     hilitcolor = "#e9cfec"
     bordercolor = "black"
@@ -223,16 +221,6 @@ crosstab = () ->
     chart.title = (value) ->
                       return title if !arguments.length
                       title = value
-                      chart
-
-    chart.xlab = (value) ->
-                      return xlab if !arguments.length
-                      xlab = value
-                      chart
-
-    chart.ylab = (value) ->
-                      return ylab if !arguments.length
-                      ylab = value
                       chart
 
     chart.rectcolor = (value) ->

@@ -67,7 +67,7 @@ function(cross, chr, file, onefile=FALSE, openfile=TRUE, title="",
     append_html_jscode(file, paste0(chartdivid, '_geno = '), geno_json, ';')
     append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
     append_html_jscode(file, paste0('iplotRF(', chartdivid, '_rfdata,',
-                                    chartdivid, '_geno_json,',
+                                    chartdivid, '_geno,',
                                     chartdivid, '_chartOpts);'))
 
     append_html_bottom(file, print=print)
@@ -94,6 +94,6 @@ function(cross)
     names(n.mar) <- NULL
     chrnam <- chrnames(cross)
 
-    jsonlite::toJSON(list(rf=rf, nmar=n.mar, chr=chrnam, markers=mnames),
+    jsonlite::toJSON(list(rf=t(rf), nmar=n.mar, chr=chrnam, labels=mnames),
                      na="null")
 }

@@ -417,6 +417,40 @@ customization options for each chart.
 
 `eff_yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
 
+### `iplotRF`
+
+`pixelPerCell = NULL` &mdash; pixels per cell in heat map
+
+`chrGap = 2` &mdash; gaps between chr in heat map
+
+`cellHeight = 30` &mdash; cell height (in pixels) in crosstab
+
+`cellWidth = 80` &mdash; cell width (in pixels) in crosstab
+
+`cellPad = 20` &mdash; cell padding (in pixels) to right of text in crosstab
+
+`fontsize = cellHeight*0.7` &mdash; font size in crosstab
+
+`margin = list(left=60, top=40, right=40, bottom=40)` &mdash; margins in each panel
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
+
+`rectcolor = "#e6e6e6"` &mdash; background color in heatmap and crosstab
+
+`hilitcolor = "#e6e6e6"` &mdash; highlight color in crosstab
+
+`nullcolor = "#e6e6e6"` &mdash; color of null pixels in heat map
+
+`bordercolor = "black"` &mdash; border color in heat map and in cross-tab
+
+`colors = c("slateblue", "white", "crimson")` &mdash; colors for heat map
+
+`lodlim = c(2, 12)` &mdash; range of LOD values to display; omit below 1st, truncate about 2nd
+
+`rflim = c(0.01, 0.4)` &mdash; range of rf values to display (will also show symmetric interval on other side of 1/2, in another color)
+
+`oneAtTop = false` &mdash; whether to put chr 1 at top of heatmap
+
 ### `iplotPXG`
 
 `height = 450` &mdash; height of chart in pixels

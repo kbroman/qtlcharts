@@ -8,24 +8,22 @@ crosstab = function() {
   cellPad = 20;
   margin = {
     left: 60,
-    top: 40,
+    top: 80,
     right: 40,
-    bottom: 40
+    bottom: 20
   };
   axispos = {
-    xtitle: 25,
-    ytitle: 30,
-    xlabel: 5,
-    ylabel: 5
+    xtitle: 20,
+    ytitle: 20
   };
-  titlepos = 20;
+  titlepos = 50;
   title = "";
   rectcolor = "#e6e6e6";
   hilitcolor = "#e9cfec";
   bordercolor = "black";
   chart = function(selection) {
     return selection.each(function(data) {
-      var borders, cell, cells, collab, colrect, denom, g, gEnter, height, i, j, n, ncol, nrow, rect, rowlab, rowrect, svg, tab, values, width, xscale, yscale, _i, _j, _k, _l, _ref, _ref1, _results, _results1;
+      var borders, cell, cells, collab, colrect, denom, g, gEnter, height, i, j, n, ncol, nrow, rect, rowlab, rowrect, svg, tab, titlegrp, values, width, xscale, yscale, _i, _j, _k, _l, _ref, _ref1, _ref2, _ref3, _results, _results1;
       n = data.x.length;
       if (data.y.length !== n) {
         console.log("data.x.length != data.y.length");
@@ -39,6 +37,8 @@ crosstab = function() {
         console.log("data.y should be in range 0-" + (nrow - 1));
       }
       tab = calc_crosstab(data);
+      data.xlabel = (_ref = data != null ? data.xlabel : void 0) != null ? _ref : "";
+      data.ylabel = (_ref1 = data != null ? data.ylabel : void 0) != null ? _ref1 : "";
       cells = [];
       for (i = _i = 0; 0 <= nrow ? _i <= nrow : _i >= nrow; i = 0 <= nrow ? ++_i : --_i) {
         for (j = _j = 0; 0 <= ncol ? _j <= ncol : _j >= ncol; j = 0 <= ncol ? ++_j : --_j) {
@@ -81,12 +81,12 @@ crosstab = function() {
       height = margin.top + margin.bottom + (nrow + 2) * cellHeight;
       xscale = d3.scale.ordinal().domain((function() {
         _results = [];
-        for (var _k = 0, _ref = ncol + 1; 0 <= _ref ? _k <= _ref : _k >= _ref; 0 <= _ref ? _k++ : _k--){ _results.push(_k); }
+        for (var _k = 0, _ref2 = ncol + 1; 0 <= _ref2 ? _k <= _ref2 : _k >= _ref2; 0 <= _ref2 ? _k++ : _k--){ _results.push(_k); }
         return _results;
       }).apply(this)).rangeBands([margin.left, width - margin.right], 0, 0);
       yscale = d3.scale.ordinal().domain((function() {
         _results1 = [];
-        for (var _l = 0, _ref1 = nrow + 1; 0 <= _ref1 ? _l <= _ref1 : _l >= _ref1; 0 <= _ref1 ? _l++ : _l--){ _results1.push(_l); }
+        for (var _l = 0, _ref3 = nrow + 1; 0 <= _ref3 ? _l <= _ref3 : _l >= _ref3; 0 <= _ref3 ? _l++ : _l--){ _results1.push(_l); }
         return _results1;
       }).apply(this)).rangeBands([margin.top, height - margin.bottom], 0, 0);
       svg = d3.select(this).selectAll("svg").data([data]);
@@ -163,7 +163,8 @@ crosstab = function() {
       }).attr("class", "crosstab").style("font-size", cellHeight * 0.7).style("pointer-events", "none");
       borders = g.append("g").attr("id", "borders");
       borders.append("rect").attr("x", xscale(1)).attr("y", yscale(1)).attr("width", cellWidth * ncol).attr("height", cellHeight * nrow).attr("fill", "none").attr("stroke", bordercolor).attr("stroke-width", 2).style("pointer-events", "none");
-      return borders.append("rect").attr("x", xscale(ncol + 1)).attr("y", yscale(nrow + 1)).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "none").attr("stroke", bordercolor).attr("stroke-width", 2).style("pointer-events", "none");
+      borders.append("rect").attr("x", xscale(ncol + 1)).attr("y", yscale(nrow + 1)).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "none").attr("stroke", bordercolor).attr("stroke-width", 2).style("pointer-events", "none");
+      return titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + (width - margin.left - margin.right) / 2).attr("y", margin.top - titlepos).text(title);
     });
   };
   chart.cellHeight = function(value) {

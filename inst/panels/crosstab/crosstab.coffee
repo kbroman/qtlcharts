@@ -4,9 +4,9 @@ crosstab = () ->
     cellHeight = 30
     cellWidth = 80
     cellPad = 20
-    margin = {left:60, top:40, right:40, bottom: 40}
-    axispos = {xtitle:25, ytitle:30, xlabel:5, ylabel:5}
-    titlepos = 20
+    margin = {left:60, top:80, right:40, bottom: 20}
+    axispos = {xtitle:20, ytitle:20}
+    titlepos = 50
     title = ""
     rectcolor = "#e6e6e6"
     hilitcolor = "#e9cfec"
@@ -27,6 +27,10 @@ crosstab = () ->
                 console.log("data.y should be in range 0-#{nrow-1}")
 
             tab = calc_crosstab(data)
+
+            # in case labels weren't provided
+            data.xlabel = data?.xlabel ? ""
+            data.ylabel = data?.ylabel ? ""
 
             # turn it into a vector of cells
             cells = []
@@ -191,6 +195,13 @@ crosstab = () ->
                    .attr("stroke", bordercolor)
                    .attr("stroke-width", 2)
                    .style("pointer-events", "none")
+
+            # title
+            titlegrp = g.append("g").attr("class", "title")
+                        .append("text")
+                        .attr("x", margin.left+(width-margin.left-margin.right)/2)
+                        .attr("y", margin.top-titlepos)
+                        .text(title)
 
     ## configuration parameters
     chart.cellHeight = (value) ->

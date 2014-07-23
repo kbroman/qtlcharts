@@ -16,9 +16,9 @@ Here are all of the options:
 ```coffeescript
 mychart = crosstab().cellHeight(30)                                            # number of pixels for height of each cell
                     .cellWidth(100)                                            # number of pixels for width of each cell
-                    .margin({left:60, top:40, right:40, bottom:40})            # margins
-                    .axispos({xtitle:25, ytitle:30, xlabel:5, ylabel:5})       # spacing for axis titles and labels
-                    .titlepos(20)                                              # spacing for panel title
+                    .margin({left:60, top:80, right:40, bottom:20})            # margins
+                    .axispos({xtitle:20, ytitle:20})                           # spacing for column and row headings
+                    .titlepos(50)                                              # spacing for panel title
                     .title("")                                                 # panel title
                     .rectcolor("#e6e6e6")                                      # color of shaded cells
                     .hilitcolor("#e9cfec")                                     # color of highlighted cells

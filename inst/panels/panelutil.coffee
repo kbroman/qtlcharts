@@ -257,3 +257,6 @@ transpose = (mat) -> ((mat[i][j] for i in [0...mat.length]) for j in [0...mat[0]
 
 # colSums = the sums for each column
 colSums = (mat) -> rowSums(transpose(mat))
+
+# log base 2
+log2 = (x) -> Math.log(x)/Math.log(2.0)

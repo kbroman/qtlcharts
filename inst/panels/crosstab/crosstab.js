@@ -2,7 +2,7 @@
 var crosstab;
 
 crosstab = function() {
-  var axispos, bordercolor, cellHeight, cellPad, cellWidth, chart, fontsize, hilitcolor, margin, rectcolor, title, titlepos;
+  var bordercolor, cellHeight, cellPad, cellWidth, chart, fontsize, hilitcolor, margin, rectcolor, title, titlepos;
   cellHeight = 30;
   cellWidth = 80;
   cellPad = 20;
@@ -11,10 +11,6 @@ crosstab = function() {
     top: 80,
     right: 40,
     bottom: 20
-  };
-  axispos = {
-    xtitle: 20,
-    ytitle: 20
   };
   titlepos = 50;
   title = "";
@@ -190,13 +186,6 @@ crosstab = function() {
       return margin;
     }
     margin = value;
-    return chart;
-  };
-  chart.axispos = function(value) {
-    if (!arguments.length) {
-      return axispos;
-    }
-    axispos = value;
     return chart;
   };
   chart.titlepos = function(value) {

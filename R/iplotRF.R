@@ -94,6 +94,6 @@ function(cross)
     names(n.mar) <- NULL
     chrnam <- chrnames(cross)
 
-    jsonlite::toJSON(list(rf=t(rf), nmar=n.mar, chr=chrnam, labels=mnames),
+    jsonlite::toJSON(list(rf=rf, nmar=n.mar, chr=chrnam, labels=mnames),
                      na="null")
 }

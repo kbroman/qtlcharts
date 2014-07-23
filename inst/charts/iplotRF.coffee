@@ -21,6 +21,8 @@ iplotRF = (rf_data, geno, chartOpts) ->
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # colors for heat map
     lodlim = chartOpts?.lodlim ? [2, 12] # range of LOD values to display; omit below 1st, truncate about 2nd
     rflim = chartOpts?.rflim ? [0.01, 0.4] # range of rf values to display (will also show symmetric interval on other side of 1/2, in another color)
+    lodonly = chartOpts?.lodonly ? false # if true, show symmetric plot of LOD scores
+    rfonly = chartOpts?.rfonly ? false # if true, show symmetric plot of rec frac
     oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
@@ -61,6 +63,12 @@ iplotRF = (rf_data, geno, chartOpts) ->
         console.log("rflim[0] must be < rflim[1]; ignored")
         rflim = [0.001, 0.4]
 
+    # check lodonly and rfonly
+    if lodonly and rfonly
+        console.log("lodonly and rfonly shouldn't both be true; ignored")
+        lodonly = false
+        rfonly = false
+
     # transforming rf to a LOD-type scale, using lodlim and rflim
     rftran = (rf) ->
         p = (log2(r*(1-r)) for r in rflim)
@@ -71,16 +79,37 @@ iplotRF = (rf_data, geno, chartOpts) ->
     # make copy of rf/lod
     rf_data.z = rf_data.rf.map (d) -> d.map (dd) -> dd
 
-    # transform rec frac and truncate values
+    # transpose matrix, unless oneAtTop is true
+    rf_data.z = transpose(rf_data.z) unless oneAtTop
+
+    # if only LOD or only rec frac, make symmetric
+    if lodonly
+        for row in [0...rf_data.z.length]
+            for col in [0...rf_data.z.length]
+                rf_data.z[row][col] = rf_data.z[col][row] if col > row
+    if rfonly
+        for row in [0...rf_data.z.length]
+            for col in [0...rf_data.z.length]
+                rf_data.z[row][col] = rf_data.z[col][row] if row > col
+
+    # transform rf and truncate values; max value on diagonal
     for row in [0...rf_data.z.length]
         for col in [0...rf_data.z.length]
             if rf_data.z[row][col]?
-                if col > row # rec frac
+                if rfonly or (!lodonly and col > row) # rec frac
                     rf_data.z[row][col] = rftran(rf_data.z[row][col])
                 rf_data.z[row][col] = lodlim[1] if rf_data.z[row][col] > lodlim[1]
 
-    Z = rf_data.z
+                # negative values for rf > 0.5
+                if row > col and rf_data.rf[row][col] > 0.5
+                    rf_data.z[row][col] = -rf_data.z[row][col]
+                if col > row and rf_data.rf[col][row] > 0.5
+                    rf_data.z[row][col] = -rf_data.z[row][col]
 
+            rf_data.z[row][col] = lodlim[1] if row == col
+
+    Z = rf_data.z
+    
     mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell)
                                .chrGap(chrGap)
                                .axispos(axispos)

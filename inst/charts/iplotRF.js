@@ -4,7 +4,7 @@ var Z, iplotRF;
 Z = null;
 
 iplotRF = function(rf_data, geno, chartOpts) {
-  var axispos, bordercolor, cellHeight, cellPad, cellWidth, chartdivid, chrGap, chrtype, col, colors, crosstab_height, crosstab_width, fontsize, g_heatmap, heatmap_height, heatmap_width, hilitcolor, lodlim, margin, max_ngeno, mychrheatmap, nullcolor, oneAtTop, pixelPerCell, rectcolor, rflim, rftran, row, svg, totalh, totalw, totmar, w, _i, _j, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, bordercolor, cellHeight, cellPad, cellWidth, chartdivid, chrGap, chrtype, col, colors, crosstab_height, crosstab_width, fontsize, g_heatmap, heatmap_height, heatmap_width, hilitcolor, lodlim, lodonly, margin, max_ngeno, mychrheatmap, nullcolor, oneAtTop, pixelPerCell, rectcolor, rflim, rfonly, rftran, row, svg, totalh, totalw, totmar, w, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   pixelPerCell = (_ref = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? _ref : null;
   chrGap = (_ref1 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref1 : 2;
   cellHeight = (_ref2 = chartOpts != null ? chartOpts.cellHeight : void 0) != null ? _ref2 : 30;
@@ -30,8 +30,10 @@ iplotRF = function(rf_data, geno, chartOpts) {
   colors = (_ref12 = chartOpts != null ? chartOpts.colors : void 0) != null ? _ref12 : ["slateblue", "white", "crimson"];
   lodlim = (_ref13 = chartOpts != null ? chartOpts.lodlim : void 0) != null ? _ref13 : [2, 12];
   rflim = (_ref14 = chartOpts != null ? chartOpts.rflim : void 0) != null ? _ref14 : [0.01, 0.4];
-  oneAtTop = (_ref15 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? _ref15 : false;
-  chartdivid = (_ref16 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref16 : 'chart';
+  lodonly = (_ref15 = chartOpts != null ? chartOpts.lodonly : void 0) != null ? _ref15 : false;
+  rfonly = (_ref16 = chartOpts != null ? chartOpts.rfonly : void 0) != null ? _ref16 : false;
+  oneAtTop = (_ref17 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? _ref17 : false;
+  chartdivid = (_ref18 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref18 : 'chart';
   totmar = sumArray(rf_data.nmar);
   if (pixelPerCell == null) {
     pixelPerCell = Math.floor(700 / totmar);
@@ -68,6 +70,11 @@ iplotRF = function(rf_data, geno, chartOpts) {
     console.log("rflim[0] must be < rflim[1]; ignored");
     rflim = [0.001, 0.4];
   }
+  if (lodonly && rfonly) {
+    console.log("lodonly and rfonly shouldn't both be true; ignored");
+    lodonly = false;
+    rfonly = false;
+  }
   rftran = function(rf) {
     var a, b, p, r;
     p = (function() {
@@ -88,15 +95,45 @@ iplotRF = function(rf_data, geno, chartOpts) {
       return dd;
     });
   });
-  for (row = _i = 0, _ref17 = rf_data.z.length; 0 <= _ref17 ? _i < _ref17 : _i > _ref17; row = 0 <= _ref17 ? ++_i : --_i) {
-    for (col = _j = 0, _ref18 = rf_data.z.length; 0 <= _ref18 ? _j < _ref18 : _j > _ref18; col = 0 <= _ref18 ? ++_j : --_j) {
-      if (rf_data.z[row][col] != null) {
+  if (!oneAtTop) {
+    rf_data.z = transpose(rf_data.z);
+  }
+  if (lodonly) {
+    for (row = _i = 0, _ref19 = rf_data.z.length; 0 <= _ref19 ? _i < _ref19 : _i > _ref19; row = 0 <= _ref19 ? ++_i : --_i) {
+      for (col = _j = 0, _ref20 = rf_data.z.length; 0 <= _ref20 ? _j < _ref20 : _j > _ref20; col = 0 <= _ref20 ? ++_j : --_j) {
         if (col > row) {
+          rf_data.z[row][col] = rf_data.z[col][row];
+        }
+      }
+    }
+  }
+  if (rfonly) {
+    for (row = _k = 0, _ref21 = rf_data.z.length; 0 <= _ref21 ? _k < _ref21 : _k > _ref21; row = 0 <= _ref21 ? ++_k : --_k) {
+      for (col = _l = 0, _ref22 = rf_data.z.length; 0 <= _ref22 ? _l < _ref22 : _l > _ref22; col = 0 <= _ref22 ? ++_l : --_l) {
+        if (row > col) {
+          rf_data.z[row][col] = rf_data.z[col][row];
+        }
+      }
+    }
+  }
+  for (row = _m = 0, _ref23 = rf_data.z.length; 0 <= _ref23 ? _m < _ref23 : _m > _ref23; row = 0 <= _ref23 ? ++_m : --_m) {
+    for (col = _n = 0, _ref24 = rf_data.z.length; 0 <= _ref24 ? _n < _ref24 : _n > _ref24; col = 0 <= _ref24 ? ++_n : --_n) {
+      if (rf_data.z[row][col] != null) {
+        if (rfonly || (!lodonly && col > row)) {
           rf_data.z[row][col] = rftran(rf_data.z[row][col]);
         }
         if (rf_data.z[row][col] > lodlim[1]) {
           rf_data.z[row][col] = lodlim[1];
         }
+        if (row > col && rf_data.rf[row][col] > 0.5) {
+          rf_data.z[row][col] = -rf_data.z[row][col];
+        }
+        if (col > row && rf_data.rf[col][row] > 0.5) {
+          rf_data.z[row][col] = -rf_data.z[row][col];
+        }
+      }
+      if (row === col) {
+        rf_data.z[row][col] = lodlim[1];
       }
     }
   }

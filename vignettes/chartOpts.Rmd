@@ -449,6 +449,10 @@ customization options for each chart.
 
 `rflim = c(0.01, 0.4)` &mdash; range of rf values to display (will also show symmetric interval on other side of 1/2, in another color)
 
+`lodonly = false` &mdash; if true, show symmetric plot of LOD scores
+
+`rfonly = false` &mdash; if true, show symmetric plot of rec frac
+
 `oneAtTop = false` &mdash; whether to put chr 1 at top of heatmap
 
 ### `iplotPXG`

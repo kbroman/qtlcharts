@@ -17,9 +17,9 @@ Here are all of the options:
 mychart = crosstab().cellHeight(30)                                            # number of pixels for height of each cell
                     .cellWidth(100)                                            # number of pixels for width of each cell
                     .margin({left:60, top:80, right:40, bottom:20})            # margins
-                    .axispos({xtitle:20, ytitle:20})                           # spacing for column and row headings
                     .titlepos(50)                                              # spacing for panel title
                     .title("")                                                 # panel title
+                    .fontsize(cellHeight*0.7)                                  # font size for values and headings
                     .rectcolor("#e6e6e6")                                      # color of shaded cells
                     .hilitcolor("#e9cfec")                                     # color of highlighted cells
                     .bordercolor("black")                                      # color of borders around main table and overall total cell

@@ -5,9 +5,9 @@ crosstab = () ->
     cellWidth = 80
     cellPad = 20
     margin = {left:60, top:80, right:40, bottom: 20}
-    axispos = {xtitle:20, ytitle:20}
     titlepos = 50
     title = ""
+    fontsize = cellHeight*0.7
     rectcolor = "#e6e6e6"
     hilitcolor = "#e9cfec"
     bordercolor = "black"
@@ -107,7 +107,7 @@ crosstab = () ->
                   .attr("y", (d) -> yscale(d.row+1) + cellHeight/2)
                   .text((d) -> d.value)
                   .attr("class", (d) -> "crosstab row#{d.row} col#{d.col}")
-                  .style("font-size", cellHeight*0.7)
+                  .style("font-size", fontsize)
                   .style("pointer-events", "none")
 
             # rectangles for the column headings
@@ -139,7 +139,7 @@ crosstab = () ->
                   .attr("y", yscale(0)+cellHeight/2)
                   .text((d) -> d)
                   .attr("class", "crosstab")
-                  .style("font-size", cellHeight*0.7)
+                  .style("font-size", fontsize)
                   .style("pointer-events", "none")
 
             # rectangles for the row headings
@@ -171,7 +171,7 @@ crosstab = () ->
                   .attr("y", (d,i) -> yscale(i+1) + cellHeight/2)
                   .text((d) -> d)
                   .attr("class", "crosstab")
-                  .style("font-size", cellHeight*0.7)
+                  .style("font-size", fontsize)
                   .style("pointer-events", "none")
 
             # border around central part
@@ -196,12 +196,25 @@ crosstab = () ->
                    .attr("stroke-width", 2)
                    .style("pointer-events", "none")
 
-            # title
-            titlegrp = g.append("g").attr("class", "title")
-                        .append("text")
-                        .attr("x", margin.left+(width-margin.left-margin.right)/2)
-                        .attr("y", margin.top-titlepos)
-                        .text(title)
+            # row and column headings and optional overall title
+            titles = g.append("g").attr("id", "titles")
+            titles.append("text").attr("class", "crosstabtitle")
+                  .attr("x", margin.left + (ncol+1)*cellWidth/2)
+                  .attr("y", margin.top - cellHeight/2)
+                  .text(data.xlabel)
+                  .style("font-size", fontsize)
+                  .style("font-weight", "bold")
+            titles.append("text").attr("class", "crosstab")
+                  .attr("x", xscale(0) + cellWidth - cellPad)
+                  .attr("y", yscale(0) + cellHeight/2)
+                  .text(data.ylabel)
+                  .style("font-size", fontsize)
+                  .style("font-weight", "bold")
+            titles.append("text").attr("class", "crosstabtitle")
+                  .attr("x", margin.left+(width-margin.left-margin.right)/2)
+                  .attr("y", margin.top-titlepos)
+                  .text(title)
+                  .style("font-size", fontsize)
 
     ## configuration parameters
     chart.cellHeight = (value) ->
@@ -217,11 +230,6 @@ crosstab = () ->
     chart.margin = (value) ->
                       return margin if !arguments.length
                       margin = value
-                      chart
-
-    chart.axispos = (value) ->
-                      return axispos if !arguments.length
-                      axispos = value
                       chart
 
     chart.titlepos = (value) ->

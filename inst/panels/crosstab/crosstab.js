@@ -2,7 +2,7 @@
 var crosstab;
 
 crosstab = function() {
-  var axispos, bordercolor, cellHeight, cellPad, cellWidth, chart, hilitcolor, margin, rectcolor, title, titlepos;
+  var axispos, bordercolor, cellHeight, cellPad, cellWidth, chart, fontsize, hilitcolor, margin, rectcolor, title, titlepos;
   cellHeight = 30;
   cellWidth = 80;
   cellPad = 20;
@@ -18,12 +18,13 @@ crosstab = function() {
   };
   titlepos = 50;
   title = "";
+  fontsize = cellHeight * 0.7;
   rectcolor = "#e6e6e6";
   hilitcolor = "#e9cfec";
   bordercolor = "black";
   chart = function(selection) {
     return selection.each(function(data) {
-      var borders, cell, cells, collab, colrect, denom, g, gEnter, height, i, j, n, ncol, nrow, rect, rowlab, rowrect, svg, tab, titlegrp, values, width, xscale, yscale, _i, _j, _k, _l, _ref, _ref1, _ref2, _ref3, _results, _results1;
+      var borders, cell, cells, collab, colrect, denom, g, gEnter, height, i, j, n, ncol, nrow, rect, rowlab, rowrect, svg, tab, titles, values, width, xscale, yscale, _i, _j, _k, _l, _ref, _ref1, _ref2, _ref3, _results, _results1;
       n = data.x.length;
       if (data.y.length !== n) {
         console.log("data.x.length != data.y.length");
@@ -120,7 +121,7 @@ crosstab = function() {
         return d.value;
       }).attr("class", function(d) {
         return "crosstab row" + d.row + " col" + d.col;
-      }).style("font-size", cellHeight * 0.7).style("pointer-events", "none");
+      }).style("font-size", fontsize).style("pointer-events", "none");
       colrect = g.append("g").attr("id", "colrect");
       colrect.selectAll("empty").data(data.xcat.concat("Total")).enter().append("rect").attr("x", function(d, i) {
         return xscale(i + 1);
@@ -140,7 +141,7 @@ crosstab = function() {
         return xscale(i + 1) + cellWidth - cellPad;
       }).attr("y", yscale(0) + cellHeight / 2).text(function(d) {
         return d;
-      }).attr("class", "crosstab").style("font-size", cellHeight * 0.7).style("pointer-events", "none");
+      }).attr("class", "crosstab").style("font-size", fontsize).style("pointer-events", "none");
       rowrect = g.append("g").attr("id", "rowrect");
       rowrect.selectAll("empty").data(data.ycat.concat("Total")).enter().append("rect").attr("x", xscale(0)).attr("y", function(d, i) {
         return yscale(i + 1);
@@ -160,11 +161,14 @@ crosstab = function() {
         return yscale(i + 1) + cellHeight / 2;
       }).text(function(d) {
         return d;
-      }).attr("class", "crosstab").style("font-size", cellHeight * 0.7).style("pointer-events", "none");
+      }).attr("class", "crosstab").style("font-size", fontsize).style("pointer-events", "none");
       borders = g.append("g").attr("id", "borders");
       borders.append("rect").attr("x", xscale(1)).attr("y", yscale(1)).attr("width", cellWidth * ncol).attr("height", cellHeight * nrow).attr("fill", "none").attr("stroke", bordercolor).attr("stroke-width", 2).style("pointer-events", "none");
       borders.append("rect").attr("x", xscale(ncol + 1)).attr("y", yscale(nrow + 1)).attr("width", cellWidth).attr("height", cellHeight).attr("fill", "none").attr("stroke", bordercolor).attr("stroke-width", 2).style("pointer-events", "none");
-      return titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + (width - margin.left - margin.right) / 2).attr("y", margin.top - titlepos).text(title);
+      titles = g.append("g").attr("id", "titles");
+      titles.append("text").attr("class", "crosstabtitle").attr("x", margin.left + (ncol + 1) * cellWidth / 2).attr("y", margin.top - cellHeight / 2).text(data.xlabel).style("font-size", fontsize).style("font-weight", "bold");
+      titles.append("text").attr("class", "crosstab").attr("x", xscale(0) + cellWidth - cellPad).attr("y", yscale(0) + cellHeight / 2).text(data.ylabel).style("font-size", fontsize).style("font-weight", "bold");
+      return titles.append("text").attr("class", "crosstabtitle").attr("x", margin.left + (width - margin.left - margin.right) / 2).attr("y", margin.top - titlepos).text(title).style("font-size", fontsize);
     });
   };
   chart.cellHeight = function(value) {

@@ -1,8 +1,6 @@
 # iplotRF: interactive plot of pairwise recombination fractions
 # Karl W Broman
 
-Z = null
-
 iplotRF = (rf_data, geno, chartOpts) ->
 
     # chartOpts start
@@ -33,8 +31,11 @@ iplotRF = (rf_data, geno, chartOpts) ->
 
     # size of crosstab region
     max_ngeno = d3.max( (geno.genocat[chrtype].length for chrtype of geno.genocat) )
-    crosstab_width = cellWidth*max_ngeno + margin.left + margin.right
+    crosstab_width = cellWidth*(max_ngeno+2) + margin.left + margin.right
     crosstab_height = cellHeight*max_ngeno + margin.top + margin.bottom
+    crosstab_xpos = heatmap_width
+    crosstab_ypos = (heatmap_height - crosstab_height)/2
+    crosstab_ypos = 0 if crosstab_ypos < 0
     
     # total size of SVG
     totalw = heatmap_width + crosstab_width
@@ -56,8 +57,6 @@ iplotRF = (rf_data, geno, chartOpts) ->
 
     # make copy of rf/lod
     rf_data.z = rf_data.rf.map (d) -> d.map (dd) -> dd
-
-    Z = rf_data.rf
 
     # make symmetric
     for row in [0...rf_data.z.length]
@@ -91,6 +90,34 @@ iplotRF = (rf_data, geno, chartOpts) ->
                    .datum(rf_data)
                    .call(mychrheatmap)
 
+    g_crosstab = null
+
+    create_crosstab = (marker1, marker2) ->
+        data =
+            x: geno.geno[marker1]
+            y: geno.geno[marker2]
+            xcat: geno.genocat[geno.chrtype[marker1]]
+            ycat: geno.genocat[geno.chrtype[marker2]]
+            xlabel: marker1
+            ylabel: marker2
+
+        g_crosstab.remove() if g_crosstab?
+
+        mycrosstab = crosstab().cellHeight(cellHeight)
+                               .cellWidth(cellWidth)
+                               .cellPad(cellPad)
+                               #.margin(margin)
+                               #.fontsize(fontsize)
+                               #.rectcolor(rectcolor)
+                               #.hilitcolor(hilitcolor)
+                               #.bordercolor(bordercolor)
+
+        g_crosstab = svg.append("g")
+                        .attr("id", crosstab)
+                        .attr("transform", "translate(#{crosstab_xpos}, #{crosstab_ypos})")
+                        .datum(data)
+                        .call(mycrosstab)
+
     celltip = d3.tip()
                 .attr('class', 'd3-tip')
                 .html((d) ->
@@ -116,3 +143,5 @@ iplotRF = (rf_data, geno, chartOpts) ->
                      celltip.show(d))
          .on("mouseout", () ->
                      celltip.hide())
+         .on("click", (d) ->
+                     create_crosstab(rf_data.labels[d.j], rf_data.labels[d.i]))

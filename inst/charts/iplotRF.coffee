@@ -1,6 +1,8 @@
 # iplotRF: interactive plot of pairwise recombination fractions
 # Karl W Broman
 
+Z = null
+
 iplotRF = (rf_data, geno, chartOpts) ->
 
     # chartOpts start
@@ -18,9 +20,6 @@ iplotRF = (rf_data, geno, chartOpts) ->
     bordercolor = chartOpts?.bordercolor ? "black" # border color in heat map and in cross-tab
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # colors for heat map
     lodlim = chartOpts?.lodlim ? [2, 12] # range of LOD values to display; omit below 1st, truncate about 2nd
-    rflim = chartOpts?.rflim ? [0.01, 0.4] # range of rf values to display (will also show symmetric interval on other side of 1/2, in another color)
-    lodonly = chartOpts?.lodonly ? false # if true, show symmetric plot of LOD scores
-    rfonly = chartOpts?.rfonly ? false # if true, show symmetric plot of rec frac
     oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
@@ -47,64 +46,34 @@ iplotRF = (rf_data, geno, chartOpts) ->
             .attr("height", totalh)
             .attr("width", totalw)
   
-    # ensure lodlim and rflim conform
+    # ensure lodlim has 0 <= lo < hi 
     if d3.min(lodlim) < 0
         console.log("lodlim values must be non-negative; ignored")
         lodlim = [2, 12]
     if lodlim[0] >= lodlim[1]
         console.log("lodlim[0] must be < lodlim[1]; ignored")
         lodlim = [2, 12]
-    if d3.min(rflim) <= 0 or d3.min(rflim) > 0.5
-        console.log("rflim values must be > 0 and <= 0.5; ignored")
-        rflim = [0.001, 0.4]
-    if rflim[0] >= rflim[1]
-        console.log("rflim[0] must be < rflim[1]; ignored")
-        rflim = [0.001, 0.4]
-
-    # check lodonly and rfonly
-    if lodonly and rfonly
-        console.log("lodonly and rfonly shouldn't both be true; ignored")
-        lodonly = false
-        rfonly = false
-
-    # transforming rf to a LOD-type scale, using lodlim and rflim
-    rftran = (rf) ->
-        p = (log2(r*(1-r)) for r in rflim)
-        a = (lodlim[1]-lodlim[0])/(p[1] - p[0])
-        b = lodlim[0] + a*p[1]
-        -a*log2(rf*(1-rf)) + b
 
     # make copy of rf/lod
     rf_data.z = rf_data.rf.map (d) -> d.map (dd) -> dd
 
-    # transpose matrix, unless oneAtTop is true
-    rf_data.z = transpose(rf_data.z) unless oneAtTop
+    Z = rf_data.rf
 
-    # if only LOD or only rec frac, make symmetric
-    if lodonly
-        for row in [0...rf_data.z.length]
-            for col in [0...rf_data.z.length]
-                rf_data.z[row][col] = rf_data.z[col][row] if col > row
-    if rfonly
-        for row in [0...rf_data.z.length]
-            for col in [0...rf_data.z.length]
-                rf_data.z[row][col] = rf_data.z[col][row] if row > col
-
-    # transform rf and truncate values; max value on diagonal
+    # make symmetric
     for row in [0...rf_data.z.length]
         for col in [0...rf_data.z.length]
-            if rf_data.z[row][col]?
-                if rfonly or (!lodonly and col > row) # rec frac
-                    rf_data.z[row][col] = rftran(rf_data.z[row][col])
-                rf_data.z[row][col] = lodlim[1] if rf_data.z[row][col] > lodlim[1]
+            rf_data.z[row][col] = rf_data.z[col][row] if row > col
 
-                # negative values for rf > 0.5
-                if row > col and rf_data.rf[row][col] > 0.5
-                    rf_data.z[row][col] = -rf_data.z[row][col]
-                if col > row and rf_data.rf[col][row] > 0.5
-                    rf_data.z[row][col] = -rf_data.z[row][col]
+    # truncate values; max value on diagonal
+    for row in [0...rf_data.z.length]
+        for col in [0...rf_data.z.length]
+            rf_data.z[row][col] = lodlim[1] if row == col or (rf_data.z[row][col]? and rf_data.z[row][col] > lodlim[1])
 
-            rf_data.z[row][col] = lodlim[1] if row == col
+            # negative values for rf > 0.5
+            if row > col and rf_data.rf[row][col] > 0.5
+                rf_data.z[row][col] = -rf_data.z[row][col]
+            if col > row and rf_data.rf[col][row] > 0.5
+                rf_data.z[row][col] = -rf_data.z[row][col]
 
     mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell)
                                .chrGap(chrGap)
@@ -127,9 +96,15 @@ iplotRF = (rf_data, geno, chartOpts) ->
                 .html((d) ->
                         mari = rf_data.labels[d.i]
                         marj = rf_data.labels[d.j]
-                        rf = if d.i > d.j then rf_data.rf[d.i][d.j] else rf_data.rf[d.j][d.i]
+                        if +d.i > +d.j                # +'s ensure number not string
+                            rf = rf_data.rf[d.i][d.j]
+                            lod = rf_data.rf[d.j][d.i]
+                        else if +d.j > +d.i
+                            rf = rf_data.rf[d.j][d.i]
+                            lod = rf_data.rf[d.i][d.j]
+                        else
+                            return mari
                         rf = if rf >= 0.1 then d3.format(".2f")(rf) else d3.format(".3f")(rf)
-                        lod = if d.i < d.j then rf_data.rf[d.i][d.j] else rf_data.rf[d.j][d.i]
                         return mari if d.i == d.j
                         "(#{mari} #{marj}), LOD = #{d3.format(".1f")(lod)}, rf = #{rf}")
                 .direction('e')

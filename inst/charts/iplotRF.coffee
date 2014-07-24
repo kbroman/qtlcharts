@@ -9,13 +9,18 @@ iplotRF = (rf_data, geno, chartOpts) ->
     cellHeight = chartOpts?.cellHeight ? 30 # cell height (in pixels) in crosstab
     cellWidth = chartOpts?.cellWidth ? 80 # cell width (in pixels) in crosstab
     cellPad = chartOpts?.cellPad ? 20 # cell padding (in pixels) to right of text in crosstab
+    hbot = chartOpts?.hbot ? 150 # height (in pixels) of each of the lower panels with rf and LOD across genome
     fontsize = chartOpts?.fontsize ? cellHeight*0.7 # font size in crosstab    
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40} # margins in each panel
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # axis positions in heatmap
-    rectcolor = chartOpts?.rectcolor ? "#e6e6e6" # background color in heatmap and crosstab
+    lightrect = chartOpts?.lightrect ? "#e6e6e6" # background color in heatmap and crosstab; light rect in lower panels with LOD and rf
+    darkrect = chartOpts?.darkrect ? "#c8c8c8" # dark rectangle in lower panels with LOD and rf
     hilitcolor = chartOpts?.hilitcolor ? "#e6e6e6" # highlight color in crosstab
     nullcolor = chartOpts?.nullcolor ? "#e6e6e6" # color of null pixels in heat map
     bordercolor = chartOpts?.bordercolor ? "black" # border color in heat map and in cross-tab
+    pointsize = chartOpts?.pointsize ? 2 # point size in lower panels with LOD and rf
+    pointcolor = chartOpts?.pointcolor ? "slateblue" # point color in lower panels with LOD and rf
+    pointstroke = chartOpts?.pointstroke ? "black" # stroke color for points in lower panels with LOD and rf
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # colors for heat map
     lodlim = chartOpts?.lodlim ? [2, 12] # range of LOD values to display; omit below 1st, truncate about 2nd
     oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
@@ -24,7 +29,7 @@ iplotRF = (rf_data, geno, chartOpts) ->
   
     # size of heatmap region
     totmar = sumArray(rf_data.nmar)
-    pixelPerCell = Math.floor(700/totmar) unless pixelPerCell?
+    pixelPerCell = d3.max([2, Math.floor(500/totmar)]) unless pixelPerCell?
     w = chrGap*rf_data.chr.length + pixelPerCell*totmar
     heatmap_width =  w + margin.left + margin.right
     heatmap_height = w + margin.top + margin.bottom
@@ -32,14 +37,20 @@ iplotRF = (rf_data, geno, chartOpts) ->
     # size of crosstab region
     max_ngeno = d3.max( (geno.genocat[chrtype].length for chrtype of geno.genocat) )
     crosstab_width = cellWidth*(max_ngeno+2) + margin.left + margin.right
-    crosstab_height = cellHeight*max_ngeno + margin.top + margin.bottom
+    crosstab_height = cellHeight*(max_ngeno+3) + margin.top + margin.bottom
     crosstab_xpos = heatmap_width
-    crosstab_ypos = (heatmap_height - crosstab_height)/2
+    crosstab_ypos = (heatmap_height - crosstab_height)/2 - margin.top
     crosstab_ypos = 0 if crosstab_ypos < 0
     
+    # height of lower panels
+    wbot = (heatmap_width + crosstab_width)/2
+
     # total size of SVG
     totalw = heatmap_width + crosstab_width
-    totalh = d3.max([heatmap_height, crosstab_height])
+    htop = d3.max([heatmap_height, crosstab_height])
+    totalh =  htop + hbot*2
+    console.log("totalw: #{totalw}")
+    console.log("totalh: #{totalh}")
 
     # create SVG
     svg = d3.select("div##{chartdivid}")
@@ -77,7 +88,7 @@ iplotRF = (rf_data, geno, chartOpts) ->
     mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell)
                                .chrGap(chrGap)
                                .axispos(axispos)
-                               .rectcolor(rectcolor)
+                               .rectcolor(lightrect)
                                .nullcolor(nullcolor)
                                .bordercolor(bordercolor)
                                .colors(colors)
@@ -91,6 +102,7 @@ iplotRF = (rf_data, geno, chartOpts) ->
                    .call(mychrheatmap)
 
     g_crosstab = null
+    g_scans = [null, null]
 
     create_crosstab = (marker1, marker2) ->
         data =
@@ -106,17 +118,83 @@ iplotRF = (rf_data, geno, chartOpts) ->
         mycrosstab = crosstab().cellHeight(cellHeight)
                                .cellWidth(cellWidth)
                                .cellPad(cellPad)
-                               #.margin(margin)
-                               #.fontsize(fontsize)
-                               #.rectcolor(rectcolor)
-                               #.hilitcolor(hilitcolor)
-                               #.bordercolor(bordercolor)
+                               .margin(margin)
+                               .fontsize(fontsize)
+                               .rectcolor(lightrect)
+                               .hilitcolor(hilitcolor)
+                               .bordercolor(bordercolor)
 
         g_crosstab = svg.append("g")
-                        .attr("id", crosstab)
+                        .attr("id", "crosstab")
                         .attr("transform", "translate(#{crosstab_xpos}, #{crosstab_ypos})")
                         .datum(data)
                         .call(mycrosstab)
+
+    create_scans = (markerindex, panelindex) -> # panelindex = 0 or 1 for left or right panels
+        data =
+            chrnames: rf_data.chrnames
+            lodnames: ["lod", "rf"]
+            chr: rf_data.chr
+            pos: rf_data.pos
+            markernames: rf_data.labels
+            lod: (i for i of rf_data.pos)
+            rf: (i for i of rf_data.pos)
+
+        console.log(markerindex)
+        console.log(data.lod)
+        console.log(data.rf)
+        for row in [0...rf_data.rf.length]
+            if row < markerindex
+                data.rf[row]  = rf_data.rf[row][markerindex]
+                data.lod[row] = rf_data.rf[markerindex][row]
+            else if row > markerindex
+                data.lod[row] = rf_data.rf[row][markerindex]
+                data.rf[row]  = rf_data.rf[markerindex][row]
+            else
+                data.lod[row] = null
+                data.rf[row]  = null
+            
+
+        g_scans[panelindex].remove() if g_scans[panelindex]?
+
+        mylodchart = lodchart().height(hbot)
+                               .width(wbot)
+                               .margin(margin)
+                               .axispos(axispos)
+                               .ylim([0.0, d3.max(data.lod)])
+                               .lightrect(lightrect)
+                               .darkrect(darkrect)
+                               .linewidth(0)
+                               .linecolor("")
+                               .pointsize(pointsize)
+                               .pointcolor(pointcolor)
+                               .pointstroke(pointstroke)
+                               .lodvarname("lod")
+                               
+        myrfchart  = lodchart().height(hbot)
+                               .width(wbot)
+                               .margin(margin)
+                               .axispos(axispos)
+                               .ylim([0.0, 1.0])
+                               .lightrect(lightrect)
+                               .darkrect(darkrect)
+                               .linewidth(0)
+                               .linecolor("")
+                               .pointsize(pointsize)
+                               .pointcolor(pointcolor)
+                               .pointstroke(pointstroke)
+                               .ylab("Rec frac")
+                               .lodvarname("rf")
+
+        g_scans[panelindex] = svg.append("g")
+                                 .attr("id", "lod_rf_#{panelindex+1}")
+                                 .attr("transform", "translate(#{htop}, #{wbot*panelindex})")
+                                 .datum(data)
+                                 .call(mylodchart)
+        g_scans[panelindex] = g_scans[panelindex].append("g")
+                                 .attr("transform", "translate(#{hbot}, 0)")
+                                 .datum(data)
+                                 .call(myrfchart)
 
     celltip = d3.tip()
                 .attr('class', 'd3-tip')
@@ -143,5 +221,11 @@ iplotRF = (rf_data, geno, chartOpts) ->
                      celltip.show(d))
          .on("mouseout", () ->
                      celltip.hide())
-         .on("click", (d) ->
-                     create_crosstab(rf_data.labels[d.j], rf_data.labels[d.i]))
+         .on "click", (d) ->
+                     create_crosstab(rf_data.labels[d.j], rf_data.labels[d.i])
+                     create_scans(d.i, 0)
+                     if d.i != d.j
+                       create_scans(d.j, 1)
+                     else # if same marker, just show the one panel
+                       g_scans[1].remove()
+                       g_scans[1] = null

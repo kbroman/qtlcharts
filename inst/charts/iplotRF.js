@@ -2,36 +2,41 @@
 var iplotRF;
 
 iplotRF = function(rf_data, geno, chartOpts) {
-  var axispos, bordercolor, cellHeight, cellPad, cellWidth, cells, celltip, chartdivid, chrGap, chrtype, col, colors, create_crosstab, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, fontsize, g_crosstab, g_heatmap, heatmap_height, heatmap_width, hilitcolor, lodlim, margin, max_ngeno, mychrheatmap, nullcolor, oneAtTop, pixelPerCell, rectcolor, row, svg, totalh, totalw, totmar, w, _i, _j, _k, _l, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, bordercolor, cellHeight, cellPad, cellWidth, cells, celltip, chartdivid, chrGap, chrtype, col, colors, create_crosstab, create_scans, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, darkrect, fontsize, g_crosstab, g_heatmap, g_scans, hbot, heatmap_height, heatmap_width, hilitcolor, htop, lightrect, lodlim, margin, max_ngeno, mychrheatmap, nullcolor, oneAtTop, pixelPerCell, pointcolor, pointsize, pointstroke, row, svg, totalh, totalw, totmar, w, wbot, _i, _j, _k, _l, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   pixelPerCell = (_ref = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? _ref : null;
   chrGap = (_ref1 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref1 : 2;
   cellHeight = (_ref2 = chartOpts != null ? chartOpts.cellHeight : void 0) != null ? _ref2 : 30;
   cellWidth = (_ref3 = chartOpts != null ? chartOpts.cellWidth : void 0) != null ? _ref3 : 80;
   cellPad = (_ref4 = chartOpts != null ? chartOpts.cellPad : void 0) != null ? _ref4 : 20;
-  fontsize = (_ref5 = chartOpts != null ? chartOpts.fontsize : void 0) != null ? _ref5 : cellHeight * 0.7;
-  margin = (_ref6 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref6 : {
+  hbot = (_ref5 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref5 : 150;
+  fontsize = (_ref6 = chartOpts != null ? chartOpts.fontsize : void 0) != null ? _ref6 : cellHeight * 0.7;
+  margin = (_ref7 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref7 : {
     left: 60,
     top: 40,
     right: 40,
     bottom: 40
   };
-  axispos = (_ref7 = chartOpts != null ? chartOpts.axispos : void 0) != null ? _ref7 : {
+  axispos = (_ref8 = chartOpts != null ? chartOpts.axispos : void 0) != null ? _ref8 : {
     xtitle: 25,
     ytitle: 30,
     xlabel: 5,
     ylabel: 5
   };
-  rectcolor = (_ref8 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref8 : "#e6e6e6";
-  hilitcolor = (_ref9 = chartOpts != null ? chartOpts.hilitcolor : void 0) != null ? _ref9 : "#e6e6e6";
-  nullcolor = (_ref10 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? _ref10 : "#e6e6e6";
-  bordercolor = (_ref11 = chartOpts != null ? chartOpts.bordercolor : void 0) != null ? _ref11 : "black";
-  colors = (_ref12 = chartOpts != null ? chartOpts.colors : void 0) != null ? _ref12 : ["slateblue", "white", "crimson"];
-  lodlim = (_ref13 = chartOpts != null ? chartOpts.lodlim : void 0) != null ? _ref13 : [2, 12];
-  oneAtTop = (_ref14 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? _ref14 : false;
-  chartdivid = (_ref15 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref15 : 'chart';
+  lightrect = (_ref9 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? _ref9 : "#e6e6e6";
+  darkrect = (_ref10 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? _ref10 : "#c8c8c8";
+  hilitcolor = (_ref11 = chartOpts != null ? chartOpts.hilitcolor : void 0) != null ? _ref11 : "#e6e6e6";
+  nullcolor = (_ref12 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? _ref12 : "#e6e6e6";
+  bordercolor = (_ref13 = chartOpts != null ? chartOpts.bordercolor : void 0) != null ? _ref13 : "black";
+  pointsize = (_ref14 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? _ref14 : 2;
+  pointcolor = (_ref15 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? _ref15 : "slateblue";
+  pointstroke = (_ref16 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? _ref16 : "black";
+  colors = (_ref17 = chartOpts != null ? chartOpts.colors : void 0) != null ? _ref17 : ["slateblue", "white", "crimson"];
+  lodlim = (_ref18 = chartOpts != null ? chartOpts.lodlim : void 0) != null ? _ref18 : [2, 12];
+  oneAtTop = (_ref19 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? _ref19 : false;
+  chartdivid = (_ref20 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref20 : 'chart';
   totmar = sumArray(rf_data.nmar);
   if (pixelPerCell == null) {
-    pixelPerCell = Math.floor(700 / totmar);
+    pixelPerCell = d3.max([2, Math.floor(500 / totmar)]);
   }
   w = chrGap * rf_data.chr.length + pixelPerCell * totmar;
   heatmap_width = w + margin.left + margin.right;
@@ -45,14 +50,18 @@ iplotRF = function(rf_data, geno, chartOpts) {
     return _results;
   })());
   crosstab_width = cellWidth * (max_ngeno + 2) + margin.left + margin.right;
-  crosstab_height = cellHeight * max_ngeno + margin.top + margin.bottom;
+  crosstab_height = cellHeight * (max_ngeno + 3) + margin.top + margin.bottom;
   crosstab_xpos = heatmap_width;
-  crosstab_ypos = (heatmap_height - crosstab_height) / 2;
+  crosstab_ypos = (heatmap_height - crosstab_height) / 2 - margin.top;
   if (crosstab_ypos < 0) {
     crosstab_ypos = 0;
   }
+  wbot = (heatmap_width + crosstab_width) / 2;
   totalw = heatmap_width + crosstab_width;
-  totalh = d3.max([heatmap_height, crosstab_height]);
+  htop = d3.max([heatmap_height, crosstab_height]);
+  totalh = htop + hbot * 2;
+  console.log("totalw: " + totalw);
+  console.log("totalh: " + totalh);
   svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   if (d3.min(lodlim) < 0) {
     console.log("lodlim values must be non-negative; ignored");
@@ -67,15 +76,15 @@ iplotRF = function(rf_data, geno, chartOpts) {
       return dd;
     });
   });
-  for (row = _i = 0, _ref16 = rf_data.z.length; 0 <= _ref16 ? _i < _ref16 : _i > _ref16; row = 0 <= _ref16 ? ++_i : --_i) {
-    for (col = _j = 0, _ref17 = rf_data.z.length; 0 <= _ref17 ? _j < _ref17 : _j > _ref17; col = 0 <= _ref17 ? ++_j : --_j) {
+  for (row = _i = 0, _ref21 = rf_data.z.length; 0 <= _ref21 ? _i < _ref21 : _i > _ref21; row = 0 <= _ref21 ? ++_i : --_i) {
+    for (col = _j = 0, _ref22 = rf_data.z.length; 0 <= _ref22 ? _j < _ref22 : _j > _ref22; col = 0 <= _ref22 ? ++_j : --_j) {
       if (row > col) {
         rf_data.z[row][col] = rf_data.z[col][row];
       }
     }
   }
-  for (row = _k = 0, _ref18 = rf_data.z.length; 0 <= _ref18 ? _k < _ref18 : _k > _ref18; row = 0 <= _ref18 ? ++_k : --_k) {
-    for (col = _l = 0, _ref19 = rf_data.z.length; 0 <= _ref19 ? _l < _ref19 : _l > _ref19; col = 0 <= _ref19 ? ++_l : --_l) {
+  for (row = _k = 0, _ref23 = rf_data.z.length; 0 <= _ref23 ? _k < _ref23 : _k > _ref23; row = 0 <= _ref23 ? ++_k : --_k) {
+    for (col = _l = 0, _ref24 = rf_data.z.length; 0 <= _ref24 ? _l < _ref24 : _l > _ref24; col = 0 <= _ref24 ? ++_l : --_l) {
       if (row === col || ((rf_data.z[row][col] != null) && rf_data.z[row][col] > lodlim[1])) {
         rf_data.z[row][col] = lodlim[1];
       }
@@ -87,9 +96,10 @@ iplotRF = function(rf_data, geno, chartOpts) {
       }
     }
   }
-  mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell).chrGap(chrGap).axispos(axispos).rectcolor(rectcolor).nullcolor(nullcolor).bordercolor(bordercolor).colors(colors).zthresh(lodlim[0]).oneAtTop(oneAtTop).hover(false);
+  mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell).chrGap(chrGap).axispos(axispos).rectcolor(lightrect).nullcolor(nullcolor).bordercolor(bordercolor).colors(colors).zthresh(lodlim[0]).oneAtTop(oneAtTop).hover(false);
   g_heatmap = svg.append("g").attr("id", "chrheatmap").datum(rf_data).call(mychrheatmap);
   g_crosstab = null;
+  g_scans = [null, null];
   create_crosstab = function(marker1, marker2) {
     var data, mycrosstab;
     data = {
@@ -103,8 +113,56 @@ iplotRF = function(rf_data, geno, chartOpts) {
     if (g_crosstab != null) {
       g_crosstab.remove();
     }
-    mycrosstab = crosstab().cellHeight(cellHeight).cellWidth(cellWidth).cellPad(cellPad);
-    return g_crosstab = svg.append("g").attr("id", crosstab).attr("transform", "translate(" + crosstab_xpos + ", " + crosstab_ypos + ")").datum(data).call(mycrosstab);
+    mycrosstab = crosstab().cellHeight(cellHeight).cellWidth(cellWidth).cellPad(cellPad).margin(margin).fontsize(fontsize).rectcolor(lightrect).hilitcolor(hilitcolor).bordercolor(bordercolor);
+    return g_crosstab = svg.append("g").attr("id", "crosstab").attr("transform", "translate(" + crosstab_xpos + ", " + crosstab_ypos + ")").datum(data).call(mycrosstab);
+  };
+  create_scans = function(markerindex, panelindex) {
+    var data, i, mylodchart, myrfchart, _m, _ref25;
+    data = {
+      chrnames: rf_data.chrnames,
+      lodnames: ["lod", "rf"],
+      chr: rf_data.chr,
+      pos: rf_data.pos,
+      markernames: rf_data.labels,
+      lod: (function() {
+        var _results;
+        _results = [];
+        for (i in rf_data.pos) {
+          _results.push(i);
+        }
+        return _results;
+      })(),
+      rf: (function() {
+        var _results;
+        _results = [];
+        for (i in rf_data.pos) {
+          _results.push(i);
+        }
+        return _results;
+      })()
+    };
+    console.log(markerindex);
+    console.log(data.lod);
+    console.log(data.rf);
+    for (row = _m = 0, _ref25 = rf_data.rf.length; 0 <= _ref25 ? _m < _ref25 : _m > _ref25; row = 0 <= _ref25 ? ++_m : --_m) {
+      if (row < markerindex) {
+        data.rf[row] = rf_data.rf[row][markerindex];
+        data.lod[row] = rf_data.rf[markerindex][row];
+      } else if (row > markerindex) {
+        data.lod[row] = rf_data.rf[row][markerindex];
+        data.rf[row] = rf_data.rf[markerindex][row];
+      } else {
+        data.lod[row] = null;
+        data.rf[row] = null;
+      }
+    }
+    if (g_scans[panelindex] != null) {
+      g_scans[panelindex].remove();
+    }
+    mylodchart = lodchart().height(hbot).width(wbot).margin(margin).axispos(axispos).ylim([0.0, d3.max(data.lod)]).lightrect(lightrect).darkrect(darkrect).linewidth(0).linecolor("").pointsize(pointsize).pointcolor(pointcolor).pointstroke(pointstroke).lodvarname("lod");
+    myrfchart = lodchart().height(hbot).width(wbot).margin(margin).axispos(axispos).ylim([0.0, 1.0]).lightrect(lightrect).darkrect(darkrect).linewidth(0).linecolor("").pointsize(pointsize).pointcolor(pointcolor).pointstroke(pointstroke).ylab("Rec frac").lodvarname("rf");
+    g_scans[panelindex] = svg.append("g").attr("id", "lod_rf_" + (panelindex + 1)).attr("transform", "translate(" + htop + ", " + (wbot * panelindex) + ")").datum(data).call(mylodchart);
+    return g_scans[panelindex] = g_scans[panelindex].append("g").attr("transform", "translate(" + hbot + ", 0)").datum(data).call(myrfchart);
   };
   celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
     var lod, mari, marj, rf;
@@ -132,6 +190,13 @@ iplotRF = function(rf_data, geno, chartOpts) {
   }).on("mouseout", function() {
     return celltip.hide();
   }).on("click", function(d) {
-    return create_crosstab(rf_data.labels[d.j], rf_data.labels[d.i]);
+    create_crosstab(rf_data.labels[d.j], rf_data.labels[d.i]);
+    create_scans(d.i, 0);
+    if (d.i !== d.j) {
+      return create_scans(d.j, 1);
+    } else {
+      g_scans[1].remove();
+      return g_scans[1] = null;
+    }
   });
 };

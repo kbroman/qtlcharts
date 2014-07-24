@@ -262,5 +262,10 @@ crosstab = () ->
                       bordercolor = value
                       chart
 
+    chart.fontsize = (value) ->
+                      return fontsize if !arguments.length
+                      fontsize = value
+                      chart
+
     # return the chart function
     chart

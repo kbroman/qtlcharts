@@ -230,5 +230,12 @@ crosstab = function() {
     bordercolor = value;
     return chart;
   };
+  chart.fontsize = function(value) {
+    if (!arguments.length) {
+      return fontsize;
+    }
+    fontsize = value;
+    return chart;
+  };
   return chart;
 };

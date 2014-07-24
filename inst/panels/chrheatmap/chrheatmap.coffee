@@ -34,8 +34,8 @@ chrheatmap = () ->
             totmar = sumArray(data.nmar)
             if totmar != ny
                 console.log("sum(data.nmar) != data.z.length")
-            if data.chr.length != nchr
-                console.log("data.nmar.length != data.chr.length")
+            if data.chrnames.length != nchr
+                console.log("data.nmar.length != data.chrnames.length")
             if data.labels.length != totmar
                 console.log("data.labels.length != sum(data.nmar)")         
             if chrGap < 2
@@ -142,7 +142,7 @@ chrheatmap = () ->
                  .attr("y", margin.top+height+axispos.xtitle)
                  .text(xlab)
             xaxis.selectAll("empty")
-                 .data(data.chr)
+                 .data(data.chrnames)
                  .enter()
                  .append("text")
                  .attr("x", (d,i) -> margin.left + (xChrBorder[i]+xChrBorder[i+1])/2)
@@ -159,7 +159,7 @@ chrheatmap = () ->
                  .text(ylab)
                  .attr("transform", if rotate_ylab then "rotate(270,#{margin.left-axispos.ytitle},#{margin.top+height/2})" else "")
             yaxis.selectAll("empty")
-                 .data(data.chr)
+                 .data(data.chrnames)
                  .enter()
                  .append("text")
                  .attr("y", (d,i) -> margin.top + (yChrBorder[i]+yChrBorder[i+1])/2)

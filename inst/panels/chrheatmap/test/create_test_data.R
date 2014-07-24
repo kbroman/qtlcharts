@@ -12,6 +12,6 @@ names(n.mar) <- NULL
 chrnam <- chrnames(badorder)
 
 library(jsonlite)
-cat(jsonlite::toJSON(list(z=lod, nmar=n.mar, chr=chrnam, labels=mnames),
+cat(jsonlite::toJSON(list(z=lod, nmar=n.mar, chrnames=chrnam, labels=mnames),
                      na="null"),
     file="data.json")

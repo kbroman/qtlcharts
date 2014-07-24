@@ -54,7 +54,7 @@ function(cross, chr, file, onefile=FALSE, openfile=TRUE, title="",
         caption <- 'Click on heatmap in top-left to view the corresponding two-locus genotype table to the right'
 
     file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                      panels=c("chrheatmap", "crosstab"), charts="iplotRF", chartdivid=chartdivid,
+                      panels=c("chrheatmap", "crosstab", "lodchart"), charts="iplotRF", chartdivid=chartdivid,
                       caption=caption, print=print)
 
     rf_json <- data4iplotRF(cross)

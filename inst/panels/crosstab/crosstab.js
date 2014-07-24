@@ -181,6 +181,13 @@ crosstab = function() {
     cellWidth = value;
     return chart;
   };
+  chart.cellPad = function(value) {
+    if (!arguments.length) {
+      return cellPad;
+    }
+    cellPad = value;
+    return chart;
+  };
   chart.margin = function(value) {
     if (!arguments.length) {
       return margin;

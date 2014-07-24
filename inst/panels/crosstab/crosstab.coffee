@@ -227,6 +227,11 @@ crosstab = () ->
                       cellWidth = value
                       chart
 
+    chart.cellPad = (value) ->
+                      return cellPad if !arguments.length
+                      cellPad = value
+                      chart
+
     chart.margin = (value) ->
                       return margin if !arguments.length
                       margin = value

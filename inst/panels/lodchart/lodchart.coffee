@@ -60,6 +60,7 @@ lodchart = () ->
              .attr("fill", darkrect)
              .attr("stroke", "none")
 
+            margin.inner = margin?.inner ? 0
             yscale.domain(ylim)
                   .range([height+margin.top, margin.top+margin.inner])
 

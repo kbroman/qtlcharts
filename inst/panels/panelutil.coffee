@@ -259,4 +259,17 @@ transpose = (mat) -> ((mat[i][j] for i in [0...mat.length]) for j in [0...mat[0]
 colSums = (mat) -> rowSums(transpose(mat))
 
 # log base 2
-log2 = (x) -> Math.log(x)/Math.log(2.0)
+log2 = (x) -> 
+    return(x) unless x?
+    Math.log(x)/Math.log(2.0)
+
+# log base 10
+log10 = (x) ->
+    return(x) unless x?
+    Math.log(x)/Math.log(10.0)
+
+# absolute value, preserving nulls
+abs = (x) -> 
+    return(x) unless x?
+    Math.abs(x)
+

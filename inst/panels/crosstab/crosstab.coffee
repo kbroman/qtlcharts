@@ -43,18 +43,18 @@ crosstab = () ->
                         cell.shaded = true
                     if i < nrow-1
                         denom = tab[nrow][j] - tab[nrow-1][j]
-                        cell.colpercent = if denom > 0 then "#{Math.round(100*tab[i][j]/denom)}%" else "&mdash;"
+                        cell.colpercent = if denom > 0 then "#{Math.round(100*tab[i][j]/denom)}%" else "\u2014"
                     else if i == nrow-1
                         denom = tab[nrow][j]
-                        cell.colpercent = if denom > 0 then "(#{Math.round(100*tab[i][j]/denom)}%)" else "&mdash;"
+                        cell.colpercent = if denom > 0 then "(#{Math.round(100*tab[i][j]/denom)}%)" else "\u2014"
                     else
                         cell.colpercent = cell.value
                     if j < ncol-1
                         denom = tab[i][ncol] - tab[i][ncol-1]
-                        cell.rowpercent = if denom > 0 then "#{Math.round(100*tab[i][j]/denom)}%" else "&mdash;"
+                        cell.rowpercent = if denom > 0 then "#{Math.round(100*tab[i][j]/denom)}%" else "\u2014"
                     else if j == ncol-1
                         denom = tab[i][ncol]
-                        cell.rowpercent = if denom > 0 then "(#{Math.round(100*tab[i][j]/denom)}%)" else "&mdash;"
+                        cell.rowpercent = if denom > 0 then "(#{Math.round(100*tab[i][j]/denom)}%)" else "\u2014"
                     else
                         cell.rowpercent = cell.value
                     cells.push(cell)

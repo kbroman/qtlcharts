@@ -168,6 +168,13 @@ iplotRF = (rf_data, geno, chartOpts) ->
                                  .datum(data)
                                  .call(mylodchart)
 
+        mylodchart.markerSelect().on "click", (d) ->
+                                          newmarker = d.name
+                                          if panelindex == 0
+                                              create_crosstab(rf_data.labels[markerindex], newmarker)
+                                          else
+                                              create_crosstab(newmarker, rf_data.labels[markerindex])
+                                          create_scan(rf_data.labels.indexOf(newmarker), 1-panelindex)
 
     celltip = d3.tip()
                 .attr('class', 'd3-tip')

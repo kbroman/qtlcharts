@@ -145,7 +145,17 @@ iplotRF = function(rf_data, geno, chartOpts) {
       g_scans[panelindex].remove();
     }
     mylodchart = lodchart().height(hbot - margin.top - margin.bottom).width(wbot - margin.left - margin.right).margin(margin).axispos(axispos).ylim([0.0, d3.max(data.lod)]).lightrect(lightrect).darkrect(darkrect).linewidth(0).linecolor("").pointsize(pointsize).pointcolor(pointcolor).pointstroke(pointstroke).lodvarname("lod").title(data.markernames[markerindex]);
-    return g_scans[panelindex] = svg.append("g").attr("id", "lod_rf_" + (panelindex + 1)).attr("transform", "translate(" + (wbot * panelindex) + ", " + htop + ")").datum(data).call(mylodchart);
+    g_scans[panelindex] = svg.append("g").attr("id", "lod_rf_" + (panelindex + 1)).attr("transform", "translate(" + (wbot * panelindex) + ", " + htop + ")").datum(data).call(mylodchart);
+    return mylodchart.markerSelect().on("click", function(d) {
+      var newmarker;
+      newmarker = d.name;
+      if (panelindex === 0) {
+        create_crosstab(rf_data.labels[markerindex], newmarker);
+      } else {
+        create_crosstab(newmarker, rf_data.labels[markerindex]);
+      }
+      return create_scan(rf_data.labels.indexOf(newmarker), 1 - panelindex);
+    });
   };
   celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
     var lod, mari, marj, rf;

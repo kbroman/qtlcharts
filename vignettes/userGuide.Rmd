@@ -776,8 +776,8 @@ iplotRF(badorder)
 ```
 
 The main plot is a heatmap of the LOD scores indicating pairwise
-linkage; red indicates large LOD score with recombination fraction <
-1/2; blue indicates large LOD score with recombination fraction > 1/2.
+linkage; blue indicates large LOD score with recombination fraction <
+1/2; red indicates large LOD score with recombination fraction > 1/2.
 Hover over the heat map to view the LOD and recombination fraction
 values. Click to generate additional views: to the right, a
 cross-tabulation of two-locus genotypes for the pair of markers;
@@ -785,9 +785,10 @@ below, plots of the LOD scores for linkage, for the selected markers
 versus every other marker across the genome.
 
 Hover over the row and column headings in the cross-tab to view
-conditional distributions (genotypes as percentages of the
-non-missing observations; missing value as percentage of the total
-individuals).
+conditional distributions (genotypes as percentages of the non-missing
+observations; missing value as percentage of the total individuals).
+Click on the points in the lower panels to refresh the cross-tab and
+lower panels with the selected marker.
 
 By default, the LOD scores in the heatmap are truncated at 12. This
 can be changed with the chart option `lodlim`, which takes an

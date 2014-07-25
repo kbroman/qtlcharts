@@ -21,7 +21,7 @@ iplotRF = (rf_data, geno, chartOpts) ->
     pointsize = chartOpts?.pointsize ? 2 # point size in lower panels with LOD and rf
     pointcolor = chartOpts?.pointcolor ? "slateblue" # point color in lower panels with LOD and rf
     pointstroke = chartOpts?.pointstroke ? "black" # stroke color for points in lower panels with LOD and rf
-    colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # colors for heat map
+    colors = chartOpts?.colors ? ["crimson", "white", "slateblue"] # colors for heat map
     lodlim = chartOpts?.lodlim ? [0, 12] # range of LOD values to display; omit below 1st, truncate about 2nd
     oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
     # chartOpts end

@@ -51,12 +51,15 @@ function(cross, chr, file, onefile=FALSE, openfile=TRUE, title="",
     if(missing(file)) file <- NULL
 
     if(missing(caption) || is.null(caption))
-        caption <- c('Click on heatmap in top-left to view the corresponding two-locus ',
+        caption <- c('The heatmap displays LOD scores indicating linkage between all ',
+                     'pairs of markers. Blue indicates large LOD with rf < 1/2; red ',
+                     'indicates large LOD but with rf > 1/2. ',
+                     'Click on the heatmap to view the corresponding two-locus ',
                      'genotype table to the right and LOD scores for selected markers, ',
-                     'below. In subsequent cross-tabulation on right, hover over column ',
-                     'and row headings to view conditional distributions. In panels below, ',
-                     'hover over points to view marker names and click to refresh cross-tab ',
-                     'and lower panels and selected marker.')
+                     'below. In the subsequent cross-tabulation on right, hover over column ',
+                     'and row headings to view conditional distributions. In the panels below, ',
+                     'hover over points to view marker names and click to refresh the cross-tab ',
+                     'and lower panels with the selected marker.')
 
     file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
                       panels=c("chrheatmap", "crosstab", "lodchart"), charts="iplotRF", chartdivid=chartdivid,

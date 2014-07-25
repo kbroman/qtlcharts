@@ -453,7 +453,7 @@ customization options for each chart.
 
 `pointstroke = "black"` &mdash; stroke color for points in lower panels with LOD and rf
 
-`colors = c("slateblue", "white", "crimson")` &mdash; colors for heat map
+`colors = c("crimson", "white", "slateblue")` &mdash; colors for heat map
 
 `lodlim = c(0, 12)` &mdash; range of LOD values to display; omit below 1st, truncate about 2nd
 

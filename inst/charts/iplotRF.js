@@ -31,7 +31,7 @@ iplotRF = function(rf_data, geno, chartOpts) {
   pointsize = (_ref14 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? _ref14 : 2;
   pointcolor = (_ref15 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? _ref15 : "slateblue";
   pointstroke = (_ref16 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? _ref16 : "black";
-  colors = (_ref17 = chartOpts != null ? chartOpts.colors : void 0) != null ? _ref17 : ["slateblue", "white", "crimson"];
+  colors = (_ref17 = chartOpts != null ? chartOpts.colors : void 0) != null ? _ref17 : ["crimson", "white", "slateblue"];
   lodlim = (_ref18 = chartOpts != null ? chartOpts.lodlim : void 0) != null ? _ref18 : [0, 12];
   oneAtTop = (_ref19 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? _ref19 : false;
   chartdivid = (_ref20 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref20 : 'chart';

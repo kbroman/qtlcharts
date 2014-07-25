@@ -137,10 +137,9 @@ iplotRF = function(rf_data, geno, chartOpts) {
         data.lod[row] = rf_data.rf[markerindex][row];
       } else if (row < markerindex) {
         data.lod[row] = rf_data.rf[row][markerindex];
-      } else {
-        data.lod[row] = null;
       }
     }
+    data.lod[markerindex] = null;
     if (g_scans[panelindex] != null) {
       g_scans[panelindex].remove();
     }

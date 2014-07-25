@@ -142,8 +142,7 @@ iplotRF = (rf_data, geno, chartOpts) ->
                 data.lod[row] = rf_data.rf[markerindex][row]
             else if row < markerindex
                 data.lod[row] = rf_data.rf[row][markerindex]
-            else
-                data.lod[row] = null
+        data.lod[markerindex] = null # point at marker: set to maximum LOD
 
         g_scans[panelindex].remove() if g_scans[panelindex]?
 

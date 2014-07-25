@@ -25,7 +25,7 @@ iplotRF = function(rf_data, geno, chartOpts) {
   };
   lightrect = (_ref9 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? _ref9 : "#e6e6e6";
   darkrect = (_ref10 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? _ref10 : "#c8c8c8";
-  hilitcolor = (_ref11 = chartOpts != null ? chartOpts.hilitcolor : void 0) != null ? _ref11 : "#e6e6e6";
+  hilitcolor = (_ref11 = chartOpts != null ? chartOpts.hilitcolor : void 0) != null ? _ref11 : "#e9cfec";
   nullcolor = (_ref12 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? _ref12 : "#e6e6e6";
   bordercolor = (_ref13 = chartOpts != null ? chartOpts.bordercolor : void 0) != null ? _ref13 : "black";
   pointsize = (_ref14 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? _ref14 : 2;

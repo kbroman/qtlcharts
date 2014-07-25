@@ -42,7 +42,7 @@ Click on a chart for the corresponding interactive version.
 | [![iplotScanone example](assets/pics/charts/iplotScanone.png)](example/iplotScanone.html)    | [![iplotCorr example](assets/pics/charts/iplotCorr.png)](example/iplotCorr.html) |
 | [![iplotMScanone example](assets/pics/charts/iplotMScanone.png)](example/iplotMScanone.html) | [![iplotMap example](assets/pics/charts/iplotMap.png)](example/iplotMap.html)    |
 | [![iplotCurves example](assets/pics/charts/iplotCurves.png)](example/iplotCurves.html)       | [![iheatmap example](assets/pics/charts/iheatmap.png)](example/iheatmap.html)    |
-| [![iboxplot example](assets/pics/charts/iboxplot.png)](example/iboxplot.html)                |                                                                                                       |
+| [![iboxplot example](assets/pics/charts/iboxplot.png)](example/iboxplot.html)                | [![iplotRF example](assets/pics/charts/iplotRF.png)](example/iplotRF.html)       |
 
 
 ---

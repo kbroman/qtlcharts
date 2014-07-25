@@ -455,7 +455,7 @@ customization options for each chart.
 
 `colors = c("slateblue", "white", "crimson")` &mdash; colors for heat map
 
-`lodlim = c(2, 12)` &mdash; range of LOD values to display; omit below 1st, truncate about 2nd
+`lodlim = c(0, 12)` &mdash; range of LOD values to display; omit below 1st, truncate about 2nd
 
 `oneAtTop = false` &mdash; whether to put chr 1 at top of heatmap
 

@@ -115,7 +115,6 @@ iplotRF = function(rf_data, geno, chartOpts) {
     mycrosstab = crosstab().cellHeight(cellHeight).cellWidth(cellWidth).cellPad(cellPad).margin(margin).fontsize(fontsize).rectcolor(lightrect).hilitcolor(hilitcolor).bordercolor(bordercolor);
     return g_crosstab = svg.append("g").attr("id", "crosstab").attr("transform", "translate(" + crosstab_xpos + ", " + crosstab_ypos + ")").datum(data).call(mycrosstab);
   };
-  svg.append("line").attr("x1", 0).attr("x2", totalw).attr("y1", htop).attr("y2", htop);
   create_scan = function(markerindex, panelindex) {
     var data, i, mylodchart, _m, _ref25;
     data = {

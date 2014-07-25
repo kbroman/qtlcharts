@@ -51,11 +51,11 @@ function(cross, chr, file, onefile=FALSE, openfile=TRUE, title="",
     if(missing(file)) file <- NULL
 
     if(missing(caption) || is.null(caption))
-        caption <- c('Click on heatmap in top-left to view the corresponding two-locus',
-                     'genotype table to the right and LOD scores for selected markers,',
-                     'below. In subsequent cross-tabulation on right, hover over column',
-                     'and row headings to view conditional distributions. In panels below,',
-                     'hover over points to view marker names and click to refresh cross-tab',
+        caption <- c('Click on heatmap in top-left to view the corresponding two-locus ',
+                     'genotype table to the right and LOD scores for selected markers, ',
+                     'below. In subsequent cross-tabulation on right, hover over column ',
+                     'and row headings to view conditional distributions. In panels below, ',
+                     'hover over points to view marker names and click to refresh cross-tab ',
                      'and lower panels and selected marker.')
 
     file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),

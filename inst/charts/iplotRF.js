@@ -2,19 +2,20 @@
 var iplotRF;
 
 iplotRF = function(rf_data, geno, chartOpts) {
-  var axispos, bordercolor, cellHeight, cellPad, cellWidth, cells, celltip, chartdivid, chrGap, chrtype, col, colors, create_crosstab, create_scans, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, darkrect, fontsize, g_crosstab, g_heatmap, g_scans, hbot, heatmap_height, heatmap_width, hilitcolor, htop, lightrect, lodlim, margin, max_ngeno, mychrheatmap, nullcolor, oneAtTop, pixelPerCell, pointcolor, pointsize, pointstroke, row, svg, totalh, totalw, totmar, w, wbot, _i, _j, _k, _l, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, bordercolor, cellHeight, cellPad, cellWidth, cells, celltip, chartdivid, chrGap, chrtype, col, colors, create_crosstab, create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, darkrect, fontsize, g_crosstab, g_heatmap, g_scans, hbot, heatmap_height, heatmap_width, hilitcolor, htop, lightrect, lodlim, margin, max_ngeno, mychrheatmap, nullcolor, oneAtTop, pixelPerCell, pointcolor, pointsize, pointstroke, row, svg, totalh, totalw, totmar, w, wbot, _i, _j, _k, _l, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   pixelPerCell = (_ref = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? _ref : null;
   chrGap = (_ref1 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref1 : 2;
   cellHeight = (_ref2 = chartOpts != null ? chartOpts.cellHeight : void 0) != null ? _ref2 : 30;
   cellWidth = (_ref3 = chartOpts != null ? chartOpts.cellWidth : void 0) != null ? _ref3 : 80;
   cellPad = (_ref4 = chartOpts != null ? chartOpts.cellPad : void 0) != null ? _ref4 : 20;
-  hbot = (_ref5 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref5 : 150;
+  hbot = (_ref5 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref5 : 300;
   fontsize = (_ref6 = chartOpts != null ? chartOpts.fontsize : void 0) != null ? _ref6 : cellHeight * 0.7;
   margin = (_ref7 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref7 : {
     left: 60,
-    top: 40,
-    right: 40,
-    bottom: 40
+    top: 30,
+    right: 10,
+    bottom: 40,
+    inner: 5
   };
   axispos = (_ref8 = chartOpts != null ? chartOpts.axispos : void 0) != null ? _ref8 : {
     xtitle: 25,
@@ -36,9 +37,9 @@ iplotRF = function(rf_data, geno, chartOpts) {
   chartdivid = (_ref20 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref20 : 'chart';
   totmar = sumArray(rf_data.nmar);
   if (pixelPerCell == null) {
-    pixelPerCell = d3.max([2, Math.floor(500 / totmar)]);
+    pixelPerCell = d3.max([2, Math.floor(600 / totmar)]);
   }
-  w = chrGap * rf_data.chr.length + pixelPerCell * totmar;
+  w = chrGap * rf_data.chrnames.length + pixelPerCell * totmar;
   heatmap_width = w + margin.left + margin.right;
   heatmap_height = w + margin.top + margin.bottom;
   max_ngeno = d3.max((function() {
@@ -59,9 +60,7 @@ iplotRF = function(rf_data, geno, chartOpts) {
   wbot = (heatmap_width + crosstab_width) / 2;
   totalw = heatmap_width + crosstab_width;
   htop = d3.max([heatmap_height, crosstab_height]);
-  totalh = htop + hbot * 2;
-  console.log("totalw: " + totalw);
-  console.log("totalh: " + totalh);
+  totalh = htop + hbot;
   svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   if (d3.min(lodlim) < 0) {
     console.log("lodlim values must be non-negative; ignored");
@@ -116,14 +115,14 @@ iplotRF = function(rf_data, geno, chartOpts) {
     mycrosstab = crosstab().cellHeight(cellHeight).cellWidth(cellWidth).cellPad(cellPad).margin(margin).fontsize(fontsize).rectcolor(lightrect).hilitcolor(hilitcolor).bordercolor(bordercolor);
     return g_crosstab = svg.append("g").attr("id", "crosstab").attr("transform", "translate(" + crosstab_xpos + ", " + crosstab_ypos + ")").datum(data).call(mycrosstab);
   };
-  create_scans = function(markerindex, panelindex) {
-    var data, i, mylodchart, myrfchart, _m, _ref25;
+  svg.append("line").attr("x1", 0).attr("x2", totalw).attr("y1", htop).attr("y2", htop);
+  create_scan = function(markerindex, panelindex) {
+    var data, i, mylodchart, _m, _ref25;
     data = {
       chrnames: rf_data.chrnames,
-      lodnames: ["lod", "rf"],
+      lodnames: ["lod"],
       chr: rf_data.chr,
       pos: rf_data.pos,
-      markernames: rf_data.labels,
       lod: (function() {
         var _results;
         _results = [];
@@ -132,37 +131,22 @@ iplotRF = function(rf_data, geno, chartOpts) {
         }
         return _results;
       })(),
-      rf: (function() {
-        var _results;
-        _results = [];
-        for (i in rf_data.pos) {
-          _results.push(i);
-        }
-        return _results;
-      })()
+      markernames: rf_data.labels
     };
-    console.log(markerindex);
-    console.log(data.lod);
-    console.log(data.rf);
     for (row = _m = 0, _ref25 = rf_data.rf.length; 0 <= _ref25 ? _m < _ref25 : _m > _ref25; row = 0 <= _ref25 ? ++_m : --_m) {
-      if (row < markerindex) {
-        data.rf[row] = rf_data.rf[row][markerindex];
+      if (row > markerindex) {
         data.lod[row] = rf_data.rf[markerindex][row];
-      } else if (row > markerindex) {
+      } else if (row < markerindex) {
         data.lod[row] = rf_data.rf[row][markerindex];
-        data.rf[row] = rf_data.rf[markerindex][row];
       } else {
         data.lod[row] = null;
-        data.rf[row] = null;
       }
     }
     if (g_scans[panelindex] != null) {
       g_scans[panelindex].remove();
     }
-    mylodchart = lodchart().height(hbot).width(wbot).margin(margin).axispos(axispos).ylim([0.0, d3.max(data.lod)]).lightrect(lightrect).darkrect(darkrect).linewidth(0).linecolor("").pointsize(pointsize).pointcolor(pointcolor).pointstroke(pointstroke).lodvarname("lod");
-    myrfchart = lodchart().height(hbot).width(wbot).margin(margin).axispos(axispos).ylim([0.0, 1.0]).lightrect(lightrect).darkrect(darkrect).linewidth(0).linecolor("").pointsize(pointsize).pointcolor(pointcolor).pointstroke(pointstroke).ylab("Rec frac").lodvarname("rf");
-    g_scans[panelindex] = svg.append("g").attr("id", "lod_rf_" + (panelindex + 1)).attr("transform", "translate(" + htop + ", " + (wbot * panelindex) + ")").datum(data).call(mylodchart);
-    return g_scans[panelindex] = g_scans[panelindex].append("g").attr("transform", "translate(" + hbot + ", 0)").datum(data).call(myrfchart);
+    mylodchart = lodchart().height(hbot - margin.top - margin.bottom).width(wbot - margin.left - margin.right).margin(margin).axispos(axispos).ylim([0.0, d3.max(data.lod)]).lightrect(lightrect).darkrect(darkrect).linewidth(0).linecolor("").pointsize(pointsize).pointcolor(pointcolor).pointstroke(pointstroke).lodvarname("lod").title(data.markernames[markerindex]);
+    return g_scans[panelindex] = svg.append("g").attr("id", "lod_rf_" + (panelindex + 1)).attr("transform", "translate(" + (wbot * panelindex) + ", " + htop + ")").datum(data).call(mylodchart);
   };
   celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
     var lod, mari, marj, rf;
@@ -191,9 +175,9 @@ iplotRF = function(rf_data, geno, chartOpts) {
     return celltip.hide();
   }).on("click", function(d) {
     create_crosstab(rf_data.labels[d.j], rf_data.labels[d.i]);
-    create_scans(d.i, 0);
+    create_scan(d.i, 0);
     if (d.i !== d.j) {
-      return create_scans(d.j, 1);
+      return create_scan(d.j, 1);
     } else {
       g_scans[1].remove();
       return g_scans[1] = null;

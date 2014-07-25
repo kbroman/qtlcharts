@@ -429,11 +429,11 @@ customization options for each chart.
 
 `cellPad = 20` &mdash; cell padding (in pixels) to right of text in crosstab
 
-`hbot = 150` &mdash; height (in pixels) of each of the lower panels with rf and LOD across genome
+`hbot = 300` &mdash; height (in pixels) of each of the lower panels with rf and LOD across genome
 
 `fontsize = cellHeight*0.7` &mdash; font size in crosstab
 
-`margin = list(left=60, top=40, right=40, bottom=40)` &mdash; margins in each panel
+`margin = list(left=60, top=30, right=10, bottom=40, inner=5)` &mdash; margins in each panel
 
 `axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
 

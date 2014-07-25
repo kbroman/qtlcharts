@@ -44,7 +44,7 @@ lodchart = function() {
   pointsAtMarkers = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var chr, curves, g, gEnter, hiddenpoints, lodvarnum, markerpoints, markertip, svg, titlegrp, x, xaxis, yaxis, _i, _len, _ref, _ref1;
+      var bigpointsize, chr, curves, g, gEnter, hiddenpoints, lodvarnum, markerpoints, markertip, svg, titlegrp, x, xaxis, yaxis, _i, _len, _ref, _ref1;
       lodvarname = lodvarname != null ? lodvarname : data.lodnames[0];
       data[lodvarname] = (function() {
         var _i, _len, _ref, _results;
@@ -52,7 +52,7 @@ lodchart = function() {
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           x = _ref[_i];
-          _results.push(Math.abs(x));
+          _results.push(abs(x));
         }
         return _results;
       })();
@@ -126,7 +126,13 @@ lodchart = function() {
           return xscale[d.chr](d.pos);
         }).attr("cy", function(d) {
           return yscale(d.lod);
-        }).attr("r", pointsize).attr("fill", pointcolor).attr("stroke", pointstroke).attr("pointer-events", "hidden");
+        }).attr("r", function(d) {
+          if (d.lod != null) {
+            return pointsize;
+          } else {
+            return null;
+          }
+        }).attr("fill", pointcolor).attr("stroke", pointstroke).attr("pointer-events", "hidden");
       }
       if (pointsAtMarkers) {
         hiddenpoints = g.append("g").attr("id", "markerpoints_hidden");
@@ -134,13 +140,20 @@ lodchart = function() {
           return [d.name, " LOD = " + (d3.format('.2f')(d.lod))];
         }).direction("e").offset([0, 10]);
         svg.call(markertip);
+        bigpointsize = d3.max([2 * pointsize, 3]);
         markerSelect = hiddenpoints.selectAll("empty").data(data.markers).enter().append("circle").attr("cx", function(d) {
           return xscale[d.chr](d.pos);
         }).attr("cy", function(d) {
           return yscale(d.lod);
         }).attr("id", function(d) {
           return d.name;
-        }).attr("r", d3.max([pointsize * 2, 3])).attr("opacity", 0).attr("fill", pointcolor).attr("stroke", pointstroke).attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
+        }).attr("r", function(d) {
+          if (d.lod != null) {
+            return bigpointsize;
+          } else {
+            return null;
+          }
+        }).attr("opacity", 0).attr("fill", pointcolor).attr("stroke", pointstroke).attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
           d3.select(this).attr("opacity", 1);
           return markertip.show(d);
         }).on("mouseout.paneltip", function() {

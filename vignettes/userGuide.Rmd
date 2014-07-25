@@ -754,6 +754,51 @@ The labels for the axes can be controlled with the options `xlab`,
 iheatmap(z, x, y, chartOpts=list(xlab="theta", ylab="psi", zlab="response"))
 ```
 
+### `iplotRF`
+
+`iplotRF` is an interactive version of the R/qtl function `plot.rf`,
+a diagnostic plot of pairwise linkage between markers.
+
+We'll look at the `badorder` dataset included with R/qtl. We first run
+`est.rf` to estimate the recombination fraction between each pair of
+markers and to further calculate a LOD score indicating evidence for
+linkage for each marker pair.
+
+```{r badorder_rf}
+data(badorder)
+badorder <- est.rf(badorder)
+```
+
+Making the plot is simple.
+
+```{r iplotRF, eval=FALSE}
+iplotRF(badorder)
+```
+
+The main plot is a heatmap of the LOD scores indicating pairwise
+linkage; red indicates large LOD score with recombination fraction <
+1/2; blue indicates large LOD score with recombination fraction > 1/2.
+Hover over the heat map to view the LOD and recombination fraction
+values. Click to generate additional views: to the right, a
+cross-tabulation of two-locus genotypes for the pair of markers;
+below, plots of the LOD scores for linkage, for the selected markers
+versus every other marker across the genome.
+
+Hover over the row and column headings in the cross-tab to view
+conditional distributions (genotypes as percentages of the
+non-missing observations; missing value as percentage of the total
+individuals).
+
+By default, the LOD scores in the heatmap are truncated at 12. This
+can be changed with the chart option `lodlim`, which takes an
+interval. Marker pairs with LOD below the lower limit will be omitted
+from the heat map, which can give greater performance in the case of a
+very large number of markers.
+
+```{r iplotRF_lodlim, eval=FALSE}
+iplotRF(badorder, chartOpts=list(lodlim=c(2, 15)))
+```
+
 
 
 <!-- the following to make it look nicer -->

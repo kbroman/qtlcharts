@@ -44,7 +44,7 @@ lodchart = function() {
   pointsAtMarkers = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var chr, curves, g, gEnter, hiddenpoints, lodvarnum, markerpoints, markertip, svg, titlegrp, x, xaxis, yaxis, _i, _len, _ref;
+      var chr, curves, g, gEnter, hiddenpoints, lodvarnum, markerpoints, markertip, svg, titlegrp, x, xaxis, yaxis, _i, _len, _ref, _ref1;
       lodvarname = lodvarname != null ? lodvarname : data.lodnames[0];
       data[lodvarname] = (function() {
         var _i, _len, _ref, _results;
@@ -63,6 +63,7 @@ lodchart = function() {
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
       g = svg.select("g");
       g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", darkrect).attr("stroke", "none");
+      margin.inner = (_ref = margin != null ? margin.inner : void 0) != null ? _ref : 0;
       yscale.domain(ylim).range([height + margin.top, margin.top + margin.inner]);
       yticks = yticks != null ? yticks : yscale.ticks(nyticks);
       data = reorgLodData(data, lodvarname);
@@ -114,9 +115,9 @@ lodchart = function() {
         });
       };
       curves = g.append("g").attr("id", "curves");
-      _ref = data.chrnames;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        chr = _ref[_i];
+      _ref1 = data.chrnames;
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        chr = _ref1[_i];
         curves.append("path").datum(data.posByChr[chr]).attr("d", lodcurve(chr, lodvarnum)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none");
       }
       if (pointsize > 0) {

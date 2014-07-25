@@ -55,19 +55,19 @@ crosstab = function() {
           }
           if (i < nrow - 1) {
             denom = tab[nrow][j] - tab[nrow - 1][j];
-            cell.colpercent = denom > 0 ? "" + (Math.round(100 * tab[i][j] / denom)) + "%" : "&mdash;";
+            cell.colpercent = denom > 0 ? "" + (Math.round(100 * tab[i][j] / denom)) + "%" : "\u2014";
           } else if (i === nrow - 1) {
             denom = tab[nrow][j];
-            cell.colpercent = denom > 0 ? "(" + (Math.round(100 * tab[i][j] / denom)) + "%)" : "&mdash;";
+            cell.colpercent = denom > 0 ? "(" + (Math.round(100 * tab[i][j] / denom)) + "%)" : "\u2014";
           } else {
             cell.colpercent = cell.value;
           }
           if (j < ncol - 1) {
             denom = tab[i][ncol] - tab[i][ncol - 1];
-            cell.rowpercent = denom > 0 ? "" + (Math.round(100 * tab[i][j] / denom)) + "%" : "&mdash;";
+            cell.rowpercent = denom > 0 ? "" + (Math.round(100 * tab[i][j] / denom)) + "%" : "\u2014";
           } else if (j === ncol - 1) {
             denom = tab[i][ncol];
-            cell.rowpercent = denom > 0 ? "(" + (Math.round(100 * tab[i][j] / denom)) + "%)" : "&mdash;";
+            cell.rowpercent = denom > 0 ? "(" + (Math.round(100 * tab[i][j] / denom)) + "%)" : "\u2014";
           } else {
             cell.rowpercent = cell.value;
           }
@@ -181,6 +181,13 @@ crosstab = function() {
     cellWidth = value;
     return chart;
   };
+  chart.cellPad = function(value) {
+    if (!arguments.length) {
+      return cellPad;
+    }
+    cellPad = value;
+    return chart;
+  };
   chart.margin = function(value) {
     if (!arguments.length) {
       return margin;
@@ -221,6 +228,13 @@ crosstab = function() {
       return bordercolor;
     }
     bordercolor = value;
+    return chart;
+  };
+  chart.fontsize = function(value) {
+    if (!arguments.length) {
+      return fontsize;
+    }
+    fontsize = value;
     return chart;
   };
   return chart;

@@ -56,8 +56,8 @@ chrheatmap = function() {
       if (totmar !== ny) {
         console.log("sum(data.nmar) != data.z.length");
       }
-      if (data.chr.length !== nchr) {
-        console.log("data.nmar.length != data.chr.length");
+      if (data.chrnames.length !== nchr) {
+        console.log("data.nmar.length != data.chrnames.length");
       }
       if (data.labels.length !== totmar) {
         console.log("data.labels.length != sum(data.nmar)");
@@ -184,7 +184,7 @@ chrheatmap = function() {
       titlegrp = g.append("g").attr("class", "title").append("text").attr("x", margin.left + width / 2).attr("y", margin.top - titlepos).text(title);
       xaxis = g.append("g").attr("class", "x axis");
       xaxis.append("text").attr("class", "title").attr("x", margin.left + width / 2).attr("y", margin.top + height + axispos.xtitle).text(xlab);
-      xaxis.selectAll("empty").data(data.chr).enter().append("text").attr("x", function(d, i) {
+      xaxis.selectAll("empty").data(data.chrnames).enter().append("text").attr("x", function(d, i) {
         return margin.left + (xChrBorder[i] + xChrBorder[i + 1]) / 2;
       }).attr("y", oneAtTop ? margin.top - 2 * axispos.xlabel : margin.top + height + axispos.xlabel).text(function(d) {
         return d;
@@ -192,7 +192,7 @@ chrheatmap = function() {
       rotate_ylab = rotate_ylab != null ? rotate_ylab : ylab.length > 1;
       yaxis = g.append("g").attr("class", "y axis");
       yaxis.append("text").attr("class", "title").attr("y", margin.top + height / 2).attr("x", margin.left - axispos.ytitle).text(ylab).attr("transform", rotate_ylab ? "rotate(270," + (margin.left - axispos.ytitle) + "," + (margin.top + height / 2) + ")" : "");
-      yaxis.selectAll("empty").data(data.chr).enter().append("text").attr("y", function(d, i) {
+      yaxis.selectAll("empty").data(data.chrnames).enter().append("text").attr("y", function(d, i) {
         return margin.top + (yChrBorder[i] + yChrBorder[i + 1]) / 2;
       }).attr("x", margin.left - axispos.ylabel).text(function(d) {
         return d;
@@ -216,10 +216,14 @@ chrheatmap = function() {
         }
       }).attr("stroke", "none").attr("stroke-width", "1").on("mouseover.paneltip", function(d) {
         d3.select(this).attr("stroke", "black");
-        return celltip.show(d);
+        if (hover) {
+          return celltip.show(d);
+        }
       }).on("mouseout.paneltip", function() {
         d3.select(this).attr("stroke", "none");
-        return celltip.hide();
+        if (hover) {
+          return celltip.hide();
+        }
       });
       return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });

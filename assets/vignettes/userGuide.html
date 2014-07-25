@@ -860,6 +860,48 @@ value, and the color for the maximum value.</p>
 <pre><code class="r">iheatmap(z, x, y, chartOpts=list(xlab=&quot;theta&quot;, ylab=&quot;psi&quot;, zlab=&quot;response&quot;))
 </code></pre>
 
+<h3><code>iplotRF</code></h3>
+
+<p><code>iplotRF</code> is an interactive version of the R/qtl function <code>plot.rf</code>,
+a diagnostic plot of pairwise linkage between markers.</p>
+
+<p>We&#39;ll look at the <code>badorder</code> dataset included with R/qtl. We first run
+<code>est.rf</code> to estimate the recombination fraction between each pair of
+markers and to further calculate a LOD score indicating evidence for
+linkage for each marker pair.</p>
+
+<pre><code class="r">data(badorder)
+badorder &lt;- est.rf(badorder)
+</code></pre>
+
+<p>Making the plot is simple.</p>
+
+<pre><code class="r">iplotRF(badorder)
+</code></pre>
+
+<p>The main plot is a heatmap of the LOD scores indicating pairwise
+linkage; red indicates large LOD score with recombination fraction &lt;
+&frac12;; blue indicates large LOD score with recombination fraction &gt; &frac12;.
+Hover over the heat map to view the LOD and recombination fraction
+values. Click to generate additional views: to the right, a
+cross-tabulation of two-locus genotypes for the pair of markers;
+below, plots of the LOD scores for linkage, for the selected markers
+versus every other marker across the genome.</p>
+
+<p>Hover over the row and column headings in the cross-tab to view
+conditional distributions (genotypes as percentages of the
+non-missing observations; missing value as percentage of the total
+individuals).</p>
+
+<p>By default, the LOD scores in the heatmap are truncated at 12. This
+can be changed with the chart option <code>lodlim</code>, which takes an
+interval. Marker pairs with LOD below the lower limit will be omitted
+from the heat map, which can give greater performance in the case of a
+very large number of markers.</p>
+
+<pre><code class="r">iplotRF(badorder, chartOpts=list(lodlim=c(2, 15)))
+</code></pre>
+
 <!-- the following to make it look nicer -->
 
 <p><link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link></p>

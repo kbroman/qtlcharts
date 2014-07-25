@@ -34,7 +34,7 @@ lodchart = () ->
     chart = (selection) ->
         selection.each (data) ->
             lodvarname = lodvarname ? data.lodnames[0]
-            data[lodvarname] = (Math.abs(x) for x in data[lodvarname]) # take absolute values
+            data[lodvarname] = (abs(x) for x in data[lodvarname]) # take absolute values
             ylim = ylim ? [0, d3.max(data[lodvarname])]
             lodvarnum = data.lodnames.indexOf(lodvarname)
 
@@ -163,7 +163,7 @@ lodchart = () ->
                             .append("circle")
                             .attr("cx", (d) -> xscale[d.chr](d.pos))
                             .attr("cy", (d) -> yscale(d.lod))
-                            .attr("r", pointsize)
+                            .attr("r", (d) -> if d.lod? then pointsize else null)
                             .attr("fill", pointcolor)
                             .attr("stroke", pointstroke)
                             .attr("pointer-events", "hidden")
@@ -180,6 +180,8 @@ lodchart = () ->
                               .offset([0,10])
                 svg.call(markertip)
 
+                bigpointsize = d3.max([2*pointsize, 3])
+
                 markerSelect =
                     hiddenpoints.selectAll("empty")
                                 .data(data.markers)
@@ -188,7 +190,7 @@ lodchart = () ->
                                 .attr("cx", (d) -> xscale[d.chr](d.pos))
                                 .attr("cy", (d) -> yscale(d.lod))
                                 .attr("id", (d) -> d.name)
-                                .attr("r", d3.max([pointsize*2, 3]))
+                                .attr("r", (d) -> if d.lod? then bigpointsize else null)
                                 .attr("opacity", 0)
                                 .attr("fill", pointcolor)
                                 .attr("stroke", pointstroke)

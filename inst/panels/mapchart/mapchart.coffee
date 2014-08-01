@@ -153,7 +153,7 @@ mapchart = () ->
             markernames = (mar for mar of markerpos)
 
             markers = g.append("g").attr("id", "points")
-            markSelect =
+            markerSelect =
                 markers.selectAll("empty")
                        .data(markernames)
                        .enter()

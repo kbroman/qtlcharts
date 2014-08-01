@@ -296,14 +296,14 @@ function(file, onefile=FALSE, print=FALSE)
 }
 
 link_jquery <-
-function(file, onefile=FALSE, print=FALSE)
+function(file, onefile=FALSE, print=FALSE) # onefile and print ignored, as link-based
 {
     append_html_csslink(file, "http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css",
-                        onefile=onefile, print=print)
+                        onefile=FALSE, print=FALSE)
     append_html_jslink(file, "http://code.jquery.com/jquery-1.11.0.js",
-                       onefile=onefile, print=print)
+                        onefile=FALSE, print=FALSE)
     append_html_jslink(file, "http://code.jquery.com/ui/1.11.0/jquery-ui.js",
-                       onefile=onefile, print=print)
+                        onefile=FALSE, print=FALSE)
 }
 
 link_panelutil <-

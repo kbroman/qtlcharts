@@ -1,9 +1,6 @@
 # iplotMap: interactive plot of a genetic marker map
 # Karl W Broman
 
-# global vector of marker names for marker search box
-markernames = []
-
 iplotMap = (data, chartOpts) ->
 
     # chartOpts start
@@ -47,8 +44,50 @@ iplotMap = (data, chartOpts) ->
       .datum(data)
       .call(mychart)
 
-    # grab all marker names
-    for chr of data.map
-        these = (marker for marker of data.map[chr])
-        markernames = markernames.concat(these)
+# code for marker search box for iplotMap
+markersearch = (markernames) ->
 
+    # grab selected marker from the search box
+    selectedMarker = ""
+    $("#markerinput").submit () ->
+        newSelection = document.getElementById("marker").value
+        console.log("input: #{newSelection}")
+        event.preventDefault()
+        if newSelection != "" and newSelection != selectedMarker
+            if markernames.indexOf(newSelection) >= 0
+                selectedMarker = newSelection
+                console.log("selected marker: #{selectedMarker}")
+                d3.select("a#currentmarker")
+                  .text(selectedMarker)
+                return true
+            else
+                d3.select("a#currentmarker")
+                  .text("Marker \"#{newSelection}\" not found")
+        return false
+
+    # autocomplete
+    $('input#marker').autocomplete({
+        autoFocus: true,
+        source: (request, response) ->
+            matches = $.map(markernames, (tag) ->
+                tag if tag.toUpperCase().indexOf(request.term.toUpperCase()) is 0)
+            response(matches)
+        ,
+        select: (event, ui) ->
+            $('input#marker').val(ui.item.label)
+            $('input#submit').submit()})
+
+    # grayed out "Marker name"
+    $('input#marker').each(() ->
+        $(this)
+            .data('default', $(this).val())
+            .addClass('inactive')
+            .focus(() ->
+                $(this).removeClass('inactive')
+                $(this).val('') if($(this).val() is $(this).data('default') or $(this).val() is '')
+            )
+            .blur(() ->
+                if($(this).val() is '')
+                    $(this).addClass('inactive').val($(this).data('default'))
+            )
+        )

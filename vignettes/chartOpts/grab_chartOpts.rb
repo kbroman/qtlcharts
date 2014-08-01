@@ -7,7 +7,6 @@
 def find_coffeescript_files (directory)
     files = []
     Dir.foreach(directory) do |file|
-        next if file =~ /^markersearch/ # ignore the markersearch.coffee file
         files.push(file) if file =~ /\.coffee$/
     end
     files

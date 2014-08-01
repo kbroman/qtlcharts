@@ -66,7 +66,7 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
                                     chartdivid, '_chartOpts);'))
 
     add_searchbox(file, "markerinput", "marker", "Marker name")
-    link_markersearch(file, onefile=onefile, print=print)
+    append_html_jscode(file, paste0('markersearch(', chartdivid, '_data.markernames);'))
 
     append_html_bottom(file, print=print)
 
@@ -92,11 +92,3 @@ function(file, formid="markerinput", inputid="marker", text="Marker name")
     cat('    </form>\n</div>\n\n',
         file=file, append=TRUE, sep='')
 }
-
-link_markersearch <-
-function(file, onefile=FALSE, print=FALSE)
-{
-    append_html_jslink(file, system.file('charts', 'markersearch.js', package='qtlcharts'),
-                       onefile=onefile, print=print)
-}
-

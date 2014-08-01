@@ -48,7 +48,8 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
     if(missing(file)) file <- NULL
 
     if(missing(caption) || is.null(caption))
-        caption <- 'Hover over marker positions to view the marker names.'
+        caption <- c('Hover over marker positions to view the marker names and positions. ',
+                     'Enter a marker name in the search box below, to have it highlighted.')
 
     file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil", "jquery"),
                       panels="mapchart", charts="iplotMap", chartdivid=chartdivid,

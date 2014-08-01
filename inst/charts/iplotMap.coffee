@@ -77,9 +77,8 @@ iplotMap = (data, chartOpts) ->
         if newSelection != ""
             if data.markernames.indexOf(newSelection) >= 0
                 selectedMarker = newSelection
-                d3.select("line##{selectedMarker}")
-                  .attr("stroke", linecolorhilit)
                 line = d3.select("line##{selectedMarker}")
+                         .attr("stroke", linecolorhilit)
                 martip.show(line.datum(), line.node())
                 d3.select("a#currentmarker")
                   .text("")

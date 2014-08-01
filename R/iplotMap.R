@@ -66,7 +66,8 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
                                     chartdivid, '_chartOpts);'))
 
     add_searchbox(file, "markerinput", "marker", "Marker name")
-    append_html_jscode(file, paste0('markersearch(', chartdivid, '_data.markernames);'))
+    append_html_jscode(file, paste0('markersearch(', chartdivid, '_data.markernames,',
+                                    chartdivid, '_chartOpts);'))
 
     append_html_bottom(file, print=print)
 

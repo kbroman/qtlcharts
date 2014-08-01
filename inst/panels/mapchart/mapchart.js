@@ -150,6 +150,8 @@ mapchart = function() {
         return yscale(markerpos[d].pos);
       }).attr("y2", function(d) {
         return yscale(markerpos[d].pos);
+      }).attr("id", function(d) {
+        return d;
       }).attr("fill", "none").attr("stroke", linecolor).attr("stroke-width", linewidth).on("mouseover.paneltip", function(d) {
         d3.select(this).attr("stroke", linecolorhilit);
         return martip.show(d);

@@ -45,25 +45,34 @@ iplotMap = (data, chartOpts) ->
       .call(mychart)
 
 # code for marker search box for iplotMap
-markersearch = (markernames) ->
+markersearch = (markernames, chartOpts) ->
+
+    linecolor = chartOpts?.linecolor ? "slateblue" # color of lines
+    linecolorhilit = chartOpts?.linecolorhilit ? "Orchid" # color of lines, when highlighted
 
     # grab selected marker from the search box
     selectedMarker = ""
     $("#markerinput").submit () ->
         newSelection = document.getElementById("marker").value
-        console.log("input: #{newSelection}")
         event.preventDefault()
-        if newSelection != "" and newSelection != selectedMarker
+        unless selectedMarker == ""
+            d3.select("line##{selectedMarker}")
+              .attr("stroke", linecolor)
+
+        if newSelection != ""
             if markernames.indexOf(newSelection) >= 0
                 selectedMarker = newSelection
-                console.log("selected marker: #{selectedMarker}")
+                d3.select("line##{selectedMarker}")
+                  .attr("stroke", linecolorhilit)
                 d3.select("a#currentmarker")
                   .text(selectedMarker)
                 return true
             else
                 d3.select("a#currentmarker")
                   .text("Marker \"#{newSelection}\" not found")
+
         return false
+
 
     # autocomplete
     $('input#marker').autocomplete({
@@ -76,6 +85,7 @@ markersearch = (markernames) ->
         select: (event, ui) ->
             $('input#marker').val(ui.item.label)
             $('input#submit').submit()})
+
 
     # grayed out "Marker name"
     $('input#marker').each(() ->

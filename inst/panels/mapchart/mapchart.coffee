@@ -162,6 +162,7 @@ mapchart = () ->
                        .attr("x2", (d) -> xscale(markerpos[d].chr)+tickwidth)
                        .attr("y1", (d) -> yscale(markerpos[d].pos))
                        .attr("y2", (d) -> yscale(markerpos[d].pos))
+                       .attr("id", (d) -> d)
                        .attr("fill", "none")
                        .attr("stroke", linecolor)
                        .attr("stroke-width", linewidth)

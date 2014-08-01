@@ -35,18 +35,22 @@ iplotMap = function(data, chartOpts) {
   return d3.select("div#" + chartdivid).datum(data).call(mychart);
 };
 
-markersearch = function(markernames) {
-  var selectedMarker;
+markersearch = function(markernames, chartOpts) {
+  var linecolor, linecolorhilit, selectedMarker, _ref, _ref1;
+  linecolor = (_ref = chartOpts != null ? chartOpts.linecolor : void 0) != null ? _ref : "slateblue";
+  linecolorhilit = (_ref1 = chartOpts != null ? chartOpts.linecolorhilit : void 0) != null ? _ref1 : "Orchid";
   selectedMarker = "";
   $("#markerinput").submit(function() {
     var newSelection;
     newSelection = document.getElementById("marker").value;
-    console.log("input: " + newSelection);
     event.preventDefault();
-    if (newSelection !== "" && newSelection !== selectedMarker) {
+    if (selectedMarker !== "") {
+      d3.select("line#" + selectedMarker).attr("stroke", linecolor);
+    }
+    if (newSelection !== "") {
       if (markernames.indexOf(newSelection) >= 0) {
         selectedMarker = newSelection;
-        console.log("selected marker: " + selectedMarker);
+        d3.select("line#" + selectedMarker).attr("stroke", linecolorhilit);
         d3.select("a#currentmarker").text(selectedMarker);
         return true;
       } else {

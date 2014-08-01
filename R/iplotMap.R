@@ -62,11 +62,8 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
 
     append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
     append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-    append_html_jscode(file, paste0('iplotMap(', chartdivid, '_data,',
-                                    chartdivid, '_chartOpts);'))
-
     add_searchbox(file, "markerinput", "marker", "Marker name")
-    append_html_jscode(file, paste0('markersearch(', chartdivid, '_data.markernames,',
+    append_html_jscode(file, paste0('iplotMap(', chartdivid, '_data,',
                                     chartdivid, '_chartOpts);'))
 
     append_html_bottom(file, print=print)

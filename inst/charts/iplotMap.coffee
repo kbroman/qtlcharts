@@ -44,11 +44,31 @@ iplotMap = (data, chartOpts) ->
       .datum(data)
       .call(mychart)
 
+    markersearch(data, chartOpts)
+
+
 # code for marker search box for iplotMap
-markersearch = (markernames, chartOpts) ->
+markersearch = (data, chartOpts) ->
 
     linecolor = chartOpts?.linecolor ? "slateblue" # color of lines
     linecolorhilit = chartOpts?.linecolorhilit ? "Orchid" # color of lines, when highlighted
+    chartdivid = chartOpts?.chartdivid ? 'chart'
+
+    # reorganize map information by marker
+    markerpos = {}
+    for chr in data.chr
+        for marker of data.map[chr]
+            markerpos[marker] = {chr:chr, pos:data.map[chr][marker]}
+
+    # create marker tip
+    martip = d3.tip()
+               .attr('class', 'd3-tip')
+               .html((d) ->
+                  pos = d3.format(".1f")(markerpos[d].pos)
+                  "#{d} (#{pos})")
+               .direction('e')
+               .offset([0,10])
+    d3.select("div##{chartdivid} svg").call(martip)
 
     # grab selected marker from the search box
     selectedMarker = ""
@@ -58,12 +78,15 @@ markersearch = (markernames, chartOpts) ->
         unless selectedMarker == ""
             d3.select("line##{selectedMarker}")
               .attr("stroke", linecolor)
+            martip.hide()
 
         if newSelection != ""
-            if markernames.indexOf(newSelection) >= 0
+            if data.markernames.indexOf(newSelection) >= 0
                 selectedMarker = newSelection
                 d3.select("line##{selectedMarker}")
                   .attr("stroke", linecolorhilit)
+                line = d3.select("line##{selectedMarker}")
+                martip.show(line.datum(), line.node())
                 d3.select("a#currentmarker")
                   .text(selectedMarker)
                 return true
@@ -78,7 +101,7 @@ markersearch = (markernames, chartOpts) ->
     $('input#marker').autocomplete({
         autoFocus: true,
         source: (request, response) ->
-            matches = $.map(markernames, (tag) ->
+            matches = $.map(data.markernames, (tag) ->
                 tag if tag.toUpperCase().indexOf(request.term.toUpperCase()) is 0)
             response(matches)
         ,

@@ -32,25 +32,47 @@ iplotMap = function(data, chartOpts) {
   ylab = (_ref15 = chartOpts != null ? chartOpts.ylab : void 0) != null ? _ref15 : "Position (cM)";
   chartdivid = (_ref16 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref16 : 'chart';
   mychart = mapchart().height(height).width(width).margin(margin).axispos(axispos).titlepos(titlepos).ylim(ylim).yticks(yticks).nyticks(nyticks).tickwidth(tickwidth).rectcolor(rectcolor).linecolor(linecolor).linecolorhilit(linecolorhilit).linewidth(linewidth).title(title).xlab(xlab).ylab(ylab);
-  return d3.select("div#" + chartdivid).datum(data).call(mychart);
+  d3.select("div#" + chartdivid).datum(data).call(mychart);
+  return markersearch(data, chartOpts);
 };
 
-markersearch = function(markernames, chartOpts) {
-  var linecolor, linecolorhilit, selectedMarker, _ref, _ref1;
+markersearch = function(data, chartOpts) {
+  var chartdivid, chr, linecolor, linecolorhilit, marker, markerpos, martip, selectedMarker, _i, _len, _ref, _ref1, _ref2, _ref3;
   linecolor = (_ref = chartOpts != null ? chartOpts.linecolor : void 0) != null ? _ref : "slateblue";
   linecolorhilit = (_ref1 = chartOpts != null ? chartOpts.linecolorhilit : void 0) != null ? _ref1 : "Orchid";
+  chartdivid = (_ref2 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref2 : 'chart';
+  markerpos = {};
+  _ref3 = data.chr;
+  for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
+    chr = _ref3[_i];
+    for (marker in data.map[chr]) {
+      markerpos[marker] = {
+        chr: chr,
+        pos: data.map[chr][marker]
+      };
+    }
+  }
+  martip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+    var pos;
+    pos = d3.format(".1f")(markerpos[d].pos);
+    return "" + d + " (" + pos + ")";
+  }).direction('e').offset([0, 10]);
+  d3.select("div#" + chartdivid + " svg").call(martip);
   selectedMarker = "";
   $("#markerinput").submit(function() {
-    var newSelection;
+    var line, newSelection;
     newSelection = document.getElementById("marker").value;
     event.preventDefault();
     if (selectedMarker !== "") {
       d3.select("line#" + selectedMarker).attr("stroke", linecolor);
+      martip.hide();
     }
     if (newSelection !== "") {
-      if (markernames.indexOf(newSelection) >= 0) {
+      if (data.markernames.indexOf(newSelection) >= 0) {
         selectedMarker = newSelection;
         d3.select("line#" + selectedMarker).attr("stroke", linecolorhilit);
+        line = d3.select("line#" + selectedMarker);
+        martip.show(line.datum(), line.node());
         d3.select("a#currentmarker").text(selectedMarker);
         return true;
       } else {
@@ -63,7 +85,7 @@ markersearch = function(markernames, chartOpts) {
     autoFocus: true,
     source: function(request, response) {
       var matches;
-      matches = $.map(markernames, function(tag) {
+      matches = $.map(data.markernames, function(tag) {
         if (tag.toUpperCase().indexOf(request.term.toUpperCase()) === 0) {
           return tag;
         }

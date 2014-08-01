@@ -50,7 +50,7 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
     if(missing(caption) || is.null(caption))
         caption <- 'Hover over marker positions to view the marker names.'
 
-    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
+    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil", "jquery"),
                       panels="mapchart", charts="iplotMap", chartdivid=chartdivid,
                       caption=caption, print=print)
 
@@ -65,9 +65,38 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
     append_html_jscode(file, paste0('iplotMap(', chartdivid, '_data,',
                                     chartdivid, '_chartOpts);'))
 
+    add_searchbox(file, "markerinput", "marker", "Marker name")
+    link_markersearch(file, onefile=onefile, print=print)
+
     append_html_bottom(file, print=print)
 
     if(openfile && !print) browseURL(file)
 
     invisible(file)
 }
+
+add_searchbox <-
+function(file, formid="markerinput", inputid="marker", text="Marker name")
+{
+
+    cat('\n<div class="searchbox" id="', formid, '">\n',
+        file=file, append=TRUE, sep='')
+    cat('    <form name="', formid, '">\n',
+        file=file, append=TRUE, sep='')
+    cat('        <input id="', inputid, '" type="text" value="', text, '" name="', inputid, '"/>\n',
+        file=file, append=TRUE, sep='')
+    cat('        <input type="submit" id="submit" value="Submit" />\n',
+        file=file, append=TRUE, sep='')
+    cat('        <a id="current', inputid, '"></a>\n',
+        file=file, append=TRUE, sep='')
+    cat('    </form>\n</div>\n\n',
+        file=file, append=TRUE, sep='')
+}
+
+link_markersearch <-
+function(file, onefile=FALSE, print=FALSE)
+{
+    append_html_jslink(file, system.file('charts', 'markersearch.js', package='qtlcharts'),
+                       onefile=onefile, print=print)
+}
+

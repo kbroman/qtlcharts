@@ -22,6 +22,7 @@ function(file, onefile=FALSE, title='',
         if("d3" %in% links) link_d3(file, onefile=onefile, print=print)
         if("d3tip" %in% links) link_d3tip(file, onefile=onefile, print=print)
         if("colorbrewer" %in% links) link_colorbrewer(file, onefile=onefile, print=print)
+        if("jquery" %in% links) link_jquery(file, onefile=onefile, print=print)
         if("panelutil" %in% links) link_panelutil(file, onefile=onefile, print=print)
         for(panel in panels)
             link_panel(panel, file, onefile=onefile, print=print)
@@ -291,6 +292,17 @@ function(file, onefile=FALSE, print=FALSE)
     append_html_csslink(file, system.file('colorbrewer', 'colorbrewer.css', package='qtlcharts'),
                         onefile=onefile, print=print)
     append_html_jslink(file, system.file('colorbrewer', 'colorbrewer.js', package='qtlcharts'),
+                       onefile=onefile, print=print)
+}
+
+link_jquery <-
+function(file, onefile=FALSE, print=FALSE)
+{
+    append_html_csslink(file, "http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css",
+                        onefile=onefile, print=print)
+    append_html_jslink(file, "http://code.jquery.com/jquery-1.11.0.js",
+                       onefile=onefile, print=print)
+    append_html_jslink(file, "http://code.jquery.com/ui/1.11.0/jquery-ui.js",
                        onefile=onefile, print=print)
 }
 

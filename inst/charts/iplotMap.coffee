@@ -1,6 +1,9 @@
 # iplotMap: interactive plot of a genetic marker map
 # Karl W Broman
 
+# global vector of marker names for marker search box
+markernames = []
+
 iplotMap = (data, chartOpts) ->
 
     # chartOpts start
@@ -22,7 +25,7 @@ iplotMap = (data, chartOpts) ->
     ylab = chartOpts?.ylab ? "Position (cM)" # y-axis label
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
-  
+
     mychart = mapchart().height(height)
                         .width(width)
                         .margin(margin)
@@ -39,7 +42,13 @@ iplotMap = (data, chartOpts) ->
                         .title(title)
                         .xlab(xlab)
                         .ylab(ylab)
-  
+
     d3.select("div##{chartdivid}")
       .datum(data)
       .call(mychart)
+
+    # grab all marker names
+    for chr of data.map
+        these = (marker for marker of data.map[chr])
+        markernames = markernames.concat(these)
+

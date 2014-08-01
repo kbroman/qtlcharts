@@ -65,7 +65,7 @@ iplotMap = function(data, chartOpts) {
         d3.select("line#" + selectedMarker).attr("stroke", linecolorhilit);
         line = d3.select("line#" + selectedMarker);
         martip.show(line.datum(), line.node());
-        d3.select("a#currentmarker").text(selectedMarker);
+        d3.select("a#currentmarker").text("");
         return true;
       } else {
         d3.select("a#currentmarker").text("Marker \"" + newSelection + "\" not found");

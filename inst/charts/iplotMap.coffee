@@ -82,7 +82,7 @@ iplotMap = (data, chartOpts) ->
                 line = d3.select("line##{selectedMarker}")
                 martip.show(line.datum(), line.node())
                 d3.select("a#currentmarker")
-                  .text(selectedMarker)
+                  .text("")
                 return true
             else
                 d3.select("a#currentmarker")

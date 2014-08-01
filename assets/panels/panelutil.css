@@ -106,3 +106,14 @@ div.qtlcharts text.crosstabtitle {
     dominant-baseline: middle;
     text-anchor: center;
 }
+
+div.searchbox {
+    font-family: Sans-serif;
+    font-size: 11pt;
+    margin-left: 60px;
+}
+
+/* default form input made gray */
+div.searchbox.inactive {
+  color: #888;
+}

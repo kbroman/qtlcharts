@@ -36,7 +36,7 @@ mapchart = function() {
   markerSelect = null;
   chart = function(selection) {
     return selection.each(function(data) {
-      var chr, g, gEnter, mar, markSelect, marker, markernames, markerpos, markers, martip, pos, svg, titlegrp, xaxis, xrange, yaxis, yextentByChr, ymax, ymin, yrange, _i, _j, _len, _len1, _ref, _ref1;
+      var chr, g, gEnter, mar, marker, markernames, markerpos, markers, martip, pos, svg, titlegrp, xaxis, xrange, yaxis, yextentByChr, ymax, ymin, yrange, _i, _j, _len, _len1, _ref, _ref1;
       yextentByChr = {};
       _ref = data.chr;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -142,7 +142,7 @@ mapchart = function() {
         return _results;
       })();
       markers = g.append("g").attr("id", "points");
-      markSelect = markers.selectAll("empty").data(markernames).enter().append("line").attr("x1", function(d) {
+      markerSelect = markers.selectAll("empty").data(markernames).enter().append("line").attr("x1", function(d) {
         return xscale(markerpos[d].chr) - tickwidth;
       }).attr("x2", function(d) {
         return xscale(markerpos[d].chr) + tickwidth;
@@ -150,6 +150,8 @@ mapchart = function() {
         return yscale(markerpos[d].pos);
       }).attr("y2", function(d) {
         return yscale(markerpos[d].pos);
+      }).attr("id", function(d) {
+        return d;
       }).attr("fill", "none").attr("stroke", linecolor).attr("stroke-width", linewidth).on("mouseover.paneltip", function(d) {
         d3.select(this).attr("stroke", linecolorhilit);
         return martip.show(d);

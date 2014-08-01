@@ -44,15 +44,9 @@ iplotMap = (data, chartOpts) ->
       .datum(data)
       .call(mychart)
 
-    markersearch(data, chartOpts)
-
-
-# code for marker search box for iplotMap
-markersearch = (data, chartOpts) ->
-
-    linecolor = chartOpts?.linecolor ? "slateblue" # color of lines
-    linecolorhilit = chartOpts?.linecolorhilit ? "Orchid" # color of lines, when highlighted
-    chartdivid = chartOpts?.chartdivid ? 'chart'
+    ##############################
+    # code for marker search box for iplotMap
+    ##############################
 
     # reorganize map information by marker
     markerpos = {}
@@ -124,3 +118,7 @@ markersearch = (data, chartOpts) ->
                     $(this).addClass('inactive').val($(this).data('default'))
             )
         )
+
+    # on hover, remove tool tip from marker search
+    markerSelect = mychart.markerSelect()
+    markerSelect.on("mouseover", martip.hide)

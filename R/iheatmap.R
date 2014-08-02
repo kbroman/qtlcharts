@@ -46,7 +46,7 @@
 #' for(i in seq(along=x))
 #'     for(j in seq(along=y))
 #'         z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
-#' \dontrun{
+#' \donttest{
 #' # open iheatmap in web browser
 #' iheatmap(z, x, y, title = "iheatmap example")}
 #' \dontshow{

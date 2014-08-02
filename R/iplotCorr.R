@@ -53,7 +53,7 @@
 #'
 #' @examples
 #' data(geneExpr)
-#' \dontrun{
+#' \donttest{
 #' # open iplotCorr in web browser
 #' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
 #'           title = "iplotCorr example",

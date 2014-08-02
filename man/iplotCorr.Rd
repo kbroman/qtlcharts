@@ -70,7 +70,7 @@ Individual IDs are taken from \code{rownames(mat)}; they must match
 }
 \examples{
 data(geneExpr)
-\dontrun{
+\donttest{
 # open iplotCorr in web browser
 iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
           title = "iplotCorr example",

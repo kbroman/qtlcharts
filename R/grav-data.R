@@ -26,7 +26,7 @@
 #' data(grav)
 #' times <- attr(grav, "time")
 #' phe <- grav$pheno
-#' \dontrun{
+#' \donttest{
 #' # open an interactive plot in web browser
 #' iplotCurves(phe, times, phe[,c(61,121)], phe[,c(121,181)],
 #'             title="gravitropism curves",

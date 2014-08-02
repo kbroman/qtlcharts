@@ -85,7 +85,7 @@ function in R/qtl.
 data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
 out <- scanone(hyper)
-\dontrun{
+\donttest{
 # open iplotScanone (with CIs) in web browser
 iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
              title="iplotScanone example (CIs)")}
@@ -95,8 +95,8 @@ iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
              title="iplotScanone example (CIs)",
              openfile=FALSE)}
 
-\dontrun{
-# open iplotScanone (with raw phe x gen) in web browser
+\donttest{
+# open iplotScanone (with raw phe x gen)
 iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
              title="iplotScanone example (raw phe x gen)",
              pxgtype='raw')}

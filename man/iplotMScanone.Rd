@@ -88,7 +88,7 @@ times <- attr(grav, "time")[phecol]
 # genome scan
 out <- scanone(grav, phe=phecol, method="hk")
 
-\dontrun{
+\donttest{
 # plot with qualitative labels on y-axis (in web browser)
 iplotMScanone(out, title="iplotMScanone example, no effects")}
 \dontshow{
@@ -96,8 +96,8 @@ iplotMScanone(out, title="iplotMScanone example, no effects")}
 iplotMScanone(out, title="iplotMScanone example, no effects",
               openfile=FALSE)}
 
-\dontrun{
-# plot with quantitative y-axis (in web browser)
+\donttest{
+# plot with quantitative y-axis
 iplotMScanone(out, times=times, title="iplotMScanone example, no effects")}
 \dontshow{
 # save to temporary file but don't open
@@ -107,8 +107,8 @@ iplotMScanone(out, times=times, title="iplotMScanone example, no effects",
 # estimate QTL effect for each time point at each genomic position
 eff <- estQTLeffects(grav, phe=seq(1, nphe(grav), by=5), what="effects")
 
-\dontrun{
-# plot with QTL effects included (and with quantitative y-axis) (in web browser)
+\donttest{
+# plot with QTL effects included (and with quantitative y-axis)
 iplotMScanone(out, effects=eff, times=times,
               title="iplotMScanone example, with effects",
               chartOpts=list(eff_ylab="QTL effect", eff_xlab="Time (hrs)"))}

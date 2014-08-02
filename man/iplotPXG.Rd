@@ -62,7 +62,7 @@ function in R/qtl.
 \examples{
 data(hyper)
 marker <- sample(markernames(hyper), 1)
-\dontrun{
+\donttest{
 # open iplotPXG in web browser
 iplotPXG(hyper, marker, title="iplotPXG example")}
 \dontshow{

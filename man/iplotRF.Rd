@@ -50,7 +50,7 @@ Creates an interactive graph of estimated recombination fractions and LOD scores
 \examples{
 data(hyper)
 hyper <- est.rf(hyper)
-\dontrun{
+\donttest{
 # open iplotRF in web browser
 iplotRF(hyper)}
 \dontshow{

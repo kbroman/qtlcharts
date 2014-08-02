@@ -15,7 +15,7 @@ for the 491 individuals.
 }
 \examples{
 data(geneExpr)
-\dontrun{
+\donttest{
 # open an interactive plot in web browser
 iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
           title="geneExpr correlations linked to scatterplots")}

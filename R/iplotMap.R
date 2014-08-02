@@ -36,7 +36,7 @@
 #' @examples
 #' data(hyper)
 #' map <- pull.map(hyper)
-#' \dontrun{
+#' \donttest{
 #' # open iplotMap in web browser
 #' iplotMap(map, shift=TRUE, title="iplotMap example")}
 #' \dontshow{

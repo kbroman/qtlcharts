@@ -53,7 +53,7 @@
 #'     y[,j] <- y[,j-1] + slope5to16
 #' y <- y + rnorm(prod(dim(y)), 0, 0.35)
 #'
-#' \dontrun{
+#' \donttest{
 #' # open iplotCurves in web browser
 #' iplotCurves(y, times, y[,c(1,5)], y[,c(5,16)],
 #'             title = "iplotCurves example",

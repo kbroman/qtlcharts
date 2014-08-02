@@ -36,7 +36,13 @@
 #' @examples
 #' data(hyper)
 #' map <- pull.map(hyper)
-#' iplotMap(map, shift=TRUE, title="iplotMap example")
+#' \dontrun{
+#' # open iplotMap in web browser
+#' iplotMap(map, shift=TRUE, title="iplotMap example")}
+#' \dontshow{
+#' # save to temporary file but don't open
+#' iplotMap(map, shift=TRUE, title="iplotMap example",
+#'          openfile=FALSE)}
 #'
 #' @export
 iplotMap <-

@@ -26,9 +26,19 @@
 #' data(grav)
 #' times <- attr(grav, "time")
 #' phe <- grav$pheno
+#' \dontrun{
+#' # open an interactive plot in web browser
 #' iplotCurves(phe, times, phe[,c(61,121)], phe[,c(121,181)],
 #'             title="gravitropism curves",
 #'             chartOpts=list(curves_xlab="Time (hours)", curves_ylab="Root tip angle (degrees)",
 #'                            scat1_xlab="Angle at 2 hrs", scat1_ylab="Angle at 4 hrs",
-#'                            scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 6 hrs"))
+#'                            scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 6 hrs"))}
+#' \dontshow{
+#' # save plot to temporary html file but don't open
+#' iplotCurves(phe, times, phe[,c(61,121)], phe[,c(121,181)],
+#'             title="gravitropism curves",
+#'             chartOpts=list(curves_xlab="Time (hours)", curves_ylab="Root tip angle (degrees)",
+#'                            scat1_xlab="Angle at 2 hrs", scat1_ylab="Angle at 4 hrs",
+#'                            scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 6 hrs"),
+#'             openfile=FALSE)}
 NULL

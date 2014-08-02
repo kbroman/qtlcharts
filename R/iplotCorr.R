@@ -53,10 +53,20 @@
 #'
 #' @examples
 #' data(geneExpr)
+#' \dontrun{
+#' # open iplotCorr in web browser
 #' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
 #'           title = "iplotCorr example",
 #'           chartOpts=list(cortitle="Correlation matrix",
-#'                          scattitle="Scatterplot"))
+#'                          scattitle="Scatterplot"))}
+#' \dontshow{
+#' # save to temporary file but don't open
+#' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
+#'           title = "iplotCorr example",
+#'           chartOpts=list(cortitle="Correlation matrix",
+#'                          scattitle="Scatterplot"),
+#'           openfile=FALSE)}
+#'
 #' @export
 iplotCorr <-
 function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.complete.obs"),

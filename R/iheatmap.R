@@ -46,7 +46,13 @@
 #' for(i in seq(along=x))
 #'     for(j in seq(along=y))
 #'         z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
-#' iheatmap(z, x, y, title = "iheatmap example")
+#' \dontrun{
+#' # open iheatmap in web browser
+#' iheatmap(z, x, y, title = "iheatmap example")}
+#' \dontshow{
+#' iheatmap(z, x, y, title = "iheatmap example",
+#'          openfile=FALSE)}
+#'
 #' @importFrom jsonlite toJSON
 #' @export
 iheatmap <-

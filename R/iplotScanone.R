@@ -66,14 +66,26 @@
 #' data(hyper)
 #' hyper <- calc.genoprob(hyper, step=1)
 #' out <- scanone(hyper)
+#' \dontrun{
+#' # open iplotScanone (with CIs) in web browser
 #' iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
-#'              title="iplotScanone example (CIs)")
+#'              title="iplotScanone example (CIs)")}
+#' \dontshow{
+#' # save to temporary file but don't open
+#' iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
+#'              title="iplotScanone example (CIs)",
+#'              openfile=FALSE)}
 #'
+#' \dontrun{
+#' # open iplotScanone (with raw phe x gen) in web browser
 #' iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
 #'              title="iplotScanone example (raw phe x gen)",
-#'              pxgtype='raw')
-#'
-#' \dontshow{Sys.sleep(0.3) # wait 0.3 sec so file can be opened}
+#'              pxgtype='raw')}
+#' \dontshow{
+#' # save to temporary file but don't open
+#' iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
+#'              title="iplotScanone example (raw phe x gen)",
+#'              pxgtype='raw', openfile=FALSE)}
 #'
 #' @export
 iplotScanone <-

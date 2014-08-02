@@ -18,6 +18,13 @@
 #'
 #' @examples
 #' data(geneExpr)
+#' \dontrun{
+#' # open an interactive plot in web browser
 #' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
-#'           title="geneExpr correlations linked to scatterplots")
+#'           title="geneExpr correlations linked to scatterplots")}
+#' \dontshow{
+#' # save to temporary file but don't open
+#' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
+#'           title="geneExpr correlations linked to scatterplots",
+#'           openfile=FALSE)}
 NULL

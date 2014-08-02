@@ -88,19 +88,36 @@ times <- attr(grav, "time")[phecol]
 # genome scan
 out <- scanone(grav, phe=phecol, method="hk")
 
-# plot with qualitative labels on y-axis
-iplotMScanone(out, title="iplotMScanone example, no effects")
+\dontrun{
+# plot with qualitative labels on y-axis (in web browser)
+iplotMScanone(out, title="iplotMScanone example, no effects")}
+\dontshow{
+# save to temporary file but don't open
+iplotMScanone(out, title="iplotMScanone example, no effects",
+              openfile=FALSE)}
 
-# plot with quantitative y-axis
-iplotMScanone(out, times=times, title="iplotMScanone example, no effects")
+\dontrun{
+# plot with quantitative y-axis (in web browser)
+iplotMScanone(out, times=times, title="iplotMScanone example, no effects")}
+\dontshow{
+# save to temporary file but don't open
+iplotMScanone(out, times=times, title="iplotMScanone example, no effects",
+              openfile=FALSE)}
 
 # estimate QTL effect for each time point at each genomic position
 eff <- estQTLeffects(grav, phe=seq(1, nphe(grav), by=5), what="effects")
 
-# plot with QTL effects included (and with quantitative y-axis)
+\dontrun{
+# plot with QTL effects included (and with quantitative y-axis) (in web browser)
 iplotMScanone(out, effects=eff, times=times,
               title="iplotMScanone example, with effects",
-              chartOpts=list(eff_ylab="QTL effect", eff_xlab="Time (hrs)"))
+              chartOpts=list(eff_ylab="QTL effect", eff_xlab="Time (hrs)"))}
+\dontshow{
+# save to temporary file but don't open
+iplotMScanone(out, effects=eff, times=times,
+              title="iplotMScanone example, with effects",
+              chartOpts=list(eff_ylab="QTL effect", eff_xlab="Time (hrs)"),
+              openfile=FALSE)}
 }
 \seealso{
 \code{\link{iplotScanone}}

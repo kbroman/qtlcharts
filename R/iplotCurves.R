@@ -53,12 +53,21 @@
 #'     y[,j] <- y[,j-1] + slope5to16
 #' y <- y + rnorm(prod(dim(y)), 0, 0.35)
 #'
-#' # Make the plot
+#' \dontrun{
+#' # open iplotCurves in web browser
 #' iplotCurves(y, times, y[,c(1,5)], y[,c(5,16)],
 #'             title = "iplotCurves example",
 #'             chartOpts=list(curves_xlab="Time", curves_ylab="Size",
 #'                            scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
-#'                            scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))
+#'                            scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))}
+#' \dontshow{
+#' # save to temporary file but don't open
+#' iplotCurves(y, times, y[,c(1,5)], y[,c(5,16)],
+#'             title = "iplotCurves example",
+#'             chartOpts=list(curves_xlab="Time", curves_ylab="Size",
+#'                            scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
+#'                            scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"),
+#'             openfile=FALSE)}
 #'
 #' @importFrom jsonlite toJSON unbox
 #' @export

@@ -57,8 +57,15 @@ n.gene <- 10000
 expr <- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
 dimnames(expr) <- list(paste0("ind", 1:n.ind),
                        paste0("gene", 1:n.gene))
+\dontrun{
+# open iboxplot in web browser
 iboxplot(expr, title="iboxplot example",
-         chartOpts=list(xlab="Mice", ylab="Gene expression"))
+         chartOpts=list(xlab="Mice", ylab="Gene expression"))}
+\dontshow{
+# save to temporary file but don't open
+iboxplot(expr, title="iboxplot example",
+         chartOpts=list(xlab="Mice", ylab="Gene expression"),
+         openfile=FALSE)}
 }
 \seealso{
 \code{\link{iplotCorr}}

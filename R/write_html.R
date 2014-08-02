@@ -152,7 +152,7 @@ function(file, ...)
 # @param div Optional id for a div following the title
 # @return None (invisible NULL)
 # @keywords IO
-# \examples
+# @examples
 # \dontrun{append_html_middle("index.html", "QTL chart", "chart")}
 append_html_middle <-
 function(file, title, div, print=print)

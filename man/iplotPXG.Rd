@@ -62,7 +62,13 @@ function in R/qtl.
 \examples{
 data(hyper)
 marker <- sample(markernames(hyper), 1)
-iplotPXG(hyper, marker, title="iplotPXG example")
+\dontrun{
+# open iplotPXG in web browser
+iplotPXG(hyper, marker, title="iplotPXG example")}
+\dontshow{
+# save to temporary file but don't open
+iplotPXG(hyper, marker, title="iplotPXG example",
+         openfile=FALSE)}
 }
 \seealso{
 \code{\link{iplotScanone}}, \code{\link{iplotMap}}

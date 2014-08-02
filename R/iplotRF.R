@@ -39,7 +39,12 @@
 #' @examples
 #' data(hyper)
 #' hyper <- est.rf(hyper)
-#' iplotRF(hyper)
+#' \dontrun{
+#' # open iplotRF in web browser
+#' iplotRF(hyper)}
+#' \dontshow{
+#' # save to temporary file but don't open
+#' iplotRF(hyper, openfile=FALSE)}
 #'
 #' @export
 iplotRF <-

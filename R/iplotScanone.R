@@ -33,7 +33,7 @@
 #' @param chartdivid Character string for id of div to hold the chart
 #' @param caption Character vector with text for a caption (to be
 #'   combined to one string with \code{\link[base]{paste}}, with
-#'   \code{collapse=''})
+#'   \code{collapse=""})
 #' @param fillgenoArgs List of named arguments to pass to
 #'   \code{\link[qtl]{fill.geno}}, if needed.
 #' @param chartOpts A list of options for configuring the chart (see

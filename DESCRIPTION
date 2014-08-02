@@ -5,8 +5,8 @@ Title: Interactive graphics for QTL experiments
 Author: Karl W Broman <kbroman@biostat.wisc.edu>
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 Description: Web-based interactive charts (using D3.js) for the analysis of
-    experimental crosses to identify genetic loci (quantitative trait loci,
-    QTL) contributing to variation in quantitative traits.
+    experimental crosses to identify genetic loci (quantitative trait
+    loci, QTL) contributing to variation in quantitative traits.
 Depends:
     R (>= 2.15),
     qtl (>= 1.30-4)

@@ -44,7 +44,7 @@ javascript/css code}
 
 \item{caption}{Character vector with text for a caption (to be
 combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=''})}
+\code{collapse=""})}
 
 \item{fillgenoArgs}{List of named arguments to pass to
 \code{\link[qtl]{fill.geno}}, if needed.}

@@ -49,7 +49,7 @@ javascript/css code}
 
 \item{caption}{Character vector with text for a caption (to be
 combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=''})}
+\code{collapse=""})}
 
 \item{chartOpts}{A list of options for configuring the chart (see
 the coffeescript code). Each element must be named using the

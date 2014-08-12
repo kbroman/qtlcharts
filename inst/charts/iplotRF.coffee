@@ -58,10 +58,12 @@ iplotRF = (rf_data, geno, chartOpts) ->
   
     # ensure lodlim has 0 <= lo < hi 
     if d3.min(lodlim) < 0
-        console.log("lodlim values must be non-negative; ignored")
+        displayError("lodlim values must be non-negative; ignored",
+                     "error_#{chartdivid}")
         lodlim = [2, 12]
     if lodlim[0] >= lodlim[1]
-        console.log("lodlim[0] must be < lodlim[1]; ignored")
+        displayError("lodlim[0] must be < lodlim[1]; ignored",
+                     "error_#{chartdivid}")
         lodlim = [2, 12]
 
     # make copy of rf/lod

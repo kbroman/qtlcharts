@@ -51,7 +51,7 @@ lodheatmap = () ->
             zmax = -zmin if -zmin > zmax
             zlim = zlim ? [-zmax, 0, zmax]
             if zlim.length != colors.length
-                console.log("zlim.length (#{zlim.length}) != colors.length (#{colors.length})")
+                displayError("zlim.length (#{zlim.length}) != colors.length (#{colors.length})")
             zscale.domain(zlim).range(colors)
 
             zthresh = zthresh ? zmin - 1

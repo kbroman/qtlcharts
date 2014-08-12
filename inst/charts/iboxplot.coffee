@@ -158,7 +158,8 @@ iboxplot = (data, chartOpts) ->
   
     # colors for quantile curves
     if qucolors? and qucolors.length < (nQuant-1)/2+1
-        console.log("Not enough quantile colors: #{qucolors.length} but need #{(nQuant-1)/2+1}")
+        displayError("Not enough quantile colors: #{qucolors.length} but need #{(nQuant-1)/2+1}",
+                     "error_#{chartdivid}")
         qucolors = null
     unless qucolors?
         colindex = d3.range((nQuant-1)/2)

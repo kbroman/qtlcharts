@@ -18,13 +18,13 @@ crosstab = () ->
 
             n = data.x.length
             if data.y.length != n
-                console.log("data.x.length != data.y.length")
+                displayError("data.x.length != data.y.length")
             ncol = data.xcat.length
             if d3.max(data.x) >= ncol or d3.min(data.x) < 0
-                console.log("data.x should be in range 0-#{ncol-1}")
+                displayError("data.x should be in range 0-#{ncol-1}")
             nrow = data.ycat.length
             if d3.max(data.y) >= nrow or d3.min(data.y) < 0
-                console.log("data.y should be in range 0-#{nrow-1}")
+                displayError("data.y should be in range 0-#{nrow-1}")
 
             tab = calc_crosstab(data)
 

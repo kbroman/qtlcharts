@@ -63,11 +63,11 @@ iplotRF = function(rf_data, geno, chartOpts) {
   totalh = htop + hbot;
   svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   if (d3.min(lodlim) < 0) {
-    console.log("lodlim values must be non-negative; ignored");
+    displayError("lodlim values must be non-negative; ignored", "error_" + chartdivid);
     lodlim = [2, 12];
   }
   if (lodlim[0] >= lodlim[1]) {
-    console.log("lodlim[0] must be < lodlim[1]; ignored");
+    displayError("lodlim[0] must be < lodlim[1]; ignored", "error_" + chartdivid);
     lodlim = [2, 12];
   }
   rf_data.z = rf_data.rf.map(function(d) {

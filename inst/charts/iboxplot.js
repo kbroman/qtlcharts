@@ -105,7 +105,7 @@ iboxplot = function(data, chartOpts) {
     return xScale(d - 1);
   }).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   if ((qucolors != null) && qucolors.length < (nQuant - 1) / 2 + 1) {
-    console.log("Not enough quantile colors: " + qucolors.length + " but need " + ((nQuant - 1) / 2 + 1));
+    displayError("Not enough quantile colors: " + qucolors.length + " but need " + ((nQuant - 1) / 2 + 1), "error_" + chartdivid);
     qucolors = null;
   }
   if (qucolors == null) {

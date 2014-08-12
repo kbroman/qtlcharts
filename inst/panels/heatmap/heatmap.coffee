@@ -39,9 +39,9 @@ heatmap = () ->
                 nx = data.x.length
                 ny = data.y.length
                 if(nx != data.z.length)
-                    console.log("data.x.length (#{data.x.length}) != data.z.length (#{data.z.length})")
+                    displayError("data.x.length (#{data.x.length}) != data.z.length (#{data.z.length})")
                 if(ny != data.z[0].length)
-                    console.log("data.y.length (#{data.y.length}) != data.z[0].length (#{data.z[0].length})")
+                    displayError("data.y.length (#{data.y.length}) != data.z[0].length (#{data.z[0].length})")
                 data.cells = []
                 for i of data.z
                     for j of data.z[i]
@@ -66,7 +66,7 @@ heatmap = () ->
             zmax = -zmin if -zmin > zmax
             zlim = zlim ? [-zmax, 0, zmax]
             if zlim.length != colors.length
-                console.log("zlim.length (#{zlim.length}) != colors.length (#{colors.length})")
+                displayError("zlim.length (#{zlim.length}) != colors.length (#{colors.length})")
             zscale.domain(zlim).range(colors)
     
             # discard cells with |z| < zthresh

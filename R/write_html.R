@@ -163,7 +163,10 @@ function(file, title, div, print=print)
         if(!missing(title) && !is.null(title)) text <- c(text, '<h3>', title, '</h3>\n\n')
     }
     text <- c(text, '<p class="loading">Loading...</p>\n\n')
-    if(!missing(div) && !is.null(div)) text <- c(text, '<div id="', div, '" class="qtlcharts"></div>\n\n')
+    if(!missing(div) && !is.null(div))
+        text <- c(text,
+                  '<div id="error_', div, '" class="error"></div>\n',
+                  '<div id="', div, '" class="qtlcharts"></div>\n\n')
 
     cat(text, file=file, append=TRUE, sep='')
 

@@ -209,12 +209,14 @@ missing2null = (vec, missingvalues=['NA', '']) ->
     vec.map (value) -> if missingvalues.indexOf(value) > -1 then null else value
 
 # display error at top of page
-displayError = (message) ->
-    if d3.select("div.error").empty() # no errors yet
+displayError = (message, divid=null) ->
+    div = "div.error"
+    div += "##{divid}" if divid?
+    if d3.select(div).empty() # no errors yet
         d3.select("body")
           .insert("div", ":first-child")
           .attr("class", "error")
-    d3.select("div.error")
+    d3.select(div)
       .append("p")
       .text(message)
 

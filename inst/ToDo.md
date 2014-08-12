@@ -8,9 +8,6 @@
 
 ### General things
 
-- errors in coffeescript printed to browser
-  (insert before svg?)
-
 - Edits to user guide; is it missing anything?
 
 - Revise developer's guide

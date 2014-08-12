@@ -48,23 +48,23 @@ chrheatmap = function() {
       })();
       for (i in nx) {
         if (nx[i] !== ny) {
-          console.log("Row " + (i + 1) + " of data.z is not the write length: " + nx[i] + " != " + ny);
+          displayError("Row " + (i + 1) + " of data.z is not the right length: " + nx[i] + " != " + ny);
         }
       }
       nchr = data.nmar.length;
       totmar = sumArray(data.nmar);
       if (totmar !== ny) {
-        console.log("sum(data.nmar) != data.z.length");
+        displayError("sum(data.nmar) != data.z.length");
       }
       if (data.chrnames.length !== nchr) {
-        console.log("data.nmar.length != data.chrnames.length");
+        displayError.log("data.nmar.length != data.chrnames.length");
       }
       if (data.labels.length !== totmar) {
-        console.log("data.labels.length != sum(data.nmar)");
+        displayError("data.labels.length != sum(data.nmar)");
       }
       if (chrGap < 2) {
         chrGap = 2;
-        console.log("chrGap should be >= 1");
+        displayError("chrGap should be >= 1");
       }
       xChrBorder = [0];
       xCellStart = [];
@@ -149,7 +149,7 @@ chrheatmap = function() {
       }
       zlim = zlim != null ? zlim : [-zmax, 0, zmax];
       if (zlim.length !== colors.length) {
-        console.log("zlim.length (" + zlim.length + ") != colors.length (" + colors.length + ")");
+        displayError("zlim.length (" + zlim.length + ") != colors.length (" + colors.length + ")");
       }
       zscale.domain(zlim).range(colors);
       zthresh = zthresh != null ? zthresh : zmin - 1;

@@ -69,7 +69,7 @@ lodheatmap = function() {
       }
       zlim = zlim != null ? zlim : [-zmax, 0, zmax];
       if (zlim.length !== colors.length) {
-        console.log("zlim.length (" + zlim.length + ") != colors.length (" + colors.length + ")");
+        displayError("zlim.length (" + zlim.length + ") != colors.length (" + colors.length + ")");
       }
       zscale.domain(zlim).range(colors);
       zthresh = zthresh != null ? zthresh : zmin - 1;

@@ -340,11 +340,19 @@ missing2null = function(vec, missingvalues) {
   });
 };
 
-displayError = function(message) {
-  if (d3.select("div.error").empty()) {
+displayError = function(message, divid) {
+  var div;
+  if (divid == null) {
+    divid = null;
+  }
+  div = "div.error";
+  if (divid != null) {
+    div += "#" + divid;
+  }
+  if (d3.select(div).empty()) {
     d3.select("body").insert("div", ":first-child").attr("class", "error");
   }
-  return d3.select("div.error").append("p").text(message);
+  return d3.select(div).append("p").text(message);
 };
 
 sumArray = function(vec) {

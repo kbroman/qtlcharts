@@ -27,7 +27,7 @@ dotchart = () ->
     yvar = 1
     pointsSelect = null
     dataByInd = true
-  
+
     ## the main function
     chart = (selection) ->
         selection.each (data) ->
@@ -44,6 +44,10 @@ dotchart = () ->
             indID = data?.indID ? null
             indID = indID ? [1..x.length]
 
+            # a few checks
+            displayError("length(x) != length(y)") if x.length != y.length
+            displayError("length(indID) != length(x)") if indID.length != x.length
+
             # if all y not null
             yNA.handle = false if y.every (v) -> (v?) and !yNA.force
             if yNA.handle
@@ -53,7 +57,11 @@ dotchart = () ->
 
             xcategories = xcategories ? unique(x)
             xcatlabels = xcatlabels ? xcategories
-            throw "xcatlabels.length != xcategories.length" if xcatlabels.length != xcategories.length
+            displayError("xcatlabels.length != xcategories.length") if xcatlabels.length != xcategories.length
+
+            # check all x in xcategories
+            if sumArray(xv? and !(xv in xcategories) for xv in x) > 0
+                displayError("Some x values not in xcategories")
 
             ylim = ylim ? d3.extent(y)
 
@@ -92,7 +100,7 @@ dotchart = () ->
             # simple scales (ignore NA business)
             xrange = [margin.left+margin.inner, margin.left+width-margin.inner]
             xscale.domain(xcategories).rangePoints(xrange, 1)
-  
+
             # jitter x-axis
             if xjitter == null
                 w = (xrange[1]-xrange[0])/xcategories.length
@@ -100,9 +108,8 @@ dotchart = () ->
             else
                 xjitter = [xjitter] if typeof(xjitter) == 'number'
                 xjitter = (xjitter[0] for v in d3.range(x.length)) if xjitter.length == 1
-        
-            if xjitter.length != x.length
-                throw "xjitter.length != x.length"
+
+            displayError("xjitter.length != x.length") if xjitter.length != x.length
 
             yrange = [margin.top+panelheight-margin.inner, margin.top+margin.inner]
             yscale.domain(ylim).range(yrange)
@@ -134,7 +141,7 @@ dotchart = () ->
                  .attr("x2", (d) -> xscale(d))
                  .attr("y1", margin.top)
                  .attr("y2", margin.top+height)
-                 .attr("class", "x axis grid") 
+                 .attr("class", "x axis grid")
             xaxis.selectAll("empty")
                  .data(xcategories)
                  .enter()
@@ -158,7 +165,7 @@ dotchart = () ->
                  .attr("y2", (d) -> yscale(d))
                  .attr("x1", margin.left)
                  .attr("x2", margin.left+width)
-                 .attr("class", "y axis grid") 
+                 .attr("class", "y axis grid")
             yaxis.selectAll("empty")
                  .data(yticks)
                  .enter()
@@ -198,7 +205,7 @@ dotchart = () ->
                       .attr("stroke", pointstroke)
                       .attr("stroke-width", "1")
                       .attr("opacity", (d,i) ->
-                                           return 1 if (y[i]? or yNA.handle) and x[i] in xcategories
+                                           return 1 if (y[i]? or yNA.handle) and x[i]? and x[i] in xcategories
                                            return 0)
                       .on("mouseover.paneltip", indtip.show)
                       .on("mouseout.paneltip", indtip.hide)

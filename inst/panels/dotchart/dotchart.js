@@ -48,7 +48,7 @@ dotchart = function() {
   dataByInd = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var g, gEnter, indID, indtip, na_value, panelheight, points, svg, titlegrp, v, w, x, xaxis, xrange, y, yaxis, yrange, ys, _i, _ref, _ref1, _results;
+      var g, gEnter, indID, indtip, na_value, panelheight, points, svg, titlegrp, v, w, x, xaxis, xrange, xv, y, yaxis, yrange, ys, _i, _ref, _ref1, _results;
       if (dataByInd) {
         x = data.map(function(d) {
           return d[xvar];
@@ -66,6 +66,12 @@ dotchart = function() {
         for (var _i = 1, _ref1 = x.length; 1 <= _ref1 ? _i <= _ref1 : _i >= _ref1; 1 <= _ref1 ? _i++ : _i--){ _results.push(_i); }
         return _results;
       }).apply(this);
+      if (x.length !== y.length) {
+        displayError("length(x) != length(y)");
+      }
+      if (indID.length !== x.length) {
+        displayError("length(indID) != length(x)");
+      }
       if (y.every(function(v) {
         return (v != null) && !yNA.force;
       })) {
@@ -79,7 +85,18 @@ dotchart = function() {
       xcategories = xcategories != null ? xcategories : unique(x);
       xcatlabels = xcatlabels != null ? xcatlabels : xcategories;
       if (xcatlabels.length !== xcategories.length) {
-        throw "xcatlabels.length != xcategories.length";
+        displayError("xcatlabels.length != xcategories.length");
+      }
+      if (sumArray((function() {
+        var _j, _len, _results1;
+        _results1 = [];
+        for (_j = 0, _len = x.length; _j < _len; _j++) {
+          xv = x[_j];
+          _results1.push((xv != null) && !(__indexOf.call(xcategories, xv) >= 0));
+        }
+        return _results1;
+      })()) > 0) {
+        displayError("Some x values not in xcategories");
       }
       ylim = ylim != null ? ylim : d3.extent(y);
       na_value = d3.min(y) - 100;
@@ -123,7 +140,7 @@ dotchart = function() {
         }
       }
       if (xjitter.length !== x.length) {
-        throw "xjitter.length != x.length";
+        displayError("xjitter.length != x.length");
       }
       yrange = [margin.top + panelheight - margin.inner, margin.top + margin.inner];
       yscale.domain(ylim).range(yrange);
@@ -181,7 +198,7 @@ dotchart = function() {
         return "pt" + i;
       }).attr("r", pointsize).attr("fill", pointcolor).attr("stroke", pointstroke).attr("stroke-width", "1").attr("opacity", function(d, i) {
         var _ref2;
-        if (((y[i] != null) || yNA.handle) && (_ref2 = x[i], __indexOf.call(xcategories, _ref2) >= 0)) {
+        if (((y[i] != null) || yNA.handle) && (x[i] != null) && (_ref2 = x[i], __indexOf.call(xcategories, _ref2) >= 0)) {
           return 1;
         }
         return 0;

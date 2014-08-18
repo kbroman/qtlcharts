@@ -1,5 +1,5 @@
 
-context("utililities")
+context("utilities")
 
 test_that("select phenotype columns works on small cases", {
 

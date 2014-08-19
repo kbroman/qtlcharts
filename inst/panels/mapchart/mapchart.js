@@ -37,6 +37,28 @@ mapchart = function() {
   chart = function(selection) {
     return selection.each(function(data) {
       var chr, g, gEnter, mar, marker, markernames, markerpos, markers, martip, pos, svg, titlegrp, xaxis, xrange, yaxis, yextentByChr, ymax, ymin, yrange, _i, _j, _len, _len1, _ref, _ref1;
+      if (sumArray((function() {
+        var _i, _len, _ref, _results;
+        _ref = data.chr;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          chr = _ref[_i];
+          _results.push(!(data.map[chr] != null));
+        }
+        return _results;
+      })()) > 0) {
+        displayError("Some chr in data.chr not in data.map");
+      }
+      if (sumArray((function() {
+        var _results;
+        _results = [];
+        for (chr in data.map) {
+          _results.push(!(data.chr != null));
+        }
+        return _results;
+      })()) > 0) {
+        displayError("Some chr in data.map not in data.chr");
+      }
       yextentByChr = {};
       _ref = data.chr;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {

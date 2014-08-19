@@ -26,6 +26,12 @@ mapchart = () ->
     chart = (selection) ->
         selection.each (data) ->
 
+            # check that the elements in data.chr are all in data.map
+            if sumArray(!(data.map[chr]?) for chr in data.chr) > 0
+                displayError("Some chr in data.chr not in data.map") 
+            if sumArray(!(data.chr?) for chr of data.map) > 0
+                displayError("Some chr in data.map not in data.chr")
+
             # find min and max position on each chromosome
             yextentByChr = {}
             for chr in data.chr

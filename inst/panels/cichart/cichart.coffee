@@ -31,12 +31,12 @@ cichart = () ->
             low = data.low
             high = data.high
             categories = data.categories
-            throw "means.length != low.length" if means.length != low.length
-            throw "means.length != high.length" if means.length != high.length
-            throw "means.length != categories.length" if means.length != categories.length
+            displayError("means.length != low.length") if means.length != low.length
+            displayError("means.length != high.length") if means.length != high.length
+            displayError("means.length != categories.length") if means.length != categories.length
       
             xcatlabels = xcatlabels ? categories
-            throw "xcatlabels.length != categories.length" if xcatlabels.length != categories.length
+            displayError("xcatlabels.length != categories.length") if xcatlabels.length != categories.length
       
             ylim = ylim ? [d3.min(low), d3.max(high)]
       

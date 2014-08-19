@@ -42,17 +42,17 @@ cichart = function() {
       high = data.high;
       categories = data.categories;
       if (means.length !== low.length) {
-        throw "means.length != low.length";
+        displayError("means.length != low.length");
       }
       if (means.length !== high.length) {
-        throw "means.length != high.length";
+        displayError("means.length != high.length");
       }
       if (means.length !== categories.length) {
-        throw "means.length != categories.length";
+        displayError("means.length != categories.length");
       }
       xcatlabels = xcatlabels != null ? xcatlabels : categories;
       if (xcatlabels.length !== categories.length) {
-        throw "xcatlabels.length != categories.length";
+        displayError("xcatlabels.length != categories.length");
       }
       ylim = ylim != null ? ylim : [d3.min(low), d3.max(high)];
       svg = d3.select(this).selectAll("svg").data([data]);

@@ -54,6 +54,12 @@ curvechart = () ->
             else
                 data = data.data
 
+            # check lengths
+            displayError("data.length != group.length") if data.length != group.length
+            displayError("data.length != indID.length") if data.length != indID.length
+            if sumArray(ind_data.x.length != ind_data.y.length for ind_data in data) > 0
+                displayError("At least one curve with x.length != y.length")
+
             xlim = xlim ? d3.extent(pullVarAsArray(data, "x"))
             ylim = ylim ? d3.extent(pullVarAsArray(data, "y"))
       

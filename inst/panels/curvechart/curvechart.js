@@ -40,7 +40,7 @@ curvechart = function() {
   commonX = true;
   chart = function(selection) {
     return selection.each(function(data) {
-      var curve, curves, g, gEnter, group, i, indID, indtip, j, lastpoint, ngroup, points, pointsg, svg, titlegrp, tmp, v, xaxis, xrange, xs, yaxis, yrange, ys, _i, _j, _len, _ref, _ref1, _ref2, _ref3, _results;
+      var curve, curves, g, gEnter, group, i, indID, ind_data, indtip, j, lastpoint, ngroup, points, pointsg, svg, titlegrp, tmp, v, xaxis, xrange, xs, yaxis, yrange, ys, _i, _j, _len, _ref, _ref1, _ref2, _ref3, _results;
       indID = (_ref = data != null ? data.indID : void 0) != null ? _ref : null;
       indID = indID != null ? indID : (function() {
         _results = [];
@@ -83,6 +83,23 @@ curvechart = function() {
         })();
       } else {
         data = data.data;
+      }
+      if (data.length !== group.length) {
+        displayError("data.length != group.length");
+      }
+      if (data.length !== indID.length) {
+        displayError("data.length != indID.length");
+      }
+      if (sumArray((function() {
+        var _j, _len, _results1;
+        _results1 = [];
+        for (_j = 0, _len = data.length; _j < _len; _j++) {
+          ind_data = data[_j];
+          _results1.push(ind_data.x.length !== ind_data.y.length);
+        }
+        return _results1;
+      })()) > 0) {
+        displayError("At least one curve with x.length != y.length");
       }
       xlim = xlim != null ? xlim : d3.extent(pullVarAsArray(data, "x"));
       ylim = ylim != null ? ylim : d3.extent(pullVarAsArray(data, "y"));

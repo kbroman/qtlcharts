@@ -65,6 +65,17 @@ curvechart = function() {
         }
         return _results1;
       })();
+      if (sumArray((function() {
+        var _j, _len, _results1;
+        _results1 = [];
+        for (_j = 0, _len = group.length; _j < _len; _j++) {
+          g = group[_j];
+          _results1.push(g < 0 || g > ngroup - 1);
+        }
+        return _results1;
+      })()) > 0) {
+        displayError("group values out of range");
+      }
       strokecolor = strokecolor != null ? strokecolor : selectGroupColors(ngroup, "pastel");
       strokecolor = expand2vector(strokecolor, ngroup);
       strokecolorhilit = strokecolorhilit != null ? strokecolorhilit : selectGroupColors(ngroup, "dark");
@@ -85,10 +96,10 @@ curvechart = function() {
         data = data.data;
       }
       if (data.length !== group.length) {
-        displayError("data.length != group.length");
+        displayError("data.length (" + data.length + ") != group.length (" + group.length + ")");
       }
       if (data.length !== indID.length) {
-        displayError("data.length != indID.length");
+        displayError("data.length (" + data.length + ") != indID.length (" + indID.length + ")");
       }
       if (sumArray((function() {
         var _j, _len, _results1;

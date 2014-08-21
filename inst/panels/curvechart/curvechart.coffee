@@ -39,6 +39,7 @@ curvechart = () ->
             group = data?.group ? (1 for i of data.data)
             ngroup = d3.max(group)
             group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
+            displayError("group values out of range") if sumArray(g < 0 or g > ngroup-1 for g in group) > 0
       
             # default light stroke colors
             strokecolor = strokecolor ? selectGroupColors(ngroup, "pastel")
@@ -55,8 +56,10 @@ curvechart = () ->
                 data = data.data
 
             # check lengths
-            displayError("data.length != group.length") if data.length != group.length
-            displayError("data.length != indID.length") if data.length != indID.length
+            if data.length != group.length
+                displayError("data.length (#{data.length}) != group.length (#{group.length})")
+            if data.length != indID.length
+                displayError("data.length (#{data.length}) != indID.length (#{indID.length})") 
             if sumArray(ind_data.x.length != ind_data.y.length for ind_data in data) > 0
                 displayError("At least one curve with x.length != y.length")
 

@@ -40,6 +40,9 @@ scatterplot = () ->
                 x = data.data[xvar]
                 y = data.data[yvar]
 
+            if x.length != y.length
+                displayError("x.length (#{x.length}) != y.length (#{y.length})")
+            
             # missing values can be any of null, "NA", or ""; replacing with nulls
             x = missing2null(x, ["NA", ""])
             y = missing2null(y, ["NA", ""])
@@ -48,15 +51,22 @@ scatterplot = () ->
             # if no indID, create a vector of them
             indID = data?.indID ? null
             indID = indID ? [1..x.length]
-
+            if indID.length != x.length
+                displayError("indID.length (#{indID.length}) != x.length (#{x.length})")
+            
             # groups of colors
             group = data?.group ? (1 for i in x)
             ngroup = d3.max(group)
             group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
+            displayError("group values out of range") if sumArray(g < 0 or g > ngroup-1 for g in group) > 0
+            if group.length != x.length
+                displayError("group.length (#{group.length}) != x.length (#{x.length})")
 
             # colors of the points in the different groups
             pointcolor = pointcolor ? selectGroupColors(ngroup, "dark")
             pointcolor = expand2vector(pointcolor, ngroup)
+            if pointcolor.length != ngroup
+                displayError("pointcolor.length (#{pointcolor.length}) != ngroup (#{ngroup})")
 
             # if all (x,y) not null
             xNA.handle = false if x.every (v) -> (v?) and !xNA.force

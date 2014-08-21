@@ -65,6 +65,9 @@ scatterplot = function() {
         x = data.data[xvar];
         y = data.data[yvar];
       }
+      if (x.length !== y.length) {
+        displayError("x.length (" + x.length + ") != y.length (" + y.length + ")");
+      }
       x = missing2null(x, ["NA", ""]);
       y = missing2null(y, ["NA", ""]);
       indID = (_ref = data != null ? data.indID : void 0) != null ? _ref : null;
@@ -73,6 +76,9 @@ scatterplot = function() {
         for (var _i = 1, _ref1 = x.length; 1 <= _ref1 ? _i <= _ref1 : _i >= _ref1; 1 <= _ref1 ? _i++ : _i--){ _results.push(_i); }
         return _results;
       }).apply(this);
+      if (indID.length !== x.length) {
+        displayError("indID.length (" + indID.length + ") != x.length (" + x.length + ")");
+      }
       group = (_ref2 = data != null ? data.group : void 0) != null ? _ref2 : (function() {
         var _j, _len, _results1;
         _results1 = [];
@@ -92,8 +98,25 @@ scatterplot = function() {
         }
         return _results1;
       })();
+      if (sumArray((function() {
+        var _j, _len, _results1;
+        _results1 = [];
+        for (_j = 0, _len = group.length; _j < _len; _j++) {
+          g = group[_j];
+          _results1.push(g < 0 || g > ngroup - 1);
+        }
+        return _results1;
+      })()) > 0) {
+        displayError("group values out of range");
+      }
+      if (group.length !== x.length) {
+        displayError("group.length (" + group.length + ") != x.length (" + x.length + ")");
+      }
       pointcolor = pointcolor != null ? pointcolor : selectGroupColors(ngroup, "dark");
       pointcolor = expand2vector(pointcolor, ngroup);
+      if (pointcolor.length !== ngroup) {
+        displayError("pointcolor.length (" + pointcolor.length + ") != ngroup (" + ngroup + ")");
+      }
       if (x.every(function(v) {
         return (v != null) && !xNA.force;
       })) {

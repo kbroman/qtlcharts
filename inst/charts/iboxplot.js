@@ -2,7 +2,7 @@
 var iboxplot;
 
 iboxplot = function(data, chartOpts) {
-  var Baxis, BaxisData, Laxis, LaxisData, botylim, br2, chartdivid, circles, clickStatus, colindex, color, curves, d, fix4hist, grp4BkgdHist, height, hi, hist, histcolors, histline, i, indRect, indRectGrp, indindex, indtip, j, lo, longRect, longRectGrp, lowBaxis, lowBaxisData, lowsvg, lowxScale, lowyScale, margin, midQuant, nQuant, qucolors, quline, randomInd, recWidth, rectcolor, rightAxis, svg, tmp, topylim, width, x, xScale, xlab, yScale, ylab, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _o, _ref, _ref1, _ref10, _ref11, _ref12, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var Baxis, BaxisData, Laxis, LaxisData, botylim, br2, chartdivid, circles, clickStatus, colindex, color, curves, d, fix4hist, grp4BkgdHist, height, hi, hist, histcolors, histline, i, indRect, indRectGrp, indindex, indtip, j, lo, longRect, longRectGrp, lowBaxis, lowBaxisData, lowsvg, lowxScale, lowyScale, m, margin, midQuant, nQuant, qucolors, quline, r, randomInd, recWidth, rectcolor, rightAxis, svg, tmp, topylim, width, xScale, xlab, yScale, ylab, _i, _j, _k, _l, _len, _len1, _len2, _len3, _m, _ref, _ref1, _ref10, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   width = (_ref = chartOpts != null ? chartOpts.width : void 0) != null ? _ref : 1000;
   height = (_ref1 = chartOpts != null ? chartOpts.height : void 0) != null ? _ref1 : 450;
   margin = (_ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref2 : {
@@ -19,44 +19,38 @@ iboxplot = function(data, chartOpts) {
   chartdivid = (_ref8 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref8 : 'chart';
   histcolors = forceAsArray(histcolors);
   qucolors = forceAsArray(qucolors);
-  topylim = [data.quant[0][0], data.quant[0][1]];
+  topylim = [data.quant[0][0], data.quant[0][0]];
   for (i in data.quant) {
-    _ref9 = data.quant[i];
-    for (_i = 0, _len = _ref9.length; _i < _len; _i++) {
-      x = _ref9[_i];
-      if (x < topylim[0]) {
-        topylim[0] = x;
-      }
-      if (x > topylim[1]) {
-        topylim[1] = x;
-      }
+    r = d3.extent(data.quant[i]);
+    if (r[0] < topylim[0]) {
+      topylim[0] = r;
+    }
+    if (r[1] > topylim[1]) {
+      topylim[1] = r;
     }
   }
   topylim[0] = Math.floor(topylim[0]);
   topylim[1] = Math.ceil(topylim[1]);
-  botylim = [0, data.counts[0][1]];
+  botylim = [0, data.counts[0][0]];
   for (i in data.counts) {
-    _ref10 = data.counts[i];
-    for (_j = 0, _len1 = _ref10.length; _j < _len1; _j++) {
-      x = _ref10[_j];
-      if (x > botylim[1]) {
-        botylim[1] = x;
-      }
+    m = d3.max(data.counts[i]);
+    if (m > botylim[1]) {
+      boylim[1] = m;
     }
   }
   indindex = d3.range(data.ind.length);
   br2 = [];
-  _ref11 = data.breaks;
-  for (_k = 0, _len2 = _ref11.length; _k < _len2; _k++) {
-    i = _ref11[_k];
+  _ref9 = data.breaks;
+  for (_i = 0, _len = _ref9.length; _i < _len; _i++) {
+    i = _ref9[_i];
     br2.push(i);
     br2.push(i);
   }
   fix4hist = function(d) {
-    var _l, _len3;
+    var x, _j, _len1;
     x = [0];
-    for (_l = 0, _len3 = d.length; _l < _len3; _l++) {
-      i = d[_l];
+    for (_j = 0, _len1 = d.length; _j < _len1; _j++) {
+      i = d[_j];
       x.push(i);
       x.push(i);
     }
@@ -112,8 +106,8 @@ iboxplot = function(data, chartOpts) {
     colindex = d3.range((nQuant - 1) / 2);
     tmp = d3.scale.category10().domain(colindex);
     qucolors = ["black"];
-    for (_l = 0, _len3 = colindex.length; _l < _len3; _l++) {
-      j = colindex[_l];
+    for (_j = 0, _len1 = colindex.length; _j < _len1; _j++) {
+      j = colindex[_j];
       qucolors.push(tmp(j));
     }
   }
@@ -121,13 +115,13 @@ iboxplot = function(data, chartOpts) {
     qucolors = qucolors.slice(0, (nQuant - 1) / 2 + 1);
   }
   qucolors = qucolors.reverse();
-  _ref12 = qucolors.slice(0, -1).reverse();
-  for (_m = 0, _len4 = _ref12.length; _m < _len4; _m++) {
-    color = _ref12[_m];
+  _ref10 = qucolors.slice(0, -1).reverse();
+  for (_k = 0, _len2 = _ref10.length; _k < _len2; _k++) {
+    color = _ref10[_k];
     qucolors.push(color);
   }
   curves = svg.append("g").attr("id", "curves");
-  for (j = _n = 0; 0 <= nQuant ? _n < nQuant : _n > nQuant; j = 0 <= nQuant ? ++_n : --_n) {
+  for (j = _l = 0; 0 <= nQuant ? _l < nQuant : _l > nQuant; j = 0 <= nQuant ? ++_l : --_l) {
     curves.append("path").datum(indindex).attr("d", quline(j)).attr("class", "line").attr("stroke", qucolors[j]).attr("pointer-events", "none");
   }
   indtip = d3.tip().attr('class', 'd3-tip').html(function(d) {
@@ -191,8 +185,8 @@ iboxplot = function(data, chartOpts) {
   randomInd = indindex[Math.floor(Math.random() * data.ind.length)];
   hist = lowsvg.append("path").datum(data.counts[randomInd]).attr("d", histline).attr("id", "histline").attr("fill", "none").attr("stroke", "purple").attr("stroke-width", "2");
   clickStatus = [];
-  for (_o = 0, _len5 = indindex.length; _o < _len5; _o++) {
-    d = indindex[_o];
+  for (_m = 0, _len3 = indindex.length; _m < _len3; _m++) {
+    d = indindex[_m];
     clickStatus.push(0);
   }
   longRect.on("mouseover", function(d, i) {

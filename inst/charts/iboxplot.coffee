@@ -26,19 +26,19 @@ iboxplot = (data, chartOpts) ->
     qucolors = forceAsArray(qucolors)
 
     # y-axis limits for top figure
-    topylim = [data.quant[0][0], data.quant[0][1]]
+    topylim = [data.quant[0][0], data.quant[0][0]]
     for i of data.quant
-        for x in data.quant[i]
-            topylim[0] = x if x < topylim[0]
-            topylim[1] = x if x > topylim[1]
+        r = d3.extent(data.quant[i])
+        topylim[0] = r if r[0] < topylim[0]
+        topylim[1] = r if r[1] > topylim[1]
     topylim[0] = Math.floor(topylim[0])
     topylim[1] = Math.ceil(topylim[1])
 
     # y-axis limits for bottom figure
-    botylim = [0, data.counts[0][1]]
+    botylim = [0, data.counts[0][0]]
     for i of data.counts
-        for x in data.counts[i]
-            botylim[1] = x if x > botylim[1]
+        m = d3.max(data.counts[i])
+        boylim[1] = m if m > botylim[1]
 
     indindex = d3.range(data.ind.length)
 

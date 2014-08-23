@@ -58,6 +58,12 @@ lodchart = function() {
       })();
       ylim = ylim != null ? ylim : [0, d3.max(data[lodvarname])];
       lodvarnum = data.lodnames.indexOf(lodvarname);
+      if (data.chr.length !== data.pos.length) {
+        displayError("chr.length (" + data.chr.length + ") != pos.length (" + data.pos.length + ")");
+      }
+      if (data.chr.length !== data.markernames.length) {
+        displayError("chr.length (" + data.chr.length + ") != markernames.length (" + data.markernames.length + ")");
+      }
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);

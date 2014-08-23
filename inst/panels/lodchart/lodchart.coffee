@@ -38,6 +38,11 @@ lodchart = () ->
             ylim = ylim ? [0, d3.max(data[lodvarname])]
             lodvarnum = data.lodnames.indexOf(lodvarname)
 
+            if data.chr.length != data.pos.length
+                displayError("chr.length (#{data.chr.length}) != pos.length (#{data.pos.length})")
+            if data.chr.length != data.markernames.length
+                displayError("chr.length (#{data.chr.length}) != markernames.length (#{data.markernames.length})")
+
             # Select the svg element, if it exists.
             svg = d3.select(this).selectAll("svg").data([data])
 

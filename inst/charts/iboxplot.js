@@ -35,7 +35,7 @@ iboxplot = function(data, chartOpts) {
   for (i in data.counts) {
     m = d3.max(data.counts[i]);
     if (m > botylim[1]) {
-      boylim[1] = m;
+      botylim[1] = m;
     }
   }
   indindex = d3.range(data.ind.length);

@@ -23,10 +23,10 @@ iboxplot = function(data, chartOpts) {
   for (i in data.quant) {
     r = d3.extent(data.quant[i]);
     if (r[0] < topylim[0]) {
-      topylim[0] = r;
+      topylim[0] = r[0];
     }
     if (r[1] > topylim[1]) {
-      topylim[1] = r;
+      topylim[1] = r[1];
     }
   }
   topylim[0] = Math.floor(topylim[0]);

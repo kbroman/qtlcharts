@@ -29,8 +29,8 @@ iboxplot = (data, chartOpts) ->
     topylim = [data.quant[0][0], data.quant[0][0]]
     for i of data.quant
         r = d3.extent(data.quant[i])
-        topylim[0] = r if r[0] < topylim[0]
-        topylim[1] = r if r[1] > topylim[1]
+        topylim[0] = r[0] if r[0] < topylim[0]
+        topylim[1] = r[1] if r[1] > topylim[1]
     topylim[0] = Math.floor(topylim[0])
     topylim[1] = Math.ceil(topylim[1])
 

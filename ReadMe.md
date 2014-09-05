@@ -1,5 +1,7 @@
 ### R/qtlcharts: Interactive graphics for QTL experiments
 
+[![Build Status](https://travis-ci.org/kbroman/qtlcharts.png?branch=master)](https://travis-ci.org/kbroman/qtlcharts)
+
 [Karl W Broman](http://kbroman.org)
 
 [R/qtlcharts](http://kbroman.org/qtlcharts) is an [R](http://www.r-project.org) package to create

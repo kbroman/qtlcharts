@@ -8,3 +8,4 @@
 ^License\.txt$
 inst/ToDo.html
 vignettes/chartOpt_vignette
+^\.travis\.yml$

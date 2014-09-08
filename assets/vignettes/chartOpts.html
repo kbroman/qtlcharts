@@ -5,6 +5,18 @@
 
 <title>List of chart customization options</title>
 
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
 
 
 
@@ -58,7 +70,9 @@ a:visited {
 pre, img {
   max-width: 100%;
 }
-
+pre {
+  overflow-x: auto;
+}
 pre code {
    display: block; padding: 0.5em;
 }
@@ -149,6 +163,11 @@ hr {
 </head>
 
 <body>
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{List of chart customization options}
+-->
+
 <h1>List of chart customization options</h1>
 
 <p>There are a number of ways in which one may wish to customize the

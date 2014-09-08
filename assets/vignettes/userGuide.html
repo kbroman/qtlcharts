@@ -5,6 +5,18 @@
 
 <title>R/qtlcharts User Guide</title>
 
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
    pre .operator,
@@ -46,7 +58,7 @@ hljs.initHighlightingOnLoad();
 </script>
 
 <!-- MathJax scripts -->
-<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
 
@@ -99,7 +111,9 @@ a:visited {
 pre, img {
   max-width: 100%;
 }
-
+pre {
+  overflow-x: auto;
+}
 pre code {
    display: block; padding: 0.5em;
 }
@@ -190,6 +204,11 @@ hr {
 </head>
 
 <body>
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{R/qtlcharts User Guide}
+-->
+
 <h1>R/qtlcharts User Guide</h1>
 
 <p><a href="http://kbroman.org/qtlcharts">R/qtlcharts</a> is an

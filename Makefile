@@ -1,10 +1,15 @@
 
 all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vignettes
+.PHONY: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vignettes
 
 # Examples
 CHARTEX = example
 
-chartexamples: ${CHARTEX}/iboxplot.html ${CHARTEX}/iplotCorr.html ${CHARTEX}/iplotCurves.html ${CHARTEX}/iplotMScanone.html ${CHARTEX}/iplotMap.html ${CHARTEX}/iplotScanone.html ${CHARTEX}/iheatmap.html ${CHARTEX}/iplotRF.html
+CHARTEXAMPLES = ${CHARTEX}/iboxplot.html ${CHARTEX}/iplotCorr.html \
+                ${CHARTEX}/iplotCurves.html ${CHARTEX}/iplotMScanone.html \
+                ${CHARTEX}/iplotMap.html ${CHARTEX}/iplotScanone.html \
+                ${CHARTEX}/iheatmap.html ${CHARTEX}/iplotRF.html
+chartexamples: ${CHARTEXAMPLES}
 
 ${CHARTEX}/iboxplot.html: ${CHARTEX}/R/iboxplot_example.R ${CHARTEX}/R/hypo.RData
 	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
@@ -73,7 +78,12 @@ QTLCHARTS_BREWER = ../qtlcharts/inst/colorbrewer
 #------------------------------------------------------------
 
 # javascript of panel tests
-jspaneltests: ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js ${HEATMAP_TESTDIR}/test_heatmap.js ${CHRHEATMAP_TESTDIR}/test_chrheatmap.js ${LODHEATMAP_TESTDIR}/test_lodheatmap.js ${CROSSTAB_TESTDIR}/test_crosstab.js
+JSPANELTESTS = ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js \
+               ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js \
+               ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js \
+               ${HEATMAP_TESTDIR}/test_heatmap.js ${CHRHEATMAP_TESTDIR}/test_chrheatmap.js \
+               ${LODHEATMAP_TESTDIR}/test_lodheatmap.js ${CROSSTAB_TESTDIR}/test_crosstab.js
+jspaneltests: ${JSPANELTESTS}
 
 ${THIS}/%/test/%.js: ${QTLCHARTS}/%/test/%.js
 	cp $< $@
@@ -81,7 +91,13 @@ ${THIS}/%/test/%.js: ${QTLCHARTS}/%/test/%.js
 #------------------------------------------------------------
 
 # javascript of panels
-jspanels: ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js ${CURVECHART_DIR}/curvechart.js ${MAPCHART_DIR}/mapchart.js ${HEATMAP_DIR}/heatmap.js ${CHRHEATMAP_DIR}/chrheatmap.js ${LODHEATMAP_DIR}/lodheatmap.js ${CROSSTAB_DIR}/crosstab.js ${PANEL_DIR}/panelutil.js ${PANEL_DIR}/panelutil.css
+JSPANELS = ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js \
+           ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js \
+           ${CURVECHART_DIR}/curvechart.js ${MAPCHART_DIR}/mapchart.js \
+           ${HEATMAP_DIR}/heatmap.js ${CHRHEATMAP_DIR}/chrheatmap.js \
+           ${LODHEATMAP_DIR}/lodheatmap.js ${CROSSTAB_DIR}/crosstab.js \
+           ${PANEL_DIR}/panelutil.js ${PANEL_DIR}/panelutil.css
+jspanels: ${JSPANELS}
 
 ${THIS}/%.js: ${QTLCHARTS}/%.js
 	cp $< $@
@@ -92,7 +108,12 @@ ${THIS}/panelutil.css: ${QTLCHARTS}/panelutil.css
 #------------------------------------------------------------
 
 # test data files
-json: ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json ${HEATMAP_TESTDIR}/data.json ${CHRHEATMAP_TESTDIR}/data.json ${LODHEATMAP_TESTDIR}/data.json ${CROSSTAB_TESTDIR}/data.json
+JSON = ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json \
+       ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json \
+       ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json \
+       ${HEATMAP_TESTDIR}/data.json ${CHRHEATMAP_TESTDIR}/data.json \
+       ${LODHEATMAP_TESTDIR}/data.json ${CROSSTAB_TESTDIR}/data.json
+json: ${JSON}
 
 ${THIS}/%/test/data.json: ${QTLCHARTS}/%/test/data.json
 	cp $< $@
@@ -100,7 +121,12 @@ ${THIS}/%/test/data.json: ${QTLCHARTS}/%/test/data.json
 #------------------------------------------------------------
 
 # test/index.html files
-testhtml: ${LODCHART_TESTDIR}/index.html ${SCATTERPLOT_TESTDIR}/index.html ${DOTCHART_TESTDIR}/index.html ${CICHART_TESTDIR}/index.html ${CURVECHART_TESTDIR}/index.html ${MAPCHART_TESTDIR}/index.html ${HEATMAP_TESTDIR}/index.html ${CHRHEATMAP_TESTDIR}/index.html ${LODHEATMAP_TESTDIR}/index.html ${CROSSTAB_TESTDIR}/index.html
+TESTHTML = ${LODCHART_TESTDIR}/index.html ${SCATTERPLOT_TESTDIR}/index.html \
+           ${DOTCHART_TESTDIR}/index.html ${CICHART_TESTDIR}/index.html \
+           ${CURVECHART_TESTDIR}/index.html ${MAPCHART_TESTDIR}/index.html \
+           ${HEATMAP_TESTDIR}/index.html ${CHRHEATMAP_TESTDIR}/index.html \
+           ${LODHEATMAP_TESTDIR}/index.html ${CROSSTAB_TESTDIR}/index.html
+testhtml: ${TESTHTML}
 
 ${THIS}/%/test/index.html: ${QTLCHARTS}/%/test/index.html
 	cp $< $@
@@ -108,38 +134,42 @@ ${THIS}/%/test/index.html: ${QTLCHARTS}/%/test/index.html
 #------------------------------------------------------------
 
 # d3, d3tip, colorbrewer
-d3: ${THIS_D3}/d3.min.js ${THIS_D3}/LICENSE ${THIS_D3}/ReadMe.md
+D3 = ${THIS_D3}/d3.min.js ${THIS_D3}/LICENSE ${THIS_D3}/ReadMe.md
+d3: ${D3}
 
 ${THIS_D3}/%: ${QTLCHARTS_D3}/%
 	cp $< $@
 
-d3tip: ${THIS_D3TIP}/d3-tip.min.js ${THIS_D3TIP}/d3-tip.min.css ${THIS_D3TIP}/LICENSE ${THIS_D3TIP}/ReadMe.md
+D3TIP = ${THIS_D3TIP}/d3-tip.min.js ${THIS_D3TIP}/d3-tip.min.css ${THIS_D3TIP}/LICENSE ${THIS_D3TIP}/ReadMe.md
+d3tip: ${D3TIP}
 
 ${THIS_D3TIP}/%: ${QTLCHARTS_D3TIP}/%
 	cp $< $@
 
-colorbrewer: ${THIS_BREWER}/colorbrewer.js ${THIS_BREWER}/colorbrewer.css ${THIS_BREWER}/LICENSE ${THIS_BREWER}/ReadMe.md
+COLORBREWER = ${THIS_BREWER}/colorbrewer.js ${THIS_BREWER}/colorbrewer.css ${THIS_BREWER}/LICENSE ${THIS_BREWER}/ReadMe.md
+colorbrewer: ${COLORBREWER}
 
 ${THIS_BREWER}/%: ${QTLCHARTS_BREWER}/%
 	cp $< $@
 
 #------------------------------------------------------------
 
-VIGNETTES= assets/vignettes
+THIS_VIGNETTES= assets/vignettes
 QTLCHARTS_VIGNETTES = ../qtlcharts/vignettes
 
-vignettes: ${VIGNETTES}/Rmarkdown.html ${VIGNETTES}/userGuide.html ${VIGNETTES}/chartOpts.html ${VIGNETTES}/develGuide.html
+VIGNETTES = ${THIS_VIGNETTES}/Rmarkdown.html ${THIS_VIGNETTES}/userGuide.html ${THIS_VIGNETTES}/chartOpts.html ${THIS_VIGNETTES}/develGuide.html
+vignettes: ${VIGNETTES}
 
-${VIGNETTES}/Rmarkdown.html: ${QTLCHARTS_VIGNETTES}/Rmarkdown.Rmd
+${THIS_VIGNETTES}/Rmarkdown.html: ${QTLCHARTS_VIGNETTES}/Rmarkdown.Rmd
 	R -e 'library(knitr);knit2html("$<", "$@")'
 
-${VIGNETTES}/chartOpts.html: ${QTLCHARTS_VIGNETTES}/chartOpts.Rmd
+${THIS_VIGNETTES}/chartOpts.html: ${QTLCHARTS_VIGNETTES}/chartOpts.Rmd
 	R -e 'library(knitr);knit2html("$<", "$@")'
 
-${VIGNETTES}/develGuide.html: ${QTLCHARTS_VIGNETTES}/develGuide.Rmd
+${THIS_VIGNETTES}/develGuide.html: ${QTLCHARTS_VIGNETTES}/develGuide.Rmd
 	R -e 'library(knitr);knit2html("$<", "$@")'
 
-${VIGNETTES}/userGuide.html: ${QTLCHARTS_VIGNETTES}/userGuide.Rmd
+${THIS_VIGNETTES}/userGuide.html: ${QTLCHARTS_VIGNETTES}/userGuide.Rmd
 	mkdir tmp
 	mkdir tmp/Figs
 	cp $< tmp/userGuide.Rmd

@@ -1,5 +1,7 @@
+<!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{R/qtlcharts User Guide}
+-->
 
 # R/qtlcharts User Guide
 

@@ -1,5 +1,7 @@
+<!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Interactive QTL charts within R Markdown}
+-->
 
 ## Interactive QTL charts within R Markdown
 

@@ -1,5 +1,7 @@
+<!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{List of chart customization options}
+-->
 
 # List of chart customization options
 

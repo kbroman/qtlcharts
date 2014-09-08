@@ -1,5 +1,5 @@
 all: jspanels jspaneltests jscharts json doc inst/ToDo.html vignettes/chartOpts.Rmd
-.PHONY : all jspanels jspaneltests jscharts json doc clean
+.PHONY: all jspanels jspaneltests jscharts json doc clean
 
 
 PANEL_DIR = inst/panels
@@ -91,13 +91,16 @@ ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
 
 #------------------------------------------------------------
 
-# remove all data files and javascript files
-clean:
-	rm ${PANEL_DIR}/*/*.js ${PANEL_DIR}/*/test/*.js ${PANEL_DIR}/*/test/*.json ${CHART_DIR}/*.js
+# Add list of chartOpts to vignette
+
+vignettes/chartOpts.Rmd: vignettes/chartOpts/grab_chartOpts.rb \
+                         vignettes/chartOpts/chartOpts_source.Rmd \
+                         vignettes/chartOpts/multiversions.csv \
+                         ${JSCHARTS}
+	$<
 
 #------------------------------------------------------------
 
-# Add list of chartOpts to vignette
-
-vignettes/chartOpts.Rmd: vignettes/chartOpts/grab_chartOpts.rb vignettes/chartOpts/chartOpts_source.Rmd vignettes/chartOpts/multiversions.csv ${JSCHARTS}
-	$<
+# remove all data files and javascript files
+clean:
+	rm ${PANEL_DIR}/*/*.js ${PANEL_DIR}/*/test/*.js ${PANEL_DIR}/*/test/*.json ${CHART_DIR}/*.js

@@ -1,7 +1,6 @@
-#' @name geneExpr
-#' @title Anonymized gene expression data
+#' Anonymized gene expression data
 #'
-#' @description An anonymized set of gene expression values, for 100
+#' An anonymized set of gene expression values, for 100
 #' genes all influenced by a common locus, plus a vector of genotypes
 #' for the 491 individuals.
 #'
@@ -27,4 +26,4 @@
 #' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
 #'           title="geneExpr correlations linked to scatterplots",
 #'           openfile=FALSE)}
-NULL
+"geneExpr"

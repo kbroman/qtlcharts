@@ -1,11 +1,11 @@
-#' @name grav
-#' @title Arabidopsis QTL data on gravitropism
+#' Arabidopsis QTL data on gravitropism
 #'
-#' @description Data from a QTL experiment on gravitropism in
+#' Data from a QTL experiment on gravitropism in
 #' Arabidopsis, with data on 162 recombinant inbred lines (Ler x
 #' Cvi). The outcome is the root tip angle (in degrees) at two-minute
 #' increments over eight hours.
 #'
+#' @name grav
 #' @docType data
 #'
 #' @usage data(grav)

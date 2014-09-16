@@ -5,7 +5,6 @@
 #' Cvi). The outcome is the root tip angle (in degrees) at two-minute
 #' increments over eight hours.
 #'
-#' @name grav
 #' @docType data
 #'
 #' @usage data(grav)
@@ -41,4 +40,4 @@
 #'                            scat1_xlab="Angle at 2 hrs", scat1_ylab="Angle at 4 hrs",
 #'                            scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 6 hrs"),
 #'             openfile=FALSE)}
-NULL
+"grav"

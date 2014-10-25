@@ -64,12 +64,12 @@ iheatmap = function(data, chartOpts) {
   shiftdown = htop + margin.top + margin.bottom;
   g_horslice = svg.append("g").attr("id", "horslice").attr("transform", "translate(0," + shiftdown + ")").datum({
     x: data.x,
-    data: pullVarAsArray(data.z, 0)
+    data: [pullVarAsArray(data.z, 0)]
   }).call(horslice);
   shiftright = wleft + margin.left + margin.right;
   g_verslice = svg.append("g").attr("id", "verslice").attr("transform", "translate(" + shiftright + ",0)").datum({
     x: data.y,
-    data: data.z[0]
+    data: [data.z[0]]
   }).call(verslice);
   horcurvefunc = function(j) {
     return d3.svg.line().x(function(d) {

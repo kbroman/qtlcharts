@@ -32,16 +32,16 @@ iheatmap = (data, chartOpts) ->
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors (same length as `zlim`)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
-  
+
     totalh = htop + hbot + 2*(margin.top + margin.bottom)
     totalw = wleft + wright + 2*(margin.left + margin.right)
-  
+
     # Select the svg element, if it exists.
     svg = d3.select("div##{chartdivid}")
             .append("svg")
             .attr("height", totalh)
             .attr("width", totalw)
-  
+
     ## configure the three charts
     myheatmap = heatmap().width(wleft)
                          .height(htop)
@@ -61,7 +61,7 @@ iheatmap = (data, chartOpts) ->
                          .zthresh(zthresh)
                          .colors(colors)
                          .nullcolor(nullcolor)
-  
+
     horslice = curvechart().width(wleft)
                            .height(hbot)
                            .margin(margin)
@@ -69,7 +69,7 @@ iheatmap = (data, chartOpts) ->
                            .titlepos(titlepos)
                            .rectcolor(rectcolor)
                            .xlim(xlim)
-                           .ylim([zlim[0], zlim[2]])
+                           .ylim(d3.extent(zlim))
                            .nxticks(nxticks)
                            .xticks(xticks)
                            .nyticks(nzticks)
@@ -78,7 +78,7 @@ iheatmap = (data, chartOpts) ->
                            .ylab(zlab)
                            .strokecolor("")
                            .commonX(true)
-  
+
     verslice = curvechart().width(wright)
                            .height(htop)
                            .margin(margin)
@@ -86,7 +86,7 @@ iheatmap = (data, chartOpts) ->
                            .titlepos(titlepos)
                            .rectcolor(rectcolor)
                            .xlim(ylim)
-                           .ylim([zlim[0], zlim[2]])
+                           .ylim(d3.extent(zlim))
                            .nxticks(nyticks)
                            .xticks(yticks)
                            .nyticks(nzticks)
@@ -95,16 +95,16 @@ iheatmap = (data, chartOpts) ->
                            .ylab(zlab)
                            .strokecolor("")
                            .commonX(true)
-  
+
     ## now make the actual charts
     g_heatmap = svg.append("g")
                    .attr("id", "heatmap")
                    .datum(data)
                    .call(myheatmap)
-  
+
     formatX = formatAxis(data.x)
     formatY = formatAxis(data.y)
-  
+
     cells = myheatmap.cellSelect()
                      .on "mouseover", (d,i) ->
                              g_verslice.select("g.title text").text("X = #{formatX(d.x)}")
@@ -116,21 +116,21 @@ iheatmap = (data, chartOpts) ->
                              g_horslice.select("g.title text").text("")
                              removeVer()
                              removeHor()
-  
+
     shiftdown = htop+margin.top+margin.bottom
     g_horslice = svg.append("g")
                     .attr("id", "horslice")
                     .attr("transform", "translate(0,#{shiftdown})")
                     .datum({x:data.x, data:pullVarAsArray(data.z, 0)})
                     .call(horslice)
-  
+
     shiftright = wleft+margin.left+margin.right
     g_verslice = svg.append("g")
                     .attr("id", "verslice")
                     .attr("transform", "translate(#{shiftright},0)")
                     .datum({x:data.y, data:data.z[0]})
                     .call(verslice)
-  
+
     # functions for paths
     horcurvefunc = (j) ->
             d3.svg.line()
@@ -140,8 +140,8 @@ iheatmap = (data, chartOpts) ->
             d3.svg.line()
               .x((d) -> verslice.xscale()(d))
               .y((d,j) -> verslice.yscale()(data.z[i][j]))
-  
-  
+
+
     plotHor = (j) ->
         g_horslice.append("g").attr("id", "horcurve")
                   .append("path")
@@ -151,10 +151,10 @@ iheatmap = (data, chartOpts) ->
                   .attr("fill", "none")
                   .attr("stroke-width", strokewidth)
                   .attr("style", "pointer-events", "none")
-  
+
     removeHor = () ->
         g_horslice.selectAll("g#horcurve").remove()
-  
+
     plotVer = (i) ->
         g_verslice.append("g").attr("id", "vercurve")
                   .append("path")
@@ -164,6 +164,6 @@ iheatmap = (data, chartOpts) ->
                   .attr("fill", "none")
                   .attr("stroke-width", strokewidth)
                   .attr("style", "pointer-events", "none")
-  
+
     removeVer = () ->
         g_verslice.selectAll("g#vercurve").remove()

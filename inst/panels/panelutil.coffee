@@ -20,7 +20,7 @@ pullVarAsArray = (data, variable) ->
     for i of data
         v = v.concat data[i][variable]
     v
-  
+
 # reorganize lod/pos by chromosome
 # lodvarname==null    -> case for multiple LOD columns (lodheatmap)
 # lodvarname provided -> case for one LOD column (lodchart)
@@ -125,7 +125,7 @@ expand2vector = (input, n) ->
 
 # median of a vector
 median = (x) ->
-    return null if !x? 
+    return null if !x?
     n = x.length
     x.sort((a,b) -> a-b)
     if n % 2 == 1
@@ -173,27 +173,27 @@ matrixMin = (mat) ->
     for i of mat
         for j of mat[i]
             result = mat[i][j] if result > mat[i][j]
-    result      
+    result
 
 matrixMax = (mat) ->
     result = mat[0][0]
     for i of mat
         for j of mat[i]
             result = mat[i][j] if result < mat[i][j]
-    result      
+    result
 
 matrixMaxAbs = (mat) ->
     result = Math.abs(mat[0][0])
     for i of mat
         for j of mat[i]
-            result = Math.abs(mat[i][j]) if result < mat[i][j]
-    result      
+            result = Math.abs(mat[i][j]) if result < Math.abs(mat[i][j])
+    result
 
 matrixExtent = (mat) -> [matrixMin(mat), matrixMax(mat)]
 
 d3.selection.prototype.moveToFront = () ->
     this.each () -> this.parentNode.appendChild(this)
-  
+
 d3.selection.prototype.moveToBack = () ->
     this.each () ->
         firstChild = this.parentNode.firstchild
@@ -261,7 +261,7 @@ transpose = (mat) -> ((mat[i][j] for i in [0...mat.length]) for j in [0...mat[0]
 colSums = (mat) -> rowSums(transpose(mat))
 
 # log base 2
-log2 = (x) -> 
+log2 = (x) ->
     return(x) unless x?
     Math.log(x)/Math.log(2.0)
 
@@ -271,7 +271,6 @@ log10 = (x) ->
     Math.log(x)/Math.log(10.0)
 
 # absolute value, preserving nulls
-abs = (x) -> 
+abs = (x) ->
     return(x) unless x?
     Math.abs(x)
-

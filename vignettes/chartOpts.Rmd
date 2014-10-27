@@ -59,9 +59,9 @@ customization options for each chart.
 
 `strokewidth = 2` &mdash; line width
 
-`xlim = range(x)` &mdash; x-axis limits
+`xlim = NULL` &mdash; x-axis limits
 
-`ylim = range(y)` &mdash; y-axis limits
+`ylim = NULL` &mdash; y-axis limits
 
 `nxticks = 5` &mdash; no. ticks on x-axis
 

@@ -2,7 +2,7 @@
 var iheatmap;
 
 iheatmap = function(data, chartOpts) {
-  var axispos, cells, chartdivid, colors, formatX, formatY, g_heatmap, g_horslice, g_verslice, hbot, horcurvefunc, horslice, htop, margin, myheatmap, nullcolor, nxticks, nyticks, nzticks, plotHor, plotVer, rectcolor, removeHor, removeVer, shiftdown, shiftright, strokecolor, strokewidth, svg, title, titlepos, totalh, totalw, vercurvefunc, verslice, wleft, wright, xlab, xlim, xticks, ylab, ylim, yticks, zlab, zlim, zthresh, zticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref25, _ref26, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, cells, chartdivid, colors, formatX, formatY, g_heatmap, g_horslice, g_verslice, hbot, horcurvefunc, horslice, htop, margin, myheatmap, nullcolor, nxticks, nyticks, nzticks, plotHor, plotVer, rectcolor, removeHor, removeVer, shiftdown, shiftright, strokecolor, strokewidth, svg, title, titlepos, totalh, totalw, vercurvefunc, verslice, wleft, wright, xdif, xlab, xlim, xticks, ydif, ylab, ylim, yticks, zlab, zlim, zthresh, zticks, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref25, _ref26, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   htop = (_ref = chartOpts != null ? chartOpts.htop : void 0) != null ? _ref : 500;
   hbot = (_ref1 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref1 : 500;
   wleft = (_ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref2 : 500;
@@ -25,8 +25,8 @@ iheatmap = function(data, chartOpts) {
   nullcolor = (_ref8 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? _ref8 : "#E6E6E6";
   strokecolor = (_ref9 = chartOpts != null ? chartOpts.strokecolor : void 0) != null ? _ref9 : "slateblue";
   strokewidth = (_ref10 = chartOpts != null ? chartOpts.strokewidth : void 0) != null ? _ref10 : 2;
-  xlim = (_ref11 = chartOpts != null ? chartOpts.xlim : void 0) != null ? _ref11 : d3.extent(data.x);
-  ylim = (_ref12 = chartOpts != null ? chartOpts.ylim : void 0) != null ? _ref12 : d3.extent(data.y);
+  xlim = (_ref11 = chartOpts != null ? chartOpts.xlim : void 0) != null ? _ref11 : null;
+  ylim = (_ref12 = chartOpts != null ? chartOpts.ylim : void 0) != null ? _ref12 : null;
   nxticks = (_ref13 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? _ref13 : 5;
   xticks = (_ref14 = chartOpts != null ? chartOpts.xticks : void 0) != null ? _ref14 : null;
   nyticks = (_ref15 = chartOpts != null ? chartOpts.nyticks : void 0) != null ? _ref15 : 5;
@@ -44,6 +44,18 @@ iheatmap = function(data, chartOpts) {
   totalh = htop + hbot + 2 * (margin.top + margin.bottom);
   totalw = wleft + wright + 2 * (margin.left + margin.right);
   svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
+  if (xlim == null) {
+    xlim = d3.extent(data.x);
+    xdif = (data.x[1] - data.x[0]) / 2;
+    xlim[0] -= xdif;
+    xlim[1] += xdif;
+  }
+  if (ylim == null) {
+    ylim = d3.extent(data.y);
+    ydif = (data.y[1] - data.y[0]) / 2;
+    ylim[0] -= ydif;
+    ylim[1] += ydif;
+  }
   myheatmap = heatmap().width(wleft).height(htop).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).xlim(xlim).ylim(ylim).nxticks(nxticks).xticks(xticks).nyticks(nyticks).yticks(yticks).xlab(xlab).ylab(ylab).zlim(zlim).zthresh(zthresh).colors(colors).nullcolor(nullcolor);
   horslice = curvechart().width(wleft).height(hbot).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).xlim(xlim).ylim(d3.extent(zlim)).nxticks(nxticks).xticks(xticks).nyticks(nzticks).yticks(zticks).xlab(xlab).ylab(zlab).strokecolor("").commonX(true);
   verslice = curvechart().width(wright).height(htop).margin(margin).axispos(axispos).titlepos(titlepos).rectcolor(rectcolor).xlim(ylim).ylim(d3.extent(zlim)).nxticks(nyticks).xticks(yticks).nyticks(nzticks).yticks(zticks).xlab(ylab).ylab(zlab).strokecolor("").commonX(true);

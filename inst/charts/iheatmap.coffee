@@ -15,8 +15,8 @@ iheatmap = (data, chartOpts) ->
     nullcolor = chartOpts?.nullcolor ? "#E6E6E6" # color of pixels with null values
     strokecolor = chartOpts?.strokecolor ? "slateblue" # line color
     strokewidth = chartOpts?.strokewidth ? 2 # line width
-    xlim = chartOpts?.xlim ? d3.extent(data.x) # x-axis limits
-    ylim = chartOpts?.ylim ? d3.extent(data.y) # y-axis limits
+    xlim = chartOpts?.xlim ? null # x-axis limits
+    ylim = chartOpts?.ylim ? null # y-axis limits
     nxticks = chartOpts?.nxticks ? 5 # no. ticks on x-axis
     xticks = chartOpts?.xticks ? null # vector of tick positions on x-axis
     nyticks = chartOpts?.nyticks ? 5 # no. ticks on y-axis
@@ -41,6 +41,17 @@ iheatmap = (data, chartOpts) ->
             .append("svg")
             .attr("height", totalh)
             .attr("width", totalw)
+
+    unless xlim?
+        xlim = d3.extent(data.x)
+        xdif = (data.x[1] - data.x[0])/2
+        xlim[0] -= xdif
+        xlim[1] += xdif
+    unless ylim?
+        ylim = d3.extent(data.y)
+        ydif = (data.y[1] - data.y[0])/2
+        ylim[0] -= ydif
+        ylim[1] += ydif
 
     ## configure the three charts
     myheatmap = heatmap().width(wleft)

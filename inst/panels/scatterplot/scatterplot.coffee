@@ -42,7 +42,7 @@ scatterplot = () ->
 
             if x.length != y.length
                 displayError("x.length (#{x.length}) != y.length (#{y.length})")
-            
+
             # missing values can be any of null, "NA", or ""; replacing with nulls
             x = missing2null(x, ["NA", ""])
             y = missing2null(y, ["NA", ""])
@@ -53,7 +53,7 @@ scatterplot = () ->
             indID = indID ? [1..x.length]
             if indID.length != x.length
                 displayError("indID.length (#{indID.length}) != x.length (#{x.length})")
-            
+
             # groups of colors
             group = data?.group ? (1 for i in x)
             ngroup = d3.max(group)
@@ -143,7 +143,7 @@ scatterplot = () ->
 
             # "polylinear" scales to handle missing values
             if xNA.handle
-                xscale.domain([na_value].concat xlim) 
+                xscale.domain([na_value].concat xlim)
                       .range([margin.left + xNA.width/2].concat xrange)
                 x = x.map (e) -> if e? then e else na_value
             if yNA.handle
@@ -312,7 +312,7 @@ scatterplot = () ->
 
     chart.titlepos = (value) ->
                       return titlepos if !arguments.length
-                      titlepos
+                      titlepos = value
                       chart
 
     chart.xlim = (value) ->
@@ -399,7 +399,7 @@ scatterplot = () ->
                       return yvar if !arguments.length
                       yvar = value
                       chart
-  
+
     chart.xNA = (value) ->
                       return xNA if !arguments.length
                       xNA = value

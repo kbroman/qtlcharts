@@ -252,7 +252,7 @@ dotchart = () ->
 
     chart.titlepos = (value) ->
                       return titlepos if !arguments.length
-                      titlepos
+                      titlepos = value
                       chart
 
     chart.xcategories = (value) ->

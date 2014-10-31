@@ -28,7 +28,7 @@ mapchart = () ->
 
             # check that the elements in data.chr are all in data.map
             if sumArray(!(data.map[chr]?) for chr in data.chr) > 0
-                displayError("Some chr in data.chr not in data.map") 
+                displayError("Some chr in data.chr not in data.map")
             if sumArray(!(data.chr?) for chr of data.map) > 0
                 displayError("Some chr in data.map not in data.chr")
 
@@ -90,7 +90,7 @@ mapchart = () ->
                  .attr("x2", (d) -> xscale(d))
                  .attr("y1", margin.top)
                  .attr("y2", margin.top+height)
-                 .attr("class", "x axis grid") 
+                 .attr("class", "x axis grid")
             xaxis.selectAll("empty")
                  .data(data.chr)
                  .enter()
@@ -114,7 +114,7 @@ mapchart = () ->
                  .attr("y2", (d) -> yscale(d))
                  .attr("x1", margin.left)
                  .attr("x2", margin.left+width)
-                 .attr("class", "y axis grid") 
+                 .attr("class", "y axis grid")
             yaxis.selectAll("empty")
                  .data(yticks)
                  .enter()
@@ -212,7 +212,7 @@ mapchart = () ->
 
     chart.titlepos = (value) ->
                       return titlepos if !arguments.length
-                      titlepos
+                      titlepos = value
                       chart
 
     chart.ylim = (value) ->

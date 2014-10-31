@@ -26,7 +26,7 @@ heatmap = () ->
     zscale = d3.scale.linear()
     cellSelect = null
     dataByCell = false
-  
+
     ## the main function
     chart = (selection) ->
         selection.each (data) ->
@@ -51,15 +51,15 @@ heatmap = () ->
             # sort the x and y values
             data.x.sort((a,b) -> a-b)
             data.y.sort((a,b) -> a-b)
-    
+
             # x values to left and right of each value
             xLR = getLeftRight(data.x)
             yLR = getLeftRight(data.y)
-    
+
             # x and y axis limits
             xlim = xlim ? xLR.extent
             ylim = ylim ? yLR.extent
-    
+
             # z-axis (color) limits; if not provided, make symmetric about 0
             zmin = d3.min(data.allz)
             zmax = d3.max(data.allz)
@@ -68,30 +68,30 @@ heatmap = () ->
             if zlim.length != colors.length
                 displayError("zlim.length (#{zlim.length}) != colors.length (#{colors.length})")
             zscale.domain(zlim).range(colors)
-    
+
             # discard cells with |z| < zthresh
             zthresh = zthresh ? zmin - 1
             data.cells = (cell for cell in data.cells when cell.z >= zthresh or cell.z <= -zthresh)
-    
+
             # insert info about left, right, top, bottom points of cell rectangles
             for cell in data.cells
                 cell.recLeft = (xLR[cell.x].left+cell.x)/2
                 cell.recRight = (xLR[cell.x].right+cell.x)/2
                 cell.recTop = (yLR[cell.y].right+cell.y)/2
                 cell.recBottom = (yLR[cell.y].left+cell.y)/2
-    
+
             # Select the svg element, if it exists.
             svg = d3.select(this).selectAll("svg").data([data])
-    
+
             # Otherwise, create the skeletal chart.
             gEnter = svg.enter().append("svg").append("g")
-    
+
             # Update the outer dimensions.
             svg.attr("width", width+margin.left+margin.right)
                .attr("height", height+margin.top+margin.bottom)
-    
+
             g = svg.select("g")
-    
+
             # box
             g.append("rect")
              .attr("x", margin.left)
@@ -100,24 +100,24 @@ heatmap = () ->
              .attr("width", width)
              .attr("fill", rectcolor)
              .attr("stroke", "none")
-    
+
             xrange = [margin.left, margin.left+width]
             xscale.domain(xlim).range(xrange)
-    
+
             yrange = [margin.top+height, margin.top]
             yscale.domain(ylim).range(yrange)
-    
+
             # if xticks not provided, use nxticks to choose pretty ones
             xticks = xticks ? xscale.ticks(nxticks)
             yticks = yticks ? yscale.ticks(nyticks)
-    
+
             # title
             titlegrp = g.append("g").attr("class", "title")
                         .append("text")
                         .attr("x", margin.left + width/2)
                         .attr("y", margin.top - titlepos)
                         .text(title)
-    
+
             # x-axis
             xaxis = g.append("g").attr("class", "x axis")
             xaxis.selectAll("empty")
@@ -128,7 +128,7 @@ heatmap = () ->
                  .attr("x2", (d) -> xscale(d))
                  .attr("y1", margin.top)
                  .attr("y2", margin.top+height)
-                 .attr("class", "y axis grid") 
+                 .attr("class", "y axis grid")
             xaxis.selectAll("empty")
                  .data(xticks)
                  .enter()
@@ -140,7 +140,7 @@ heatmap = () ->
                  .attr("x", margin.left+width/2)
                  .attr("y", margin.top+height+axispos.xtitle)
                  .text(xlab)
-    
+
             # y-axis
             rotate_ylab = rotate_ylab ? (ylab.length > 1)
             yaxis = g.append("g").attr("class", "y axis")
@@ -152,7 +152,7 @@ heatmap = () ->
                  .attr("y2", (d) -> yscale(d))
                  .attr("x1", margin.left)
                  .attr("x2", margin.left+width)
-                 .attr("class", "y axis grid") 
+                 .attr("class", "y axis grid")
             yaxis.selectAll("empty")
                  .data(yticks)
                  .enter()
@@ -176,7 +176,7 @@ heatmap = () ->
                         .direction('e')
                         .offset([0,10])
             svg.call(celltip)
-    
+
             cells = g.append("g").attr("id", "cells")
             cellSelect =
                 cells.selectAll("empty")
@@ -231,7 +231,7 @@ heatmap = () ->
 
     chart.titlepos = (value) ->
                       return titlepos if !arguments.length
-                      titlepos
+                      titlepos = value
                       chart
 
     chart.xlim = (value) ->
@@ -322,9 +322,9 @@ heatmap = () ->
 
     chart.zscale = () ->
                       return zscale
-                  
+
     chart.cellSelect = () ->
                       return cellSelect
-                  
+
     # return the chart function
     chart

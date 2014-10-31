@@ -25,7 +25,7 @@ curvechart = () ->
     xscale = d3.scale.linear()
     curvesSelect = null
     commonX = true
-  
+
     ## the main function
     chart = (selection) ->
         selection.each (data) ->
@@ -40,7 +40,7 @@ curvechart = () ->
             ngroup = d3.max(group)
             group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
             displayError("group values out of range") if sumArray(g < 0 or g > ngroup-1 for g in group) > 0
-      
+
             # default light stroke colors
             strokecolor = strokecolor ? selectGroupColors(ngroup, "pastel")
             strokecolor = expand2vector(strokecolor, ngroup)
@@ -48,7 +48,7 @@ curvechart = () ->
             # default dark stroke colors
             strokecolorhilit = strokecolorhilit ? selectGroupColors(ngroup, "dark")
             strokecolorhilit = expand2vector(strokecolorhilit, ngroup)
-  
+
             # reorganize data?
             if commonX # reorganize data
                 data = ({x:data.x, y:data.data[i]} for i of data.data)
@@ -59,13 +59,13 @@ curvechart = () ->
             if data.length != group.length
                 displayError("data.length (#{data.length}) != group.length (#{group.length})")
             if data.length != indID.length
-                displayError("data.length (#{data.length}) != indID.length (#{indID.length})") 
+                displayError("data.length (#{data.length}) != indID.length (#{indID.length})")
             if sumArray(ind_data.x.length != ind_data.y.length for ind_data in data) > 0
                 displayError("At least one curve with x.length != y.length")
 
             xlim = xlim ? d3.extent(pullVarAsArray(data, "x"))
             ylim = ylim ? d3.extent(pullVarAsArray(data, "y"))
-      
+
             # reorganize again
             for i of data
                 tmp = data[i]
@@ -196,7 +196,7 @@ curvechart = () ->
                                                indtip.show(i, circle.node())
                      .on "mouseout.panel", (d,i) ->
                                                d3.select(this).attr("stroke", strokecolor[group[i]]).moveToBack()
-                                               indtip.hide()  
+                                               indtip.hide()
 
             # grab the last non-null point from each curve
             lastpoint = ({x:null, y:null} for i of data)
@@ -248,7 +248,7 @@ curvechart = () ->
 
     chart.titlepos = (value) ->
                       return titlepos if !arguments.length
-                      titlepos
+                      titlepos = value
                       chart
 
     chart.xlim = (value) ->

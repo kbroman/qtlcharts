@@ -20,7 +20,7 @@ chrheatmap = () ->
     oneAtTop = false
     hover = true
     cellSelect = null
-  
+
     ## the main function
     chart = (selection) ->
         selection.each (data) ->
@@ -37,7 +37,7 @@ chrheatmap = () ->
             if data.chrnames.length != nchr
                 displayError.log("data.nmar.length != data.chrnames.length")
             if data.labels.length != totmar
-                displayError("data.labels.length != sum(data.nmar)")         
+                displayError("data.labels.length != sum(data.nmar)")
             if chrGap < 2
                 chrGap = 2
                 displayError("chrGap should be >= 1")
@@ -77,23 +77,23 @@ chrheatmap = () ->
             if zlim.length != colors.length
                 displayError("zlim.length (#{zlim.length}) != colors.length (#{colors.length})")
             zscale.domain(zlim).range(colors)
-    
+
             # discard cells with |z| < zthresh
             zthresh = zthresh ? zmin - 1
             data.cells = (cell for cell in data.cells when cell.z >= zthresh or cell.z <= -zthresh)
-    
+
             # Select the svg element, if it exists.
             svg = d3.select(this).selectAll("svg").data([data])
-    
+
             # Otherwise, create the skeletal chart.
             gEnter = svg.enter().append("svg").append("g")
-    
+
             # Update the outer dimensions.
             svg.attr("width", width+margin.left+margin.right)
                .attr("height", height+margin.top+margin.bottom)
-    
+
             g = svg.select("g")
-    
+
             # box
             g.append("rect")
              .attr("x", margin.left)
@@ -103,7 +103,7 @@ chrheatmap = () ->
              .attr("fill", rectcolor)
              .attr("stroke", null)
              .attr("stroke-width", "0")
-    
+
             # chromosome borders
             chrborders = g.append("g").attr("id", "chrBorders")
             chrborders.selectAll("empty")
@@ -134,7 +134,7 @@ chrheatmap = () ->
                         .attr("x", margin.left + width/2)
                         .attr("y", margin.top - titlepos)
                         .text(title)
-    
+
             # x-axis
             xaxis = g.append("g").attr("class", "x axis")
             xaxis.append("text").attr("class", "title")
@@ -173,7 +173,7 @@ chrheatmap = () ->
                         .direction('e')
                         .offset([0,10])
             svg.call(celltip)
-    
+
             cells = g.append("g").attr("id", "cells")
             cellSelect =
                 cells.selectAll("empty")
@@ -228,7 +228,7 @@ chrheatmap = () ->
 
     chart.titlepos = (value) ->
                       return titlepos if !arguments.length
-                      titlepos
+                      titlepos = value
                       chart
 
     chart.rectcolor = (value) ->
@@ -293,9 +293,9 @@ chrheatmap = () ->
 
     chart.zscale = () ->
                       return zscale
-                  
+
     chart.cellSelect = () ->
                       return cellSelect
-                  
+
     # return the chart function
     chart

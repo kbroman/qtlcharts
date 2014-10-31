@@ -24,7 +24,7 @@ lodheatmap = () ->
     yscale = d3.scale.linear()
     zscale = d3.scale.linear()
     cellSelect = null
-  
+
     ## the main function
     chart = (selection) ->
         selection.each (data) ->
@@ -40,7 +40,7 @@ lodheatmap = () ->
             xLR = {}
             for chr in data.chrnames
                 xLR[chr] = getLeftRight(data.posByChr[chr])
-      
+
             # z-axis (color) limits; if not provided, make symmetric about 0
             zmin = 0
             zmax = 0
@@ -213,7 +213,7 @@ lodheatmap = () ->
 
     chart.titlepos = (value) ->
                       return titlepos if !arguments.length
-                      titlepos
+                      titlepos = value
                       chart
 
     chart.rectcolor = (value) ->

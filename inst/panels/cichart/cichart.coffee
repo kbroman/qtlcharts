@@ -34,12 +34,12 @@ cichart = () ->
             displayError("means.length != low.length") if means.length != low.length
             displayError("means.length != high.length") if means.length != high.length
             displayError("means.length != categories.length") if means.length != categories.length
-      
+
             xcatlabels = xcatlabels ? categories
             displayError("xcatlabels.length != categories.length") if xcatlabels.length != categories.length
-      
+
             ylim = ylim ? [d3.min(low), d3.max(high)]
-      
+
             # Select the svg element, if it exists.
             svg = d3.select(this).selectAll("svg").data([data])
 
@@ -64,7 +64,7 @@ cichart = () ->
             # simple scales (ignore NA business)
             xrange = [margin.left+margin.inner, margin.left+width-margin.inner]
             xscale.domain(categories).rangePoints(xrange, 1)
-  
+
             # width of segments
             segwidth = segwidth ? (xrange[1]-xrange[0])/categories.length*0.2
 
@@ -92,7 +92,7 @@ cichart = () ->
                  .attr("x2", (d) -> xscale(d))
                  .attr("y1", margin.top)
                  .attr("y2", margin.top+height)
-                 .attr("class", "x axis grid") 
+                 .attr("class", "x axis grid")
             xaxis.selectAll("empty")
                  .data(categories)
                  .enter()
@@ -116,7 +116,7 @@ cichart = () ->
                  .attr("y2", (d) -> yscale(d))
                  .attr("x1", margin.left)
                  .attr("x2", margin.left+width)
-                 .attr("class", "y axis grid") 
+                 .attr("class", "y axis grid")
             yaxis.selectAll("empty")
                  .data(yticks)
                  .enter()
@@ -204,7 +204,7 @@ cichart = () ->
 
     chart.titlepos = (value) ->
                        return titlepos if !arguments.length
-                       titlepos
+                       titlepos = value
                        chart
 
     chart.xcatlabels = (value) ->
@@ -274,9 +274,9 @@ cichart = () ->
 
     chart.yscale = () ->
                        return yscale
-                   
+
     chart.xscale = () ->
                        return xscale
-  
+
     # return the chart function
     chart

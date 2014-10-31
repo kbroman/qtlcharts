@@ -11,7 +11,7 @@ crosstab = () ->
     rectcolor = "#e6e6e6"
     hilitcolor = "#e9cfec"
     bordercolor = "black"
-  
+
     ## the main function
     chart = (selection) ->
         selection.each (data) ->
@@ -58,7 +58,7 @@ crosstab = () ->
                     else
                         cell.rowpercent = cell.value
                     cells.push(cell)
-                        
+
             # svg width and height
             width = margin.left + margin.right + (ncol+2)*cellWidth
             height = margin.top + margin.bottom + (nrow+2)*cellHeight
@@ -72,16 +72,16 @@ crosstab = () ->
 
             # Select the svg element, if it exists.
             svg = d3.select(this).selectAll("svg").data([data])
-    
+
             # Otherwise, create the skeletal chart.
             gEnter = svg.enter().append("svg").append("g")
-    
+
             # Update the outer dimensions.
             svg.attr("width", width+margin.left+margin.right)
                .attr("height", height+margin.top+margin.bottom)
-    
+
             g = svg.select("g")
-    
+
             # rectangles for body of table
             rect = g.append("g").attr("id", "value_rect")
             rect.selectAll("empty")
@@ -239,7 +239,7 @@ crosstab = () ->
 
     chart.titlepos = (value) ->
                       return titlepos if !arguments.length
-                      titlepos
+                      titlepos = value
                       chart
 
     chart.title = (value) ->

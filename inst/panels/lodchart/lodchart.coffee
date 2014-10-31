@@ -29,7 +29,7 @@ lodchart = () ->
     markerSelect = null
     chrSelect = null
     pointsAtMarkers = true
-  
+
     ## the main function
     chart = (selection) ->
         selection.each (data) ->
@@ -244,7 +244,7 @@ lodchart = () ->
 
     chart.titlepos = (value) ->
                       return titlepos unless arguments.length
-                      titlepos
+                      titlepos = value
                       chart
 
     chart.axispos = (value) ->

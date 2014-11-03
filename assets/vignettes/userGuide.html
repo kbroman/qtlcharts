@@ -453,9 +453,10 @@ marker position to view the marker name.</p>
 
 <p>Let&#39;s first load the <code>hyper</code> data included with
 <a href="http://www.rqtl.org">R/qtl</a> and pull out the genetic map with
-<code>pull.map</code>.</p>
+<code>pull.map</code>. We need to load R/qtl, too.</p>
 
-<pre><code class="r">data(hyper)
+<pre><code class="r">library(qtl)
+data(hyper)
 map &lt;- pull.map(hyper)
 </code></pre>
 

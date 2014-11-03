@@ -1,4 +1,3 @@
-
 all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vignettes
 .PHONY: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vignettes
 
@@ -6,9 +5,9 @@ all: chartexamples jspanels jspaneltests json testhtml d3 d3tip colorbrewer vign
 CHARTEX = example
 
 CHARTEXAMPLES = ${CHARTEX}/iboxplot.html ${CHARTEX}/iplotCorr.html \
-                ${CHARTEX}/iplotCurves.html ${CHARTEX}/iplotMScanone.html \
-                ${CHARTEX}/iplotMap.html ${CHARTEX}/iplotScanone.html \
-                ${CHARTEX}/iheatmap.html ${CHARTEX}/iplotRF.html
+				${CHARTEX}/iplotCurves.html ${CHARTEX}/iplotMScanone.html \
+				${CHARTEX}/iplotMap.html ${CHARTEX}/iplotScanone.html \
+				${CHARTEX}/iheatmap.html ${CHARTEX}/iplotRF.html
 chartexamples: ${CHARTEXAMPLES}
 
 ${CHARTEX}/iboxplot.html: ${CHARTEX}/R/iboxplot_example.R ${CHARTEX}/R/hypo.RData
@@ -79,10 +78,10 @@ QTLCHARTS_BREWER = ../qtlcharts/inst/colorbrewer
 
 # javascript of panel tests
 JSPANELTESTS = ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js \
-               ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js \
-               ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js \
-               ${HEATMAP_TESTDIR}/test_heatmap.js ${CHRHEATMAP_TESTDIR}/test_chrheatmap.js \
-               ${LODHEATMAP_TESTDIR}/test_lodheatmap.js ${CROSSTAB_TESTDIR}/test_crosstab.js
+			   ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js \
+			   ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js \
+			   ${HEATMAP_TESTDIR}/test_heatmap.js ${CHRHEATMAP_TESTDIR}/test_chrheatmap.js \
+			   ${LODHEATMAP_TESTDIR}/test_lodheatmap.js ${CROSSTAB_TESTDIR}/test_crosstab.js
 jspaneltests: ${JSPANELTESTS}
 
 ${THIS}/%/test/%.js: ${QTLCHARTS}/%/test/%.js
@@ -92,11 +91,11 @@ ${THIS}/%/test/%.js: ${QTLCHARTS}/%/test/%.js
 
 # javascript of panels
 JSPANELS = ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js \
-           ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js \
-           ${CURVECHART_DIR}/curvechart.js ${MAPCHART_DIR}/mapchart.js \
-           ${HEATMAP_DIR}/heatmap.js ${CHRHEATMAP_DIR}/chrheatmap.js \
-           ${LODHEATMAP_DIR}/lodheatmap.js ${CROSSTAB_DIR}/crosstab.js \
-           ${PANEL_DIR}/panelutil.js ${PANEL_DIR}/panelutil.css
+		   ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js \
+		   ${CURVECHART_DIR}/curvechart.js ${MAPCHART_DIR}/mapchart.js \
+		   ${HEATMAP_DIR}/heatmap.js ${CHRHEATMAP_DIR}/chrheatmap.js \
+		   ${LODHEATMAP_DIR}/lodheatmap.js ${CROSSTAB_DIR}/crosstab.js \
+		   ${PANEL_DIR}/panelutil.js ${PANEL_DIR}/panelutil.css
 jspanels: ${JSPANELS}
 
 ${THIS}/%.js: ${QTLCHARTS}/%.js
@@ -109,10 +108,10 @@ ${THIS}/panelutil.css: ${QTLCHARTS}/panelutil.css
 
 # test data files
 JSON = ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json \
-       ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json \
-       ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json \
-       ${HEATMAP_TESTDIR}/data.json ${CHRHEATMAP_TESTDIR}/data.json \
-       ${LODHEATMAP_TESTDIR}/data.json ${CROSSTAB_TESTDIR}/data.json
+	   ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json \
+	   ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json \
+	   ${HEATMAP_TESTDIR}/data.json ${CHRHEATMAP_TESTDIR}/data.json \
+	   ${LODHEATMAP_TESTDIR}/data.json ${CROSSTAB_TESTDIR}/data.json
 json: ${JSON}
 
 ${THIS}/%/test/data.json: ${QTLCHARTS}/%/test/data.json
@@ -122,10 +121,10 @@ ${THIS}/%/test/data.json: ${QTLCHARTS}/%/test/data.json
 
 # test/index.html files
 TESTHTML = ${LODCHART_TESTDIR}/index.html ${SCATTERPLOT_TESTDIR}/index.html \
-           ${DOTCHART_TESTDIR}/index.html ${CICHART_TESTDIR}/index.html \
-           ${CURVECHART_TESTDIR}/index.html ${MAPCHART_TESTDIR}/index.html \
-           ${HEATMAP_TESTDIR}/index.html ${CHRHEATMAP_TESTDIR}/index.html \
-           ${LODHEATMAP_TESTDIR}/index.html ${CROSSTAB_TESTDIR}/index.html
+		   ${DOTCHART_TESTDIR}/index.html ${CICHART_TESTDIR}/index.html \
+		   ${CURVECHART_TESTDIR}/index.html ${MAPCHART_TESTDIR}/index.html \
+		   ${HEATMAP_TESTDIR}/index.html ${CHRHEATMAP_TESTDIR}/index.html \
+		   ${LODHEATMAP_TESTDIR}/index.html ${CROSSTAB_TESTDIR}/index.html
 testhtml: ${TESTHTML}
 
 ${THIS}/%/test/index.html: ${QTLCHARTS}/%/test/index.html

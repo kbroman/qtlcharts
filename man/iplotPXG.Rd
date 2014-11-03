@@ -61,6 +61,7 @@ the input \code{cross} object, using the \code{\link[qtl]{getid}}
 function in R/qtl.
 }
 \examples{
+library(qtl)
 data(hyper)
 marker <- sample(markernames(hyper), 1)
 \donttest{

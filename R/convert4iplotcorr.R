@@ -14,9 +14,6 @@
 #
 # @return Character string with the input data in JSON format
 #
-#' @importFrom jsonlite toJSON
-#' @importFrom stats hclust
-#
 # @keywords interface
 # @seealso \code{\link{iplotCorr}}
 #
@@ -47,7 +44,7 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
             stop("corr matrix should be ", ncol(dat), " x ", ncol(dat))
 
         if(reorder) {
-            ord <- hclust(dist(corr), method="average")$order
+            ord <- stats::hclust(stats::dist(corr), method="average")$order
             variables <- variables[ord]
             dat <- dat[,ord]
 
@@ -73,13 +70,13 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
     dimnames(corr) <- dimnames(dat) <- NULL
     names(group) <- NULL
 
-    output <- list("indID" = toJSON(indID, na="null"),
-                   "var" = toJSON(variables, na="null"),
-                   "corr" = toJSON(corr, digits=digits, na="null"),
-                   "rows" = toJSON(rows-1, na="null"),
-                   "cols" = toJSON(cols-1, na="null"),
-                   "dat" =  toJSON(t(dat), digits=digits, na="null"), # columns as rows
-                   "group" = toJSON(group, na="null"))
+    output <- list("indID" = jsonlite::toJSON(indID, na="null"),
+                   "var" = jsonlite::toJSON(variables, na="null"),
+                   "corr" = jsonlite::toJSON(corr, digits=digits, na="null"),
+                   "rows" = jsonlite::toJSON(rows-1, na="null"),
+                   "cols" = jsonlite::toJSON(cols-1, na="null"),
+                   "dat" =  jsonlite::toJSON(t(dat), digits=digits, na="null"), # columns as rows
+                   "group" = jsonlite::toJSON(group, na="null"))
     output <- paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
     strip_whitespace(output)
 }

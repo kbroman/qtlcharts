@@ -69,7 +69,6 @@
 #'                            scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"),
 #'             openfile=FALSE)}
 #'
-#' @importFrom jsonlite toJSON unbox
 #' @export
 iplotCurves <-
 function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
@@ -136,7 +135,7 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
 
     append_html_bottom(file, print=print)
 
-    if(openfile & !print) browseURL(file)
+    if(openfile & !print) utils::browseURL(file)
 
     invisible(file)
 }
@@ -145,11 +144,11 @@ curves2json <-
 function(times, curvedata, group, indID, digits=4)
 {
     # NULL -> NA so treated properly by JSON
-    if(is.null(times)) times <- unbox(NA)
-    if(is.null(group)) group <- unbox(NA)
-    if(is.null(indID)) indID <- unbox(NA)
+    if(is.null(times)) times <- jsonlite::unbox(NA)
+    if(is.null(group)) group <- jsonlite::unbox(NA)
+    if(is.null(indID)) indID <- jsonlite::unbox(NA)
 
-    strip_whitespace( toJSON(list(x=times, data=curvedata, group=group, indID=indID), digits=digits, na="null") )
+    strip_whitespace( jsonlite::toJSON(list(x=times, data=curvedata, group=group, indID=indID), digits=digits, na="null") )
 }
 
 scat2json <-
@@ -158,8 +157,8 @@ function(scatdata, group, indID, digits=4)
     if(is.null(scatdata)) return("null")
 
     # NULL -> NA so treated properly by JSON
-    if(is.null(group)) group <- unbox(NA)
-    if(is.null(indID)) indID <- unbox(NA)
+    if(is.null(group)) group <- jsonlite::unbox(NA)
+    if(is.null(indID)) indID <- jsonlite::unbox(NA)
 
-    strip_whitespace( toJSON(list(data=scatdata, group=group, indID=indID), digits=digits, na="null") )
+    strip_whitespace( jsonlite::toJSON(list(data=scatdata, group=group, indID=indID), digits=digits, na="null") )
 }

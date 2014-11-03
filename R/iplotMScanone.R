@@ -50,13 +50,12 @@
 #' @details If \code{cross} is provided, Haley-Knott regression is
 #' used to estimate QTL effects at each pseudomarker.
 #'
-#' @importFrom utils browseURL
-#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotScanone}}
 #'
 #' @examples
 #' data(grav)
+#' library(qtl)
 #' grav <- calc.genoprob(grav, step=1)
 #' grav <- reduce2grid(grav)
 #'
@@ -198,7 +197,7 @@ function(scanoneOutput, times=NULL,
 
     append_html_bottom(file, print=print)
 
-    if(openfile && !print) browseURL(file)
+    if(openfile && !print) utils::browseURL(file)
 
     invisible(file)
 }

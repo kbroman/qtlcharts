@@ -83,6 +83,7 @@ input \code{cross} object, using the \code{\link[qtl]{getid}}
 function in R/qtl.
 }
 \examples{
+library(qtl)
 data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
 out <- scanone(hyper)

@@ -57,12 +57,11 @@
 #' input \code{cross} object, using the \code{\link[qtl]{getid}}
 #' function in R/qtl.
 #'
-#' @importFrom utils browseURL
-#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotMScanone}}, \code{\link{iplotPXG}}, \code{\link{iplotMap}}
 #'
 #' @examples
+#' library(qtl)
 #' data(hyper)
 #' hyper <- calc.genoprob(hyper, step=1)
 #' out <- scanone(hyper)
@@ -172,7 +171,7 @@ function(scanoneOutput, file, onefile=FALSE, openfile=TRUE, title="", chartdivid
 
     append_html_bottom(file, print=print)
 
-    if(openfile && !print) browseURL(file)
+    if(openfile && !print) utils::browseURL(file)
 
     invisible(file)
 }
@@ -207,7 +206,7 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
 
     append_html_bottom(file, print=print)
 
-    if(openfile && !print) browseURL(file)
+    if(openfile && !print) utils::browseURL(file)
 
     invisible(file)
 }
@@ -241,7 +240,7 @@ function(scanoneOutput, cross, pheno.col=1, file, onefile=FALSE, openfile=TRUE,
 
     append_html_bottom(file, print=print)
 
-    if(openfile && !print) browseURL(file)
+    if(openfile && !print) utils::browseURL(file)
 
     invisible(file)
 }

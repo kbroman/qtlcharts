@@ -46,6 +46,7 @@ Character string with the name of the file created.
 Creates an interactive graph of a genetic marker map.
 }
 \examples{
+library(qtl)
 data(hyper)
 map <- pull.map(hyper)
 \donttest{

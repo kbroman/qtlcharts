@@ -1,4 +1,3 @@
-
 context("utilities")
 
 test_that("select phenotype columns works on small cases", {
@@ -86,32 +85,32 @@ test_that("strip_whitespace works", {
     expect_equal(strip_whitespace(input), output)
 
     opt <- list(xlab="x-axis label", ylab="y-axis label")
-    json <- strip_whitespace(toJSON(opt))
+    json <- strip_whitespace(jsonlite::toJSON(opt))
     output <- "{\"xlab\":[\"x-axis label\"],\"ylab\":[\"y-axis label\"]}"
     expect_equal(json, output)
 
     opt <- list(xlab='x-axis label', ylab='y-axis label')
-    json <- strip_whitespace(toJSON(opt))
+    json <- strip_whitespace(jsonlite::toJSON(opt))
     output <- "{\"xlab\":[\"x-axis label\"],\"ylab\":[\"y-axis label\"]}"
     expect_equal(json, output)
 
     opt <- list(xlab="x-axis label", ylab="y-axis label")
-    json <- strip_whitespace(toJSON(opts4json(opt)))
+    json <- strip_whitespace(jsonlite::toJSON(opts4json(opt)))
     output <- "{\"xlab\":\"x-axis label\",\"ylab\":\"y-axis label\"}"
     expect_equal(json, output)
 
     opt <- list(xlab='x-axis label', ylab='y-axis label')
-    json <- strip_whitespace(toJSON(opts4json(opt)))
+    json <- strip_whitespace(jsonlite::toJSON(opts4json(opt)))
     output <- "{\"xlab\":\"x-axis label\",\"ylab\":\"y-axis label\"}"
     expect_equal(json, output)
 
     opt <- c(xlab="Don't try this at home", ylab="y-axis label")
-    json <- toJSON(opts4json(opt))
+    json <- jsonlite::toJSON(opts4json(opt))
     output <- "{\"xlab\":\"Don't try this at home\",\"ylab\":\"y-axis label\"}"
     expect_equal(strip_whitespace(json), output)
 
     opt <- c(xlab="Don't try this at home", ylab="Don't try this either")
-    json <- toJSON(opts4json(opt))
+    json <- jsonlite::toJSON(opts4json(opt))
     output <- "{\"xlab\":\"Don't try this at home\",\"ylab\":\"Don't try this either\"}"
     expect_equal(strip_whitespace(json), output)
 
@@ -121,7 +120,7 @@ test_that("strip_whitespace works", {
     expect_equal(strip_whitespace(input), output)
 
     opt <- c(xlab="Can't use \"double-quotes\".", ylab="blah")
-    json <- toJSON(opts4json(opt))
+    json <- jsonlite::toJSON(opts4json(opt))
     output <- "{\"xlab\":\"Can't use \\\"double-quotes\\\".\",\"ylab\":\"blah\"}"
     expect_equal(strip_whitespace(json), output)
 

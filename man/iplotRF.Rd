@@ -49,6 +49,7 @@ Character string with the name of the file created.
 Creates an interactive graph of estimated recombination fractions and LOD scores for all pairs of markers.
 }
 \examples{
+library(qtl)
 data(hyper)
 hyper <- est.rf(hyper)
 \donttest{

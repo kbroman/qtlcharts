@@ -41,9 +41,10 @@ and then rotated 90 degrees with respect to gravity; the growth of the
 seedlings was then recorded on video. The outcome is the root tip
 angle (in degrees) at two-minute increments over eight hours.
 
-We'll first load the R/qtlcharts package and the data set.
+We'll first load the R/qtl and R/qtlcharts packages and the data set.
 
 ```{r load_data, message=FALSE}
+library(qtl)
 library(qtlcharts)
 data(grav)
 ```

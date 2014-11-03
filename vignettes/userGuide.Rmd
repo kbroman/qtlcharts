@@ -274,10 +274,11 @@ marker position to view the marker name.
 
 Let's first load the `hyper` data included with
 [R/qtl](http://www.rqtl.org) and pull out the genetic map with
-`pull.map`.
+`pull.map`. We need to load R/qtl, too.
 
 
 ```{r, load_hyper}
+library(qtl)
 data(hyper)
 map <- pull.map(hyper)
 ```

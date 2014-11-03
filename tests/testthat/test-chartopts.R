@@ -1,7 +1,6 @@
-
 context("chartOpts")
 
-tmpf <- function(opts, digits=2) as.character(toJSON(opts4json(opts), digits=digits))
+tmpf <- function(opts, digits=2) as.character(jsonlite::toJSON(opts4json(opts), digits=digits))
 addquotes <- function(x) paste0("\"", x, "\"")
 
 test_that("conversion of chartOpts to JSON", {

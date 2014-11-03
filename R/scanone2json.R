@@ -15,12 +15,11 @@
 #
 # @return A character string with the input in JSON format.
 #
-#' @importFrom jsonlite toJSON
-#
 # @keywords interface
 # @seealso \code{\link{pxg2json}}
 #
 # @examples
+# library(qtl)
 # data(hyper)
 # hyper <- calc.genoprob(hyper, step=1)
 # out <- scanone(hyper)

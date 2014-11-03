@@ -15,12 +15,11 @@
 #    includes an ordered vector of chromosome names and then the map,
 #    organized by chromosome and then by marker.
 #
-#' @importFrom jsonlite toJSON unbox
-#
 # @keywords interface
 # @seealso \code{\link{scanone2json}}, \code{\link{pxg2json}}
 #
 # @examples
+# library(qtl)
 # data(hyper)
 # map <- pull.map(hyper)
 # map_as_json <- map2json(map)

@@ -35,6 +35,7 @@ this case.
 }
 \examples{
 data(grav)
+library(qtl)
 grav <- reduce2grid(calc.genoprob(grav, step=1))
 out <- estQTLeffects(grav, phe=seq(1, nphe(grav), by=5))
 }

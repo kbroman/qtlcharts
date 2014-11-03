@@ -1,6 +1,6 @@
 Package: qtlcharts
-Version: 0.2-45
-Date: 31 Oct 2014
+Version: 0.3-1
+Date: 3 Nov 2014
 Title: Interactive graphics for QTL experiments
 Author: Karl W Broman <kbroman@biostat.wisc.edu>
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
@@ -8,9 +8,9 @@ Description: Web-based interactive charts (using D3.js) for the analysis of
     experimental crosses to identify genetic loci (quantitative trait
     loci, QTL) contributing to variation in quantitative traits.
 Depends:
-    R (>= 2.15),
-    qtl (>= 1.30-4)
+    R (>= 2.15)
 Imports:
+    qtl (>= 1.30-4),
     jsonlite,
     graphics,
     stats,

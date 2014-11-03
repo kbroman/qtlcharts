@@ -77,6 +77,7 @@ used to estimate QTL effects at each pseudomarker.
 }
 \examples{
 data(grav)
+library(qtl)
 grav <- calc.genoprob(grav, step=1)
 grav <- reduce2grid(grav)
 

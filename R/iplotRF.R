@@ -30,13 +30,11 @@
 #'
 #' @return Character string with the name of the file created.
 #'
-#' @importFrom utils browseURL
-#' @importFrom qtl pull.map
-#'
 #' @keywords hplot
 #' @seealso \code{\link[qtl]{est.rf}}, \code{\link[qtl]{plotRF}}
 #'
 #' @examples
+#' library(qtl)
 #' data(hyper)
 #' hyper <- est.rf(hyper)
 #' \donttest{
@@ -85,7 +83,7 @@ function(cross, chr, file, onefile=FALSE, openfile=TRUE, title="",
 
     append_html_bottom(file, print=print)
 
-    if(openfile && !print) browseURL(file)
+    if(openfile && !print) utils::browseURL(file)
 
     invisible(file)
 }
@@ -96,18 +94,18 @@ function(cross)
 {
     if(!("rf" %in% names(cross))) {
         warning("Running est.rf.")
-        cross <- est.rf(cross)
+        cross <- qtl::est.rf(cross)
     }
 
     rf <- cross$rf
     diag(rf) <- NA
-    mnames <- markernames(cross)
+    mnames <- qtl::markernames(cross)
     dimnames(rf) <- NULL
-    n.mar <- nmar(cross)
+    n.mar <- qtl::nmar(cross)
     names(n.mar) <- NULL
-    chrnam <- chrnames(cross)
+    chrnam <- qtl::chrnames(cross)
 
-    map <- pull.map(cross, as.table=TRUE)
+    map <- qtl::pull.map(cross, as.table=TRUE)
     chr <- as.character(map[,1])
     pos <- map[,2]
 

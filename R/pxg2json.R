@@ -19,13 +19,11 @@
 #
 # @details Genotypes are encoded as integers; negative integers are used to indicate imputed values.
 #
-#' @importFrom qtl pull.pheno markernames getsex chrnames getgenonames getid nmar
-#' @importFrom jsonlite toJSON
-#
 # @keywords interface
 # @seealso \code{\link{scanone2json}}
 #
 # @examples
+# library(qtl)
 # data(hyper)
 # pxg_as_json <- pxg2json(hyper)
 pxg2json <-
@@ -38,7 +36,7 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, digits=4)
         stop("phenotype ", pheno.col, " is not numeric: ", paste(head(phe), collapse=" "))
 
     # marker names
-    markers <- markernames(cross)
+    markers <- qtl::markernames(cross)
 
     # chr types
     sexpgm <- qtl::getsex(cross)
@@ -53,7 +51,7 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, digits=4)
         genonames[[i]] <- qtl::getgenonames(class(cross)[1], i, "full", sexpgm, attributes(cross))
 
     id <- qtl::getid(cross)
-    if(is.null(id)) id <- 1:nind(cross)
+    if(is.null(id)) id <- 1:qtl::nind(cross)
     id <- as.character(id)
 
     dimnames(geno_filled) <- NULL
@@ -73,8 +71,6 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, digits=4)
 
 
 # get imputed genotypes, dealing specially with X chr genotypes
-#' @importFrom qtl pull.geno fill.geno chrnames getsex reviseXdata
-#
 getImputedGenotypes <-
 function(cross, fillgenoArgs=NULL, imputed_negative=TRUE)
 {

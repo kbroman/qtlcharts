@@ -27,13 +27,11 @@
 #'
 #' @return Character string with the name of the file created.
 #'
-#' @importFrom utils browseURL
-#' @importFrom qtl pull.map
-#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotScanone}}, \code{\link{iplotPXG}}
 #'
 #' @examples
+#' library(qtl)
 #' data(hyper)
 #' map <- pull.map(hyper)
 #' \donttest{
@@ -49,7 +47,7 @@ iplotMap <-
 function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
          chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
-    if("cross" %in% class(map)) map <- pull.map(map)
+    if("cross" %in% class(map)) map <- qtl::pull.map(map)
 
     if(missing(file)) file <- NULL
 
@@ -61,7 +59,7 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
                       panels="mapchart", charts="iplotMap", chartdivid=chartdivid,
                       caption=caption, print=print)
 
-    if(shift) map <- shiftmap(map)
+    if(shift) map <- qtl::shiftmap(map)
     json <- map2json(map, digits=digits)
 
     # add chartdivid to chartOpts
@@ -75,7 +73,7 @@ function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
 
     append_html_bottom(file, print=print)
 
-    if(openfile && !print) browseURL(file)
+    if(openfile && !print) utils::browseURL(file)
 
     invisible(file)
 }

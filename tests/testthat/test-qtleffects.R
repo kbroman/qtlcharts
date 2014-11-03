@@ -1,4 +1,3 @@
-
 context("QTL effects")
 
 test_that("estQTLeffects works for RIL by selfing", {
@@ -19,6 +18,7 @@ test_that("estQTLeffects works for RIL by selfing", {
 
 test_that("estQTLeffects works for X chromosome in F2", {
 
+    library(qtl)
     data(fake.f2)
     fake.f2 <- qtl::calc.genoprob(fake.f2["X",])
 

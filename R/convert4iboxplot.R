@@ -12,10 +12,6 @@
 #
 # @return Character string with the input data in JSON format
 #
-#' @importFrom jsonlite toJSON
-#' @importFrom stats quantile
-#' @importFrom graphics hist
-#
 # @keywords interface
 # @seealso \code{\link{iboxplot}}
 #
@@ -48,7 +44,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
     }
 
     qu <- sort(c(qu, 0.5, rev(1-qu)))
-    quant <- apply(dat, 1, quantile, qu, na.rm=TRUE)
+    quant <- apply(dat, 1, stats::quantile, qu, na.rm=TRUE)
 
     # counts for histograms
     if(length(breaks) == 1)
@@ -59,7 +55,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
             dat[dat > max(breaks) | dat < min(breaks)] <- NA
         }
     }
-    counts <- apply(dat, 1, function(a) hist(a, breaks=breaks, plot=FALSE)$counts)
+    counts <- apply(dat, 1, function(a) graphics::hist(a, breaks=breaks, plot=FALSE)$counts)
 
     ind <- rownames(dat)
 

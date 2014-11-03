@@ -31,8 +31,6 @@
 #'
 #' @return Character string with the name of the file created.
 #'
-#' @importFrom utils browseURL
-#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotCorr}}
 #'
@@ -81,7 +79,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
 
     append_html_bottom(file, print=print)
 
-    if(openfile && !print) browseURL(file)
+    if(openfile && !print) utils::browseURL(file)
 
     invisible(file)
 }

@@ -28,14 +28,12 @@
 #' @seealso \code{\link{iplotMScanone}}, \code{\link[qtl]{effectscan}}
 #' \code{\link{cbindQTLeffects}}
 #'
-#' @importFrom stats lm
-#'
 #' @examples
 #' data(grav)
+#' library(qtl)
 #' grav <- reduce2grid(calc.genoprob(grav, step=1))
 #' out <- estQTLeffects(grav, phe=seq(1, nphe(grav), by=5))
 #'
-#' @importFrom qtl calc.genoprob getsex reviseXdata
 #' @export
 estQTLeffects <-
 function(cross, pheno.col=1, what=c("means", "effects"))
@@ -59,8 +57,8 @@ function(cross, pheno.col=1, what=c("means", "effects"))
         cross <- qtl::calc.genoprob(cross)
     }
 
-    pr <- vector("list", nchr(cross))
-    for(i in 1:nchr(cross)) {
+    pr <- vector("list", qtl::nchr(cross))
+    for(i in 1:qtl::nchr(cross)) {
         pr[[i]] <- cross$geno[[i]]$prob
         if(chrtype[i] == "X")
             pr[[i]] <- qtl::reviseXdata(crosstype, "full", qtl::getsex(cross),
@@ -73,7 +71,7 @@ function(cross, pheno.col=1, what=c("means", "effects"))
         for(j in 1:ncol(pr[[i]])) {
             cur <- cur + 1
             # lm to estimate phenotype averages in each genotype group
-            eff[[cur]] <- t(lm(phe ~ -1 + pr[[i]][,j,])$coef)
+            eff[[cur]] <- t(stats::lm(phe ~ -1 + pr[[i]][,j,])$coef)
             dimnames(eff[[cur]]) <- list(colnames(phe), dimnames(pr[[i]])[[3]])
 
             if(what == "effects")
@@ -205,8 +203,6 @@ function(effects, crosstype, chrtype)
 }
 
 # strip off names; save colnames within the lists
-#' @importFrom jsonlite toJSON
-#
 effects2json <-
 function(effects, digits=4)
 {

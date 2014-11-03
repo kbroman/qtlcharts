@@ -45,9 +45,6 @@
 #' Individual IDs are taken from \code{rownames(mat)}; they must match
 #' \code{names(group)}.
 #'
-#' @importFrom stats cor
-#' @importFrom utils browseURL
-#'
 #' @keywords hplot
 #' @seealso \code{\link{iheatmap}}, \code{\link{iplotCurves}}
 #'
@@ -69,7 +66,7 @@
 #'
 #' @export
 iplotCorr <-
-function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.complete.obs"),
+function(mat, group, rows, cols, reorder=FALSE, corr=stats::cor(mat, use="pairwise.complete.obs"),
          file, onefile=FALSE, openfile=TRUE, title="",
          chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
 {
@@ -128,7 +125,7 @@ function(mat, group, rows, cols, reorder=FALSE, corr=cor(mat, use="pairwise.comp
 
     append_html_bottom(file, print=print)
 
-    if(openfile && !print) browseURL(file)
+    if(openfile && !print) utils::browseURL(file)
 
     invisible(file)
 }

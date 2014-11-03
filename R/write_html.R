@@ -223,15 +223,13 @@ function(file, ..., tag="p", id, class, style)
 #
 # @return None (invisible NULL)
 # @keywords IO
-#' @importFrom jsonlite toJSON
-#
 append_html_chartopts <-
 function(file, chartOpts, chartdivid='chart', digits=2)
 {
     if(is.null(chartOpts))
         chartOpts <- list("null" = NULL)
 
-    opts_json <- strip_whitespace( toJSON( opts4json(chartOpts), digits=digits, na="null") )
+    opts_json <- strip_whitespace( jsonlite::toJSON( opts4json(chartOpts), digits=digits, na="null") )
 
     cat('\n<script type="text/javascript">\n', file=file, append=TRUE)
     cat(chartdivid, '_chartOpts = ', opts_json, ';', file=file, append=TRUE, sep='')
@@ -245,9 +243,6 @@ function(file, chartOpts, chartdivid='chart', digits=2)
 # named vector -> list
 # vectors of length 1 "unboxed" (scalar rather than array)
 # NULL -> unbox(NA) [converted to null]
-#
-#' @importFrom jsonlite unbox
-#
 opts4json <-
 function(opts)
 {

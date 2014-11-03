@@ -4,8 +4,8 @@
 \alias{iplotCorr}
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
-iplotCorr(mat, group, rows, cols, reorder = FALSE, corr = cor(mat, use =
-  "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
+iplotCorr(mat, group, rows, cols, reorder = FALSE, corr = stats::cor(mat,
+  use = "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
   title = "", chartdivid = "chart", caption, chartOpts = NULL,
   digits = 4, print = FALSE)
 }

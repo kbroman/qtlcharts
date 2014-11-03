@@ -38,12 +38,11 @@
 #' the input \code{cross} object, using the \code{\link[qtl]{getid}}
 #' function in R/qtl.
 #'
-#' @importFrom utils browseURL
-#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotScanone}}, \code{\link{iplotMap}}
 #'
 #' @examples
+#' library(qtl)
 #' data(hyper)
 #' marker <- sample(markernames(hyper), 1)
 #' \donttest{
@@ -80,7 +79,7 @@ function(cross, marker, pheno.col=1,
                       panels="dotchart", charts="iplotPXG", chartdivid=chartdivid,
                       caption=caption, print=print)
 
-    json <- pxg2json(pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
+    json <- pxg2json(qtl::pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs, digits=digits)
 
     # use phenotype name as y-axis label, unless ylab is already provided
     chartOpts <- add2chartOpts(chartOpts, ylab=getPhename(cross, pheno.col))
@@ -94,7 +93,7 @@ function(cross, marker, pheno.col=1,
 
     append_html_bottom(file, print=print)
 
-    if(openfile && !print) browseURL(file)
+    if(openfile && !print) utils::browseURL(file)
 
     invisible(file)
 }

@@ -1,8 +1,7 @@
-
 context("json i/o")
 
 test_that("test simple conversions to JSON", {
-    tocharjson <- function(...) as.character(toJSON(...))
+    tocharjson <- function(...) as.character(jsonlite::toJSON(...))
 
     input01 <- list(x="a", y=NA)
     output01 <- "{\"x\":[\"a\"],\"y\":[null]}"
@@ -37,7 +36,7 @@ test_that("test simple conversions to JSON", {
     expect_equal(tocharjson(input08), output08)
 
     # It's a bit of a surprise that NA -> "NA" if numeric and NA -> null if character
-    expect_equal(tocharjson(lapply(c(a=1,   b=NA), unbox)), "{\"a\":1,\"b\":\"NA\"}")
-    expect_equal(tocharjson(lapply(c(a="1", b=NA), unbox)), "{\"a\":\"1\",\"b\":null}")
+    expect_equal(tocharjson(lapply(c(a=1,   b=NA), jsonlite::unbox)), "{\"a\":1,\"b\":\"NA\"}")
+    expect_equal(tocharjson(lapply(c(a="1", b=NA), jsonlite::unbox)), "{\"a\":\"1\",\"b\":null}")
 
 })

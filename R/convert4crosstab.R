@@ -7,35 +7,31 @@
 #
 # @param cross R/qtl cross object; see help file for \code{\link[qtl]{read.cross}}
 # @param chr Optional set of chromosomes to select
-#
-#' @importFrom qtl markernames getsex getgenonames reviseXdata pull.geno
-#' @importFrom jsonlite toJSON unbox
-#
 convert4crosstab <-
 function(cross, chr)
 {
     if(!missing(chr)) cross <- cross[chr,]
 
     crosstype <- class(cross)[1] # f2, bc, etc.
-    mnames <- markernames(cross)
+    mnames <- qtl::markernames(cross)
 
     # chr type for each marker ("A" or "X")
-    chrtype <- rep(sapply(cross$geno, class), nmar(cross))
+    chrtype <- rep(sapply(cross$geno, class), qtl::nmar(cross))
     names(chrtype) <- mnames
 
     # for conversion with X chr
     cross.attr <- attributes(cross)
-    sexpgm <- getsex(cross)
+    sexpgm <- qtl::getsex(cross)
 
     # names of the genotype categories; making missing values the last category
     genocat <- vector("list", 0)
     if(any(chrtype == "A"))
-        genocat$A <- c(getgenonames(crosstype, "A", cross.attr=cross.attr), "N/A")
+        genocat$A <- c(qtl::getgenonames(crosstype, "A", cross.attr=cross.attr), "N/A")
     if(any(chrtype == "X"))
-        genocat$X <- c(getgenonames(crosstype, "X", expandX = "standard", sexpgm=sexpgm,
-                                    cross.attr=attributes(cross)), "N/A")
+        genocat$X <- c(qtl::getgenonames(crosstype, "X", expandX = "standard", sexpgm=sexpgm,
+                                         cross.attr=attributes(cross)), "N/A")
 
-    geno <- pull.geno(cross)
+    geno <- qtl::pull.geno(cross)
     if(any(chrtype=="A")) {
         genoA <- geno[,chrtype=="A"]
         # replace missing values with number for last category
@@ -52,8 +48,8 @@ function(cross, chr)
     if(any(chrtype=="X")) {
         genoX <- geno[,chrtype=="X"]
         # convert from 1/2 to numbers for like AA/AB/BB/AY/BY
-        genoX <- reviseXdata(crosstype, expandX="standard", sexpgm=sexpgm, geno=genoX,
-                             cross.attr=cross.attr)
+        genoX <- qtl::reviseXdata(crosstype, expandX="standard", sexpgm=sexpgm, geno=genoX,
+                                  cross.attr=cross.attr)
         # replace missing values with number for last category
         genoX[is.na(genoX)] <- length(genocat$X)
         # check for unexpected codes

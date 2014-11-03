@@ -175,5 +175,5 @@ ${THIS_VIGNETTES}/userGuide.html: ${QTLCHARTS_VIGNETTES}/userGuide.Rmd
 	cp $< tmp/userGuide.Rmd
 	cp ${QTLCHARTS_VIGNETTES}/Figs/* tmp/Figs/
 	cd tmp;R -e 'library(knitr);knit2html("userGuide.Rmd")'
-	mv tmp/userGuide.html ${VIGNETTES}/
+	mv tmp/userGuide.html ${THIS_VIGNETTES}/
 	rm -r tmp

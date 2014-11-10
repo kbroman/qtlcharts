@@ -463,6 +463,48 @@ customization options for each chart.
 
 `eff_yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
 
+### `iplotMScanone` (no effects)
+
+`wleft = 650` &mdash; width of left panels in pixels
+
+`wright = 350` &mdash; width of right panel in pixels
+
+`htop = 350` &mdash; height of top panels in pixels
+
+`hbot = 350` &mdash; height of bottom panel in pixels
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`chrGap = 8` &mdash; gap between chromosomes in pixels
+
+`darkrect = "#C8C8C8"` &mdash; color of darker background rectangle
+
+`lightrect = "#E6E6E6"` &mdash; color of lighter background rectangle
+
+`nullcolor = "#E6E6E6"` &mdash; color for pixels with null values
+
+`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
+
+`zlim = NULL` &mdash; z-axis limits
+
+`zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
+
+`lod_ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
+
+`linecolor = "darkslateblue"` &mdash; color of lines
+
+`linewidth = 2` &mdash; width of lines
+
+`nxticks = 5` &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale
+
+`xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale
+
+`lod_labels = NULL` &mdash; optional vector of strings, for LOD column labels
+
 ### `iplotRF`
 
 `pixelPerCell = NULL` &mdash; pixels per cell in heat map
@@ -541,48 +583,6 @@ customization options for each chart.
 
 `yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
 
-### `iplotMScanone` (no effects)
-
-`wleft = 650` &mdash; width of left panels in pixels
-
-`wright = 350` &mdash; width of right panel in pixels
-
-`htop = 350` &mdash; height of top panels in pixels
-
-`hbot = 350` &mdash; height of bottom panel in pixels
-
-`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`chrGap = 8` &mdash; gap between chromosomes in pixels
-
-`darkrect = "#C8C8C8"` &mdash; color of darker background rectangle
-
-`lightrect = "#E6E6E6"` &mdash; color of lighter background rectangle
-
-`nullcolor = "#E6E6E6"` &mdash; color for pixels with null values
-
-`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
-
-`zlim = NULL` &mdash; z-axis limits
-
-`zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
-
-`lod_ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
-
-`linecolor = "darkslateblue"` &mdash; color of lines
-
-`linewidth = 2` &mdash; width of lines
-
-`nxticks = 5` &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale
-
-`xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale
-
-`lod_labels = NULL` &mdash; optional vector of strings, for LOD column labels
-
 ### `iplotMScanone` (with effects)
 
 `wleft = 650` &mdash; width of left panels in pixels
@@ -632,6 +632,36 @@ customization options for each chart.
 `xticks = NULL` &mdash; tick positions in x-axis for effect plot (right panel), if quantitative scale
 
 `lod_labels = NULL` &mdash; optional vector of strings, for LOD column labels
+
+### `iplotScantwo`
+
+`pixelPerCell = NULL` &mdash; pixels per cell in heat map
+
+`chrGap = 2` &mdash; gaps between chr in heat map
+
+`wright = 500` &mdash; width (in pixels) of right panels
+
+`hbot = 300` &mdash; height (in pixels) of each of the lower panels
+
+`margin = list(left=60, top=30, right=10, bottom=40, inner=5)` &mdash; margins in each panel
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
+
+`lightrect = "#e6e6e6"` &mdash; background color in heatmap; light rect in lower panels
+
+`darkrect = "#c8c8c8"` &mdash; dark rectangle in lower panels
+
+`nullcolor = "#e6e6e6"` &mdash; color of null pixels in heat map
+
+`bordercolor = "black"` &mdash; border color in heat map
+
+`linecolor = "slateblue"` &mdash; line color in lower panels
+
+`linewidth = 2` &mdash; line width in lower panels
+
+`colors = c("white", "slateblue")` &mdash; colors for heat map
+
+`oneAtTop = false` &mdash; whether to put chr 1 at top of heatmap
 
 
 <!-- the following to make it look nicer -->

@@ -446,6 +446,40 @@ ignored if <code>corr</code> is provided.</p>
 the column names of the former and both the row and column names of
 the latter.</p>
 
+<h3><code>iplot</code></h3>
+
+<p><code>iplot</code> creates a simple, interactive scatterplot. Hover over a point
+to view an identifier. Points may be colored according to some
+provided group categories.</p>
+
+<p>Let&#39;s simulate a bit of data, as an example.</p>
+
+<pre><code class="r">n &lt;- 100
+x &lt;- rnorm(n)
+grp &lt;- sample(1:3, n, replace=TRUE)
+y &lt;- grp*x + rnorm(n)
+</code></pre>
+
+<p>We use <code>iplot</code> as follows.</p>
+
+<pre><code class="r">iplot(x, y, grp)
+</code></pre>
+
+<p>The default is for the individual IDs to be simple sequential
+numbers. We can include more detail by providing character strings.</p>
+
+<pre><code class="r">id &lt;- paste(seq(along=x), &quot; x =&quot;, round(x,1), &quot;  y =&quot;, round(y, 1), &quot; group =&quot;, grp)
+iplot(x, y, grp, id)
+</code></pre>
+
+<p>If you want to change the x- and y-axis labels, you need to use the
+<code>chartOpts</code> argument. You can similarly change the point colors.</p>
+
+<pre><code class="r">iplot(x, y, grp, id,
+      chartOpts=list(xlab=&quot;x variable&quot;, ylab=&quot;y variable&quot;,
+                     pointcolor=c(&quot;slateblue&quot;, &quot;#999999&quot;, &quot;violetred&quot;)))
+</code></pre>
+
 <h3><code>iplotMap</code></h3>
 
 <p><code>iplotMap</code> creates a (slightly) interactive genetic map. Hover over a

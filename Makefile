@@ -39,10 +39,10 @@ doc:
 
 # javascript of panel tests
 JSPANELTESTS = ${LODCHART_TESTDIR}/test_lodchart.js ${SCATTERPLOT_TESTDIR}/test_scatterplot.js \
-               ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js \
-               ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js \
-               ${HEATMAP_TESTDIR}/test_heatmap.js ${CHRHEATMAP_TESTDIR}/test_chrheatmap.js \
-               ${LODHEATMAP_TESTDIR}/test_lodheatmap.js ${CROSSTAB_TESTDIR}/test_crosstab.js
+			   ${DOTCHART_TESTDIR}/test_dotchart.js ${CICHART_TESTDIR}/test_cichart.js \
+			   ${CURVECHART_TESTDIR}/test_curvechart.js ${MAPCHART_TESTDIR}/test_mapchart.js \
+			   ${HEATMAP_TESTDIR}/test_heatmap.js ${CHRHEATMAP_TESTDIR}/test_chrheatmap.js \
+			   ${LODHEATMAP_TESTDIR}/test_lodheatmap.js ${CROSSTAB_TESTDIR}/test_crosstab.js
 jspaneltests: ${JSPANELTESTS}
 
 ${PANEL_DIR}/%/test/%.js: ${PANEL_DIR}/%/test/%.coffee
@@ -52,11 +52,11 @@ ${PANEL_DIR}/%/test/%.js: ${PANEL_DIR}/%/test/%.coffee
 
 # javascript of panels
 JSPANELS = ${LODCHART_DIR}/lodchart.js ${SCATTERPLOT_DIR}/scatterplot.js \
-           ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js \
-           ${CURVECHART_DIR}/curvechart.js ${MAPCHART_DIR}/mapchart.js \
-           ${HEATMAP_DIR}/heatmap.js ${CHRHEATMAP_DIR}/chrheatmap.js \
-           ${LODHEATMAP_DIR}/lodheatmap.js ${CROSSTAB_DIR}/crosstab.js \
-           ${PANEL_DIR}/panelutil.js
+		   ${DOTCHART_DIR}/dotchart.js ${CICHART_DIR}/cichart.js \
+		   ${CURVECHART_DIR}/curvechart.js ${MAPCHART_DIR}/mapchart.js \
+		   ${HEATMAP_DIR}/heatmap.js ${CHRHEATMAP_DIR}/chrheatmap.js \
+		   ${LODHEATMAP_DIR}/lodheatmap.js ${CROSSTAB_DIR}/crosstab.js \
+		   ${PANEL_DIR}/panelutil.js
 jspanels: ${JSPANELS}
 
 ${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
@@ -66,10 +66,10 @@ ${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
 
 # test data files
 JSON = ${LODCHART_TESTDIR}/data.json ${SCATTERPLOT_TESTDIR}/data.json \
-       ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json \
-       ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json \
-       ${HEATMAP_TESTDIR}/data.json ${CHRHEATMAP_TESTDIR}/data.json \
-       ${LODHEATMAP_TESTDIR}/data.json ${CROSSTAB_TESTDIR}/data.json
+	   ${DOTCHART_TESTDIR}/data.json ${CICHART_TESTDIR}/data.json \
+	   ${CURVECHART_TESTDIR}/data.json ${MAPCHART_TESTDIR}/data.json \
+	   ${HEATMAP_TESTDIR}/data.json ${CHRHEATMAP_TESTDIR}/data.json \
+	   ${LODHEATMAP_TESTDIR}/data.json ${CROSSTAB_TESTDIR}/data.json
 json: ${JSON}
 
 ${PANEL_DIR}/%/test/data.json: ${PANEL_DIR}/%/test/create_test_data.R
@@ -79,11 +79,12 @@ ${PANEL_DIR}/%/test/data.json: ${PANEL_DIR}/%/test/create_test_data.R
 
 # javascript for the real charts
 JSCHARTS = ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js \
-           ${CHART_DIR}/iplotScanone_ci.js ${CHART_DIR}/iplotPXG.js \
-           ${CHART_DIR}/iplotCorr.js ${CHART_DIR}/iboxplot.js \
-           ${CHART_DIR}/iplotCurves.js ${CHART_DIR}/iplotMap.js \
-           ${CHART_DIR}/iplotRF.js ${CHART_DIR}/iplotMScanone_noeff.js \
-           ${CHART_DIR}/iplotMScanone_eff.js ${CHART_DIR}/iheatmap.js
+		   ${CHART_DIR}/iplotScanone_ci.js ${CHART_DIR}/iplotPXG.js \
+		   ${CHART_DIR}/iplotCorr.js ${CHART_DIR}/iboxplot.js \
+		   ${CHART_DIR}/iplotCurves.js ${CHART_DIR}/iplotMap.js \
+		   ${CHART_DIR}/iplotRF.js ${CHART_DIR}/iplotMScanone_noeff.js \
+		   ${CHART_DIR}/iplotMScanone_eff.js ${CHART_DIR}/iheatmap.js \
+		   ${CHART_DIR}/iplot.js
 jscharts: ${JSCHARTS}
 
 ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
@@ -94,9 +95,9 @@ ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
 # Add list of chartOpts to vignette
 
 vignettes/chartOpts.Rmd: vignettes/chartOpts/grab_chartOpts.rb \
-                         vignettes/chartOpts/chartOpts_source.Rmd \
-                         vignettes/chartOpts/multiversions.csv \
-                         ${JSCHARTS}
+						 vignettes/chartOpts/chartOpts_source.Rmd \
+						 vignettes/chartOpts/multiversions.csv \
+						 ${JSCHARTS}
 	$<
 
 #------------------------------------------------------------

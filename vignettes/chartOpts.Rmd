@@ -89,6 +89,50 @@ customization options for each chart.
 
 `colors = c("slateblue", "white", "crimson")` &mdash; heat map colors (same length as `zlim`)
 
+### `iplot`
+
+`height = 500` &mdash; height of chart in pixels
+
+`width = 800` &mdash; width of chart in pixels
+
+`title = ""` &mdash; title for chart
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`xlab = "X"` &mdash; x-axis label
+
+`ylab = "Y"` &mdash; y-axis label
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`xlim = NULL` &mdash; x-axis limits
+
+`xticks = NULL` &mdash; vector of tick positions on x-axis
+
+`nxticks = 5` &mdash; no. ticks on x-axis
+
+`ylim = NULL` &mdash; y-axis limits
+
+`yticks = NULL` &mdash; vector of tick positions on y-axis
+
+`nyticks = 5` &mdash; no. ticks on y-axis
+
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
+
+`pointcolor = NULL` &mdash; colors for points
+
+`pointsize = 3` &mdash; size of points in pixels
+
+`pointstroke = "black"` &mdash; color of outer circle for points
+
+`rotate_ylab = NULL` &mdash; whether to rotate the y-axis label
+
+`xNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
+
+`yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
+
 ### `iplotCorr`
 
 `height = 450` &mdash; height of each panel in pixels

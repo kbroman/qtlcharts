@@ -267,6 +267,44 @@ the column names of the former and both the row and column names of
 the latter.
 
 
+### `iplot`
+
+`iplot` creates a simple, interactive scatterplot. Hover over a point
+to view an identifier. Points may be colored according to some
+provided group categories.
+
+Let's simulate a bit of data, as an example.
+
+```{r sim_data_iplot}
+n <- 100
+x <- rnorm(n)
+grp <- sample(1:3, n, replace=TRUE)
+y <- grp*x + rnorm(n)
+```
+
+We use `iplot` as follows.
+
+```{r iplot_example, eval=FALSE}
+iplot(x, y, grp)
+```
+
+The default is for the individual IDs to be simple sequential
+numbers. We can include more detail by providing character strings.
+
+```{r iplot_example_id, eval=FALSE}
+id <- paste(seq(along=x), " x =", round(x,1), "  y =", round(y, 1), " group =", grp)
+iplot(x, y, grp, id)
+```
+
+If you want to change the x- and y-axis labels, you need to use the
+`chartOpts` argument. You can similarly change the point colors.
+
+```{r iplot_chartOpts, eval=FALSE}
+iplot(x, y, grp, id,
+      chartOpts=list(xlab="x variable", ylab="y variable",
+                     pointcolor=c("slateblue", "#999999", "violetred")))
+```
+
 ### `iplotMap`
 
 `iplotMap` creates a (slightly) interactive genetic map. Hover over a

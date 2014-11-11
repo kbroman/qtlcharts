@@ -274,3 +274,52 @@ log10 = (x) ->
 abs = (x) ->
     return(x) unless x?
     Math.abs(x)
+
+# mean of y for each possible value of g
+mean_by_group = (g, y) ->
+    means = {}
+    n = {}
+    for i of g
+        if n[g[i]]?
+            means[g[i]] += y[i]
+            n[g[i]] += 1
+        else
+            means[g[i]] = y[i]
+            n[g[i]] = 1
+    for i of means
+        means[i] /= n[i]
+    means
+
+# SD of y for each possible value of g
+sd_by_group = (g, y) ->
+    means = mean_by_group(g, y)
+    sds = {}
+    n = {}
+    for i of g
+        dev = (y[i] - means[g[i]])
+        if n[g[i]]?
+            sds[g[i]] += (dev*dev)
+            n[g[i]] += 1
+        else
+            sds[g[i]] = (dev*dev)
+            n[g[i]] = 1
+
+    for i of sds
+        sds[i] = if n[i] < 2 then null else Math.sqrt(sds[i]/(n[i]-1))
+
+    sds
+
+
+# CI for mean(y) for each possible value of g
+#  (as mean +/- m*SD)
+ci_by_group = (g, y, m=2) ->
+    means = mean_by_group(g, y)
+    sds = sd_by_group(g,y)
+    ci = {}
+    for i of means
+        ci[i] =
+            mean: means[i]
+            low: if sds[i]? then means[i] - m*sds[i] else means[i]
+            high: if sds[i]? then means[i] + m*sds[i] else means[i]
+
+    ci

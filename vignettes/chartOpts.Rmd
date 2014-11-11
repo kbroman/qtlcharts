@@ -647,7 +647,7 @@ customization options for each chart.
 
 `axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
 
-`lightrect = "#e6e6e6"` &mdash; color for light rect in lower panels and background in right panels
+`lightrect = "#e6e6e6"` &mdash; color for light rect in lower panels and backgrd in right panels
 
 `darkrect = "#c8c8c8"` &mdash; dark rectangle in lower panels
 

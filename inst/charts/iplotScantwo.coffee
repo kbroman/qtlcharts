@@ -1,6 +1,7 @@
 # iplotScantwo: interactive plot of scantwo results (2-dim, 2-QTL genome scan)
 # Karl W Broman
 
+ci_data = null
 mydotchart = null
 
 iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
@@ -12,7 +13,7 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
     hbot = chartOpts?.hbot ? 200 # height (in pixels) of each of the lower panels
     margin = chartOpts?.margin ? {left:60, top:30, right:10, bottom: 40, inner: 5} # margins in each panel
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # axis positions in heatmap
-    lightrect = chartOpts?.lightrect ? "#e6e6e6" # color for light rect in lower panels and background in right panels
+    lightrect = chartOpts?.lightrect ? "#e6e6e6" # color for light rect in lower panels and backgrd in right panels
     darkrect = chartOpts?.darkrect ? "#c8c8c8" # dark rectangle in lower panels
     nullcolor = chartOpts?.nullcolor ? "#e6e6e6" # color of null pixels in heat map
     bordercolor = chartOpts?.bordercolor ? "black" # border color in heat map
@@ -92,7 +93,6 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                      leftvalue = leftsel.options[leftsel.selectedIndex].value
                      rightsel = document.getElementById('rightselect')
                      rightvalue = rightsel.options[rightsel.selectedIndex].value
-                     console.log("left: #{leftvalue}, right: #{rightvalue}")
 
                      scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue)
                      d3.select("g#chrheatmap svg").remove()
@@ -107,10 +107,8 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
 
     # add the full,add,int,fv1,av1 lod matrices to scantwo_data
     # (and remove the non-symmetric ones)
-    console.log("add symmetric lod")
     scantwo_data = add_symmetric_lod(scantwo_data)
 
-    console.log("lod for heatmap")
     scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue)
 
     mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell)
@@ -125,7 +123,6 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                                .oneAtTop(oneAtTop)
                                .hover(false)
 
-    console.log("create heatmap")
     g_heatmap = svg.append("g")
                    .attr("id", "chrheatmap")
                    .datum(scantwo_data)
@@ -253,6 +250,7 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                                .pointsize(3)
                                .pointcolor(pointcolor)
                                .pointstroke(pointstroke)
+                               .xcategories([1..gn1.length])
                                .xcatlabels(gn1)
                                .xlab("")
                                .ylab("Phenotype")
@@ -266,26 +264,55 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                       .attr("transform", "translate(#{eff_hpos[1]}, #{eff_vpos[1]})")
                       .datum(pxg_data)
                       .call(mydotchart)
-        g_eff[1].select("svg")
-                .append("g").attr("class", "x axis")
-                .selectAll("empty")
-                .data(gn2)
-                .enter()
-                .append("text")
-                .attr("x", (d,i) -> mydotchart.xscale()(i+1))
-                .attr("y", margin.top+hright+margin.bottom/2+axispos.xlabel)
-                .text((d) -> d)
-        g_eff[1].select("svg")
-                .append("g").attr("class", "x axis")
-                .selectAll("empty")
-                .data([mar1, mar2])
-                .enter()
-                .append("text")
-                .attr("x", margin.left)
-                .attr("y", (d,i) ->
-                    margin.top+hright+margin.bottom/2*i+axispos.xlabel)
-                .style("text-anchor", "end")
-                .text((d) -> d)
+
+        cis = ci_by_group(g, pheno_and_geno.pheno, 1)
+        ci_data =
+            means: (cis[x].mean for x in [1..gn1.length])
+            low:  (cis[x].low for x in [1..gn1.length])
+            high: (cis[x].high for x in [1..gn1.length])
+            categories: [1..gn1.length]
+
+        mycichart = cichart().height(hright)
+                             .width(wright)
+                             .margin(margin)
+                             .axispos(axispos)
+                             .rectcolor(lightrect)
+                             .segcolor(linecolor)
+                             .vertsegcolor(linecolor)
+                             .segstrokewidth(linewidth)
+                             .xlab("")
+                             .ylab("Phenotype")
+                             .xcatlabels(gn1)
+                             .title("#{mar1} : #{mar2}")
+
+        g_eff[0] = svg.append("g")
+                      .attr("id", "eff_0")
+                      .attr("transform", "translate(#{eff_hpos[0]}, #{eff_vpos[0]})")
+                      .datum(ci_data)
+                      .call(mycichart)
+
+        # add second row of labels
+        for p in [0..1]
+            g_eff[p].select("svg")
+                    .append("g").attr("class", "x axis")
+                    .selectAll("empty")
+                    .data(gn2)
+                    .enter()
+                    .append("text")
+                    .attr("x", (d,i) -> mydotchart.xscale()(i+1))
+                    .attr("y", margin.top+hright+margin.bottom/2+axispos.xlabel)
+                    .text((d) -> d)
+            g_eff[p].select("svg")
+                    .append("g").attr("class", "x axis")
+                    .selectAll("empty")
+                    .data([mar1, mar2])
+                    .enter()
+                    .append("text")
+                    .attr("x", (margin.left + mydotchart.xscale()(1))/2.0)
+                    .attr("y", (d,i) ->
+                        margin.top+hright+margin.bottom/2*i+axispos.xlabel)
+                    .style("text-anchor", "end")
+                    .text((d) -> d + ":")
 
 # add full,add,int,av1,fv1 lod scores to scantwo_data
 add_symmetric_lod = (scantwo_data) ->

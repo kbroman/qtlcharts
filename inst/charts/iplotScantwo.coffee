@@ -170,7 +170,8 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                     plot_scan(d.j, 0, 1, leftvalue)
                     plot_scan(d.j, 1, 1, rightvalue)
                     # plot the effect plot and phe x gen plot to right
-                    plot_effects(d.i, d.j)
+                    if pheno_and_geno?
+                        plot_effects(d.i, d.j)
 
     add_cell_tooltips()
 
@@ -221,7 +222,6 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
         mar2 = scantwo_data.labels[markerindex2]
         g1 = pheno_and_geno.geno[mar1]
         g2 = pheno_and_geno.geno[mar2]
-        y  = pheno_and_geno.pheno
         chr1 = pheno_and_geno.chr[mar1]
         chr2 = pheno_and_geno.chr[mar2]
         gnames1 = pheno_and_geno.genonames[chr1]
@@ -240,7 +240,10 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
         for i in [0..1]
             g_eff[i].remove() if g_eff[i]?
 
-        pxg_data = [g, y]
+        pxg_data =
+            g:g
+            y:pheno_and_geno.pheno
+            indID:pheno_and_geno.indID
 
         mydotchart = dotchart().height(hright)
                                .width(wright)
@@ -253,6 +256,8 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                                .xcatlabels(gn1)
                                .xlab("")
                                .ylab("Phenotype")
+                               .xvar("g")
+                               .yvar("y")
                                .dataByInd(false)
                                .title("#{mar1} : #{mar2}")
 

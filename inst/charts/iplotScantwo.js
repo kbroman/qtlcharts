@@ -131,7 +131,9 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
       plot_scan(d.i, 1, 0, rightvalue);
       plot_scan(d.j, 0, 1, leftvalue);
       plot_scan(d.j, 1, 1, rightvalue);
-      return plot_effects(d.i, d.j);
+      if (pheno_and_geno != null) {
+        return plot_effects(d.i, d.j);
+      }
     });
   };
   add_cell_tooltips();
@@ -167,12 +169,11 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
     return g_scans[panelrow][panelcol] = svg.append("g").attr("id", "scan_" + (panelrow + 1) + "_" + (panelcol + 1)).attr("transform", "translate(" + scans_hpos[panelcol] + ", " + scans_vpos[panelrow] + ")").datum(data).call(mylodchart);
   };
   return plot_effects = function(markerindex1, markerindex2) {
-    var chr1, chr2, g, g1, g2, gn1, gn2, gnames1, gnames2, i, j, mar1, mar2, ng1, ng2, pxg_data, y, _i, _j, _k;
+    var chr1, chr2, g, g1, g2, gn1, gn2, gnames1, gnames2, i, j, mar1, mar2, ng1, ng2, pxg_data, _i, _j, _k;
     mar1 = scantwo_data.labels[markerindex1];
     mar2 = scantwo_data.labels[markerindex2];
     g1 = pheno_and_geno.geno[mar1];
     g2 = pheno_and_geno.geno[mar2];
-    y = pheno_and_geno.pheno;
     chr1 = pheno_and_geno.chr[mar1];
     chr2 = pheno_and_geno.chr[mar2];
     gnames1 = pheno_and_geno.genonames[chr1];
@@ -200,8 +201,12 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
         g_eff[i].remove();
       }
     }
-    pxg_data = [g, y];
-    mydotchart = dotchart().height(hright).width(wright).margin(margin).axispos(axispos).rectcolor(lightrect).pointsize(3).pointcolor(pointcolor).pointstroke(pointstroke).xcatlabels(gn1).xlab("").ylab("Phenotype").dataByInd(false).title("" + mar1 + " : " + mar2);
+    pxg_data = {
+      g: g,
+      y: pheno_and_geno.pheno,
+      indID: pheno_and_geno.indID
+    };
+    mydotchart = dotchart().height(hright).width(wright).margin(margin).axispos(axispos).rectcolor(lightrect).pointsize(3).pointcolor(pointcolor).pointstroke(pointstroke).xcatlabels(gn1).xlab("").ylab("Phenotype").xvar("g").yvar("y").dataByInd(false).title("" + mar1 + " : " + mar2);
     g_eff[1] = svg.append("g").attr("id", "eff_1").attr("transform", "translate(" + eff_hpos[1] + ", " + eff_vpos[1] + ")").datum(pxg_data).call(mydotchart);
     g_eff[1].select("svg").append("g").attr("class", "x axis").selectAll("empty").data(gn2).enter().append("text").attr("x", function(d, i) {
       return mydotchart.xscale()(i + 1);

@@ -134,15 +134,16 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                             mari = scantwo_data.labels[d.i]
                             marj = scantwo_data.labels[d.j]
                             if +d.i > +d.j                # +'s ensure number not string
-                                leftlod = scantwo_data[leftvalue][d.i][d.j]
-                                rightlod = scantwo_data[rightvalue][d.j][d.i]
+                                leftlod = d3.format(".1f")(scantwo_data[leftvalue][d.i][d.j])
+                                rightlod = d3.format(".1f")(scantwo_data[rightvalue][d.j][d.i])
+                                return "(#{marj} #{mari}) #{rightvalue} = #{rightlod}, #{leftvalue} = #{leftlod}"
                             else if +d.j > +d.i
-                                leftlod = scantwo_data[leftvalue][d.j][d.i]
-                                rightlod = scantwo_data[rightvalue][d.i][d.j]
+                                leftlod = d3.format(".1f")(scantwo_data[leftvalue][d.j][d.i])
+                                rightlod = d3.format(".1f")(scantwo_data[rightvalue][d.i][d.j])
+                                return "(#{marj} #{mari}) #{leftvalue} = #{leftlod}, #{rightvalue} = #{rightlod}"
                             else
                                 return mari
-                            return mari if d.i == d.j
-                            "(#{marj} #{mari}) #{leftvalue} = #{d3.format(".1f")(leftlod)}, #{rightvalue} = #{d3.format(".1f")(rightlod)}")
+                            )
                     .direction('e')
                     .offset([0,10])
         svg.call(celltip)

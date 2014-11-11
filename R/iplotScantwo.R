@@ -89,7 +89,7 @@ function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
         warning("pheno.col should have length 1; using first value")
     }
     if(!missing(cross) && !is.null(cross))
-        pheno <- qtl::find.pheno(cross, pheno.col)
+        pheno <- qtl::pull.pheno(cross, pheno.col)
     else cross <- pheno <- NULL
 
     if(missing(file)) file <- NULL

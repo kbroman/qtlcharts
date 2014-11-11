@@ -1,9 +1,6 @@
 # iplotScantwo: interactive plot of scantwo results (2-dim, 2-QTL genome scan)
 # Karl W Broman
 
-ci_data = null
-mydotchart = null
-
 iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
 
     # chartOpts start
@@ -267,9 +264,9 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
 
         cis = ci_by_group(g, pheno_and_geno.pheno, 1)
         ci_data =
-            means: (cis[x].mean for x in [1..gn1.length])
-            low:  (cis[x].low for x in [1..gn1.length])
-            high: (cis[x].high for x in [1..gn1.length])
+            means: (cis[x]?.mean ? null for x in [1..gn1.length])
+            low:  (cis[x]?.low ? null for x in [1..gn1.length])
+            high: (cis[x]?.high ? null for x in [1..gn1.length])
             categories: [1..gn1.length]
 
         mycichart = cichart().height(hright)

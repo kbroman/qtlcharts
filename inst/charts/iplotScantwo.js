@@ -2,11 +2,11 @@
 var add_symmetric_lod, iplotScantwo, lod_for_heatmap;
 
 iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
-  var add_cell_tooltips, axispos, bordercolor, chartdivid, chrGap, color, darkrect, div, form, g_heatmap, hbot, heatmap_height, heatmap_width, hright, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, nullcolor, oneAtTop, options, pixelPerCell, right, rightsel, rightvalue, submit, svg, totalh, totalw, totmar, w, wbot, wright, zthresh, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var add_cell_tooltips, axispos, bordercolor, chartdivid, chrGap, color, darkrect, div, form, g_heatmap, g_scans, hbot, heatmap_height, heatmap_width, hright, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, nullcolor, oneAtTop, options, pixelPerCell, plot_scan, right, rightsel, rightvalue, scans_hpos, scans_vpos, submit, svg, totalh, totalw, totmar, w, wbot, wright, zthresh, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   pixelPerCell = (_ref = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? _ref : null;
   chrGap = (_ref1 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref1 : 2;
   wright = (_ref2 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref2 : 500;
-  hbot = (_ref3 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref3 : 300;
+  hbot = (_ref3 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref3 : 200;
   margin = (_ref4 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref4 : {
     left: 60,
     top: 30,
@@ -40,7 +40,7 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
   hright = heatmap_height / 2 - margin.top - margin.bottom;
   totalw = heatmap_width + wright + margin.left + margin.right;
   totalh = heatmap_height + (hbot + margin.top + margin.bottom) * 2;
-  wbot = totalw / 3 - margin.left - margin.right;
+  wbot = totalw / 2 - margin.left - margin.right;
   leftvalue = "int";
   rightvalue = "fv1";
   options = ["full", "fv1", "int", "add", "av1"];
@@ -115,17 +115,48 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
     }).on("mouseout", function() {
       return celltip.hide();
     }).on("click", function(d) {
-      create_crosstab(scantwo_data.labels[d.j], scantwo_data.labels[d.i]);
-      create_scan(d.i, 0);
-      if (d.i !== d.j) {
-        return create_scan(d.j, 1);
-      } else {
-        g_scans[1].remove();
-        return g_scans[1] = null;
+      var mari, marj;
+      mari = scantwo_data.labels[d.i];
+      marj = scantwo_data.labels[d.j];
+      console.log("click! " + mari + " (" + d.i + "), " + marj + " (" + d.j + ")");
+      if (d.i === d.j) {
+        return null;
       }
+      plot_scan(d.i, 0, 0, leftvalue);
+      plot_scan(d.i, 1, 0, rightvalue);
+      plot_scan(d.j, 0, 1, leftvalue);
+      return plot_scan(d.j, 1, 1, rightvalue);
     });
   };
-  return add_cell_tooltips();
+  add_cell_tooltips();
+  g_scans = [[null, null], [null, null]];
+  scans_hpos = [0, wbot + margin.left + margin.right];
+  scans_vpos = [heatmap_height, heatmap_height + hbot + margin.top + margin.bottom];
+  return plot_scan = function(markerindex, panelrow, panelcol, lod) {
+    var data, mylodchart, x;
+    data = {
+      chrnames: scantwo_data.chrnames,
+      lodnames: ["lod"],
+      chr: scantwo_data.chr,
+      pos: scantwo_data.pos,
+      lod: (function() {
+        var _i, _len, _ref16, _results;
+        _ref16 = scantwo_data[lod][markerindex];
+        _results = [];
+        for (_i = 0, _len = _ref16.length; _i < _len; _i++) {
+          x = _ref16[_i];
+          _results.push(x);
+        }
+        return _results;
+      })(),
+      markernames: scantwo_data.labels
+    };
+    if (g_scans[panelrow][panelcol] != null) {
+      g_scans[panelrow][panelcol].remove();
+    }
+    mylodchart = lodchart().height(hbot).width(wbot).margin(margin).axispos(axispos).ylim([0.0, scantwo_data.max[lod]]).lightrect(lightrect).darkrect(darkrect).linewidth(linewidth).linecolor(linecolor).pointsize(0).pointcolor("").pointstroke("").lodvarname("lod").title(data.markernames[markerindex]);
+    return g_scans[panelrow][panelcol] = svg.append("g").attr("id", "scan_" + (panelrow + 1) + "_" + (panelcol + 1)).attr("transform", "translate(" + scans_hpos[panelcol] + ", " + scans_vpos[panelrow] + ")").datum(data).call(mylodchart);
+  };
 };
 
 add_symmetric_lod = function(scantwo_data) {

@@ -7,7 +7,7 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
     pixelPerCell = chartOpts?.pixelPerCell ? null # pixels per cell in heat map
     chrGap = chartOpts?.chrGap ? 2 # gaps between chr in heat map
     wright = chartOpts?.wright ? 500 # width (in pixels) of right panels
-    hbot = chartOpts?.hbot ? 300 # height (in pixels) of each of the lower panels
+    hbot = chartOpts?.hbot ? 200 # height (in pixels) of each of the lower panels
     margin = chartOpts?.margin ? {left:60, top:30, right:10, bottom: 40, inner: 5} # margins in each panel
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # axis positions in heatmap
     lightrect = chartOpts?.lightrect ? "#e6e6e6" # color for light rect in lower panels
@@ -34,7 +34,7 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
     totalh = heatmap_height + (hbot + margin.top + margin.bottom)*2
 
     # width of lower panels
-    wbot = (totalw/3 - margin.left - margin.right)
+    wbot = (totalw/2 - margin.left - margin.right)
 
     # selected LODs on left and right
     leftvalue = "int"
@@ -126,6 +126,7 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                    .datum(scantwo_data)
                    .call(mychrheatmap)
 
+    # function to add tool tips and handle clicking
     add_cell_tooltips = () ->
         d3.selectAll(".d3-tip").remove()
         celltip = d3.tip()
@@ -154,16 +155,54 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
              .on("mouseout", () ->
                          celltip.hide())
              .on "click", (d) ->
-                     create_crosstab(scantwo_data.labels[d.j], scantwo_data.labels[d.i])
-                     create_scan(d.i, 0)
-                     if d.i != d.j
-                       create_scan(d.j, 1)
-                     else # if same marker, just show the one panel
-                       g_scans[1].remove()
-                       g_scans[1] = null
+                    mari = scantwo_data.labels[d.i]
+                    marj = scantwo_data.labels[d.j]
+                    console.log("click! #{mari} (#{d.i}), #{marj} (#{d.j})")
+                    return null if d.i == d.j # skip the diagonal case
+                    # plot the cross-sections as genome scans, below
+                    plot_scan(d.i, 0, 0, leftvalue)
+                    plot_scan(d.i, 1, 0, rightvalue)
+                    plot_scan(d.j, 0, 1, leftvalue)
+                    plot_scan(d.j, 1, 1, rightvalue)
+                    # plot the effect plot and phe x gen plot to right
 
     add_cell_tooltips()
 
+    g_scans = [[null,null], [null,null]]
+    scans_hpos = [0, wbot+margin.left+margin.right]
+    scans_vpos = [heatmap_height, heatmap_height+hbot+margin.top+margin.bottom]
+
+    plot_scan = (markerindex, panelrow, panelcol, lod) ->
+        data =
+            chrnames: scantwo_data.chrnames
+            lodnames: ["lod"]
+            chr: scantwo_data.chr
+            pos: scantwo_data.pos
+            lod: (x for x in scantwo_data[lod][markerindex])
+            markernames: scantwo_data.labels
+
+        g_scans[panelrow][panelcol].remove() if g_scans[panelrow][panelcol]?
+
+        mylodchart = lodchart().height(hbot)
+                               .width(wbot)
+                               .margin(margin)
+                               .axispos(axispos)
+                               .ylim([0.0, scantwo_data.max[lod]])
+                               .lightrect(lightrect)
+                               .darkrect(darkrect)
+                               .linewidth(linewidth)
+                               .linecolor(linecolor)
+                               .pointsize(0)
+                               .pointcolor("")
+                               .pointstroke("")
+                               .lodvarname("lod")
+                               .title(data.markernames[markerindex])
+
+        g_scans[panelrow][panelcol] = svg.append("g")
+                                 .attr("id", "scan_#{panelrow+1}_#{panelcol+1}")
+                                 .attr("transform", "translate(#{scans_hpos[panelcol]}, #{scans_vpos[panelrow]})")
+                                 .datum(data)
+                                 .call(mylodchart)
 
 # add full,add,int,av1,fv1 lod scores to scantwo_data
 add_symmetric_lod = (scantwo_data) ->
@@ -209,4 +248,4 @@ lod_for_heatmap = (scantwo_data, left, right) ->
             thelod = if j < i then right else left
             z[i][j] = scantwo_data[thelod][i][j]/scantwo_data.max[thelod]*scantwo_data.max["full"]
 
-    z
+    z # return the matrix we created

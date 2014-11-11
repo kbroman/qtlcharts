@@ -1,6 +1,8 @@
 # iplotScantwo: interactive plot of scantwo results (2-dim, 2-QTL genome scan)
 # Karl W Broman
 
+mydotchart = null
+
 iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
 
     # chartOpts start
@@ -10,12 +12,15 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
     hbot = chartOpts?.hbot ? 200 # height (in pixels) of each of the lower panels
     margin = chartOpts?.margin ? {left:60, top:30, right:10, bottom: 40, inner: 5} # margins in each panel
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # axis positions in heatmap
-    lightrect = chartOpts?.lightrect ? "#e6e6e6" # color for light rect in lower panels
+    lightrect = chartOpts?.lightrect ? "#e6e6e6" # color for light rect in lower panels and background in right panels
     darkrect = chartOpts?.darkrect ? "#c8c8c8" # dark rectangle in lower panels
     nullcolor = chartOpts?.nullcolor ? "#e6e6e6" # color of null pixels in heat map
     bordercolor = chartOpts?.bordercolor ? "black" # border color in heat map
     linecolor = chartOpts?.linecolor ? "slateblue" # line color in lower panels
     linewidth = chartOpts?.linewidth ? 2 # line width in lower panels
+    pointcolor = chartOpts?.pointcolor ? "slateblue" # point color in right panels
+    pointsize = chartOpts?.pointsize ? 3 # point size in right panels
+    pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle in right panels
     color = chartOpts?.color ? "slateblue" # color for heat map
     oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
     zthresh = chartOpts?.zthresh ? 0 # LOD values below this threshold aren't shown (on LOD_full scale)
@@ -165,12 +170,18 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                     plot_scan(d.j, 0, 1, leftvalue)
                     plot_scan(d.j, 1, 1, rightvalue)
                     # plot the effect plot and phe x gen plot to right
+                    plot_effects(d.i, d.j)
 
     add_cell_tooltips()
 
+    # to hold groups and positions of scan and effect plots
     g_scans = [[null,null], [null,null]]
     scans_hpos = [0, wbot+margin.left+margin.right]
     scans_vpos = [heatmap_height, heatmap_height+hbot+margin.top+margin.bottom]
+
+    g_eff = [null, null]
+    eff_hpos = [heatmap_width, heatmap_width]
+    eff_vpos = [0, heatmap_height/2]
 
     plot_scan = (markerindex, panelrow, panelcol, lod) ->
         data =
@@ -196,13 +207,80 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                                .pointcolor("")
                                .pointstroke("")
                                .lodvarname("lod")
-                               .title(data.markernames[markerindex])
+                               .xlab("")
+                               .title("#{data.markernames[markerindex]} : #{lod}")
 
         g_scans[panelrow][panelcol] = svg.append("g")
                                  .attr("id", "scan_#{panelrow+1}_#{panelcol+1}")
                                  .attr("transform", "translate(#{scans_hpos[panelcol]}, #{scans_vpos[panelrow]})")
                                  .datum(data)
                                  .call(mylodchart)
+
+    plot_effects = (markerindex1, markerindex2) ->
+        mar1 = scantwo_data.labels[markerindex1]
+        mar2 = scantwo_data.labels[markerindex2]
+        g1 = pheno_and_geno.geno[mar1]
+        g2 = pheno_and_geno.geno[mar2]
+        y  = pheno_and_geno.pheno
+        chr1 = pheno_and_geno.chr[mar1]
+        chr2 = pheno_and_geno.chr[mar2]
+        gnames1 = pheno_and_geno.genonames[chr1]
+        gnames2 = pheno_and_geno.genonames[chr2]
+        ng1 = gnames1.length
+        ng2 = gnames2.length
+
+        g = (g1[i] + (g2[i]-1)*ng1 for i of g1)
+        gn1 = []
+        gn2 = []
+        for i in [0...ng1]
+            for j in [0...ng2]
+                gn1.push(gnames1[i])
+                gn2.push(gnames2[j])
+
+        for i in [0..1]
+            g_eff[i].remove() if g_eff[i]?
+
+        pxg_data = [g, y]
+
+        mydotchart = dotchart().height(hright)
+                               .width(wright)
+                               .margin(margin)
+                               .axispos(axispos)
+                               .rectcolor(lightrect)
+                               .pointsize(3)
+                               .pointcolor(pointcolor)
+                               .pointstroke(pointstroke)
+                               .xcatlabels(gn1)
+                               .xlab("")
+                               .ylab("Phenotype")
+                               .dataByInd(false)
+                               .title("#{mar1} : #{mar2}")
+
+        g_eff[1] = svg.append("g")
+                      .attr("id", "eff_1")
+                      .attr("transform", "translate(#{eff_hpos[1]}, #{eff_vpos[1]})")
+                      .datum(pxg_data)
+                      .call(mydotchart)
+        g_eff[1].select("svg")
+                .append("g").attr("class", "x axis")
+                .selectAll("empty")
+                .data(gn2)
+                .enter()
+                .append("text")
+                .attr("x", (d,i) -> mydotchart.xscale()(i+1))
+                .attr("y", margin.top+hright+margin.bottom/2+axispos.xlabel)
+                .text((d) -> d)
+        g_eff[1].select("svg")
+                .append("g").attr("class", "x axis")
+                .selectAll("empty")
+                .data([mar1, mar2])
+                .enter()
+                .append("text")
+                .attr("x", margin.left)
+                .attr("y", (d,i) ->
+                    margin.top+hright+margin.bottom/2*i+axispos.xlabel)
+                .style("text-anchor", "end")
+                .text((d) -> d)
 
 # add full,add,int,av1,fv1 lod scores to scantwo_data
 add_symmetric_lod = (scantwo_data) ->

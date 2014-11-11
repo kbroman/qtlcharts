@@ -286,6 +286,10 @@ cross4iplotScantwo <-
     chr <- as.character(map$chr)
     names(chr) <- names(geno) # the revised pseudomarker names
 
-    jsonlite::toJSON(list(geno=geno, chr=as.list(chr), genonames=genonames, pheno=pheno),
+    # individual IDs
+    indID <- getid(cross)
+    if(is.null(indID)) indID <- 1:nind(cross)
+
+    jsonlite::toJSON(list(geno=geno, chr=as.list(chr), genonames=genonames, pheno=pheno, indID=indID),
                      auto_unbox=TRUE, digits=digits)
 }

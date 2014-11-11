@@ -221,7 +221,7 @@ displayError = (message, divid=null) ->
       .text(message)
 
 # sum values in an array
-sumArray = (vec) -> (vec.reduce (a,b) -> a+b)
+sumArray = (vec) -> (vec.reduce (a,b) -> (a*1)+(b*1))
 
 # calculate cross-tabulation
 calc_crosstab = (data) ->

@@ -60,6 +60,7 @@ scan.
 \examples{
 library(qtl)
 data(fake.f2)
+\dontshow{fake.f2 <- fake.f2[c(1, 13, "X"),]}
 fake.f2 <- calc.genoprob(fake.f2, step=2.5)
 out <- scantwo(fake.f2, method="hk", verbose=FALSE)
 \donttest{

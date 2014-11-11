@@ -42,6 +42,7 @@
 #' @examples
 #' library(qtl)
 #' data(fake.f2)
+#' \dontshow{fake.f2 <- fake.f2[c(1, 13, "X"),]}
 #' fake.f2 <- calc.genoprob(fake.f2, step=2.5)
 #' out <- scantwo(fake.f2, method="hk", verbose=FALSE)
 #' \donttest{
@@ -255,13 +256,13 @@ cross4iplotScantwo <-
     # X chr imputations: 1/2 -> AA/AB/BB/AY/BY
     crosstype <- class(cross)[1]
     chrtype <- sapply(cross$geno, class)
-    sexpgm <- getsex(cross)
+    sexpgm <- qtl::getsex(cross)
     cross.attr <- attributes(cross)
     if(crosstype %in% c("f2", "bc", "bcsft") && any(chrtype=="X")) {
         for(i in which(chrtype=="X")) {
-            cross$geno[[i]]$draws <- reviseXdata(crosstype, "full", sexpgm,
-                                                 draws=cross$geno[[i]]$draws,
-                                                 cross.attr=cross.attr)
+            cross$geno[[i]]$draws <- qtl::reviseXdata(crosstype, "full", sexpgm,
+                                                      draws=cross$geno[[i]]$draws,
+                                                      cross.attr=cross.attr)
         }
     }
 
@@ -287,8 +288,8 @@ cross4iplotScantwo <-
     names(chr) <- names(geno) # the revised pseudomarker names
 
     # individual IDs
-    indID <- getid(cross)
-    if(is.null(indID)) indID <- 1:nind(cross)
+    indID <- qtl::getid(cross)
+    if(is.null(indID)) indID <- 1:qtl::nind(cross)
 
     jsonlite::toJSON(list(geno=geno, chr=as.list(chr), genonames=genonames, pheno=pheno, indID=indID),
                      auto_unbox=TRUE, digits=digits)

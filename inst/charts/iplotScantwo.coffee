@@ -82,13 +82,17 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                  .append("button")
                  .attr("name", "refresh")
                  .text("Refresh")
-                 .on("click", () ->
+                 .on "click", () ->
                      leftsel = document.getElementById('leftselect')
                      leftvalue = leftsel.options[leftsel.selectedIndex].value
                      rightsel = document.getElementById('rightselect')
                      rightvalue = rightsel.options[rightsel.selectedIndex].value
-                     console.log("left: #{leftval}, right: #{rightval}")
-                     )
+                     console.log("left: #{leftvalue}, right: #{rightvalue}")
+
+                     scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue)
+                     d3.select("g#chrheatmap svg").remove()
+                     d3.select("g#chrheatmap").datum(scantwo_data).call(mychrheatmap)
+                     add_cell_tooltips()
 
     # create SVG
     svg = d3.select("div##{chartdivid}")
@@ -102,7 +106,7 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
     scantwo_data = add_symmetric_lod(scantwo_data)
 
     console.log("lod for heatmap")
-    scantwo_data.z = lod_for_heatmap(scantwo_data, "int", "fv1")
+    scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue)
 
     mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell)
                                .chrGap(chrGap)
@@ -122,31 +126,33 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                    .datum(scantwo_data)
                    .call(mychrheatmap)
 
-    celltip = d3.tip()
-                .attr('class', 'd3-tip')
-                .html((d) ->
-                        mari = scantwo_data.labels[d.i]
-                        marj = scantwo_data.labels[d.j]
-                        if +d.i > +d.j                # +'s ensure number not string
-                            leftlod = scantwo_data[leftvalue][d.i][d.j]
-                            rightlod = scantwo_data[rightvalue][d.j][d.i]
-                        else if +d.j > +d.i
-                            leftlod = scantwo_data[leftvalue][d.j][d.i]
-                            rightlod = scantwo_data[rightvalue][d.i][d.j]
-                        else
-                            return mari
-                        return mari if d.i == d.j
-                        "(#{marj} #{mari}) #{leftvalue} = #{d3.format(".1f")(leftlod)}, #{rightvalue} = #{d3.format(".1f")(rightlod)}")
-                .direction('e')
-                .offset([0,10])
-    svg.call(celltip)
+    add_cell_tooltips = () ->
+        d3.selectAll(".d3-tip").remove()
+        celltip = d3.tip()
+                    .attr('class', 'd3-tip')
+                    .html((d) ->
+                            mari = scantwo_data.labels[d.i]
+                            marj = scantwo_data.labels[d.j]
+                            if +d.i > +d.j                # +'s ensure number not string
+                                leftlod = scantwo_data[leftvalue][d.i][d.j]
+                                rightlod = scantwo_data[rightvalue][d.j][d.i]
+                            else if +d.j > +d.i
+                                leftlod = scantwo_data[leftvalue][d.j][d.i]
+                                rightlod = scantwo_data[rightvalue][d.i][d.j]
+                            else
+                                return mari
+                            return mari if d.i == d.j
+                            "(#{marj} #{mari}) #{leftvalue} = #{d3.format(".1f")(leftlod)}, #{rightvalue} = #{d3.format(".1f")(rightlod)}")
+                    .direction('e')
+                    .offset([0,10])
+        svg.call(celltip)
 
-    cells = mychrheatmap.cellSelect()
-    cells.on("mouseover", (d) ->
-                     celltip.show(d))
-         .on("mouseout", () ->
-                     celltip.hide())
-         .on "click", (d) ->
+        cells = mychrheatmap.cellSelect()
+        cells.on("mouseover", (d) ->
+                         celltip.show(d))
+             .on("mouseout", () ->
+                         celltip.hide())
+             .on "click", (d) ->
                      create_crosstab(scantwo_data.labels[d.j], scantwo_data.labels[d.i])
                      create_scan(d.i, 0)
                      if d.i != d.j
@@ -154,6 +160,9 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                      else # if same marker, just show the one panel
                        g_scans[1].remove()
                        g_scans[1] = null
+
+    add_cell_tooltips()
+
 
 # add full,add,int,av1,fv1 lod scores to scantwo_data
 add_symmetric_lod = (scantwo_data) ->

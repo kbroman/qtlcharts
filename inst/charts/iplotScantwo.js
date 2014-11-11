@@ -2,7 +2,7 @@
 var add_symmetric_lod, iplotScantwo, lod_for_heatmap;
 
 iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
-  var axispos, bordercolor, cells, celltip, chartdivid, chrGap, color, darkrect, div, form, g_heatmap, hbot, heatmap_height, heatmap_width, hright, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, nullcolor, oneAtTop, options, pixelPerCell, right, rightsel, rightvalue, submit, svg, totalh, totalw, totmar, w, wbot, wright, zthresh, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var add_cell_tooltips, axispos, bordercolor, chartdivid, chrGap, color, darkrect, div, form, g_heatmap, hbot, heatmap_height, heatmap_width, hright, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, nullcolor, oneAtTop, options, pixelPerCell, right, rightsel, rightvalue, submit, svg, totalh, totalw, totmar, w, wbot, wright, zthresh, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   pixelPerCell = (_ref = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? _ref : null;
   chrGap = (_ref1 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref1 : 2;
   wright = (_ref2 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref2 : 500;
@@ -75,50 +75,59 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
     leftvalue = leftsel.options[leftsel.selectedIndex].value;
     rightsel = document.getElementById('rightselect');
     rightvalue = rightsel.options[rightsel.selectedIndex].value;
-    return console.log("left: " + leftval + ", right: " + rightval);
+    console.log("left: " + leftvalue + ", right: " + rightvalue);
+    scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);
+    d3.select("g#chrheatmap svg").remove();
+    d3.select("g#chrheatmap").datum(scantwo_data).call(mychrheatmap);
+    return add_cell_tooltips();
   });
   svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   console.log("add symmetric lod");
   scantwo_data = add_symmetric_lod(scantwo_data);
   console.log("lod for heatmap");
-  scantwo_data.z = lod_for_heatmap(scantwo_data, "int", "fv1");
+  scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);
   mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell).chrGap(chrGap).axispos(axispos).rectcolor("white").nullcolor(nullcolor).bordercolor(bordercolor).colors(["white", color]).zlim([0, scantwo_data.max.full]).zthresh(zthresh).oneAtTop(oneAtTop).hover(false);
   console.log("create heatmap");
   g_heatmap = svg.append("g").attr("id", "chrheatmap").datum(scantwo_data).call(mychrheatmap);
-  celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
-    var leftlod, mari, marj, rightlod;
-    mari = scantwo_data.labels[d.i];
-    marj = scantwo_data.labels[d.j];
-    if (+d.i > +d.j) {
-      leftlod = scantwo_data[leftvalue][d.i][d.j];
-      rightlod = scantwo_data[rightvalue][d.j][d.i];
-    } else if (+d.j > +d.i) {
-      leftlod = scantwo_data[leftvalue][d.j][d.i];
-      rightlod = scantwo_data[rightvalue][d.i][d.j];
-    } else {
-      return mari;
-    }
-    if (d.i === d.j) {
-      return mari;
-    }
-    return "(" + marj + " " + mari + ") " + leftvalue + " = " + (d3.format(".1f")(leftlod)) + ", " + rightvalue + " = " + (d3.format(".1f")(rightlod));
-  }).direction('e').offset([0, 10]);
-  svg.call(celltip);
-  cells = mychrheatmap.cellSelect();
-  return cells.on("mouseover", function(d) {
-    return celltip.show(d);
-  }).on("mouseout", function() {
-    return celltip.hide();
-  }).on("click", function(d) {
-    create_crosstab(scantwo_data.labels[d.j], scantwo_data.labels[d.i]);
-    create_scan(d.i, 0);
-    if (d.i !== d.j) {
-      return create_scan(d.j, 1);
-    } else {
-      g_scans[1].remove();
-      return g_scans[1] = null;
-    }
-  });
+  add_cell_tooltips = function() {
+    var cells, celltip;
+    d3.selectAll(".d3-tip").remove();
+    celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+      var leftlod, mari, marj, rightlod;
+      mari = scantwo_data.labels[d.i];
+      marj = scantwo_data.labels[d.j];
+      if (+d.i > +d.j) {
+        leftlod = scantwo_data[leftvalue][d.i][d.j];
+        rightlod = scantwo_data[rightvalue][d.j][d.i];
+      } else if (+d.j > +d.i) {
+        leftlod = scantwo_data[leftvalue][d.j][d.i];
+        rightlod = scantwo_data[rightvalue][d.i][d.j];
+      } else {
+        return mari;
+      }
+      if (d.i === d.j) {
+        return mari;
+      }
+      return "(" + marj + " " + mari + ") " + leftvalue + " = " + (d3.format(".1f")(leftlod)) + ", " + rightvalue + " = " + (d3.format(".1f")(rightlod));
+    }).direction('e').offset([0, 10]);
+    svg.call(celltip);
+    cells = mychrheatmap.cellSelect();
+    return cells.on("mouseover", function(d) {
+      return celltip.show(d);
+    }).on("mouseout", function() {
+      return celltip.hide();
+    }).on("click", function(d) {
+      create_crosstab(scantwo_data.labels[d.j], scantwo_data.labels[d.i]);
+      create_scan(d.i, 0);
+      if (d.i !== d.j) {
+        return create_scan(d.j, 1);
+      } else {
+        g_scans[1].remove();
+        return g_scans[1] = null;
+      }
+    });
+  };
+  return add_cell_tooltips();
 };
 
 add_symmetric_lod = function(scantwo_data) {

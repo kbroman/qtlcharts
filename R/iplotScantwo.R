@@ -267,12 +267,13 @@ cross4iplotScantwo <-
 
     # pull out imputed genotypes as a list
     geno <- vector("list", nrow(map))
-    names(geno) <- revisePmarNames(rownames(map))
+    names(geno) <- rownames(map)
     for(i in seq(along=cross$geno)) {
         m <- which(nam[[i]] %in% rownames(map))
         for(j in m)
             geno[[nam[[i]][j]]] <- cross$geno[[i]]$draws[,j,1]
     }
+    names(geno) <- revisePmarNames(rownames(map))
 
     # names of the possible genotypes
     genonames <- vector("list", length(cross$geno))

@@ -1,6 +1,7 @@
 # example of iplotMap
 
 library(qtlcharts)
+library(qtl)
 data(hyper)
 map <- pull.map(hyper)
 

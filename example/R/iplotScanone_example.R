@@ -1,6 +1,7 @@
 # example of iplotScanone
 
 library(qtlcharts)
+library(qtl)
 
 data(hyper)
 hyper <- calc.genoprob(hyper, step=1)

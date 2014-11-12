@@ -1,6 +1,7 @@
 # example of iplotRF
 
 library(qtlcharts)
+library(qtl)
 data(badorder)
 rf <- pull.rf(badorder)
 
@@ -21,4 +22,3 @@ iplotRF(badorder, title="iplotRF example",
                     'and lower panels with the selected marker.\n',
                     '</p><hr/><p class="caption"><a style="text-decoration:none;" ',
                     'href="http://kbroman.org/qtlcharts">R/qtlcharts</a>'))
-

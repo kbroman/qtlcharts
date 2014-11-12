@@ -57,6 +57,12 @@ Creates an interactive plot of the results of
 \code{\link[qtl]{scantwo}}, for a two-dimensional, two-QTL genome
 scan.
 }
+\details{
+The estimated QTL effects, and the genotypes in the
+phenotype x genotype plot, in the right-hand panels, are derived
+following a single imputation to fill in missing data, and so are a
+bit crude.
+}
 \examples{
 library(qtl)
 data(fake.f2)

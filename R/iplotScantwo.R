@@ -36,6 +36,11 @@
 #'
 #' @return Character string with the name of the file created.
 #'
+#' @details The estimated QTL effects, and the genotypes in the
+#' phenotype x genotype plot, in the right-hand panels, are derived
+#' following a single imputation to fill in missing data, and so are a
+#' bit crude.
+#'
 #' @keywords hplot
 #' @seealso \code{\link{iplotScanone}}
 #'

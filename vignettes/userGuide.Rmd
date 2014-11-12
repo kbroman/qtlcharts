@@ -548,6 +548,59 @@ iplotMScanone(out, grav, times=times)
 ```
 
 
+### `iplotScantwo`
+
+`iplotScantwo` creates an interactive plot of the output of the
+[R/qtl](http://rqtl.org) function `scantwo`, of a two-dimensional,
+two-QTL genome scan.
+
+Let's first run `scantwo` using a coarse step size and focusing on
+selected chromosomes. For the sake of speed, we'll use Haley-Knott
+regression, even though it does not work well for selectively
+genotyped data.
+
+```{r scantwo}
+data(hyper)
+hyper <- hyper[c(1,4,6,15),]
+hyper <- calc.genoprob(hyper, step=5)
+out2 <- scantwo(hyper, method="hk", verbose=FALSE)
+```
+
+The simplest use of `iplotScantwo` is to just provide the `scantwo`
+output, but it's best to also provide the QTL cross data, so that
+QTL effect plots may be produced.
+
+```{r iplotScantwo, eval=FALSE}
+iplotScantwo(out2, hyper)
+```
+
+There are drop-down
+menus to select different which LOD scores to display in the heat map.
+Hover over the heatmap to view the LOD scores, and click on a pixel to
+view cross-sectional slices below and the QTL effect plot to the
+right.
+
+You can control the size of the heatmap through the chart option
+`pixelPerCell`, the number of pixels, in each direction, for each
+small rectangle (&ldquo;cell&rdquo;) within the heatmap.
+
+```{r iplotScantwo_bigger, eval=FALSE}
+iplotScantwo(out2, hyper, chartOpts=list(pixelPerCell=12))
+```
+
+You can orient the plot with the diagonal going from the top-left to
+the lower right (so that chromosome 1 is at the top on the left rather
+than at the bottom) using the chart option `oneAtTop`, as follows.
+
+```{r iplotScantwo_oneAtTop, eval=FALSE}
+iplotScantwo(out2, hyper, chartOpts=list(oneAtTop=TRUE))
+```
+
+The estimated QTL effects in the right-hand panels are derived
+following a single imputation to fill in missing data, and so are a
+bit crude.
+
+
 ### `iplotCurves`
 
 `iplotCurves` creates a plot of a set of curves linked to one or two

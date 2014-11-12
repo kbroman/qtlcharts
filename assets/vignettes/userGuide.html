@@ -714,20 +714,20 @@ QTL effect plots may be produced.</p>
 </code></pre>
 
 <p>There are drop-down
-menus to select different which LOD scores to display in the heat map.
-Hover over the heatmap to view the LOD scores, and click on a pixel to
+menus to select which LOD scores to display in the heat map.
+Hover over the heatmap to view the LOD scores, and click to
 view cross-sectional slices below and the QTL effect plot to the
 right.</p>
 
 <p>You can control the size of the heatmap through the chart option
-<code>pixelPerCell</code>, the number of pixels, in each direction, for each
-small rectangle (&ldquo;cell&rdquo;) within the heatmap.</p>
+<code>pixelPerCell</code> &mdash; the number of pixels, in each direction, for each
+small rectangle within the heatmap.</p>
 
 <pre><code class="r">iplotScantwo(out2, hyper, chartOpts=list(pixelPerCell=12))
 </code></pre>
 
 <p>You can orient the plot with the diagonal going from the top-left to
-the lower right (so that chromosome 1 is at the top on the left rather
+the lower right (so that chromosome 1 is at the top rather
 than at the bottom) using the chart option <code>oneAtTop</code>, as follows.</p>
 
 <pre><code class="r">iplotScantwo(out2, hyper, chartOpts=list(oneAtTop=TRUE))

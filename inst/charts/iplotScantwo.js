@@ -48,8 +48,8 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
   rightvalue = "fv1";
   options = ["full", "fv1", "int", "add", "av1"];
   div = d3.select("div#" + chartdivid);
-  form = div.append("g").attr("id", "form");
-  left = form.append("div").text(oneAtTop ? "bottom-left: " : "top-left: ").style("float", "left").style("margin-left", "50px");
+  form = d3.select("body").insert("div", "div#" + chartdivid).attr("id", "form");
+  left = form.append("div").text(oneAtTop ? "bottom-left: " : "top-left: ").style("float", "left").style("margin-left", "150px");
   leftsel = left.append("select").attr("id", "leftselect").attr("name", "left");
   leftsel.selectAll("empty").data(options).enter().append("option").attr("value", function(d) {
     return d;
@@ -83,6 +83,7 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
     d3.select("g#chrheatmap").datum(scantwo_data).call(mychrheatmap);
     return add_cell_tooltips();
   });
+  d3.select("body").insert("p", "div#" + chartdivid);
   svg = d3.select("div#" + chartdivid).append("svg").attr("height", totalh).attr("width", totalw);
   scantwo_data = add_symmetric_lod(scantwo_data);
   scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);

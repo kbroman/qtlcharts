@@ -46,11 +46,13 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
     # drop-down menus
     options = ["full", "fv1", "int", "add", "av1"]
     div = d3.select("div##{chartdivid}")
-    form = div.append("g").attr("id", "form")
+    form = d3.select("body")
+             .insert("div", "div##{chartdivid}")
+             .attr("id", "form")
     left = form.append("div")
               .text(if oneAtTop then "bottom-left: " else "top-left: ")
               .style("float", "left")
-              .style("margin-left", "50px")
+              .style("margin-left", "150px")
     leftsel = left.append("select")
                   .attr("id", "leftselect")
                   .attr("name", "left")
@@ -95,6 +97,9 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                      d3.select("g#chrheatmap svg").remove()
                      d3.select("g#chrheatmap").datum(scantwo_data).call(mychrheatmap)
                      add_cell_tooltips()
+
+    d3.select("body")
+      .insert("p", "div##{chartdivid}")
 
     # create SVG
     svg = d3.select("div##{chartdivid}")

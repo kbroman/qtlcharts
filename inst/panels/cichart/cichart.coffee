@@ -50,6 +50,16 @@ cichart = () ->
             svg.attr("width", width+margin.left+margin.right)
                .attr("height", height+margin.top+margin.bottom)
 
+            # expand segcolor and vertsegcolor to length of means
+            if segcolor.length == 1
+                segcolor = (segcolor for i in means)
+            else if segcolor.length < means.length
+                displayError("segcolor.length > 1 but != means.length")
+            if vertsegcolor.length == 1
+                vertsegcolor = (vertsegcolor for i in means)
+            else if vertsegcolor.length < means.length
+                displayError("vertsegcolor.length > 1 but != means.length")
+
             g = svg.select("g")
 
             # box
@@ -150,7 +160,7 @@ cichart = () ->
                     .attr("y1", (d) -> yscale(d))
                     .attr("y2", (d,i) -> yscale(high[i]))
                     .attr("fill", "none")
-                    .attr("stroke", vertsegcolor)
+                    .attr("stroke", (d,i) -> vertsegcolor[i])
                     .attr("stroke-width", segstrokewidth)
             segments.selectAll("empty")
                     .data(means.concat(low, high))
@@ -167,7 +177,7 @@ cichart = () ->
                     .attr("y1", (d) -> yscale(d))
                     .attr("y2", (d) -> yscale(d))
                     .attr("fill", "none")
-                    .attr("stroke", segcolor)
+                    .attr("stroke", (d,i) -> segcolor[i])
                     .attr("stroke-width", segstrokewidth)
                     .on("mouseover.paneltip", tip.show)
                     .on("mouseout.paneltip", tip.hide)

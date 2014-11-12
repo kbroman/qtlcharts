@@ -36,7 +36,7 @@ cichart = function() {
   yscale = d3.scale.linear();
   chart = function(selection) {
     return selection.each(function(data) {
-      var categories, g, gEnter, high, low, means, segments, svg, tip, titlegrp, xaxis, xrange, yaxis, yrange, ys;
+      var categories, g, gEnter, high, i, low, means, segments, svg, tip, titlegrp, xaxis, xrange, yaxis, yrange, ys;
       means = data.means;
       low = data.low;
       high = data.high;
@@ -58,6 +58,32 @@ cichart = function() {
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
+      if (segcolor.length === 1) {
+        segcolor = (function() {
+          var _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = means.length; _i < _len; _i++) {
+            i = means[_i];
+            _results.push(segcolor);
+          }
+          return _results;
+        })();
+      } else if (segcolor.length < means.length) {
+        displayError("segcolor.length > 1 but != means.length");
+      }
+      if (vertsegcolor.length === 1) {
+        vertsegcolor = (function() {
+          var _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = means.length; _i < _len; _i++) {
+            i = means[_i];
+            _results.push(vertsegcolor);
+          }
+          return _results;
+        })();
+      } else if (vertsegcolor.length < means.length) {
+        displayError("vertsegcolor.length > 1 but != means.length");
+      }
       g = svg.select("g");
       g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", rectcolor).attr("stroke", "none");
       xrange = [margin.left + margin.inner, margin.left + width - margin.inner];
@@ -109,7 +135,9 @@ cichart = function() {
         return yscale(d);
       }).attr("y2", function(d, i) {
         return yscale(high[i]);
-      }).attr("fill", "none").attr("stroke", vertsegcolor).attr("stroke-width", segstrokewidth);
+      }).attr("fill", "none").attr("stroke", function(d, i) {
+        return vertsegcolor[i];
+      }).attr("stroke-width", segstrokewidth);
       segments.selectAll("empty").data(means.concat(low, high)).enter().append("line").attr("x1", function(d, i) {
         var x;
         x = xscale(categories[i % means.length]);
@@ -128,7 +156,9 @@ cichart = function() {
         return yscale(d);
       }).attr("y2", function(d) {
         return yscale(d);
-      }).attr("fill", "none").attr("stroke", segcolor).attr("stroke-width", segstrokewidth).on("mouseover.paneltip", tip.show).on("mouseout.paneltip", tip.hide);
+      }).attr("fill", "none").attr("stroke", function(d, i) {
+        return segcolor[i];
+      }).attr("stroke-width", segstrokewidth).on("mouseover.paneltip", tip.show).on("mouseout.paneltip", tip.hide);
       return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });
   };

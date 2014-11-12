@@ -24,9 +24,6 @@ For example charts, see the [R/qtlcharts website](http://kbroman.org/qtlcharts).
 
 #### Installation
 
-R/qtlcharts is early in development and so is not yet available on
-[CRAN](http://cran.r-project.org).
-
 You can install R/qtlcharts from its
 [GitHub repository](http://github.com/kbroman/qtlcharts). You first need to
 install the [R/qtl](http://www.rqtl.org),

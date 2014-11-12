@@ -689,6 +689,54 @@ results and the cross object.</p>
 <pre><code class="r">iplotMScanone(out, grav, times=times)
 </code></pre>
 
+<h3><code>iplotScantwo</code></h3>
+
+<p><code>iplotScantwo</code> creates an interactive plot of the output of the
+<a href="http://rqtl.org">R/qtl</a> function <code>scantwo</code>, of a two-dimensional,
+two-QTL genome scan.</p>
+
+<p>Let&#39;s first run <code>scantwo</code> using a coarse step size and focusing on
+selected chromosomes. For the sake of speed, we&#39;ll use Haley-Knott
+regression, even though it does not work well for selectively
+genotyped data.</p>
+
+<pre><code class="r">data(hyper)
+hyper &lt;- hyper[c(1,4,6,15),]
+hyper &lt;- calc.genoprob(hyper, step=5)
+out2 &lt;- scantwo(hyper, method=&quot;hk&quot;, verbose=FALSE)
+</code></pre>
+
+<p>The simplest use of <code>iplotScantwo</code> is to just provide the <code>scantwo</code>
+output, but it&#39;s best to also provide the QTL cross data, so that
+QTL effect plots may be produced.</p>
+
+<pre><code class="r">iplotScantwo(out2, hyper)
+</code></pre>
+
+<p>There are drop-down
+menus to select different which LOD scores to display in the heat map.
+Hover over the heatmap to view the LOD scores, and click on a pixel to
+view cross-sectional slices below and the QTL effect plot to the
+right.</p>
+
+<p>You can control the size of the heatmap through the chart option
+<code>pixelPerCell</code>, the number of pixels, in each direction, for each
+small rectangle (&ldquo;cell&rdquo;) within the heatmap.</p>
+
+<pre><code class="r">iplotScantwo(out2, hyper, chartOpts=list(pixelPerCell=12))
+</code></pre>
+
+<p>You can orient the plot with the diagonal going from the top-left to
+the lower right (so that chromosome 1 is at the top on the left rather
+than at the bottom) using the chart option <code>oneAtTop</code>, as follows.</p>
+
+<pre><code class="r">iplotScantwo(out2, hyper, chartOpts=list(oneAtTop=TRUE))
+</code></pre>
+
+<p>The estimated QTL effects in the right-hand panels are derived
+following a single imputation to fill in missing data, and so are a
+bit crude.</p>
+
 <h3><code>iplotCurves</code></h3>
 
 <p><code>iplotCurves</code> creates a plot of a set of curves linked to one or two

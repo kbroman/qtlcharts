@@ -628,6 +628,48 @@ customization options for each chart.</p>
 
 <p><code>eff_yNA = list(handle=true, force=false, width=15, gap=10)</code> &mdash; treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)</p>
 
+<h3><code>iplotMScanone</code> (no effects)</h3>
+
+<p><code>wleft = 650</code> &mdash; width of left panels in pixels</p>
+
+<p><code>wright = 350</code> &mdash; width of right panel in pixels</p>
+
+<p><code>htop = 350</code> &mdash; height of top panels in pixels</p>
+
+<p><code>hbot = 350</code> &mdash; height of bottom panel in pixels</p>
+
+<p><code>margin = list(left=60, top=40, right=40, bottom=40, inner=5)</code> &mdash; margins in pixels (left, top, right, bottom, inner)</p>
+
+<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)</p>
+
+<p><code>titlepos = 20</code> &mdash; position of chart title in pixels</p>
+
+<p><code>chrGap = 8</code> &mdash; gap between chromosomes in pixels</p>
+
+<p><code>darkrect = &quot;#C8C8C8&quot;</code> &mdash; color of darker background rectangle</p>
+
+<p><code>lightrect = &quot;#E6E6E6&quot;</code> &mdash; color of lighter background rectangle</p>
+
+<p><code>nullcolor = &quot;#E6E6E6&quot;</code> &mdash; color for pixels with null values</p>
+
+<p><code>colors = c(&quot;slateblue&quot;, &quot;white&quot;, &quot;crimson&quot;)</code> &mdash; heat map colors</p>
+
+<p><code>zlim = NULL</code> &mdash; z-axis limits</p>
+
+<p><code>zthresh = NULL</code> &mdash; lower z-axis threshold for display in heat map</p>
+
+<p><code>lod_ylab = &quot;&quot;</code> &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)</p>
+
+<p><code>linecolor = &quot;darkslateblue&quot;</code> &mdash; color of lines</p>
+
+<p><code>linewidth = 2</code> &mdash; width of lines</p>
+
+<p><code>nxticks = 5</code> &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale</p>
+
+<p><code>xticks = NULL</code> &mdash; tick positions in x-axis on right-hand panel, if quantitative scale</p>
+
+<p><code>lod_labels = NULL</code> &mdash; optional vector of strings, for LOD column labels</p>
+
 <h3><code>iplotRF</code></h3>
 
 <p><code>pixelPerCell = NULL</code> &mdash; pixels per cell in heat map</p>
@@ -706,48 +748,6 @@ customization options for each chart.</p>
 
 <p><code>yNA = list(handle=true, force=false, width=15, gap=10)</code> &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)</p>
 
-<h3><code>iplotMScanone</code> (no effects)</h3>
-
-<p><code>wleft = 650</code> &mdash; width of left panels in pixels</p>
-
-<p><code>wright = 350</code> &mdash; width of right panel in pixels</p>
-
-<p><code>htop = 350</code> &mdash; height of top panels in pixels</p>
-
-<p><code>hbot = 350</code> &mdash; height of bottom panel in pixels</p>
-
-<p><code>margin = list(left=60, top=40, right=40, bottom=40, inner=5)</code> &mdash; margins in pixels (left, top, right, bottom, inner)</p>
-
-<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)</p>
-
-<p><code>titlepos = 20</code> &mdash; position of chart title in pixels</p>
-
-<p><code>chrGap = 8</code> &mdash; gap between chromosomes in pixels</p>
-
-<p><code>darkrect = &quot;#C8C8C8&quot;</code> &mdash; color of darker background rectangle</p>
-
-<p><code>lightrect = &quot;#E6E6E6&quot;</code> &mdash; color of lighter background rectangle</p>
-
-<p><code>nullcolor = &quot;#E6E6E6&quot;</code> &mdash; color for pixels with null values</p>
-
-<p><code>colors = c(&quot;slateblue&quot;, &quot;white&quot;, &quot;crimson&quot;)</code> &mdash; heat map colors</p>
-
-<p><code>zlim = NULL</code> &mdash; z-axis limits</p>
-
-<p><code>zthresh = NULL</code> &mdash; lower z-axis threshold for display in heat map</p>
-
-<p><code>lod_ylab = &quot;&quot;</code> &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)</p>
-
-<p><code>linecolor = &quot;darkslateblue&quot;</code> &mdash; color of lines</p>
-
-<p><code>linewidth = 2</code> &mdash; width of lines</p>
-
-<p><code>nxticks = 5</code> &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale</p>
-
-<p><code>xticks = NULL</code> &mdash; tick positions in x-axis on right-hand panel, if quantitative scale</p>
-
-<p><code>lod_labels = NULL</code> &mdash; optional vector of strings, for LOD column labels</p>
-
 <h3><code>iplotMScanone</code> (with effects)</h3>
 
 <p><code>wleft = 650</code> &mdash; width of left panels in pixels</p>
@@ -797,6 +797,44 @@ customization options for each chart.</p>
 <p><code>xticks = NULL</code> &mdash; tick positions in x-axis for effect plot (right panel), if quantitative scale</p>
 
 <p><code>lod_labels = NULL</code> &mdash; optional vector of strings, for LOD column labels</p>
+
+<h3><code>iplotScantwo</code></h3>
+
+<p><code>pixelPerCell = NULL</code> &mdash; pixels per cell in heat map</p>
+
+<p><code>chrGap = 2</code> &mdash; gaps between chr in heat map</p>
+
+<p><code>wright = 500</code> &mdash; width (in pixels) of right panels</p>
+
+<p><code>hbot = 150</code> &mdash; height (in pixels) of each of the lower panels</p>
+
+<p><code>margin = list(left=60, top=30, right=10, bottom=40, inner=5)</code> &mdash; margins in each panel</p>
+
+<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> &mdash; axis positions in heatmap</p>
+
+<p><code>lightrect = &quot;#e6e6e6&quot;</code> &mdash; color for light rect in lower panels and backgrd in right panels</p>
+
+<p><code>darkrect = &quot;#c8c8c8&quot;</code> &mdash; dark rectangle in lower panels</p>
+
+<p><code>nullcolor = &quot;#e6e6e6&quot;</code> &mdash; color of null pixels in heat map</p>
+
+<p><code>bordercolor = &quot;black&quot;</code> &mdash; border color in heat map</p>
+
+<p><code>linecolor = &quot;slateblue&quot;</code> &mdash; line color in lower panels</p>
+
+<p><code>linewidth = 2</code> &mdash; line width in lower panels</p>
+
+<p><code>pointcolor = &quot;slateblue&quot;</code> &mdash; point color in right panels</p>
+
+<p><code>pointsize = 3</code> &mdash; point size in right panels</p>
+
+<p><code>pointstroke = &quot;black&quot;</code> &mdash; color of outer circle in right panels</p>
+
+<p><code>color = &quot;slateblue&quot;</code> &mdash; color for heat map</p>
+
+<p><code>oneAtTop = false</code> &mdash; whether to put chr 1 at top of heatmap</p>
+
+<p><code>zthresh = 0</code> &mdash; LOD values below this threshold aren&#39;t shown (on LOD_full scale)</p>
 
 <!-- the following to make it look nicer -->
 

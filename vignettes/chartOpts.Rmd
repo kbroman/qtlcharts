@@ -33,7 +33,7 @@ customization options for each chart.
 
 `qucolors = NULL` &mdash; vector of colors for the quantile curves
 
-`histcolors = c("blue", "red", "green", "MediumVioletRed", "black")` &mdash; vector of colors for selected histograms
+`histcolors = c("#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black")` &mdash; vector of colors for selected histograms
 
 ### `iheatmap`
 

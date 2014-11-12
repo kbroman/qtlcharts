@@ -15,7 +15,7 @@ iboxplot = function(data, chartOpts) {
   xlab = (_ref4 = chartOpts != null ? chartOpts.xlab : void 0) != null ? _ref4 : "Individuals";
   rectcolor = (_ref5 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? _ref5 : "#E6E6E6";
   qucolors = (_ref6 = chartOpts != null ? chartOpts.qucolors : void 0) != null ? _ref6 : null;
-  histcolors = (_ref7 = chartOpts != null ? chartOpts.histcolors : void 0) != null ? _ref7 : ["blue", "red", "green", "MediumVioletRed", "black"];
+  histcolors = (_ref7 = chartOpts != null ? chartOpts.histcolors : void 0) != null ? _ref7 : ["#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black"];
   chartdivid = (_ref8 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref8 : 'chart';
   histcolors = forceAsArray(histcolors);
   qucolors = forceAsArray(qucolors);
@@ -214,7 +214,7 @@ iboxplot = function(data, chartOpts) {
     }
   });
   lowsvg.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height - margin.bottom - margin.top).attr("width", width - margin.left - margin.right).attr("stroke", "black").attr("stroke-width", 2).attr("fill", "none");
-  svg.append("text").text(ylab).attr("x", margin.left * 0.2).attr("y", height / 2).attr("fill", "blue").attr("transform", "rotate(270 " + (margin.left * 0.2) + " " + (height / 2) + ")").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
-  lowsvg.append("text").text(ylab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", height - margin.bottom * 0.2).attr("fill", "blue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
-  return svg.append("text").text(xlab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", height - margin.bottom * 0.2).attr("fill", "blue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
+  svg.append("text").text(ylab).attr("x", margin.left * 0.2).attr("y", height / 2).attr("fill", "slateblue").attr("transform", "rotate(270 " + (margin.left * 0.2) + " " + (height / 2) + ")").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
+  lowsvg.append("text").text(ylab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", height - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
+  return svg.append("text").text(xlab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", height - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
 };

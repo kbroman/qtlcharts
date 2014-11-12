@@ -17,7 +17,7 @@ iboxplot = (data, chartOpts) ->
     xlab = chartOpts?.xlab ? "Individuals" # x-axis label
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
     qucolors = chartOpts?.qucolors ? null # vector of colors for the quantile curves
-    histcolors = chartOpts?.histcolors ? ["blue", "red", "green", "MediumVioletRed", "black"] # vector of colors for selected histograms
+    histcolors = chartOpts?.histcolors ? ["#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black"] # vector of colors for selected histograms
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
@@ -155,7 +155,7 @@ iboxplot = (data, chartOpts) ->
        .attr("x", (d) -> xScale(d-1))
        .attr("dominant-baseline", "middle")
        .attr("text-anchor", "middle")
-  
+
     # colors for quantile curves
     if qucolors? and qucolors.length < (nQuant-1)/2+1
         displayError("Not enough quantile colors: #{qucolors.length} but need #{(nQuant-1)/2+1}",
@@ -380,7 +380,7 @@ iboxplot = (data, chartOpts) ->
        .text(ylab)
        .attr("x", margin.left*0.2)
        .attr("y", height/2)
-       .attr("fill", "blue")
+       .attr("fill", "slateblue")
        .attr("transform", "rotate(270 #{margin.left*0.2} #{height/2})")
        .attr("dominant-baseline", "middle")
        .attr("text-anchor", "middle")
@@ -389,7 +389,7 @@ iboxplot = (data, chartOpts) ->
           .text(ylab)
           .attr("x", (width-margin.left-margin.bottom)/2+margin.left)
           .attr("y", height-margin.bottom*0.2)
-          .attr("fill", "blue")
+          .attr("fill", "slateblue")
           .attr("dominant-baseline", "middle")
           .attr("text-anchor", "middle")
 
@@ -397,6 +397,6 @@ iboxplot = (data, chartOpts) ->
        .text(xlab)
        .attr("x", (width-margin.left-margin.bottom)/2+margin.left)
        .attr("y", height-margin.bottom*0.2)
-       .attr("fill", "blue")
+       .attr("fill", "slateblue")
        .attr("dominant-baseline", "middle")
        .attr("text-anchor", "middle")

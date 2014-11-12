@@ -101,7 +101,9 @@ function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
     if(missing(file)) file <- NULL
 
     if(missing(caption) || is.null(caption))
-        caption <- ''
+        caption <- c('Use the drop-down menus to select the LOD scores to plot. ',
+                     'Hover over the heatmap to view the LOD scores; click to view cross-sectional ',
+                     'slices below and QTL effects plots to the right.')
 
     file <- write_top(file, onefile, title, links=c("d3", "d3tip", "colorbrewer", "panelutil"),
                       panels=c("lodchart", "cichart", "dotchart", "chrheatmap"),

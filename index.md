@@ -22,8 +22,8 @@ for the larger visualizations.
 
 ---
 
-- [Installation](pages/installation.html) 
-- [User guide](assets/vignettes/userGuide.html) 
+- [Installation](pages/installation.html)
+- [User guide](assets/vignettes/userGuide.html)
 - [Developer guide](assets/vignettes/develGuide.html)
 - [Reusable graphic panels](pages/panels.html)
 - [Use with R Markdown](assets/vignettes/Rmarkdown.html)
@@ -43,6 +43,7 @@ Click on a chart for the corresponding interactive version.
 | [![iplotMScanone example](assets/pics/charts/iplotMScanone.png)](example/iplotMScanone.html) | [![iplotMap example](assets/pics/charts/iplotMap.png)](example/iplotMap.html)    |
 | [![iplotCurves example](assets/pics/charts/iplotCurves.png)](example/iplotCurves.html)       | [![iheatmap example](assets/pics/charts/iheatmap.png)](example/iheatmap.html)    |
 | [![iboxplot example](assets/pics/charts/iboxplot.png)](example/iboxplot.html)                | [![iplotRF example](assets/pics/charts/iplotRF.png)](example/iplotRF.html)       |
+| [![iplotScantwo example](assets/pics/charts/iplotScantwo.png)](example/iplotScantwo.html)    |                                                                                  |
 
 
 ---

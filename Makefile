@@ -7,32 +7,36 @@ CHARTEX = example
 CHARTEXAMPLES = ${CHARTEX}/iboxplot.html ${CHARTEX}/iplotCorr.html \
 				${CHARTEX}/iplotCurves.html ${CHARTEX}/iplotMScanone.html \
 				${CHARTEX}/iplotMap.html ${CHARTEX}/iplotScanone.html \
-				${CHARTEX}/iheatmap.html ${CHARTEX}/iplotRF.html
+				${CHARTEX}/iheatmap.html ${CHARTEX}/iplotRF.html \
+				${CHARTEX}/iplotScantwo.html
 chartexamples: ${CHARTEXAMPLES}
 
 ${CHARTEX}/iboxplot.html: ${CHARTEX}/R/iboxplot_example.R ${CHARTEX}/R/hypo.RData
-	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+	cd $(<D); R CMD BATCH --no-save $(<F)
 
 ${CHARTEX}/iplotCorr.html: ${CHARTEX}/R/iplotCorr_example.R
-	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+	cd $(<D); R CMD BATCH --no-save $(<F)
 
 ${CHARTEX}/iplotCurves.html: ${CHARTEX}/R/iplotCurves_example.R
-	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+	cd $(<D); R CMD BATCH --no-save $(<F)
 
 ${CHARTEX}/iplotMScanone.html: ${CHARTEX}/R/iplotMScanone_example.R
-	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+	cd $(<D); R CMD BATCH --no-save $(<F)
 
 ${CHARTEX}/iplotMap.html: ${CHARTEX}/R/iplotMap_example.R
-	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+	cd $(<D); R CMD BATCH --no-save $(<F)
 
 ${CHARTEX}/iplotScanone.html: ${CHARTEX}/R/iplotScanone_example.R
-	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+	cd $(<D); R CMD BATCH --no-save $(<F)
 
 ${CHARTEX}/iheatmap.html: ${CHARTEX}/R/iheatmap_example.R
-	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+	cd $(<D); R CMD BATCH --no-save $(<F)
 
 ${CHARTEX}/iplotRF.html: ${CHARTEX}/R/iplotRF_example.R
-	cd ${CHARTEX}/R; R CMD BATCH --no-save $(<F)
+	cd $(<D); R CMD BATCH --no-save $(<F)
+
+${CHARTEX}/iplotScantwo.html: ${CHARTEX}/R/iplotScantwo_example.R
+	cd $(<D); R CMD BATCH --no-save $(<F)
 
 #------------------------------------------------------------
 

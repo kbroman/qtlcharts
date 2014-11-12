@@ -659,13 +659,11 @@ customization options for each chart.
 
 `linewidth = 2` &mdash; line width in lower panels
 
-`pointcolor = "slateblue"` &mdash; point color in right panels
-
 `pointsize = 3` &mdash; point size in right panels
 
 `pointstroke = "black"` &mdash; color of outer circle in right panels
 
-`cicolors = NULL` &mdash; colors for CIs in QTL effect plot
+`cicolors = NULL` &mdash; colors for CIs in QTL effect plot; also used for points in phe x gen plot
 
 `color = "slateblue"` &mdash; color for heat map
 

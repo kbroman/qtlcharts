@@ -16,10 +16,9 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
     bordercolor = chartOpts?.bordercolor ? "black" # border color in heat map
     linecolor = chartOpts?.linecolor ? "slateblue" # line color in lower panels
     linewidth = chartOpts?.linewidth ? 2 # line width in lower panels
-    pointcolor = chartOpts?.pointcolor ? "slateblue" # point color in right panels
     pointsize = chartOpts?.pointsize ? 3 # point size in right panels
     pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle in right panels
-    cicolors = chartOpts?.cicolors ? null # colors for CIs in QTL effect plot
+    cicolors = chartOpts?.cicolors ? null # colors for CIs in QTL effect plot; also used for points in phe x gen plot
     color = chartOpts?.color ? "slateblue" # color for heat map
     oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
     zthresh = chartOpts?.zthresh ? 0 # LOD values below this threshold aren't shown (on LOD_full scale)
@@ -258,7 +257,6 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                                .axispos(axispos)
                                .rectcolor(lightrect)
                                .pointsize(3)
-                               .pointcolor(pointcolor)
                                .pointstroke(pointstroke)
                                .xcategories([1..gn1.length])
                                .xcatlabels(gn1)
@@ -274,6 +272,11 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                       .attr("transform", "translate(#{eff_hpos[1]}, #{eff_vpos[1]})")
                       .datum(pxg_data)
                       .call(mydotchart)
+
+        # revise point colors
+        mydotchart.pointsSelect()
+                  .attr("fill", (d,i) ->
+                          cicolors_expanded[g[i]-1])
 
         cis = ci_by_group(g, pheno_and_geno.pheno, 2)
         ci_data =

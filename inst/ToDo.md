@@ -12,7 +12,7 @@
 
 - Revise developer's guide
   - a bit more detail about how the panels and charts work?
-  
+
 
 ### Enhancements to current charts
 
@@ -52,8 +52,6 @@
 
 - Set of QTL intervals on a genetic map plot, linked to the LOD curves
 - cis/trans figure, with slider for selecting a band of LOD scores
-- Interactive 2d scan plot (iplotScantwo)
-- interactive rec frac plot (iplotRF)
 - iheatmapCurves: heatmap of multiple curves linked to curvechart
 - iplotCorr: also include plots with slices of the correlation matrix?
 
@@ -62,8 +60,6 @@
 
 - panel: colorscale for a heatmap (allow horiz/vert; allow scale on
   top, right, bottom, or left)
-- iplotRF
-- iplotScantwo
 - plot.qtl
 - comparison of two maps
 - effectscan

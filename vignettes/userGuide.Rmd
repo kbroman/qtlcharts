@@ -68,7 +68,7 @@ iplotCorr(expr, reorder=TRUE)
 
 This will open an interactive figure in a web browser, with a heat map
 of the correlation matrix of the genes on the left linked to
-the underlying scatterplots. The argument `reorder=TRUE`, the genes
+the underlying scatterplots. With the argument `reorder=TRUE`, the genes
 are reordered (by hierarchical clustering with the R function
 `hclust`) to bring genes with similar expression patterns next to each
 other.
@@ -184,7 +184,7 @@ iplotCorr(expr, geno, reorder=TRUE,
 ```
 
 A full list of options is available in the
-[`chartOpts` vignette](http://kbroman.githu.b.io/qtlcharts/vignettes/chartOpts.html):
+[`chartOpts` vignette](chartOpts.html):
 
 ```{r chartOpts_vignette, eval=FALSE}
 vignette("chartOpts", "qtlcharts")
@@ -194,8 +194,8 @@ vignette("chartOpts", "qtlcharts")
 ## Including a chart in an R Markdown document
 
 The interactive charts may be included within an
-[R Markdown](https://www.rstudio.com/ide/docs/r_markdown)-based
-report. See the separate [`Rmarkdown` vignette](http://kbroman.org/qtlcharts/assets/vignettes/Rmarkdown.html):
+[R Markdown](http://rmarkdown.rstudio.com/)-based
+report. See the separate [`Rmarkdown` vignette](Rmarkdown.html):
 
 ```{r Rmarkdown_vignette, eval=FALSE}
 vignette("Rmarkdown", "qtlcharts")

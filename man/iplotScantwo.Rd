@@ -61,14 +61,14 @@ scan.
 library(qtl)
 data(fake.f2)
 \dontshow{fake.f2 <- fake.f2[c(1, 13, "X"),]}
-fake.f2 <- calc.genoprob(fake.f2, step=2.5)
+fake.f2 <- calc.genoprob(fake.f2, step=5)
 out <- scantwo(fake.f2, method="hk", verbose=FALSE)
 \donttest{
 # open iplotScantwo in web browser
 iplotScantwo(out, fake.f2)}
 \dontshow{
 # save to temporary file but don't open
-iplotScantwo(out, fake.f2, openfile=FALSE)}
+iplotScantwo(out, fake.f2, openfile=FALSE, chartOpts=list(zthresh=2))}
 }
 \seealso{
 \code{\link{iplotScanone}}

@@ -641,7 +641,7 @@ customization options for each chart.
 
 `wright = 500` &mdash; width (in pixels) of right panels
 
-`hbot = 200` &mdash; height (in pixels) of each of the lower panels
+`hbot = 150` &mdash; height (in pixels) of each of the lower panels
 
 `margin = list(left=60, top=30, right=10, bottom=40, inner=5)` &mdash; margins in each panel
 

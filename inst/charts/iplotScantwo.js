@@ -6,7 +6,7 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
   pixelPerCell = (_ref = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? _ref : null;
   chrGap = (_ref1 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref1 : 2;
   wright = (_ref2 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref2 : 500;
-  hbot = (_ref3 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref3 : 200;
+  hbot = (_ref3 = chartOpts != null ? chartOpts.hbot : void 0) != null ? _ref3 : 150;
   margin = (_ref4 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref4 : {
     left: 60,
     top: 30,

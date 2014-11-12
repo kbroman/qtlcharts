@@ -24,7 +24,7 @@ For example charts, see the [R/qtlcharts website](http://kbroman.org/qtlcharts).
 
 #### Installation
 
-You can install R/qtlcharts from its
+Install R/qtlcharts from its
 [GitHub repository](http://github.com/kbroman/qtlcharts). You first need to
 install the [R/qtl](http://www.rqtl.org),
 [jsonlite](http://cran.r-project.org/web/packages/jsonlite),

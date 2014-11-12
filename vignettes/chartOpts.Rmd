@@ -665,6 +665,8 @@ customization options for each chart.
 
 `pointstroke = "black"` &mdash; color of outer circle in right panels
 
+`cicolors = NULL` &mdash; colors for CIs in QTL effect plot
+
 `color = "slateblue"` &mdash; color for heat map
 
 `oneAtTop = false` &mdash; whether to put chr 1 at top of heatmap

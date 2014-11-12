@@ -19,6 +19,7 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
     pointcolor = chartOpts?.pointcolor ? "slateblue" # point color in right panels
     pointsize = chartOpts?.pointsize ? 3 # point size in right panels
     pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle in right panels
+    cicolors = chartOpts?.cicolors ? null # colors for CIs in QTL effect plot
     color = chartOpts?.color ? "slateblue" # color for heat map
     oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
     zthresh = chartOpts?.zthresh ? 0 # LOD values below this threshold aren't shown (on LOD_full scale)
@@ -42,6 +43,12 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
     # selected LODs on left and right
     leftvalue = "int"
     rightvalue = "fv1"
+
+    # ci colors
+    if !(cicolors?) and pheno_and_geno?
+        gn = pheno_and_geno.genonames
+        ncat = d3.max(gn[x].length for x of gn)
+        cicolors = selectGroupColors(ncat, "dark")
 
     # drop-down menus
     options = ["full", "fv1", "int", "add", "av1"]
@@ -161,7 +168,6 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
              .on "click", (d) ->
                     mari = scantwo_data.labels[d.i]
                     marj = scantwo_data.labels[d.j]
-                    console.log("click! #{mari} (#{d.i}), #{marj} (#{d.j})")
                     return null if d.i == d.j # skip the diagonal case
                     # plot the cross-sections as genome scans, below
                     plot_scan(d.i, 0, 0, leftvalue)
@@ -231,10 +237,12 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
         g = (g1[i] + (g2[i]-1)*ng1 for i of g1)
         gn1 = []
         gn2 = []
+        cicolors_expanded = []
         for i in [0...ng1]
             for j in [0...ng2]
                 gn1.push(gnames1[i])
                 gn2.push(gnames2[j])
+                cicolors_expanded.push(cicolors[i])
 
         for i in [0..1]
             g_eff[i].remove() if g_eff[i]?
@@ -274,13 +282,20 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
             high: (cis[x]?.high ? null for x in [1..gn1.length])
             categories: [1..gn1.length]
 
+
+        # adjust segment widths in ci chart
+        xs = mydotchart.xscale()
+        dif = xs(2) - xs(1)
+        segwidth = if gn1.length > 9 then dif*0.5 else dif*0.25
+
         mycichart = cichart().height(hright)
                              .width(wright)
                              .margin(margin)
                              .axispos(axispos)
                              .rectcolor(lightrect)
-                             .segcolor(linecolor)
-                             .vertsegcolor(linecolor)
+                             .segcolor(cicolors_expanded)
+                             .segwidth(segwidth)
+                             .vertsegcolor(cicolors_expanded)
                              .segstrokewidth(linewidth)
                              .xlab("")
                              .ylab("Phenotype")

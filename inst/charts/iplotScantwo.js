@@ -207,7 +207,7 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
       return _results;
     }).apply(this)).xcatlabels(gn1).xlab("").ylab("Phenotype").xvar("g").yvar("y").dataByInd(false).title("" + mar1 + " : " + mar2);
     g_eff[1] = svg.append("g").attr("id", "eff_1").attr("transform", "translate(" + eff_hpos[1] + ", " + eff_vpos[1] + ")").datum(pxg_data).call(mydotchart);
-    cis = ci_by_group(g, pheno_and_geno.pheno, 1);
+    cis = ci_by_group(g, pheno_and_geno.pheno, 2);
     ci_data = {
       means: (function() {
         var _m, _ref20, _ref21, _ref22, _results1;

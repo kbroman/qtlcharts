@@ -267,7 +267,7 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
                       .datum(pxg_data)
                       .call(mydotchart)
 
-        cis = ci_by_group(g, pheno_and_geno.pheno, 1)
+        cis = ci_by_group(g, pheno_and_geno.pheno, 2)
         ci_data =
             means: (cis[x]?.mean ? null for x in [1..gn1.length])
             low:  (cis[x]?.low ? null for x in [1..gn1.length])

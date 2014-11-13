@@ -43,11 +43,18 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
     leftvalue = "int"
     rightvalue = "fv1"
 
-    # ci colors
-    if !(cicolors?) and pheno_and_geno?
+    # cicolors: check they're the write length or estimate them
+    if pheno_and_geno?
         gn = pheno_and_geno.genonames
         ncat = d3.max(gn[x].length for x of gn)
-        cicolors = selectGroupColors(ncat, "dark")
+        if cicolors? # cicolors provided; expand to ncat
+            cicolors = expand2vector(cicolors, ncat)
+            n = cicolors.length
+            if n < ncat # not enough, display error
+                displayError("length(cicolors) (#{n}) < maximum no. genotypes (#{ncat})")
+                cicolors = (cicolors[i % n] for i in [0...ncat])
+        else # not provided; select them
+            cicolors = selectGroupColors(ncat, "dark")
 
     # drop-down menus
     options = ["full", "fv1", "int", "add", "av1"]

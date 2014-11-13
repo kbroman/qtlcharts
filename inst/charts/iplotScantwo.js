@@ -2,7 +2,7 @@
 var add_symmetric_lod, iplotScantwo, lod_for_heatmap;
 
 iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
-  var add_cell_tooltips, axispos, bordercolor, chartdivid, chrGap, cicolors, color, darkrect, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, hright, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, ncat, nullcolor, oneAtTop, options, pixelPerCell, plot_effects, plot_scan, pointsize, pointstroke, right, rightsel, rightvalue, scans_hpos, scans_vpos, submit, svg, totalh, totalw, totmar, w, wbot, wright, x, zthresh, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var add_cell_tooltips, axispos, bordercolor, chartdivid, chrGap, cicolors, color, darkrect, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, hright, i, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, n, ncat, nullcolor, oneAtTop, options, pixelPerCell, plot_effects, plot_scan, pointsize, pointstroke, right, rightsel, rightvalue, scans_hpos, scans_vpos, submit, svg, totalh, totalw, totmar, w, wbot, wright, x, zthresh, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   pixelPerCell = (_ref = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? _ref : null;
   chrGap = (_ref1 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? _ref1 : 2;
   wright = (_ref2 = chartOpts != null ? chartOpts.wright : void 0) != null ? _ref2 : 500;
@@ -46,7 +46,7 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
   wbot = totalw / 2 - margin.left - margin.right;
   leftvalue = "int";
   rightvalue = "fv1";
-  if (!(cicolors != null) && (pheno_and_geno != null)) {
+  if (pheno_and_geno != null) {
     gn = pheno_and_geno.genonames;
     ncat = d3.max((function() {
       var _results;
@@ -56,7 +56,23 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
       }
       return _results;
     })());
-    cicolors = selectGroupColors(ncat, "dark");
+    if (cicolors != null) {
+      cicolors = expand2vector(cicolors, ncat);
+      n = cicolors.length;
+      if (n < ncat) {
+        displayError("length(cicolors) (" + n + ") < maximum no. genotypes (" + ncat + ")");
+        cicolors = (function() {
+          var _i, _results;
+          _results = [];
+          for (i = _i = 0; 0 <= ncat ? _i < ncat : _i > ncat; i = 0 <= ncat ? ++_i : --_i) {
+            _results.push(cicolors[i % n]);
+          }
+          return _results;
+        })();
+      }
+    } else {
+      cicolors = selectGroupColors(ncat, "dark");
+    }
   }
   options = ["full", "fv1", "int", "add", "av1"];
   div = d3.select("div#" + chartdivid);
@@ -175,7 +191,7 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
     return g_scans[panelrow][panelcol] = svg.append("g").attr("id", "scan_" + (panelrow + 1) + "_" + (panelcol + 1)).attr("transform", "translate(" + scans_hpos[panelcol] + ", " + scans_vpos[panelrow] + ")").datum(data).call(mylodchart);
   };
   return plot_effects = function(markerindex1, markerindex2) {
-    var chr1, chr2, ci_data, cicolors_expanded, cis, dif, g, g1, g2, gn1, gn2, gnames1, gnames2, i, j, mar1, mar2, mycichart, mydotchart, ng1, ng2, p, pxg_data, segwidth, xs, _i, _j, _k, _l, _m, _n, _ref19, _ref20, _results, _results1, _results2;
+    var chr1, chr2, ci_data, cicolors_expanded, cis, dif, g, g1, g2, gn1, gn2, gnames1, gnames2, j, mar1, mar2, mycichart, mydotchart, ng1, ng2, p, pxg_data, segwidth, xs, _i, _j, _k, _l, _m, _n, _ref19, _ref20, _results, _results1, _results2;
     mar1 = scantwo_data.labels[markerindex1];
     mar2 = scantwo_data.labels[markerindex2];
     g1 = pheno_and_geno.geno[mar1];

@@ -42,7 +42,7 @@ print_qtlcharts_resources <-
 function(main, panels, charts, onefile=TRUE)
 {
     if(missing(main) || is.null(main)) {
-        main <- c("d3", "d3tip", "colorbrewer", "panelutil")
+        main <- c("d3", "d3tip", "colorbrewer", "panelutil", "jquery")
     }
     if(missing(panels) || is.null(panels)) {
         paneldir <- system.file("panels", package="qtlcharts")
@@ -59,6 +59,7 @@ function(main, panels, charts, onefile=TRUE)
     if("d3tip" %in% main) link_d3tip(file='', onefile=onefile, print=TRUE)
     if("colorbrewer" %in% main) link_colorbrewer(file='', onefile=onefile, print=TRUE)
     if("panelutil" %in% main) link_panelutil(file='', onefile=onefile, print=TRUE)
+    if("jquery" %in% main) link_jquery(file='', onefile=onefile, print=TRUE)
 
     for(panel in panels)
         link_panel(panel, file='', onefile=onefile, print=TRUE)

@@ -89,19 +89,6 @@ details.
 print_qtlcharts_resources()
 ```
 
-If you're using [R Markdown v2](http://rmarkdown.github.com) (within
-[RStudio](http://www.rstudio.com/products/rstudio/), or via the
-[rmarkdown](http://cran.r-project.org/web/packages/rmarkdown/index.html)
-package), use the argument `onefile=FALSE` in that last line, like so:
-
-```{r print_qtlcharts_results_rmdv2, eval=FALSE}
-print_qtlcharts_resources(onefile=FALSE)
-```
-
-(R Markdown v2 uses [pandoc](http://johnmacfarlane.net/pandoc/) which
-will replace any links to code with the actual code, but it seems to
-be garbling part of the [D3](http://d3js.org) code.)
-
 We're now free to begin making charts. With each, you'll want to use
 `print=TRUE`. And you **don't** want to do that within R. You may be
 sitting watching a megabyte of text fly (or crawl) by.

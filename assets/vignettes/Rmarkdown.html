@@ -218,7 +218,7 @@ While its interactive QTL charts are particularly useful for
 exploratory data analysis within R, they may also be included within
 <a href="https://www.rstudio.com/ide/docs/r_markdown">R Markdown</a>-based reports.</p>
 
-<p><a href="https://www.rstudio.com/ide/docs/r_markdown">R Markdown</a> is a
+<p><a href="http://rmarkdown.rstudio.com">R Markdown</a> is a
 extension of <a href="http://daringfireball.net/projects/markdown/">Markdown</a>,
 using <a href="http://yihui.name/knitr/">knitr</a>, to write simply-marked-up
 text with R code chunks that are converted to an html file, for
@@ -232,8 +232,8 @@ tutorial.</p>
 <p>To include <a href="http://kbroman.org/qtlcharts">R/qtlcharts</a>-based
 interactive charts within an R Markdown document, you include the
 relevant calls to the R function within a code chunk, using the chunk
-option <code>results=&quot;asis&quot;</code>. Also, include <code>print=TRUE</code> and likely
-<code>onefile=TRUE</code> in the function call. Below, I&#39;ll illustrate how it&#39;s
+option <code>results=&quot;asis&quot;</code>. Also, include <code>print=TRUE</code>
+in the function call. Below, I&#39;ll illustrate how it&#39;s
 done.</p>
 
 <h3>An example</h3>
@@ -9051,6 +9051,18 @@ lod_for_heatmap = function(scantwo_data, left, right) {
   return z;
 };
 </script>
+
+<p>If you&#39;re using <a href="http://rmarkdown.github.com">R Markdown v2</a> (within
+<a href="http://www.rstudio.com/products/rstudio/">RStudio</a>, or via the
+<a href="http://cran.r-project.org/web/packages/rmarkdown/index.html">rmarkdown</a>
+package), use the argument <code>onefile=FALSE</code> in that last line, like so:</p>
+
+<pre><code class="r">print_qtlcharts_resources(onefile=FALSE)
+</code></pre>
+
+<p>(R Markdown v2 uses <a href="http://johnmacfarlane.net/pandoc/">pandoc</a> which
+will replace any links to code with the actual code, but it seems to
+be garbling part of the <a href="http://d3js.org">D3</a> code.)</p>
 
 <p>We&#39;re now free to begin making charts. With each, you&#39;ll want to use
 <code>print=TRUE</code>. And you <strong>don&#39;t</strong> want to do that within R. You may be

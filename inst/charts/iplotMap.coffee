@@ -64,20 +64,25 @@ iplotMap = (data, chartOpts) ->
                .offset([0,10])
     d3.select("div##{chartdivid} svg").call(martip)
 
+    clean_marker_name = (markername) ->
+        markername.replace(".", "\\.")
+                  .replace("#", "\\#")
+                  .replace("/", "\\/")
+
     # grab selected marker from the search box
     selectedMarker = ""
     $("#markerinput").submit () ->
         newSelection = document.getElementById("marker").value
         event.preventDefault()
         unless selectedMarker == ""
-            d3.select("line##{selectedMarker}")
+            d3.select("line##{clean_marker_name(selectedMarker)}")
               .attr("stroke", linecolor)
             martip.hide()
 
         if newSelection != ""
             if data.markernames.indexOf(newSelection) >= 0
                 selectedMarker = newSelection
-                line = d3.select("line##{selectedMarker}")
+                line = d3.select("line##{clean_marker_name(selectedMarker)}")
                          .attr("stroke", linecolorhilit)
                 martip.show(line.datum(), line.node())
                 d3.select("a#currentmarker")

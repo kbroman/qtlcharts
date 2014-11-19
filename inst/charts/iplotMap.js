@@ -2,7 +2,7 @@
 var iplotMap;
 
 iplotMap = function(data, chartOpts) {
-  var axispos, chartdivid, chr, height, linecolor, linecolorhilit, linewidth, margin, marker, markerSelect, markerpos, martip, mychart, nyticks, rectcolor, selectedMarker, tickwidth, title, titlepos, width, xlab, ylab, ylim, yticks, _i, _len, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
+  var axispos, chartdivid, chr, clean_marker_name, height, linecolor, linecolorhilit, linewidth, margin, marker, markerSelect, markerpos, martip, mychart, nyticks, rectcolor, selectedMarker, tickwidth, title, titlepos, width, xlab, ylab, ylim, yticks, _i, _len, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
   width = (_ref = chartOpts != null ? chartOpts.width : void 0) != null ? _ref : 1000;
   height = (_ref1 = chartOpts != null ? chartOpts.height : void 0) != null ? _ref1 : 600;
   margin = (_ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref2 : {
@@ -50,19 +50,22 @@ iplotMap = function(data, chartOpts) {
     return "" + d + " (" + pos + ")";
   }).direction('e').offset([0, 10]);
   d3.select("div#" + chartdivid + " svg").call(martip);
+  clean_marker_name = function(markername) {
+    return markername.replace(".", "\\.").replace("#", "\\#").replace("/", "\\/");
+  };
   selectedMarker = "";
   $("#markerinput").submit(function() {
     var line, newSelection;
     newSelection = document.getElementById("marker").value;
     event.preventDefault();
     if (selectedMarker !== "") {
-      d3.select("line#" + selectedMarker).attr("stroke", linecolor);
+      d3.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolor);
       martip.hide();
     }
     if (newSelection !== "") {
       if (data.markernames.indexOf(newSelection) >= 0) {
         selectedMarker = newSelection;
-        line = d3.select("line#" + selectedMarker).attr("stroke", linecolorhilit);
+        line = d3.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolorhilit);
         martip.show(line.datum(), line.node());
         d3.select("a#currentmarker").text("");
         return true;

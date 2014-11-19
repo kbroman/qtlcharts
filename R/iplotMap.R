@@ -84,14 +84,14 @@ function(file, formid="markerinput", inputid="marker", text="Marker name")
 
     cat('\n<div class="searchbox" id="', formid, '">\n',
         file=file, append=TRUE, sep='')
-    cat('    <form name="', formid, '">\n',
+    cat('<form name="', formid, '">\n',
         file=file, append=TRUE, sep='')
-    cat('        <input id="', inputid, '" type="text" value="', text, '" name="', inputid, '"/>\n',
+    cat('<input id="', inputid, '" type="text" value="', text, '" name="', inputid, '"/>\n',
         file=file, append=TRUE, sep='')
-    cat('        <input type="submit" id="submit" value="Submit" />\n',
+    cat('<input type="submit" id="submit" value="Submit" />\n',
         file=file, append=TRUE, sep='')
-    cat('        <a id="current', inputid, '"></a>\n',
+    cat('<a id="current', inputid, '"></a>\n',
         file=file, append=TRUE, sep='')
-    cat('    </form>\n</div>\n\n',
+    cat('</form>\n</div>\n\n',
         file=file, append=TRUE, sep='')
 }

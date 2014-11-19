@@ -9052,18 +9052,6 @@ lod_for_heatmap = function(scantwo_data, left, right) {
 };
 </script>
 
-<p>If you&#39;re using <a href="http://rmarkdown.github.com">R Markdown v2</a> (within
-<a href="http://www.rstudio.com/products/rstudio/">RStudio</a>, or via the
-<a href="http://cran.r-project.org/web/packages/rmarkdown/index.html">rmarkdown</a>
-package), use the argument <code>onefile=FALSE</code> in that last line, like so:</p>
-
-<pre><code class="r">print_qtlcharts_resources(onefile=FALSE)
-</code></pre>
-
-<p>(R Markdown v2 uses <a href="http://johnmacfarlane.net/pandoc/">pandoc</a> which
-will replace any links to code with the actual code, but it seems to
-be garbling part of the <a href="http://d3js.org">D3</a> code.)</p>
-
 <p>We&#39;re now free to begin making charts. With each, you&#39;ll want to use
 <code>print=TRUE</code>. And you <strong>don&#39;t</strong> want to do that within R. You may be
 sitting watching a megabyte of text fly (or crawl) by.</p>
@@ -9101,11 +9089,11 @@ chart_chartOpts = {"chartdivid":"chart"};
 </script>
 
 <div class="searchbox" id="markerinput">
-    <form name="markerinput">
-        <input id="marker" type="text" value="Marker name" name="marker"/>
-        <input type="submit" id="submit" value="Submit" />
-        <a id="currentmarker"></a>
-    </form>
+<form name="markerinput">
+<input id="marker" type="text" value="Marker name" name="marker"/>
+<input type="submit" id="submit" value="Submit" />
+<a id="currentmarker"></a>
+</form>
 </div>
 
 <script type="text/javascript">

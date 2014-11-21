@@ -9,3 +9,20 @@ code {
 a code {
   color: #08c;
 }
+
+table.wide {
+    width: 100%;
+}
+
+table.wide td {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+td.left {
+    text-align: left;
+}
+
+td.right {
+    text-align: right;
+}

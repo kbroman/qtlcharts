@@ -37,14 +37,65 @@ Click on a chart for the corresponding interactive version.
 
 <link href="assets/css/image_table.css" rel="stylesheet" />
 
-|                                                                                                                   |                                                                                                       |
-| :---------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: |
-| [![iplotScanone example](assets/pics/charts/iplotScanone.png)](example/iplotScanone.html)    | [![iplotCorr example](assets/pics/charts/iplotCorr.png)](example/iplotCorr.html) |
-| [![iplotMScanone example](assets/pics/charts/iplotMScanone.png)](example/iplotMScanone.html) | [![iplotMap example](assets/pics/charts/iplotMap.png)](example/iplotMap.html)    |
-| [![iplotCurves example](assets/pics/charts/iplotCurves.png)](example/iplotCurves.html)       | [![iheatmap example](assets/pics/charts/iheatmap.png)](example/iheatmap.html)    |
-| [![iboxplot example](assets/pics/charts/iboxplot.png)](example/iboxplot.html)                | [![iplotRF example](assets/pics/charts/iplotRF.png)](example/iplotRF.html)       |
-| [![iplotScantwo example](assets/pics/charts/iplotScantwo.png)](example/iplotScantwo.html)    |                                                                                  |
-
+<table class="wide">
+<tr>
+  <td class="left">
+    <a href="example/iplotScanone.html">
+        <img src="assets/pics/charts/iplotScanone.png" alt="iplotScanone example" title="iplotScanone example"/>
+    </a>
+  </td>
+  <td class="right">
+    <a href="example/iplotCorr.html">
+        <img src="assets/pics/charts/iplotCorr.png" alt="iplotCorr example" title="iplotCorr example"/>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td class="left">
+    <a href="example/iplotMScanone.html">
+        <img src="assets/pics/charts/iplotMScanone.png" alt="iplotMScanone example" title="iplotMScanone example"/>
+    </a>
+  </td>
+  <td class="right">
+    <a href="example/iplotMap.html">
+        <img src="assets/pics/charts/iplotMap.png" alt="iplotMap example" title="iplotMap example"/>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td class="left">
+    <a href="example/iplotCurves.html">
+        <img src="assets/pics/charts/iplotCurves.png" alt="iplotCurves example" title="iplotCurves example"/>
+    </a>
+  </td>
+  <td class="right">
+    <a href="example/iheatmap.html">
+        <img src="assets/pics/charts/iheatmap.png" alt="iheatmap example" title="iheatmap example"/>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td class="left">
+    <a href="example/iboxplot.html">
+        <img src="assets/pics/charts/iboxplot.png" alt="iboxplot example" title="iboxplot example"/>
+    </a>
+  </td>
+  <td class="right">
+    <a href="example/iplotRF.html">
+        <img src="assets/pics/charts/iplotRF.png" alt="iplotRF example" title="iplotRF example"/>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td class="left">
+    <a href="example/iplotScantwo.html">
+        <img src="assets/pics/charts/iplotScantwo.png" alt="iplotScantwo example" title="iplotScantwo example"/>
+    </a>
+  </td>
+  <td class="right">
+  </td>
+</tr>
+</table>
 
 ---
 

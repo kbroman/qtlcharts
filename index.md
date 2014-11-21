@@ -35,8 +35,6 @@ for the larger visualizations.
 
 Click on a chart for the corresponding interactive version.
 
-<link href="assets/css/image_table.css" rel="stylesheet" />
-
 <table class="wide">
 <tr>
   <td class="left">

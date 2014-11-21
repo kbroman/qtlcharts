@@ -17,12 +17,65 @@ to move.
 
 Click on a panel for a corresponding interactive illustration.
 
-<link href="../assets/css/image_table.css" rel="stylesheet" />
-
-|                                                                                                    |                                                                                            |
-| :------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: |
-| [![dotchart example](../assets/pics/panels/dotchart.png)](../assets/panels/dotchart/test)          | [![cichart example](../assets/pics/panels/cichart.png)](../assets/panels/cichart/test)     |
-| [![scatterplot example](../assets/pics/panels/scatterplot.png)](../assets/panels/scatterplot/test) | [![heatmap example](../assets/pics/panels/heatmap.png)](../assets/panels/heatmap/test)        |
-| [![lodchart example](../assets/pics/panels/lodchart.png)](../assets/panels/lodchart/test)          | [![lodheatmap example](../assets/pics/panels/lodheatmap.png)](../assets/panels/lodheatmap/test) |
-| [![curvechart example](../assets/pics/panels/curvechart.png)](../assets/panels/curvechart/test)    | [![mapchart example](../assets/pics/panels/mapchart.png)](../assets/panels/mapchart/test)     |
-| [![chrheatmap example](../assets/pics/panels/chrheatmap.png)](../assets/panels/chrheatmap/test)    |  [![crosstab example](../assets/pics/panels/crosstab.png)](../assets/panels/crosstab/test) |
+<table class="wide">
+<tr>
+  <td class="left">
+    <a href="../assets/panels/dotchart/test">
+        <img src="../assets/pics/panels/dotchart.png" alt="dotchart example" title="dotchart example"/>
+    </a>
+  </td>
+  <td class="right">
+    <a href="../assets/panels/cichart/test">
+        <img src="../assets/pics/panels/cichart.png" alt="cichart example" title="cichart example"/>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td class="left">
+    <a href="../assets/panels/scatterplot/test">
+        <img src="../assets/pics/panels/scatterplot.png" alt="scatterplot example" title="scatterplot example"/>
+    </a>
+  </td>
+  <td class="right">
+    <a href="../assets/panels/heatmap/test">
+        <img src="../assets/pics/panels/heatmap.png" alt="heatmap example" title="heatmap example"/>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td class="left">
+    <a href="../assets/panels/lodchart/test">
+        <img src="../assets/pics/panels/lodchart.png" alt="lodchart example" title="lodchart example"/>
+    </a>
+  </td>
+  <td class="right">
+    <a href="../assets/panels/lodheatmap/test">
+        <img src="../assets/pics/panels/lodheatmap.png" alt="lodheatmap example" title="lodheatmap example"/>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td class="left">
+    <a href="../assets/panels/curvechart/test">
+        <img src="../assets/pics/panels/curvechart.png" alt="curvechart example" title="curvechart example"/>
+    </a>
+  </td>
+  <td class="right">
+    <a href="../assets/panels/mapchart/test">
+        <img src="../assets/pics/panels/mapchart.png" alt="mapchart example" title="mapchart example"/>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td class="left">
+    <a href="../assets/panels/chrheatmap/test">
+        <img src="../assets/pics/panels/chrheatmap.png" alt="chrheatmap example" title="chrheatmap example"/>
+    </a>
+  </td>
+  <td class="right">
+    <a href="../assets/panels/crosstab/test">
+        <img src="../assets/pics/panels/crosstab.png" alt="crosstab example" title="crosstab example"/>
+    </a>
+  </td>
+</tr>
+</table>

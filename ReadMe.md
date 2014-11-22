@@ -55,6 +55,7 @@ Try the following example, which creates an interactive chart with LOD
 curves linked to estimated QTL effects.
 
 ```S
+library(qtl)
 library(qtlcharts)
 data(hyper)
 hyper <- calc.genoprob(hyper, step=1)

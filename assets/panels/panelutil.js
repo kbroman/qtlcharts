@@ -452,11 +452,19 @@ mean_by_group = function(g, y) {
   n = {};
   for (i in g) {
     if (n[g[i]] != null) {
-      means[g[i]] += y[i];
-      n[g[i]] += 1;
+      if (y[i] != null) {
+        means[g[i]] += y[i];
+      }
+      if (y[i] != null) {
+        n[g[i]] += 1;
+      }
     } else {
-      means[g[i]] = y[i];
-      n[g[i]] = 1;
+      if (y[i] != null) {
+        means[g[i]] = y[i];
+      }
+      if (y[i] != null) {
+        n[g[i]] = 1;
+      }
     }
   }
   for (i in means) {
@@ -473,11 +481,19 @@ sd_by_group = function(g, y) {
   for (i in g) {
     dev = y[i] - means[g[i]];
     if (n[g[i]] != null) {
-      sds[g[i]] += dev * dev;
-      n[g[i]] += 1;
+      if (y[i] != null) {
+        sds[g[i]] += dev * dev;
+      }
+      if (y[i] != null) {
+        n[g[i]] += 1;
+      }
     } else {
-      sds[g[i]] = dev * dev;
-      n[g[i]] = 1;
+      if (y[i] != null) {
+        sds[g[i]] = dev * dev;
+      }
+      if (y[i] != null) {
+        n[g[i]] = 1;
+      }
     }
   }
   for (i in sds) {
@@ -486,27 +502,52 @@ sd_by_group = function(g, y) {
   return sds;
 };
 
-count_groups = function(g) {
+count_groups = function(g, y) {
   var i, n;
   n = {};
   for (i in g) {
     if (n[g[i]] != null) {
-      n[g[i]] += 1;
+      if (y[i] != null) {
+        n[g[i]] += 1;
+      }
     } else {
-      n[g[i]] = 1;
+      if (y[i] != null) {
+        n[g[i]] = 1;
+      }
     }
   }
   return n;
 };
 
 ci_by_group = function(g, y, m) {
-  var ci, i, means, n, sds;
+  var ci, dev, i, means, n, sds;
   if (m == null) {
     m = 2;
   }
-  n = count_groups(g);
   means = mean_by_group(g, y);
-  sds = sd_by_group(g, y);
+  sds = {};
+  n = {};
+  for (i in g) {
+    dev = y[i] - means[g[i]];
+    if (n[g[i]] != null) {
+      if (y[i] != null) {
+        sds[g[i]] += dev * dev;
+      }
+      if (y[i] != null) {
+        n[g[i]] += 1;
+      }
+    } else {
+      if (y[i] != null) {
+        sds[g[i]] = dev * dev;
+      }
+      if (y[i] != null) {
+        n[g[i]] = 1;
+      }
+    }
+  }
+  for (i in sds) {
+    sds[i] = n[i] < 2 ? null : Math.sqrt(sds[i] / (n[i] - 1));
+  }
   ci = {};
   for (i in means) {
     ci[i] = {

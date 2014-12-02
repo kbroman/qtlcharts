@@ -7,7 +7,7 @@ formatAxis = function(d, extra_digits) {
     extra_digits = 0;
   }
   d = d[1] - d[0];
-  ndig = Math.floor(Math.log(d % 10) / Math.log(10));
+  ndig = Math.floor(log10(d));
   if (ndig > 0) {
     ndig = 0;
   }

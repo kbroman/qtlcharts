@@ -16,10 +16,7 @@ unique = (x) ->
 
 # Pull out a variable (column) from a two-dimensional array
 pullVarAsArray = (data, variable) ->
-    v = []
-    for i of data
-        v = v.concat data[i][variable]
-    v
+    (data[i][variable] for i of data)
 
 # reorganize lod/pos by chromosome
 # lodvarname==null    -> case for multiple LOD columns (lodheatmap)

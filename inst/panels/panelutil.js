@@ -32,12 +32,12 @@ unique = function(x) {
 };
 
 pullVarAsArray = function(data, variable) {
-  var i, v;
-  v = [];
+  var i, _results;
+  _results = [];
   for (i in data) {
-    v = v.concat(data[i][variable]);
+    _results.push(data[i][variable]);
   }
-  return v;
+  return _results;
 };
 
 reorgLodData = function(data, lodvarname) {

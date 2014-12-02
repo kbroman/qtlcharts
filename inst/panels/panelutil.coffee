@@ -123,7 +123,9 @@ expand2vector = (input, n) ->
 # median of a vector
 median = (x) ->
     return null if !x?
+    x = (xv for xv in x when xv?)
     n = x.length
+    return null unless n>0
     x.sort((a,b) -> a-b)
     if n % 2 == 1
         return x[(n-1)/2]

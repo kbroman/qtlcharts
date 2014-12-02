@@ -199,11 +199,25 @@ expand2vector = function(input, n) {
 };
 
 median = function(x) {
-  var n;
+  var n, xv;
   if (x == null) {
     return null;
   }
+  x = (function() {
+    var _i, _len, _results;
+    _results = [];
+    for (_i = 0, _len = x.length; _i < _len; _i++) {
+      xv = x[_i];
+      if (xv != null) {
+        _results.push(xv);
+      }
+    }
+    return _results;
+  })();
   n = x.length;
+  if (!(n > 0)) {
+    return null;
+  }
   x.sort(function(a, b) {
     return a - b;
   });

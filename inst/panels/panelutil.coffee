@@ -281,11 +281,11 @@ mean_by_group = (g, y) ->
     n = {}
     for i of g
         if n[g[i]]?
-            means[g[i]] += y[i]
-            n[g[i]] += 1
+            means[g[i]] += y[i] if y[i]?
+            n[g[i]] += 1 if y[i]?
         else
-            means[g[i]] = y[i]
-            n[g[i]] = 1
+            means[g[i]] = y[i] if y[i]?
+            n[g[i]] = 1 if y[i]?
     for i of means
         means[i] /= n[i]
     means
@@ -298,11 +298,11 @@ sd_by_group = (g, y) ->
     for i of g
         dev = (y[i] - means[g[i]])
         if n[g[i]]?
-            sds[g[i]] += (dev*dev)
-            n[g[i]] += 1
+            sds[g[i]] += (dev*dev) if y[i]?
+            n[g[i]] += 1 if y[i]?
         else
-            sds[g[i]] = (dev*dev)
-            n[g[i]] = 1
+            sds[g[i]] = (dev*dev) if y[i]?
+            n[g[i]] = 1 if y[i]?
 
     for i of sds
         sds[i] = if n[i] < 2 then null else Math.sqrt(sds[i]/(n[i]-1))
@@ -310,21 +310,35 @@ sd_by_group = (g, y) ->
     sds
 
 # count groups
-count_groups = (g) ->
+count_groups = (g, y) ->
     n = {}
     for i of g
         if n[g[i]]?
-            n[g[i]] += 1
+            n[g[i]] += 1 if y[i]?
         else
-            n[g[i]] = 1
+            n[g[i]] = 1 if y[i]?
     n
 
 # CI for mean(y) for each possible value of g
 #  (as mean +/- m*SD)
 ci_by_group = (g, y, m=2) ->
-    n = count_groups(g)
     means = mean_by_group(g, y)
-    sds = sd_by_group(g,y)
+
+    # repeat the code for the SD, so I do two passes but not three
+    sds = {}
+    n = {}
+    for i of g
+        dev = (y[i] - means[g[i]])
+        if n[g[i]]?
+            sds[g[i]] += (dev*dev) if y[i]?
+            n[g[i]] += 1 if y[i]?
+        else
+            sds[g[i]] = (dev*dev) if y[i]?
+            n[g[i]] = 1 if y[i]?
+
+    for i of sds
+        sds[i] = if n[i] < 2 then null else Math.sqrt(sds[i]/(n[i]-1))
+
     ci = {}
     for i of means
         ci[i] =

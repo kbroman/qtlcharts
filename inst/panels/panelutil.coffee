@@ -117,6 +117,7 @@ expand2vector = (input, n) ->
     return input unless input? # return null if null
     return input if Array.isArray(input) and input.length >= n
     input = [input] unless Array.isArray(input)
+    input = (input[i % input.length] for i of d3.range(n)) if input.length > 1 and n > 1
     input = (input[0] for i of d3.range(n)) if input.length == 1 and n > 1
     input
 

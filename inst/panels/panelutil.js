@@ -185,6 +185,16 @@ expand2vector = function(input, n) {
   if (!Array.isArray(input)) {
     input = [input];
   }
+  if (input.length > 1 && n > 1) {
+    input = (function() {
+      var _results;
+      _results = [];
+      for (i in d3.range(n)) {
+        _results.push(input[i % input.length]);
+      }
+      return _results;
+    })();
+  }
   if (input.length === 1 && n > 1) {
     input = (function() {
       var _results;

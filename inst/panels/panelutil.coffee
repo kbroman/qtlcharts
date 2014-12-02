@@ -3,7 +3,7 @@
 # determine rounding of axis labels
 formatAxis = (d, extra_digits=0) ->
     d = d[1] - d[0]
-    ndig = Math.floor( Math.log(d % 10) / Math.log(10) )
+    ndig = Math.floor( log10(d) )
     ndig = 0 if ndig > 0
     ndig = Math.abs(ndig) + extra_digits
     d3.format(".#{ndig}f")

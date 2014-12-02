@@ -380,6 +380,21 @@ displayError = function(message, divid) {
 };
 
 sumArray = function(vec) {
+  var x;
+  vec = (function() {
+    var _i, _len, _results;
+    _results = [];
+    for (_i = 0, _len = vec.length; _i < _len; _i++) {
+      x = vec[_i];
+      if (x != null) {
+        _results.push(x);
+      }
+    }
+    return _results;
+  })();
+  if (!(vec.length > 0)) {
+    return null;
+  }
   return vec.reduce(function(a, b) {
     return (a * 1) + (b * 1);
   });

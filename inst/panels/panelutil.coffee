@@ -221,7 +221,10 @@ displayError = (message, divid=null) ->
       .text(message)
 
 # sum values in an array
-sumArray = (vec) -> (vec.reduce (a,b) -> (a*1)+(b*1))
+sumArray = (vec) ->
+    vec = (x for x in vec when x?)
+    return null unless vec.length > 0
+    (vec.reduce (a,b) -> (a*1)+(b*1))
 
 # calculate cross-tabulation
 calc_crosstab = (data) ->

@@ -51,14 +51,8 @@ cichart = () ->
                .attr("height", height+margin.top+margin.bottom)
 
             # expand segcolor and vertsegcolor to length of means
-            if segcolor.length == 1
-                segcolor = (segcolor for i in means)
-            else if segcolor.length < means.length
-                displayError("segcolor.length > 1 but != means.length")
-            if vertsegcolor.length == 1
-                vertsegcolor = (vertsegcolor for i in means)
-            else if vertsegcolor.length < means.length
-                displayError("vertsegcolor.length > 1 but != means.length")
+            segcolor = expand2vector(forceAsArray(segcolor), means.length)
+            vertsegcolor = expand2vector(forceAsArray(vertsegcolor), means.length)
 
             g = svg.select("g")
 

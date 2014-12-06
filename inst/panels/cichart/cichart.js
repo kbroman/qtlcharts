@@ -36,7 +36,7 @@ cichart = function() {
   yscale = d3.scale.linear();
   chart = function(selection) {
     return selection.each(function(data) {
-      var categories, g, gEnter, high, i, low, means, segments, svg, tip, titlegrp, xaxis, xrange, yaxis, yrange, ys;
+      var categories, g, gEnter, high, low, means, segments, svg, tip, titlegrp, xaxis, xrange, yaxis, yrange, ys;
       means = data.means;
       low = data.low;
       high = data.high;
@@ -58,32 +58,8 @@ cichart = function() {
       svg = d3.select(this).selectAll("svg").data([data]);
       gEnter = svg.enter().append("svg").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
-      if (segcolor.length === 1) {
-        segcolor = (function() {
-          var _i, _len, _results;
-          _results = [];
-          for (_i = 0, _len = means.length; _i < _len; _i++) {
-            i = means[_i];
-            _results.push(segcolor);
-          }
-          return _results;
-        })();
-      } else if (segcolor.length < means.length) {
-        displayError("segcolor.length > 1 but != means.length");
-      }
-      if (vertsegcolor.length === 1) {
-        vertsegcolor = (function() {
-          var _i, _len, _results;
-          _results = [];
-          for (_i = 0, _len = means.length; _i < _len; _i++) {
-            i = means[_i];
-            _results.push(vertsegcolor);
-          }
-          return _results;
-        })();
-      } else if (vertsegcolor.length < means.length) {
-        displayError("vertsegcolor.length > 1 but != means.length");
-      }
+      segcolor = expand2vector(forceAsArray(segcolor), means.length);
+      vertsegcolor = expand2vector(forceAsArray(vertsegcolor), means.length);
       g = svg.select("g");
       g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", rectcolor).attr("stroke", "none");
       xrange = [margin.left + margin.inner, margin.left + width - margin.inner];

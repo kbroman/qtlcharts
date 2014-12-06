@@ -133,7 +133,7 @@ cichart = function() {
       }).attr("y2", function(d) {
         return yscale(d);
       }).attr("fill", "none").attr("stroke", function(d, i) {
-        return segcolor[i];
+        return segcolor[i % means.length];
       }).attr("stroke-width", segstrokewidth).on("mouseover.paneltip", tip.show).on("mouseout.paneltip", tip.hide);
       return g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", "none").attr("stroke", "black").attr("stroke-width", "none");
     });

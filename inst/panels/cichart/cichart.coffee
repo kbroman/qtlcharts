@@ -171,7 +171,7 @@ cichart = () ->
                     .attr("y1", (d) -> yscale(d))
                     .attr("y2", (d) -> yscale(d))
                     .attr("fill", "none")
-                    .attr("stroke", (d,i) -> segcolor[i])
+                    .attr("stroke", (d,i) -> segcolor[i % means.length])
                     .attr("stroke-width", segstrokewidth)
                     .on("mouseover.paneltip", tip.show)
                     .on("mouseout.paneltip", tip.hide)

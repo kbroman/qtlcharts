@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Installing R/qtlcharts
+description: Instructions on how to install the R/qtlcharts package.
 ---
 
 R/qtlcharts is a package for [R](http://www.r-project.org). To use it,

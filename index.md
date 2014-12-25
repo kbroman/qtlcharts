@@ -2,6 +2,7 @@
 layout: page
 title: R/qtlcharts
 tagline: Interactive charts for QTL data
+description: R/qtlcharts is an R package to create interactive charts for quantitative trait locus (QTL) mapping data, for use with R/qtl.
 ---
 
 R/qtlcharts is an [R](http://www.r-project.org) package to create

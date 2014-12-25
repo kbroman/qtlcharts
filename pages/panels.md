@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Reusable graphic panels
+description: A set of reusable graphic panels form the basis for the larger visualizations in R/qtlcharts.
 ---
 
 The interactive data visualizations produced by R/qtlcharts are

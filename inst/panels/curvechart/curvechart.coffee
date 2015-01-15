@@ -63,8 +63,10 @@ curvechart = () ->
             if sumArray(ind_data.x.length != ind_data.y.length for ind_data in data) > 0
                 displayError("At least one curve with x.length != y.length")
 
-            xlim = xlim ? d3.extent(pullVarAsArray(data, "x"))
-            ylim = ylim ? d3.extent(pullVarAsArray(data, "y"))
+            xlim = xlim ? matrixExtent(pullVarAsArray(data, "x"))
+            ylim = ylim ? matrixExtent(pullVarAsArray(data, "y"))
+            console.log("xlim: #{xlim}")
+            console.log("ylim: #{ylim}")
 
             # reorganize again
             for i of data

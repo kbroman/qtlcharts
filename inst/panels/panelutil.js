@@ -287,7 +287,7 @@ matrixMin = function(mat) {
   result = mat[0][0];
   for (i in mat) {
     for (j in mat[i]) {
-      if (result > mat[i][j]) {
+      if (result > mat[i][j] && (mat[i][j] != null)) {
         result = mat[i][j];
       }
     }
@@ -300,7 +300,7 @@ matrixMax = function(mat) {
   result = mat[0][0];
   for (i in mat) {
     for (j in mat[i]) {
-      if (result < mat[i][j]) {
+      if (result < mat[i][j] && (mat[i][j] != null)) {
         result = mat[i][j];
       }
     }
@@ -313,7 +313,7 @@ matrixMaxAbs = function(mat) {
   result = Math.abs(mat[0][0]);
   for (i in mat) {
     for (j in mat[i]) {
-      if (result < Math.abs(mat[i][j])) {
+      if (result < Math.abs(mat[i][j]) && (mat[i][j] != null)) {
         result = Math.abs(mat[i][j]);
       }
     }

@@ -112,8 +112,10 @@ curvechart = function() {
       })()) > 0) {
         displayError("At least one curve with x.length != y.length");
       }
-      xlim = xlim != null ? xlim : d3.extent(pullVarAsArray(data, "x"));
-      ylim = ylim != null ? ylim : d3.extent(pullVarAsArray(data, "y"));
+      xlim = xlim != null ? xlim : matrixExtent(pullVarAsArray(data, "x"));
+      ylim = ylim != null ? ylim : matrixExtent(pullVarAsArray(data, "y"));
+      console.log("xlim: " + xlim);
+      console.log("ylim: " + ylim);
       for (i in data) {
         tmp = data[i];
         data[i] = [];

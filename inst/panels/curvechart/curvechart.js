@@ -114,8 +114,6 @@ curvechart = function() {
       }
       xlim = xlim != null ? xlim : matrixExtent(pullVarAsArray(data, "x"));
       ylim = ylim != null ? ylim : matrixExtent(pullVarAsArray(data, "y"));
-      console.log("xlim: " + xlim);
-      console.log("ylim: " + ylim);
       for (i in data) {
         tmp = data[i];
         data[i] = [];

@@ -65,8 +65,6 @@ curvechart = () ->
 
             xlim = xlim ? matrixExtent(pullVarAsArray(data, "x"))
             ylim = ylim ? matrixExtent(pullVarAsArray(data, "y"))
-            console.log("xlim: #{xlim}")
-            console.log("ylim: #{ylim}")
 
             # reorganize again
             for i of data

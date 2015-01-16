@@ -71,7 +71,7 @@ function(x, y, group, indID,
                       panels="scatterplot", charts="iplot", chartdivid=chartdivid,
                       caption=caption, print=print)
 
-    json <- jsonlite::toJSON(list(x=x, y=y, group=group, indID=indID), digits=digits)
+    json <- jsonlite::toJSON(list(x=x, y=y, group=group, indID=indID), digits=digits, na="null")
 
     # add chartdivid to chartOpts
     chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)

@@ -67,5 +67,5 @@ function(cross, chr)
     # chrtype
     chrtype <- lapply(chrtype, jsonlite::unbox)
 
-    jsonlite::toJSON(list(geno=geno, genocat=genocat, chrtype=chrtype))
+    jsonlite::toJSON(list(geno=geno, genocat=genocat, chrtype=chrtype), na="null")
 }

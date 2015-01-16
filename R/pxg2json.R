@@ -64,7 +64,8 @@ function(cross, pheno.col=1, fillgenoArgs=NULL, digits=4)
                                     chrByMarkers=as.list(chrByMarkers),
                                     indID=id,
                                     chrtype=as.list(chrtype),
-                                    genonames=genonames), digits=digits)
+                                    genonames=genonames), digits=digits,
+                               na="null")
 
     strip_whitespace( output )
 }

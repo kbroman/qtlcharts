@@ -1,3 +1,5 @@
 notes.txt
 *.map
 inst/ToDo.html
+.Rhistory
+.RData

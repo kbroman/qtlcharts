@@ -244,10 +244,10 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
         gn1 = []
         gn2 = []
         cicolors_expanded = []
-        for i in [0...ng1]
-            for j in [0...ng2]
-                gn1.push(gnames1[i])
-                gn2.push(gnames2[j])
+        for i in [0...ng2]
+            for j in [0...ng1]
+                gn1.push(gnames1[j])
+                gn2.push(gnames2[i])
                 cicolors_expanded.push(cicolors[i])
 
         for i in [0..1]

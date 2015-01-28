@@ -213,10 +213,10 @@ iplotScantwo = function(scantwo_data, pheno_and_geno, chartOpts) {
     gn1 = [];
     gn2 = [];
     cicolors_expanded = [];
-    for (i = _i = 0; 0 <= ng1 ? _i < ng1 : _i > ng1; i = 0 <= ng1 ? ++_i : --_i) {
-      for (j = _j = 0; 0 <= ng2 ? _j < ng2 : _j > ng2; j = 0 <= ng2 ? ++_j : --_j) {
-        gn1.push(gnames1[i]);
-        gn2.push(gnames2[j]);
+    for (i = _i = 0; 0 <= ng2 ? _i < ng2 : _i > ng2; i = 0 <= ng2 ? ++_i : --_i) {
+      for (j = _j = 0; 0 <= ng1 ? _j < ng1 : _j > ng1; j = 0 <= ng1 ? ++_j : --_j) {
+        gn1.push(gnames1[j]);
+        gn2.push(gnames2[i]);
         cicolors_expanded.push(cicolors[i]);
       }
     }

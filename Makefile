@@ -2,7 +2,7 @@ all: jspanels jspaneltests jscharts json doc inst/ToDo.html vignettes/chartOpts.
 .PHONY: all jspanels jspaneltests jscharts json doc clean
 
 
-PANEL_DIR = inst/panels
+PANEL_DIR = inst/htmlwidgets/lib/d3panels
 LODCHART_DIR = ${PANEL_DIR}/lodchart
 SCATTERPLOT_DIR = ${PANEL_DIR}/scatterplot
 DOTCHART_DIR = ${PANEL_DIR}/dotchart
@@ -23,7 +23,7 @@ HEATMAP_TESTDIR = ${HEATMAP_DIR}/test
 CHRHEATMAP_TESTDIR = ${CHRHEATMAP_DIR}/test
 LODHEATMAP_TESTDIR = ${LODHEATMAP_DIR}/test
 CROSSTAB_TESTDIR = ${CROSSTAB_DIR}/test
-CHART_DIR = inst/charts
+CHART_DIR = inst/htmlwidgets/lib/qtlcharts
 
 COFFEE_ARGS = -c # use -cm for debugging; -c otherwise
 

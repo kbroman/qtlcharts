@@ -1,5 +1,5 @@
-all: jspanels jspaneltests jscharts jswidgets json doc inst/ToDo.html vignettes/chartOpts.Rmd
-.PHONY: all jspanels jspaneltests jscharts json doc clean
+all: jspanels jspaneltests jscharts jswidgets json doc inst/ToDo.html vignettes/chartOpts.Rmd libs
+.PHONY: all jspanels jspaneltests jscharts json doc clean libs d3, jquery, jqueryui, colorbrewer
 
 
 PANEL_DIR = inst/htmlwidgets/lib/d3panels
@@ -99,6 +99,38 @@ jswidgets: ${JSWIDGETS}
 
 ${WIDGET_DIR}/%.js: ${WIDGET_DIR}/%.coffee
 	coffee ${COFFEE_ARGS} -b $^
+
+#------------------------------------------------------------
+# d3, jquery, jquery-ui, colorbrewer
+libs: d3, jquery, jqueryui, colorbrewer
+LIB_DIR = inst/htmlwidgets/lib
+BOWER_DIR = ../libs/bower_components
+
+# d3
+d3: ${LIB_DIR}/d3/d3.min.js ${LIB_DIR}/d3/LICENSE
+${LIB_DIR}/d3/%: ${BOWER_DIR}/d3/%
+	cp $< $@
+
+# colorbrewer
+colorbrewer: ${LIB_DIR}/colorbrewer/LICENSE \
+			 ${LIB_DIR}/colorbrewer/colorbrewer.js \
+			 ${LIB_DIR}/colorbrewer/colorbrewer.css
+${LIB_DIR}/colorbrewer/%: ${BOWER_DIR}/colorbrewer/%
+	cp $< $@
+
+# jquery
+jquery: ${LIB_DIR}/jquery/MIT-LICENSE.txt \
+		${LIB_DIR}/jquery/dist/jquery.min.js
+${LIB_DIR}/jquery/%: ${BOWER_DIR}/jquery/%
+	cp $< $@
+
+# jquery-ui
+jqueryui: ${LIB_DIR}/jquery-ui/LICENSE.txt \
+		  ${LIB_DIR}/jquery-ui/jquery-ui.min.js \
+		  ${LIB_DIR}/jquery-ui/themes/smoothness
+${LIB_DIR}/jquery-ui/%: ${BOWER_DIR}/jquery-ui/%
+	cp $< $@
+
 
 #------------------------------------------------------------
 

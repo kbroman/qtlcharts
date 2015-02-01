@@ -89,20 +89,20 @@ def load_multiversions (filename)
 
     multiver_comments
 end
-        
+
 
 # pull off the first part of the coffeescript file name
 def get_filestem (csfile)
     return $1 if csfile =~ /^(.+)\.coffee$/
     print "unexpected name for coffeescript file: #{csfile}"
     csfile
-end    
+end
 
 # if filestem like func_opt, return "opt"
 def get_func_name (filestem)
     return $1 if filestem =~ /^(.+)_/
     filestem
-end    
+end
 
 def write_chartOpts (ofile, chartOpts, mvcomments)
 
@@ -134,7 +134,7 @@ end
 ### now to the real work
 ##############################
 # directory and file names
-chart_dir = "inst/charts"
+chart_dir = "inst/htmlwidgets/lib/qtlcharts"
 ifile = "vignettes/chartOpts/chartOpts_source.Rmd"
 ofile = "vignettes/chartOpts.Rmd"
 mvfile = "vignettes/chartOpts/multiversions.csv"

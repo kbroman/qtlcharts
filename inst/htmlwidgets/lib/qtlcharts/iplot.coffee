@@ -1,7 +1,7 @@
 # iplot: interactive scatterplot
 # Karl W Broman
 
-iplot = (data, chartOpts) ->
+iplot = (el, data, chartOpts) ->
 
     # chartOpts start
     height = chartOpts?.height ? 500 # height of chart in pixels
@@ -28,8 +28,11 @@ iplot = (data, chartOpts) ->
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
-    mychart = scatterplot().height(height)
-                           .width(width)
+    console.log("width: #{width}")
+    console.log("height: #{height}")
+
+    mychart = scatterplot().height(height - margin.top - margin.bottom)
+                           .width(width - margin.left - margin.right)
                            .margin(margin)
                            .axispos(axispos)
                            .titlepos(titlepos)
@@ -53,7 +56,7 @@ iplot = (data, chartOpts) ->
                            .yvar('y')
                            .dataByInd(false)
 
-    d3.select("div##{chartdivid}")
+    d3.select(el).select("svg")
       .datum({data:{x:data.x, y:data.y}, group:data.group, indID:data.indID})
       .call(mychart)
 

@@ -1,4 +1,4 @@
-all: jspanels jspaneltests jscharts json doc inst/ToDo.html vignettes/chartOpts.Rmd
+all: jspanels jspaneltests jscharts jswidgets json doc inst/ToDo.html vignettes/chartOpts.Rmd
 .PHONY: all jspanels jspaneltests jscharts json doc clean
 
 
@@ -24,6 +24,7 @@ CHRHEATMAP_TESTDIR = ${CHRHEATMAP_DIR}/test
 LODHEATMAP_TESTDIR = ${LODHEATMAP_DIR}/test
 CROSSTAB_TESTDIR = ${CROSSTAB_DIR}/test
 CHART_DIR = inst/htmlwidgets/lib/qtlcharts
+WIDGET_DIR = inst/htmlwidgets
 
 COFFEE_ARGS = -c # use -cm for debugging; -c otherwise
 
@@ -77,7 +78,7 @@ ${PANEL_DIR}/%/test/data.json: ${PANEL_DIR}/%/test/create_test_data.R
 
 #------------------------------------------------------------
 
-# javascript for the real charts
+# javascript for the chart functions
 JSCHARTS = ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js \
 		   ${CHART_DIR}/iplotScanone_ci.js ${CHART_DIR}/iplotPXG.js \
 		   ${CHART_DIR}/iplotCorr.js ${CHART_DIR}/iboxplot.js \
@@ -88,6 +89,15 @@ JSCHARTS = ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js \
 jscharts: ${JSCHARTS}
 
 ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
+	coffee ${COFFEE_ARGS} -b $^
+
+#------------------------------------------------------------
+
+# javascript for the widgets called from R
+JSWIDGETS = ${WIDGET_DIR}/iplot.js
+jswidgets: ${JSWIDGETS}
+
+${WIDGET_DIR}/%.js: ${WIDGET_DIR}/%.coffee
 	coffee ${COFFEE_ARGS} -b $^
 
 #------------------------------------------------------------

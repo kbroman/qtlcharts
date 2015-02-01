@@ -9,23 +9,10 @@
 #' @param y Numeric vector of y values
 #' @param group Optional vector of categories for coloring the points
 #' @param indID Optional vector of character strings, shown with tool tips
-#' @param file Optional character vector with file to contain the
-#'   output.
-#' @param onefile If TRUE, have output file contain all necessary
-#'   javascript/css code.
-#' @param openfile If TRUE, open the plot in the default web browser.
-#' @param title Character string with title for plot.
-#' @param chartdivid Character string for id of div to hold the chart
-#' @param caption Character vector with text for a caption (to be
-#'   combined to one string with \code{\link[base]{paste}}, with
-#'   \code{collapse=""})
 #' @param chartOpts A list of options for configuring the chart.  Each
-#'   element must be named using the corresponding option. See details.
-#' @param digits Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.
-#' @param print If TRUE, print the output, rather than writing it to a file,
-#' for use within an R Markdown document.
+#'   element must be named using the corresponding option.
 #'
-#' @return Character string with the name of the file created.
+#' @return None.
 #'
 #' @keywords hplot
 #' @seealso \code{\link{iplotCorr}}, \code{\link{iplotCurves}}
@@ -36,19 +23,11 @@
 #' y <- x*grp + rnorm(100)
 #' \donttest{
 #' # open iplot in web browser
-#' iplot(x, y, grp, title="iplot example")}
-#' \dontshow{
-#' # save to temporary file but don't open
-#' iplot(x, y, grp, title="iplot example",
-#'       openfile=FALSE)}
+#' iplot(x, y, grp)}
 #'
 #' @export
 iplot <-
-function(x, y, group, indID,
-         file, onefile=FALSE, openfile=TRUE, title="",
-         chartdivid='chart',
-         caption, chartOpts=NULL,
-         digits=4, print=FALSE)
+function(x, y, group, indID, chartOpts=NULL)
 {
     if(length(x) != length(y))
         stop("length(x) != length(y)")
@@ -62,27 +41,21 @@ function(x, y, group, indID,
         stop("length(indID) != length(x)")
     indID <- as.character(indID)
 
-    if(missing(file)) file <- NULL
+    x <- list(data = data.frame(x=x, y=y, group=group, indID=indID),
+              chartOpts=chartOpts)
 
-    if(missing(caption) || is.null(caption))
-        caption <- 'Hover over a point to view tool tip with identifier.'
+    htmlwidgets::createWidget("iplot", x,
+                              width=chartOpts$width,
+                              height=chartOpts$height,
+                              package="qtlcharts")
+}
 
-    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "colorbrewer", "panelutil"),
-                      panels="scatterplot", charts="iplot", chartdivid=chartdivid,
-                      caption=caption, print=print)
-
-    json <- jsonlite::toJSON(list(x=x, y=y, group=group, indID=indID), digits=digits, na="null")
-
-    # add chartdivid to chartOpts
-    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
-
-    append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
-    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-    append_html_jscode(file, paste0('iplot(', chartdivid, '_data,', chartdivid, '_chartOpts);'))
-
-    append_html_bottom(file, print=print)
-
-    if(openfile && !print) utils::browseURL(file)
-
-    invisible(file)
+#' @export
+iplot_output <- function(outputId, width="100%", height="580") {
+    htmlwidgets::shinyWidgetOutput(outputId, "iplot", width, height, package="qtlcharts")
+}
+#' @export
+iplot_render <- function(expr, env=parent.frame(), quoted=FALSE) {
+    if(!quoted) { expr <- substitute(expr) } # force quoted
+    htmlwidgets::shinyRenderWidget(expr, iplot_output, env, quoted=TRUE)
 }

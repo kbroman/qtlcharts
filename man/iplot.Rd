@@ -4,9 +4,7 @@
 \alias{iplot}
 \title{Interactive scatterplot}
 \usage{
-iplot(x, y, group, indID, file, onefile = FALSE, openfile = TRUE,
-  title = "", chartdivid = "chart", caption, chartOpts = NULL,
-  digits = 4, print = FALSE)
+iplot(x, y, group, indID, chartOpts = NULL)
 }
 \arguments{
 \item{x}{Numeric vector of x values}
@@ -17,32 +15,11 @@ iplot(x, y, group, indID, file, onefile = FALSE, openfile = TRUE,
 
 \item{indID}{Optional vector of character strings, shown with tool tips}
 
-\item{file}{Optional character vector with file to contain the
-output.}
-
-\item{onefile}{If TRUE, have output file contain all necessary
-javascript/css code.}
-
-\item{openfile}{If TRUE, open the plot in the default web browser.}
-
-\item{title}{Character string with title for plot.}
-
-\item{chartdivid}{Character string for id of div to hold the chart}
-
-\item{caption}{Character vector with text for a caption (to be
-combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=""})}
-
 \item{chartOpts}{A list of options for configuring the chart.  Each
-element must be named using the corresponding option. See details.}
-
-\item{digits}{Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.}
-
-\item{print}{If TRUE, print the output, rather than writing it to a file,
-for use within an R Markdown document.}
+  element must be named using the corresponding option.}
 }
 \value{
-Character string with the name of the file created.
+None.
 }
 \description{
 Creates an interactive scatterplot.
@@ -53,11 +30,7 @@ grp <- sample(1:3, 100, replace=TRUE)
 y <- x*grp + rnorm(100)
 \donttest{
 # open iplot in web browser
-iplot(x, y, grp, title="iplot example")}
-\dontshow{
-# save to temporary file but don't open
-iplot(x, y, grp, title="iplot example",
-      openfile=FALSE)}
+iplot(x, y, grp)}
 }
 \seealso{
 \code{\link{iplotCorr}}, \code{\link{iplotCurves}}

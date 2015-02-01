@@ -46,8 +46,6 @@ iplot = function(el, data, chartOpts) {
     gap: 10
   };
   chartdivid = (_ref21 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref21 : 'chart';
-  console.log("width: " + width);
-  console.log("height: " + height);
   mychart = scatterplot().height(height - margin.top - margin.bottom).width(width - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).xlab(xlab).ylab(ylab).title(title).ylim(ylim).xlim(xlim).xticks(xticks).nxticks(nxticks).yticks(yticks).nyticks(nyticks).rectcolor(rectcolor).pointcolor(pointcolor).pointsize(pointsize).pointstroke(pointstroke).rotate_ylab(rotate_ylab).xNA(xNA).yNA(yNA).xvar('x').yvar('y').dataByInd(false);
   d3.select(el).select("svg").datum({
     data: {

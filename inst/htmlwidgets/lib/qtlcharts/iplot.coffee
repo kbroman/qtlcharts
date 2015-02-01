@@ -28,9 +28,6 @@ iplot = (el, data, chartOpts) ->
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
-    console.log("width: #{width}")
-    console.log("height: #{height}")
-
     mychart = scatterplot().height(height - margin.top - margin.bottom)
                            .width(width - margin.left - margin.right)
                            .margin(margin)

@@ -29,7 +29,6 @@ x <- rnorm(100)
 grp <- sample(1:3, 100, replace=TRUE)
 y <- x*grp + rnorm(100)
 \donttest{
-# open iplot in web browser
 iplot(x, y, grp)}
 }
 \seealso{

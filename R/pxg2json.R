@@ -1,3 +1,70 @@
+## convert_pxg
+## Karl W Broman
+# Convert genotypes and a single phenotype to a list
+#
+# Convert the genotype and phenotype data in a cross to a list
+# for use with interative graphics, such as \code{\link{iplotScanone}}.
+# (Largely for internal use.)
+#
+# @param cross An object of class \code{"cross"}; see
+#   \code{\link[qtl]{read.cross}}.
+# @param pheno.col Phenotype column
+# @param fillgenoArgs List of named arguments to pass to
+#   \code{\link[qtl]{fill.geno}}, if needed.
+#
+# @return The data converted to a list
+#
+# @details Genotypes are encoded as integers; negative integers are used to indicate imputed values.
+#
+# @keywords interface
+# @seealso \code{\link{scanone2json}}
+#
+# @examples
+# library(qtl)
+# data(hyper)
+# pxg_data <- convert_pxg(hyper)
+convert_pxg <-
+function(cross, pheno.col=1, fillgenoArgs=NULL, digits=4)
+{
+    geno_filled <- getImputedGenotypes(cross, fillgenoArgs=fillgenoArgs, imputed_negative=TRUE)
+
+    phe <- qtl::pull.pheno(cross, pheno.col)
+    if(!is.numeric(phe))
+        stop("phenotype ", pheno.col, " is not numeric: ", paste(head(phe), collapse=" "))
+
+    # marker names
+    markers <- qtl::markernames(cross)
+
+    # chr types
+    sexpgm <- qtl::getsex(cross)
+    chrtype <- vapply(cross$geno, class, "")
+    names(chrtype) <- qtl::chrnames(cross)
+    uchrtype <- unique(chrtype)
+
+    # genotype names by chr types
+    genonames <- vector("list", length(uchrtype))
+    names(genonames) <- uchrtype
+    for(i in uchrtype)
+        genonames[[i]] <- qtl::getgenonames(class(cross)[1], i, "full", sexpgm, attributes(cross))
+
+    id <- qtl::getid(cross)
+    if(is.null(id)) id <- 1:qtl::nind(cross)
+    id <- as.character(id)
+
+    dimnames(geno_filled) <- NULL
+
+    chrByMarkers <- rep(qtl::chrnames(cross), qtl::nmar(cross))
+    names(chrByMarkers) <- markers
+
+    list(geno=t(geno_filled),
+         pheno=phe,
+         chrByMarkers=as.list(chrByMarkers),
+         indID=id,
+         chrtype=as.list(chrtype),
+         genonames=genonames)
+}
+
+
 ## pxg2json
 ## Karl W Broman
 

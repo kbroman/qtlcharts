@@ -4,10 +4,8 @@
 \alias{iplotPXG}
 \title{Interactive phenotype x genotype plot}
 \usage{
-iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
-  openfile = TRUE, title = "", chartdivid = "chart", caption,
-  chartOpts = list(title = marker[1]), fillgenoArgs = NULL, digits = 4,
-  print = FALSE)
+iplotPXG(cross, marker, pheno.col = 1, chartOpts = NULL,
+  fillgenoArgs = NULL)
 }
 \arguments{
 \item{cross}{Object of class \code{"cross"}, see
@@ -17,35 +15,14 @@ iplotPXG(cross, marker, pheno.col = 1, file, onefile = FALSE,
 
 \item{pheno.col}{Phenotype column in cross object.}
 
-\item{file}{Optional character vector with file to contain the
-output.}
-
-\item{onefile}{If TRUE, have output file contain all necessary
-javascript/css code.}
-
-\item{openfile}{If TRUE, open the plot in the default web browser.}
-
-\item{title}{Character string with title for plot.}
-
-\item{chartdivid}{Character string for id of div to hold the chart}
-
-\item{caption}{Character vector with text for a caption (to be
-combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=""})}
-
 \item{chartOpts}{A list of options for configuring the chart.  Each
 element must be named using the corresponding option. See details.}
 
 \item{fillgenoArgs}{List of named arguments to pass to
-\code{\link[qtl]{fill.geno}}, if needed.}
-
-\item{digits}{Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.}
-
-\item{print}{If TRUE, print the output, rather than writing it to a file,
-for use within an R Markdown document.}
+  \code{\link[qtl]{fill.geno}}, if needed.}
 }
 \value{
-Character string with the name of the file created.
+None.
 }
 \description{
 Creates an interactive graph of phenotypes vs genotypes at a marker.
@@ -65,12 +42,7 @@ library(qtl)
 data(hyper)
 marker <- sample(markernames(hyper), 1)
 \donttest{
-# open iplotPXG in web browser
-iplotPXG(hyper, marker, title="iplotPXG example")}
-\dontshow{
-# save to temporary file but don't open
-iplotPXG(hyper, marker, title="iplotPXG example",
-         openfile=FALSE)}
+iplotPXG(hyper, marker, chartOpts=list(width=500))}
 }
 \seealso{
 \code{\link{iplotScanone}}, \code{\link{iplotMap}}

@@ -1,13 +1,13 @@
 # iplotPXG: (just barely) interactive plot of phenotype vs genotype
 # Karl W Broman
 
-iplotPXG = (data, chartOpts) ->
+iplotPXG = (el, data, chartOpts) ->
 
     gen = (Math.abs(x) for x in data.geno[0])
     inferred = (x < 0 for x in data.geno[0])
     phe = data.pheno
     gnames = (data.genonames[y] for y of data.genonames)[0]
-  
+
     # chartOpts start
     height = chartOpts?.height ? 450 # height of chart in pixels
     width = chartOpts?.width ? 300 # width of chart in pixels
@@ -28,9 +28,9 @@ iplotPXG = (data, chartOpts) ->
     yNA = chartOpts?.yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values (handle=T/F, force=T/F, width, gap)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
-  
-    mychart = dotchart().height(height)
-                        .width(width)
+
+    mychart = dotchart().height(height - margin.top - margin.bottom)
+                        .width(width - margin.left - margin.right)
                         .margin(margin)
                         .xcategories([1..gnames.length])
                         .xcatlabels(gnames)
@@ -51,11 +51,11 @@ iplotPXG = (data, chartOpts) ->
                         .pointsize(pointsize)
                         .pointstroke(pointstroke)
                         .yNA(yNA)
-  
-    d3.select("div##{chartdivid}")
+
+    d3.select(el).select("svg")
       .datum({geno:gen, pheno:phe, indID:data.indID})
       .call(mychart)
-  
+
     # animate points at markers on click
     mychart.pointsSelect()
                 .attr("fill", (d,i) ->

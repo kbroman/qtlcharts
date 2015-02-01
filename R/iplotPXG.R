@@ -63,7 +63,7 @@ function(cross, marker, pheno.col=1,
 }
 
 #' @export
-iplotPXG_output <- function(outputId, width="100%", height="580") {
+iplotPXG_output <- function(outputId, width="100%", height="530") {
     htmlwidgets::shinyWidgetOutput(outputId, "iplotPXG", width, height, package="qtlcharts")
 }
 #' @export

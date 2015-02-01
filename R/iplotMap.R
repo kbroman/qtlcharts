@@ -9,23 +9,10 @@
 #'   being a vector of marker positions.
 #' @param shift If TRUE, shift each chromsome so that the initial marker
 #'   is at position 0.
-#' @param file Optional character vector with file to contain the
-#'   output.
-#' @param onefile If TRUE, have output file contain all necessary
-#'   javascript/css code.
-#' @param openfile If TRUE, open the plot in the default web browser.
-#' @param title Character string with title for plot.
-#' @param chartdivid Character string for id of div to hold the chart
-#' @param caption Character vector with text for a caption (to be
-#'   combined to one string with \code{\link[base]{paste}}, with
-#'   \code{collapse=""})
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option. See details.
-#' @param digits Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.
-#' @param print If TRUE, print the output, rather than writing it to a file,
-#' for use within an R Markdown document.
 #'
-#' @return Character string with the name of the file created.
+#' @return None.
 #'
 #' @keywords hplot
 #' @seealso \code{\link{iplotScanone}}, \code{\link{iplotPXG}}
@@ -35,47 +22,35 @@
 #' data(hyper)
 #' map <- pull.map(hyper)
 #' \donttest{
-#' # open iplotMap in web browser
-#' iplotMap(map, shift=TRUE, title="iplotMap example")}
-#' \dontshow{
-#' # save to temporary file but don't open
-#' iplotMap(map, shift=TRUE, title="iplotMap example",
-#'          openfile=FALSE)}
+#' iplotMap(map, shift=TRUE)}
 #'
 #' @export
 iplotMap <-
-function(map, shift=FALSE, file, onefile=FALSE, openfile=TRUE, title="",
-         chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
+function(map, shift=FALSE, chartOpts=NULL)
 {
     if("cross" %in% class(map)) map <- qtl::pull.map(map)
 
-    if(missing(file)) file <- NULL
-
-    if(missing(caption) || is.null(caption))
-        caption <- c('Hover over marker positions to view the marker names and positions. ',
-                     'Enter a marker name in the search box below, to have it highlighted.')
-
-    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil", "jquery"),
-                      panels="mapchart", charts="iplotMap", chartdivid=chartdivid,
-                      caption=caption, print=print)
-
     if(shift) map <- qtl::shiftmap(map)
-    json <- map2json(map, digits=digits)
+    map_list <- convert_map(map)
+    x <- list(data=map_list, chartOpts=chartOpts)
 
-    # add chartdivid to chartOpts
-    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
+    htmlwidgets::createWidget("iplotMap", x,
+                              width=chartOpts$width,
+                              height=chartOpts$height,
+                              package="qtlcharts")
+}
 
-    append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
-    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-    add_searchbox(file, "markerinput", "marker", "Marker name")
-    append_html_jscode(file, paste0('iplotMap(', chartdivid, '_data,',
-                                    chartdivid, '_chartOpts);'))
+# convert map to special list
+convert_map <-
+function(map) {
+    chrnames <- names(map)
+    # force use of hash with single numeric values
+    map <- lapply(map, function(a) lapply(a, jsonlite::unbox))
 
-    append_html_bottom(file, print=print)
+    mnames <- unlist(lapply(map, names))
+    names(mnames) <- NULL
 
-    if(openfile && !print) utils::browseURL(file)
-
-    invisible(file)
+    list(chr=chrnames, map=map, markernames=mnames)
 }
 
 add_searchbox <-

@@ -1,7 +1,7 @@
 # iplotMap: interactive plot of a genetic marker map
 # Karl W Broman
 
-iplotMap = (data, chartOpts) ->
+iplotMap = (el, data, chartOpts) ->
 
     # chartOpts start
     width = chartOpts?.width ? 1000 # width of chart in pixels
@@ -23,8 +23,8 @@ iplotMap = (data, chartOpts) ->
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
-    mychart = mapchart().height(height)
-                        .width(width)
+    mychart = mapchart().height(height-margin.top-margin.bottom*2) # double bottom margin, for search box
+                        .width(width-margin.left-margin.right)
                         .margin(margin)
                         .axispos(axispos)
                         .titlepos(titlepos)
@@ -40,9 +40,9 @@ iplotMap = (data, chartOpts) ->
                         .xlab(xlab)
                         .ylab(ylab)
 
-    d3.select("div##{chartdivid}")
-      .datum(data)
-      .call(mychart)
+    svg = d3.select(el).select("svg")
+            .datum(data)
+            .call(mychart)
 
     ##############################
     # code for marker search box for iplotMap
@@ -62,7 +62,9 @@ iplotMap = (data, chartOpts) ->
                   "#{d} (#{pos})")
                .direction('e')
                .offset([0,10])
-    d3.select("div##{chartdivid} svg").call(martip)
+    svg.call(martip)
+
+    add_search_box(el, -margin.bottom)
 
     clean_marker_name = (markername) ->
         markername.replace(".", "\\.")
@@ -126,3 +128,25 @@ iplotMap = (data, chartOpts) ->
     # on hover, remove tool tip from marker search
     markerSelect = mychart.markerSelect()
     markerSelect.on("mouseover", martip.hide)
+
+
+add_search_box = (el, top_margin) ->
+    console.log("top_margin: #{top_margin}")
+    form = d3.select(el)
+             .append("div")
+                 .attr("class", "searchbox")
+                 .attr("id", "markerinput")
+                 .style("margin-top", "#{top_margin}px")
+             .append("form")
+                 .attr("name", "markerinput")
+    form.append("input")
+            .attr("id", "marker")
+            .attr("type", "text")
+            .attr("value", "Marker name")
+            .attr("name", "marker")
+    form.append("input")
+            .attr("type", "submit")
+            .attr("id", "submit")
+            .attr("value", "Submit")
+    form.append("a")
+            .attr("id", "currentmarker")

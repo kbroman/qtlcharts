@@ -34,3 +34,15 @@ function(map, digits=4) {
 
     strip_whitespace( jsonlite::toJSON(list(chr=chrnames, map=map, markernames=mnames), digits=digits, na="null") )
 }
+
+convert_map <-
+function(map) {
+    chrnames <- names(map)
+    # force use of hash with single numeric values
+    map <- lapply(map, function(a) lapply(a, jsonlite::unbox))
+
+    mnames <- unlist(lapply(map, names))
+    names(mnames) <- NULL
+
+    list(chr=chrnames, map=map, markernames=mnames)
+}

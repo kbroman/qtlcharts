@@ -102,35 +102,46 @@ ${WIDGET_DIR}/%.js: ${WIDGET_DIR}/%.coffee
 
 #------------------------------------------------------------
 # d3, jquery, jquery-ui, colorbrewer
-libs: d3, jquery, jqueryui, colorbrewer
+libs: d3 jquery jqueryui colorbrewer d3-tip
 LIB_DIR = inst/htmlwidgets/lib
 BOWER_DIR = ../libs/bower_components
 
 # d3
-d3: ${LIB_DIR}/d3/d3.min.js ${LIB_DIR}/d3/LICENSE
+d3: ${LIB_DIR}/d3/d3.min.js ${LIB_DIR}/d3/LICENSE ${LIB_DIR}/d3/bower.json
 ${LIB_DIR}/d3/%: ${BOWER_DIR}/d3/%
 	cp $< $@
 
 # colorbrewer
 colorbrewer: ${LIB_DIR}/colorbrewer/LICENSE \
 			 ${LIB_DIR}/colorbrewer/colorbrewer.js \
-			 ${LIB_DIR}/colorbrewer/colorbrewer.css
+			 ${LIB_DIR}/colorbrewer/colorbrewer.css \
+			 ${LIB_DIR}/colorbrewer/bower.json
 ${LIB_DIR}/colorbrewer/%: ${BOWER_DIR}/colorbrewer/%
 	cp $< $@
 
 # jquery
 jquery: ${LIB_DIR}/jquery/MIT-LICENSE.txt \
-		${LIB_DIR}/jquery/dist/jquery.min.js
+		${LIB_DIR}/jquery/dist/jquery.min.js \
+		${LIB_DIR}/jquery/bower.json
 ${LIB_DIR}/jquery/%: ${BOWER_DIR}/jquery/%
 	cp $< $@
 
 # jquery-ui
-jqueryui: ${LIB_DIR}/jquery-ui/LICENSE.txt \
-		  ${LIB_DIR}/jquery-ui/jquery-ui.min.js \
-		  ${LIB_DIR}/jquery-ui/themes/smoothness
-${LIB_DIR}/jquery-ui/%: ${BOWER_DIR}/jquery-ui/%
+jqueryui: ${LIB_DIR}/jquery-ui/jquery-ui.min.js
+${LIB_DIR}/jquery-ui/jquery-ui.min.js: ${BOWER_DIR}/jquery-ui/jquery-ui.min.js
 	cp $< $@
+	cp $(<D)/LICENSE.txt $(@D)/
+	cp $(<D)/bower.json $(@D)/
+	cp $(<D)/themes/smoothness/*.* $(@D)/themes/smoothness/
+	cp $(<D)/themes/smoothness/images/*.* $(@D)/themes/smoothness/images/
 
+# d3-tip
+d3-tip: ${LIB_DIR}/d3-tip/bower.json \
+		${LIB_DIR}/d3-tip/d3-tip.min.css \
+		${LIB_DIR}/d3-tip/d3-tip.min.js \
+		${LIB_DIR}/d3-tip/LICENSE
+${LIB_DIR}/d3-tip/%: ${BOWER_DIR}/../d3-tip/%
+	cp $< $@
 
 #------------------------------------------------------------
 

@@ -7,9 +7,11 @@ HTMLWidgets.widget({
     type: "output",
 
     initialize: (el, width, height) ->
+        add_search_box(el)
+
         d3.select(el).append("svg")
           .attr("width", width)
-          .attr("height", height)
+          .attr("height", height-19) # adjustment for marker search box
           .attr("class", "qtlcharts")
 
     renderValue: (el, x) ->

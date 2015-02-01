@@ -31,7 +31,7 @@ iplotMap = function(el, data, chartOpts) {
   xlab = (_ref14 = chartOpts != null ? chartOpts.xlab : void 0) != null ? _ref14 : "Chromosome";
   ylab = (_ref15 = chartOpts != null ? chartOpts.ylab : void 0) != null ? _ref15 : "Position (cM)";
   chartdivid = (_ref16 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref16 : 'chart';
-  mychart = mapchart().height(height - margin.top - margin.bottom * 2).width(width - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).ylim(ylim).yticks(yticks).nyticks(nyticks).tickwidth(tickwidth).rectcolor(rectcolor).linecolor(linecolor).linecolorhilit(linecolorhilit).linewidth(linewidth).title(title).xlab(xlab).ylab(ylab);
+  mychart = mapchart().height(height - margin.top - margin.bottom).width(width - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).ylim(ylim).yticks(yticks).nyticks(nyticks).tickwidth(tickwidth).rectcolor(rectcolor).linecolor(linecolor).linecolorhilit(linecolorhilit).linewidth(linewidth).title(title).xlab(xlab).ylab(ylab);
   svg = d3.select(el).select("svg").datum(data).call(mychart);
   markerpos = {};
   _ref17 = data.chr;
@@ -50,7 +50,6 @@ iplotMap = function(el, data, chartOpts) {
     return d + " (" + pos + ")";
   }).direction('e').offset([0, 10]);
   svg.call(martip);
-  add_search_box(el, -margin.bottom);
   clean_marker_name = function(markername) {
     return markername.replace(".", "\\.").replace("#", "\\#").replace("/", "\\/");
   };
@@ -108,10 +107,9 @@ iplotMap = function(el, data, chartOpts) {
   return markerSelect.on("mouseover", martip.hide);
 };
 
-add_search_box = function(el, top_margin) {
+add_search_box = function(el) {
   var form;
-  console.log("top_margin: " + top_margin);
-  form = d3.select(el).append("div").attr("class", "searchbox").attr("id", "markerinput").style("margin-top", top_margin + "px").append("form").attr("name", "markerinput");
+  form = d3.select(el).append("div").attr("class", "searchbox").attr("id", "markerinput").append("form").attr("name", "markerinput");
   form.append("input").attr("id", "marker").attr("type", "text").attr("value", "Marker name").attr("name", "marker");
   form.append("input").attr("type", "submit").attr("id", "submit").attr("value", "Submit");
   return form.append("a").attr("id", "currentmarker");

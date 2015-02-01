@@ -23,7 +23,7 @@ iplotMap = (el, data, chartOpts) ->
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
-    mychart = mapchart().height(height-margin.top-margin.bottom*2) # double bottom margin, for search box
+    mychart = mapchart().height(height-margin.top-margin.bottom)
                         .width(width-margin.left-margin.right)
                         .margin(margin)
                         .axispos(axispos)
@@ -63,8 +63,6 @@ iplotMap = (el, data, chartOpts) ->
                .direction('e')
                .offset([0,10])
     svg.call(martip)
-
-    add_search_box(el, -margin.bottom)
 
     clean_marker_name = (markername) ->
         markername.replace(".", "\\.")
@@ -129,14 +127,11 @@ iplotMap = (el, data, chartOpts) ->
     markerSelect = mychart.markerSelect()
     markerSelect.on("mouseover", martip.hide)
 
-
-add_search_box = (el, top_margin) ->
-    console.log("top_margin: #{top_margin}")
+add_search_box = (el) ->
     form = d3.select(el)
              .append("div")
                  .attr("class", "searchbox")
                  .attr("id", "markerinput")
-                 .style("margin-top", "#{top_margin}px")
              .append("form")
                  .attr("name", "markerinput")
     form.append("input")

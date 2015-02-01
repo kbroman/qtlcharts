@@ -3,7 +3,8 @@ HTMLWidgets.widget({
   name: "iplotMap",
   type: "output",
   initialize: function(el, width, height) {
-    return d3.select(el).append("svg").attr("width", width).attr("height", height).attr("class", "qtlcharts");
+    add_search_box(el);
+    return d3.select(el).append("svg").attr("width", width).attr("height", height - 19).attr("class", "qtlcharts");
   },
   renderValue: function(el, x) {
     var chartOpts, svg, _ref, _ref1, _ref2;

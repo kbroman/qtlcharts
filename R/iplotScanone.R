@@ -89,67 +89,37 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 
     scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2), drop=FALSE]
     colnames(scanoneOutput)[3] <- 'lod'
+    scanone_list <- convert_scanone(scanoneOutput)
 
-    if(missing(cross) || is.null(cross))
-        return(iplotScanone_noeff(scanoneOutput=scanoneOutput,
-                                  chartOpts=chartOpts))
+    if(missing(cross) || is.null(cross)) { # no effect plot
+        pxgtype <- "none"
+        pxg_list <- NULL
+    } else { # include QTL effects
+        if(length(pheno.col) > 1) {
+            pheno.col <- pheno.col[1]
+            warning("pheno.col should have length 1; using first value")
+        }
 
-    if(length(pheno.col) > 1) {
-        pheno.col <- pheno.col[1]
-        warning("pheno.col should have length 1; using first value")
+        if(class(cross)[2] != "cross")
+            stop('"cross" should have class "cross".')
+
+        pxg_list <- convert_pxg(cross, pheno.col, fillgenoArgs=fillgenoArgs)
     }
 
-    if(class(cross)[2] != "cross")
-        stop('"cross" should have class "cross".')
-
-    if(pxgtype == "raw")
-        return(iplotScanone_pxg(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
-                                fillgenoArgs=fillgenoArgs, chartOpts=chartOpts))
-
-    else
-        return(iplotScanone_ci(scanoneOutput=scanoneOutput, cross=cross, pheno.col=pheno.col,
-                               fillgenoArgs=fillgenoArgs, chartOpts=chartOpts))
-
-}
-
-
-# iplotScanone: LOD curves with nothing else
-iplotScanone_noeff <-
-function(scanoneOutput, chartOpts=NULL)
-{
-    scanone_list <- convert_scanone(scanoneOutput)
-    htmlwidgets::createWidget("iplotScanone_noeff",
-                              list(scanone=scanone_list, chartOpts=chartOpts),
+    htmlwidgets::createWidget("iplotScanone",
+                              list(scanone_data=scanone_list, pxg_data=pxg_list, pxg_type=pxgtype,
+                                   chartOpts=chartOpts),
                               width=chartOpts$width,
                               height=chartOpts$height,
                               package="qtlcharts")
 }
 
-# iplotScanone_pxg: LOD curves with linked phe x gen plot
-iplotScanone_pxg <-
-function(scanoneOutput, cross, pheno.col=1, fillgenoArgs=NULL,
-         chartOpts=NULL)
-{
-    scanone_list <- convert_scanone(scanoneOutput)
-    pxg_list <- convert_pxg(cross, pheno.col, fillgenoArgs=fillgenoArgs)
-
-    htmlwidgets::createWidget("iplotScanone_pxg",
-                              list(scanone=scanone_list, pxg=pxg_list, chartOpts=chartOpts),
-                              width=chartOpts$width,
-                              height=chartOpts$height,
-                              package="qtlcharts")
+#' @export
+iplotScanone_output <- function(outputId, width="100%", height="580") {
+    htmlwidgets::shinyWidgetOutput(outputId, "iplotScanone", width, height, package="qtlcharts")
 }
-
-# iplotScanone_ci: LOD curves with linked phe mean +/- 2 SE x gen plot
-iplotScanone_ci <-
-function(scanoneOutput, cross, pheno.col=1, fillgenoArgs=NULL, chartOpts=NULL)
-{
-    scanone_list <- convert_scanone(scanoneOutput)
-    pxg_list <- convert_pxg(cross, pheno.col, fillgenoArgs=fillgenoArgs)
-
-    htmlwidgets::createWidget("iplotScanone_ci",
-                              list(scanone=scanone_list, pxg=pxg_list, chartOpts=chartOpts),
-                              width=chartOpts$width,
-                              height=chartOpts$height,
-                              package="qtlcharts")
+#' @export
+iplotScanone_render <- function(expr, env=parent.frame(), quoted=FALSE) {
+    if(!quoted) { expr <- substitute(expr) } # force quoted
+    htmlwidgets::shinyRenderWidget(expr, iplotScanone_output, env, quoted=TRUE)
 }

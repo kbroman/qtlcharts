@@ -16,10 +16,13 @@ dependencies:
     script:
       - panelutil.js
       - lodchart/lodchart.js
+      - cichart/cichart.js
       - dotchart/dotchart.js
     style: panelutil.css
   - name: qtlcharts
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1
     script:
+      - iplotScanone_noeff.js
+      - iplotScanone_ci.js
       - iplotScanone_pxg.js

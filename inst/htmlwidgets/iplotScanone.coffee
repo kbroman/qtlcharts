@@ -1,9 +1,9 @@
-# iplotScanone_ci: lod curves + phe x gen (as mean +/- 2 SE) plot
+# iplotScanone: lod curves + (possibly) QTL effects
 # Karl W Broman
 
 HTMLWidgets.widget({
 
-    name: "iplotScanone_ci",
+    name: "iplotScanone",
     type: "output",
 
     initialize: (el, width, height) ->
@@ -23,7 +23,14 @@ HTMLWidgets.widget({
         svg.attr("width", chartOpts.width)
         svg.attr("height", chartOpts.height)
 
-        iplotScanone_ci(el, x.scanone, x.pxg, chartOpts)
+        console.log(x.pxg_type)
+
+        if x.pxg_type == "ci"
+            iplotScanone_ci(el, x.scanone_data, x.pxg_data, chartOpts)
+        else if x.pxg_type == "raw"
+            iplotScanone_pxg(el, x.scanone_data, x.pxg_data, chartOpts)
+        else
+            iplotScanone_noeff(el, x.scanone_data, chartOpts)
 
     resize: (el, width, height) ->
         d3.select(el).select("svg")

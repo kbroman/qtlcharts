@@ -13,7 +13,7 @@ iplotScanone_ci = function(el, lod_data, pxg_data, chartOpts) {
   })();
   height = (_ref = chartOpts != null ? chartOpts.height : void 0) != null ? _ref : 530;
   width = (_ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? _ref1 : 1200;
-  wleft = (_ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref2 : width * 0.6;
+  wleft = (_ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? _ref2 : width * 0.7;
   margin = (_ref3 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref3 : {
     left: 60,
     top: 40,

@@ -1,7 +1,7 @@
 # iplotScanone_noeff: LOD curves (nothing else)
 # Karl W Broman
 
-iplotScanone_noeff = (data, chartOpts) ->
+iplotScanone_noeff = (el, data, chartOpts) ->
 
     # chartOpts start
     height = chartOpts?.height ? 450 # height of image in pixels
@@ -26,14 +26,14 @@ iplotScanone_noeff = (data, chartOpts) ->
     rotate_ylab = chartOpts?.rotate_ylab ? chartOpts?.lod_rotate_ylab ? null # indicates whether to rotate the y-axis label 90 degrees
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
-  
+
     halfh = (height+margin.top+margin.bottom)
     totalh = halfh*2
     totalw = (width+margin.left+margin.right)
-  
+
     mylodchart = lodchart().lodvarname("lod")
-                           .height(height)
-                           .width(width)
+                           .height(height-margin.top-margin.bottom)
+                           .width(width-margin.left-margin.right)
                            .margin(margin)
                            .axispos(axispos)
                            .titlepos(titlepos)
@@ -52,11 +52,11 @@ iplotScanone_noeff = (data, chartOpts) ->
                            .xlab(xlab)
                            .ylab(ylab)
                            .rotate_ylab(rotate_ylab)
-  
-    d3.select("div##{chartdivid}")
+
+    d3.select(el).select("svg")
       .datum(data)
       .call(mylodchart)
-  
+
     # animate points at markers on click
     mylodchart.markerSelect()
               .on "click", (d) ->

@@ -1,14 +1,14 @@
 # iplotScanone_pxg: lod curves + phe x gen plot
 # Karl W Broman
 
-iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
+iplotScanone_pxg = (el, lod_data, pxg_data, chartOpts) ->
 
     markers = (x for x of pxg_data.chrByMarkers)
-  
+
     # chartOpts start
     height = chartOpts?.height ? 450 # height of image in pixels
-    wleft = chartOpts?.wleft ? 700 # width of left panel in pixels
-    wright = chartOpts?.wright ? 300 # width of right panel in pixels
+    width = chartOpts?.width ? 1200 # width of image in pixels
+    wleft = chartOpts?.wleft ? width*0.7 # width of left panel in pixels
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
     lod_axispos = chartOpts?.lod_axispos ? chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
     lod_titlepos = chartOpts?.lod_titlepos ? chartOpts?.titlepos ? 20 # position of title for LOD curve panel, in pixels
@@ -16,7 +16,7 @@ iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
     darkrect = chartOpts?.darkrect ? "#C8C8C8" # color of darker background rectangle
     lightrect = chartOpts?.lightrect ? "#E6E6E6" # color of lighter background rectangle
     lod_ylim = chartOpts?.lod_ylim ? null # y-axis limits in LOD curve panel
-    lod_nyticks = chartOpts?.lod_nyticks ? 5 # number of ticks in y-axis in LOD curve panel 
+    lod_nyticks = chartOpts?.lod_nyticks ? 5 # number of ticks in y-axis in LOD curve panel
     lod_yticks = chartOpts?.lod_yticks ? null # vector of tick positions for y-axis in LOD curve panel
     lod_linecolor = chartOpts?.lod_linecolor ? "darkslateblue" # line color for LOD curves
     lod_linewidth = chartOpts?.lod_linewidth ? 2 # line width for LOD curves
@@ -38,19 +38,17 @@ iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
     eff_ylab = chartOpts?.eff_ylab ? "Phenotype" # y-axis label in phe-by-gen panel
     eff_rotate_ylab = chartOpts?.eff_rotate_ylab ? null # indicates whether to rotate the y-axis label 90 degrees, in phe-by-gen panel
     xjitter = chartOpts?.xjitter ? chartOpts?.eff_xjitter ? null # amount of horizontal jittering in phe-by-gen panel
-    eff_axispos = chartOpts?.eff_axispos ? chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel 
+    eff_axispos = chartOpts?.eff_axispos ? chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
     eff_titlepos = chartOpts?.eff_titlepos ? chartOpts?.titlepos ? 20 # position of title for phe-by-gen panel, in pixels
     eff_yNA = chartOpts?.eff_yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
-  
-    totalh = height + margin.top + margin.bottom
-    totalw = wleft + wright + (margin.left + margin.right)*2
-  
-  
+
+    wright = width - wleft
+
     mylodchart = lodchart().lodvarname("lod")
-                           .height(height)
-                           .width(wleft)
+                           .height(height-margin.top-margin.bottom)
+                           .width(wleft-margin.left-margin.right)
                            .margin(margin)
                            .axispos(lod_axispos)
                            .titlepos(lod_titlepos)
@@ -69,12 +67,9 @@ iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
                            .xlab(lod_xlab)
                            .ylab(lod_ylab)
                            .rotate_ylab(lod_rotate_ylab)
-  
-    svg = d3.select("div##{chartdivid}")
-            .append("svg")
-            .attr("height", totalh)
-            .attr("width", totalw)
-  
+
+    svg = d3.select(el).select("svg")
+
     g_lod = svg.append("g")
                .attr("id", "lodchart")
                .datum(lod_data)
@@ -82,7 +77,7 @@ iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
 
     plotPXG = (markername, markerindex) ->
         svg.select("g#pxgchart").remove()
-    
+
         g = pxg_data.geno[markerindex]
         gabs = (Math.abs(x) for x in g)
         inferred = (x < 0 for x in g)
@@ -91,8 +86,8 @@ iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
         chrtype = pxg_data.chrtype[chr]
         genonames = pxg_data.genonames[chrtype]
 
-        mypxgchart = dotchart().height(height)
-                               .width(wright)
+        mypxgchart = dotchart().height(height-margin.top-margin.bottom)
+                               .width(wright-margin.left-margin.right)
                                .margin(margin)
                                .xcategories([1..genonames.length])
                                .xcatlabels(genonames)
@@ -114,10 +109,10 @@ iplotScanone_pxg = (lod_data, pxg_data, chartOpts) ->
                                .rectcolor(lightrect)
                                .xjitter(xjitter)
                                .yNA(eff_yNA)
-      
+
         svg.append("g")
            .attr("id", "pxgchart")
-           .attr("transform", "translate(#{wleft+margin.left+margin.right},0)")
+           .attr("transform", "translate(#{wleft},0)")
            .datum({'geno':gabs, 'pheno':pxg_data.pheno, 'indID':pxg_data.indID})
            .call(mypxgchart)
 

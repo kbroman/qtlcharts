@@ -5,9 +5,7 @@
 \title{Interactive LOD curve}
 \usage{
 iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
-  pxgtype = c("ci", "raw"), file, onefile = FALSE, openfile = TRUE,
-  title = "", chartdivid = "chart", caption, fillgenoArgs = NULL,
-  chartOpts = NULL, digits = 4, print = FALSE)
+  pxgtype = c("ci", "raw"), fillgenoArgs = NULL, chartOpts = NULL)
 }
 \arguments{
 \item{scanoneOutput}{Object of class \code{"scanone"}, as output
@@ -31,34 +29,12 @@ preceding - to have all chromosomes but those considered. A logical
 it be with means \eqn{\pm}{+/-} 2 SE (\code{"ci"}), or raw
 phenotypes (\code{"raw"})?}
 
-\item{file}{Optional character vector with file to contain the
-output}
-
-\item{onefile}{If TRUE, have output file contain all necessary
-javascript/css code}
-
-\item{openfile}{If TRUE, open the plot in the default web browser}
-
-\item{title}{Character string with title for plot}
-
-\item{chartdivid}{Character string for id of div to hold the chart}
-
-\item{caption}{Character vector with text for a caption (to be
-combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=""})}
-
 \item{fillgenoArgs}{List of named arguments to pass to
 \code{\link[qtl]{fill.geno}}, if needed.}
 
 \item{chartOpts}{A list of options for configuring the chart (see
-the coffeescript code). Each element must be named using the
-corresponding option.}
-
-\item{digits}{Number of digits in JSON; pass to
-\code{\link[jsonlite]{toJSON}}}
-
-\item{print}{If TRUE, print the output, rather than writing it to a file,
-for use within an R Markdown document.}
+  the coffeescript code). Each element must be named using the
+  corresponding option.}
 }
 \value{
 Character string with the name of the file created.
@@ -88,25 +64,17 @@ data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
 out <- scanone(hyper)
 \donttest{
-# open iplotScanone (with CIs) in web browser
-iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
-             title="iplotScanone example (CIs)")}
-\dontshow{
-# save to temporary file but don't open
-iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
-             title="iplotScanone example (CIs)",
-             openfile=FALSE)}
+# iplotScanone with no effects
+iplotScanone(out, chr=c(1, 4, 6, 7, 15))}
 
 \donttest{
-# open iplotScanone (with raw phe x gen)
+# iplotScanone with CIs
+iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15))}
+
+\donttest{
+# iplotScanone with raw phe x gen
 iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
-             title="iplotScanone example (raw phe x gen)",
              pxgtype='raw')}
-\dontshow{
-# save to temporary file but don't open
-iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
-             title="iplotScanone example (raw phe x gen)",
-             pxgtype='raw', openfile=FALSE)}
 }
 \seealso{
 \code{\link{iplotMScanone}}, \code{\link{iplotPXG}}, \code{\link{iplotMap}}

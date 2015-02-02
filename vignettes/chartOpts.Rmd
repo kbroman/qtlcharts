@@ -327,11 +327,11 @@ customization options for each chart.
 
 ### `iplotScanone` (`pxgtype="ci"`)
 
-`height = 450` &mdash; height of image in pixels
+`height = 530` &mdash; height of image in pixels
 
-`wleft = 700` &mdash; width of left panel in pixels
+`width = 1200` &mdash; width of image in pixels
 
-`wright = 300` &mdash; width of right panel in pixels
+`wleft = width*0.6` &mdash; width of left panel in pixels
 
 `margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
 
@@ -395,9 +395,9 @@ customization options for each chart.
 
 `height = 450` &mdash; height of image in pixels
 
-`wleft = 700` &mdash; width of left panel in pixels
+`width = 1200` &mdash; width of image in pixels
 
-`wright = 300` &mdash; width of right panel in pixels
+`wleft = width*0.6` &mdash; width of left panel in pixels
 
 `margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
 

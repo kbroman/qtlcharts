@@ -52,6 +52,8 @@ iplotRF = (el, rf_data, geno, chartOpts) ->
 
     # create SVG
     svg = d3.select(el).select("svg")
+            .attr("height", totalh)
+            .attr("width", totalw)
 
     # ensure lodlim has 0 <= lo < hi
     if d3.min(lodlim) < 0

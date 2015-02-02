@@ -26,7 +26,7 @@ None.
 Creates an interactive graph of estimated recombination fractions and LOD scores for all pairs of markers.
 }
 \details{
-The ususal \code{height} and \code{width} options in
+The usual \code{height} and \code{width} options in
 \code{chartOpts} are ignored in this plot. Instead, you may provide
 \code{pixelPerCell} (number of pixels per cell in the heat map),
 \code{chrGap} (gap in pixels between chromosomes in the heat map),

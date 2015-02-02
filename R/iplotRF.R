@@ -20,7 +20,7 @@
 #' @keywords hplot
 #' @seealso \code{\link[qtl]{est.rf}}, \code{\link[qtl]{plotRF}}
 #'
-#' @details The ususal \code{height} and \code{width} options in
+#' @details The usual \code{height} and \code{width} options in
 #' \code{chartOpts} are ignored in this plot. Instead, you may provide
 #' \code{pixelPerCell} (number of pixels per cell in the heat map),
 #' \code{chrGap} (gap in pixels between chromosomes in the heat map),

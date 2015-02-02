@@ -10,7 +10,7 @@
 #' @param shift If TRUE, shift each chromsome so that the initial marker
 #'   is at position 0.
 #' @param chartOpts A list of options for configuring the chart.  Each
-#'   element must be named using the corresponding option. See details.
+#'   element must be named using the corresponding option.
 #'
 #' @return None.
 #'

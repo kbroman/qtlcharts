@@ -16,7 +16,7 @@ iplotPXG(cross, marker, pheno.col = 1, chartOpts = NULL,
 \item{pheno.col}{Phenotype column in cross object.}
 
 \item{chartOpts}{A list of options for configuring the chart.  Each
-element must be named using the corresponding option. See details.}
+element must be named using the corresponding option.}
 
 \item{fillgenoArgs}{List of named arguments to pass to
   \code{\link[qtl]{fill.geno}}, if needed.}

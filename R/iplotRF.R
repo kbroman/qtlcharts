@@ -23,7 +23,7 @@
 #'     combined to one string with \code{\link[base]{paste}}, with
 #'     \code{collapse=""})
 #' @param chartOpts A list of options for configuring the chart.  Each
-#'     element must be named using the corresponding option. See details.
+#'     element must be named using the corresponding option.
 #' @param digits Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.
 #' @param print If TRUE, print the output, rather than writing it to a file,
 #'     for use within an R Markdown document.

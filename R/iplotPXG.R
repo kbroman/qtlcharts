@@ -10,7 +10,7 @@
 #' @param marker Character string with marker name.
 #' @param pheno.col Phenotype column in cross object.
 #' @param chartOpts A list of options for configuring the chart.  Each
-#'   element must be named using the corresponding option. See details.
+#'   element must be named using the corresponding option.
 #' @param fillgenoArgs List of named arguments to pass to
 #'   \code{\link[qtl]{fill.geno}}, if needed.
 #'

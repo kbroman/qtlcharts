@@ -14,7 +14,7 @@ being a vector of marker positions.}
 is at position 0.}
 
 \item{chartOpts}{A list of options for configuring the chart.  Each
-  element must be named using the corresponding option. See details.}
+  element must be named using the corresponding option.}
 }
 \value{
 None.

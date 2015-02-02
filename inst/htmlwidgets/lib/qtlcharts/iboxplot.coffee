@@ -7,11 +7,11 @@
 #   is show below; click for it to persist; click again to make it go away.
 #
 
-iboxplot = (data, chartOpts) ->
+iboxplot = (el, data, chartOpts) ->
 
     # chartOpts start
     width = chartOpts?.width ? 1000 # width of image in pixels
-    height = chartOpts?.height ? 450 # height of image in pixels
+    height = chartOpts?.height ? 900 # total height of image in pixels
     margin = chartOpts?.margin ? {left:60, top:20, right:60, bottom: 40} # margins in pixels (left, top, right, bottom)
     ylab = chartOpts?.ylab ? "Response" # y-axis label
     xlab = chartOpts?.xlab ? "Individuals" # x-axis label
@@ -24,6 +24,8 @@ iboxplot = (data, chartOpts) ->
     # make sure histcolors and qucolors are arrays
     histcolors = forceAsArray(histcolors)
     qucolors = forceAsArray(qucolors)
+
+    halfheight = height/2
 
     # y-axis limits for top figure
     topylim = [data.quant[0][0], data.quant[0][0]]
@@ -73,7 +75,7 @@ iboxplot = (data, chartOpts) ->
 
     yScale = d3.scale.linear()
                .domain(topylim)
-               .range([height-margin.bottom, margin.top])
+               .range([halfheight-margin.bottom, margin.top])
 
     # function to create quantile lines
     quline = (j) ->
@@ -81,16 +83,17 @@ iboxplot = (data, chartOpts) ->
             .x((d) -> xScale(d))
             .y((d) -> yScale(data.quant[j][d]))
 
-    svg = d3.select("div##{chartdivid}")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
+    svg=d3.select(el).select("svg")
+             .append("svg")
+             .attr("width", width)
+             .attr("height", halfheight)
+             .attr("class", "qtlcharts")
 
-   # gray background
+    # gray background
     svg.append("rect")
        .attr("x", margin.left)
        .attr("y", margin.top)
-       .attr("height", height-margin.top-margin.bottom)
+       .attr("height", halfheight-margin.top-margin.bottom)
        .attr("width", width-margin.left-margin.right)
        .attr("stroke", "none")
        .attr("fill", rectcolor)
@@ -138,7 +141,7 @@ iboxplot = (data, chartOpts) ->
        .attr("class", "line")
        .attr("class", "axis")
        .attr("y1", margin.top)
-       .attr("y2", height-margin.bottom)
+       .attr("y2", halfheight-margin.bottom)
        .attr("x1", (d) -> xScale(d-1))
        .attr("x2", (d) -> xScale(d-1))
        .attr("stroke", "white")
@@ -151,7 +154,7 @@ iboxplot = (data, chartOpts) ->
        .append("text")
        .attr("class", "axis")
        .text((d) -> d)
-       .attr("y", height-margin.bottom*0.75)
+       .attr("y", halfheight-margin.bottom*0.75)
        .attr("x", (d) -> xScale(d-1))
        .attr("dominant-baseline", "middle")
        .attr("text-anchor", "middle")
@@ -229,7 +232,7 @@ iboxplot = (data, chartOpts) ->
                          .attr("x", (d) -> xScale(d) - recWidth/2)
                          .attr("y", margin.top)
                          .attr("width", recWidth)
-                         .attr("height", height - margin.top - margin.bottom)
+                         .attr("height", halfheight - margin.top - margin.bottom)
                          .attr("fill", "purple")
                          .attr("stroke", "none")
                          .attr("opacity", "0")
@@ -253,16 +256,21 @@ iboxplot = (data, chartOpts) ->
     svg.append("rect")
        .attr("x", margin.left)
        .attr("y", margin.top)
-       .attr("height", height-margin.top-margin.bottom)
+       .attr("height", halfheight-margin.top-margin.bottom)
        .attr("width", width-margin.left-margin.right)
        .attr("stroke", "black")
        .attr("stroke-width", 2)
        .attr("fill", "none")
 
     # lower svg
-    lowsvg = d3.select("div##{chartdivid}").append("svg")
-               .attr("height", height)
+    lowsvg = d3.select(el).select("svg")
+               .append("g")
+                   .attr("id", "lower_svg")
+                   .attr("transform", "translate(0,#{halfheight})")
+               .append("svg")
+               .attr("height", halfheight)
                .attr("width", width)
+               .attr("class", "qtlcharts")
 
     lo = data.breaks[0] - (data.breaks[1] - data.breaks[0])
     hi = data.breaks[data.breaks.length-1] + (data.breaks[1] - data.breaks[0])
@@ -273,13 +281,13 @@ iboxplot = (data, chartOpts) ->
 
     lowyScale = d3.scale.linear()
                   .domain([0, botylim[1]+1])
-                  .range([height-margin.bottom, margin.top])
+                  .range([halfheight-margin.bottom, margin.top])
 
     # gray background
     lowsvg.append("rect")
           .attr("x", margin.left)
           .attr("y", margin.top)
-          .attr("height", height-margin.top-margin.bottom)
+          .attr("height", halfheight-margin.top-margin.bottom)
           .attr("width", width-margin.left-margin.right)
           .attr("stroke", "none")
           .attr("fill", rectcolor)
@@ -296,7 +304,7 @@ iboxplot = (data, chartOpts) ->
             .attr("class", "line")
             .attr("class", "axis")
             .attr("y1", margin.top)
-            .attr("y2", height-margin.bottom)
+            .attr("y2", halfheight-margin.bottom)
             .attr("x1", (d) -> lowxScale(d))
             .attr("x2", (d) -> lowxScale(d))
             .attr("stroke", "white")
@@ -308,7 +316,7 @@ iboxplot = (data, chartOpts) ->
             .append("text")
             .attr("class", "axis")
             .text((d) -> formatAxis(lowBaxisData)(d))
-            .attr("y", height-margin.bottom*0.75)
+            .attr("y", halfheight-margin.bottom*0.75)
             .attr("x", (d) -> lowxScale(d))
             .attr("dominant-baseline", "middle")
             .attr("text-anchor", "middle")
@@ -370,7 +378,7 @@ iboxplot = (data, chartOpts) ->
     lowsvg.append("rect")
           .attr("x", margin.left)
           .attr("y", margin.top)
-          .attr("height", height-margin.bottom-margin.top)
+          .attr("height", halfheight-margin.bottom-margin.top)
           .attr("width", width-margin.left-margin.right)
           .attr("stroke", "black")
           .attr("stroke-width", 2)
@@ -379,16 +387,16 @@ iboxplot = (data, chartOpts) ->
     svg.append("text")
        .text(ylab)
        .attr("x", margin.left*0.2)
-       .attr("y", height/2)
+       .attr("y", halfheight/2)
        .attr("fill", "slateblue")
-       .attr("transform", "rotate(270 #{margin.left*0.2} #{height/2})")
+       .attr("transform", "rotate(270 #{margin.left*0.2} #{halfheight/2})")
        .attr("dominant-baseline", "middle")
        .attr("text-anchor", "middle")
 
     lowsvg.append("text")
           .text(ylab)
           .attr("x", (width-margin.left-margin.bottom)/2+margin.left)
-          .attr("y", height-margin.bottom*0.2)
+          .attr("y", halfheight-margin.bottom*0.2)
           .attr("fill", "slateblue")
           .attr("dominant-baseline", "middle")
           .attr("text-anchor", "middle")
@@ -396,7 +404,7 @@ iboxplot = (data, chartOpts) ->
     svg.append("text")
        .text(xlab)
        .attr("x", (width-margin.left-margin.bottom)/2+margin.left)
-       .attr("y", height-margin.bottom*0.2)
+       .attr("y", halfheight-margin.bottom*0.2)
        .attr("fill", "slateblue")
        .attr("dominant-baseline", "middle")
        .attr("text-anchor", "middle")

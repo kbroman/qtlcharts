@@ -5,9 +5,7 @@
 \title{Modern boxplot linked to underlying histrograms}
 \usage{
 iboxplot(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian = TRUE,
-  breaks = 251, file, onefile = FALSE, openfile = TRUE, title = "",
-  chartdivid = "chart", caption, chartOpts = NULL, digits = 4,
-  print = FALSE)
+  breaks = 251, chartOpts = NULL)
 }
 \arguments{
 \item{dat}{Data matrix (individuals x variables)}
@@ -19,34 +17,12 @@ iboxplot(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian = TRUE,
 \item{breaks}{Number of bins in the histograms, or a vector of
 locations of the breakpoints between bins (as in \code{\link[graphics]{hist}})}
 
-\item{file}{Optional character vector with file to contain the
-output}
-
-\item{onefile}{If TRUE, have output file contain all necessary
-javascript/css code}
-
-\item{openfile}{If TRUE, open the plot in the default web browser}
-
-\item{title}{Character string with title for plot}
-
-\item{chartdivid}{Character string for id of div to hold the chart}
-
-\item{caption}{Character vector with text for a caption (to be
-combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=""})}
-
 \item{chartOpts}{A list of options for configuring the chart (see
-the coffeescript code). Each element must be named using the
-corresponding option.}
-
-\item{digits}{Number of digits in JSON; pass to
-\code{\link[jsonlite]{toJSON}}}
-
-\item{print}{If TRUE, print the output, rather than writing it to a file,
-    for use within an R Markdown document.}
+    the coffeescript code). Each element must be named using the
+    corresponding option.}
 }
 \value{
-Character string with the name of the file created.
+None.
 }
 \description{
 Creates an interactive graph for a large set of box plots (rendered
@@ -59,14 +35,7 @@ expr <- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
 dimnames(expr) <- list(paste0("ind", 1:n.ind),
                        paste0("gene", 1:n.gene))
 \donttest{
-# open iboxplot in web browser
-iboxplot(expr, title="iboxplot example",
-         chartOpts=list(xlab="Mice", ylab="Gene expression"))}
-\dontshow{
-# save to temporary file but don't open
-iboxplot(expr, title="iboxplot example",
-         chartOpts=list(xlab="Mice", ylab="Gene expression"),
-         openfile=FALSE)}
+iboxplot(expr, chartOpts=list(xlab="Mice", ylab="Gene expression"))}
 }
 \seealso{
 \code{\link{iplotCorr}}

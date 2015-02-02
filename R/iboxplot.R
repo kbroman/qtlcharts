@@ -11,25 +11,11 @@
 #' @param orderByMedian If TRUE, reorder individuals by their median
 #' @param breaks Number of bins in the histograms, or a vector of
 #'     locations of the breakpoints between bins (as in \code{\link[graphics]{hist}})
-#' @param file Optional character vector with file to contain the
-#'     output
-#' @param onefile If TRUE, have output file contain all necessary
-#'     javascript/css code
-#' @param openfile If TRUE, open the plot in the default web browser
-#' @param title Character string with title for plot
-#' @param chartdivid Character string for id of div to hold the chart
-#' @param caption Character vector with text for a caption (to be
-#'     combined to one string with \code{\link[base]{paste}}, with
-#'     \code{collapse=""})
 #' @param chartOpts A list of options for configuring the chart (see
 #'     the coffeescript code). Each element must be named using the
 #'     corresponding option.
-#' @param digits Number of digits in JSON; pass to
-#'     \code{\link[jsonlite]{toJSON}}
-#' @param print If TRUE, print the output, rather than writing it to a file,
-#'     for use within an R Markdown document.
 #'
-#' @return Character string with the name of the file created.
+#' @return None.
 #'
 #' @keywords hplot
 #' @seealso \code{\link{iplotCorr}}
@@ -41,45 +27,30 @@
 #' dimnames(expr) <- list(paste0("ind", 1:n.ind),
 #'                        paste0("gene", 1:n.gene))
 #' \donttest{
-#' # open iboxplot in web browser
-#' iboxplot(expr, title="iboxplot example",
-#'          chartOpts=list(xlab="Mice", ylab="Gene expression"))}
-#' \dontshow{
-#' # save to temporary file but don't open
-#' iboxplot(expr, title="iboxplot example",
-#'          chartOpts=list(xlab="Mice", ylab="Gene expression"),
-#'          openfile=FALSE)}
+#' iboxplot(expr, chartOpts=list(xlab="Mice", ylab="Gene expression"))}
 #'
 #' @export
 iboxplot <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
-         file, onefile=FALSE, openfile=TRUE, title="",
-         chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
+         chartOpts=NULL)
 {
-    if(missing(file)) file <- NULL
+    data_list <- convert4iboxplot(dat, qu, orderByMedian, breaks)
 
-    json <- convert4iboxplot(dat, qu, orderByMedian, breaks, digits)
+    # use default height of 1000 pixels
+    chartOpts <- add2chartOpts(chartOpts, height=1000)
 
-    if(missing(caption) || is.null(caption))
-        caption <- c('The top panel is like a set of ', nrow(dat), ' box plots: ',
-                     'lines are drawn at a series of percentiles for each of the distributions. ',
-                     'Hover over a column in the top panel and the corresponding distribution ',
-                     'is show below; click for it to persist; click again to make it go away.')
+    htmlwidgets::createWidget("iboxplot", list(data=data_list, chartOpts=chartOpts),
+                              width=chartOpts$width,
+                              height=chartOpts$height,
+                              package="qtlcharts")
+}
 
-    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                      panels=NULL, charts="iboxplot", chartdivid=chartdivid,
-                      caption=caption, print=print)
-
-    # add chartdivid to chartOpts
-    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
-
-    append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
-    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-    append_html_jscode(file, paste0('iboxplot(', chartdivid, '_data, ', chartdivid, '_chartOpts);'))
-
-    append_html_bottom(file, print=print)
-
-    if(openfile && !print) utils::browseURL(file)
-
-    invisible(file)
+#' @export
+iboxplot_output <- function(outputId, width="100%", height="900") {
+    htmlwidgets::shinyWidgetOutput(outputId, "iplot", width, height, package="qtlcharts")
+}
+#' @export
+iboxplot_render <- function(expr, env=parent.frame(), quoted=FALSE) {
+    if(!quoted) { expr <- substitute(expr) } # force quoted
+    htmlwidgets::shinyRenderWidget(expr, iplot_output, env, quoted=TRUE)
 }

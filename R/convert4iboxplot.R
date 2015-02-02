@@ -1,16 +1,15 @@
 ## convert4iboxplot
 ## Karl W Broman
 
-# Convert data to JSON format for iboxplot vis
+# Convert data to a list format for iboxplot vis
 #
 # @param dat Data matrix (individuals x variables)
 # @param qu Quantiles to plot (All with 0 < qu < 0.5)
 # @param orderByMedian If TRUE, reorder individuals by their median
 # @param breaks Number of bins in the histograms, or a vector of
 #     locations of the breakpoints between bins (as in \code{\link[graphics]{hist}})
-# @param digits Number of digits in JSON file; passed to \code{\link[jsonlite]{toJSON}}
 #
-# @return Character string with the input data in JSON format
+# @return Data formated as a list
 #
 # @keywords interface
 # @seealso \code{\link{iboxplot}}
@@ -21,10 +20,10 @@
 # expr <- matrix(rnorm(n.ind * n.gene, (1:n.ind)/n.ind*3), ncol=n.gene)
 # dimnames(expr) <- list(paste0("ind", 1:n.ind),
 #                        paste0("gene", 1:n.gene))
-# geneExpr_as_json <- convert4iboxplot(expr)
+# geneexpr_data <- convert4iboxplot(expr)
 convert4iboxplot <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
-         breaks=251, digits=4)
+         breaks=251)
 {
     if(is.null(rownames(dat)))
         rownames(dat) <- paste0(1:nrow(dat))
@@ -61,12 +60,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
 
     dimnames(quant) <- dimnames(counts) <- NULL
 
-    # data structure for JSON
-    output <- list("ind" = jsonlite::toJSON(ind, na="null"),
-                   "qu" = jsonlite::toJSON(qu, na="null"),
-                   "breaks" = jsonlite::toJSON(breaks, digits=digits, na="null"),
-                   "quant" = jsonlite::toJSON(quant, digits=digits, na="null"),
-                   "counts" = jsonlite::toJSON(t(counts)), na="null")
-    output <- paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
-    strip_whitespace(output)
+    # data structure for iboxplot
+    list(ind=ind, qu=qu, breaks=breaks, quant=quant,
+         counts=t(counts))
 }

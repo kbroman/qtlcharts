@@ -21,7 +21,7 @@ customization options for each chart.
 
 `width = 1000` &mdash; width of image in pixels
 
-`height = 450` &mdash; height of image in pixels
+`height = 900` &mdash; total height of image in pixels
 
 `margin = list(left=60, top=20, right=60, bottom=40)` &mdash; margins in pixels (left, top, right, bottom)
 

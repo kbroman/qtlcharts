@@ -16,25 +16,11 @@
 #'   clustering. Ignored if \code{corr} is provided as a subset of the
 #'   overall correlation matrix
 #' @param corr Correlation matrix (optional).
-#' @param file Optional character vector with file to contain the
-#'   output
-#' @param onefile If TRUE, have output file contain all necessary
-#'   javascript/css code
-#' @param openfile If TRUE, open the plot in the default web browser
-#' @param title Character string with title for plot
-#' @param chartdivid Character string for id of div to hold the chart
-#' @param caption Character vector with text for a caption (to be
-#'   combined to one string with \code{\link[base]{paste}}, with
-#'   \code{collapse=""})
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
-#' @param digits Number of digits in JSON; pass to
-#'   \code{\link[jsonlite]{toJSON}}
-#' @param print If TRUE, print the output, rather than writing it to a file,
-#'   for use within an R Markdown document.
 #'
-#' @return Character string with the name of the file created.
+#' @return None.
 #'
 #' @details \code{corr} may be provided as a subset of the overall
 #' correlation matrix for the columns of \code{mat}. In this case, the
@@ -51,27 +37,15 @@
 #' @examples
 #' data(geneExpr)
 #' \donttest{
-#' # open iplotCorr in web browser
 #' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
-#'           title = "iplotCorr example",
 #'           chartOpts=list(cortitle="Correlation matrix",
 #'                          scattitle="Scatterplot"))}
-#' \dontshow{
-#' # save to temporary file but don't open
-#' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
-#'           title = "iplotCorr example",
-#'           chartOpts=list(cortitle="Correlation matrix",
-#'                          scattitle="Scatterplot"),
-#'           openfile=FALSE)}
 #'
 #' @export
 iplotCorr <-
 function(mat, group, rows, cols, reorder=FALSE, corr=stats::cor(mat, use="pairwise.complete.obs"),
-         file, onefile=FALSE, openfile=TRUE, title="",
-         chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
+         chartOpts=NULL)
 {
-    if(missing(file)) file <- NULL
-
     if(missing(group) || is.null(group)) group <- rep(1, nrow(mat))
     if(is.data.frame(mat)) mat <- as.matrix(mat)
     stopifnot(length(group) == nrow(mat))
@@ -104,30 +78,22 @@ function(mat, group, rows, cols, reorder=FALSE, corr=stats::cor(mat, use="pairwi
         corr_was_presubset <- FALSE
     }
 
-    json <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset,
-                              digits)
+    data_list <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset)
 
-    if(missing(caption) || is.null(caption))
-        caption <- c('The left panel is an image of a correlation matrix, with blue = -1 and red = +1. ',
-                     'Hover over pixels in the correlation matrix on the left to see the ',
-                     'values; click to see the corresponding scatterplot on the right.')
+    htmlwidgets::createWidget("iplotCorr", list(data=data_list, chartOpts=chartOpts),
+                              width=chartOpts$width,
+                              height=chartOpts$height,
+                              package="qtlcharts")
+}
 
-    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                      panels=NULL, charts="iplotCorr", chartdivid=chartdivid,
-                      caption=caption, print=print)
-
-    # add chartdivid to chartOpts
-    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
-
-    append_html_jscode(file, paste0(chartdivid, '_data = '), json, ';')
-    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-    append_html_jscode(file, paste0('iplotCorr(', chartdivid, '_data, ', chartdivid, '_chartOpts);'))
-
-    append_html_bottom(file, print=print)
-
-    if(openfile && !print) utils::browseURL(file)
-
-    invisible(file)
+#' @export
+iplotCorr_output <- function(outputId, width="100%", height="1000") {
+    htmlwidgets::shinyWidgetOutput(outputId, "iplotCorr", width, height, package="qtlcharts")
+}
+#' @export
+iplotCorr_render <- function(expr, env=parent.frame(), quoted=FALSE) {
+    if(!quoted) { expr <- substitute(expr) } # force quoted
+    htmlwidgets::shinyRenderWidget(expr, iplotCorr_output, env, quoted=TRUE)
 }
 
 # ensure that a "group" vector is really the numbers 1, 2, ..., k

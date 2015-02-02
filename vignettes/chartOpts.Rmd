@@ -135,9 +135,9 @@ customization options for each chart.
 
 ### `iplotCorr`
 
-`height = 450` &mdash; height of each panel in pixels
+`height = 560` &mdash; height of each panel in pixels
 
-`width = height` &mdash; width of each panel in pixels
+`width = 1050` &mdash; total height of panels
 
 `margin = list(left=70, top=40, right=5, bottom=70, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
 

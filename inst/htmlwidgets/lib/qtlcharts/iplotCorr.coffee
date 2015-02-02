@@ -3,7 +3,7 @@
 # Left panel is a heat map of a correlation matrix; hover over pixels
 # to see the values; click to see the corresponding scatterplot on the right
 
-iplotCorr = (data, chartOpts) ->
+iplotCorr = (el, data, chartOpts) ->
 
     # data is an object with 7 components
     #   data.indID  vector of character strings, of length n, with IDs for individuals
@@ -19,8 +19,8 @@ iplotCorr = (data, chartOpts) ->
     #                  used as categories for coloring points in the scatterplot
 
     # chartOpts start
-    height = chartOpts?.height ? 450 # height of each panel in pixels
-    width = chartOpts?.width ? height # width of each panel in pixels
+    height = chartOpts?.height ? 560 # height of each panel in pixels
+    width = chartOpts?.width ? 1050 # total height of panels
     margin = chartOpts?.margin ? {left:70, top:40, right:5, bottom: 70, inner:5} # margins in pixels (left, top, right, bottom, inner)
     corcolors = chartOpts?.corcolors ? ["darkslateblue", "white", "crimson"] # heat map colors (same length as `zlim`)
     zlim = chartOpts?.zlim ? [-1, 0, 1] # z-axis limits
@@ -30,33 +30,34 @@ iplotCorr = (data, chartOpts) ->
     scatcolors = chartOpts?.scatcolors ? null # vector of point colors for scatterplot
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
-  
-    totalh = height + margin.top + margin.bottom
-    totalw = (width + margin.left + margin.right)*2
-  
-    svg = d3.select("div##{chartdivid}")
-            .append("svg")
-            .attr("height", totalh)
-            .attr("width", totalw)
-  
+
+    panelheight = height - margin.top - margin.bottom
+    panelwidth = (width - margin.left - margin.right)/2
+    # force panelheight == panelwidth by taking minimum of the two
+    min_paneldim = d3.min([panelheight, panelwidth])
+    panelheight = min_paneldim
+    panelwidth = min_paneldim
+
+    svg = d3.select(el).select("svg")
+
     # panel for correlation image
     corrplot = svg.append("g")
                  .attr("id", "corplot")
                  .attr("transform", "translate(#{margin.left},#{margin.top})")
-  
+
     # panel for scatterplot
     scatterplot = svg.append("g")
                      .attr("id", "scatterplot")
-                     .attr("transform", "translate(#{margin.left*2+margin.right+width},#{margin.top})")
-  
+                     .attr("transform", "translate(#{margin.left*2+margin.right+panelwidth},#{margin.top})")
+
     # no. data points
     nind = data.indID.length
     nvar = data.var.length
     ncorrX = data.cols.length
     ncorrY = data.rows.length
-  
-    corXscale = d3.scale.ordinal().domain(d3.range(ncorrX)).rangeBands([0, width])
-    corYscale = d3.scale.ordinal().domain(d3.range(ncorrY)).rangeBands([height, 0])
+
+    corXscale = d3.scale.ordinal().domain(d3.range(ncorrX)).rangeBands([0, panelwidth])
+    corYscale = d3.scale.ordinal().domain(d3.range(ncorrY)).rangeBands([panelheight, 0])
     corZscale = d3.scale.linear().domain(zlim).range(corcolors)
     pixel_width = corXscale(1)-corXscale(0)
     pixel_height = corYscale(0)-corYscale(1)
@@ -70,8 +71,8 @@ iplotCorr = (data, chartOpts) ->
 
     # gray background on scatterplot
     scatterplot.append("rect")
-               .attr("height", height)
-               .attr("width", width)
+               .attr("height", panelheight)
+               .attr("width", panelwidth)
                .attr("fill", rectcolor)
                .attr("stroke", "black")
                .attr("stroke-width", 1)
@@ -101,7 +102,7 @@ iplotCorr = (data, chartOpts) ->
                      corr_tip.show(d)
                      corrplot.append("text").attr("class","corrlabel")
                              .attr("x", corXscale(d.col)+pixel_width/2)
-                             .attr("y", height+margin.bottom*0.2)
+                             .attr("y", panelheight+margin.bottom*0.2)
                              .text(data.var[data.cols[d.col]])
                              .attr("dominant-baseline", "middle")
                              .attr("text-anchor", "middle")
@@ -116,7 +117,7 @@ iplotCorr = (data, chartOpts) ->
                      d3.selectAll("text.corrlabel").remove()
                      d3.select(this).attr("stroke","none"))
                .on("click",(d) -> drawScatter(d.col, d.row))
- 
+
     # colors for scatterplot
     nGroup = d3.max(data.group)
     scatcolors = expand2vector(scatcolors) # make sure it's an array (or null)
@@ -125,7 +126,7 @@ iplotCorr = (data, chartOpts) ->
             scatcolors = [ "#969696" ]
         else if nGroup <= 3
             scatcolors = ["crimson", "green", "darkslateblue"]
-        else 
+        else
             if nGroup <= 10
                 colorScale = d3.scale.category10()
             else
@@ -145,16 +146,16 @@ iplotCorr = (data, chartOpts) ->
         d3.selectAll("line.axes").remove()
         xScale = d3.scale.linear()
                          .domain(d3.extent(data.dat[data.cols[i]]))
-                         .range([margin.inner, width-margin.inner])
+                         .range([margin.inner, panelwidth-margin.inner])
         yScale = d3.scale.linear()
                          .domain(d3.extent(data.dat[data.rows[j]]))
-                         .range([height-margin.inner, margin.inner])
+                         .range([panelheight-margin.inner, margin.inner])
         # axis labels
         scatterplot.append("text")
                    .attr("id", "xaxis")
                    .attr("class", "axes")
-                   .attr("x", width/2)
-                   .attr("y", height+margin.bottom*0.7)
+                   .attr("x", panelwidth/2)
+                   .attr("y", panelheight+margin.bottom*0.7)
                    .text(data.var[data.cols[i]])
                    .attr("dominant-baseline", "middle")
                    .attr("text-anchor", "middle")
@@ -163,11 +164,11 @@ iplotCorr = (data, chartOpts) ->
                    .attr("id", "yaxis")
                    .attr("class", "axes")
                    .attr("x", -margin.left*0.8)
-                   .attr("y", height/2)
+                   .attr("y", panelheight/2)
                    .text(data.var[data.rows[j]])
                    .attr("dominant-baseline", "middle")
                    .attr("text-anchor", "middle")
-                   .attr("transform", "rotate(270,#{-margin.left*0.8},#{height/2})")
+                   .attr("transform", "rotate(270,#{-margin.left*0.8},#{panelheight/2})")
                    .attr("fill", "slateblue")
         # axis scales
         xticks = xScale.ticks(5)
@@ -179,7 +180,7 @@ iplotCorr = (data, chartOpts) ->
                    .attr("class", "axes")
                    .text((d) -> formatAxis(xticks)(d))
                    .attr("x", (d) -> xScale(d))
-                   .attr("y", height+margin.bottom*0.3)
+                   .attr("y", panelheight+margin.bottom*0.3)
                    .attr("dominant-baseline", "middle")
                    .attr("text-anchor", "middle")
         scatterplot.selectAll("empty")
@@ -200,7 +201,7 @@ iplotCorr = (data, chartOpts) ->
                    .attr("x1", (d) -> xScale(d))
                    .attr("x2", (d) -> xScale(d))
                    .attr("y1", 0)
-                   .attr("y2", height)
+                   .attr("y2", panelheight)
                    .attr("stroke", "white")
                    .attr("stroke-width", 1)
         scatterplot.selectAll("empty")
@@ -211,7 +212,7 @@ iplotCorr = (data, chartOpts) ->
                    .attr("y1", (d) -> yScale(d))
                    .attr("y2", (d) -> yScale(d))
                    .attr("x1", 0)
-                   .attr("x2", width)
+                   .attr("x2", panelwidth)
                    .attr("stroke", "white")
                    .attr("stroke-width", 1)
         # the points
@@ -234,16 +235,16 @@ iplotCorr = (data, chartOpts) ->
 
     # boxes around panels
     corrplot.append("rect")
-           .attr("height", height)
-           .attr("width", width)
+           .attr("height", panelheight)
+           .attr("width", panelwidth)
            .attr("fill", "none")
            .attr("stroke", "black")
            .attr("stroke-width", 1)
            .attr("pointer-events", "none")
 
     scatterplot.append("rect")
-               .attr("height", height)
-               .attr("width", width)
+               .attr("height", panelheight)
+               .attr("width", panelwidth)
                .attr("fill", "none")
                .attr("stroke", "black")
                .attr("stroke-width", 1)
@@ -253,7 +254,7 @@ iplotCorr = (data, chartOpts) ->
     corrplot.append("text")
             .text(cortitle)
             .attr("id", "corrtitle")
-            .attr("x", width/2)
+            .attr("x", panelwidth/2)
             .attr("y", -margin.top/2)
             .attr("dominant-baseline", "middle")
             .attr("text-anchor", "middle")
@@ -261,7 +262,7 @@ iplotCorr = (data, chartOpts) ->
     scatterplot.append("text")
                .text(scattitle)
                .attr("id", "scattitle")
-               .attr("x", width/2)
+               .attr("x", panelwidth/2)
                .attr("y", -margin.top/2)
                .attr("dominant-baseline", "middle")
                .attr("text-anchor", "middle")

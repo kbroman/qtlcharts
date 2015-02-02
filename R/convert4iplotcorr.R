@@ -1,7 +1,7 @@
 ## convert4iplotcorr
 ## Karl W Broman
 
-# Convert data to JSON format for iplotCorr vis
+# Convert data to a list for iplotCorr vis
 #
 # @param dat Data matrix (individuals x variables)
 # @param group Optional vector of groups of individuals (e.g., a genotype)
@@ -10,7 +10,6 @@
 # @param reorder If TRUE, reorder the variables by clustering
 # @param corr Correlation matrix
 # @param corr_was_presubset: If TRUE, no need to subset with selected rows and columns
-# @param digits Number of digits in JSON; passed to \code{\link[jsonlite]{toJSON}}
 #
 # @return Character string with the input data in JSON format
 #
@@ -19,12 +18,11 @@
 #
 # @examples
 # data(geneExpr)
-# geneExpr_as_json <- convert4iplotcorr(geneExpr$expr, geneExpr$genotype,
+# geneExpr_as_list <- convert4iplotcorr(geneExpr$expr, geneExpr$genotype,
 #                                       rows=1:ncol(geneExpr$expr), cols=1:ncol(geneExpr$expr),
 #                                       corr=cor(geneExpr$expr, use="pair"))
 convert4iplotcorr <-
-function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
-         digits=4)
+function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE)
 {
     indID <- rownames(dat)
     if(is.null(indID)) indID <- paste(1:nrow(dat))
@@ -70,13 +68,11 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
     dimnames(corr) <- dimnames(dat) <- NULL
     names(group) <- NULL
 
-    output <- list("indID" = jsonlite::toJSON(indID, na="null"),
-                   "var" = jsonlite::toJSON(variables, na="null"),
-                   "corr" = jsonlite::toJSON(corr, digits=digits, na="null"),
-                   "rows" = jsonlite::toJSON(rows-1, na="null"),
-                   "cols" = jsonlite::toJSON(cols-1, na="null"),
-                   "dat" =  jsonlite::toJSON(t(dat), digits=digits, na="null"), # columns as rows
-                   "group" = jsonlite::toJSON(group, na="null"))
-    output <- paste0("{", paste0("\"", names(output), "\" :", output, collapse=","), "}")
-    strip_whitespace(output)
+    output <- list(indID = indID,
+                   var = variables,
+                   corr = corr,
+                   rows = rows-1,
+                   cols = cols-1,
+                   dat =  t(dat), # columns as rows
+                   group = group)
 }

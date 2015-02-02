@@ -5,9 +5,7 @@
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
 iplotCorr(mat, group, rows, cols, reorder = FALSE, corr = stats::cor(mat,
-  use = "pairwise.complete.obs"), file, onefile = FALSE, openfile = TRUE,
-  title = "", chartdivid = "chart", caption, chartOpts = NULL,
-  digits = 4, print = FALSE)
+  use = "pairwise.complete.obs"), chartOpts = NULL)
 }
 \arguments{
 \item{mat}{Data matrix (individuals x variables)}
@@ -26,34 +24,12 @@ overall correlation matrix}
 
 \item{corr}{Correlation matrix (optional).}
 
-\item{file}{Optional character vector with file to contain the
-output}
-
-\item{onefile}{If TRUE, have output file contain all necessary
-javascript/css code}
-
-\item{openfile}{If TRUE, open the plot in the default web browser}
-
-\item{title}{Character string with title for plot}
-
-\item{chartdivid}{Character string for id of div to hold the chart}
-
-\item{caption}{Character vector with text for a caption (to be
-combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=""})}
-
 \item{chartOpts}{A list of options for configuring the chart (see
-the coffeescript code). Each element must be named using the
-corresponding option.}
-
-\item{digits}{Number of digits in JSON; pass to
-\code{\link[jsonlite]{toJSON}}}
-
-\item{print}{If TRUE, print the output, rather than writing it to a file,
-  for use within an R Markdown document.}
+  the coffeescript code). Each element must be named using the
+  corresponding option.}
 }
 \value{
-Character string with the name of the file created.
+None.
 }
 \description{
 Creates an interactive graph with an image of a
@@ -72,18 +48,9 @@ Individual IDs are taken from \code{rownames(mat)}; they must match
 \examples{
 data(geneExpr)
 \donttest{
-# open iplotCorr in web browser
 iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
-          title = "iplotCorr example",
           chartOpts=list(cortitle="Correlation matrix",
                          scattitle="Scatterplot"))}
-\dontshow{
-# save to temporary file but don't open
-iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
-          title = "iplotCorr example",
-          chartOpts=list(cortitle="Correlation matrix",
-                         scattitle="Scatterplot"),
-          openfile=FALSE)}
 }
 \seealso{
 \code{\link{iheatmap}}, \code{\link{iplotCurves}}

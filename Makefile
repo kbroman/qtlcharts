@@ -96,7 +96,7 @@ ${CHART_DIR}/%.js: ${CHART_DIR}/%.coffee
 # javascript for the widgets called from R
 JSWIDGETS = ${WIDGET_DIR}/iplot.js ${WIDGET_DIR}/iplotPXG.js \
 			${WIDGET_DIR}/iplotMap.js ${WIDGET_DIR}/iheatmap.js \
-			${WIDGET_DIR}/iboxplot.js
+			${WIDGET_DIR}/iboxplot.js ${WIDGET_DIR}/iplotCorr.js
 jswidgets: ${JSWIDGETS}
 
 ${WIDGET_DIR}/%.js: ${WIDGET_DIR}/%.coffee

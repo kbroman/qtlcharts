@@ -12,23 +12,10 @@
 #'     name; numeric values are converted to strings.  Refer to
 #'     chromosomes with a preceding \code{-} to have all chromosomes but
 #'     those considered.  A logical (TRUE/FALSE) vector may also be used.
-#' @param file Optional character vector with file to contain the
-#'   output.
-#' @param onefile If TRUE, have output file contain all necessary
-#'   javascript/css code.
-#' @param openfile If TRUE, open the plot in the default web browser.
-#' @param title Character string with title for plot.
-#' @param chartdivid Character string for id of div to hold the chart
-#' @param caption Character vector with text for a caption (to be
-#'     combined to one string with \code{\link[base]{paste}}, with
-#'     \code{collapse=""})
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'     element must be named using the corresponding option.
-#' @param digits Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.
-#' @param print If TRUE, print the output, rather than writing it to a file,
-#'     for use within an R Markdown document.
 #'
-#' @return Character string with the name of the file created.
+#' @return None.
 #'
 #' @keywords hplot
 #' @seealso \code{\link[qtl]{est.rf}}, \code{\link[qtl]{plotRF}}
@@ -38,54 +25,32 @@
 #' data(hyper)
 #' hyper <- est.rf(hyper)
 #' \donttest{
-#' # open iplotRF in web browser
 #' iplotRF(hyper)}
-#' \dontshow{
-#' # save to temporary file but don't open
-#' iplotRF(hyper, openfile=FALSE)}
 #'
 #' @export
 iplotRF <-
-function(cross, chr, file, onefile=FALSE, openfile=TRUE, title="",
-         chartdivid='chart', caption, chartOpts=NULL, digits=4, print=FALSE)
+function(cross, chr, chartOpts=NULL)
 {
     if(!missing(chr)) cross <- cross[chr,]
 
-    if(missing(file)) file <- NULL
+    rf <- data4iplotRF(cross)
+    geno <- convert4crosstab(cross)
 
-    if(missing(caption) || is.null(caption))
-        caption <- c('The heatmap displays LOD scores indicating linkage between all ',
-                     'pairs of markers. Blue indicates large LOD with rf < 1/2; red ',
-                     'indicates large LOD but with rf > 1/2. ',
-                     'Click on the heatmap to view the corresponding two-locus ',
-                     'genotype table to the right and LOD scores for selected markers, ',
-                     'below. In the subsequent cross-tabulation on right, hover over column ',
-                     'and row headings to view conditional distributions. In the panels below, ',
-                     'hover over points to view marker names and click to refresh the cross-tab ',
-                     'and lower panels with the selected marker.')
+    htmlwidgets::createWidget("iplotRF", list(rfdata=rf, genodata=geno,
+                                              chartOpts=chartOpts),
+                              width=chartOpts$width,
+                              height=chartOpts$height,
+                              package="qtlcharts")
+}
 
-    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "panelutil"),
-                      panels=c("chrheatmap", "crosstab", "lodchart"), charts="iplotRF", chartdivid=chartdivid,
-                      caption=caption, print=print)
-
-    rf_json <- data4iplotRF(cross)
-    geno_json <- convert4crosstab(cross)
-
-    # add chartdivid to chartOpts
-    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
-
-    append_html_jscode(file, paste0(chartdivid, '_rfdata = '), rf_json, ';')
-    append_html_jscode(file, paste0(chartdivid, '_geno = '), geno_json, ';')
-    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-    append_html_jscode(file, paste0('iplotRF(', chartdivid, '_rfdata,',
-                                    chartdivid, '_geno,',
-                                    chartdivid, '_chartOpts);'))
-
-    append_html_bottom(file, print=print)
-
-    if(openfile && !print) utils::browseURL(file)
-
-    invisible(file)
+#' @export
+iplotRF_output <- function(outputId, width="100%", height="580") {
+    htmlwidgets::shinyWidgetOutput(outputId, "iplotRF", width, height, package="qtlcharts")
+}
+#' @export
+iplotRF_render <- function(expr, env=parent.frame(), quoted=FALSE) {
+    if(!quoted) { expr <- substitute(expr) } # force quoted
+    htmlwidgets::shinyRenderWidget(expr, iplotRF_output, env, quoted=TRUE)
 }
 
 # convert RF/LOD and genotypes for iplotRF
@@ -109,7 +74,6 @@ function(cross)
     chr <- as.character(map[,1])
     pos <- map[,2]
 
-    jsonlite::toJSON(list(rf=rf, nmar=n.mar, chrnames=chrnam,
-                          labels=mnames, chr=chr, pos=pos),
-                     na="null")
+    list(rf=rf, nmar=n.mar, chrnames=chrnam,
+         labels=mnames, chr=chr, pos=pos)
 }

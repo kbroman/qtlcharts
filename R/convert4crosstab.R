@@ -64,8 +64,5 @@ function(cross, chr)
     # make it a list, and convert to 0, 1, 2, ...
     geno <- as.list(as.data.frame(geno - 1))
 
-    # chrtype
-    chrtype <- lapply(chrtype, jsonlite::unbox)
-
-    jsonlite::toJSON(list(geno=geno, genocat=genocat, chrtype=chrtype), na="null")
+    list(geno=geno, genocat=genocat, chrtype=chrtype)
 }

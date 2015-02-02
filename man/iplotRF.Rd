@@ -4,9 +4,7 @@
 \alias{iplotRF}
 \title{Interactive plot of recombination fractions}
 \usage{
-iplotRF(cross, chr, file, onefile = FALSE, openfile = TRUE, title = "",
-  chartdivid = "chart", caption, chartOpts = NULL, digits = 4,
-  print = FALSE)
+iplotRF(cross, chr, chartOpts = NULL)
 }
 \arguments{
 \item{cross}{Object of class \code{"cross"}, see
@@ -18,32 +16,11 @@ name; numeric values are converted to strings.  Refer to
 chromosomes with a preceding \code{-} to have all chromosomes but
 those considered.  A logical (TRUE/FALSE) vector may also be used.}
 
-\item{file}{Optional character vector with file to contain the
-output.}
-
-\item{onefile}{If TRUE, have output file contain all necessary
-javascript/css code.}
-
-\item{openfile}{If TRUE, open the plot in the default web browser.}
-
-\item{title}{Character string with title for plot.}
-
-\item{chartdivid}{Character string for id of div to hold the chart}
-
-\item{caption}{Character vector with text for a caption (to be
-combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=""})}
-
 \item{chartOpts}{A list of options for configuring the chart.  Each
-element must be named using the corresponding option.}
-
-\item{digits}{Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.}
-
-\item{print}{If TRUE, print the output, rather than writing it to a file,
-    for use within an R Markdown document.}
+    element must be named using the corresponding option.}
 }
 \value{
-Character string with the name of the file created.
+None.
 }
 \description{
 Creates an interactive graph of estimated recombination fractions and LOD scores for all pairs of markers.
@@ -53,11 +30,7 @@ library(qtl)
 data(hyper)
 hyper <- est.rf(hyper)
 \donttest{
-# open iplotRF in web browser
 iplotRF(hyper)}
-\dontshow{
-# save to temporary file but don't open
-iplotRF(hyper, openfile=FALSE)}
 }
 \seealso{
 \code{\link[qtl]{est.rf}}, \code{\link[qtl]{plotRF}}

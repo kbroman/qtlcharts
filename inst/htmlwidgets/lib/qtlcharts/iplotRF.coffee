@@ -1,7 +1,7 @@
 # iplotRF: interactive plot of pairwise recombination fractions
 # Karl W Broman
 
-iplotRF = (rf_data, geno, chartOpts) ->
+iplotRF = (el, rf_data, geno, chartOpts) ->
 
     # chartOpts start
     pixelPerCell = chartOpts?.pixelPerCell ? null # pixels per cell in heat map
@@ -10,7 +10,7 @@ iplotRF = (rf_data, geno, chartOpts) ->
     cellWidth = chartOpts?.cellWidth ? 80 # cell width (in pixels) in crosstab
     cellPad = chartOpts?.cellPad ? 20 # cell padding (in pixels) to right of text in crosstab
     hbot = chartOpts?.hbot ? 300 # height (in pixels) of each of the lower panels with rf and LOD across genome
-    fontsize = chartOpts?.fontsize ? cellHeight*0.7 # font size in crosstab    
+    fontsize = chartOpts?.fontsize ? cellHeight*0.7 # font size in crosstab
     margin = chartOpts?.margin ? {left:60, top:30, right:10, bottom: 40, inner: 5} # margins in each panel
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # axis positions in heatmap
     lightrect = chartOpts?.lightrect ? "#e6e6e6" # background color in heatmap and crosstab; light rect in lower panels with LOD and rf
@@ -26,7 +26,7 @@ iplotRF = (rf_data, geno, chartOpts) ->
     oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
-  
+
     # size of heatmap region
     totmar = sumArray(rf_data.nmar)
     pixelPerCell = d3.max([2, Math.floor(600/totmar)]) unless pixelPerCell?
@@ -41,7 +41,7 @@ iplotRF = (rf_data, geno, chartOpts) ->
     crosstab_xpos = heatmap_width
     crosstab_ypos = (heatmap_height - crosstab_height)/2 - margin.top
     crosstab_ypos = 0 if crosstab_ypos < 0
-    
+
     # height of lower panels
     wbot = (heatmap_width + crosstab_width)/2
 
@@ -51,12 +51,9 @@ iplotRF = (rf_data, geno, chartOpts) ->
     totalh =  htop + hbot
 
     # create SVG
-    svg = d3.select("div##{chartdivid}")
-            .append("svg")
-            .attr("height", totalh)
-            .attr("width", totalw)
-  
-    # ensure lodlim has 0 <= lo < hi 
+    svg = d3.select(el).select("svg")
+
+    # ensure lodlim has 0 <= lo < hi
     if d3.min(lodlim) < 0
         displayError("lodlim values must be non-negative; ignored",
                      "error_#{chartdivid}")
@@ -162,7 +159,7 @@ iplotRF = (rf_data, geno, chartOpts) ->
                                .pointstroke(pointstroke)
                                .lodvarname("lod")
                                .title(data.markernames[markerindex])
-                               
+
         g_scans[panelindex] = svg.append("g")
                                  .attr("id", "lod_rf_#{panelindex+1}")
                                  .attr("transform", "translate(#{wbot*panelindex}, #{htop})")
@@ -196,7 +193,7 @@ iplotRF = (rf_data, geno, chartOpts) ->
                 .direction('e')
                 .offset([0,10])
     svg.call(celltip)
-    
+
     cells = mychrheatmap.cellSelect()
     cells.on("mouseover", (d) ->
                      celltip.show(d))

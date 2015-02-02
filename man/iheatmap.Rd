@@ -4,9 +4,7 @@
 \alias{iheatmap}
 \title{Interactive heat map}
 \usage{
-iheatmap(z, x, y, file, onefile = FALSE, openfile = TRUE, title = "",
-  chartdivid = "chart", caption, chartOpts = NULL, digits = 4,
-  print = FALSE)
+iheatmap(z, x, y, chartOpts = NULL)
 }
 \arguments{
 \item{z}{Numeric matrix of dim \code{length(x)} x \code{length(y)}}
@@ -15,33 +13,12 @@ iheatmap(z, x, y, file, onefile = FALSE, openfile = TRUE, title = "",
 
 \item{y}{Vector of numeric values for the y-axis}
 
-\item{file}{Optional character vector with file to contain the
-output}
-
-\item{onefile}{If TRUE, have output file contain all necessary
-javascript/css code}
-
-\item{openfile}{If TRUE, open the plot in the default web browser}
-
-\item{title}{Character string with title for plot}
-
-\item{chartdivid}{Character string for id of div to hold the chart}
-
-\item{caption}{Character vector with text for a caption (to be
-combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=""})}
-
 \item{chartOpts}{A list of options for configuring the chart (see
-the coffeescript code). Each element must be named using the
-corresponding option.}
-
-\item{digits}{Number of digits in JSON; passed to \code{\link[jsonlite]{toJSON}}}
-
-\item{print}{If TRUE, print the output, rather than writing it to a file,
-for use within an R Markdown document.}
+  the coffeescript code). Each element must be named using the
+  corresponding option.}
 }
 \value{
-Character string with the name of the file created.
+None.
 }
 \description{
 Creates an interactive heatmap, with each cell linked to
@@ -60,11 +37,7 @@ for(i in seq(along=x))
     for(j in seq(along=y))
         z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
 \donttest{
-# open iheatmap in web browser
-iheatmap(z, x, y, title = "iheatmap example")}
-\dontshow{
-iheatmap(z, x, y, title = "iheatmap example",
-         openfile=FALSE)}
+iheatmap(z, x, y)}
 }
 \seealso{
 \code{\link{iplotCorr}}

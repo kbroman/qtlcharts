@@ -37,13 +37,13 @@ customization options for each chart.
 
 ### `iheatmap`
 
-`htop = 500` &mdash; height of top charts in pixels
+`height = 800` &mdash; total height of chart
 
-`hbot = 500` &mdash; height of bottom chart in pixels
+`width = 800` &mdash; total width of chart
 
-`wleft = 500` &mdash; width of left charts in pixels
+`htop = height/2` &mdash; height of top charts in pixels
 
-`wright = 500` &mdash; width of right chart in pixels
+`wleft = width/2` &mdash; width of left charts in pixels
 
 `margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
 

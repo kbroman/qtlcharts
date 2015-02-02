@@ -1,13 +1,13 @@
 # iheatmap: Interactive heatmap, linked to curves with the horizontal and vertical slices
 # Karl W Broman
 
-iheatmap = (data, chartOpts) ->
+iheatmap = (el, data, chartOpts) ->
 
     # chartOpts start
-    htop = chartOpts?.htop ? 500 # height of top charts in pixels
-    hbot = chartOpts?.hbot ? 500 # height of bottom chart in pixels
-    wleft = chartOpts?.wleft ? 500 # width of left charts in pixels
-    wright = chartOpts?.wright ? 500 # width of right chart in pixels
+    height = chartOpts?.height ? 800 # total height of chart
+    width  = chartOpts?.width  ? 800 # total width of chart
+    htop = chartOpts?.htop ? height/2 # height of top charts in pixels
+    wleft = chartOpts?.wleft ? width/2 # width of left charts in pixels
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
     titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
@@ -33,14 +33,11 @@ iheatmap = (data, chartOpts) ->
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
-    totalh = htop + hbot + 2*(margin.top + margin.bottom)
-    totalw = wleft + wright + 2*(margin.left + margin.right)
+    hbot = height - htop
+    wright = width - wleft
 
-    # Select the svg element, if it exists.
-    svg = d3.select("div##{chartdivid}")
-            .append("svg")
-            .attr("height", totalh)
-            .attr("width", totalw)
+    # Select the svg element
+    svg = d3.select(el).select("svg")
 
     unless xlim?
         xlim = d3.extent(data.x)
@@ -54,8 +51,8 @@ iheatmap = (data, chartOpts) ->
         ylim[1] += ydif
 
     ## configure the three charts
-    myheatmap = heatmap().width(wleft)
-                         .height(htop)
+    myheatmap = heatmap().width(wleft-margin.left-margin.right)
+                         .height(htop-margin.top-margin.bottom)
                          .margin(margin)
                          .axispos(axispos)
                          .titlepos(titlepos)
@@ -73,8 +70,8 @@ iheatmap = (data, chartOpts) ->
                          .colors(colors)
                          .nullcolor(nullcolor)
 
-    horslice = curvechart().width(wleft)
-                           .height(hbot)
+    horslice = curvechart().width(wleft-margin.left-margin.right)
+                           .height(hbot-margin.top-margin.bottom)
                            .margin(margin)
                            .axispos(axispos)
                            .titlepos(titlepos)
@@ -90,8 +87,8 @@ iheatmap = (data, chartOpts) ->
                            .strokecolor("")
                            .commonX(true)
 
-    verslice = curvechart().width(wright)
-                           .height(htop)
+    verslice = curvechart().width(wright-margin.left-margin.right)
+                           .height(htop-margin.top-margin.bottom)
                            .margin(margin)
                            .axispos(axispos)
                            .titlepos(titlepos)
@@ -128,17 +125,15 @@ iheatmap = (data, chartOpts) ->
                              removeVer()
                              removeHor()
 
-    shiftdown = htop+margin.top+margin.bottom
     g_horslice = svg.append("g")
                     .attr("id", "horslice")
-                    .attr("transform", "translate(0,#{shiftdown})")
+                    .attr("transform", "translate(0,#{htop})")
                     .datum({x:data.x, data:[pullVarAsArray(data.z, 0)]})
                     .call(horslice)
 
-    shiftright = wleft+margin.left+margin.right
     g_verslice = svg.append("g")
                     .attr("id", "verslice")
-                    .attr("transform", "translate(#{shiftright},0)")
+                    .attr("transform", "translate(#{wleft},0)")
                     .datum({x:data.y, data:[data.z[0]]})
                     .call(verslice)
 

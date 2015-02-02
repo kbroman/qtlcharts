@@ -4,9 +4,8 @@
 \alias{iplotScantwo}
 \title{Interactive plot of 2d genome scan}
 \usage{
-iplotScantwo(scantwoOutput, cross, lodcolumn = 1, pheno.col = 1, chr, file,
-  onefile = FALSE, openfile = TRUE, title = "", chartdivid = "chart",
-  caption, chartOpts = NULL, digits = 4, print = FALSE)
+iplotScantwo(scantwoOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
+  chartOpts = NULL)
 }
 \arguments{
 \item{scantwoOutput}{Output of \code{\link[qtl]{scantwo}}}
@@ -25,32 +24,11 @@ values are converted to strings. Refer to chromosomes with a
 preceding - to have all chromosomes but those considered. A logical
 (TRUE/FALSE) vector may also be used.}
 
-\item{file}{Optional character vector with file to contain the
-output.}
-
-\item{onefile}{If TRUE, have output file contain all necessary
-javascript/css code.}
-
-\item{openfile}{If TRUE, open the plot in the default web browser.}
-
-\item{title}{Character string with title for plot.}
-
-\item{chartdivid}{Character string for id of div to hold the chart}
-
-\item{caption}{Character vector with text for a caption (to be
-combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=""})}
-
 \item{chartOpts}{A list of options for configuring the chart.  Each
-element must be named using the corresponding option.}
-
-\item{digits}{Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.}
-
-\item{print}{If TRUE, print the output, rather than writing it to a file,
-for use within an R Markdown document.}
+  element must be named using the corresponding option.}
 }
 \value{
-Character string with the name of the file created.
+None.
 }
 \description{
 Creates an interactive plot of the results of
@@ -62,6 +40,13 @@ The estimated QTL effects, and the genotypes in the
 phenotype x genotype plot, in the right-hand panels, are derived
 following a single imputation to fill in missing data, and so are a
 bit crude.
+
+Note that the usual \code{height} and \code{width} options in
+\code{chartOpts} are ignored here. Instead, you may provide
+\code{pixelPerCell} (number of pixels per cell in the heat map),
+\code{chrGap} (gaps between chr in heat map), \code{wright} (width
+in pixels of right panels), and \code{hbot} (height in pixels of
+each of the lower panels)
 }
 \examples{
 library(qtl)
@@ -70,11 +55,7 @@ data(fake.f2)
 fake.f2 <- calc.genoprob(fake.f2, step=5)
 out <- scantwo(fake.f2, method="hk", verbose=FALSE)
 \donttest{
-# open iplotScantwo in web browser
 iplotScantwo(out, fake.f2)}
-\dontshow{
-# save to temporary file but don't open
-iplotScantwo(out, fake.f2, openfile=FALSE, chartOpts=list(zthresh=2))}
 }
 \seealso{
 \code{\link{iplotScanone}}

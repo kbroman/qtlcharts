@@ -18,28 +18,22 @@
 #'   values are converted to strings. Refer to chromosomes with a
 #'   preceding - to have all chromosomes but those considered. A logical
 #'   (TRUE/FALSE) vector may also be used.
-#' @param file Optional character vector with file to contain the
-#'   output.
-#' @param onefile If TRUE, have output file contain all necessary
-#'   javascript/css code.
-#' @param openfile If TRUE, open the plot in the default web browser.
-#' @param title Character string with title for plot.
-#' @param chartdivid Character string for id of div to hold the chart
-#' @param caption Character vector with text for a caption (to be
-#'   combined to one string with \code{\link[base]{paste}}, with
-#'   \code{collapse=""})
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option.
-#' @param digits Number of digits in JSON; passed to \cite{\link[jsonlite]{toJSON}}.
-#' @param print If TRUE, print the output, rather than writing it to a file,
-#' for use within an R Markdown document.
 #'
-#' @return Character string with the name of the file created.
+#' @return None.
 #'
 #' @details The estimated QTL effects, and the genotypes in the
 #' phenotype x genotype plot, in the right-hand panels, are derived
 #' following a single imputation to fill in missing data, and so are a
 #' bit crude.
+#'
+#' Note that the usual \code{height} and \code{width} options in
+#' \code{chartOpts} are ignored here. Instead, you may provide
+#' \code{pixelPerCell} (number of pixels per cell in the heat map),
+#' \code{chrGap} (gaps between chr in heat map), \code{wright} (width
+#' in pixels of right panels), and \code{hbot} (height in pixels of
+#' each of the lower panels)
 #'
 #' @keywords hplot
 #' @seealso \code{\link{iplotScanone}}
@@ -51,19 +45,12 @@
 #' fake.f2 <- calc.genoprob(fake.f2, step=5)
 #' out <- scantwo(fake.f2, method="hk", verbose=FALSE)
 #' \donttest{
-#' # open iplotScantwo in web browser
 #' iplotScantwo(out, fake.f2)}
-#' \dontshow{
-#' # save to temporary file but don't open
-#' iplotScantwo(out, fake.f2, openfile=FALSE, chartOpts=list(zthresh=2))}
 #'
 #' @export
 iplotScantwo <-
 function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
-         file, onefile=FALSE, openfile=TRUE, title="",
-         chartdivid='chart',
-         caption, chartOpts=NULL,
-         digits=4, print=FALSE)
+         chartOpts=NULL)
 {
     if(!any(class(scantwoOutput) == "scantwo"))
         stop('"scantwoOutput" should have class "scantwo".')
@@ -98,37 +85,28 @@ function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
         pheno <- qtl::pull.pheno(cross, pheno.col)
     else cross <- pheno <- NULL
 
-    if(missing(file)) file <- NULL
+    scantwo_list <- data4iplotScantwo(scantwoOutput)
+    phenogeno_list <- cross4iplotScantwo(scantwoOutput, cross, pheno)
 
-    if(missing(caption) || is.null(caption))
-        caption <- c('Use the drop-down menus to select the LOD scores to plot. ',
-                     'Hover over the heatmap to view the LOD scores; click to view cross-sectional ',
-                     'slices below and QTL effects plots to the right.')
-
-    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "colorbrewer", "panelutil"),
-                      panels=c("lodchart", "cichart", "dotchart", "chrheatmap"),
-                      charts="iplotScantwo", chartdivid=chartdivid,
-                      caption=caption, print=print)
-
-    scantwo_json <- data4iplotScantwo(scantwoOutput, digits=digits)
-    phenogeno_json <- cross4iplotScantwo(scantwoOutput, cross, pheno, digits=digits)
-
-    # add chartdivid to chartOpts
-    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
-
-    append_html_jscode(file, paste0(chartdivid, '_scantwo_data = '), scantwo_json, ';')
-    append_html_jscode(file, paste0(chartdivid, '_phenogeno_data = '), phenogeno_json, ';')
-    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-    append_html_jscode(file, paste0('iplotScantwo(', chartdivid, '_scantwo_data,',
-                                    chartdivid, '_phenogeno_data,',
-                                    chartdivid, '_chartOpts);'))
-
-    append_html_bottom(file, print=print)
-
-    if(openfile && !print) utils::browseURL(file)
-
-    invisible(file)
+    htmlwidgets::createWidget("iplotScantwo",
+                              list(scantwo_data=scantwo_list,
+                                   phenogeno_data=phenogeno_list,
+                                   chartOpts=chartOpts),
+                              width=chartOpts$width,
+                              height=chartOpts$height,
+                              package="qtlcharts")
 }
+
+#' @export
+iplotScantwo_output <- function(outputId, width="100%", height="1000") {
+    htmlwidgets::shinyWidgetOutput(outputId, "iplotScantwo", width, height, package="qtlcharts")
+}
+#' @export
+iplotScantwo_render <- function(expr, env=parent.frame(), quoted=FALSE) {
+    if(!quoted) { expr <- substitute(expr) } # force quoted
+    htmlwidgets::shinyRenderWidget(expr, iplotScantwo_output, env, quoted=TRUE)
+}
+
 
 # convert scantwo output to JSON format
 data4iplotScantwo <-
@@ -149,10 +127,9 @@ data4iplotScantwo <-
 
     dimnames(lod) <- NULL
     dimnames(lodv1) <- NULL
-    jsonlite::toJSON(list(lod=lod, lodv1=lodv1,
-                          nmar=n.mar, chrnames=chrnam,
-                          labels=labels, chr=chr, pos=map$pos),
-                     na="null", digits=digits)
+    list(lod=lod, lodv1=lodv1,
+         nmar=n.mar, chrnames=chrnam,
+         labels=labels, chr=chr, pos=map$pos)
 }
 
 
@@ -298,6 +275,5 @@ cross4iplotScantwo <-
     indID <- qtl::getid(cross)
     if(is.null(indID)) indID <- 1:qtl::nind(cross)
 
-    jsonlite::toJSON(list(geno=geno, chr=as.list(chr), genonames=genonames, pheno=pheno, indID=indID),
-                     auto_unbox=TRUE, digits=digits, na="null")
+    list(geno=geno, chr=as.list(chr), genonames=genonames, pheno=pheno, indID=indID)
 }

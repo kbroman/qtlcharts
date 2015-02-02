@@ -1,7 +1,7 @@
 # iplotScantwo: interactive plot of scantwo results (2-dim, 2-QTL genome scan)
 # Karl W Broman
 
-iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
+iplotScantwo = (el, scantwo_data, pheno_and_geno, chartOpts) ->
 
     # chartOpts start
     pixelPerCell = chartOpts?.pixelPerCell ? null # pixels per cell in heat map
@@ -115,8 +115,7 @@ iplotScantwo = (scantwo_data, pheno_and_geno, chartOpts) ->
       .insert("p", "div##{chartdivid}")
 
     # create SVG
-    svg = d3.select("div##{chartdivid}")
-            .append("svg")
+    svg = d3.select(el).select("svg")
             .attr("height", totalh)
             .attr("width", totalw)
 

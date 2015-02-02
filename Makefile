@@ -98,7 +98,7 @@ JSWIDGETS = ${WIDGET_DIR}/iplot.js ${WIDGET_DIR}/iplotPXG.js \
 			${WIDGET_DIR}/iplotMap.js ${WIDGET_DIR}/iheatmap.js \
 			${WIDGET_DIR}/iboxplot.js ${WIDGET_DIR}/iplotCorr.js \
 			${WIDGET_DIR}/iplotCurves.js ${WIDGET_DIR}/iplotRF.js \
-			${WIDGET_DIR}/iplotScanone.js
+			${WIDGET_DIR}/iplotScanone.js ${WIDGET_DIR}/iplotMScanone.js
 jswidgets: ${JSWIDGETS}
 
 ${WIDGET_DIR}/%.js: ${WIDGET_DIR}/%.coffee

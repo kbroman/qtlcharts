@@ -5,9 +5,7 @@
 \title{Interactive LOD curve}
 \usage{
 iplotMScanone(scanoneOutput, cross, lodcolumn, pheno.col, times = NULL,
-  effects, chr, file, onefile = FALSE, openfile = TRUE, title = "",
-  chartdivid = "chart", caption, chartOpts = NULL, digits = 4,
-  print = FALSE)
+  effects, chr, chartOpts = NULL)
 }
 \arguments{
 \item{scanoneOutput}{Object of class \code{"scanone"}, as output
@@ -36,34 +34,12 @@ values are converted to strings. Refer to chromosomes with a
 preceding - to have all chromosomes but those considered. A logical
 (TRUE/FALSE) vector may also be used.}
 
-\item{file}{Optional character vector with file to contain the
-output}
-
-\item{onefile}{If TRUE, have output file contain all necessary
-javascript/css code}
-
-\item{openfile}{If TRUE, open the plot in the default web browser}
-
-\item{title}{Character string with title for plot}
-
-\item{chartdivid}{Character string for id of div to hold the chart}
-
-\item{caption}{Character vector with text for a caption (to be
-combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=""})}
-
 \item{chartOpts}{A list of options for configuring the chart (see
-the coffeescript code). Each element must be named using the
-corresponding option.}
-
-\item{digits}{Number of digits in JSON; passed to
-\code{\link[jsonlite]{toJSON}}}
-
-\item{print}{If TRUE, print the output, rather than writing it to a file,
-for use within an R Markdown document.}
+  the coffeescript code). Each element must be named using the
+  corresponding option.}
 }
 \value{
-Character string with the name of the file created.
+None.
 }
 \description{
 Creates an interactive graph of a set of single-QTL genome scans, as
@@ -91,20 +67,12 @@ times <- attr(grav, "time")[phecol]
 out <- scanone(grav, phe=phecol, method="hk")
 
 \donttest{
-# plot with qualitative labels on y-axis (in web browser)
-iplotMScanone(out, title="iplotMScanone example, no effects")}
-\dontshow{
-# save to temporary file but don't open
-iplotMScanone(out, title="iplotMScanone example, no effects",
-              openfile=FALSE)}
+# plot with qualitative labels on y-axis
+iplotMScanone(out)}
 
 \donttest{
 # plot with quantitative y-axis
-iplotMScanone(out, times=times, title="iplotMScanone example, no effects")}
-\dontshow{
-# save to temporary file but don't open
-iplotMScanone(out, times=times, title="iplotMScanone example, no effects",
-              openfile=FALSE)}
+iplotMScanone(out, times=times)}
 
 # estimate QTL effect for each time point at each genomic position
 eff <- estQTLeffects(grav, phe=seq(1, nphe(grav), by=5), what="effects")
@@ -112,14 +80,7 @@ eff <- estQTLeffects(grav, phe=seq(1, nphe(grav), by=5), what="effects")
 \donttest{
 # plot with QTL effects included (and with quantitative y-axis)
 iplotMScanone(out, effects=eff, times=times,
-              title="iplotMScanone example, with effects",
               chartOpts=list(eff_ylab="QTL effect", eff_xlab="Time (hrs)"))}
-\dontshow{
-# save to temporary file but don't open
-iplotMScanone(out, effects=eff, times=times,
-              title="iplotMScanone example, with effects",
-              chartOpts=list(eff_ylab="QTL effect", eff_xlab="Time (hrs)"),
-              openfile=FALSE)}
 }
 \seealso{
 \code{\link{iplotScanone}}

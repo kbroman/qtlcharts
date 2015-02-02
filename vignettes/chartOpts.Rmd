@@ -465,13 +465,13 @@ customization options for each chart.
 
 ### `iplotMScanone` (no effects)
 
-`wleft = 650` &mdash; width of left panels in pixels
+`height = 700` &mdash; height of chart in pixels
 
-`wright = 350` &mdash; width of right panel in pixels
+`width = 1000` &mdash; width of chart in pixels
 
-`htop = 350` &mdash; height of top panels in pixels
+`wleft = width*0.65` &mdash; width of left panels in pixels
 
-`hbot = 350` &mdash; height of bottom panel in pixels
+`htop = height/2` &mdash; height of top panels in pixels
 
 `margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
 
@@ -585,13 +585,13 @@ customization options for each chart.
 
 ### `iplotMScanone` (with effects)
 
-`wleft = 650` &mdash; width of left panels in pixels
+`height = 700` &mdash; height of chart in pixels
 
-`wright = 350` &mdash; width of right panel in pixels
+`width = 1000` &mdash; width of chart in pixels
 
-`htop = 350` &mdash; height of top panels in pixels
+`wleft = width*0.65` &mdash; width of left panels in pixels
 
-`hbot = 350` &mdash; height of bottom panel in pixels
+`htop = height/2` &mdash; height of top panels in pixels
 
 `margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
 

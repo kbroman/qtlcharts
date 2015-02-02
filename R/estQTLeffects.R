@@ -203,7 +203,7 @@ function(effects, crosstype, chrtype)
 }
 
 # strip off names; save colnames within the lists
-effects2json <-
+convert_effects <-
 function(effects, digits=4)
 {
     names(effects) <- NULL
@@ -218,5 +218,5 @@ function(effects, digits=4)
         effects[[i]] <- list(data=eff, x=(1:nr)-1, names=cn)
     }
 
-    strip_whitespace( jsonlite::toJSON(effects, digits=digits, na="null") )
+    effects
 }

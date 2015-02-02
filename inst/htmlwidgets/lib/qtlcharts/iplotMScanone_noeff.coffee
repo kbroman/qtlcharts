@@ -1,13 +1,13 @@
 # iplotMScanone_noeff: image of lod curves linked to plot of lod curves
 # Karl W Broman
 
-iplotMScanone_noeff = (lod_data, times, chartOpts) ->
+iplotMScanone_noeff = (el, lod_data, times, chartOpts) ->
 
     # chartOpts start
-    wleft = chartOpts?.wleft ? 650 # width of left panels in pixels
-    wright = chartOpts?.wright ? 350 # width of right panel in pixels
-    htop = chartOpts?.htop ? 350 # height of top panels in pixels
-    hbot = chartOpts?.hbot ? 350 # height of bottom panel in pixels
+    height = chartOpts?.height ? 700 # height of chart in pixels
+    width = chartOpts?.width ? 1000 # width of chart in pixels
+    wleft = chartOpts?.wleft ? width*0.65 # width of left panels in pixels
+    htop = chartOpts?.htop ? height/2 # height of top panels in pixels
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
     titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
@@ -26,16 +26,16 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
     lod_labels = chartOpts?.lod_labels ? null # optional vector of strings, for LOD column labels
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
-  
-    totalh = htop + hbot + 2*(margin.top + margin.bottom)
-    totalw = wleft + wright + 2*(margin.left + margin.right)
-  
+
+    wright = width - wleft
+    hbot = height - htop
+
     # if quant scale, use times as labels; otherwise use lod_data.lodnames
     unless lod_labels?
         lod_labels = if times? then (formatAxis(times, extra_digits=1)(x) for x in times) else lod_data.lodnames
 
-    mylodheatmap = lodheatmap().height(htop)
-                               .width(wleft)
+    mylodheatmap = lodheatmap().height(htop-margin.top-margin.bottom)
+                               .width(wleft-margin.left-margin.right)
                                .margin(margin)
                                .axispos(axispos)
                                .titlepos(titlepos)
@@ -48,19 +48,16 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                                .lod_labels(lod_labels)
                                .ylab(lod_ylab)
                                .nullcolor(nullcolor)
-  
-    svg = d3.select("div##{chartdivid}")
-            .append("svg")
-            .attr("height", totalh)
-            .attr("width", totalw)
-  
+
+    svg = d3.select(el).select("svg")
+
     g_heatmap = svg.append("g")
                    .attr("id", "heatmap")
                    .datum(lod_data)
                    .call(mylodheatmap)
-  
-    mylodchart = lodchart().height(hbot)
-                           .width(wleft)
+
+    mylodchart = lodchart().height(hbot-margin.top-margin.bottom)
+                           .width(wleft-margin.left-margin.right)
                            .margin(margin)
                            .axispos(axispos)
                            .titlepos(titlepos)
@@ -71,19 +68,19 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                            .lightrect(lightrect)
                            .ylim([0, d3.max(mylodheatmap.zlim())])
                            .pointsAtMarkers(false)
-  
+
     g_lodchart = svg.append("g")
-                    .attr("transform", "translate(0,#{htop+margin.top+margin.bottom})")
+                    .attr("transform", "translate(0,#{htop})")
                     .attr("id", "lodchart")
                     .datum(lod_data)
                     .call(mylodchart)
-  
+
     # function for lod curve path
     lodcurve = (chr, lodcolumn) ->
             d3.svg.line()
                   .x((d) -> mylodchart.xscale()[chr](d))
                   .y((d,i) -> mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn])))
-  
+
     # plot lod curves for selected lod column
     lodchart_curves = null
     plotLodCurve = (lodcolumn) ->
@@ -96,16 +93,16 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                            .attr("fill", "none")
                            .attr("stroke-width", linewidth)
                            .style("pointer-events", "none")
-  
+
     # rearrange data for curves of time x LOD
     lod4curves = {data:[]}
     for pos of lod_data.pos
         y = (Math.abs(lod_data[lodcolumn][pos]) for lodcolumn in lod_data.lodnames)
         x = (+i for i of lod_data.lodnames)
         lod4curves.data.push({x:x, y:y})
-  
-    mycurvechart = curvechart().height(htop)
-                               .width(wright)
+
+    mycurvechart = curvechart().height(htop-margin.top-margin.bottom)
+                               .width(wright-margin.left-margin.right)
                                .margin(margin)
                                .axispos(axispos)
                                .titlepos(titlepos)
@@ -117,13 +114,13 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
                                .ylim([0, d3.max(mylodheatmap.zlim())])
                                .nxticks(0)
                                .commonX(false)
-  
+
     g_curvechart = svg.append("g")
-                      .attr("transform", "translate(#{wleft+margin.top+margin.bottom},0)")
+                      .attr("transform", "translate(#{wleft},0)")
                       .attr("id", "curvechart")
                       .datum(lod4curves)
                       .call(mycurvechart)
-  
+
     # add X axis
     if times? # use quantitative axis
         xscale = d3.scale.linear().range(mycurvechart.xscale().range())
@@ -169,11 +166,11 @@ iplotMScanone_noeff = (lod_data, times, chartOpts) ->
         for pos in lod_data.posByChr[chr]
             posindex[chr][pos] = curindex
             curindex += 1
-  
+
     mycurvechart.curvesSelect()
                 .on("mouseover.panel", null)
                 .on("mouseout.panel", null)
-  
+
     mylodheatmap.cellSelect()
                 .on "mouseover", (d) ->
                          plotLodCurve(d.lodindex)

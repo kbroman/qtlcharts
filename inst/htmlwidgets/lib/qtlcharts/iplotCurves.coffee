@@ -1,12 +1,12 @@
 # iplotCurves: Plot of a bunch of curves, linked to points in 0, 1, or 2 scatterplots
 # Karl W Broman
 
-iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
+iplotCurves = (el, curve_data, scatter1_data, scatter2_data, chartOpts) ->
 
     # chartOpts start
-    htop = chartOpts?.htop ? 500 # height of curves chart in pixels
-    hbot = chartOpts?.hbot ? 500 # height of scatterplots in pixels
-    width = chartOpts?.width ? 1000 # width of chart in pixels
+    height = chartOpts?.height ? 1000 # total height of chart in pixels
+    width =  chartOpts?.width ? 1000 # total width of chart in pixels
+    htop = chartOpts?.htop ? height/2 # height of curves chart in pixels
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
     titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
@@ -20,7 +20,7 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
     strokecolorhilit = chartOpts?.strokecolorhilit ? chartOpts?.colorhilit ? null # vector of colors of curves, when highlighted
     strokewidth = chartOpts?.strokewidth ? 2 # line width of curves
     strokewidthhilit = chartOpts?.strokewidthhilit ? 2 # line widths of curves, when highlighted
-  
+
     curves_xlim = chartOpts?.curves_xlim ? null # x-axis limits in curve plot
     curves_ylim = chartOpts?.curves_ylim ? null # y-axis limits in curve plot
     curves_nxticks = chartOpts?.curves_nxticks ? 5 # no. ticks on x-axis in curve plot
@@ -30,7 +30,7 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
     curves_title = chartOpts?.curves_title ? "" # title for curve plot
     curves_xlab = chartOpts?.curves_xlab ? chartOpts?.xlab ? "X" # x-axis label for curve plot
     curves_ylab = chartOpts?.curves_ylab ? chartOpts?.ylab ? "Y" # y-axis label for curve plot
-  
+
     scat1_xlim = chartOpts?.scat1_xlim ? null # x-axis limits in first scatterplot
     scat1_ylim = chartOpts?.scat1_ylim ? null # y-axis limits in first scatterplot
     scat1_xNA = chartOpts?.scat1_xNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values for x variable in first scatterplot (handle=T/F, force=T/F, width, gap)
@@ -42,7 +42,7 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
     scat1_title = chartOpts?.scat1_title ? "" # title for first scatterplot
     scat1_xlab = chartOpts?.scat1_xlab ? "X" # x-axis label for first scatterplot
     scat1_ylab = chartOpts?.scat1_ylab ? "Y" # y-axis label for first scatterplot
-  
+
     scat2_xlim = chartOpts?.scat2_xlim ? null # x-axis limits in second scatterplot
     scat2_ylim = chartOpts?.scat2_ylim ? null # y-axis limits in second scatterplot
     scat2_xNA = chartOpts?.scat2_xNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values for x variable in second scatterplot (handle=T/F, force=T/F, width, gap)
@@ -56,35 +56,41 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
     scat2_ylab = chartOpts?.scat2_ylab ? "Y" # y-axis label for second scatterplot
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
-  
+
     # number of scatterplots
     nscatter = (scatter1_data?) + (scatter2_data?)
-  
-    totalh = if nscatter==0 then (htop + margin.top + margin.bottom) else (htop + hbot + 2*(margin.top + margin.bottom))
-    totalw = width + margin.left + margin.right
-    wbot = (width - margin.left - margin.right)/2
-  
+
+    # panel heights and widths
+    htop = if nscatter==0 then height else htop
+    hbot = height - htop
+    htop = htop - (margin.top + margin.bottom) # remove margins
+    hbot = hbot - (margin.top + margin.bottom) # remove margins
+    wtop = (width - (margin.left + margin.top))
+    wbot = (width - 2*(margin.left + margin.right))/2
+    console.log("height: #{height}")
+    console.log("htop: #{htop}")
+    console.log("hbot: #{hbot}")
+    console.log("width: #{width}")
+    console.log("wtop: #{wtop}")
+    console.log("wbot: #{wbot}")
+
     # Select the svg element, if it exists.
-    svg = d3.select("div##{chartdivid}")
-            .append("svg")
-            .attr("height", totalh)
-            .attr("width", totalw)
-  
-  
+    svg = d3.select(el).select("svg")
+
     # groups of colors
     nind = curve_data.data.length
     group = curve_data?.group ? (1 for i in curve_data.data)
     ngroup = d3.max(group)
     group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
-  
+
     # colors of the points in the different groups
     pointcolor = pointcolor ? selectGroupColors(ngroup, "light")
     pointcolorhilit = pointcolorhilit ? selectGroupColors(ngroup, "dark")
     strokecolor = strokecolor ? selectGroupColors(ngroup, "light")
     strokecolorhilit = strokecolorhilit ? selectGroupColors(ngroup, "dark")
-  
+
     ## configure the three charts
-    mycurvechart = curvechart().width(width)
+    mycurvechart = curvechart().width(wtop)
                                .height(htop)
                                .margin(margin)
                                .axispos(axispos)
@@ -174,13 +180,13 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
     allpoints = [points1] if nscatter == 1
     allpoints = [points1, points2] if nscatter == 2
     curves = mycurvechart.curvesSelect()
-    
+
     # expand pointcolor and pointcolorhilit to length of group
     pointcolor = expand2vector(pointcolor, ngroup)
     pointcolorhilit = expand2vector(pointcolorhilit, ngroup)
     strokecolor = expand2vector(strokecolor, ngroup)
     strokecolorhilit = expand2vector(strokecolorhilit, ngroup)
-    
+
     curves.on "mouseover", (d,i) ->
                              d3.select(this).attr("stroke", strokecolorhilit[group[i]]).moveToFront()
                              d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit) if nscatter > 0
@@ -189,8 +195,8 @@ iplotCurves = (curve_data, scatter1_data, scatter2_data, chartOpts) ->
                              d3.select(this).attr("stroke", strokecolor[group[i]]).moveToBack()
                              d3.selectAll("circle.pt#{i}").attr("r", pointsize) if nscatter > 0
                              d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]]) if nscatter > 0
-    
-    
+
+
     if nscatter > 0
         allpoints.forEach (points) ->
             points.on "mouseover", (d,i) ->

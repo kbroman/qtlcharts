@@ -5,9 +5,7 @@
 \title{Plot of a bunch of curves, linked to points in scatterplots}
 \usage{
 iplotCurves(curveMatrix, times, scatter1 = NULL, scatter2 = NULL,
-  group = NULL, file, onefile = FALSE, openfile = TRUE, title = "",
-  chartdivid = "chart", caption, chartOpts = NULL, digits = 4,
-  print = FALSE)
+  group = NULL, chartOpts = NULL)
 }
 \arguments{
 \item{curveMatrix}{Matrix (dim n_ind x n_times) with outcomes}
@@ -23,34 +21,12 @@ scatterplot}
 
 \item{group}{Optional vector of groups of individuals (e.g., a genotype)}
 
-\item{file}{Optional character vector with file to contain the
-output}
-
-\item{onefile}{If TRUE, have output file contain all necessary
-javascript/css code}
-
-\item{openfile}{If TRUE, open the plot in the default web browser}
-
-\item{title}{Character string with title for plot}
-
-\item{chartdivid}{Character string for id of div to hold the chart}
-
-\item{caption}{Character vector with text for a caption (to be
-combined to one string with \code{\link[base]{paste}}, with
-\code{collapse=""})}
-
 \item{chartOpts}{A list of options for configuring the chart (see
-the coffeescript code). Each element must be named using the
-corresponding option.}
-
-\item{digits}{Number of digits in JSON; passed to
-\code{\link[jsonlite]{toJSON}}}
-
-\item{print}{If TRUE, print the output, rather than writing it to a file,
-for use within an R Markdown document.}
+  the coffeescript code). Each element must be named using the
+  corresponding option.}
 }
 \value{
-Character string with the name of the file created.
+None.
 }
 \description{
 Creates an interactive graph with a panel having a number of curves
@@ -73,20 +49,10 @@ for(j in 6:16)
 y <- y + rnorm(prod(dim(y)), 0, 0.35)
 
 \donttest{
-# open iplotCurves in web browser
 iplotCurves(y, times, y[,c(1,5)], y[,c(5,16)],
-            title = "iplotCurves example",
             chartOpts=list(curves_xlab="Time", curves_ylab="Size",
                            scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
                            scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))}
-\dontshow{
-# save to temporary file but don't open
-iplotCurves(y, times, y[,c(1,5)], y[,c(5,16)],
-            title = "iplotCurves example",
-            chartOpts=list(curves_xlab="Time", curves_ylab="Size",
-                           scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
-                           scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"),
-            openfile=FALSE)}
 }
 \seealso{
 \code{\link{iplotCorr}}

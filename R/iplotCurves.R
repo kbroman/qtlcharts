@@ -15,25 +15,11 @@
 #' @param scatter2 Matrix (dim n_ind x 2) with data for the second
 #'   scatterplot
 #' @param group Optional vector of groups of individuals (e.g., a genotype)
-#' @param file Optional character vector with file to contain the
-#'   output
-#' @param onefile If TRUE, have output file contain all necessary
-#'   javascript/css code
-#' @param openfile If TRUE, open the plot in the default web browser
-#' @param title Character string with title for plot
-#' @param chartdivid Character string for id of div to hold the chart
-#' @param caption Character vector with text for a caption (to be
-#'   combined to one string with \code{\link[base]{paste}}, with
-#'   \code{collapse=""})
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
-#' @param digits Number of digits in JSON; passed to
-#'   \code{\link[jsonlite]{toJSON}}
-#' @param print If TRUE, print the output, rather than writing it to a file,
-#' for use within an R Markdown document.
 #'
-#' @return Character string with the name of the file created.
+#' @return None.
 #'
 #' @keywords hplot
 #' @seealso \code{\link{iplotCorr}}
@@ -54,29 +40,16 @@
 #' y <- y + rnorm(prod(dim(y)), 0, 0.35)
 #'
 #' \donttest{
-#' # open iplotCurves in web browser
 #' iplotCurves(y, times, y[,c(1,5)], y[,c(5,16)],
-#'             title = "iplotCurves example",
 #'             chartOpts=list(curves_xlab="Time", curves_ylab="Size",
 #'                            scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
 #'                            scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"))}
-#' \dontshow{
-#' # save to temporary file but don't open
-#' iplotCurves(y, times, y[,c(1,5)], y[,c(5,16)],
-#'             title = "iplotCurves example",
-#'             chartOpts=list(curves_xlab="Time", curves_ylab="Size",
-#'                            scat1_xlab="Size at T=1", scat1_ylab="Size at T=5",
-#'                            scat2_xlab="Size at T=5", scat2_ylab="Size at T=16"),
-#'             openfile=FALSE)}
 #'
 #' @export
 iplotCurves <-
 function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
-         file, onefile=FALSE, openfile=TRUE, title="", chartdivid='chart',
-         caption, chartOpts=NULL, digits=4, print=FALSE)
+         chartOpts=NULL)
 {
-    if(missing(file)) file <- NULL
-
     n.ind <- nrow(curveMatrix)
     n.times <- ncol(curveMatrix)
     if(missing(times) || is.null(times)) times <- 1:ncol(curveMatrix)
@@ -95,70 +68,46 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
     group <- group2numeric(group)
     indID <- rownames(curveMatrix)
 
+    if(!is.null(scatter1)) # at least one scatterplot: use larger default dimensions
+        chartOpts <- add2chartOpts(chartOpts, height=800, width=800)
+
     if(is.data.frame(curveMatrix)) curveMatrix <- as.matrix(curveMatrix)
     if(is.data.frame(scatter1)) scatter1 <- as.matrix(scatter1)
     if(is.data.frame(scatter2)) scatter2 <- as.matrix(scatter2)
     dimnames(curveMatrix) <- dimnames(scatter1) <- dimnames(scatter2) <- names(group) <- names(times) <- NULL
 
-    if(missing(caption) || is.null(caption)) {
-        if(is.null(scatter1)) # no scatterplots
-            caption <- 'Hover over a curve to have it highlighted.'
-        else if(is.null(scatter2)) # one scatterplot
-            caption <- c('The curves are linked to the scatterplot below: ',
-                         'hover over an element in one panel, ',
-                         'and the corresponding element in the other panel will be highlighted.')
-        else
-            caption <- c('The curves are linked to the two scatterplots below: ',
-                         'hover over an element in one panel, ',
-                         'and the corresponding elements in the other panels will be highlighted.')
-    }
 
-    file <- write_top(file, onefile, title, links=c("d3", "d3tip", "colorbrewer", "panelutil"),
-                      panels=c("curvechart", "scatterplot"), charts="iplotCurves",
-                      chartdivid=chartdivid, caption=caption, print=print)
+    data_list <- list(curve_data=convert_curves(times, curveMatrix, group, indID),
+                      scatter1_data=convert_scat(scatter1, group, indID),
+                      scatter2_data=convert_scat(scatter2, group, indID))
 
-    # add chartdivid to chartOpts
-    chartOpts <- add2chartOpts(chartOpts, chartdivid=chartdivid)
-
-    append_html_jscode(file, paste0(chartdivid, '_curve_data = '),
-                       curves2json(times, curveMatrix, group, indID, digits=digits), ';')
-    append_html_jscode(file, paste0(chartdivid, '_scatter1_data = '),
-                       scat2json(scatter1, group, indID, digits=digits), ';')
-    append_html_jscode(file, paste0(chartdivid, '_scatter2_data = '),
-                       scat2json(scatter2, group, indID, digits=digits), ';')
-    append_html_chartopts(file, chartOpts, chartdivid=chartdivid)
-
-    append_html_jscode(file, paste0('iplotCurves(', chartdivid, '_curve_data, ',
-                                    chartdivid, '_scatter1_data, ',
-                                    chartdivid, '_scatter2_data, ',
-                                    chartdivid, '_chartOpts)'))
-
-    append_html_bottom(file, print=print)
-
-    if(openfile & !print) utils::browseURL(file)
-
-    invisible(file)
+    htmlwidgets::createWidget("iplotCurves", list(data=data_list, chartOpts=chartOpts),
+                              width=chartOpts$width,
+                              height=chartOpts$height,
+                              package="qtlcharts")
 }
 
-curves2json <-
-function(times, curvedata, group, indID, digits=4)
+#' @export
+iplotCurves_output <- function(outputId, width="100%", height="1000") {
+    htmlwidgets::shinyWidgetOutput(outputId, "iplotCurves", width, height, package="qtlcharts")
+}
+#' @export
+iplotCurves_render <- function(expr, env=parent.frame(), quoted=FALSE) {
+    if(!quoted) { expr <- substitute(expr) } # force quoted
+    htmlwidgets::shinyRenderWidget(expr, iplotCurves_output, env, quoted=TRUE)
+}
+
+
+convert_curves <-
+function(times, curvedata, group, indID)
 {
-    # NULL -> NA so treated properly by JSON
-    if(is.null(times)) times <- jsonlite::unbox(NA)
-    if(is.null(group)) group <- jsonlite::unbox(NA)
-    if(is.null(indID)) indID <- jsonlite::unbox(NA)
-
-    strip_whitespace( jsonlite::toJSON(list(x=times, data=curvedata, group=group, indID=indID), digits=digits, na="null") )
+    list(x=times, data=curvedata, group=group, indID=indID)
 }
 
-scat2json <-
+convert_scat <-
 function(scatdata, group, indID, digits=4)
 {
-    if(is.null(scatdata)) return("null")
+    if(is.null(scatdata)) return(NULL)
 
-    # NULL -> NA so treated properly by JSON
-    if(is.null(group)) group <- jsonlite::unbox(NA)
-    if(is.null(indID)) indID <- jsonlite::unbox(NA)
-
-    strip_whitespace( jsonlite::toJSON(list(data=scatdata, group=group, indID=indID), digits=digits, na="null") )
+    list(data=scatdata, group=group, indID=indID)
 }

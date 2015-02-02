@@ -155,11 +155,11 @@ customization options for each chart.
 
 ### `iplotCurves`
 
-`htop = 500` &mdash; height of curves chart in pixels
+`height = 1000` &mdash; total height of chart in pixels
 
-`hbot = 500` &mdash; height of scatterplots in pixels
+`width = 1000` &mdash; total width of chart in pixels
 
-`width = 1000` &mdash; width of chart in pixels
+`htop = height/2` &mdash; height of curves chart in pixels
 
 `margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
 

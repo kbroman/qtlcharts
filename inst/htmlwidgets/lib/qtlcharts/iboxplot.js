@@ -123,7 +123,7 @@ iboxplot = function(el, data, chartOpts) {
   }
   curves = svg.append("g").attr("id", "curves");
   for (j = _l = 0; 0 <= nQuant ? _l < nQuant : _l > nQuant; j = 0 <= nQuant ? ++_l : --_l) {
-    curves.append("path").datum(indindex).attr("d", quline(j)).attr("class", "line").attr("stroke", qucolors[j]).attr("pointer-events", "none");
+    curves.append("path").datum(indindex).attr("d", quline(j)).attr("class", "line").attr("stroke", qucolors[j]).attr("pointer-events", "none").attr("fill", "none");
   }
   indtip = d3.tip().attr('class', 'd3-tip').html(function(d) {
     return d;

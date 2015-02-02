@@ -185,6 +185,7 @@ iboxplot = (el, data, chartOpts) ->
            .attr("class", "line")
            .attr("stroke", qucolors[j])
            .attr("pointer-events", "none")
+           .attr("fill", "none")
 
     indtip = d3.tip()
                .attr('class', 'd3-tip')

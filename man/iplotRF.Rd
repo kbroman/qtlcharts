@@ -25,6 +25,16 @@ None.
 \description{
 Creates an interactive graph of estimated recombination fractions and LOD scores for all pairs of markers.
 }
+\details{
+The ususal \code{height} and \code{width} options in
+\code{chartOpts} are ignored in this plot. Instead, you may provide
+\code{pixelPerCell} (number of pixels per cell in the heat map),
+\code{chrGap} (gap in pixels between chromosomes in the heat map),
+\code{cellHeight} (height in pixels of each cell in the
+cross-tabulation), \code{cellWidth} (width in pixels of each cell
+in the cross-tabulation), and \code{hbot} (height in pixels of the
+lower panels showing cross-sections of the heat map)
+}
 \examples{
 library(qtl)
 data(hyper)

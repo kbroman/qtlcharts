@@ -20,6 +20,15 @@
 #' @keywords hplot
 #' @seealso \code{\link[qtl]{est.rf}}, \code{\link[qtl]{plotRF}}
 #'
+#' @details The ususal \code{height} and \code{width} options in
+#' \code{chartOpts} are ignored in this plot. Instead, you may provide
+#' \code{pixelPerCell} (number of pixels per cell in the heat map),
+#' \code{chrGap} (gap in pixels between chromosomes in the heat map),
+#' \code{cellHeight} (height in pixels of each cell in the
+#' cross-tabulation), \code{cellWidth} (width in pixels of each cell
+#' in the cross-tabulation), and \code{hbot} (height in pixels of the
+#' lower panels showing cross-sections of the heat map)
+#'
 #' @examples
 #' library(qtl)
 #' data(hyper)
@@ -38,13 +47,12 @@ function(cross, chr, chartOpts=NULL)
 
     htmlwidgets::createWidget("iplotRF", list(rfdata=rf, genodata=geno,
                                               chartOpts=chartOpts),
-                              width=chartOpts$width,
-                              height=chartOpts$height,
+                              width=NULL, height=NULL,
                               package="qtlcharts")
 }
 
 #' @export
-iplotRF_output <- function(outputId, width="100%", height="580") {
+iplotRF_output <- function(outputId, width="100%", height="1000") {
     htmlwidgets::shinyWidgetOutput(outputId, "iplotRF", width, height, package="qtlcharts")
 }
 #' @export

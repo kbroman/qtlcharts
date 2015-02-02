@@ -517,7 +517,7 @@ customization options for each chart.
 
 `cellPad = 20` &mdash; cell padding (in pixels) to right of text in crosstab
 
-`hbot = 300` &mdash; height (in pixels) of each of the lower panels with rf and LOD across genome
+`hbot = 300` &mdash; height (in pixels) of each of the lower panels with LOD scores across the genome
 
 `fontsize = cellHeight*0.7` &mdash; font size in crosstab
 

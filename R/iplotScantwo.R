@@ -21,7 +21,10 @@
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option.
 #'
-#' @return None.
+#' @return An object of class \code{htmlwidget} that will
+#' intelligently print itself into HTML in a variety of contexts
+#' including the R console, within R Markdown documents, and within
+#' Shiny output bindings.
 #'
 #' @details The estimated QTL effects, and the genotypes in the
 #' phenotype x genotype plot, in the right-hand panels, are derived

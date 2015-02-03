@@ -26,7 +26,10 @@ scatterplot}
   corresponding option.}
 }
 \value{
-None.
+An object of class \code{htmlwidget} that will
+intelligently print itself into HTML in a variety of contexts
+including the R console, within R Markdown documents, and within
+Shiny output bindings.
 }
 \description{
 Creates an interactive graph with a panel having a number of curves

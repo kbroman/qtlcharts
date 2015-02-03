@@ -20,7 +20,10 @@ those considered.  A logical (TRUE/FALSE) vector may also be used.}
     element must be named using the corresponding option.}
 }
 \value{
-None.
+An object of class \code{htmlwidget} that will
+intelligently print itself into HTML in a variety of contexts
+including the R console, within R Markdown documents, and within
+Shiny output bindings.
 }
 \description{
 Creates an interactive graph of estimated recombination fractions and LOD scores for all pairs of markers.

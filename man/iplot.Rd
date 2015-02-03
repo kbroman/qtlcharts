@@ -19,7 +19,10 @@ iplot(x, y, group, indID, chartOpts = NULL)
   element must be named using the corresponding option.}
 }
 \value{
-None.
+An object of class \code{htmlwidget} that will
+intelligently print itself into HTML in a variety of contexts
+including the R console, within R Markdown documents, and within
+Shiny output bindings.
 }
 \description{
 Creates an interactive scatterplot.

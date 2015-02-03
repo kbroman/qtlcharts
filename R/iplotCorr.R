@@ -20,7 +20,10 @@
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
 #'
-#' @return None.
+#' @return An object of class \code{htmlwidget} that will
+#' intelligently print itself into HTML in a variety of contexts
+#' including the R console, within R Markdown documents, and within
+#' Shiny output bindings.
 #'
 #' @details \code{corr} may be provided as a subset of the overall
 #' correlation matrix for the columns of \code{mat}. In this case, the

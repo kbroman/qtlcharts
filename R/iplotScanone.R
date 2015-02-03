@@ -30,7 +30,10 @@
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
 #'
-#' @return Character string with the name of the file created.
+#' @return An object of class \code{htmlwidget} that will
+#' intelligently print itself into HTML in a variety of contexts
+#' including the R console, within R Markdown documents, and within
+#' Shiny output bindings.
 #'
 #' @details If \code{cross} is provided, \code{\link[qtl]{fill.geno}}
 #' is used to impute missing genotypes. In this case, arguments to

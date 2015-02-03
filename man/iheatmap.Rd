@@ -18,7 +18,10 @@ iheatmap(z, x, y, chartOpts = NULL)
   corresponding option.}
 }
 \value{
-None.
+An object of class \code{htmlwidget} that will
+intelligently print itself into HTML in a variety of contexts
+including the R console, within R Markdown documents, and within
+Shiny output bindings.
 }
 \description{
 Creates an interactive heatmap, with each cell linked to

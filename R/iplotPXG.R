@@ -14,7 +14,10 @@
 #' @param fillgenoArgs List of named arguments to pass to
 #'   \code{\link[qtl]{fill.geno}}, if needed.
 #'
-#' @return None.
+#' @return An object of class \code{htmlwidget} that will
+#' intelligently print itself into HTML in a variety of contexts
+#' including the R console, within R Markdown documents, and within
+#' Shiny output bindings.
 #'
 #' @details The function \code{\link[qtl]{fill.geno}} is used to
 #' impute missing genotypes, with arguments passed as a list, for

@@ -1,9 +1,11 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Interactive QTL charts within R Markdown}
--->
-
-## Interactive QTL charts within R Markdown
+---
+title: Interactive QTL charts within R Markdown
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Interactive QTL charts within R Markdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8](inputenc)
+---
 
 [R/qtlcharts](http://kbroman.org/qtlcharts) is an R package to
 create interactive charts for QTL data, for use with
@@ -24,11 +26,8 @@ For more information on R Markdown and knitr, see the
 tutorial.
 
 To include [R/qtlcharts](http://kbroman.org/qtlcharts)-based
-interactive charts within an R Markdown document, you include the
-relevant calls to the R function within a code chunk, using the chunk
-option `results="asis"`. Also, include `print=TRUE`
-in the function call. Below, I'll illustrate how it's
-done.
+interactive charts within an R Markdown document, you just need to include the
+relevant calls to the R function within a code chunk.
 
 ### An example
 
@@ -72,65 +71,35 @@ grav <- calc.genoprob(grav, step=1)
 out.hk <- scanone(grav, pheno.col=1:nphe(grav), method="hk")
 ```
 
-### Interactive charts
-
-To use the interactive charts from R/qtlcharts within an R Markdown
-document, you must first load all of the javascript-based
-resources. (When the charts are created from within R, this is done
-separately, and automatically, with each function call. But within an
-R Markdown document, we want to do it just once.)
-
-This is done by calling `print_qtlcharts_resources()` within a code
-chunk, using the chunk option `results="asis"`. I would generally
-suppress the code using `echo=FALSE`, but here we'll show the
-details.
-
-```{r print_qtlcharts_resources, results="asis"}
-print_qtlcharts_resources()
-```
-
-We're now free to begin making charts. With each, you'll want to use
-`print=TRUE`. And you **don't** want to do that within R. You may be
-sitting watching a megabyte of text fly (or crawl) by.
-
-In addition, you want to use the argument `chartdivid` to define some
-unique character string for each interactive plot. These are sort of
-like the names of code chunks with knitr.
-
-Finally, each of these code chunks is with `results="asis"`.
 
 
 ### Now, the charts
-
 
 First, let's make an interactive chart of the genetic map of markers
 for these data, just because it's easy. `iplotMap` will take either a
 map object or the cross object `grav`; in the latter case, it uses
 the R/qtl function `pull.map` to pull out the map.
 
-```{r iplotMap, results="asis"}
-iplotMap(grav, print=TRUE)
+```{r iplotMap}
+iplotMap(grav)
 ```
 
 Now, let's use `iplotCorr` to plot a heat map of the correlation
 matrix for the phenotype at all pairs of times, linked to scatterplots
 of the phenotypes.
 
-```{r iplotCorr, results="asis"}
-iplotCorr(grav$pheno, title="", chartdivid="iplotCorr",
-          print=TRUE)
+```{r iplotCorr}
+iplotCorr(grav$pheno)
 ```
 
 Next, let's use `plotCurves` to create an interactive plot of the
 phenotype traces, linked to scatterplots of two cross-sections.
 We use `chartOpts` to specify the axis labels.
 
-```{r iplotCurves, results="asis"}
+```{r iplotCurves}
 iplotCurves(grav$pheno, times,
             grav$pheno[,c("T30", "T240")],
             grav$pheno[,c("T240", "T480")],
-            chartdivid="iplotCurves",
-            print=TRUE,
             chartOpts=list(curves_xlab="Time", curves_ylab="Root tip angle",
                            scat1_xlab="Angle at 30 min", scat1_ylab="Angle at 4 hrs",
                            scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 8 hrs"))
@@ -142,18 +111,6 @@ each individual time point at each genomic position, linked to the
 individual LOD curves and to a plot of the estimated QTL effect over
 time.
 
-```{r iplotMScanone, results="asis"}
-iplotMScanone(out.hk, grav, chartdivid="iplotMScanone",
-              print=TRUE, chartOpts=list(eff_ylab="QTL effect"))
+```{r iplotMScanone}
+iplotMScanone(out.hk, grav, chartOpts=list(eff_ylab="QTL effect"))
 ```
-
-### A bit of CSS
-
-One final detail: I link to a
-[CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) file to
-revise the style of the document that's produced. This is done
-as straight text, not inside a code chunk. Look at the
-[source for this vignette](https://github.com/kbroman/qtlcharts/blob/master/vignettes/Rmarkdown.Rmd) to see the code.
-
-<!-- the following to make it look nicer -->
-<link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

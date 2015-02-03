@@ -1,9 +1,11 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{R/qtlcharts User Guide}
--->
-
-# R/qtlcharts User Guide
+---
+title: R/qtlcharts User Guide
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{R/qtlcharts User Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8](inputenc)
+---
 
 [R/qtlcharts](http://kbroman.org/qtlcharts) is an
 [R](http://www.r-project.org) package to create interactive charts for

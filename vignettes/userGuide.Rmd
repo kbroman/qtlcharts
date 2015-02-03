@@ -23,7 +23,7 @@ hard to accommodate all possible browser differences.
 Information on installing R/qtlcharts is available
 [here](http://kbroman.org/qtlcharts/pages/installation.html); it
 requires installation of the packages [R/qtl](http://www.rqtl.org),
-[jsonlite](http://cran.r-project.org/web/packages/jsonlite/), and
+[htmlwidgets](http://htmlwidgets.org), and
 [devtools](https://github.com/hadley/devtools).
 
 ## Basic use
@@ -111,37 +111,27 @@ iplotCorr(expr, title="Correlation matrix linked to scatterplots",
 
 The interactive graphs produced by R/qtlcharts are, by default, saved
 to a temporary file and then opened in the default web browser. If you
-want to save a chart to a _particular_ file, use the `file`
-argument, as follows:
+want to save a chart to a _particular_ file, assign the result to some
+object and use the function `saveWidget()` in the
+[htmlwidgets](http://htmlwidgets.org) package, as follows:
 
 ```{r iplotCorr_specify_file, eval=FALSE}
-iplotCorr(expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html")
+corrplot <- iplotCorr(expr, reorder=TRUE)
+htmlwidgets::saveWidget(corrplot, file="~/Desktop/iplotCorr_example.html")
 ```
 
-The chart will still be opened in the browser. To create the file
-without opening it, use the argument `openfile=FALSE`, as follows:
+The chart will not be opened for viewing. If you wish to view the
+chart, type the name of the object that you created, as so:
 
-```{r iplotCorr_specify_file_dont_open, eval=FALSE}
-iplotCorr(expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html",
-          openfile=FALSE)
+```{r iplotCorr_now_view, eval=FALSE}
+corrplot
 ```
 
-Charts saved in this way will contain links to resources within the
-R/qtlcharts package, and so will not be portable to another system
-that doesn't have R/qtlcharts installed, or that has the package
-installed in a different location.
+Charts saved with `saveWidget()` will, by default, contain all necessary code/resources.
+A smaller file may be obtained by using `selfcontained=FALSE` in the
+call to `saveWidget()`, in which case the external resources will be
+placed in an adjacent directory.
 
-To make the interactive graph portable to other computers (for
-example, for sharing with collaborators), use the argument
-`onefile=TRUE`, as follows:
-
-```{r iplotCorr_make_portable, eval=FALSE}
-iplotCorr(expr, reorder=TRUE, file="~/Desktop/iplotCorr_example.html",
-          onefile=TRUE)
-```
-
-The file will be somewhat larger, but it will be self-contained and so
-may be transferred to and viewed on any computer.
 
 
 ## Chart customization options
@@ -896,8 +886,3 @@ very large number of markers.
 ```{r iplotRF_lodlim, eval=FALSE}
 iplotRF(badorder, chartOpts=list(lodlim=c(2, 15)))
 ```
-
-
-
-<!-- the following to make it look nicer -->
-<link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

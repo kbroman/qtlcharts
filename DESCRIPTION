@@ -13,8 +13,7 @@ Imports:
     qtl (>= 1.30-4),
     htmlwidgets,
     graphics,
-    stats,
-    utils
+    stats
 Suggests:
     knitr,
     devtools,

@@ -15,7 +15,6 @@
 #    organized by chromosome and then by marker.
 #
 # @keywords interface
-# @seealso \code{\link{scanone2json}}, \code{\link{pxg2json}}
 #
 # @examples
 # library(qtl)
@@ -25,8 +24,9 @@
 convert_map <-
 function(map) {
     chrnames <- names(map)
-    # force use of hash with single numeric values
-    map <- lapply(map, function(a) lapply(a, jsonlite::unbox))
+
+    # remove the A/X classes
+    map <- lapply(map, unclass)
 
     mnames <- unlist(lapply(map, names))
     names(mnames) <- NULL

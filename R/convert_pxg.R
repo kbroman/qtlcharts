@@ -17,7 +17,6 @@
 # @details Genotypes are encoded as integers; negative integers are used to indicate imputed values.
 #
 # @keywords interface
-# @seealso \code{\link{scanone2json}}
 #
 # @examples
 # library(qtl)

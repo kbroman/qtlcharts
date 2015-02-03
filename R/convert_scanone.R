@@ -14,7 +14,6 @@
 # @return A list with the data reformatted
 #
 # @keywords interface
-# @seealso \code{\link{pxg2json}}
 #
 # @examples
 # library(qtl)

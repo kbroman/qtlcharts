@@ -44,8 +44,9 @@ function(map, shift=FALSE, chartOpts=NULL)
 convert_map <-
 function(map) {
     chrnames <- names(map)
-    # force use of hash with single numeric values
-    map <- lapply(map, function(a) lapply(a, jsonlite::unbox))
+
+    # remove the A/X classes
+    map <- sapply(map, unclass)
 
     mnames <- unlist(lapply(map, names))
     names(mnames) <- NULL

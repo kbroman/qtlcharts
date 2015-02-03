@@ -87,8 +87,8 @@ iboxplot(expr)
 Licensed under the [MIT license](LICENSE). ([More information here](http://en.wikipedia.org/wiki/MIT_License).)
 
 R/qtlcharts incorporates
-- [D3.js](http://d3js.org) ([see its license](inst/htmlwidgets/lib/d3/LICENSE))
-- [d3.tip](http://github.com/Caged/d3-tip) ([see its license](inst/htmlwidgets/lib/d3-tip/LICENSE))
-- [ColorBrewer](http://colorbrewer2.org) ([see its license](inst/htmlwidgets/lib/colorbrewer/LICENSE)
-- [jQuery](http://jquery.com) ([see its license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt))
-- [jQuery UI](http://jqueryui.com/) ([see its license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt))
+- [D3.js](http://d3js.org) \[[license](inst/htmlwidgets/lib/d3/LICENSE)\]
+- [d3.tip](http://github.com/Caged/d3-tip) \[[license](inst/htmlwidgets/lib/d3-tip/LICENSE)\]
+- [ColorBrewer](http://colorbrewer2.org) \[[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)\]
+- [jQuery](http://jquery.com) \[[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)\]
+- [jQuery UI](http://jqueryui.com/) \[[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]

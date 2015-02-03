@@ -27,26 +27,19 @@ For example charts, see the [R/qtlcharts website](http://kbroman.org/qtlcharts).
 Install R/qtlcharts from its
 [GitHub repository](http://github.com/kbroman/qtlcharts). You first need to
 install the [R/qtl](http://www.rqtl.org),
-[jsonlite](http://cran.r-project.org/web/packages/jsonlite),
+[htmlwidgets](http://htmlwidgets.org),
 and [devtools](https://github.com/hadley/devtools) packages.
 
-```S
-install.packages(c("qtl", "jsonlite", "devtools"))
+```r
+install.packages(c("qtl", "htmlwidgets", "devtools"))
 ```
 
 Then install R/qtlcharts using the `install_github` function in the
 [devtools](http://github.com/hadley/devtools) package.
 
-```S
+```r
 library(devtools)
 install_github("kbroman/qtlcharts")
-```
-
-If that doesn't work, you might have an older version of devtools, so try:
-
-```S
-library(devtools)
-install_github("qtlcharts", "kbroman")
 ```
 
 #### Example use
@@ -54,7 +47,7 @@ install_github("qtlcharts", "kbroman")
 Try the following example, which creates an interactive chart with LOD
 curves linked to estimated QTL effects.
 
-```S
+```r
 library(qtl)
 library(qtlcharts)
 data(hyper)
@@ -68,7 +61,7 @@ gene expression of a set of 100 genes) linked to the underlying
 scatterplots, with the points in the scatterplot colored by their
 genotype at a QTL:
 
-```S
+```r
 library(qtlcharts)
 data(geneExpr)
 iplotCorr(geneExpr$expr, geneExpr$genotype)
@@ -77,7 +70,7 @@ iplotCorr(geneExpr$expr, geneExpr$genotype)
 Finally, try `iboxplot`, a plot of the quantiles of many
 distributions, linked to the underlying histograms.
 
-```S
+```r
 library(qtlcharts)
 # simulate some data
 n.ind <- 500
@@ -94,7 +87,11 @@ iboxplot(expr)
 Licensed under the [MIT license](LICENSE). ([More information here](http://en.wikipedia.org/wiki/MIT_License).)
 
 R/qtlcharts incorporates [D3.js](http://d3js.org)
-([see its license](inst/d3/LICENSE)),
+([see its license](inst/htmlwidgets/lib/d3/LICENSE)),
 [d3.tip](http://github.com/Caged/d3-tip)
-([see its license](inst/d3-tip/LICENSE)), and
-[ColorBrewer](http://colorbrewer2.org) ([see its license](inst/colorbrewer/LICENSE)).
+([see its license](inst/htmlwidgets/lib/d3-tip/LICENSE)),
+[ColorBrewer](http://colorbrewer2.org)
+([see its license](inst/htmlwidgets/lib/colorbrewer/LICENSE),
+[jQuery](http://jquery.com)
+([see its license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)), and
+[jQuery UI](http://jqueryui.com/) ([see its license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)).

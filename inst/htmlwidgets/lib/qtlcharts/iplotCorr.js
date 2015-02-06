@@ -74,8 +74,10 @@ iplotCorr = function(el, data, chartOpts) {
   if (!(scatcolors != null) || scatcolors.length < nGroup) {
     if (nGroup === 1) {
       scatcolors = ["#969696"];
-    } else if (nGroup <= 3) {
-      scatcolors = ["crimson", "green", "darkslateblue"];
+    } else if (nGroup === 2) {
+      scatcolors = ["crimson", "darkslateblue"];
+    } else if (nGroup === 3) {
+      scatcolors = ["violetred", "green", "darkslateblue"];
     } else {
       if (nGroup <= 10) {
         colorScale = d3.scale.category10();

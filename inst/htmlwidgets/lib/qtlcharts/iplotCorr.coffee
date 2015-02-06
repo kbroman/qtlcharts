@@ -125,9 +125,9 @@ iplotCorr = (el, data, chartOpts) ->
         if nGroup == 1
             scatcolors = [ "#969696" ]
         else if nGroup == 2
-            scatcolors = ["crimson", "darkslateblue"]
+            scatcolors = ["MediumVioletRed", "slateblue"]
         else if nGroup == 3
-            scatcolors = ["violetred", "green", "darkslateblue"]
+            scatcolors = ["MediumVioletRed", "MediumSeaGreen", "slateblue"]
         else
             if nGroup <= 10
                 colorScale = d3.scale.category10()

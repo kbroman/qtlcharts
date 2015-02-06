@@ -98,6 +98,7 @@ selectGroupColors = (ngroup, palette) ->
     if palette == "dark"
         return ["slateblue"] if ngroup == 1
         return ["MediumVioletRed", "slateblue"] if ngroup == 2
+        return ["MediumVioletRed", "MediumSeaGreen", "slateblue"] if ngroup == 3
         return colorbrewer.Set1[ngroup] if ngroup <= 9
         return d3.scale.category20().range()[0...ngroup]
     else

@@ -40,6 +40,13 @@ function(map, shift=FALSE, chartOpts=NULL)
     htmlwidgets::createWidget("iplotMap", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
+                              sizingPolicy=htmlwidgets::sizingPolicy(
+                                  viewer.paneHeight=600,
+                                  browser.defaultWidth=1000,
+                                  browser.defaultHeight=800,
+                                  knitr.defaultWidth=960,
+                                  knitr.defaultHeight=600,
+                                  knitr.figure=FALSE),
                               package="qtlcharts")
 }
 

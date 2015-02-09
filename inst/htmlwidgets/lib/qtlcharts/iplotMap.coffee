@@ -125,7 +125,11 @@ iplotMap = (el, data, chartOpts) ->
 
     # on hover, remove tool tip from marker search
     markerSelect = mychart.markerSelect()
-    markerSelect.on("mouseover", martip.hide)
+    markerSelect.on "mouseover", () ->
+        unless selectedMarker == ""
+            d3.select("line##{clean_marker_name(selectedMarker)}")
+              .attr("stroke", linecolor)
+            martip.hide()
 
 add_search_box = (el) ->
     form = d3.select(el)

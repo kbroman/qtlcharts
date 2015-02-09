@@ -104,7 +104,12 @@ iplotMap = function(el, data, chartOpts) {
     });
   });
   markerSelect = mychart.markerSelect();
-  return markerSelect.on("mouseover", martip.hide);
+  return markerSelect.on("mouseover", function() {
+    if (selectedMarker !== "") {
+      d3.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolor);
+      return martip.hide();
+    }
+  });
 };
 
 add_search_box = function(el) {

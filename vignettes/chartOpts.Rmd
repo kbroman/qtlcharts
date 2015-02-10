@@ -255,7 +255,7 @@ customization options for each chart.
 
 `height = 600` &mdash; height of chart in pixels
 
-`margin = list(left=60, top=40, right=40, bottom=40, inner=10)` &mdash; margins in pixels (left, top, right, bottom, inner)
+`margin = list(left=60, top=40, right=100, bottom=40, inner=10)` &mdash; margins in pixels (left, top, right, bottom, inner)
 
 `axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
 

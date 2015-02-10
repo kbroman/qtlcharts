@@ -8,7 +8,7 @@ iplotMap = function(el, data, chartOpts) {
   margin = (_ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? _ref2 : {
     left: 60,
     top: 40,
-    right: 40,
+    right: 100,
     bottom: 40,
     inner: 10
   };

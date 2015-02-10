@@ -49,6 +49,10 @@ function(x, y, group, indID, chartOpts=NULL)
     htmlwidgets::createWidget("iplot", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
+                              sizingPolicy=htmlwidgets::sizingPolicy(
+                                  browser.defaultWidth=800,
+                                  browser.defaultHeight=500
+                              ),
                               package="qtlcharts")
 }
 

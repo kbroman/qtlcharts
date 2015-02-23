@@ -16,15 +16,27 @@ dependencies:
     script:
       - d3-tip.min.js
     style: d3-tip.min.css
-  - name: d3panels_iplotMScanone
+  - name: d3panels_core
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
       - panelutil.js
-      - lodheatmap/lodheatmap.js
-      - lodchart/lodchart.js
-      - curvechart/curvechart.js
     style: panelutil.css
+  - name: d3panels_lodheatmap
+    src: htmlwidgets/lib/d3panels
+    version: 0.1.1
+    script:
+      - lodheatmap/lodheatmap.js
+  - name: d3panels_lodchart
+    src: htmlwidgets/lib/d3panels
+    version: 0.1.1
+    script:
+      - lodchart/lodchart.js
+  - name: d3panels_curvechart
+    src: htmlwidgets/lib/d3panels
+    version: 0.1.1
+    script:
+      - curvechart/curvechart.js
   - name: qtlcharts_iplotMScanone
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

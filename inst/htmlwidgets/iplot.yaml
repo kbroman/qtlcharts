@@ -16,13 +16,17 @@ dependencies:
     script:
       - d3-tip.min.js
     style: d3-tip.min.css
-  - name: d3panels_iplot
+  - name: d3panels_core
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
       - panelutil.js
-      - scatterplot/scatterplot.js
     style: panelutil.css
+  - name: d3panels_scatterplot
+    src: htmlwidgets/lib/d3panels
+    version: 0.1.1
+    script:
+      - scatterplot/scatterplot.js
   - name: qtlcharts_iplot
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

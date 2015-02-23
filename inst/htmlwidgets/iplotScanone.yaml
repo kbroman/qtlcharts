@@ -10,15 +10,27 @@ dependencies:
     script:
       - d3-tip.min.js
     style: d3-tip.min.css
-  - name: d3panels_iplotScanone
+  - name: d3panels_core
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
       - panelutil.js
-      - lodchart/lodchart.js
-      - cichart/cichart.js
-      - dotchart/dotchart.js
     style: panelutil.css
+  - name: d3panels_lodchart
+    src: htmlwidgets/lib/d3panels
+    version: 0.1.1
+    script:
+      - lodchart/lodchart.js
+  - name: d3panels_cichart
+    src: htmlwidgets/lib/d3panels
+    version: 0.1.1
+    script:
+      - cichart/cichart.js
+  - name: d3panels_dotchart
+    src: htmlwidgets/lib/d3panels
+    version: 0.1.1
+    script:
+      - dotchart/dotchart.js
   - name: qtlcharts_iplotScanone
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

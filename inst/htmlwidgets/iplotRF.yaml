@@ -10,15 +10,27 @@ dependencies:
     script:
       - d3-tip.min.js
     style: d3-tip.min.css
-  - name: d3panels_iplotRF
+  - name: d3panels_core
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
       - panelutil.js
-      - chrheatmap/chrheatmap.js
-      - crosstab/crosstab.js
-      - lodchart/lodchart.js
     style: panelutil.css
+  - name: d3panels_chrheatmap
+    src: htmlwidgets/lib/d3panels
+    version: 0.1.1
+    script:
+      - chrheatmap/chrheatmap.js
+  - name: d3panels_crosstab
+    src: htmlwidgets/lib/d3panels
+    version: 0.1.1
+    script:
+      - crosstab/crosstab.js
+  - name: d3panels_lodchart
+    src: htmlwidgets/lib/d3panels
+    version: 0.1.1
+    script:
+      - lodchart/lodchart.js
   - name: qtlcharts_iplotRF
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

@@ -114,3 +114,22 @@ time.
 ```{r iplotMScanone}
 iplotMScanone(out.hk, grav, chartOpts=list(eff_ylab="QTL effect"))
 ```
+
+### Charts within a loop
+
+If you want to produce multiple interactive charts within a loop, you
+need to finesse it a bit with `tags` and `tagList` from the
+[htmltools](https://github.com/rstudio/htmltools) package.
+
+Create a list containing the charts, wrap each within a `<p>` tag
+using `tags$p()`, and then use `tagList` when you print the list.
+
+```{r iplotScanone_loop}
+times <- c("T30", "T240", "T480")
+times_number <- match(times, phenames(grav))
+plot_list <- vector("list", length(times))
+for(i in seq(along=times))
+    plot_list[[i]] <- iplotScanone(out.hk, lodcolumn=times_number[i])
+plot_list <- lapply(plot_list, htmltools::tags$p)
+htmltools::tagList(plot_list)
+```

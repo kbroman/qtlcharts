@@ -15,6 +15,7 @@ Imports:
     graphics,
     stats
 Suggests:
+    htmltools,
     knitr,
     devtools,
     roxygen2,

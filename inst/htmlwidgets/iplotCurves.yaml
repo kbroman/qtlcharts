@@ -16,7 +16,7 @@ dependencies:
     script:
       - d3-tip.min.js
     style: d3-tip.min.css
-  - name: d3panels
+  - name: d3panels_iplotCurves
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
@@ -24,7 +24,7 @@ dependencies:
       - curvechart/curvechart.js
       - scatterplot/scatterplot.js
     style: panelutil.css
-  - name: qtlcharts
+  - name: qtlcharts_iplotCurves
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1
     script:

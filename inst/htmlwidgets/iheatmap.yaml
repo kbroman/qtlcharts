@@ -10,7 +10,7 @@ dependencies:
     script:
       - d3-tip.min.js
     style: d3-tip.min.css
-  - name: d3panels
+  - name: d3panels_iheatmap
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
@@ -18,7 +18,7 @@ dependencies:
       - heatmap/heatmap.js
       - curvechart/curvechart.js
     style: panelutil.css
-  - name: qtlcharts
+  - name: qtlcharts_iheatmap
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1
     script:

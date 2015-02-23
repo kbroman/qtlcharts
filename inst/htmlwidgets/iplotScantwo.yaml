@@ -16,7 +16,7 @@ dependencies:
     script:
       - d3-tip.min.js
     style: d3-tip.min.css
-  - name: d3panels
+  - name: d3panels_iplotScantwo
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
@@ -26,7 +26,7 @@ dependencies:
       - dotchart/dotchart.js
       - chrheatmap/chrheatmap.js
     style: panelutil.css
-  - name: qtlcharts
+  - name: qtlcharts_iplotScantwo
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1
     script:

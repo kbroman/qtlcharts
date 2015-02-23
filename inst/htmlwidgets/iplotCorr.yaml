@@ -10,13 +10,13 @@ dependencies:
     script:
       - d3-tip.min.js
     style: d3-tip.min.css
-  - name: d3panels
+  - name: d3panels_iplotCorr
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
       - panelutil.js
     style: panelutil.css
-  - name: qtlcharts
+  - name: qtlcharts_iplotCorr
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1
     script:

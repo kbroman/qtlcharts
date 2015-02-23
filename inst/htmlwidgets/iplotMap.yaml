@@ -21,14 +21,14 @@ dependencies:
     script:
       - jquery-ui.min.js
     style: themes/smoothness/jquery-ui.min.css
-  - name: d3panels
+  - name: d3panels_iplotMap
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
       - panelutil.js
       - mapchart/mapchart.js
     style: panelutil.css
-  - name: qtlcharts
+  - name: qtlcharts_iplotMap
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1
     script:

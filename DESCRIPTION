@@ -19,6 +19,7 @@ Suggests:
     knitr,
     devtools,
     roxygen2,
+    rmarkdown,
     testthat
 License: MIT + file LICENSE
 URL: http://kbroman.org/qtlcharts

@@ -1,0 +1,130 @@
+---
+title: R/qtlcharts within R Markdown
+output: html_document
+---
+
+This document serves to test each of the main chart functions in
+[R/qtlcharts](http://kbroman.org/qtlcharts).
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+data(grav)
+```
+
+### iboxplot
+
+```{r iboxplot}
+iboxplot(t(grav$pheno), breaks=51, orderByMedian=FALSE,
+         chartOpts=list(xlab="Time index", ylab="Root tip angle (degrees)"))
+```
+
+
+### Subset phenotypes and run scanone
+
+Reduce size of data.
+
+```{r subset_pheno}
+grav$pheno <- grav$pheno[,seq(1, nphe(grav), by=5)]
+times <- as.numeric(sub("T", "", phenames(grav)))/60
+```
+
+Run scanone.
+
+```{r run_scanone}
+grav <- calc.genoprob(grav, step=1)
+out.hk <- scanone(grav, pheno.col=1:nphe(grav), method="hk")
+```
+
+### iheatmap
+
+```{r iheatmap}
+n <- 101
+x <- y <- seq(-2, 2, len=n)
+z <- matrix(ncol=n, nrow=n)
+for(i in seq(along=x))
+    for(j in seq(along=y))
+        z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
+iheatmap(z, x, y)
+```
+
+### iplot
+
+```{r iplot}
+rowmedian <- apply(grav$pheno, 1, median, na.rm=TRUE)
+grp <- as.numeric(rowmedian < median(unlist(grav$pheno), na.rm=TRUE))+1
+iplot(grav$pheno$T0, grav$pheno$T60,
+      group=grp,
+      indID=paste0("RIL", 1:nind(grav)),
+      chartOpts=list(xlab="Angle at time 0", ylab="Angle at 60 min"))
+```
+
+### iplotCorr
+
+```{r iplotCorr}
+iplotCorr(grav$pheno)
+```
+
+### iplotCurves
+
+```{r iplotCurves}
+iplotCurves(grav$pheno, times,
+            grav$pheno[,c("T30", "T240")],
+            grav$pheno[,c("T240", "T480")],
+            chartOpts=list(curves_xlab="Time", curves_ylab="Root tip angle",
+                           scat1_xlab="Angle at 30 min", scat1_ylab="Angle at 4 hrs",
+                           scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 8 hrs"))
+```
+
+
+### iplotMScanone
+
+```{r iplotMScanone}
+iplotMScanone(out.hk, grav, chartOpts=list(eff_ylab="QTL effect"))
+```
+
+### iplotMap
+
+```{r iplotMap}
+iplotMap(grav)
+```
+
+
+### iplotPXG
+
+
+```{r iplotPXG}
+iplotPXG(grav, marker="BF.206L-Col", pheno.col="T320")
+```
+
+
+### iplotRF
+
+```{r iplotRF}
+gravsub <- pull.markers(grav, sample(markernames(grav), 50, replace=FALSE))
+gravsub <- est.rf(gravsub)
+iplotRF(gravsub)
+
+
+### iplotScanone
+
+```{r iplotScanone_noeff}
+iplotScanone(out.hk, lodcolumn=32)
+```
+
+```{r iplotScanone_ci}
+iplotScanone(out.hk, grav, lodcolumn=32, pheno.col=32)
+```
+
+```{r iplotScanone_pxg}
+iplotScanone(out.hk, grav, lodcolumn=32, pheno.col=32, pxgtype="raw")
+```
+
+### iplotScantwo
+
+```{r iplotScantwo}
+gravsub <- calc.genoprob(gravsub, step=5)
+out2 <- scantwo(gravsub, pheno.col=32, method="hk", verbose=FALSE)
+iplotScantwo(out2)
+```

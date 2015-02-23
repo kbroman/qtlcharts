@@ -33,6 +33,8 @@ lodchart = () ->
     ## the main function
     chart = (selection) ->
         selection.each (data) ->
+            data.chrnames = forceAsArray(data.chrnames)
+            data.lodnames = forceAsArray(data.lodnames)
             lodvarname = lodvarname ? data.lodnames[0]
             data[lodvarname] = (abs(x) for x in data[lodvarname]) # take absolute values
             ylim = ylim ? [0, d3.max(data[lodvarname])]

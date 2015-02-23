@@ -12,7 +12,7 @@ create interactive charts for QTL data, for use with
 [R/qtl](http://www.rqtl.org).
 While its interactive QTL charts are particularly useful for
 exploratory data analysis within R, they may also be included within
-[R Markdown](https://www.rstudio.com/ide/docs/r_markdown)-based reports.
+[R Markdown](http://rmarkdown.rstudio.com)-based reports.
 
 [R Markdown](http://rmarkdown.rstudio.com) is a
 extension of [Markdown](http://daringfireball.net/projects/markdown/),

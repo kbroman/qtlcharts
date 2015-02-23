@@ -45,6 +45,9 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
     htmlwidgets::createWidget("iboxplot", list(data=data_list, chartOpts=chartOpts),
                               width=chartOpts$width,
                               height=chartOpts$height,
+                              sizingPolicy=htmlwidgets::sizingPolicy(
+                                  knitr.figure=FALSE
+                              ),
                               package="qtlcharts")
 }
 

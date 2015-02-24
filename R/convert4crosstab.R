@@ -64,5 +64,5 @@ function(cross, chr)
     # make it a list, and convert to 0, 1, 2, ...
     geno <- as.list(as.data.frame(geno - 1))
 
-    list(geno=geno, genocat=genocat, chrtype=chrtype)
+    list(geno=geno, genocat=genocat, chrtype=as.list(chrtype))
 }

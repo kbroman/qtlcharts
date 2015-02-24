@@ -26,17 +26,17 @@ dependencies:
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - lodheatmap/lodheatmap.js
+      - lodheatmap.js
   - name: d3panels_lodchart
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - lodchart/lodchart.js
+      - lodchart.js
   - name: d3panels_curvechart
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - curvechart/curvechart.js
+      - curvechart.js
   - name: qtlcharts_iplotMScanone
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

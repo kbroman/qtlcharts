@@ -20,12 +20,12 @@ dependencies:
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - heatmap/heatmap.js
+      - heatmap.js
   - name: d3panels_curvechart
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - curvechart/curvechart.js
+      - curvechart.js
   - name: qtlcharts_iheatmap
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

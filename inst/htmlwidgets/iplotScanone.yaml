@@ -20,17 +20,17 @@ dependencies:
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - lodchart/lodchart.js
+      - lodchart.js
   - name: d3panels_cichart
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - cichart/cichart.js
+      - cichart.js
   - name: d3panels_dotchart
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - dotchart/dotchart.js
+      - dotchart.js
   - name: qtlcharts_iplotScanone
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

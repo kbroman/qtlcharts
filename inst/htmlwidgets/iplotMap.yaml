@@ -31,7 +31,7 @@ dependencies:
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - mapchart/mapchart.js
+      - mapchart.js
   - name: qtlcharts_iplotMap
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

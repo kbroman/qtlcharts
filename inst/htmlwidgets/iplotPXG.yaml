@@ -20,7 +20,7 @@ dependencies:
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - dotchart/dotchart.js
+      - dotchart.js
   - name: qtlcharts_iplotPXG
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

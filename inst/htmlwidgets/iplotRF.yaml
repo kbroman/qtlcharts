@@ -20,17 +20,17 @@ dependencies:
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - chrheatmap/chrheatmap.js
+      - chrheatmap.js
   - name: d3panels_crosstab
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - crosstab/crosstab.js
+      - crosstab.js
   - name: d3panels_lodchart
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - lodchart/lodchart.js
+      - lodchart.js
   - name: qtlcharts_iplotRF
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

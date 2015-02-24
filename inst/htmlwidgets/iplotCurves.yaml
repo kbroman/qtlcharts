@@ -26,12 +26,12 @@ dependencies:
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - curvechart/curvechart.js
+      - curvechart.js
   - name: d3panels_scatterplot
     src: htmlwidgets/lib/d3panels
     version: 0.1.1
     script:
-      - scatterplot/scatterplot.js
+      - scatterplot.js
   - name: qtlcharts_iplotCurves
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

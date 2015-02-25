@@ -60,8 +60,8 @@ ${WIDGET_DIR}/%.js: ${WIDGET_DIR}/%.coffee
 	coffee ${COFFEE_ARGS} -b $^
 
 #------------------------------------------------------------
-# d3, jquery, jquery-ui, colorbrewer
-libs: d3 jquery jqueryui colorbrewer d3-tip
+# d3, jquery, jquery-ui, colorbrewer, d3panels
+libs: d3 jquery jqueryui colorbrewer d3-tip d3panels
 LIB_DIR = inst/htmlwidgets/lib
 BOWER_DIR = ../libs/bower_components
 

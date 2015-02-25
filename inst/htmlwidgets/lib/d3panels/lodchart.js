@@ -67,7 +67,7 @@ lodchart = function() {
         displayError("chr.length (" + data.chr.length + ") != markernames.length (" + data.markernames.length + ")");
       }
       svg = d3.select(this).selectAll("svg").data([data]);
-      gEnter = svg.enter().append("svg").append("g");
+      gEnter = svg.enter().append("svg").attr("class", "d3panels").append("g");
       svg.attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom);
       g = svg.select("g");
       g.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", height).attr("width", width).attr("fill", darkrect).attr("stroke", "none");

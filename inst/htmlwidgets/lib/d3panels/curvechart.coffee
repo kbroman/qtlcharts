@@ -77,7 +77,7 @@ curvechart = () ->
             svg = d3.select(this).selectAll("svg").data([data])
 
             # Otherwise, create the skeletal chart.
-            gEnter = svg.enter().append("svg").append("g")
+            gEnter = svg.enter().append("svg").attr("class", "d3panels").append("g")
 
             # Update the outer dimensions.
             svg.attr("width", width+margin.left+margin.right)

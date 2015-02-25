@@ -1,5 +1,3 @@
-# Sample .travis.yml for R projects from https://github.com/craigcitro/r-travis
-
 language: c
 
 before_install:
@@ -14,6 +12,10 @@ script: ./travis-tool.sh run_tests
 
 after_failure:
   - ./travis-tool.sh dump_logs
+
+env:
+  - global:
+    - WARNINGS_ARE_ERRORS=1
 
 notifications:
   email:

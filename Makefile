@@ -102,6 +102,23 @@ d3-tip: ${LIB_DIR}/d3-tip/bower.json \
 ${LIB_DIR}/d3-tip/%: ${BOWER_DIR}/../d3-tip/%
 	cp $< $@
 
+# d3panels
+d3panels: ${LIB_DIR}/d3panels/chrheatmap.coffee \
+		  ${LIB_DIR}/d3panels/cichart.coffee \
+		  ${LIB_DIR}/d3panels/crosstab.coffee \
+		  ${LIB_DIR}/d3panels/curvechart.coffee \
+		  ${LIB_DIR}/d3panels/dotchart.coffee \
+		  ${LIB_DIR}/d3panels/heatmap.coffee \
+		  ${LIB_DIR}/d3panels/lodchart.coffee \
+		  ${LIB_DIR}/d3panels/lodheatmap.coffee \
+		  ${LIB_DIR}/d3panels/mapchart.coffee \
+		  ${LIB_DIR}/d3panels/panelutil.coffee \
+		  ${LIB_DIR}/d3panels/panelutil.css \
+		  ${LIB_DIR}/d3panels/scatterplot.coffee
+
+${LIB_DIR}/d3panels/%: ${BOWER_DIR}/../d3panels/%
+	cp $< $@
+
 #------------------------------------------------------------
 
 # Add list of chartOpts to vignette

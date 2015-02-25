@@ -168,7 +168,7 @@ maxdiff = (x) ->
         result = d if d > result
     result
 
-# matrix extent, min max
+# matrix extent, min, max, and max of absolute values
 matrixMin = (mat) ->
     result = mat[0][0]
     for i of mat
@@ -192,6 +192,7 @@ matrixMaxAbs = (mat) ->
 
 matrixExtent = (mat) -> [matrixMin(mat), matrixMax(mat)]
 
+# move an object to front or back
 d3.selection.prototype.moveToFront = () ->
     this.each () -> this.parentNode.appendChild(this)
 
@@ -200,6 +201,7 @@ d3.selection.prototype.moveToBack = () ->
         firstChild = this.parentNode.firstchild
         this.parentNode.insertBefore(this, firstChild) if firstChild
 
+# force an object to be an array (rather than a scalar)
 forceAsArray = (x) ->
     return x unless x? # if null, return null
     return x if Array.isArray(x)

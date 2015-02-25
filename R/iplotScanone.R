@@ -117,10 +117,13 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
                               package="qtlcharts")
 }
 
+#' @rdname qtlcharts-shiny
 #' @export
 iplotScanone_output <- function(outputId, width="100%", height="580") {
     htmlwidgets::shinyWidgetOutput(outputId, "iplotScanone", width, height, package="qtlcharts")
 }
+
+#' @rdname qtlcharts-shiny
 #' @export
 iplotScanone_render <- function(expr, env=parent.frame(), quoted=FALSE) {
     if(!quoted) { expr <- substitute(expr) } # force quoted

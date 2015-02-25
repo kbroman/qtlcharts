@@ -65,10 +65,13 @@ function(cross, marker, pheno.col=1,
                               package="qtlcharts")
 }
 
+#' @rdname qtlcharts-shiny
 #' @export
 iplotPXG_output <- function(outputId, width="100%", height="530") {
     htmlwidgets::shinyWidgetOutput(outputId, "iplotPXG", width, height, package="qtlcharts")
 }
+
+#' @rdname qtlcharts-shiny
 #' @export
 iplotPXG_render <- function(expr, env=parent.frame(), quoted=FALSE) {
     if(!quoted) { expr <- substitute(expr) } # force quoted

@@ -51,10 +51,14 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
                               package="qtlcharts")
 }
 
+
+#' @rdname qtlcharts-shiny
 #' @export
 iboxplot_output <- function(outputId, width="100%", height="900") {
     htmlwidgets::shinyWidgetOutput(outputId, "iplot", width, height, package="qtlcharts")
 }
+
+#' @rdname qtlcharts-shiny
 #' @export
 iboxplot_render <- function(expr, env=parent.frame(), quoted=FALSE) {
     if(!quoted) { expr <- substitute(expr) } # force quoted

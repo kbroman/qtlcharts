@@ -64,10 +64,13 @@ function(map) {
     list(chr=chrnames, map=map, markernames=mnames)
 }
 
+#' @rdname qtlcharts-shiny
 #' @export
 iplotMap_output <- function(outputId, width="100%", height="680") {
     htmlwidgets::shinyWidgetOutput(outputId, "iplotMap", width, height, package="qtlcharts")
 }
+
+#' @rdname qtlcharts-shiny
 #' @export
 iplotMap_render <- function(expr, env=parent.frame(), quoted=FALSE) {
     if(!quoted) { expr <- substitute(expr) } # force quoted

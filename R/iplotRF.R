@@ -54,10 +54,13 @@ function(cross, chr, chartOpts=NULL)
                               package="qtlcharts")
 }
 
+#' @rdname qtlcharts-shiny
 #' @export
 iplotRF_output <- function(outputId, width="100%", height="1000") {
     htmlwidgets::shinyWidgetOutput(outputId, "iplotRF", width, height, package="qtlcharts")
 }
+
+#' @rdname qtlcharts-shiny
 #' @export
 iplotRF_render <- function(expr, env=parent.frame(), quoted=FALSE) {
     if(!quoted) { expr <- substitute(expr) } # force quoted

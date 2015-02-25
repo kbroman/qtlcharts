@@ -90,10 +90,13 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
                               package="qtlcharts")
 }
 
+#' @rdname qtlcharts-shiny
 #' @export
 iplotCurves_output <- function(outputId, width="100%", height="1000") {
     htmlwidgets::shinyWidgetOutput(outputId, "iplotCurves", width, height, package="qtlcharts")
 }
+
+#' @rdname qtlcharts-shiny
 #' @export
 iplotCurves_render <- function(expr, env=parent.frame(), quoted=FALSE) {
     if(!quoted) { expr <- substitute(expr) } # force quoted

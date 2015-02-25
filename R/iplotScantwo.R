@@ -100,10 +100,13 @@ function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
                               package="qtlcharts")
 }
 
+#' @rdname qtlcharts-shiny
 #' @export
 iplotScantwo_output <- function(outputId, width="100%", height="1000") {
     htmlwidgets::shinyWidgetOutput(outputId, "iplotScantwo", width, height, package="qtlcharts")
 }
+
+#' @rdname qtlcharts-shiny
 #' @export
 iplotScantwo_render <- function(expr, env=parent.frame(), quoted=FALSE) {
     if(!quoted) { expr <- substitute(expr) } # force quoted

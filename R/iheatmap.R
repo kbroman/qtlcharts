@@ -58,10 +58,13 @@ function(z, x, y, chartOpts=NULL)
                               package="qtlcharts")
 }
 
+#' @rdname qtlcharts-shiny
 #' @export
 iheatmap_output <- function(outputId, width="100%", height="1000") {
     htmlwidgets::shinyWidgetOutput(outputId, "iheatmap", width, height, package="qtlcharts")
 }
+
+#' @rdname qtlcharts-shiny
 #' @export
 iheatmap_render <- function(expr, env=parent.frame(), quoted=FALSE) {
     if(!quoted) { expr <- substitute(expr) } # force quoted

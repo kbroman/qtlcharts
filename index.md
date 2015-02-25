@@ -21,6 +21,9 @@ targeting Chrome and Safari and, as much as possible, Firefox.
 A set of [reusable graphics panels](pages/panels.html) form the basis
 for the larger visualizations.
 
+To cite R/qtlcharts in publications, please use
+[Broman KW (2015) R/qtlcharts: interactive graphics for quantitative trait locus mapping. Genetics 199:359-361](http://www.ncbi.nlm.nih.gov/pubmed/25527287)
+
 ---
 
 - [Installation](pages/installation.html)

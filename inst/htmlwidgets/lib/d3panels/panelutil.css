@@ -105,9 +105,14 @@ div.error p {
     padding: 5px;
 }
 
+div.qtlcharts {
+    font-family: sans-serif;
+    font-size: 12pt;
+}
+
 div.searchbox {
     font-family: Sans-serif;
-    font-size: 11pt;
+    font-size: 12pt;
     margin-left: 60px;
 }
 

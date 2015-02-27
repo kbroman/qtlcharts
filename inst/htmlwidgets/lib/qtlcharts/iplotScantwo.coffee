@@ -59,9 +59,10 @@ iplotScantwo = (el, scantwo_data, pheno_and_geno, chartOpts) ->
     # drop-down menus
     options = ["full", "fv1", "int", "add", "av1"]
     div = d3.select("div##{chartdivid}")
-    form = d3.select("body")
-             .insert("div", "div##{chartdivid}")
+    form = d3.select(el)
+             .insert("div", ":first-child")
              .attr("id", "form")
+             .attr("class", "qtlcharts")
     left = form.append("div")
               .text(if oneAtTop then "bottom-left: " else "top-left: ")
               .style("float", "left")

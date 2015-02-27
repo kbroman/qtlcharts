@@ -76,7 +76,7 @@ iplotScantwo = function(el, scantwo_data, pheno_and_geno, chartOpts) {
   }
   options = ["full", "fv1", "int", "add", "av1"];
   div = d3.select("div#" + chartdivid);
-  form = d3.select("body").insert("div", "div#" + chartdivid).attr("id", "form");
+  form = d3.select(el).insert("div", ":first-child").attr("id", "form").attr("class", "qtlcharts");
   left = form.append("div").text(oneAtTop ? "bottom-left: " : "top-left: ").style("float", "left").style("margin-left", "150px");
   leftsel = left.append("select").attr("id", "leftselect").attr("name", "left");
   leftsel.selectAll("empty").data(options).enter().append("option").attr("value", function(d) {

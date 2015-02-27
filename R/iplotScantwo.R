@@ -128,6 +128,7 @@ data4iplotScantwo <-
     chr <- as.character(map$chr)
     chrnam <- unique(chr)
     n.mar <- tapply(chr, chr, length)[chrnam]
+    names(n.mar) <- NULL
 
     labels <- revisePmarNames(rownames(map))
 

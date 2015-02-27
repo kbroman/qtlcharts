@@ -25,6 +25,10 @@ iplotScantwo = (el, scantwo_data, pheno_and_geno, chartOpts) ->
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
+    # force chrnames to be a list
+    scantwo_data.chrnames = forceAsArray(scantwo_data.chrnames)
+    scantwo_data.nmar = forceAsArray(scantwo_data.nmar)
+
     # size of heatmap region
     totmar = sumArray(scantwo_data.nmar)
     pixelPerCell = d3.max([2, Math.floor(600/totmar)]) unless pixelPerCell?

@@ -33,6 +33,8 @@ iplotScantwo = function(el, scantwo_data, pheno_and_geno, chartOpts) {
   oneAtTop = (_ref16 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? _ref16 : false;
   zthresh = (_ref17 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? _ref17 : 0;
   chartdivid = (_ref18 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref18 : 'chart';
+  scantwo_data.chrnames = forceAsArray(scantwo_data.chrnames);
+  scantwo_data.nmar = forceAsArray(scantwo_data.nmar);
   totmar = sumArray(scantwo_data.nmar);
   if (pixelPerCell == null) {
     pixelPerCell = d3.max([2, Math.floor(600 / totmar)]);

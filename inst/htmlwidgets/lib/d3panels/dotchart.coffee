@@ -45,8 +45,8 @@ dotchart = () ->
             indID = indID ? [1..x.length]
 
             # a few checks
-            displayError("length(x) != length(y)") if x.length != y.length
-            displayError("length(indID) != length(x)") if indID.length != x.length
+            displayError("length(x) [#{x.length}] != length(y) [#{y.length}]") if x.length != y.length
+            displayError("length(indID) [#{indID.length}] != length(x) [#{x.length}]") if indID.length != x.length
 
             # if all y not null
             yNA.handle = false if y.every (v) -> (v?) and !yNA.force
@@ -57,11 +57,15 @@ dotchart = () ->
 
             xcategories = xcategories ? unique(x)
             xcatlabels = xcatlabels ? xcategories
-            displayError("xcatlabels.length != xcategories.length") if xcatlabels.length != xcategories.length
+            displayError("xcatlabels.length [#{xcatlabels.length}] != xcategories.length [#{xcategories.length}]") if xcatlabels.length != xcategories.length
 
             # check all x in xcategories
             if sumArray(xv? and !(xv in xcategories) for xv in x) > 0
                 displayError("Some x values not in xcategories")
+                console.log("xcategories:")
+                console.log(xcategories)
+                console.log("x:")
+                console.log(x)
 
             ylim = ylim ? d3.extent(y)
 
@@ -109,7 +113,7 @@ dotchart = () ->
                 xjitter = [xjitter] if typeof(xjitter) == 'number'
                 xjitter = (xjitter[0] for v in d3.range(x.length)) if xjitter.length == 1
 
-            displayError("xjitter.length != x.length") if xjitter.length != x.length
+            displayError("xjitter.length [#{xjitter.length}] != x.length [#{x.length}]") if xjitter.length != x.length
 
             yrange = [margin.top+panelheight-margin.inner, margin.top+margin.inner]
             yscale.domain(ylim).range(yrange)

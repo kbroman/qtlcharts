@@ -108,6 +108,9 @@ scatterplot = function() {
         return _results1;
       })()) > 0) {
         displayError("group values out of range");
+        console.log("ngroup: " + ngroup);
+        console.log("g:");
+        console.log(g);
       }
       if (group.length !== x.length) {
         displayError("group.length (" + group.length + ") != x.length (" + x.length + ")");

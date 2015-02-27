@@ -67,10 +67,10 @@ dotchart = function() {
         return _results;
       }).apply(this);
       if (x.length !== y.length) {
-        displayError("length(x) != length(y)");
+        displayError("length(x) [" + x.length + "] != length(y) [" + y.length + "]");
       }
       if (indID.length !== x.length) {
-        displayError("length(indID) != length(x)");
+        displayError("length(indID) [" + indID.length + "] != length(x) [" + x.length + "]");
       }
       if (y.every(function(v) {
         return (v != null) && !yNA.force;
@@ -85,7 +85,7 @@ dotchart = function() {
       xcategories = xcategories != null ? xcategories : unique(x);
       xcatlabels = xcatlabels != null ? xcatlabels : xcategories;
       if (xcatlabels.length !== xcategories.length) {
-        displayError("xcatlabels.length != xcategories.length");
+        displayError("xcatlabels.length [" + xcatlabels.length + "] != xcategories.length [" + xcategories.length + "]");
       }
       if (sumArray((function() {
         var _j, _len, _results1;
@@ -97,6 +97,10 @@ dotchart = function() {
         return _results1;
       })()) > 0) {
         displayError("Some x values not in xcategories");
+        console.log("xcategories:");
+        console.log(xcategories);
+        console.log("x:");
+        console.log(x);
       }
       ylim = ylim != null ? ylim : d3.extent(y);
       na_value = d3.min(y) - 100;
@@ -140,7 +144,7 @@ dotchart = function() {
         }
       }
       if (xjitter.length !== x.length) {
-        displayError("xjitter.length != x.length");
+        displayError("xjitter.length [" + xjitter.length + "] != x.length [" + x.length + "]");
       }
       yrange = [margin.top + panelheight - margin.inner, margin.top + margin.inner];
       yscale.domain(ylim).range(yrange);

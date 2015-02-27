@@ -58,7 +58,11 @@ scatterplot = () ->
             group = data?.group ? (1 for i in x)
             ngroup = d3.max(group)
             group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
-            displayError("group values out of range") if sumArray(g < 0 or g > ngroup-1 for g in group) > 0
+            if sumArray(g < 0 or g > ngroup-1 for g in group) > 0
+                displayError("group values out of range")
+                console.log("ngroup: #{ngroup}")
+                console.log("g:")
+                console.log(g)
             if group.length != x.length
                 displayError("group.length (#{group.length}) != x.length (#{x.length})")
 

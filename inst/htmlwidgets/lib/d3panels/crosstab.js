@@ -23,15 +23,15 @@ crosstab = function() {
       var borders, cell, cells, collab, colrect, denom, g, gEnter, height, i, j, n, ncol, nrow, rect, rowlab, rowrect, svg, tab, titles, values, width, xscale, yscale, _i, _j, _k, _l, _ref, _ref1, _ref2, _ref3, _results, _results1;
       n = data.x.length;
       if (data.y.length !== n) {
-        displayError("data.x.length != data.y.length");
+        displayError("data.x.length [" + data.x.length + "] != data.y.length [" + data.y.length + "]");
       }
       ncol = data.xcat.length;
       if (d3.max(data.x) >= ncol || d3.min(data.x) < 0) {
-        displayError("data.x should be in range 0-" + (ncol - 1));
+        displayError("data.x should be in range 0-" + (ncol - 1) + " [was " + (d3.min(data.x)) + " - " + (d3.max(data.x)) + "]");
       }
       nrow = data.ycat.length;
       if (d3.max(data.y) >= nrow || d3.min(data.y) < 0) {
-        displayError("data.y should be in range 0-" + (nrow - 1));
+        displayError("data.y should be in range 0-" + (nrow - 1) + " [was " + (d3.min(data.y)) + " - " + (d3.max(data.y)) + "]");
       }
       tab = calc_crosstab(data);
       data.xlabel = (_ref = data != null ? data.xlabel : void 0) != null ? _ref : "";

@@ -54,17 +54,17 @@ chrheatmap = function() {
       nchr = data.nmar.length;
       totmar = sumArray(data.nmar);
       if (totmar !== ny) {
-        displayError("sum(data.nmar) != data.z.length");
+        displayError("sum(data.nmar) [" + (sumArray(data.nmar)) + "] != data.z.length [" + data.z.length + "]");
       }
       if (data.chrnames.length !== nchr) {
-        displayError.log("data.nmar.length != data.chrnames.length");
+        displayError.log("data.nmar.length [" + data.nmar.length + "] != data.chrnames.length [" + data.chrnames.length + "]");
       }
       if (data.labels.length !== totmar) {
-        displayError("data.labels.length != sum(data.nmar)");
+        displayError("data.labels.length [" + data.labels.length + "] != sum(data.nmar) [" + (sum(data.nmar)) + "]");
       }
-      if (chrGap < 2) {
+      if (chrGap < 1) {
+        displayError("chrGap should be >= 2 (was " + chrGap + ")");
         chrGap = 2;
-        displayError("chrGap should be >= 1");
       }
       xChrBorder = [0];
       xCellStart = [];

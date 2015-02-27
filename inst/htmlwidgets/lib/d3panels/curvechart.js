@@ -75,6 +75,8 @@ curvechart = function() {
         return _results1;
       })()) > 0) {
         displayError("group values out of range");
+        console.log("groups:");
+        console.log(g);
       }
       strokecolor = strokecolor != null ? strokecolor : selectGroupColors(ngroup, "pastel");
       strokecolor = expand2vector(strokecolor, ngroup);

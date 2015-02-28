@@ -296,7 +296,7 @@ iplotScantwo = function(el, scantwo_data, pheno_and_geno, chartOpts) {
 };
 
 add_symmetric_lod = function(scantwo_data) {
-  var i, j, _i, _j, _k, _l, _len, _m, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+  var i, j, _i, _j, _k, _l, _len, _m, _ref, _ref1, _ref2, _ref3, _ref4;
   scantwo_data.full = scantwo_data.lod.map(function(d) {
     return d.map(function(dd) {
       return dd;
@@ -323,7 +323,7 @@ add_symmetric_lod = function(scantwo_data) {
     });
   });
   for (i = _i = 0, _ref = scantwo_data.lod.length - 1; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
-    for (j = _j = _ref1 = i + 1, _ref2 = scantwo_data.lod[i].length; _ref1 <= _ref2 ? _j < _ref2 : _j > _ref2; j = _ref1 <= _ref2 ? ++_j : --_j) {
+    for (j = _j = i, _ref1 = scantwo_data.lod[i].length; i <= _ref1 ? _j < _ref1 : _j > _ref1; j = i <= _ref1 ? ++_j : --_j) {
       scantwo_data.full[i][j] = scantwo_data.lod[j][i];
       scantwo_data.add[j][i] = scantwo_data.lod[i][j];
       scantwo_data.fv1[i][j] = scantwo_data.lodv1[j][i];
@@ -331,22 +331,18 @@ add_symmetric_lod = function(scantwo_data) {
     }
   }
   scantwo_data.one = [];
-  for (i = _k = 0, _ref3 = scantwo_data.lod.length; 0 <= _ref3 ? _k < _ref3 : _k > _ref3; i = 0 <= _ref3 ? ++_k : --_k) {
-    scantwo_data.full[i][i] = 0;
-    scantwo_data.add[i][i] = 0;
-    scantwo_data.fv1[i][i] = 0;
-    scantwo_data.av1[i][i] = 0;
+  for (i = _k = 0, _ref2 = scantwo_data.lod.length; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; i = 0 <= _ref2 ? ++_k : --_k) {
     scantwo_data.one.push(scantwo_data.lod[i]);
-    for (j = _l = 0, _ref4 = scantwo_data.lod.length; 0 <= _ref4 ? _l < _ref4 : _l > _ref4; j = 0 <= _ref4 ? ++_l : --_l) {
+    for (j = _l = 0, _ref3 = scantwo_data.lod.length; 0 <= _ref3 ? _l < _ref3 : _l > _ref3; j = 0 <= _ref3 ? ++_l : --_l) {
       scantwo_data.int[i][j] = scantwo_data.full[i][j] - scantwo_data.add[i][j];
     }
   }
   scantwo_data.lod = null;
   scantwo_data.lodv1 = null;
   scantwo_data.max = {};
-  _ref5 = ["full", "add", "fv1", "av1", "int"];
-  for (_m = 0, _len = _ref5.length; _m < _len; _m++) {
-    i = _ref5[_m];
+  _ref4 = ["full", "add", "fv1", "av1", "int"];
+  for (_m = 0, _len = _ref4.length; _m < _len; _m++) {
+    i = _ref4[_m];
     scantwo_data.max[i] = matrixMax(scantwo_data[i]);
   }
   return scantwo_data;

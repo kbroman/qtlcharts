@@ -354,7 +354,7 @@ add_symmetric_lod = (scantwo_data) ->
     scantwo_data.int  = scantwo_data.lod.map (d) -> d.map (dd) -> dd
 
     for i in [0...(scantwo_data.lod.length-1)]
-        for j in [(i+1)...scantwo_data.lod[i].length]
+        for j in [i...scantwo_data.lod[i].length]
             scantwo_data.full[i][j] = scantwo_data.lod[j][i]
             scantwo_data.add[j][i]  = scantwo_data.lod[i][j]
             scantwo_data.fv1[i][j]  = scantwo_data.lodv1[j][i]
@@ -362,10 +362,6 @@ add_symmetric_lod = (scantwo_data) ->
 
     scantwo_data.one = []
     for i in [0...scantwo_data.lod.length]
-        scantwo_data.full[i][i] = 0
-        scantwo_data.add[i][i] = 0
-        scantwo_data.fv1[i][i] = 0
-        scantwo_data.av1[i][i] = 0
         scantwo_data.one.push(scantwo_data.lod[i])
         for j in [0...scantwo_data.lod.length]
             scantwo_data.int[i][j] = scantwo_data.full[i][j] - scantwo_data.add[i][j]

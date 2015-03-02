@@ -111,7 +111,7 @@ function(times, curvedata, group, indID)
 }
 
 convert_scat <-
-function(scatdata, group, indID, digits=4)
+function(scatdata, group, indID)
 {
     if(is.null(scatdata)) return(NULL)
 

@@ -204,7 +204,7 @@ function(effects, crosstype, chrtype)
 
 # strip off names; save colnames within the lists
 convert_effects <-
-function(effects, digits=4)
+function(effects)
 {
     names(effects) <- NULL
     for(i in seq(along=effects)) {

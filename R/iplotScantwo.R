@@ -116,7 +116,7 @@ iplotScantwo_render <- function(expr, env=parent.frame(), quoted=FALSE) {
 
 # convert scantwo output to JSON format
 data4iplotScantwo <-
-    function(scantwoOutput, digits=4)
+    function(scantwoOutput)
 {
     lod <- scantwoOutput$lod
     map <- scantwoOutput$map
@@ -190,7 +190,7 @@ get_lodv1 <-
 
 # convert genotype/phenotype information to JSON format
 cross4iplotScantwo <-
-    function(scantwoOutput, cross, pheno, digits=4)
+    function(scantwoOutput, cross, pheno)
 {
     # if no cross or phenotype, just return null
     if(missing(cross) || is.null(cross) || missing(pheno) || is.null(pheno))

@@ -20,7 +20,7 @@ iplotCorr = function(el, data, chartOpts) {
   scatcolors = (_ref8 = chartOpts != null ? chartOpts.scatcolors : void 0) != null ? _ref8 : null;
   chartdivid = (_ref9 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? _ref9 : 'chart';
   panelheight = height - margin.top - margin.bottom;
-  panelwidth = (width - margin.left - margin.right) / 2;
+  panelwidth = (width - 2 * margin.left - 2 * margin.right) / 2;
   min_paneldim = d3.min([panelheight, panelwidth]);
   panelheight = min_paneldim;
   panelwidth = min_paneldim;

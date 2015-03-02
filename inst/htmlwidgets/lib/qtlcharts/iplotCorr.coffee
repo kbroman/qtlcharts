@@ -20,7 +20,7 @@ iplotCorr = (el, data, chartOpts) ->
 
     # chartOpts start
     height = chartOpts?.height ? 560 # height of each panel in pixels
-    width = chartOpts?.width ? 1050 # total height of panels
+    width = chartOpts?.width ? 1050 # total width of panels
     margin = chartOpts?.margin ? {left:70, top:40, right:5, bottom: 70, inner:5} # margins in pixels (left, top, right, bottom, inner)
     corcolors = chartOpts?.corcolors ? ["darkslateblue", "white", "crimson"] # heat map colors (same length as `zlim`)
     zlim = chartOpts?.zlim ? [-1, 0, 1] # z-axis limits
@@ -32,7 +32,7 @@ iplotCorr = (el, data, chartOpts) ->
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
     panelheight = height - margin.top - margin.bottom
-    panelwidth = (width - margin.left - margin.right)/2
+    panelwidth = (width - 2*margin.left - 2*margin.right)/2
     # force panelheight == panelwidth by taking minimum of the two
     min_paneldim = d3.min([panelheight, panelwidth])
     panelheight = min_paneldim

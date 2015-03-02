@@ -123,8 +123,15 @@ iplotScanone(out.hk, grav, lodcolumn=32, pheno.col=32, pxgtype="raw")
 
 ### iplotScantwo
 
-```{r iplotScantwo}
-gravsub <- calc.genoprob(gravsub, step=5)
-out2 <- scantwo(gravsub, pheno.col=32, method="hk", verbose=FALSE)
+```{r run_scantwo}
+grav <- calc.genoprob(grav, step=5)
+out2 <- scantwo(grav, pheno.col=32, method="hk", verbose=FALSE)
+```
+
+```{r iplotScantwo_noeff}
 iplotScantwo(out2)
+```
+
+```{r iplotScantwo_eff}
+iplotScantwo(out2, grav, pheno.col=32)
 ```

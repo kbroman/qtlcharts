@@ -89,12 +89,6 @@ iplotCurves = function(el, curve_data, scatter1_data, scatter2_data, chartOpts) 
   hbot = hbot - (margin.top + margin.bottom);
   wtop = width - (margin.left + margin.top);
   wbot = (width - 2 * (margin.left + margin.right)) / 2;
-  console.log("height: " + height);
-  console.log("htop: " + htop);
-  console.log("hbot: " + hbot);
-  console.log("width: " + width);
-  console.log("wtop: " + wtop);
-  console.log("wbot: " + wbot);
   svg = d3.select(el).select("svg");
   nind = curve_data.data.length;
   group = (_ref54 = curve_data != null ? curve_data.group : void 0) != null ? _ref54 : (function() {

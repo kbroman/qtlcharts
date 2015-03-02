@@ -67,12 +67,6 @@ iplotCurves = (el, curve_data, scatter1_data, scatter2_data, chartOpts) ->
     hbot = hbot - (margin.top + margin.bottom) # remove margins
     wtop = (width - (margin.left + margin.top))
     wbot = (width - 2*(margin.left + margin.right))/2
-    console.log("height: #{height}")
-    console.log("htop: #{htop}")
-    console.log("hbot: #{hbot}")
-    console.log("width: #{width}")
-    console.log("wtop: #{wtop}")
-    console.log("wbot: #{wbot}")
 
     # Select the svg element, if it exists.
     svg = d3.select(el).select("svg")

@@ -105,6 +105,7 @@ iplotPXG(grav, marker="BF.206L-Col", pheno.col="T320")
 gravsub <- pull.markers(grav, sample(markernames(grav), 50, replace=FALSE))
 gravsub <- est.rf(gravsub)
 iplotRF(gravsub)
+```
 
 
 ### iplotScanone

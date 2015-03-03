@@ -1,7 +1,7 @@
 # iplotScanone_ci: lod curves + phe x gen (as mean +/- 2 SE) plot
 # Karl W Broman
 
-iplotScanone_ci = (el, lod_data, pxg_data, chartOpts) ->
+iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
     markers = (x for x of pxg_data.chrByMarkers)
 
@@ -65,7 +65,7 @@ iplotScanone_ci = (el, lod_data, pxg_data, chartOpts) ->
                            .ylab(lod_ylab)
                            .rotate_ylab(lod_rotate_ylab)
 
-    svg = d3.select(el).select("svg")
+    svg = d3.select(widgetdiv).select("svg")
 
     g_lod = svg.append("g")
                .attr("id", "lodchart")

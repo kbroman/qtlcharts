@@ -1,7 +1,7 @@
 # iplotScanone_pxg: lod curves + phe x gen plot
 # Karl W Broman
 
-iplotScanone_pxg = (el, lod_data, pxg_data, chartOpts) ->
+iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
     markers = (x for x of pxg_data.chrByMarkers)
 
@@ -68,7 +68,7 @@ iplotScanone_pxg = (el, lod_data, pxg_data, chartOpts) ->
                            .ylab(lod_ylab)
                            .rotate_ylab(lod_rotate_ylab)
 
-    svg = d3.select(el).select("svg")
+    svg = d3.select(widgetdiv).select("svg")
 
     g_lod = svg.append("g")
                .attr("id", "lodchart")

@@ -6,17 +6,17 @@ HTMLWidgets.widget({
     name: "iplotMap",
     type: "output",
 
-    initialize: (el, width, height) ->
-        add_search_box(el)
+    initialize: (widgetdiv, width, height) ->
+        add_search_box(widgetdiv)
 
-        d3.select(el).append("svg")
+        d3.select(widgetdiv).append("svg")
           .attr("width", width)
           .attr("height", height-19) # adjustment for marker search box
           .attr("class", "qtlcharts")
 
-    renderValue: (el, x) ->
+    renderValue: (widgetdiv, x) ->
 
-        svg = d3.select(el).select("svg")
+        svg = d3.select(widgetdiv).select("svg")
 
         chartOpts = x.chartOpts ? [ ]
         chartOpts.width = chartOpts?.width ? svg.attr("width")
@@ -25,10 +25,10 @@ HTMLWidgets.widget({
         svg.attr("width", chartOpts.width)
         svg.attr("height", chartOpts.height)
 
-        iplotMap(el, x.data, chartOpts)
+        iplotMap(widgetdiv, x.data, chartOpts)
 
-    resize: (el, width, height) ->
-        d3.select(el).select("svg")
+    resize: (widgetdiv, width, height) ->
+        d3.select(widgetdiv).select("svg")
           .attr("width", width)
           .attr("height", height)
 

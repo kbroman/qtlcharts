@@ -7,7 +7,7 @@
 #   is show below; click for it to persist; click again to make it go away.
 #
 
-iboxplot = (el, data, chartOpts) ->
+iboxplot = (widgetdiv, data, chartOpts) ->
 
     # chartOpts start
     width = chartOpts?.width ? 1000 # width of image in pixels
@@ -83,7 +83,7 @@ iboxplot = (el, data, chartOpts) ->
             .x((d) -> xScale(d))
             .y((d) -> yScale(data.quant[j][d]))
 
-    svg=d3.select(el).select("svg")
+    svg=d3.select(widgetdiv).select("svg")
              .append("svg")
              .attr("width", width)
              .attr("height", halfheight)
@@ -264,7 +264,7 @@ iboxplot = (el, data, chartOpts) ->
        .attr("fill", "none")
 
     # lower svg
-    lowsvg = d3.select(el).select("svg")
+    lowsvg = d3.select(widgetdiv).select("svg")
                .append("g")
                    .attr("id", "lower_svg")
                    .attr("transform", "translate(0,#{halfheight})")

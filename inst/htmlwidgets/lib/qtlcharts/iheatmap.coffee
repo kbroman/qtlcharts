@@ -1,7 +1,7 @@
 # iheatmap: Interactive heatmap, linked to curves with the horizontal and vertical slices
 # Karl W Broman
 
-iheatmap = (el, data, chartOpts) ->
+iheatmap = (widgetdiv, data, chartOpts) ->
 
     # chartOpts start
     height = chartOpts?.height ? 800 # total height of chart
@@ -37,7 +37,7 @@ iheatmap = (el, data, chartOpts) ->
     wright = width - wleft
 
     # Select the svg element
-    svg = d3.select(el).select("svg")
+    svg = d3.select(widgetdiv).select("svg")
 
     unless xlim?
         xlim = d3.extent(data.x)

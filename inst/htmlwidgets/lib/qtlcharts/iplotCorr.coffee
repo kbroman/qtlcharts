@@ -3,7 +3,7 @@
 # Left panel is a heat map of a correlation matrix; hover over pixels
 # to see the values; click to see the corresponding scatterplot on the right
 
-iplotCorr = (el, data, chartOpts) ->
+iplotCorr = (widgetdiv, data, chartOpts) ->
 
     # data is an object with 7 components
     #   data.indID  vector of character strings, of length n, with IDs for individuals
@@ -38,7 +38,7 @@ iplotCorr = (el, data, chartOpts) ->
     panelheight = min_paneldim
     panelwidth = min_paneldim
 
-    svg = d3.select(el).select("svg")
+    svg = d3.select(widgetdiv).select("svg")
 
     # panel for correlation image
     corrplot = svg.append("g")

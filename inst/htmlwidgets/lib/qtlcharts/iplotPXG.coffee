@@ -1,7 +1,7 @@
 # iplotPXG: (just barely) interactive plot of phenotype vs genotype
 # Karl W Broman
 
-iplotPXG = (el, data, chartOpts) ->
+iplotPXG = (widgetdiv, data, chartOpts) ->
 
     gen = (Math.abs(x) for x in data.geno[0])
     inferred = (x < 0 for x in data.geno[0])
@@ -52,7 +52,7 @@ iplotPXG = (el, data, chartOpts) ->
                         .pointstroke(pointstroke)
                         .yNA(yNA)
 
-    d3.select(el).select("svg")
+    d3.select(widgetdiv).select("svg")
       .datum({geno:gen, pheno:phe, indID:data.indID})
       .call(mychart)
 

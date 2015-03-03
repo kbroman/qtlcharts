@@ -6,13 +6,13 @@ HTMLWidgets.widget({
     name: "iplotScantwo",
     type: "output",
 
-    initialize: (el, width, height) ->
-        d3.select(el).append("svg")
+    initialize: (widgetdiv, width, height) ->
+        d3.select(widgetdiv).append("svg")
           .attr("class", "qtlcharts")
 
-    renderValue: (el, x) ->
-        iplotScantwo(el, x.scantwo_data, x.phenogeno_data, x.chartOpts)
+    renderValue: (widgetdiv, x) ->
+        iplotScantwo(widgetdiv, x.scantwo_data, x.phenogeno_data, x.chartOpts)
 
-    resize: (el, width, height) -> null
+    resize: (widgetdiv, width, height) -> null
 
 })

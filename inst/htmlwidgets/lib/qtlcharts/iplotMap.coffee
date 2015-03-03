@@ -1,7 +1,7 @@
 # iplotMap: interactive plot of a genetic marker map
 # Karl W Broman
 
-iplotMap = (el, data, chartOpts) ->
+iplotMap = (widgetdiv, data, chartOpts) ->
 
     # chartOpts start
     width = chartOpts?.width ? 1000 # width of chart in pixels
@@ -40,7 +40,7 @@ iplotMap = (el, data, chartOpts) ->
                         .xlab(xlab)
                         .ylab(ylab)
 
-    svg = d3.select(el).select("svg")
+    svg = d3.select(widgetdiv).select("svg")
             .datum(data)
             .call(mychart)
 
@@ -131,8 +131,8 @@ iplotMap = (el, data, chartOpts) ->
               .attr("stroke", linecolor)
             martip.hide()
 
-add_search_box = (el) ->
-    form = d3.select(el)
+add_search_box = (widgetdiv) ->
+    form = d3.select(widgetdiv)
              .append("div")
                  .attr("class", "searchbox")
                  .attr("id", "markerinput")

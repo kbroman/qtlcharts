@@ -6,15 +6,15 @@ HTMLWidgets.widget({
     name: "iplotScanone",
     type: "output",
 
-    initialize: (el, width, height) ->
-        d3.select(el).append("svg")
+    initialize: (widgetdiv, width, height) ->
+        d3.select(widgetdiv).append("svg")
           .attr("width", width)
           .attr("height", height)
           .attr("class", "qtlcharts")
 
-    renderValue: (el, x) ->
+    renderValue: (widgetdiv, x) ->
 
-        svg = d3.select(el).select("svg")
+        svg = d3.select(widgetdiv).select("svg")
 
         chartOpts = x.chartOpts ? [ ]
         chartOpts.width = chartOpts?.width ? svg.attr("width")
@@ -26,14 +26,14 @@ HTMLWidgets.widget({
         console.log(x.pxg_type)
 
         if x.pxg_type == "ci"
-            iplotScanone_ci(el, x.scanone_data, x.pxg_data, chartOpts)
+            iplotScanone_ci(widgetdiv, x.scanone_data, x.pxg_data, chartOpts)
         else if x.pxg_type == "raw"
-            iplotScanone_pxg(el, x.scanone_data, x.pxg_data, chartOpts)
+            iplotScanone_pxg(widgetdiv, x.scanone_data, x.pxg_data, chartOpts)
         else
-            iplotScanone_noeff(el, x.scanone_data, chartOpts)
+            iplotScanone_noeff(widgetdiv, x.scanone_data, chartOpts)
 
-    resize: (el, width, height) ->
-        d3.select(el).select("svg")
+    resize: (widgetdiv, width, height) ->
+        d3.select(widgetdiv).select("svg")
           .attr("width", width)
           .attr("height", height)
 

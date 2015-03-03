@@ -1,7 +1,7 @@
 # iplotScanone_noeff: LOD curves (nothing else)
 # Karl W Broman
 
-iplotScanone_noeff = (el, data, chartOpts) ->
+iplotScanone_noeff = (widgetdiv, data, chartOpts) ->
 
     # chartOpts start
     height = chartOpts?.height ? 450 # height of image in pixels
@@ -53,7 +53,7 @@ iplotScanone_noeff = (el, data, chartOpts) ->
                            .ylab(ylab)
                            .rotate_ylab(rotate_ylab)
 
-    d3.select(el).select("svg")
+    d3.select(widgetdiv).select("svg")
       .datum(data)
       .call(mylodchart)
 

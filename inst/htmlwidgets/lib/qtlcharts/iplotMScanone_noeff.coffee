@@ -1,7 +1,7 @@
 # iplotMScanone_noeff: image of lod curves linked to plot of lod curves
 # Karl W Broman
 
-iplotMScanone_noeff = (el, lod_data, times, chartOpts) ->
+iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
 
     # chartOpts start
     height = chartOpts?.height ? 700 # height of chart in pixels
@@ -49,7 +49,7 @@ iplotMScanone_noeff = (el, lod_data, times, chartOpts) ->
                                .ylab(lod_ylab)
                                .nullcolor(nullcolor)
 
-    svg = d3.select(el).select("svg")
+    svg = d3.select(widgetdiv).select("svg")
 
     g_heatmap = svg.append("g")
                    .attr("id", "heatmap")

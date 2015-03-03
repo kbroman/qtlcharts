@@ -1,7 +1,7 @@
 # iplotRF: interactive plot of pairwise recombination fractions
 # Karl W Broman
 
-iplotRF = (el, rf_data, geno, chartOpts) ->
+iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
 
     # chartOpts start
     pixelPerCell = chartOpts?.pixelPerCell ? null # pixels per cell in heat map
@@ -51,12 +51,12 @@ iplotRF = (el, rf_data, geno, chartOpts) ->
     totalh =  htop + hbot
 
     # resize widget
-    d3.select(el)
+    d3.select(widgetdiv)
       .style("height", "#{totalh}px")
       .style("width", "#{totalw}px")
 
     # select SVG and resize
-    svg = d3.select(el).select("svg")
+    svg = d3.select(widgetdiv).select("svg")
             .attr("height", totalh)
             .attr("width", totalw)
 

@@ -1,7 +1,7 @@
 # iplotCurves: Plot of a bunch of curves, linked to points in 0, 1, or 2 scatterplots
 # Karl W Broman
 
-iplotCurves = (el, curve_data, scatter1_data, scatter2_data, chartOpts) ->
+iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) ->
 
     # chartOpts start
     height = chartOpts?.height ? 1000 # total height of chart in pixels
@@ -69,7 +69,7 @@ iplotCurves = (el, curve_data, scatter1_data, scatter2_data, chartOpts) ->
     wbot = (width - 2*(margin.left + margin.right))/2
 
     # Select the svg element, if it exists.
-    svg = d3.select(el).select("svg")
+    svg = d3.select(widgetdiv).select("svg")
 
     # groups of colors
     nind = curve_data.data.length

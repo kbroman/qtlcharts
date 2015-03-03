@@ -6,14 +6,14 @@ HTMLWidgets.widget({
     name: "iplotRF",
     type: "output",
 
-    initialize: (el, width, height) ->
+    initialize: (widgetdiv, width, height) ->
         # note that width and height are ignored
-        d3.select(el).append("svg")
+        d3.select(widgetdiv).append("svg")
           .attr("class", "qtlcharts")
 
-    renderValue: (el, x) ->
-        iplotRF(el, x.rfdata, x.genodata, x.chartOpts)
+    renderValue: (widgetdiv, x) ->
+        iplotRF(widgetdiv, x.rfdata, x.genodata, x.chartOpts)
 
-    resize: (el, width, height) -> null
+    resize: (widgetdiv, width, height) -> null
 
 })

@@ -23,7 +23,6 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
     zthresh = chartOpts?.zthresh ? 0 # LOD values below this threshold aren't shown (on LOD_full scale)
     # chartOpts end
-    chartdivid = chartOpts?.chartdivid ? 'chart'
 
     # force chrnames to be a list
     scantwo_data.chrnames = forceAsArray(scantwo_data.chrnames)
@@ -62,7 +61,6 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
 
     # drop-down menus
     options = ["full", "fv1", "int", "add", "av1"]
-    div = d3.select("div##{chartdivid}")
     form = d3.select(widgetdiv)
              .insert("div", ":first-child")
              .attr("id", "form")
@@ -115,9 +113,6 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                      d3.select("g#chrheatmap svg").remove()
                      d3.select("g#chrheatmap").datum(scantwo_data).call(mychrheatmap)
                      add_cell_tooltips()
-
-    d3.select("body")
-      .insert("p", "div##{chartdivid}")
 
     # resize widget
     d3.select(widgetdiv)

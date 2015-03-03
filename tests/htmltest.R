@@ -13,7 +13,7 @@ grav <- calc.genoprob(grav, step=1)
 out.hk <- scanone(grav, pheno.col=1:nphe(grav), method="hk")
 
 # run each .R file and create a link to the results html file
-files <- list.files(".", pattern=".R")
+files <- list.files(".", pattern="\\.R$")
 for(file in files) {
     cat("Sourcing ", file, "\n")
     source(file)

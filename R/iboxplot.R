@@ -39,15 +39,12 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
 {
     data_list <- convert4iboxplot(dat, qu, orderByMedian, breaks)
 
-    # use default height of 600 pixels and width of 900 pixels
-    chartOpts <- add2chartOpts(chartOpts, height=600, width=900)
-
     htmlwidgets::createWidget("iboxplot", list(data=data_list, chartOpts=chartOpts),
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=900,
-                                  browser.defaultHeight=600,
+                                  browser.defaultWidth=1200,
+                                  browser.defaultHeight=800,
                                   knitr.defaultWidth=900,
                                   knitr.defaultHeight=600,
                                   knitr.figure=FALSE

@@ -49,8 +49,15 @@ iplotRF = (el, rf_data, geno, chartOpts) ->
     totalw = heatmap_width + crosstab_width
     htop = d3.max([heatmap_height, crosstab_height])
     totalh =  htop + hbot
+    console.log("width: #{totalw}, height: #{totalh}")
 
-    # create SVG
+    # resize widget
+    d3.select(el)
+      .style("height", "#{totalh}px")
+      .style("width", "#{totalw}px")
+    console.log(el)
+
+    # select SVG and resize
     svg = d3.select(el).select("svg")
             .attr("height", totalh)
             .attr("width", totalw)

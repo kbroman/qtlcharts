@@ -87,8 +87,8 @@ function(mat, group, rows, cols, reorder=FALSE, corr=stats::cor(mat, use="pairwi
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=1600,
-                                  browser.defaultHeight=800,
+                                  browser.defaultWidth=1200,
+                                  browser.defaultHeight=600,
                                   knitr.defaultWidth=1200,
                                   knitr.defaultHeight=600,
                               ),

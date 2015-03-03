@@ -36,7 +36,7 @@
 #' data(hyper)
 #' marker <- sample(markernames(hyper), 1)
 #' \donttest{
-#' iplotPXG(hyper, marker, chartOpts=list(width=500))}
+#' iplotPXG(hyper, marker)}
 #'
 #' @export
 iplotPXG <-
@@ -62,6 +62,11 @@ function(cross, marker, pheno.col=1,
     htmlwidgets::createWidget("iplotPXG", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
+                              sizingPolicy=htmlwidgets::sizingPolicy(
+                                  browser.defaultWidth=800,
+                                  browser.defaultHeight=800,
+                                  knitr.defaultWidth=600,
+                                  knitr.defaultHeight=600),
                               package="qtlcharts")
 }
 

@@ -45,7 +45,7 @@ library(qtl)
 data(hyper)
 marker <- sample(markernames(hyper), 1)
 \donttest{
-iplotPXG(hyper, marker, chartOpts=list(width=500))}
+iplotPXG(hyper, marker)}
 }
 \seealso{
 \code{\link{iplotScanone}}, \code{\link{iplotMap}}

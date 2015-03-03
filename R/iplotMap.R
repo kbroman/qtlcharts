@@ -41,12 +41,10 @@ function(map, shift=FALSE, chartOpts=NULL)
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  viewer.paneHeight=600,
                                   browser.defaultWidth=1000,
-                                  browser.defaultHeight=800,
-                                  knitr.defaultWidth=960,
-                                  knitr.defaultHeight=600,
-                                  knitr.figure=FALSE),
+                                  browser.defaultHeight=700,
+                                  knitr.defaultWidth=900,
+                                  knitr.defaultHeight=600),
                               package="qtlcharts")
 }
 

@@ -144,6 +144,12 @@ function(scanoneOutput, cross, lodcolumn, pheno.col, times=NULL,
                                    chartOpts=chartOpts),
                               width=chartOpts$width,
                               height=chartOpts$height,
+                              sizingPolicy=htmlwidgets::sizingPolicy(
+                                  browser.defaultWidth=1200,
+                                  browser.defaultHeight=800,
+                                  knitr.defaultWidth=1200,
+                                  knitr.defaultHeight=800,
+                              ),
                               package="qtlcharts")
 }
 

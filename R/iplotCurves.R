@@ -71,9 +71,6 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
     group <- group2numeric(group)
     indID <- rownames(curveMatrix)
 
-    if(!is.null(scatter1)) # at least one scatterplot: use larger default dimensions
-        chartOpts <- add2chartOpts(chartOpts, height=800, width=800)
-
     if(is.data.frame(curveMatrix)) curveMatrix <- as.matrix(curveMatrix)
     if(is.data.frame(scatter1)) scatter1 <- as.matrix(scatter1)
     if(is.data.frame(scatter2)) scatter2 <- as.matrix(scatter2)
@@ -87,6 +84,12 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
     htmlwidgets::createWidget("iplotCurves", list(data=data_list, chartOpts=chartOpts),
                               width=chartOpts$width,
                               height=chartOpts$height,
+                              sizingPolicy=htmlwidgets::sizingPolicy(
+                                  browser.defaultWidth=1000,
+                                  browser.defaultHeight=800,
+                                  knitr.defaultWidth=1000,
+                                  knitr.defaultHeight=800,
+                              ),
                               package="qtlcharts")
 }
 

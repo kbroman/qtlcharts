@@ -61,9 +61,7 @@ iplotRF = function(el, rf_data, geno, chartOpts) {
   totalw = heatmap_width + crosstab_width;
   htop = d3.max([heatmap_height, crosstab_height]);
   totalh = htop + hbot;
-  console.log("width: " + totalw + ", height: " + totalh);
   d3.select(el).style("height", totalh + "px").style("width", totalw + "px");
-  console.log(el);
   svg = d3.select(el).select("svg").attr("height", totalh).attr("width", totalw);
   if (d3.min(lodlim) < 0) {
     displayError("lodlim values must be non-negative; ignored", "error_" + chartdivid);

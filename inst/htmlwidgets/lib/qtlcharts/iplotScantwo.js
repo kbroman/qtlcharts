@@ -114,6 +114,7 @@ iplotScantwo = function(el, scantwo_data, pheno_and_geno, chartOpts) {
     return add_cell_tooltips();
   });
   d3.select("body").insert("p", "div#" + chartdivid);
+  d3.select(el).style("height", totalh + "px").style("width", totalw + "px");
   svg = d3.select(el).select("svg").attr("height", totalh).attr("width", totalw);
   scantwo_data = add_symmetric_lod(scantwo_data);
   scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);

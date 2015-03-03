@@ -119,7 +119,12 @@ iplotScantwo = (el, scantwo_data, pheno_and_geno, chartOpts) ->
     d3.select("body")
       .insert("p", "div##{chartdivid}")
 
-    # create SVG
+    # resize widget
+    d3.select(el)
+      .style("height", "#{totalh}px")
+      .style("width", "#{totalw}px")
+
+    # select SVG
     svg = d3.select(el).select("svg")
             .attr("height", totalh)
             .attr("width", totalw)

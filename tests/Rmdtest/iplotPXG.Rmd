@@ -1,0 +1,18 @@
+---
+title: iplotPXG within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](http://kbroman.org/qtlcharts) function `iplotPXG`.
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+data(grav)
+```
+
+```{r iplotPXG}
+iplotPXG(grav, marker="BF.206L-Col", pheno.col="T320")
+```

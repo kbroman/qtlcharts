@@ -1,0 +1,30 @@
+---
+title: iplotCurves within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](http://kbroman.org/qtlcharts) function `iplotCurves`.
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+data(grav)
+```
+
+Reduce size of data.
+
+```{r subset_pheno}
+grav$pheno <- grav$pheno[,seq(1, nphe(grav), by=5)]
+times <- as.numeric(sub("T", "", phenames(grav)))/60
+```
+
+```{r iplotCurves}
+iplotCurves(grav$pheno, times,
+            grav$pheno[,c("T30", "T240")],
+            grav$pheno[,c("T240", "T480")],
+            chartOpts=list(curves_xlab="Time", curves_ylab="Root tip angle",
+                           scat1_xlab="Angle at 30 min", scat1_ylab="Angle at 4 hrs",
+                           scat2_xlab="Angle at 4 hrs", scat2_ylab="Angle at 8 hrs"))
+```

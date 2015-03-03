@@ -1,0 +1,19 @@
+---
+title: iboxplot within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](http://kbroman.org/qtlcharts) function `iboxplot`.
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+data(grav)
+```
+
+```{r iboxplot}
+iboxplot(t(grav$pheno), breaks=51, orderByMedian=FALSE,
+         chartOpts=list(xlab="Time index", ylab="Root tip angle (degrees)"))
+```

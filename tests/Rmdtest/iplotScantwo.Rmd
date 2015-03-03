@@ -1,0 +1,23 @@
+---
+title: iplotScantwo within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](http://kbroman.org/qtlcharts) function `iplotScantwo`.
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+data(grav)
+```
+
+```{r run_scantwo}
+grav <- calc.genoprob(grav, step=5)
+out2 <- scantwo(grav, pheno.col=32, method="hk", verbose=FALSE)
+```
+
+```{r iplotScantwo_eff}
+iplotScantwo(out2, grav, pheno.col=32)
+```

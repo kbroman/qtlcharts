@@ -1,0 +1,22 @@
+---
+title: iheatmap within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](http://kbroman.org/qtlcharts) function `iheatmap`.
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtlcharts)
+```
+
+```{r iheatmap}
+n <- 101
+x <- y <- seq(-2, 2, len=n)
+z <- matrix(ncol=n, nrow=n)
+for(i in seq(along=x))
+    for(j in seq(along=y))
+        z[i,j] <- x[i]*y[j]*exp(-x[i]^2 - y[j]^2)
+iheatmap(z, x, y)
+```

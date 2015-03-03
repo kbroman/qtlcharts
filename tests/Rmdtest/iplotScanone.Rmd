@@ -1,0 +1,23 @@
+---
+title: iplotScanone within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](http://kbroman.org/qtlcharts) function `iplotScanone`.
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+data(grav)
+```
+
+```{r run_scanone}
+grav <- calc.genoprob(grav, step=1)
+out.hk <- scanone(grav, pheno.col=32, method="hk")
+```
+
+```{r iplotScanone_ci}
+iplotScanone(out.hk, grav, lodcolumn=1, pheno.col=32)
+```

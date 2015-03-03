@@ -1,0 +1,24 @@
+---
+title: iplot within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](http://kbroman.org/qtlcharts) function `iplot`.
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+data(grav)
+grav$pheno <- grav$pheno[,seq(1, nphe(grav), by=5)]
+```
+
+```{r iplot}
+rowmedian <- apply(grav$pheno, 1, median, na.rm=TRUE)
+grp <- as.numeric(rowmedian < median(unlist(grav$pheno), na.rm=TRUE))+1
+iplot(grav$pheno$T0, grav$pheno$T60,
+      group=grp,
+      indID=paste0("RIL", 1:nind(grav)),
+      chartOpts=list(xlab="Angle at time 0", ylab="Angle at 60 min"))
+```

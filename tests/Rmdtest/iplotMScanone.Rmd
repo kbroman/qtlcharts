@@ -1,0 +1,32 @@
+---
+title: iplotMScanone within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](http://kbroman.org/qtlcharts) function `iplotMScanone`.
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+data(grav)
+```
+
+Reduce size of data.
+
+```{r subset_pheno}
+grav$pheno <- grav$pheno[,seq(1, nphe(grav), by=5)]
+times <- as.numeric(sub("T", "", phenames(grav)))/60
+```
+
+Run scanone.
+
+```{r run_scanone}
+grav <- calc.genoprob(grav, step=1)
+out.hk <- scanone(grav, pheno.col=1:nphe(grav), method="hk")
+```
+
+```{r iplotMScanone}
+iplotMScanone(out.hk, grav, chartOpts=list(eff_ylab="QTL effect"))
+```

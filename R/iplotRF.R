@@ -34,10 +34,11 @@
 #'
 #' @examples
 #' library(qtl)
-#' data(hyper)
-#' hyper <- est.rf(hyper)
+#' data(fake.f2)
+#' \dontshow{fake.f2 <- fake.f2[c(1,5,13),]}
+#' fake.f2 <- est.rf(fake.f2)
 #' \donttest{
-#' iplotRF(hyper)}
+#' iplotRF(fake.f2)}
 #'
 #' @export
 iplotRF <-

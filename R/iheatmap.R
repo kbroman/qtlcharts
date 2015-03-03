@@ -53,8 +53,8 @@ function(z, x, y, chartOpts=NULL)
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=1200,
-                                  browser.defaultHeight=1200,
+                                  browser.defaultWidth=800,
+                                  browser.defaultHeight=800,
                                   knitr.defaultWidth=800,
                                   knitr.defaultHeight=800,
                               ),

@@ -43,7 +43,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=1200,
+                                  browser.defaultWidth=1000,
                                   browser.defaultHeight=800,
                                   knitr.defaultWidth=900,
                                   knitr.defaultHeight=600,

@@ -23,8 +23,6 @@ HTMLWidgets.widget({
         svg.attr("width", chartOpts.width)
         svg.attr("height", chartOpts.height)
 
-        console.log(x.pxg_type)
-
         if x.pxg_type == "ci"
             iplotScanone_ci(widgetdiv, x.scanone_data, x.pxg_data, chartOpts)
         else if x.pxg_type == "raw"

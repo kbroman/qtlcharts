@@ -86,6 +86,12 @@ function(mat, group, rows, cols, reorder=FALSE, corr=stats::cor(mat, use="pairwi
     htmlwidgets::createWidget("iplotCorr", list(data=data_list, chartOpts=chartOpts),
                               width=chartOpts$width,
                               height=chartOpts$height,
+                              sizingPolicy=htmlwidgets::sizingPolicy(
+                                  browser.defaultWidth=1600,
+                                  browser.defaultHeight=800,
+                                  knitr.defaultWidth=1200,
+                                  knitr.defaultHeight=600,
+                              ),
                               package="qtlcharts")
 }
 

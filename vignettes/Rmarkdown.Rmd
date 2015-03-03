@@ -29,6 +29,14 @@ To include [R/qtlcharts](http://kbroman.org/qtlcharts)-based
 interactive charts within an R Markdown document, you just need to include the
 relevant calls to the R function within a code chunk.
 
+I'm going to use defaults of `fig.width=8` and `fig.height=6` for
+each of these charts.
+
+```{r knitr_options}
+knitr::opts_chunk$set(fig.width=8, fig.height=6)
+```
+
+
 ### An example
 
 As an example, we'll consider the `grav` dataset included with
@@ -86,9 +94,10 @@ iplotMap(grav)
 
 Now, let's use `iplotCorr` to plot a heat map of the correlation
 matrix for the phenotype at all pairs of times, linked to scatterplots
-of the phenotypes.
+of the phenotypes. (Note that for this plot, I'm using
+`fig.height=4.2` in order to avoid some empty space below the figure.)
 
-```{r iplotCorr}
+```{r iplotCorr, fig.height=4.2}
 iplotCorr(grav$pheno)
 ```
 

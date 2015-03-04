@@ -1,9 +1,11 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{R/qtlcharts Developer Guide}
--->
-
-# R/qtlcharts Developer Guide
+---
+title: R/qtlcharts Developer Guide
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{R/qtlcharts User Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8](inputenc)
+---
 
 [R/qtlcharts](http://kbroman.org/qtlcharts) is an
 [R](http://www.r-project.org) package to create interactive charts for
@@ -249,7 +251,7 @@ For further information on Roxygen2, see
 in [Hadley Wickham](http://had.co.nz/)'s [Advanced R Programming](http://adv-r.had.co.nz/)
 or the [Roxygen2 vignettes](http://cran.r-project.org/web/packages/roxygen2/), such as
 [Getting started with Roxygen2](http://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
-and 
+and
 [Generating Rd files](http://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html).
 
 ## Tests
@@ -281,7 +283,3 @@ R/qtlcharts incorporates [D3.js](http://d3js.org)
 ([see its license](https://github.com/kbroman/qtlcharts/blob/master/inst/d3-tip/LICENSE)),
 and [ColorBrewer](http://colorbrewer2.org)
 ([see its license](https://github.com/kbroman/qtlcharts/blob/master/inst/colorbrewer/LICENSE)).
-
-
-<!-- the following to make it look nicer -->
-<link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

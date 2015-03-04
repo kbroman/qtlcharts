@@ -1,15 +1,17 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{List of chart customization options}
--->
-
-# List of chart customization options
+---
+title: List of chart customization options
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{R/qtlcharts User Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8](inputenc)
+---
 
 There are a number of ways in which one may wish to customize the
 interactive graphs produced by
 [R/qtlcharts](http://kbroman.org/qtlcharts), such as different
 colors or axis labels. Our main approach to allow such customization
-is through a function argument, `chartOpts`. 
+is through a function argument, `chartOpts`.
 
 Use of these options is described in the
 [R/qtlcharts User Guide](http://kbroman.org/qtlcharts/assets/vignettes/userGuide.html).
@@ -671,6 +673,3 @@ customization options for each chart.
 
 `zthresh = 0` &mdash; LOD values below this threshold aren't shown (on LOD_full scale)
 
-
-<!-- the following to make it look nicer -->
-<link href="http://kbroman.org/qtlcharts/assets/vignettes/vignette.css" rel="stylesheet"></link>

@@ -18,7 +18,7 @@ The interactive visualizations are built with the JavaScript library
 [D3](http://d3js.org), and are viewed in a web browser. We are
 targeting Chrome and Safari and, as much as possible, Firefox.
 
-A set of [reusable graphics panels](pages/panels.html) form the basis
+A set of [reusable graphics panels](http://kbroman.org/d3panels) form the basis
 for the larger visualizations.
 
 To cite R/qtlcharts in publications, please use
@@ -29,7 +29,7 @@ To cite R/qtlcharts in publications, please use
 - [Installation](pages/installation.html)
 - [User guide](assets/vignettes/userGuide.html)
 - [Developer guide](assets/vignettes/develGuide.html)
-- [Reusable graphic panels](pages/panels.html)
+- [Reusable graphic panels](http://kbroman.org/d3panels)
 - [Use with R Markdown](assets/vignettes/Rmarkdown.html)
 - [List of chart customization options](assets/vignettes/chartOpts.html)
 
@@ -43,55 +43,55 @@ Click on a chart for the corresponding interactive version.
 <tr>
   <td class="left">
     <a href="example/iplotScanone.html">
-        <img src="assets/pics/charts/iplotScanone.png" alt="iplotScanone example" title="iplotScanone example"/>
+        <img src="assets/pics/iplotScanone.png" alt="iplotScanone example" title="iplotScanone example"/>
     </a>
   </td>
   <td class="right">
     <a href="example/iplotCorr.html">
-        <img src="assets/pics/charts/iplotCorr.png" alt="iplotCorr example" title="iplotCorr example"/>
+        <img src="assets/pics/iplotCorr.png" alt="iplotCorr example" title="iplotCorr example"/>
     </a>
   </td>
 </tr>
 <tr>
   <td class="left">
     <a href="example/iplotMScanone.html">
-        <img src="assets/pics/charts/iplotMScanone.png" alt="iplotMScanone example" title="iplotMScanone example"/>
+        <img src="assets/pics/iplotMScanone.png" alt="iplotMScanone example" title="iplotMScanone example"/>
     </a>
   </td>
   <td class="right">
     <a href="example/iplotMap.html">
-        <img src="assets/pics/charts/iplotMap.png" alt="iplotMap example" title="iplotMap example"/>
+        <img src="assets/pics/iplotMap.png" alt="iplotMap example" title="iplotMap example"/>
     </a>
   </td>
 </tr>
 <tr>
   <td class="left">
     <a href="example/iplotCurves.html">
-        <img src="assets/pics/charts/iplotCurves.png" alt="iplotCurves example" title="iplotCurves example"/>
+        <img src="assets/pics/iplotCurves.png" alt="iplotCurves example" title="iplotCurves example"/>
     </a>
   </td>
   <td class="right">
     <a href="example/iheatmap.html">
-        <img src="assets/pics/charts/iheatmap.png" alt="iheatmap example" title="iheatmap example"/>
+        <img src="assets/pics/iheatmap.png" alt="iheatmap example" title="iheatmap example"/>
     </a>
   </td>
 </tr>
 <tr>
   <td class="left">
     <a href="example/iboxplot.html">
-        <img src="assets/pics/charts/iboxplot.png" alt="iboxplot example" title="iboxplot example"/>
+        <img src="assets/pics/iboxplot.png" alt="iboxplot example" title="iboxplot example"/>
     </a>
   </td>
   <td class="right">
     <a href="example/iplotRF.html">
-        <img src="assets/pics/charts/iplotRF.png" alt="iplotRF example" title="iplotRF example"/>
+        <img src="assets/pics/iplotRF.png" alt="iplotRF example" title="iplotRF example"/>
     </a>
   </td>
 </tr>
 <tr>
   <td class="left">
     <a href="example/iplotScantwo.html">
-        <img src="assets/pics/charts/iplotScantwo.png" alt="iplotScantwo example" title="iplotScantwo example"/>
+        <img src="assets/pics/iplotScantwo.png" alt="iplotScantwo example" title="iplotScantwo example"/>
     </a>
   </td>
   <td class="right">

@@ -28,8 +28,9 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     scantwo_data.chrnames = forceAsArray(scantwo_data.chrnames)
     scantwo_data.nmar = forceAsArray(scantwo_data.nmar)
 
-    # id for the htmlwidget div element
-    widgetid = d3.select(widgetdiv).attr("id")
+    # htmlwidget div element containing the chart, and its ID
+    div = d3.select(widgetdiv)
+    widgetid = div.attr("id")
 
     # size of heatmap region
     totmar = sumArray(scantwo_data.nmar)
@@ -64,16 +65,15 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
 
     # drop-down menus
     options = ["full", "fv1", "int", "add", "av1"]
-    form = d3.select(widgetdiv)
-             .insert("div", ":first-child")
-             .attr("id", "form")
-             .attr("class", "qtlcharts")
+    form = div.insert("div", ":first-child")
+              .attr("id", "form")
+              .attr("class", "qtlcharts")
     left = form.append("div")
               .text(if oneAtTop then "bottom-left: " else "top-left: ")
               .style("float", "left")
               .style("margin-left", "150px")
     leftsel = left.append("select")
-                  .attr("id", "leftselect")
+                  .attr("id", "leftselect_#{widgetid}")
                   .attr("name", "left")
     leftsel.selectAll("empty")
            .data(options)
@@ -89,7 +89,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                 .style("float", "left")
                 .style("margin-left", "50px")
     rightsel = right.append("select")
-                    .attr("id", "rightselect")
+                    .attr("id", "rightselect_#{widgetid}")
                     .attr("name", "right")
     rightsel.selectAll("empty")
             .data(options)
@@ -107,25 +107,24 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                  .attr("name", "refresh")
                  .text("Refresh")
                  .on "click", () ->
-                     leftsel = document.getElementById('leftselect')
+                     leftsel = document.getElementById("leftselect_#{widgetid}")
                      leftvalue = leftsel.options[leftsel.selectedIndex].value
-                     rightsel = document.getElementById('rightselect')
+                     rightsel = document.getElementById("rightselect_#{widgetid}")
                      rightvalue = rightsel.options[rightsel.selectedIndex].value
 
                      scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue)
-                     d3.select("g#chrheatmap svg").remove()
-                     d3.select("g#chrheatmap").datum(scantwo_data).call(mychrheatmap)
+                     div.select("g#chrheatmap svg").remove()
+                     div.select("g#chrheatmap").datum(scantwo_data).call(mychrheatmap)
                      add_cell_tooltips()
 
     # resize widget
-    d3.select(widgetdiv)
-      .style("height", "#{totalh}px")
-      .style("width", "#{totalw}px")
+    div.style("height", "#{totalh}px")
+       .style("width", "#{totalw}px")
 
     # select SVG
-    svg = d3.select(widgetdiv).select("svg")
-            .attr("height", totalh)
-            .attr("width", totalw)
+    svg = div.select("svg")
+             .attr("height", totalh)
+             .attr("width", totalw)
 
     # add the full,add,int,fv1,av1 lod matrices to scantwo_data
     # (and remove the non-symmetric ones)

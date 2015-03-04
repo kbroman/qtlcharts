@@ -17,8 +17,8 @@ exploratory data analysis within R, they may also be included within
 [R Markdown](http://rmarkdown.rstudio.com) is a
 extension of [Markdown](http://daringfireball.net/projects/markdown/),
 using [knitr](http://yihui.name/knitr/), to write simply-marked-up
-text with R code chunks that are converted to an html file, for
-viewing in the browser. Code chunks are processed by knitr and
+text, with chunks of R code, that is converted to an html file, for
+viewing in a web browser. The chunks of code are processed by knitr and
 replaced with the results or graphs produced.
 
 For more information on R Markdown and knitr, see the

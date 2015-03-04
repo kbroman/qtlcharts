@@ -28,6 +28,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     scantwo_data.chrnames = forceAsArray(scantwo_data.chrnames)
     scantwo_data.nmar = forceAsArray(scantwo_data.nmar)
 
+    # id for the htmlwidget div element
     widgetid = d3.select(widgetdiv).attr("id")
 
     # size of heatmap region
@@ -151,9 +152,10 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
 
     # function to add tool tips and handle clicking
     add_cell_tooltips = () ->
-        d3.selectAll(".d3-tip #{widgetid}").remove()
+        d3.selectAll(".d3-tip##{widgetid}").remove()
         celltip = d3.tip()
-                    .attr("class", "d3-tip #{widgetid}")
+                    .attr("class", "d3-tip")
+                    .attr("id", widgetid)
                     .html((d) ->
                             mari = scantwo_data.labels[d.i]
                             marj = scantwo_data.labels[d.j]

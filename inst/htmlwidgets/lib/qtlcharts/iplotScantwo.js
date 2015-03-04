@@ -2,7 +2,7 @@
 var add_symmetric_lod, iplotScantwo, lod_for_heatmap;
 
 iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
-  var add_cell_tooltips, axispos, bordercolor, chrGap, cicolors, color, darkrect, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, hright, i, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, n, ncat, nullcolor, oneAtTop, options, pixelPerCell, plot_effects, plot_scan, pointsize, pointstroke, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, submit, svg, totalh, totalw, totmar, w, wbot, wright, x, zthresh;
+  var add_cell_tooltips, axispos, bordercolor, chrGap, cicolors, color, darkrect, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, hright, i, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, n, ncat, nullcolor, oneAtTop, options, pixelPerCell, plot_effects, plot_scan, pointsize, pointstroke, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, submit, svg, totalh, totalw, totmar, w, wbot, widgetid, wright, x, zthresh;
   pixelPerCell = (ref = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? ref : null;
   chrGap = (ref1 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref1 : 2;
   wright = (ref2 = chartOpts != null ? chartOpts.wright : void 0) != null ? ref2 : 500;
@@ -34,6 +34,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   zthresh = (ref17 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref17 : 0;
   scantwo_data.chrnames = forceAsArray(scantwo_data.chrnames);
   scantwo_data.nmar = forceAsArray(scantwo_data.nmar);
+  widgetid = d3.select(widgetdiv).attr("id");
   totmar = sumArray(scantwo_data.nmar);
   if (pixelPerCell == null) {
     pixelPerCell = d3.max([2, Math.floor(600 / totmar)]);
@@ -119,8 +120,8 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   g_heatmap = svg.append("g").attr("id", "chrheatmap").datum(scantwo_data).call(mychrheatmap);
   add_cell_tooltips = function() {
     var cells, celltip;
-    d3.selectAll(".d3-tip").remove();
-    celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+    d3.selectAll(".d3-tip#" + widgetid).remove();
+    celltip = d3.tip().attr("class", "d3-tip").attr("id", widgetid).html(function(d) {
       var leftlod, mari, marj, rightlod;
       mari = scantwo_data.labels[d.i];
       marj = scantwo_data.labels[d.j];

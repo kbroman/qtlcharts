@@ -198,7 +198,7 @@ cross4iplotScantwo <-
 {
     # if no cross or phenotype, just return null
     if(missing(cross) || is.null(cross) || missing(pheno) || is.null(pheno))
-        return("null")
+        return(NULL)
 
     # pull out locations of LOD calculations, on grid
     map <- scantwoOutput$map

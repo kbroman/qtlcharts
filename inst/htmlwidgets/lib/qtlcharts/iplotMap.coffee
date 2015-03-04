@@ -40,9 +40,14 @@ iplotMap = (widgetdiv, data, chartOpts) ->
                         .xlab(xlab)
                         .ylab(ylab)
 
-    svg = d3.select(widgetdiv).select("svg")
-            .datum(data)
-            .call(mychart)
+    # select htmlwidget div and grab its ID
+    div = d3.select(widgetdiv)
+    widgetid = div.attr("id")
+
+    svg = div.select("svg")
+                 .datum(data)
+                 .call(mychart)
+
 
     ##############################
     # code for marker search box for iplotMap
@@ -56,7 +61,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
 
     # create marker tip
     martip = d3.tip()
-               .attr('class', 'd3-tip')
+               .attr('class', 'd3-tip #{widgetid}')
                .html((d) ->
                   pos = d3.format(".1f")(markerpos[d].pos)
                   "#{d} (#{pos})")
@@ -71,32 +76,32 @@ iplotMap = (widgetdiv, data, chartOpts) ->
 
     # grab selected marker from the search box
     selectedMarker = ""
-    $("#markerinput").submit () ->
-        newSelection = document.getElementById("marker").value
+    $("div#markerinput_#{widgetid}").submit () ->
+        newSelection = document.getElementById("marker_#{widgetid}").value
         event.preventDefault()
         unless selectedMarker == ""
-            d3.select("line##{clean_marker_name(selectedMarker)}")
-              .attr("stroke", linecolor)
+            div.select("line##{clean_marker_name(selectedMarker)}")
+               .attr("stroke", linecolor)
             martip.hide()
 
         if newSelection != ""
             if data.markernames.indexOf(newSelection) >= 0
                 selectedMarker = newSelection
-                line = d3.select("line##{clean_marker_name(selectedMarker)}")
-                         .attr("stroke", linecolorhilit)
+                line = div.select("line##{clean_marker_name(selectedMarker)}")
+                          .attr("stroke", linecolorhilit)
                 martip.show(line.datum(), line.node())
-                d3.select("a#currentmarker")
-                  .text("")
+                div.select("a#currentmarker")
+                   .text("")
                 return true
             else
-                d3.select("a#currentmarker")
-                  .text("Marker \"#{newSelection}\" not found")
+                div.select("a#currentmarker")
+                   .text("Marker \"#{newSelection}\" not found")
 
         return false
 
 
     # autocomplete
-    $('input#marker').autocomplete({
+    $("input#marker_#{widgetid}").autocomplete({
         autoFocus: true,
         source: (request, response) ->
             matches = $.map(data.markernames, (tag) ->
@@ -104,22 +109,23 @@ iplotMap = (widgetdiv, data, chartOpts) ->
             response(matches)
         ,
         select: (event, ui) ->
-            $('input#marker').val(ui.item.label)
-            $('input#submit').submit()})
+            $("input#marker_#{widgetid}").val(ui.item.label)
+            $("input#submit_#{widgetid}").submit()})
 
 
     # grayed out "Marker name"
-    $('input#marker').each(() ->
+    $("input#marker_#{widgetid}").each(() ->
+        $("div.searchbox#markerinput_#{widgetid}").addClass('inactive')
         $(this)
             .data('default', $(this).val())
-            .addClass('inactive')
             .focus(() ->
-                $(this).removeClass('inactive')
+                $("div.searchbox#markerinput_#{widgetid}").removeClass('inactive')
                 $(this).val('') if($(this).val() is $(this).data('default') or $(this).val() is '')
             )
             .blur(() ->
                 if($(this).val() is '')
-                    $(this).addClass('inactive').val($(this).data('default'))
+                    $("div.searchbox#markerinput_#{widgetid}").addClass('inactive')
+                    $(this).val($(this).data('default'))
             )
         )
 
@@ -127,25 +133,27 @@ iplotMap = (widgetdiv, data, chartOpts) ->
     markerSelect = mychart.markerSelect()
     markerSelect.on "mouseover", () ->
         unless selectedMarker == ""
-            d3.select("line##{clean_marker_name(selectedMarker)}")
+            div.select("line##{clean_marker_name(selectedMarker)}")
               .attr("stroke", linecolor)
             martip.hide()
 
 add_search_box = (widgetdiv) ->
-    form = d3.select(widgetdiv)
-             .append("div")
+    div = d3.select(widgetdiv)
+    widgetid = div.attr("id")
+
+    form = div.append("div")
                  .attr("class", "searchbox")
-                 .attr("id", "markerinput")
-             .append("form")
-                 .attr("name", "markerinput")
+                 .attr("id", "markerinput_#{widgetid}")
+              .append("form")
+                 .attr("name", "markerinput_#{widgetid}")
     form.append("input")
-            .attr("id", "marker")
+            .attr("id", "marker_#{widgetid}")
             .attr("type", "text")
             .attr("value", "Marker name")
             .attr("name", "marker")
     form.append("input")
             .attr("type", "submit")
-            .attr("id", "submit")
+            .attr("id", "submit_#{widgetid}")
             .attr("value", "Submit")
     form.append("a")
             .attr("id", "currentmarker")

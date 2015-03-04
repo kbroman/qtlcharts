@@ -2,7 +2,7 @@
 var add_search_box, iplotMap;
 
 iplotMap = function(widgetdiv, data, chartOpts) {
-  var axispos, chartdivid, chr, clean_marker_name, height, i, len, linecolor, linecolorhilit, linewidth, margin, marker, markerSelect, markerpos, martip, mychart, nyticks, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, selectedMarker, svg, tickwidth, title, titlepos, width, xlab, ylab, ylim, yticks;
+  var axispos, chartdivid, chr, clean_marker_name, div, height, i, len, linecolor, linecolorhilit, linewidth, margin, marker, markerSelect, markerpos, martip, mychart, nyticks, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, selectedMarker, svg, tickwidth, title, titlepos, widgetid, width, xlab, ylab, ylim, yticks;
   width = (ref = chartOpts != null ? chartOpts.width : void 0) != null ? ref : 1000;
   height = (ref1 = chartOpts != null ? chartOpts.height : void 0) != null ? ref1 : 600;
   margin = (ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? ref2 : {
@@ -32,7 +32,9 @@ iplotMap = function(widgetdiv, data, chartOpts) {
   ylab = (ref15 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref15 : "Position (cM)";
   chartdivid = (ref16 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref16 : 'chart';
   mychart = mapchart().height(height - margin.top - margin.bottom).width(width - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).ylim(ylim).yticks(yticks).nyticks(nyticks).tickwidth(tickwidth).rectcolor(rectcolor).linecolor(linecolor).linecolorhilit(linecolorhilit).linewidth(linewidth).title(title).xlab(xlab).ylab(ylab);
-  svg = d3.select(widgetdiv).select("svg").datum(data).call(mychart);
+  div = d3.select(widgetdiv);
+  widgetid = div.attr("id");
+  svg = div.select("svg").datum(data).call(mychart);
   markerpos = {};
   ref17 = data.chr;
   for (i = 0, len = ref17.length; i < len; i++) {
@@ -44,7 +46,7 @@ iplotMap = function(widgetdiv, data, chartOpts) {
       };
     }
   }
-  martip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+  martip = d3.tip().attr('class', 'd3-tip #{widgetid}').html(function(d) {
     var pos;
     pos = d3.format(".1f")(markerpos[d].pos);
     return d + " (" + pos + ")";
@@ -54,28 +56,28 @@ iplotMap = function(widgetdiv, data, chartOpts) {
     return markername.replace(".", "\\.").replace("#", "\\#").replace("/", "\\/");
   };
   selectedMarker = "";
-  $("#markerinput").submit(function() {
+  $("div#markerinput_" + widgetid).submit(function() {
     var line, newSelection;
-    newSelection = document.getElementById("marker").value;
+    newSelection = document.getElementById("marker_" + widgetid).value;
     event.preventDefault();
     if (selectedMarker !== "") {
-      d3.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolor);
+      div.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolor);
       martip.hide();
     }
     if (newSelection !== "") {
       if (data.markernames.indexOf(newSelection) >= 0) {
         selectedMarker = newSelection;
-        line = d3.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolorhilit);
+        line = div.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolorhilit);
         martip.show(line.datum(), line.node());
-        d3.select("a#currentmarker").text("");
+        div.select("a#currentmarker").text("");
         return true;
       } else {
-        d3.select("a#currentmarker").text("Marker \"" + newSelection + "\" not found");
+        div.select("a#currentmarker").text("Marker \"" + newSelection + "\" not found");
       }
     }
     return false;
   });
-  $('input#marker').autocomplete({
+  $("input#marker_" + widgetid).autocomplete({
     autoFocus: true,
     source: function(request, response) {
       var matches;
@@ -87,35 +89,39 @@ iplotMap = function(widgetdiv, data, chartOpts) {
       return response(matches);
     },
     select: function(event, ui) {
-      $('input#marker').val(ui.item.label);
-      return $('input#submit').submit();
+      $("input#marker_" + widgetid).val(ui.item.label);
+      return $("input#submit_" + widgetid).submit();
     }
   });
-  $('input#marker').each(function() {
-    return $(this).data('default', $(this).val()).addClass('inactive').focus(function() {
-      $(this).removeClass('inactive');
+  $("input#marker_" + widgetid).each(function() {
+    $("div.searchbox#markerinput_" + widgetid).addClass('inactive');
+    return $(this).data('default', $(this).val()).focus(function() {
+      $("div.searchbox#markerinput_" + widgetid).removeClass('inactive');
       if ($(this).val() === $(this).data('default') || $(this).val() === '') {
         return $(this).val('');
       }
     }).blur(function() {
       if ($(this).val() === '') {
-        return $(this).addClass('inactive').val($(this).data('default'));
+        $("div.searchbox#markerinput_" + widgetid).addClass('inactive');
+        return $(this).val($(this).data('default'));
       }
     });
   });
   markerSelect = mychart.markerSelect();
   return markerSelect.on("mouseover", function() {
     if (selectedMarker !== "") {
-      d3.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolor);
+      div.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolor);
       return martip.hide();
     }
   });
 };
 
 add_search_box = function(widgetdiv) {
-  var form;
-  form = d3.select(widgetdiv).append("div").attr("class", "searchbox").attr("id", "markerinput").append("form").attr("name", "markerinput");
-  form.append("input").attr("id", "marker").attr("type", "text").attr("value", "Marker name").attr("name", "marker");
-  form.append("input").attr("type", "submit").attr("id", "submit").attr("value", "Submit");
+  var div, form, widgetid;
+  div = d3.select(widgetdiv);
+  widgetid = div.attr("id");
+  form = div.append("div").attr("class", "searchbox").attr("id", "markerinput_" + widgetid).append("form").attr("name", "markerinput_" + widgetid);
+  form.append("input").attr("id", "marker_" + widgetid).attr("type", "text").attr("value", "Marker name").attr("name", "marker");
+  form.append("input").attr("type", "submit").attr("id", "submit_" + widgetid).attr("value", "Submit");
   return form.append("a").attr("id", "currentmarker");
 };

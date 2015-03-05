@@ -1,3 +1,10 @@
+# qtlcharts 0.5-2
+
+- Added idotplot function for plotting a quantitative variable in
+  different categories.  (It's just like iplotPXG, but with x and y
+  values not connected to a cross object.)
+
+
 # qtlcharts 0.5-1
 
 - Refactored the entire package to use

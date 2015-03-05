@@ -89,7 +89,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p><a href="http://rmarkdown.rstudio.com">R Markdown</a> is a extension of <a href="http://daringfireball.net/projects/markdown/">Markdown</a>, using <a href="http://yihui.name/knitr/">knitr</a>, to write simply-marked-up text, with chunks of R code, that is converted to an html file, for viewing in a web browser. The chunks of code are processed by knitr and replaced with the results or graphs produced.</p>
 <p>For more information on R Markdown and knitr, see the <a href="http://kbroman.org/knitr_knutshell/">knitr in a knutshell</a> tutorial.</p>
 <p>To include <a href="http://kbroman.org/qtlcharts">R/qtlcharts</a>-based interactive charts within an R Markdown document, you just need to include the relevant calls to the R function within a code chunk.</p>
-<p>I’m going to use defaults of <code>fig.width=8</code> and <code>fig.height=6</code> for each of these charts.</p>
+<p>I’m going to use defaults of <code>fig.width=8</code> and <code>fig.height=6</code> for each of these charts. (But note that <code>iplotRF</code> and <code>iplotScantwo</code> ignore these settings.)</p>
 <pre class="sourceCode r"><code class="sourceCode r">knitr::opts_chunk$<span class="kw">set</span>(<span class="dt">fig.width=</span><span class="dv">8</span>, <span class="dt">fig.height=</span><span class="dv">6</span>)</code></pre>
 <div id="an-example" class="section level3">
 <h3>An example</h3>
@@ -110,8 +110,8 @@ out.hk &lt;-<span class="st"> </span><span class="kw">scanone</span>(grav, <span
 <h3>Now, the charts</h3>
 <p>First, let’s make an interactive chart of the genetic map of markers for these data, just because it’s easy. <code>iplotMap</code> will take either a map object or the cross object <code>grav</code>; in the latter case, it uses the R/qtl function <code>pull.map</code> to pull out the map.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">iplotMap</span>(grav)</code></pre>
-<p><div id="htmlwidget-8783" style="width:768px;height:576px;" class="iplotMap"></div>
-<script type="application/json" data-for="htmlwidget-8783">{ "x": {
+<p><div id="htmlwidget-648" style="width:768px;height:576px;" class="iplotMap"></div>
+<script type="application/json" data-for="htmlwidget-648">{ "x": {
  "data": {
  "chr": [ "1", "2", "3", "4", "5" ],
 "map": {
@@ -366,8 +366,8 @@ out.hk &lt;-<span class="st"> </span><span class="kw">scanone</span>(grav, <span
 },"evals": [  ] }</script></p>
 <p>Now, let’s use <code>iplotCorr</code> to plot a heat map of the correlation matrix for the phenotype at all pairs of times, linked to scatterplots of the phenotypes. (Note that for this plot, I’m using <code>fig.height=4.2</code> in order to avoid some empty space below the figure.)</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">iplotCorr</span>(grav$pheno)</code></pre>
-<p><div id="htmlwidget-4138" style="width:768px;height:403.2px;" class="iplotCorr"></div>
-<script type="application/json" data-for="htmlwidget-4138">{ "x": {
+<p><div id="htmlwidget-7507" style="width:768px;height:403.2px;" class="iplotCorr"></div>
+<script type="application/json" data-for="htmlwidget-7507">{ "x": {
  "data": {
  "indID": [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108", "109", "110", "111", "112", "113", "114", "115", "116", "117", "118", "119", "120", "121", "122", "123", "124", "125", "126", "127", "128", "129", "130", "131", "132", "133", "134", "135", "136", "137", "138", "139", "140", "141", "142", "143", "144", "145", "146", "147", "148", "149", "150", "151", "152", "153", "154", "155", "156", "157", "158", "159", "160", "161", "162" ],
 "var": [ "T0", "T10", "T20", "T30", "T40", "T50", "T60", "T70", "T80", "T90", "T100", "T110", "T120", "T130", "T140", "T150", "T160", "T170", "T180", "T190", "T200", "T210", "T220", "T230", "T240", "T250", "T260", "T270", "T280", "T290", "T300", "T310", "T320", "T330", "T340", "T350", "T360", "T370", "T380", "T390", "T400", "T410", "T420", "T430", "T440", "T450", "T460", "T470", "T480" ],
@@ -482,8 +482,8 @@ out.hk &lt;-<span class="st"> </span><span class="kw">scanone</span>(grav, <span
             <span class="dt">chartOpts=</span><span class="kw">list</span>(<span class="dt">curves_xlab=</span><span class="st">&quot;Time&quot;</span>, <span class="dt">curves_ylab=</span><span class="st">&quot;Root tip angle&quot;</span>,
                            <span class="dt">scat1_xlab=</span><span class="st">&quot;Angle at 30 min&quot;</span>, <span class="dt">scat1_ylab=</span><span class="st">&quot;Angle at 4 hrs&quot;</span>,
                            <span class="dt">scat2_xlab=</span><span class="st">&quot;Angle at 4 hrs&quot;</span>, <span class="dt">scat2_ylab=</span><span class="st">&quot;Angle at 8 hrs&quot;</span>))</code></pre>
-<p><div id="htmlwidget-2720" style="width:768px;height:576px;" class="iplotCurves"></div>
-<script type="application/json" data-for="htmlwidget-2720">{ "x": {
+<p><div id="htmlwidget-3807" style="width:768px;height:576px;" class="iplotCurves"></div>
+<script type="application/json" data-for="htmlwidget-3807">{ "x": {
  "data": {
  "curve_data": {
  "x": [                 0, 0.1666666666666667, 0.3333333333333333,               0.5, 0.6666666666666666, 0.8333333333333334,                 1, 1.166666666666667, 1.333333333333333,               1.5, 1.666666666666667, 1.833333333333333,                 2, 2.166666666666667, 2.333333333333333,               2.5, 2.666666666666667, 2.833333333333333,                 3, 3.166666666666667, 3.333333333333333,               3.5, 3.666666666666667, 3.833333333333333,                 4, 4.166666666666667, 4.333333333333333,               4.5, 4.666666666666667, 4.833333333333333,                 5, 5.166666666666667, 5.333333333333333,               5.5, 5.666666666666667, 5.833333333333333,                 6, 6.166666666666667, 6.333333333333333,               6.5, 6.666666666666667, 6.833333333333333,                 7, 7.166666666666667, 7.333333333333333,               7.5, 7.666666666666667, 7.833333333333333,                 8 ],
@@ -996,8 +996,8 @@ out.hk &lt;-<span class="st"> </span><span class="kw">scanone</span>(grav, <span
 },"evals": [  ] }</script></p>
 <p>Finally, <code>iplotMScanone</code> produces a heat map of the LOD scores for each individual time point at each genomic position, linked to the individual LOD curves and to a plot of the estimated QTL effect over time.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">iplotMScanone</span>(out.hk, grav, <span class="dt">chartOpts=</span><span class="kw">list</span>(<span class="dt">eff_ylab=</span><span class="st">&quot;QTL effect&quot;</span>))</code></pre>
-<p><div id="htmlwidget-2300" style="width:768px;height:576px;" class="iplotMScanone"></div>
-<script type="application/json" data-for="htmlwidget-2300">{ "x": {
+<p><div id="htmlwidget-9197" style="width:768px;height:576px;" class="iplotMScanone"></div>
+<script type="application/json" data-for="htmlwidget-9197">{ "x": {
  "lod_data": {
  "chrnames": [ "1", "2", "3", "4", "5" ],
 "lodnames": [ "T0", "T10", "T20", "T30", "T40", "T50", "T60", "T70", "T80", "T90", "T100", "T110", "T120", "T130", "T140", "T150", "T160", "T170", "T180", "T190", "T200", "T210", "T220", "T230", "T240", "T250", "T260", "T270", "T280", "T290", "T300", "T310", "T320", "T330", "T340", "T350", "T360", "T370", "T380", "T390", "T400", "T410", "T420", "T430", "T440", "T450", "T460", "T470", "T480" ],
@@ -4380,8 +4380,8 @@ for(i in <span class="kw">seq</span>(<span class="dt">along=</span>times))
 plot_list &lt;-<span class="st"> </span><span class="kw">lapply</span>(plot_list, htmltools::tags$p)
 htmltools::<span class="kw">tagList</span>(plot_list)</code></pre>
 <p><p>
-<div id="htmlwidget-6629" style="width:960px;height:500px;" class="iplotScanone"></div>
-<script type="application/json" data-for="htmlwidget-6629">{ "x": {
+<div id="htmlwidget-6841" style="width:960px;height:500px;" class="iplotScanone"></div>
+<script type="application/json" data-for="htmlwidget-6841">{ "x": {
  "scanone_data": {
  "chrnames": [ "1", "2", "3", "4", "5" ],
 "lodnames": "lod",
@@ -4396,8 +4396,8 @@ htmltools::<span class="kw">tagList</span>(plot_list)</code></pre>
 },"evals": [  ] }</script>
 </p>
 <p>
-<div id="htmlwidget-2002" style="width:960px;height:500px;" class="iplotScanone"></div>
-<script type="application/json" data-for="htmlwidget-2002">{ "x": {
+<div id="htmlwidget-8101" style="width:960px;height:500px;" class="iplotScanone"></div>
+<script type="application/json" data-for="htmlwidget-8101">{ "x": {
  "scanone_data": {
  "chrnames": [ "1", "2", "3", "4", "5" ],
 "lodnames": "lod",
@@ -4412,8 +4412,8 @@ htmltools::<span class="kw">tagList</span>(plot_list)</code></pre>
 },"evals": [  ] }</script>
 </p>
 <p>
-<div id="htmlwidget-6052" style="width:960px;height:500px;" class="iplotScanone"></div>
-<script type="application/json" data-for="htmlwidget-6052">{ "x": {
+<div id="htmlwidget-8606" style="width:960px;height:500px;" class="iplotScanone"></div>
+<script type="application/json" data-for="htmlwidget-8606">{ "x": {
  "scanone_data": {
  "chrnames": [ "1", "2", "3", "4", "5" ],
 "lodnames": "lod",

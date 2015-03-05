@@ -1,8 +1,12 @@
-# qtlcharts 0.5-2
+# qtlcharts 0.5-3
 
 - Added idotplot function for plotting a quantitative variable in
   different categories.  (It's just like iplotPXG, but with x and y
   values not connected to a cross object.)
+
+- Reorganized the d3panels code: just using d3panels.min.js and
+  d3panels.min.css rather than linking to js code for individual
+  panels.
 
 
 # qtlcharts 0.5-1

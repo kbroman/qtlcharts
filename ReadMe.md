@@ -8,17 +8,8 @@
 interactive charts for QTL data, for use
 with [R/qtl](http://www.rqtl.org). \[[website](http://kbroman.org/qtlcharts)\]
 
-It is built with [D3](http://d3js.org), using the following reusable components:
-- [lodchart](inst/panels/lodchart): LOD curve panel
-- [scatterplot](inst/panels/scatterplot): scatter plot panel
-- [dotchart](inst/panels/dotchart): dot plot panel
-- [cichart](inst/panels/cichart): confidence interval plot panel
-- [curvechart](inst/panels/curvechart): panel for multiple curves
-- [mapchart](inst/panels/mapchart): genetic marker map panel
-- [heatmap](inst/panels/heatmap): heat map panel
-- [lodheatmap](inst/panels/lodheatmap): panel for heat map of LOD curves
-- [chrheatmap](inst/panels/chrheatmap): heat map panel broken into chromosomes
-- [crosstab](inst/panels/crosstab): panel to display a cross-tabulation
+It is built with [D3](http://d3js.org), using a set of reusable
+panels (also available separately, as [d3panels](http://kbroman.org/d3panels)).
 
 For example charts, see the [R/qtlcharts website](http://kbroman.org/qtlcharts).
 

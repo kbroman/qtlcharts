@@ -6,7 +6,10 @@
 #' Creates an interactive graph of a genetic marker map.
 #'
 #' @param map Object of class \code{"map"}, a list with each component
-#'   being a vector of marker positions.
+#'   being a vector of marker positions. You can also provide an object of
+#'   class \code{"cross"}, in which case the map is extracted with
+#'   \code{\link[qtl]{pull.map}}.
+#' @param chr (Optional) Vector indicating the chromosomes to plot.
 #' @param shift If TRUE, shift each chromsome so that the initial marker
 #'   is at position 0.
 #' @param chartOpts A list of options for configuring the chart.  Each
@@ -29,9 +32,15 @@
 #'
 #' @export
 iplotMap <-
-function(map, shift=FALSE, chartOpts=NULL)
+function(map, chr, shift=FALSE, chartOpts=NULL)
 {
     if("cross" %in% class(map)) map <- qtl::pull.map(map)
+
+    if(!missing(chr) && !is.null(chr)) {
+        map <- map[chr]
+        if(length(map) == 0)
+            stop("No chromosomes selected")
+    }
 
     if(shift) map <- qtl::shiftmap(map)
     map_list <- convert_map(map)

@@ -4,11 +4,15 @@
 \alias{iplotMap}
 \title{Interactive genetic map plot}
 \usage{
-iplotMap(map, shift = FALSE, chartOpts = NULL)
+iplotMap(map, chr, shift = FALSE, chartOpts = NULL)
 }
 \arguments{
 \item{map}{Object of class \code{"map"}, a list with each component
-being a vector of marker positions.}
+being a vector of marker positions. You can also provide an object of
+class \code{"cross"}, in which case the map is extracted with
+\code{\link[qtl]{pull.map}}.}
+
+\item{chr}{(Optional) Vector indicating the chromosomes to plot.}
 
 \item{shift}{If TRUE, shift each chromsome so that the initial marker
 is at position 0.}

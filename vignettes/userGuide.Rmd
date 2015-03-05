@@ -331,18 +331,18 @@ If you want to change the x- and y-axis labels, you need to use the
 iplotMap(map, chartOpts=list(xlab="Linkage group", ylab="Position (Mbp)"))
 ```
 
-If you want to plot a subset of the chromosomes, you need to select
-them yourself:
+If you want to plot a subset of the chromosomes, use the `chr` argument:
 
 ```{r iplotMap_selected_chr, eval=FALSE}
-iplotMap(map[c(5, 10, 15, "X")])
+iplotMap(map, chr=c(5, 10, 15, "X"))
 ```
 
 You can use the chart option `title` to put a title centered above the
 map panel.
 
 ```{r iplotMap_chartOpts_title, eval=FALSE}
-iplotMap(map, chartOpts=list(title="Selected chromosomes"))
+iplotMap(map, chr=c(5, 10, 15, "X"),
+         chartOpts=list(title="Selected chromosomes"))
 ```
 
 

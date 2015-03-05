@@ -30,7 +30,8 @@ interactive charts within an R Markdown document, you just need to include the
 relevant calls to the R function within a code chunk.
 
 I'm going to use defaults of `fig.width=8` and `fig.height=6` for
-each of these charts.
+each of these charts. (But note that `iplotRF` and `iplotScantwo` ignore
+these settings.)
 
 ```{r knitr_options}
 knitr::opts_chunk$set(fig.width=8, fig.height=6)

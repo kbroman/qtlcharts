@@ -34,7 +34,7 @@ R/qtlcharts was recently revised to use [htmlwidgets](http://www.htmlwidgets.org
 - [Installation](pages/installation.html)
 - [User guide](assets/vignettes/userGuide.html)
 - [Developer guide](assets/vignettes/develGuide.html)
-- [Reusable graphic panels](http://kbroman.org/d3panels)
+- [d3panels](http://kbroman.org/d3panels): reusable graphic panels
 - [Use with R Markdown](assets/vignettes/Rmarkdown.html) [[Rmd source](https://github.com/kbroman/qtlcharts/blob/master/vignettes/Rmarkdown.Rmd)]
 - [List of chart customization options](assets/vignettes/chartOpts.html)
 

@@ -13,8 +13,10 @@ QTL data, for use with [R/qtl](http://www.rqtl.org).
 R/qtlcharts is written in
 [R](http://www.r-project.org) and
 [CoffeeScript](http://coffeescript.org), making use of the JavaScript
-libraries [D3](http://d3js.org) and
-[d3-tip](https://github.com/caged/d3-tip), as well as
+libraries [D3](http://d3js.org),
+[d3-tip](https://github.com/caged/d3-tip),
+[jQuery](http://jquery.com), and [jQueryUI](http://jqueryui.com),
+as well as
 [ColorBrewer](http://colorbrewer2.org).
 
 The aim of this guide is to explain the basic strategy of the package
@@ -25,48 +27,38 @@ the software.
 ## Basic layout of source
 
 The source for the package is at
-[GitHub](http://github.com/kbroman/qtlcharts):
-[`http://github.com/kbroman/qtlcharts`](http://github.com/kbroman/qtlcharts).
+[GitHub](https://github.com/kbroman/qtlcharts).
 The [`devel` branch](https://github.com/kbroman/qtlcharts/tree/devel)
-contains the current development version, but it is not far ahead (if
-at all) from the
-[`master` branch](https://github.com/kbroman/qtlcharts/tree/master).
+contains the current development version, while the
+[`master` branch](https://github.com/kbroman/qtlcharts/tree/master)
+contains the stable version.
+
+R/qtlcharts uses [htmlwidgets](http://www.htmlwidgets.org) as the
+basic driver for the construction of interactive graphs: It creates an
+html file with links to the necessary resources and opens it in a
+browser.
 
 JavaScript and CoffeeScript code are within the
-[`inst/`](https://github.com/kbroman/qtlcharts/tree/master/inst)
+[`inst/htmlwidgets`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets)
 subdirectory. (When the package is _installed_, the contents of the
 `inst` directory are moved up one level, and there is no `inst`
 directory anymore.)
 
-The three main libraries are in
-[`inst/d3`](https://github.com/kbroman/qtlcharts/tree/master/inst/d3),
-[`inst/d3-tip`](https://github.com/kbroman/qtlcharts/tree/master/inst/d3-tip)
-and
-[`inst/colorbrewer`](https://github.com/kbroman/qtlcharts/tree/master/inst/colorbrewer).
+The JavaScript libraries are located in subdirectories of
+[`inst/htmlwidgets/lib`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib).
+This includes [D3](http://d3js.org),
+[d3-tip](https://github.com/caged/d3-tip),
+[jQuery](http://jquery.com), [jQueryUI](http://jqueryui.com), and
+[ColorBrewer](http://colorbrewer2.org), as well as a set of basic
+graphic panels, [d3panels](http://kbroman.org/d3panels).
 
-The interactive charts are built on a set of
-[reuseable D3-based graphic panels](http://kbroman.org/qtlcharts/pages/panels.html),
-contained in
-[`inst/panels`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels).
-These were designed following
-[Mike Bostock](http://bost.ocks.org/mike)'s
-[Towards Reuseable Charts](http://bost.ocks.org/mike/chart/).
-[`panelutil.coffee`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels/panelutil.coffee)
-contains various utility functions used by one or more panels, and
-[`panelutil.css`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels/panelutil.css)
-contains CSS code for the panels. The actual panels are in
-subdirectories of
-[`inst/panels`](https://github.com/kbroman/qtlcharts/tree/master/inst/panels),
-and each contains a `test` subdirectory with test code.
-
-The higher-level charts are located in
-[`inst/charts`](https://github.com/kbroman/qtlcharts/tree/master/inst/charts).
-This is where most of the interactivity is encoded: a chart basically
-passes data to individual panels and sets up the interactions among
-the panels.
-[`charts.css`](https://github.com/kbroman/qtlcharts/blob/master/inst/charts/charts.css)
-contains a bit of CSS code for the charts.
-
+The key functions that form the higher-level QTL visualizations are in
+[`inst/htmlwidgets/lib/qtlcharts`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/qtlcharts). Each
+has an additional file within the
+[`inst/htmlwidgets`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets)
+directory with the code that [htmlwidgets](http://www.htmlwidgets.org)
+needs, as well as a [YAML](http://yaml.org) file that describes the
+set of resources needed for that chart.
 
 ## CoffeeScript
 
@@ -101,45 +93,25 @@ The JavaScript version of this is cumbersome and ugly.
 
 ## Basic strategy
 
-For each chart there is an R function that writes to an html file (by
-default, a temporary file in a temporary directory, defined with
-[`tempfile()`](http://stat.ethz.ch/R-manual/R-devel/library/base/html/tempfile.html)
-and
-[`tempdir()`](http://stat.ethz.ch/R-manual/R-devel/library/base/html/tempfile.html)),
-which is then opened in a browser.
+For each chart there is an R function that reorganizes the data and
+call the [htmlwidgets](http://www.htmlwidgets.org) function
+`createWidget()`. This is connected to the file in
+[`inst/htmlwidgets`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets)
+that includes a call to the JavaScript function
+`HTMLWidgets.widget()`, which defines the initialization, rendering,
+and resizing of the interactive chart.
 
-The data are simply pasted into the html file in
-[JSON](http://json.org) format. This may make the chart slow to load,
-but it allows us to get around browser security settings which
-generally disallow access to local files.
+The code within `HTMLWidgets.widget()` will be relatively simple: set
+up the SVG to contain the plot, handle sizing, and then call the
+corresponding function in
+[`inst/htmlwidgets/lib/qtlcharts`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/qtlcharts).
 
-The basic functions for writing html are in
-[`write_html.R`](https://github.com/kbroman/qtlcharts/blob/master/R/write_html.R).
-The R function [`system.file`](http://stat.ethz.ch/R-manual/R-devel/library/base/html/system.file.html) is used to define links to the JavaScript
-and CSS code that are contained within the package. For example, the
-location of the `d3.min.js` file is determined through
+Those qtlcharts functions then call various
+[d3panels](http://kbroman.org/d3panels) functions (which create the
+individual panels) and sets up the interactions among the panels (for
+example, that clicking on a point in one panel causes a change to
+another panel).
 
-    system.file('d3', 'd3.min.js', package='qtlcharts')
-
-We're generally using temporary files and writing links to the
-JavaScript code, but if the argument `onefile=TRUE`, we paste the code
-directly using the R function
-[`file.append`](http://stat.ethz.ch/R-manual/R-patched/library/base/html/files.html). (The
-resulting file is then self-contained and so portable.)
-
-For creating interactive charts within R Markdown documents (see
-[the related vignette](http://kbroman.org/qtlcharts/assets/vignettes/Rmarkdown.html)),
-one would use `print=TRUE`, in which case rather than appending code
-to a file, we'd simply print it (with `cat(readLines(file), sep="\n")`).
-
-Customization options for a chart are passed via an R argument
-`chartOpts`, which is also written to the html file in JSON format and
-passed as an argument to the relevant chart function. The chart itself
-will be placed within a `<div>` with an ID specific to the chart (by
-default, `chart`. The names of the data objects (including the
-`chartOpts` object) are prepended with this same div ID. This is to
-avoid conflicts among multiple charts, particularly within
-[R Markdown files](http://kbroman.org/qtlcharts/assets/vignettes/Rmarkdown.html).
 
 ## Customization options
 
@@ -154,12 +126,12 @@ specific named components. If a specific option (e.g., `height` or
 The allowable options are maintained in one place: the CoffeeScript
 code in which they are used. These need to be listed at the top of the
 file in a format like the following (taken from
-[`iplotCorr.coffee`](https://github.com/kbroman/qtlcharts/tree/master/inst/charts/iplotCorr.coffee)).
+[`iplotCorr.coffee`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/qtlcharts/iplotCorr.coffee)).
 
     # chartOpts start
     height = chartOpts?.height ? 450 # height of each panel in pixels
     width = chartOpts?.width ? height # width of each panel in pixels
-    margin = chartOpts?.margin ? {left:70, top:40, right:5, bottom: 70, inner:5} # margins in pixels (left, top, right, bottom, inner)
+    margin = chartOpts?.margin ? {left:70, top:40, right:5, bottom: 70, inner:5} # margins in pixels
     corcolors = chartOpts?.corcolors ? ["darkslateblue", "white", "crimson"] # heat map colors (same length as `zlim`)
     zlim = chartOpts?.zlim ? [-1, 0, 1] # z-axis limits
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
@@ -189,8 +161,11 @@ is determined from the order in this file.
 
 ## R &rarr; JSON
 
-Data is pasted into the chart file as [JSON](http://json.org); they are converted from R
-objects to JSON using the
+Data is ultimately pasted into the chart file as
+[JSON](http://json.org).  [htmlwidgets](http://www.htmlwidgets.org)
+handles the conversion from R objects to JSON, currently using the
+[RJSONIO](http://www.omegahat.org/RJSONIO/) package, although it's
+expected that they'll eventually switch to the
 [jsonlite](https://github.com/jeroenooms/jsonlite) package.
 
 There are some occasional annoyances, particularly in ensuring that
@@ -198,45 +173,9 @@ an object becomes a hash (i.e., associative array) or an array (i.e.,
 vector or list), or that a single value becomes a scalar or an array
 of length 1.
 
-Things that are to be converted to hashes should first be made into
-lists, as regular vectors in R will be converted to ordered arrays,
-with any `names` ignored.
-
-The other bit of trickiness regards vectors of length 1. R does not
-have a scalar data type; one uses a vector of length 1. But in JSON
-and JavaScript, these are different, and it can be annoying to deal
-with a vector of length 1 where a scalar would do. The function
-`jsonlite::unbox` can be used to force a vector of length 1 to be made
-a scalar.
-
-We mess around with these things particularly in dealing with the
-`chartOpts` options. The function `opts4json` (see
-[`write_html.R`](https://github.com/kbroman/qtlcharts/blob/master/R/write_html.R))
-is the main utility for ensuring that `chartOpts` get turned into the
-expected JSON format.
-
-A further annoyance regards the treatment of missing values: in some
-cases jsonlite will convert missing values to `"NA"` strings, and in
-some cases will be made `null` values. Use of `na="null"` in calls to
-`jsonlite::toJSON` will force the use of `null` values.
-
-An additional difficulty with jsonlite concerns the number of digits that are
-retained in the JSON object. jsonlite is currently using `round` (see
-[`asJSON.numeric.R`](https://github.com/jeroenooms/jsonlite/blob/master/R/asJSON.numeric.R)),
-though `formatC` would probably be better.
-Most chart functions in R/qtlcharts take a `digits` argument which is
-passed to the `toJSON` to control the number of digits retained in the
-JSON objects. We want sufficient digits to keep things from looking
-too discrete in the chart, but too many digits results in large files
-and load times.
-
-Originally, jsonlite produced JSON objects with a great deal of white
-space, and so R/qtlcharts contains a function `strip_whitespace` (see
-[`write_html.R`](https://github.com/kbroman/qtlcharts/blob/master/R/write_html.R)),
-but it's a bit tricky to deal with strings with nested quotes.  In the
-most recent version of jsonlite, this seems to no longer be an issue,
-and so `strip_whitespace` could probably be omitted from R/qtlcharts.
-
+The treatment of these things is rather different between
+RJSONIO and jsonlite, and so a switch to jsonlite will require some
+cumbersome reconfiguration.
 
 ## Roxygen
 
@@ -257,19 +196,22 @@ and
 ## Tests
 
 It is tricky to test graphics, and particularly interactive
-graphics. Use of `R CMD CHECK` will run all of the examples in the
-help files, and as a result an example of each interactive chart will
-be opened in a browser. A brief inspection of the results can help to
-identify problems.
-
-Each of type of graphic panel has a corresponding test. These are
-more illustrations than proper tests. Live versions are at
-[`kbroman.org/qtlcharts/pages/panels.html`](http://kbroman.org/qtlcharts/pages/panels.html).
+graphics. The basic panel functions in
+[d3panels](http://kbroman.org/d3panels) are tested separately; see
+[its GitHub repository](https://kbroman.org/d3panels).
 
 Tests of some of the R utility functions are in
 [`tests/testthat`](https://github.com/kbroman/qtlcharts/tree/master/tests/testthat). We're
 using the R package [testthat](https://github.com/hadley/testthat).
 
+We also generate a couple of tests for each of the higher-level chart
+functions: in the usual simple way (see
+[`tests/htmltest`](https://github.com/kbroman/qtlcharts/tree/master/tests/htmltest)),
+and within the context of an
+[R Markdown](http://rmarkdown.rstudio.com) document (see
+[`tests/Rmdtest`](https://github.com/kbroman/qtlcharts/tree/master/tests/Rmdtest)).
+These are executed with `R CMD CHECK`, but the results next to be
+inspected individually by eye.
 
 
 ## Licenses
@@ -277,9 +219,13 @@ using the R package [testthat](https://github.com/hadley/testthat).
 Licensed under the
 [MIT license](LICENSE). ([More information here](http://en.wikipedia.org/wiki/MIT_License).)
 
-R/qtlcharts incorporates [D3.js](http://d3js.org)
-([see its license](https://github.com/kbroman/qtlcharts/blob/master/inst/d3/LICENSE)),
-[d3.tip](http://github.com/Caged/d3-tip)
-([see its license](https://github.com/kbroman/qtlcharts/blob/master/inst/d3-tip/LICENSE)),
-and [ColorBrewer](http://colorbrewer2.org)
-([see its license](https://github.com/kbroman/qtlcharts/blob/master/inst/colorbrewer/LICENSE)).
+R/qtlcharts incorporates
+
+- [D3.js](http://d3js.org) [[license](inst/htmlwidgets/lib/d3/LICENSE)]
+- [d3.tip](http://github.com/Caged/d3-tip) [[license](inst/htmlwidgets/lib/d3-tip/LICENSE)]
+- [ColorBrewer](http://colorbrewer2.org) [[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)]
+- [jQuery](http://jquery.com) [[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)]
+- [jQuery UI](http://jqueryui.com/) [[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)]
+
+<!-- make the body somewhat wider -->
+<style>body { max-width: 770px; }</style>

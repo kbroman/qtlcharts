@@ -10,17 +10,12 @@ dependencies:
     script:
       - d3-tip.min.js
     style: d3-tip.min.css
-  - name: d3panels_core
+  - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 0.1.1
+    version: 0.5.1
     script:
-      - panelutil.js
-    style: panelutil.css
-  - name: d3panels_dotchart
-    src: htmlwidgets/lib/d3panels
-    version: 0.1.1
-    script:
-      - dotchart.js
+      - d3panels.min.js
+    style: d3panels.min.css
   - name: qtlcharts_iplotPXG
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

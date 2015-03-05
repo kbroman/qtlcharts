@@ -21,17 +21,12 @@ dependencies:
     script:
       - jquery-ui.min.js
     style: themes/smoothness/jquery-ui.min.css
-  - name: d3panels_core
+  - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 0.1.1
+    version: 0.5.1
     script:
-      - panelutil.js
-    style: panelutil.css
-  - name: d3panels_mapchart
-    src: htmlwidgets/lib/d3panels
-    version: 0.1.1
-    script:
-      - mapchart.js
+      - d3panels.min.js
+    style: d3panels.min.css
   - name: qtlcharts_iplotMap
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1

@@ -1,49 +1,22 @@
-## Reuseable D3-based panels
+### [d3panels](http://kbroman.org/d3panels): D3-based graphics panels
 
 [Karl W Broman](http://kbroman.org)
 
-This directory contains a set of reusable panels for
-[D3](http://d3js.org)-based interactive charts for QTL data.
+This is a set of [D3](http://d3js.org)-based graphics panels, to
+be combined into larger multi-panel charts.  They were developed for
+the [R/qtlcharts](http://kbroman.org/qtlcharts) package.
 
-- [lodchart](inst/panels/lodchart): LOD curve panel
-  (uses [d3.tip](http://github.com/Caged/d3-tip))
-  \[[Example](http://kbroman.org/qtlcharts/assets/panels/lodchart/test)\]
-- [scatterplot](inst/panels/scatterplot): scatter plot panel
-  \[[Example](http://kbroman.org/qtlcharts/assets/panels/scatterplot/test)\]
-- [dotchart](inst/panels/dotchart): dot plot panel
-  (uses [d3.tip](http://github.com/Caged/d3-tip))
-  \[[Example](http://kbroman.org/qtlcharts/assets/panels/dotchart/test)\]
-- [cichart](inst/panels/cichart): confidence interval plot panel
-  (uses [d3.tip](http://github.com/Caged/d3-tip))
-  \[[Example](http://kbroman.org/qtlcharts/assets/panels/cichart/test)\]
-- [curvechart](inst/panels/curvechart): panel for multiple curves
-  (uses [d3.tip](http://github.com/Caged/d3-tip)
-  and [ColorBrewer](http://colorbrewer2.org))
-  \[[Example](http://kbroman.org/qtlcharts/assets/panels/curvechart/test)\]
-- [mapchart](inst/panels/mapchart): genetic marker map panel
-  (uses [d3.tip](http://github.com/Caged/d3-tip))
-  \[[Example](http://kbroman.org/qtlcharts/assets/panels/mapchart/test)\]
-- [heatmap](inst/panels/heatmap): heat map panel
-  (uses [d3.tip](http://github.com/Caged/d3-tip))
-  \[[Example](http://kbroman.org/qtlcharts/assets/panels/heatmap/test)\]
-- [lodheatmap](inst/panels/lodheatmap): panel for heat map of LOD curves
-  (uses [d3.tip](http://github.com/Caged/d3-tip))
-  \[[Example](http://kbroman.org/qtlcharts/assets/panels/lodheatmap/test)\]
-- [chrheatmap](inst/panels/chrheatmap): heat map panel broken into chromosomes
-  (uses [d3.tip](http://github.com/Caged/d3-tip))
-  \[[Example](http://kbroman.org/qtlcharts/assets/panels/chrheatmap/test)\]
-- [crosstab](inst/panels/crosstab): panel to display a cross-tabulation
-  \[[Example](http://kbroman.org/qtlcharts/assets/panels/crosstab/test)\]
+There are other libraries with similar goals that are of more general
+use (e.g., [C3.js](http://c3js.org) and
+[d3.Chart](http://misoproject.com/d3-chart/); see
+[this list of javascript chart libraries](http://blog.webkid.io/javascript-chart-libraries/)),
+but I wanted charts that were a bit _less_ general and flexible, but
+rather more specific to my particular applications (and style).
 
-Further utility functions are in [panelutil.coffee](panelutil.coffee).
+For snapshots and live tests, see <http://kbroman.org/d3panels>.
 
-#### Licenses
 
-Licensed under the [MIT license](LICENSE). ([More information](http://en.wikipedia.org/wiki/MIT_License).)
+#### License
 
-R/qtlcharts incorporates [D3.js](http://d3js.org)
-([see its license](../d3/LICENSE)),
-[d3.tip](http://github.com/Caged/d3-tip)
-([see its license](../d3-tip/LICENSE)), and
-[ColorBrewer](http://colorbrewer2.org) ([see its license](../colorbrewer/LICENSE)).
-
+Licensed under the
+[MIT license](License.md). ([More information here](http://en.wikipedia.org/wiki/MIT_License).)

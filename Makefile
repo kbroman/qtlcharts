@@ -1,5 +1,5 @@
-all: jspanels jscharts jswidgets json doc inst/ToDo.html vignettes/chartOpts.Rmd libs
-.PHONY: all jspanels jscharts json doc clean libs d3, jquery, jqueryui, colorbrewer
+all: jscharts jswidgets json doc inst/ToDo.html vignettes/chartOpts.Rmd libs
+.PHONY: all jscharts json doc clean libs d3, jquery, jqueryui, colorbrewer
 
 
 PANEL_DIR = inst/htmlwidgets/lib/d3panels
@@ -15,20 +15,6 @@ inst/ToDo.html: inst/ToDo.md
 # build package documentation
 doc:
 	R -e 'library(devtools);document()'
-
-#------------------------------------------------------------
-
-# javascript of panels
-JSPANELS = $(PANEL_DIR)/lodchart.js $(PANEL_DIR)/scatterplot.js \
-		   $(PANEL_DIR)/dotchart.js $(PANEL_DIR)/cichart.js \
-		   $(PANEL_DIR)/curvechart.js $(PANEL_DIR)/mapchart.js \
-		   $(PANEL_DIR)/heatmap.js $(PANEL_DIR)/chrheatmap.js \
-		   $(PANEL_DIR)/lodheatmap.js $(PANEL_DIR)/crosstab.js \
-		   $(PANEL_DIR)/panelutil.js
-jspanels: ${JSPANELS}
-
-${PANEL_DIR}/%.js: ${PANEL_DIR}/%.coffee
-	coffee ${COFFEE_ARGS} -b $^
 
 #------------------------------------------------------------
 
@@ -103,19 +89,10 @@ ${LIB_DIR}/d3-tip/%: ${BOWER_DIR}/../d3-tip/%
 	cp $< $@
 
 # d3panels
-d3panels: ${LIB_DIR}/d3panels/chrheatmap.coffee \
-		  ${LIB_DIR}/d3panels/cichart.coffee \
-		  ${LIB_DIR}/d3panels/crosstab.coffee \
-		  ${LIB_DIR}/d3panels/curvechart.coffee \
-		  ${LIB_DIR}/d3panels/dotchart.coffee \
-		  ${LIB_DIR}/d3panels/heatmap.coffee \
-		  ${LIB_DIR}/d3panels/lodchart.coffee \
-		  ${LIB_DIR}/d3panels/lodheatmap.coffee \
-		  ${LIB_DIR}/d3panels/mapchart.coffee \
-		  ${LIB_DIR}/d3panels/panelutil.coffee \
-		  ${LIB_DIR}/d3panels/panelutil.css \
-		  ${LIB_DIR}/d3panels/scatterplot.coffee
-
+d3panels: ${LIB_DIR}/d3panels/d3panels.min.js \
+		  ${LIB_DIR}/d3panels/d3panels.min.css \
+		  ${LIB_DIR}/d3panels/ReadMe.md \
+		  ${LIB_DIR}/d3panels/License.md
 ${LIB_DIR}/d3panels/%: ${BOWER_DIR}/../d3panels/%
 	cp $< $@
 

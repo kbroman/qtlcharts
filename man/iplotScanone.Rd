@@ -18,7 +18,7 @@ from \code{\link[qtl]{scanone}}.}
 
 \item{pheno.col}{(Optional) Phenotype column in cross object.}
 
-\item{chr}{(Optional) Optional vector indicating the chromosomes
+\item{chr}{(Optional) Vector indicating the chromosomes
 for which LOD scores should be calculated. This should be a vector
 of character strings referring to chromosomes by name; numeric
 values are converted to strings. Refer to chromosomes with a

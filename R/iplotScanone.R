@@ -15,7 +15,7 @@
 #'   \code{\link[qtl]{read.cross}}.
 #' @param lodcolumn Numeric value indicating LOD score column to plot.
 #' @param pheno.col (Optional) Phenotype column in cross object.
-#' @param chr (Optional) Optional vector indicating the chromosomes
+#' @param chr (Optional) Vector indicating the chromosomes
 #'   for which LOD scores should be calculated. This should be a vector
 #'   of character strings referring to chromosomes by name; numeric
 #'   values are converted to strings. Refer to chromosomes with a

@@ -7,6 +7,7 @@ This document serves to test the
 [R/qtlcharts](http://kbroman.org/qtlcharts) function `iplotScanone`.
 
 ```{r load_data, message=FALSE}
+knitr::opts_chunk$set(fig.width=9, fig.height=6)
 set.seed(69891250)
 library(qtl)
 library(qtlcharts)

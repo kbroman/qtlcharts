@@ -17,7 +17,7 @@
 #' Shiny output bindings.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplot}} \code{\link{iplotPXG}}
+#' @seealso \code{\link{iplot}}, \code{\link{iplotPXG}}
 #'
 #' @examples
 #' n <- 100

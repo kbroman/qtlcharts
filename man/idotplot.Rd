@@ -33,7 +33,7 @@ y <- rnorm(n, match(g, LETTERS[1:3])*10, 5)
 idotplot(g, y)}
 }
 \seealso{
-\code{\link{iplot}} \code{\link{iplotPXG}}
+\code{\link{iplot}}, \code{\link{iplotPXG}}
 }
 \keyword{hplot}
 

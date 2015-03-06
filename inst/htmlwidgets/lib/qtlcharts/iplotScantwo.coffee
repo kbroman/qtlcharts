@@ -42,6 +42,17 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     hright = heatmap_height/2 - margin.top - margin.bottom
     totalw = heatmap_width + wright + margin.left + margin.right
     totalh = heatmap_height + (hbot + margin.top + margin.bottom)*2
+    
+    # sloppy way to override width and height if specified in chartOpts
+    #  wait until now since we still need the size/margin calcs above
+    #  to specify the svg viewbox below
+    #  chartOpts.height and chartOpts.width if provided will specify
+    #  the size of the div widget container
+    #  svg will use its superpower viewBox attribute to fill that container
+    vieww = totalw
+    viewh = totalh
+    totalw = chartOpts?.width ? totalw
+    totalh = chartOpts?.height ? totalh
 
     # width of lower panels
     wbot = (totalw/2 - margin.left - margin.right)
@@ -123,8 +134,9 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
 
     # select SVG
     svg = div.select("svg")
-             .attr("height", totalh)
-             .attr("width", totalw)
+             .attr("viewBox", [0,0,vieww,viewh].join(","))
+             .style("height","90%") # 90% to allow room for form elements
+             .style("width", "100%")
 
     # add the full,add,int,fv1,av1 lod matrices to scantwo_data
     # (and remove the non-symmetric ones)

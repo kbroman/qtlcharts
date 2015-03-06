@@ -1,5 +1,4 @@
 GEM
-  remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
     activesupport (4.2.0)

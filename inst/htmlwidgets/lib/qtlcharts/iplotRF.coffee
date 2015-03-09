@@ -4,6 +4,8 @@
 iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
 
     # chartOpts start
+    height = chartOpts?.height ? 1000 # total height of chart in pixels
+    width = chartOpts?.width ? 1000 # total width of chart in pixels
     pixelPerCell = chartOpts?.pixelPerCell ? null # pixels per cell in heat map
     chrGap = chartOpts?.chrGap ? 2 # gaps between chr in heat map
     cellHeight = chartOpts?.cellHeight ? 30 # cell height (in pixels) in crosstab
@@ -50,15 +52,12 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
     htop = d3.max([heatmap_height, crosstab_height])
     totalh =  htop + hbot
 
-    # resize widget
-    d3.select(widgetdiv)
-      .style("height", "#{totalh}px")
-      .style("width", "#{totalw}px")
-
-    # select SVG and resize
+    # viewbox for SVG
     svg = d3.select(widgetdiv).select("svg")
-            .attr("height", totalh)
-            .attr("width", totalw)
+             .attr("viewBox", [0,0,totalw,totalh].join(" "))
+             .attr("preserveAspectRatio", "xMinYMin meet")
+             .style("height","100%")
+             .style("width", "100%")
 
     # ensure lodlim has 0 <= lo < hi
     if d3.min(lodlim) < 0

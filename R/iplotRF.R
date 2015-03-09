@@ -51,11 +51,13 @@ function(cross, chr, chartOpts=NULL)
 
     htmlwidgets::createWidget("iplotRF", list(rfdata=rf, genodata=geno,
                                               chartOpts=chartOpts),
-                              width=NULL, height=NULL,
+                              width=chartOpts$width,
+                              height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
+                                  browser.defaultWidth=1000,
+                                  browser.defaultHeight=1000,
                                   knitr.defaultWidth=1000,
-                                  knitr.defaultHeight=1000,
-                                  knitr.figure=FALSE),
+                                  knitr.defaultHeight=1000),
                               package="qtlcharts")
 }
 

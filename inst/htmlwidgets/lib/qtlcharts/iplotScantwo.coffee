@@ -4,11 +4,13 @@
 iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
 
     # chartOpts start
+    height = chartOpts?.height ? 1000 # total height of chart in pixels
+    width = chartOpts?.width ? 1000 # total width of chart in pixels
     pixelPerCell = chartOpts?.pixelPerCell ? null # pixels per cell in heat map
     chrGap = chartOpts?.chrGap ? 2 # gaps between chr in heat map
     wright = chartOpts?.wright ? 500 # width (in pixels) of right panels
     hbot = chartOpts?.hbot ? 150 # height (in pixels) of each of the lower panels
-    margin = chartOpts?.margin ? {left:60, top:30, right:10, bottom: 40, inner: 5} # margins in each panel
+    margin = chartOpts?.margin ? {left:60, top:50, right:10, bottom: 40, inner: 5} # margins in each panel
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # axis positions in heatmap
     lightrect = chartOpts?.lightrect ? "#e6e6e6" # color for light rect in lower panels and backgrd in right panels
     darkrect = chartOpts?.darkrect ? "#c8c8c8" # dark rectangle in lower panels
@@ -42,17 +44,6 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     hright = heatmap_height/2 - margin.top - margin.bottom
     totalw = heatmap_width + wright + margin.left + margin.right
     totalh = heatmap_height + (hbot + margin.top + margin.bottom)*2
-    
-    # sloppy way to override width and height if specified in chartOpts
-    #  wait until now since we still need the size/margin calcs above
-    #  to specify the svg viewbox below
-    #  chartOpts.height and chartOpts.width if provided will specify
-    #  the size of the div widget container
-    #  svg will use its superpower viewBox attribute to fill that container
-    vieww = totalw
-    viewh = totalh
-    totalw = chartOpts?.width ? totalw
-    totalh = chartOpts?.height ? totalh
 
     # width of lower panels
     wbot = (totalw/2 - margin.left - margin.right)
@@ -79,6 +70,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     form = div.insert("div", ":first-child")
               .attr("id", "form")
               .attr("class", "qtlcharts")
+              .attr("height", "24px")
     left = form.append("div")
               .text(if oneAtTop then "bottom-left: " else "top-left: ")
               .style("float", "left")
@@ -128,14 +120,11 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                      div.select("g#chrheatmap").datum(scantwo_data).call(mychrheatmap)
                      add_cell_tooltips()
 
-    # resize widget
-    div.style("height", "#{totalh}px")
-       .style("width", "#{totalw}px")
-
-    # select SVG
+    # viewBox for SVG to fit within height and width
     svg = div.select("svg")
-             .attr("viewBox", [0,0,vieww,viewh].join(","))
-             .style("height","90%") # 90% to allow room for form elements
+             .attr("viewBox", [0,0,totalw,totalh].join(" "))
+             .attr("preserveAspectRatio", "xMinYMin meet")
+             .style("height","100%")
              .style("width", "100%")
 
     # add the full,add,int,fv1,av1 lod matrices to scantwo_data

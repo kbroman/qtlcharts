@@ -2,36 +2,38 @@
 var add_symmetric_lod, iplotScantwo, lod_for_heatmap;
 
 iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
-  var add_cell_tooltips, axispos, bordercolor, chrGap, cicolors, color, darkrect, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, hright, i, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, n, ncat, nullcolor, oneAtTop, options, pixelPerCell, plot_effects, plot_scan, pointsize, pointstroke, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, submit, svg, totalh, totalw, totmar, viewh, vieww, w, wbot, widgetid, wright, x, zthresh;
-  pixelPerCell = (ref = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? ref : null;
-  chrGap = (ref1 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref1 : 2;
-  wright = (ref2 = chartOpts != null ? chartOpts.wright : void 0) != null ? ref2 : 500;
-  hbot = (ref3 = chartOpts != null ? chartOpts.hbot : void 0) != null ? ref3 : 150;
-  margin = (ref4 = chartOpts != null ? chartOpts.margin : void 0) != null ? ref4 : {
+  var add_cell_tooltips, axispos, bordercolor, chrGap, cicolors, color, darkrect, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, n, ncat, nullcolor, oneAtTop, options, pixelPerCell, plot_effects, plot_scan, pointsize, pointstroke, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, submit, svg, totalh, totalw, totmar, w, wbot, widgetid, width, wright, x, zthresh;
+  height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 1000;
+  width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000;
+  pixelPerCell = (ref2 = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? ref2 : null;
+  chrGap = (ref3 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref3 : 2;
+  wright = (ref4 = chartOpts != null ? chartOpts.wright : void 0) != null ? ref4 : 500;
+  hbot = (ref5 = chartOpts != null ? chartOpts.hbot : void 0) != null ? ref5 : 150;
+  margin = (ref6 = chartOpts != null ? chartOpts.margin : void 0) != null ? ref6 : {
     left: 60,
-    top: 30,
+    top: 50,
     right: 10,
     bottom: 40,
     inner: 5
   };
-  axispos = (ref5 = chartOpts != null ? chartOpts.axispos : void 0) != null ? ref5 : {
+  axispos = (ref7 = chartOpts != null ? chartOpts.axispos : void 0) != null ? ref7 : {
     xtitle: 25,
     ytitle: 30,
     xlabel: 5,
     ylabel: 5
   };
-  lightrect = (ref6 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? ref6 : "#e6e6e6";
-  darkrect = (ref7 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? ref7 : "#c8c8c8";
-  nullcolor = (ref8 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref8 : "#e6e6e6";
-  bordercolor = (ref9 = chartOpts != null ? chartOpts.bordercolor : void 0) != null ? ref9 : "black";
-  linecolor = (ref10 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref10 : "slateblue";
-  linewidth = (ref11 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref11 : 2;
-  pointsize = (ref12 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref12 : 3;
-  pointstroke = (ref13 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref13 : "black";
-  cicolors = (ref14 = chartOpts != null ? chartOpts.cicolors : void 0) != null ? ref14 : null;
-  color = (ref15 = chartOpts != null ? chartOpts.color : void 0) != null ? ref15 : "slateblue";
-  oneAtTop = (ref16 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? ref16 : false;
-  zthresh = (ref17 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref17 : 0;
+  lightrect = (ref8 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? ref8 : "#e6e6e6";
+  darkrect = (ref9 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? ref9 : "#c8c8c8";
+  nullcolor = (ref10 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref10 : "#e6e6e6";
+  bordercolor = (ref11 = chartOpts != null ? chartOpts.bordercolor : void 0) != null ? ref11 : "black";
+  linecolor = (ref12 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref12 : "slateblue";
+  linewidth = (ref13 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref13 : 2;
+  pointsize = (ref14 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref14 : 3;
+  pointstroke = (ref15 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref15 : "black";
+  cicolors = (ref16 = chartOpts != null ? chartOpts.cicolors : void 0) != null ? ref16 : null;
+  color = (ref17 = chartOpts != null ? chartOpts.color : void 0) != null ? ref17 : "slateblue";
+  oneAtTop = (ref18 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? ref18 : false;
+  zthresh = (ref19 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref19 : 0;
   scantwo_data.chrnames = forceAsArray(scantwo_data.chrnames);
   scantwo_data.nmar = forceAsArray(scantwo_data.nmar);
   div = d3.select(widgetdiv);
@@ -46,10 +48,6 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   hright = heatmap_height / 2 - margin.top - margin.bottom;
   totalw = heatmap_width + wright + margin.left + margin.right;
   totalh = heatmap_height + (hbot + margin.top + margin.bottom) * 2;
-  vieww = totalw;
-  viewh = totalh;
-  totalw = (ref18 = chartOpts != null ? chartOpts.width : void 0) != null ? ref18 : totalw;
-  totalh = (ref19 = chartOpts != null ? chartOpts.height : void 0) != null ? ref19 : totalh;
   wbot = totalw / 2 - margin.left - margin.right;
   leftvalue = "int";
   rightvalue = "fv1";
@@ -82,7 +80,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     }
   }
   options = ["full", "fv1", "int", "add", "av1"];
-  form = div.insert("div", ":first-child").attr("id", "form").attr("class", "qtlcharts");
+  form = div.insert("div", ":first-child").attr("id", "form").attr("class", "qtlcharts").attr("height", "24px");
   left = form.append("div").text(oneAtTop ? "bottom-left: " : "top-left: ").style("float", "left").style("margin-left", "150px");
   leftsel = left.append("select").attr("id", "leftselect_" + widgetid).attr("name", "left");
   leftsel.selectAll("empty").data(options).enter().append("option").attr("value", function(d) {
@@ -117,8 +115,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     div.select("g#chrheatmap").datum(scantwo_data).call(mychrheatmap);
     return add_cell_tooltips();
   });
-  div.style("height", totalh + "px").style("width", totalw + "px");
-  svg = div.select("svg").attr("viewBox", [0, 0, vieww, viewh].join(",")).style("height", "90%").style("width", "100%");
+  svg = div.select("svg").attr("viewBox", [0, 0, totalw, totalh].join(" ")).attr("preserveAspectRatio", "xMinYMin meet").style("height", "100%").style("width", "100%");
   scantwo_data = add_symmetric_lod(scantwo_data);
   scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);
   mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell).chrGap(chrGap).axispos(axispos).rectcolor("white").nullcolor(nullcolor).bordercolor(bordercolor).colors(["white", color]).zlim([0, scantwo_data.max.full]).zthresh(zthresh).oneAtTop(oneAtTop).hover(false);

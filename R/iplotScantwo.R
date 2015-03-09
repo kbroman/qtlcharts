@@ -98,9 +98,10 @@ function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
+                                  browser.defaultWidth=1000,
+                                  browser.defaultHeight=1000,
                                   knitr.defaultWidth=1000,
-                                  knitr.defaultHeight=1000,
-                                  knitr.figure=FALSE),
+                                  knitr.defaultHeight=1000),
                               package="qtlcharts")
 }
 

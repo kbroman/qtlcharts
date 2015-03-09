@@ -17,7 +17,7 @@ HTMLWidgets.widget({
 
         chartOpts = x.chartOpts ? {}
         chartOpts.width = chartOpts?.width ? svg.attr("width")
-        chartOpts.height = chartOpts?.height ? svg.attr("height")
+        chartOpts.height = chartOpts?.height ? svg.attr("height")+24 # 24 = form div height
 
         svg.attr("width", chartOpts.width)
         svg.attr("height", chartOpts.height-24)

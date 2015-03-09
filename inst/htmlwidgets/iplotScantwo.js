@@ -10,7 +10,7 @@ HTMLWidgets.widget({
     svg = d3.select(widgetdiv).select("svg");
     chartOpts = (ref = x.chartOpts) != null ? ref : {};
     chartOpts.width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : svg.attr("width");
-    chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : svg.attr("height");
+    chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : svg.attr("height") + 24;
     svg.attr("width", chartOpts.width);
     svg.attr("height", chartOpts.height - 24);
     return iplotScantwo(widgetdiv, x.scantwo_data, x.phenogeno_data, x.chartOpts);

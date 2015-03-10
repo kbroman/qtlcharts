@@ -101,8 +101,8 @@ function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=browsersize["width"],
-                                  browser.defaultHeight=browsersize["height"],
+                                  browser.defaultWidth=browsersize$width,
+                                  browser.defaultHeight=browsersize$height,
                                   knitr.defaultWidth=1000,
                                   knitr.defaultHeight=1000/defaultAspect
                               ),

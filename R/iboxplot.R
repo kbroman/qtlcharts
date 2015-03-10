@@ -41,13 +41,14 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
 
     defaultAspect <- 1.25 # width/height
     browsersize <- getPlotSize(defaultAspect)
+    print(browsersize)
 
     htmlwidgets::createWidget("iboxplot", list(data=data_list, chartOpts=chartOpts),
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=browsersize["width"],
-                                  browser.defaultHeight=browsersize["height"],
+                                  browser.defaultWidth=browsersize$width,
+                                  browser.defaultHeight=browsersize$height,
                                   knitr.defaultWidth=1000,
                                   knitr.defaultHeight=1000/defaultAspect
                               ),

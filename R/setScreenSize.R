@@ -30,13 +30,13 @@ setScreenSize <-
              height, width)
 {
     if(!missing(height) && !is.null(height) && !missing(width) && !is.null(width))
-        screensize <- c(height=height, width=width)
+        screensize <- list(height=height, width=width)
     else {
         size <- match.arg(size)
         screensize <- switch(size,
-                             small=  c(height= 600, width= 900),
-                             normal= c(height= 700, width=1000),
-                             large=  c(height=1200, width=1600))
+                             small=  list(height= 600, width= 900),
+                             normal= list(height= 700, width=1000),
+                             large=  list(height=1200, width=1600))
     }
 
     options(qtlchartsScreen=screensize)
@@ -62,7 +62,8 @@ getPlotSize <-
 {
     screensize <- getScreenSize()
 
-    if(screensize[1]*aspectRatio <= screensize[2])
-        return(c(height=screensize[1], width=screensize[1]*aspectRatio))
-    c(height=screensize[2]/aspectRatio, width=screensize[2])
+    if(screensize$height*aspectRatio <= screensize$width)
+            return( list(height=screensize$height, width=screensize$height*aspectRatio) )
+     list(height=screensize$width/aspectRatio, width=screensize$width)
+
 }

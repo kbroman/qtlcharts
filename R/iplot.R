@@ -53,8 +53,8 @@ function(x, y, group, indID, chartOpts=NULL)
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=browsersize["width"],
-                                  browser.defaultHeight=browsersize["height"]
+                                  browser.defaultWidth=browsersize$width,
+                                  browser.defaultHeight=browsersize$height
                               ),
                               package="qtlcharts")
 }

@@ -15,9 +15,9 @@
 #' @keywords utilities
 #'
 #' @examples
-#' setScreen("large")
+#' setScreenSize("large")
 #'
-#' @details Used to set a global option, \code{qtlchartsScreen}, that
+#' @details Used to set a global option, \code{qtlchartsScreenSize}, that
 #' contains the maximum height and maximum width for a chart in the
 #' browser.
 #'
@@ -39,17 +39,17 @@ setScreenSize <-
                              large=  list(height=1200, width=1600))
     }
 
-    options(qtlchartsScreen=screensize)
+    options(qtlchartsScreenSize=screensize)
 }
 
 # returns the default screen size saved with setScreenSize()
 getScreenSize <-
     function()
 {
-    screensize <- getOption("qtlchartsScreen")
+    screensize <- getOption("qtlchartsScreenSize")
     if(is.null(screensize)) {
         setScreenSize()
-        screensize <- getOption("qtlchartsScreen")
+        screensize <- getOption("qtlchartsScreenSize")
     }
 
     screensize

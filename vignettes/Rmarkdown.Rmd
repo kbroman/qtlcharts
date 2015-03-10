@@ -34,7 +34,7 @@ each of these charts. (But note that `iplotRF` and `iplotScantwo` ignore
 these settings.)
 
 ```{r knitr_options}
-knitr::opts_chunk$set(fig.width=8, fig.height=6)
+knitr::opts_chunk$set(fig.width=8, fig.height=6, message=FALSE)
 ```
 
 

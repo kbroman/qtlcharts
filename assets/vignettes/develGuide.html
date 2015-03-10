@@ -82,12 +82,12 @@ scatcolors = chartOpts?.scatcolors ? null # vector of point colors for scatterpl
 </div>
 <div id="roxygen" class="section level2">
 <h2>Roxygen</h2>
-<p>R help files are created using <a href="https://github.com/klutometis/roxygen">Roxygen2</a>: structured comments in the R code are converted to the R manual page format with the <code>devtools::document</code> function (see the <a href="http://github.com/kbroman/qtlcharts/tree/master/Makefile"><code>Makefile</code></a>).</p>
+<p>R help files are created using <a href="https://github.com/klutometis/roxygen">Roxygen2</a>: structured comments in the R code are converted to the R manual page format with the <code>devtools::document</code> function (see the <a href="https://github.com/kbroman/qtlcharts/tree/master/Makefile"><code>Makefile</code></a>).</p>
 <p>For further information on Roxygen2, see <a href="http://adv-r.had.co.nz/Documenting-functions.html">Documenting Functions</a> in <a href="http://had.co.nz/">Hadley Wickham</a>’s <a href="http://adv-r.had.co.nz/">Advanced R Programming</a> or the <a href="http://cran.r-project.org/web/packages/roxygen2/">Roxygen2 vignettes</a>, such as <a href="http://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html">Getting started with Roxygen2</a> and <a href="http://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html">Generating Rd files</a>.</p>
 </div>
 <div id="tests" class="section level2">
 <h2>Tests</h2>
-<p>It is tricky to test graphics, and particularly interactive graphics. The basic panel functions in <a href="http://kbroman.org/d3panels">d3panels</a> are tested separately; see <a href="https://kbroman.org/d3panels">its GitHub repository</a>.</p>
+<p>It is tricky to test graphics, and particularly interactive graphics. The basic panel functions in <a href="http://kbroman.org/d3panels">d3panels</a> are tested separately; see <a href="https://github.com/kbroman/d3panels">its GitHub repository</a>.</p>
 <p>Tests of some of the R utility functions are in <a href="https://github.com/kbroman/qtlcharts/tree/master/tests/testthat"><code>tests/testthat</code></a>. We’re using the R package <a href="https://github.com/hadley/testthat">testthat</a>.</p>
 <p>We also generate a couple of tests for each of the higher-level chart functions: in the usual simple way (see <a href="https://github.com/kbroman/qtlcharts/tree/master/tests/htmltest"><code>tests/htmltest</code></a>), and within the context of an <a href="http://rmarkdown.rstudio.com">R Markdown</a> document (see <a href="https://github.com/kbroman/qtlcharts/tree/master/tests/Rmdtest"><code>tests/Rmdtest</code></a>). These are executed with <code>R CMD CHECK</code>, but the results next to be inspected individually by eye.</p>
 </div>
@@ -97,7 +97,7 @@ scatcolors = chartOpts?.scatcolors ? null # vector of point colors for scatterpl
 <p>R/qtlcharts incorporates</p>
 <ul>
 <li><a href="http://d3js.org">D3.js</a> [<a href="inst/htmlwidgets/lib/d3/LICENSE">license</a>]</li>
-<li><a href="http://github.com/Caged/d3-tip">d3.tip</a> [<a href="inst/htmlwidgets/lib/d3-tip/LICENSE">license</a>]</li>
+<li><a href="https://github.com/Caged/d3-tip">d3.tip</a> [<a href="inst/htmlwidgets/lib/d3-tip/LICENSE">license</a>]</li>
 <li><a href="http://colorbrewer2.org">ColorBrewer</a> [<a href="inst/htmlwidgets/lib/colorbrewer/LICENSE">license</a>]</li>
 <li><a href="http://jquery.com">jQuery</a> [<a href="inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt">license</a>]</li>
 <li><a href="http://jqueryui.com/">jQuery UI</a> [<a href="inst/htmlwidgets/lib/jquery-ui/LICENSE.txt">license</a>]</li>

@@ -105,6 +105,20 @@ htmlwidgets::<span class="kw">saveWidget</span>(corrplot, <span class="dt">file=
 <p>A full list of options is available in the <a href="chartOpts.html"><code>chartOpts</code> vignette</a>:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="st">&quot;chartOpts&quot;</span>, <span class="st">&quot;qtlcharts&quot;</span>)</code></pre>
 </div>
+<div id="further-control-of-chart-dimensions" class="section level2">
+<h2>Further control of chart dimensions</h2>
+<p>To provide general control of the sizes of charts, when they are to be displayed in a web browser, use the function <code>setScreenSize()</code> to define the maximum height and width, in pixels. The default is 700 (height) × 1000 (width). For a smaller screen (600×900), use</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setScreenSize</span>(<span class="st">&quot;small&quot;</span>)</code></pre>
+<p>For a larger screen (1200×1600), use</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setScreenSize</span>(<span class="st">&quot;large&quot;</span>)</code></pre>
+<p>The default is “normal” (700×1000):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setScreenSize</span>(<span class="st">&quot;normal&quot;</span>)</code></pre>
+<p>You can also define a custom height and width:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setScreenSize</span>(<span class="dt">height=</span><span class="dv">500</span>, <span class="dt">width=</span><span class="dv">700</span>)</code></pre>
+<p>Each charting function (e.g., <code>iplotScanone</code> and <code>iplotPXG</code>) has a defined default aspect ratio, and the height and width are chosen to fit within the maximum sizes defined by the call to <code>setScreenSize</code>.</p>
+<p>You can always use <code>chartOpts</code> to define specific height and width for a given plot.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">iplotCorr</span>(expr, <span class="dt">chartOpts=</span><span class="kw">list</span>(<span class="dt">height=</span><span class="dv">400</span>, <span class="dt">width=</span><span class="dv">800</span>))</code></pre>
+</div>
 <div id="including-a-chart-in-an-r-markdown-document" class="section level2">
 <h2>Including a chart in an R Markdown document</h2>
 <p>The interactive charts may be included within an <a href="http://rmarkdown.rstudio.com/">R Markdown</a>-based report. See the separate <a href="Rmarkdown.html"><code>Rmarkdown</code> vignette</a>:</p>

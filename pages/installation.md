@@ -11,7 +11,7 @@ which provides a very nice
 [user interface for R](http://www.rstudio.com/products/rstudio/download/).
 
 Install R/qtlcharts from its
-[GitHub repository](http://github.com/kbroman/qtlcharts). You first need to
+[GitHub repository](https://github.com/kbroman/qtlcharts). You first need to
 install the [R/qtl](http://www.rqtl.org),
 [htmlwidgets](http://www.htmlwidgets.org/)
 and [devtools](https://github.com/hadley/devtools) packages.
@@ -19,7 +19,7 @@ and [devtools](https://github.com/hadley/devtools) packages.
     install.packages(c("qtl", "htmlwidgets", "devtools"))
 
 Then install R/qtlcharts using the `install_github` function in the
-[devtools](http://github.com/hadley/devtools) package.
+[devtools](https://github.com/hadley/devtools) package.
 
     library(devtools)
     install_github("kbroman/qtlcharts")

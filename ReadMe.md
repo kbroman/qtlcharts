@@ -16,7 +16,7 @@ For example charts, see the [R/qtlcharts website](http://kbroman.org/qtlcharts).
 #### Installation
 
 Install R/qtlcharts from its
-[GitHub repository](http://github.com/kbroman/qtlcharts). You first need to
+[GitHub repository](https://github.com/kbroman/qtlcharts). You first need to
 install the [R/qtl](http://www.rqtl.org),
 [htmlwidgets](http://htmlwidgets.org),
 and [devtools](https://github.com/hadley/devtools) packages.
@@ -26,7 +26,7 @@ install.packages(c("qtl", "htmlwidgets", "devtools"))
 ```
 
 Then install R/qtlcharts using the `install_github` function in the
-[devtools](http://github.com/hadley/devtools) package.
+[devtools](https://github.com/hadley/devtools) package.
 
 ```r
 library(devtools)
@@ -79,7 +79,7 @@ Licensed under the [MIT license](LICENSE). ([More information here](http://en.wi
 
 R/qtlcharts incorporates
 - [D3.js](http://d3js.org) \[[license](inst/htmlwidgets/lib/d3/LICENSE)\]
-- [d3.tip](http://github.com/Caged/d3-tip) \[[license](inst/htmlwidgets/lib/d3-tip/LICENSE)\]
+- [d3.tip](https://github.com/Caged/d3-tip) \[[license](inst/htmlwidgets/lib/d3-tip/LICENSE)\]
 - [ColorBrewer](http://colorbrewer2.org) \[[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)\]
 - [jQuery](http://jquery.com) \[[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)\]
 - [jQuery UI](http://jqueryui.com/) \[[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]

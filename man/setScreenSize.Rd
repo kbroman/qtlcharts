@@ -21,7 +21,7 @@ None.
 Set the default screen size as a global option.
 }
 \details{
-Used to set a global option, \code{qtlchartsScreen}, that
+Used to set a global option, \code{qtlchartsScreenSize}, that
 contains the maximum height and maximum width for a chart in the
 browser.
 
@@ -29,7 +29,7 @@ browser.
 1200x1600, for height x width, respectively.
 }
 \examples{
-setScreen("large")
+setScreenSize("large")
 }
 \keyword{utilities}
 

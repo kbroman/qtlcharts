@@ -173,6 +173,48 @@ vignette("chartOpts", "qtlcharts")
 ```
 
 
+## Further control of chart dimensions
+
+To provide general control of the sizes of charts, when they are to be
+displayed in a web browser, use the function `setScreenSize()` to
+define the maximum height and width, in pixels. The default is 700 (height)
+&times; 1000 (width). For a smaller screen (600&times;900), use
+
+```{r setScreen_small, eval=FALSE}
+setScreenSize("small")
+```
+
+For a larger screen (1200&times;1600), use
+
+```{r setScreen_large, eval=FALSE}
+setScreenSize("large")
+```
+
+The default is "normal" (700&times;1000):
+
+```{r setScreen_normal, eval=FALSE}
+setScreenSize("normal")
+```
+
+You can also define a custom height and width:
+
+```{r setScreen_custom, eval=FALSE}
+setScreenSize(height=500, width=700)
+```
+
+Each charting function (e.g., `iplotScanone` and `iplotPXG`) has a
+defined default aspect ratio, and the height and width are chosen to
+fit within the maximum sizes defined by the call to `setScreenSize`.
+
+You can always use `chartOpts` to define specific height and width for
+a given plot.
+
+```{r iplotCorr_height_width, eval=FALSE}
+iplotCorr(expr, chartOpts=list(height=400, width=800))
+```
+
+
+
 ## Including a chart in an R Markdown document
 
 The interactive charts may be included within an

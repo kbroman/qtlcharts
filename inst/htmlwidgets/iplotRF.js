@@ -16,6 +16,6 @@ HTMLWidgets.widget({
     return iplotRF(widgetdiv, x.rfdata, x.genodata, chartOpts);
   },
   resize: function(widgetdiv, width, height) {
-    return null;
+    return d3.select(widgetdiv).select("svg").attr("width", width).attr("height", height);
   }
 });

@@ -24,6 +24,9 @@ HTMLWidgets.widget({
 
         iplotScantwo(widgetdiv, x.scantwo_data, x.phenogeno_data, chartOpts)
 
-    resize: (widgetdiv, width, height) -> null
+    resize: (widgetdiv, width, height) ->
+        d3.select(widgetdiv).select("svg")
+          .attr("width", width)
+          .attr("height", height)
 
 })

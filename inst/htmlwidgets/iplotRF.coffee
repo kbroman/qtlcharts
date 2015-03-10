@@ -24,6 +24,9 @@ HTMLWidgets.widget({
 
         iplotRF(widgetdiv, x.rfdata, x.genodata, chartOpts)
 
-    resize: (widgetdiv, width, height) -> null
+    resize: (widgetdiv, width, height) ->
+        d3.select(widgetdiv).select("svg")
+          .attr("width", width)
+          .attr("height", height)
 
 })

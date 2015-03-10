@@ -16,6 +16,6 @@ HTMLWidgets.widget({
     return iplotScantwo(widgetdiv, x.scantwo_data, x.phenogeno_data, chartOpts);
   },
   resize: function(widgetdiv, width, height) {
-    return null;
+    return d3.select(widgetdiv).select("svg").attr("width", width).attr("height", height);
   }
 });

@@ -106,7 +106,7 @@ Click on a chart for the corresponding interactive version.
 
 ---
 
-Sources on [github](http://github.com):
+Sources on [github](https://github.com):
 
 - The [source for the package](https://github.com/kbroman/qtlcharts/tree/master)
 - The [source for the website](https://github.com/kbroman/qtlcharts/tree/gh-pages)

@@ -46,12 +46,15 @@ function(x, y, group, indID, chartOpts=NULL)
     x <- list(data = data.frame(x=x, y=y, group=group, indID=indID),
               chartOpts=chartOpts)
 
+    defaultAspect <- 1.33 # width/height
+    browsersize <- getPlotSize(defaultAspect)
+
     htmlwidgets::createWidget("iplot", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=900,
-                                  browser.defaultHeight=600
+                                  browser.defaultWidth=browsersize["width"],
+                                  browser.defaultHeight=browsersize["height"]
                               ),
                               package="qtlcharts")
 }

@@ -48,13 +48,16 @@ function(group, y, indID, chartOpts=NULL)
                         genonames=list(A=group_levels)),
               chartOpts=chartOpts)
 
+    defaultAspect <- 1 # width/height
+    browsersize <- getPlotSize(defaultAspect)
+
     htmlwidgets::createWidget("iplotPXG", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=800,
-                                  browser.defaultHeight=800,
-                                  knitr.defaultWidth=600,
-                                  knitr.defaultHeight=600),
+                                  browser.defaultWidth=browsersize["width"],
+                                  browser.defaultHeight=browsersize["height"],
+                                  knitr.defaultWidth=1000,
+                                  knitr.defaultHeight=1000/defaultAspect),
                               package="qtlcharts")
 }

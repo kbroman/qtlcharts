@@ -83,14 +83,17 @@ function(mat, group, rows, cols, reorder=FALSE, corr=stats::cor(mat, use="pairwi
 
     data_list <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset)
 
+    defaultAspect <- 2 # width/height
+    browsersize <- getPlotSize(defaultAspect)
+
     htmlwidgets::createWidget("iplotCorr", list(data=data_list, chartOpts=chartOpts),
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=1200,
-                                  browser.defaultHeight=600,
-                                  knitr.defaultWidth=1200,
-                                  knitr.defaultHeight=600,
+                                  browser.defaultWidth=browsersize["width"],
+                                  browser.defaultHeight=browsersize["height"],
+                                  knitr.defaultWidth=1000,
+                                  knitr.defaultHeight=1000/defaultAspect
                               ),
                               package="qtlcharts")
 }

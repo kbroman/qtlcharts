@@ -48,15 +48,18 @@ function(z, x, y, chartOpts=NULL)
     else stopifnot(length(y) == ncol(z))
     names(x) <- names(y) <- dimnames(z) <- NULL
 
+    defaultAspect <- 1 # width/height
+    browsersize <- getPlotSize(defaultAspect)
+
     htmlwidgets::createWidget("iheatmap",
                               list(data=list(x=x, y=y, z=z), chartOpts=chartOpts),
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=800,
-                                  browser.defaultHeight=800,
-                                  knitr.defaultWidth=800,
-                                  knitr.defaultHeight=800,
+                                  browser.defaultWidth=browsersize["width"],
+                                  browser.defaultHeight=browsersize["height"],
+                                  knitr.defaultWidth=1000,
+                                  knitr.defaultHeight=1000/defaultAspect
                               ),
                               package="qtlcharts")
 }

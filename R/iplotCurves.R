@@ -81,14 +81,17 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
                       scatter1_data=convert_scat(scatter1, group, indID),
                       scatter2_data=convert_scat(scatter2, group, indID))
 
+    defaultAspect <- 1.25 # width/height
+    browsersize <- getPlotSize(defaultAspect)
+
     htmlwidgets::createWidget("iplotCurves", list(data=data_list, chartOpts=chartOpts),
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=1000,
-                                  browser.defaultHeight=800,
+                                  browser.defaultWidth=browsersize["width"],
+                                  browser.defaultHeight=browsersize["height"],
                                   knitr.defaultWidth=1000,
-                                  knitr.defaultHeight=800,
+                                  knitr.defaultHeight=1000/defaultAspect
                               ),
                               package="qtlcharts")
 }

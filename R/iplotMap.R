@@ -46,14 +46,18 @@ function(map, chr, shift=FALSE, chartOpts=NULL)
     map_list <- convert_map(map)
     x <- list(data=map_list, chartOpts=chartOpts)
 
+    defaultAspect <- 1.5 # width/height
+    browsersize <- getPlotSize(defaultAspect)
+
     htmlwidgets::createWidget("iplotMap", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=1000,
-                                  browser.defaultHeight=700,
-                                  knitr.defaultWidth=900,
-                                  knitr.defaultHeight=600),
+                                  browser.defaultWidth=browsersize["width"],
+                                  browser.defaultHeight=browsersize["height"],
+                                  knitr.defaultWidth=1000,
+                                  knitr.defaultHeight=1000/defaultAspect
+                              ),
                               package="qtlcharts")
 }
 

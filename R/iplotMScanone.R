@@ -136,6 +136,9 @@ function(scanoneOutput, cross, lodcolumn, pheno.col, times=NULL,
 
     scanone_list <- convert_scanone(scanoneOutput)
 
+    defaultAspect <- 1.5 # width/height
+    browsersize <- getPlotSize(defaultAspect)
+
     htmlwidgets::createWidget("iplotMScanone",
                               list(lod_data=scanone_list,
                                    eff_data=effects_list,
@@ -145,10 +148,10 @@ function(scanoneOutput, cross, lodcolumn, pheno.col, times=NULL,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=1200,
-                                  browser.defaultHeight=800,
-                                  knitr.defaultWidth=1200,
-                                  knitr.defaultHeight=800,
+                                  browser.defaultWidth=browsersize["width"],
+                                  browser.defaultHeight=browsersize["height"],
+                                  knitr.defaultWidth=1000,
+                                  knitr.defaultHeight=1000/defaultAspect
                               ),
                               package="qtlcharts")
 }

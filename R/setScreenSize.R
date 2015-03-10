@@ -1,0 +1,68 @@
+## setScreenSize
+## Karl Broman
+
+#' Set default maximum screen size
+#'
+#' Set the default screen size as a global option.
+#'
+#' @param size Character vector representing screen size (normal,
+#'   small, large). Ignored if height and width are provided.
+#' @param height (Optional) Height in pixels
+#' @param width (Optional) Width in pixels
+#'
+#' @return None.
+#'
+#' @keywords utilities
+#'
+#' @examples
+#' setScreen("large")
+#'
+#' @details Used to set a global option, \code{qtlchartsScreen}, that
+#' contains the maximum height and maximum width for a chart in the
+#' browser.
+#'
+#' \code{"small"}, \code{"normal"}, and \code{"large"} correspond to 600x900, 700x1000, and
+#' 1200x1600, for height x width, respectively.
+#'
+#' @export
+setScreenSize <-
+    function(size=c("normal", "small", "large"),
+             height, width)
+{
+    if(!missing(height) && !is.null(height) && !missing(width) && !is.null(width))
+        screensize <- c(height=height, width=width)
+    else {
+        size <- match.arg(size)
+        screensize <- switch(size,
+                             small=  c(height= 600, width= 900),
+                             normal= c(height= 700, width=1000),
+                             large=  c(height=1200, width=1600))
+    }
+
+    options(qtlchartsScreen=screensize)
+}
+
+# returns the default screen size saved with setScreenSize()
+getScreenSize <-
+    function()
+{
+    screensize <- getOption("qtlchartsScreen")
+    if(is.null(screensize)) {
+        setScreenSize()
+        screensize <- getOption("qtlchartsScreen")
+    }
+
+    screensize
+}
+
+# get the plot size for a given aspect ratio that will fit within the
+# maximum screen size set with setScreenSize
+getPlotSize <-
+    function(aspectRatio) # aspectRatio = width/height (generally > 1)
+{
+    screensize <- getScreenSize()
+
+    if(screensize[1]*aspectRatio <= screensize[2])
+        return(c(height=screensize[1], width=screensize[1]*aspectRatio))
+    c(height=screensize[2]/aspectRatio, width=screensize[2])
+}

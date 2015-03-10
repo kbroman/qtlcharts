@@ -91,6 +91,9 @@ function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
     scantwo_list <- data4iplotScantwo(scantwoOutput)
     phenogeno_list <- cross4iplotScantwo(scantwoOutput, cross, pheno)
 
+    defaultAspect <- 1 # width/height
+    browsersize <- getPlotSize(defaultAspect)
+
     htmlwidgets::createWidget("iplotScantwo",
                               list(scantwo_data=scantwo_list,
                                    phenogeno_data=phenogeno_list,
@@ -98,10 +101,11 @@ function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(
-                                  browser.defaultWidth=1000,
-                                  browser.defaultHeight=1000,
+                                  browser.defaultWidth=browsersize["width"],
+                                  browser.defaultHeight=browsersize["height"],
                                   knitr.defaultWidth=1000,
-                                  knitr.defaultHeight=1000),
+                                  knitr.defaultHeight=1000/defaultAspect
+                              ),
                               package="qtlcharts")
 }
 

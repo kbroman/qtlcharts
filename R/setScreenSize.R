@@ -29,7 +29,8 @@ setScreenSize <-
     function(size=c("normal", "small", "large"),
              height, width)
 {
-    if(!missing(height) && !is.null(height) && !missing(width) && !is.null(width))
+    if(!missing(height) && !is.null(height) && !is.na(height) && height > 0 &&
+       !missing(width) && !is.null(width) && !is.na(width) && width > 0)
         screensize <- list(height=height, width=width)
     else {
         size <- match.arg(size)
@@ -39,6 +40,8 @@ setScreenSize <-
                              large=  list(height=1200, width=1600))
     }
 
+    message("Set screen size to height=", screensize$height,
+            " x width=", screensize$width)
     options(qtlchartsScreenSize=screensize)
 }
 

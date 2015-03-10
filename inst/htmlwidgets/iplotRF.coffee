@@ -22,7 +22,7 @@ HTMLWidgets.widget({
         svg.attr("width", chartOpts.width)
         svg.attr("height", chartOpts.height)
 
-        iplotRF(widgetdiv, x.rfdata, x.genodata, x.chartOpts)
+        iplotRF(widgetdiv, x.rfdata, x.genodata, chartOpts)
 
     resize: (widgetdiv, width, height) -> null
 

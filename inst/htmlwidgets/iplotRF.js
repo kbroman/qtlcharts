@@ -13,7 +13,7 @@ HTMLWidgets.widget({
     chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : svg.attr("height");
     svg.attr("width", chartOpts.width);
     svg.attr("height", chartOpts.height);
-    return iplotRF(widgetdiv, x.rfdata, x.genodata, x.chartOpts);
+    return iplotRF(widgetdiv, x.rfdata, x.genodata, chartOpts);
   },
   resize: function(widgetdiv, width, height) {
     return null;

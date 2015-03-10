@@ -13,7 +13,7 @@ HTMLWidgets.widget({
     chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : svg.attr("height") + 24;
     svg.attr("width", chartOpts.width);
     svg.attr("height", chartOpts.height - 24);
-    return iplotScantwo(widgetdiv, x.scantwo_data, x.phenogeno_data, x.chartOpts);
+    return iplotScantwo(widgetdiv, x.scantwo_data, x.phenogeno_data, chartOpts);
   },
   resize: function(widgetdiv, width, height) {
     return null;

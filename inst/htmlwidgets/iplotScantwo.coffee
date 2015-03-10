@@ -22,7 +22,7 @@ HTMLWidgets.widget({
         svg.attr("width", chartOpts.width)
         svg.attr("height", chartOpts.height-24)
 
-        iplotScantwo(widgetdiv, x.scantwo_data, x.phenogeno_data, x.chartOpts)
+        iplotScantwo(widgetdiv, x.scantwo_data, x.phenogeno_data, chartOpts)
 
     resize: (widgetdiv, width, height) -> null
 

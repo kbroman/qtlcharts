@@ -183,7 +183,7 @@ R help files are created using
 [Roxygen2](https://github.com/klutometis/roxygen): structured comments
 in the R code are converted to the R manual page format with the
 `devtools::document` function (see the
-[`Makefile`](http://github.com/kbroman/qtlcharts/tree/master/Makefile)).
+[`Makefile`](https://github.com/kbroman/qtlcharts/tree/master/Makefile)).
 
 For further information on Roxygen2, see
 [Documenting Functions](http://adv-r.had.co.nz/Documenting-functions.html)
@@ -198,7 +198,7 @@ and
 It is tricky to test graphics, and particularly interactive
 graphics. The basic panel functions in
 [d3panels](http://kbroman.org/d3panels) are tested separately; see
-[its GitHub repository](https://kbroman.org/d3panels).
+[its GitHub repository](https://github.com/kbroman/d3panels).
 
 Tests of some of the R utility functions are in
 [`tests/testthat`](https://github.com/kbroman/qtlcharts/tree/master/tests/testthat). We're
@@ -222,7 +222,7 @@ Licensed under the
 R/qtlcharts incorporates
 
 - [D3.js](http://d3js.org) [[license](inst/htmlwidgets/lib/d3/LICENSE)]
-- [d3.tip](http://github.com/Caged/d3-tip) [[license](inst/htmlwidgets/lib/d3-tip/LICENSE)]
+- [d3.tip](https://github.com/Caged/d3-tip) [[license](inst/htmlwidgets/lib/d3-tip/LICENSE)]
 - [ColorBrewer](http://colorbrewer2.org) [[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)]
 - [jQuery](http://jquery.com) [[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)]
 - [jQuery UI](http://jqueryui.com/) [[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)]

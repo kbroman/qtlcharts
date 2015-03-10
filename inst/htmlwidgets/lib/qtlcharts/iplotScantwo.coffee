@@ -74,7 +74,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     left = form.append("div")
               .text(if oneAtTop then "bottom-left: " else "top-left: ")
               .style("float", "left")
-              .style("margin-left", "150px")
+              .style("margin-left", "50px")
     leftsel = left.append("select")
                   .attr("id", "leftselect_#{widgetid}")
                   .attr("name", "left")

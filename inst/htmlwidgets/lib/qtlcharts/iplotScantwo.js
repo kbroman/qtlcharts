@@ -81,7 +81,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   }
   options = ["full", "fv1", "int", "add", "av1"];
   form = div.insert("div", ":first-child").attr("id", "form").attr("class", "qtlcharts").attr("height", "24px");
-  left = form.append("div").text(oneAtTop ? "bottom-left: " : "top-left: ").style("float", "left").style("margin-left", "150px");
+  left = form.append("div").text(oneAtTop ? "bottom-left: " : "top-left: ").style("float", "left").style("margin-left", "50px");
   leftsel = left.append("select").attr("id", "leftselect_" + widgetid).attr("name", "left");
   leftsel.selectAll("empty").data(options).enter().append("option").attr("value", function(d) {
     return d;

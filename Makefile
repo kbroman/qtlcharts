@@ -92,7 +92,8 @@ ${LIB_DIR}/d3-tip/%: ${BOWER_DIR}/../d3-tip/%
 d3panels: ${LIB_DIR}/d3panels/d3panels.min.js \
 		  ${LIB_DIR}/d3panels/d3panels.min.css \
 		  ${LIB_DIR}/d3panels/ReadMe.md \
-		  ${LIB_DIR}/d3panels/License.md
+		  ${LIB_DIR}/d3panels/License.md \
+		  ${LIB_DIR}/d3panels/bower.json
 ${LIB_DIR}/d3panels/%: ${BOWER_DIR}/../d3panels/%
 	cp $< $@
 

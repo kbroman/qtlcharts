@@ -1,0 +1,24 @@
+{
+  "name": "d3panels",
+  "version": "0.5.2",
+  "homepage": "https://github.com/kbroman/d3panels",
+  "authors": [
+    "Karl Broman <kbroman@gmail.com>"
+  ],
+  "description": "D3-based graphics panels",
+  "main": "d3panels.js",
+  "keywords": [
+    "graphics"
+  ],
+  "license": "MIT",
+  "ignore": [
+        "**/.*",
+        "Makefile",
+        "ToDo.md",
+        "Web",
+        "doc",
+        "libs",
+        "src",
+        "test"
+  ]
+}

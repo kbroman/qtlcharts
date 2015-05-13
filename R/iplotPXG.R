@@ -61,7 +61,6 @@ function(cross, marker, pheno.col=1,
 
     defaultAspect <- 1 # width/height
     browsersize <- getPlotSize(defaultAspect)
-    print(browsersize)
 
     htmlwidgets::createWidget("iplotPXG", x,
                               width=chartOpts$width,

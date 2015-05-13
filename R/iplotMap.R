@@ -67,7 +67,9 @@ function(map) {
     chrnames <- names(map)
 
     # remove the A/X classes
-    map <- sapply(map, unclass)
+    map <- lapply(map, unclass)
+    # make sure each map is hash with scalars not vectors
+    map <- lapply(map, function(a) lapply(a, jsonlite::unbox))
 
     mnames <- unlist(lapply(map, names))
     names(mnames) <- NULL

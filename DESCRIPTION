@@ -1,5 +1,5 @@
 Package: qtlcharts
-Version: 0.5-7
+Version: 0.5-8
 Date: 2015-05-13
 Title: Interactive graphics for QTL experiments
 Author: Karl W Broman <kbroman@biostat.wisc.edu>
@@ -12,6 +12,7 @@ Depends:
 Imports:
     qtl (>= 1.30-4),
     htmlwidgets,
+    jsonlite,
     graphics,
     stats
 Suggests:

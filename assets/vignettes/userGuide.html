@@ -116,7 +116,7 @@ htmlwidgets::<span class="kw">saveWidget</span>(corrplot, <span class="dt">file=
 <p>You can also define a custom height and width:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setScreenSize</span>(<span class="dt">height=</span><span class="dv">500</span>, <span class="dt">width=</span><span class="dv">700</span>)</code></pre>
 <p>Each charting function (e.g., <code>iplotScanone</code> and <code>iplotPXG</code>) has a defined default aspect ratio, and the height and width are chosen to fit within the maximum sizes defined by the call to <code>setScreenSize</code>.</p>
-<p>You can always use <code>chartOpts</code> to define specific height and width for a given plot.</p>
+<p>You can also use <code>chartOpts</code> to define a specific height and width for a given plot.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">iplotCorr</span>(expr, <span class="dt">chartOpts=</span><span class="kw">list</span>(<span class="dt">height=</span><span class="dv">400</span>, <span class="dt">width=</span><span class="dv">800</span>))</code></pre>
 </div>
 <div id="including-a-chart-in-an-r-markdown-document" class="section level2">

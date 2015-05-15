@@ -29,6 +29,10 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
+    # force things to be vectors
+    rf_data.chrnames = forceAsArray(rf_data.chrnames)
+    rf_data.nmar = forceAsArray(rf_data.nmar)
+
     # size of heatmap region
     totmar = sumArray(rf_data.nmar)
     pixelPerCell = d3.max([2, Math.floor(600/totmar)]) unless pixelPerCell?

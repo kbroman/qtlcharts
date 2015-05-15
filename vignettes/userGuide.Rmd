@@ -206,7 +206,7 @@ Each charting function (e.g., `iplotScanone` and `iplotPXG`) has a
 defined default aspect ratio, and the height and width are chosen to
 fit within the maximum sizes defined by the call to `setScreenSize`.
 
-You can always use `chartOpts` to define specific height and width for
+You can also use `chartOpts` to define a specific height and width for
 a given plot.
 
 ```{r iplotCorr_height_width, eval=FALSE}

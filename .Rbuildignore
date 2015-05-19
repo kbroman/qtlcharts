@@ -10,3 +10,4 @@ inst/ToDo.html
 vignettes/chartOpt_vignette
 ^\.travis\.yml$
 NEWS.md
+bower

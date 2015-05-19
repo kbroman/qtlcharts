@@ -49,7 +49,7 @@ ${WIDGET_DIR}/%.js: ${WIDGET_DIR}/%.coffee
 # d3, jquery, jquery-ui, colorbrewer, d3panels
 libs: d3 jquery jqueryui colorbrewer d3-tip d3panels
 LIB_DIR = inst/htmlwidgets/lib
-BOWER_DIR = ../libs/bower_components
+BOWER_DIR = bower/bower_components
 
 # d3
 d3: ${LIB_DIR}/d3/d3.min.js ${LIB_DIR}/d3/LICENSE ${LIB_DIR}/d3/bower.json
@@ -85,7 +85,7 @@ d3-tip: ${LIB_DIR}/d3-tip/bower.json \
 		${LIB_DIR}/d3-tip/d3-tip.min.css \
 		${LIB_DIR}/d3-tip/d3-tip.min.js \
 		${LIB_DIR}/d3-tip/LICENSE
-${LIB_DIR}/d3-tip/%: ${BOWER_DIR}/../d3-tip/%
+${LIB_DIR}/d3-tip/%: ${BOWER_DIR}/d3-tip/%
 	cp $< $@
 
 # d3panels
@@ -94,7 +94,7 @@ d3panels: ${LIB_DIR}/d3panels/d3panels.min.js \
 		  ${LIB_DIR}/d3panels/ReadMe.md \
 		  ${LIB_DIR}/d3panels/License.md \
 		  ${LIB_DIR}/d3panels/bower.json
-${LIB_DIR}/d3panels/%: ${BOWER_DIR}/../d3panels/%
+${LIB_DIR}/d3panels/%: ${BOWER_DIR}/d3panels/%
 	cp $< $@
 
 #------------------------------------------------------------

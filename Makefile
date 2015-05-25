@@ -27,5 +27,5 @@ vignettes: ${VIGNETTES}
 
 ${THIS_VIGNETTES}/%.html: ${QTLCHARTS_VIGNETTES}/%.Rmd
 	cd $(<D); \
-	R -e "library(rmarkdown);render('$(<F)')"; \
+	R -e "rmarkdown::render('$(<F)')"; \
 	mv $(@F) ../../Web/$(@D)/

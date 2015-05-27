@@ -1,3 +1,24 @@
+# qtlcharts 0.5-10
+
+- Included [bower](http://bower.io) information, about the javascript
+  libraries, within the source package.
+
+
+# qtlcharts 0.5-8
+
+- Got the package working with
+  [jsonlite](https://github.com/jeroenooms/jsonlite), as
+  [htmlwidgets](http://www.htmlwidgets.org) has now switched from
+  [RJSONIO](http://www.omegahat.org/RJSONIO/) to jsonlite, for
+  converting R objects to [JSON](http://www.json.org/).
+
+
+# qtlcharts 0.5-4
+
+- Added `setScreenSize` function for controlling the default sizes of
+  charts.
+
+
 # qtlcharts 0.5-3
 
 - Added `idotplot` function for plotting a quantitative variable in

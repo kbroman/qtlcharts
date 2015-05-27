@@ -19,7 +19,8 @@ and [devtools](https://github.com/hadley/devtools) packages.
     install.packages(c("qtl", "htmlwidgets", "devtools"))
 
 Then install R/qtlcharts using the `install_github` function in the
-[devtools](https://github.com/hadley/devtools) package.
+[devtools](https://github.com/hadley/devtools) package.  (With
+`build_vignettes=TRUE`, the vignettes will be built and installed.)
 
     library(devtools)
-    install_github("kbroman/qtlcharts")
+    install_github("kbroman/qtlcharts", build_vignettes=TRUE)

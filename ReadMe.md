@@ -1,6 +1,6 @@
 ### R/qtlcharts: Interactive graphics for QTL experiments
 
-[![Build Status](https://travis-ci.org/kbroman/qtlcharts.png?branch=master)](https://travis-ci.org/kbroman/qtlcharts)
+[![Build Status](https://travis-ci.org/kbroman/qtlcharts.svg?branch=master)](https://travis-ci.org/kbroman/qtlcharts)
 
 [Karl W Broman](http://kbroman.org)
 
@@ -26,11 +26,12 @@ install.packages(c("qtl", "htmlwidgets", "devtools"))
 ```
 
 Then install R/qtlcharts using the `install_github` function in the
-[devtools](https://github.com/hadley/devtools) package.
+[devtools](https://github.com/hadley/devtools) package. (With
+`build_vignettes=TRUE`, the vignettes will be built and installed.)
 
 ```r
 library(devtools)
-install_github("kbroman/qtlcharts")
+install_github("kbroman/qtlcharts", build_vignettes=TRUE)
 ```
 
 #### Example use
@@ -83,3 +84,4 @@ R/qtlcharts incorporates
 - [ColorBrewer](http://colorbrewer2.org) \[[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)\]
 - [jQuery](http://jquery.com) \[[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)\]
 - [jQuery UI](http://jqueryui.com/) \[[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
+- [d3panels](https://github.com/kbroman/d3panels) \[[license](inst/htmlwidgets/lib/d3panels/License.md)\]

@@ -163,19 +163,29 @@ is determined from the order in this file.
 
 Data is ultimately pasted into the chart file as
 [JSON](http://json.org).  [htmlwidgets](http://www.htmlwidgets.org)
-handles the conversion from R objects to JSON, currently using the
-[RJSONIO](http://www.omegahat.org/RJSONIO/) package, although it's
-expected that they'll eventually switch to the
+handles the conversion from R objects to JSON, using the
 [jsonlite](https://github.com/jeroenooms/jsonlite) package.
 
 There are some occasional annoyances, particularly in ensuring that
 an object becomes a hash (i.e., associative array) or an array (i.e.,
 vector or list), or that a single value becomes a scalar or an array
-of length 1.
+of length 1. The function `jsonlite::unbox()` is useful for forcing a
+vector of length 1 to be a scalar.
 
-The treatment of these things is rather different between
-RJSONIO and jsonlite, and so a switch to jsonlite will require some
-cumbersome reconfiguration.
+The biggest annoyance, for me, is
+getting a hash where the values are all scalars. I end up having to
+do something like `lapply(x, jsonlite::unbox)`.
+Here's an example.
+
+```{r named_vec_to_json_hash}
+x <- c(a=1, b=2, c=3)
+jsonlite::toJSON(x)
+y <- as.list(x)
+jsonlite::toJSON(y)
+z <- lapply(x, jsonlite::unbox)
+jsonlite::toJSON(z)
+```
+
 
 ## Roxygen
 

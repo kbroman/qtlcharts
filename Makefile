@@ -10,11 +10,11 @@ COFFEE_ARGS = -c # use -cm for debugging; -c otherwise
 
 # build html version of ToDo list
 inst/ToDo.html: inst/ToDo.md
-	cd inst;R -e 'library(markdown);markdownToHTML("ToDo.md", "ToDo.html")'
+	cd inst;R -e 'markdown::markdownToHTML("ToDo.md", "ToDo.html")'
 
 # build package documentation
 doc:
-	R -e 'library(devtools);document()'
+	R -e 'devtools::document()'
 
 #------------------------------------------------------------
 

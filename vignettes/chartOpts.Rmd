@@ -639,6 +639,18 @@ customization options for each chart.
 
 `eff_linewidth = 2` &mdash; width of line for effect plot (right panel)
 
+`pointcolor = "slateblue"` &mdash; point color for LOD curves (lower panel)
+
+`pointsize = 0` &mdash; point size for LOD curves (lower panel); 0 means no points
+
+`pointstroke = "black"` &mdash; stroke color for points in LOD curves (lower panel)
+
+`eff_pointcolor = NULL` &mdash; point color for effect plot (right panel)
+
+`eff_pointsize = 0` &mdash; point size for effect plot (right panel); 0 means no points
+
+`eff_pointstroke = "black"` &mdash; stroke color for points in effect plot (right panel)
+
 `nxticks = 5` &mdash; no. ticks in x-axis for effect plot (right panel), if quantitative scale
 
 `xticks = NULL` &mdash; tick positions in x-axis for effect plot (right panel), if quantitative scale

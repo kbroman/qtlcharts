@@ -25,6 +25,12 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
     eff_linecolor = chartOpts?.eff_linecolor ? null # line color for effect plot (right panel)
     linewidth = chartOpts?.linewidth ? 2 # line width for LOD curves (lower panel)
     eff_linewidth = chartOpts?.eff_linewidth ? 2 # width of line for effect plot (right panel)
+    pointcolor = chartOpts?.pointcolor ? "slateblue" # point color for LOD curves (lower panel)
+    pointsize = chartOpts?.pointsize ? 0 # point size for LOD curves (lower panel); 0 means no points
+    pointstroke = chartOpts?.pointstroke ? "black" # stroke color for points in LOD curves (lower panel)
+    eff_pointcolor = chartOpts?.eff_pointcolor ? null # point color for effect plot (right panel)
+    eff_pointsize = chartOpts?.eff_pointsize ? 0 # point size for effect plot (right panel); 0 means no points
+    eff_pointstroke = chartOpts?.eff_pointstroke ? "black" # stroke color for points in effect plot (right panel)
     nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis for effect plot (right panel), if quantitative scale
     xticks = chartOpts?.xticks ? null # tick positions in x-axis for effect plot (right panel), if quantitative scale
     lod_labels = chartOpts?.lod_labels ? null # optional vector of strings, for LOD column labels
@@ -97,10 +103,24 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                            .attr("fill", "none")
                            .attr("stroke-width", linewidth)
                            .style("pointer-events", "none")
+            if pointsize > 0
+                lodchart_curves.append("g").attr("id", "lodpoints")
+                               .selectAll("empty")
+                               .data(lod_data.posByChr[chr])
+                               .enter()
+                               .append("circle")
+                               .attr("cx", (d) -> mylodchart.xscale()[chr](d))
+                               .attr("cy", (d,i) ->
+                                   mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn])))
+                               .attr("r", pointsize)
+                               .attr("fill", pointcolor)
+                               .attr("stroke", pointstroke)
 
+    # dealing with the possibly multiple QTL effects (like add've and dominance)
     eff_ylim = eff_ylim ? matrixExtent(eff_data.map((d) -> matrixExtent(d.data)))
     eff_nlines = d3.max(eff_data.map((d) -> d.names.length))
     eff_linecolor = eff_linecolor ? selectGroupColors(eff_nlines, "dark")
+    eff_pointcolor = eff_pointcolor ? selectGroupColors(eff_nlines, "dark")
 
     mycurvechart = curvechart().height(htop-margin.top-margin.bottom)
                                .width(wright-margin.left-margin.right)
@@ -150,6 +170,18 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                                      mycurvechart.yscale()(z[z.length-1]))
                            .style("dominant-baseline", "middle")
                            .style("text-anchor", "start")
+            if eff_pointsize > 0
+                effchart_curves.append("g").attr("id", "eff_points")
+                               .selectAll("empty")
+                               .data(eff_data[posindex].x)
+                               .enter()
+                               .append("circle")
+                               .attr("cx", (d) -> mycurvechart.xscale()(d))
+                               .attr("cy", (d,i) ->
+                                   mycurvechart.yscale()(eff_data[posindex].data[curveindex][i]))
+                               .attr("r", eff_pointsize)
+                               .attr("fill", eff_pointcolor[curveindex])
+                               .attr("stroke", eff_pointstroke)
 
     # add X axis
     if times? # use quantitative axis

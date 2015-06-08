@@ -2,7 +2,7 @@
 var iplotMScanone_eff;
 
 iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
-  var axispos, chartdivid, chr, chrGap, colors, curindex, curvechart_xaxis, darkrect, eff_linecolor, eff_linewidth, eff_nlines, eff_ylab, eff_ylim, effchart_curves, effcurve, extra_digits, g_curvechart, g_heatmap, g_lodchart, hbot, height, htop, j, k, len, len1, lightrect, linecolor, linewidth, lod_labels, lod_ylab, lodchart_curves, lodcurve, margin, mycurvechart, mylodchart, mylodheatmap, nullcolor, nxticks, plotEffCurves, plotLodCurve, pos, posindex, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref3, ref4, ref5, ref6, ref7, ref8, ref9, svg, titlepos, width, wleft, wright, x, xscale, xticks, zlim, zthresh;
+  var axispos, chartdivid, chr, chrGap, colors, curindex, curvechart_xaxis, darkrect, eff_linecolor, eff_linewidth, eff_nlines, eff_pointcolor, eff_pointsize, eff_pointstroke, eff_ylab, eff_ylim, effchart_curves, effcurve, extra_digits, g_curvechart, g_heatmap, g_lodchart, hbot, height, htop, j, k, len, len1, lightrect, linecolor, linewidth, lod_labels, lod_ylab, lodchart_curves, lodcurve, margin, mycurvechart, mylodchart, mylodheatmap, nullcolor, nxticks, plotEffCurves, plotLodCurve, pointcolor, pointsize, pointstroke, pos, posindex, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref4, ref5, ref6, ref7, ref8, ref9, svg, titlepos, width, wleft, wright, x, xscale, xticks, zlim, zthresh;
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 700;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000;
   wleft = (ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? ref2 : width * 0.65;
@@ -35,10 +35,16 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
   eff_linecolor = (ref18 = chartOpts != null ? chartOpts.eff_linecolor : void 0) != null ? ref18 : null;
   linewidth = (ref19 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref19 : 2;
   eff_linewidth = (ref20 = chartOpts != null ? chartOpts.eff_linewidth : void 0) != null ? ref20 : 2;
-  nxticks = (ref21 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref21 : 5;
-  xticks = (ref22 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref22 : null;
-  lod_labels = (ref23 = chartOpts != null ? chartOpts.lod_labels : void 0) != null ? ref23 : null;
-  chartdivid = (ref24 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref24 : 'chart';
+  pointcolor = (ref21 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? ref21 : "slateblue";
+  pointsize = (ref22 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref22 : 0;
+  pointstroke = (ref23 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref23 : "black";
+  eff_pointcolor = (ref24 = chartOpts != null ? chartOpts.eff_pointcolor : void 0) != null ? ref24 : null;
+  eff_pointsize = (ref25 = chartOpts != null ? chartOpts.eff_pointsize : void 0) != null ? ref25 : 0;
+  eff_pointstroke = (ref26 = chartOpts != null ? chartOpts.eff_pointstroke : void 0) != null ? ref26 : "black";
+  nxticks = (ref27 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref27 : 5;
+  xticks = (ref28 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref28 : null;
+  lod_labels = (ref29 = chartOpts != null ? chartOpts.lod_labels : void 0) != null ? ref29 : null;
+  chartdivid = (ref30 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref30 : 'chart';
   wright = width - wleft;
   hbot = height - htop;
   if (lod_labels == null) {
@@ -66,13 +72,22 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
   };
   lodchart_curves = null;
   plotLodCurve = function(lodcolumn) {
-    var chr, j, len, ref25, results;
+    var chr, j, len, ref31, results;
     lodchart_curves = g_lodchart.append("g").attr("id", "lodcurves");
-    ref25 = lod_data.chrnames;
+    ref31 = lod_data.chrnames;
     results = [];
-    for (j = 0, len = ref25.length; j < len; j++) {
-      chr = ref25[j];
-      results.push(lodchart_curves.append("path").datum(lod_data.posByChr[chr]).attr("d", lodcurve(chr, lodcolumn)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none"));
+    for (j = 0, len = ref31.length; j < len; j++) {
+      chr = ref31[j];
+      lodchart_curves.append("path").datum(lod_data.posByChr[chr]).attr("d", lodcurve(chr, lodcolumn)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none");
+      if (pointsize > 0) {
+        results.push(lodchart_curves.append("g").attr("id", "lodpoints").selectAll("empty").data(lod_data.posByChr[chr]).enter().append("circle").attr("cx", function(d) {
+          return mylodchart.xscale()[chr](d);
+        }).attr("cy", function(d, i) {
+          return mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn]));
+        }).attr("r", pointsize).attr("fill", pointcolor).attr("stroke", pointstroke));
+      } else {
+        results.push(void 0);
+      }
     }
     return results;
   };
@@ -83,6 +98,7 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
     return d.names.length;
   }));
   eff_linecolor = eff_linecolor != null ? eff_linecolor : selectGroupColors(eff_nlines, "dark");
+  eff_pointcolor = eff_pointcolor != null ? eff_pointcolor : selectGroupColors(eff_nlines, "dark");
   mycurvechart = curvechart().height(htop - margin.top - margin.bottom).width(wright - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).xlab(lod_ylab).ylab(eff_ylab).strokecolor("none").rectcolor(lightrect).xlim([-0.5, lod_data.lodnames.length - 0.5]).ylim(eff_ylim).nxticks(0).commonX(true);
   g_curvechart = svg.append("g").attr("transform", "translate(" + wleft + ",0)").attr("id", "curvechart").datum(eff_data[0]).call(mycurvechart);
   effcurve = function(posindex, column) {
@@ -99,7 +115,7 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
     results = [];
     for (curveindex in eff_data[posindex].names) {
       effchart_curves.append("path").datum(eff_data[posindex].x).attr("d", effcurve(posindex, curveindex)).attr("fill", "none").attr("stroke", eff_linecolor[curveindex]).attr("stroke-width", eff_linewidth);
-      results.push(effchart_curves.selectAll("empty").data(eff_data[posindex].names).enter().append("text").text(function(d) {
+      effchart_curves.selectAll("empty").data(eff_data[posindex].names).enter().append("text").text(function(d) {
         return d;
       }).attr("x", function(d, i) {
         return margin.left + wright + axispos.ylabel;
@@ -107,7 +123,16 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
         var z;
         z = eff_data[posindex].data[i];
         return mycurvechart.yscale()(z[z.length - 1]);
-      }).style("dominant-baseline", "middle").style("text-anchor", "start"));
+      }).style("dominant-baseline", "middle").style("text-anchor", "start");
+      if (eff_pointsize > 0) {
+        results.push(effchart_curves.append("g").attr("id", "eff_points").selectAll("empty").data(eff_data[posindex].x).enter().append("circle").attr("cx", function(d) {
+          return mycurvechart.xscale()(d);
+        }).attr("cy", function(d, i) {
+          return mycurvechart.yscale()(eff_data[posindex].data[curveindex][i]);
+        }).attr("r", eff_pointsize).attr("fill", eff_pointcolor[curveindex]).attr("stroke", eff_pointstroke));
+      } else {
+        results.push(void 0);
+      }
     }
     return results;
   };
@@ -137,13 +162,13 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
   }
   posindex = {};
   curindex = 0;
-  ref25 = lod_data.chrnames;
-  for (j = 0, len = ref25.length; j < len; j++) {
-    chr = ref25[j];
+  ref31 = lod_data.chrnames;
+  for (j = 0, len = ref31.length; j < len; j++) {
+    chr = ref31[j];
     posindex[chr] = {};
-    ref26 = lod_data.posByChr[chr];
-    for (k = 0, len1 = ref26.length; k < len1; k++) {
-      pos = ref26[k];
+    ref32 = lod_data.posByChr[chr];
+    for (k = 0, len1 = ref32.length; k < len1; k++) {
+      pos = ref32[k];
       posindex[chr][pos] = curindex;
       curindex += 1;
     }

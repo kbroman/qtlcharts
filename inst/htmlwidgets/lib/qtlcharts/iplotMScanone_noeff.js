@@ -132,10 +132,10 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
       return xscale(d);
     }).attr("x2", function(d) {
       return xscale(d);
-    }).attr("y1", margin.top).attr("y2", margin.top + htop).attr("fill", "none").attr("stroke", "white").attr("stroke-width", 1).style("pointer-events", "none");
+    }).attr("y1", margin.top).attr("y2", htop - margin.bottom).attr("fill", "none").attr("stroke", "white").attr("stroke-width", 1).style("pointer-events", "none");
     curvechart_xaxis.selectAll("empty").data(xticks).enter().append("text").attr("x", function(d) {
       return xscale(d);
-    }).attr("y", margin.top + htop + axispos.xlabel).text(function(d) {
+    }).attr("y", htop - margin.bottom + axispos.xlabel).text(function(d) {
       return formatAxis(xticks)(d);
     });
   } else {
@@ -143,7 +143,7 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
       return "xaxis" + i;
     }).attr("x", function(d, i) {
       return mycurvechart.xscale()(i);
-    }).attr("y", margin.top + htop + axispos.xlabel).text(function(d) {
+    }).attr("y", htop - margin.bottom + axispos.xlabel).text(function(d) {
       return d;
     }).attr("opacity", 0);
   }

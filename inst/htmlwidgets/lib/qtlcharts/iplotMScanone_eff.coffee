@@ -164,7 +164,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                         .attr("x1", (d) -> xscale(d))
                         .attr("x2", (d) -> xscale(d))
                         .attr("y1", margin.top)
-                        .attr("y2", margin.top+htop)
+                        .attr("y2", htop-margin.bottom)
                         .attr("fill", "none")
                         .attr("stroke", "white")
                         .attr("stroke-width", 1)
@@ -174,7 +174,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                         .enter()
                         .append("text")
                         .attr("x", (d) -> xscale(d))
-                        .attr("y", margin.top+htop+axispos.xlabel)
+                        .attr("y", htop-margin.bottom+axispos.xlabel)
                         .text((d) -> formatAxis(xticks)(d))
     else # qualitative axis
         curvechart_xaxis = g_curvechart.select("g.x.axis")
@@ -185,7 +185,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                                        .attr("class", "y axis")
                                        .attr("id", (d,i) -> "xaxis#{i}")
                                        .attr("x", (d,i) -> mycurvechart.xscale()(i))
-                                       .attr("y", margin.top+htop+axispos.xlabel)
+                                       .attr("y", htop-margin.bottom+axispos.xlabel)
                                        .text((d) -> d)
                                        .attr("opacity", 0)
 

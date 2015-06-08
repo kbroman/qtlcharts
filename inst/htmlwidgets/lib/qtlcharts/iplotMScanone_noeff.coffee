@@ -21,6 +21,10 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     lod_ylab = chartOpts?.lod_ylab ? "" # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
     linecolor = chartOpts?.linecolor ? "darkslateblue" # color of lines
     linewidth = chartOpts?.linewidth ? 2 # width of lines
+    pointcolor = chartOpts?.pointcolor ? "slateblue" # color of points in at markers in LOD curves
+    pointsize = chartOpts?.pointsize ? 0 # size of points in LOD curves (default = 0 corresponding to no visible points at markers)
+    pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle for points at markers
+
     nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis on right-hand panel, if quantitative scale
     xticks = chartOpts?.xticks ? null # tick positions in x-axis on right-hand panel, if quantitative scale
     lod_labels = chartOpts?.lod_labels ? null # optional vector of strings, for LOD column labels
@@ -93,6 +97,18 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
                            .attr("fill", "none")
                            .attr("stroke-width", linewidth)
                            .style("pointer-events", "none")
+            if pointsize > 0
+                lodchart_curves.append("g").attr("id", "lodpoints")
+                               .selectAll("empty")
+                               .data(lod_data.posByChr[chr])
+                               .enter()
+                               .append("circle")
+                               .attr("cx", (d) -> mylodchart.xscale()[chr](d))
+                               .attr("cy", (d,i) ->
+                                   mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn])))
+                               .attr("r", pointsize)
+                               .attr("fill", pointcolor)
+                               .attr("stroke", pointstroke)
 
     # rearrange data for curves of time x LOD
     lod4curves = {data:[]}

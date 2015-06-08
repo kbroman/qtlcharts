@@ -501,6 +501,12 @@ customization options for each chart.
 
 `linewidth = 2` &mdash; width of lines
 
+`pointcolor = "slateblue"` &mdash; color of points in at markers in LOD curves
+
+`pointsize = 0` &mdash; size of points in LOD curves (default = 0 corresponding to no visible points at markers)
+
+`pointstroke = "black"` &mdash; color of outer circle for points at markers
+
 `nxticks = 5` &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale
 
 `xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale

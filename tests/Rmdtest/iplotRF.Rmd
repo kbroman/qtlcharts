@@ -16,7 +16,7 @@ data(grav)
 
 ### iplotRF
 
-```{r iplotRF}
+```{r iplotRF, fig.width=9, fig.height=9}
 gravsub <- pull.markers(grav, sample(markernames(grav), 50, replace=FALSE))
 gravsub <- est.rf(gravsub)
 iplotRF(gravsub)

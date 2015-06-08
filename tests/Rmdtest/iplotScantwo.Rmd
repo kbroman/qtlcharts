@@ -18,6 +18,6 @@ grav <- calc.genoprob(grav, step=5)
 out2 <- scantwo(grav, pheno.col=32, method="hk", verbose=FALSE)
 ```
 
-```{r iplotScantwo_eff}
+```{r iplotScantwo_eff, fig.height=9, fig.width=9}
 iplotScantwo(out2, grav, pheno.col=32)
 ```

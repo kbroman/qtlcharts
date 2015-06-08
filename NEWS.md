@@ -1,3 +1,12 @@
+# qtlcharts 0.5-13
+
+- `iplotMScanone` can plot just points (rather than curves) for the
+  LOD scores and QTL effects in the lower and right-hand panels.
+
+- Fix a bug in `iplotMScanone` (x-axis labels in right-hand plot
+  weren't being shown)
+
+
 # qtlcharts 0.5-10
 
 - Included [bower](http://bower.io) information, about the javascript

@@ -113,8 +113,6 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   }
   mycurvechart = curvechart().height(htop - margin.top - margin.bottom).width(wright - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).xlab(lod_ylab).ylab("LOD score").strokecolor("none").rectcolor(lightrect).xlim([-0.5, lod_data.lodnames.length - 0.5]).ylim([0, d3.max(mylodheatmap.zlim())]).nxticks(0).commonX(false);
   g_curvechart = svg.append("g").attr("transform", "translate(" + wleft + ",0)").attr("id", "curvechart").datum(lod4curves).call(mycurvechart);
-  console.log(mycurvechart.xscale());
-  console.log(mycurvechart.yscale());
   points_in_curvechart = null;
   plotPointsInCurvechart = function(pos_index) {
     return g_curvechart.append("g").attr("id", "pointsInCurveChart").selectAll("empty").data(lod4curves.data[pos_index]).enter().append("circle").attr("cx", function(d) {

@@ -137,8 +137,6 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
                       .datum(lod4curves)
                       .call(mycurvechart)
 
-    console.log(mycurvechart.xscale())
-    console.log(mycurvechart.yscale())
     points_in_curvechart = null
     plotPointsInCurvechart = (pos_index) ->
         g_curvechart.append("g").attr("id", "pointsInCurveChart")

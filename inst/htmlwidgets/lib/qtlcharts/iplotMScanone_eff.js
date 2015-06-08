@@ -99,6 +99,8 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
   }));
   eff_linecolor = eff_linecolor != null ? eff_linecolor : selectGroupColors(eff_nlines, "dark");
   eff_pointcolor = eff_pointcolor != null ? eff_pointcolor : selectGroupColors(eff_nlines, "dark");
+  eff_linecolor = forceAsArray(eff_linecolor);
+  eff_pointcolor = forceAsArray(eff_pointcolor);
   mycurvechart = curvechart().height(htop - margin.top - margin.bottom).width(wright - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).xlab(lod_ylab).ylab(eff_ylab).strokecolor("none").rectcolor(lightrect).xlim([-0.5, lod_data.lodnames.length - 0.5]).ylim(eff_ylim).nxticks(0).commonX(true);
   g_curvechart = svg.append("g").attr("transform", "translate(" + wleft + ",0)").attr("id", "curvechart").datum(eff_data[0]).call(mycurvechart);
   effcurve = function(posindex, column) {

@@ -121,6 +121,8 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
     eff_nlines = d3.max(eff_data.map((d) -> d.names.length))
     eff_linecolor = eff_linecolor ? selectGroupColors(eff_nlines, "dark")
     eff_pointcolor = eff_pointcolor ? selectGroupColors(eff_nlines, "dark")
+    eff_linecolor = forceAsArray(eff_linecolor) # force to be arrays
+    eff_pointcolor = forceAsArray(eff_pointcolor) # force to be an array
 
     mycurvechart = curvechart().height(htop-margin.top-margin.bottom)
                                .width(wright-margin.left-margin.right)

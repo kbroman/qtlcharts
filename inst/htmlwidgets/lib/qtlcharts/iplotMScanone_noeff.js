@@ -116,8 +116,8 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   console.log(mycurvechart.xscale());
   console.log(mycurvechart.yscale());
   points_in_curvechart = null;
-  plotPointsInCurvechart = function(lodindex) {
-    return g_curvechart.append("g").attr("id", "pointsInCurveChart").selectAll("empty").data(lod4curves.data[lodindex]).enter().append("circle").attr("cx", function(d) {
+  plotPointsInCurvechart = function(pos_index) {
+    return g_curvechart.append("g").attr("id", "pointsInCurveChart").selectAll("empty").data(lod4curves.data[pos_index]).enter().append("circle").attr("cx", function(d) {
       return mycurvechart.xscale()(d.x);
     }).attr("cy", function(d) {
       return mycurvechart.yscale()(d.y);
@@ -166,7 +166,9 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     plotLodCurve(d.lodindex);
     g_lodchart.select("g.title text").text("" + lod_labels[d.lodindex]);
     g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("stroke", linecolor);
-    plotPointsInCurvechart(d.lodindex);
+    if (pointsize > 0) {
+      plotPointsInCurvechart(posindex[d.chr][d.pos]);
+    }
     p = d3.format(".1f")(d.pos);
     g_curvechart.select("g.title text").text(d.chr + "@" + p);
     if (times == null) {
@@ -174,7 +176,9 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     }
   }).on("mouseout", function(d) {
     lodchart_curves.remove();
-    g_curvechart.select("g#pointsInCurveChart").remove();
+    if (pointsize > 0) {
+      g_curvechart.select("g#pointsInCurveChart").remove();
+    }
     g_lodchart.select("g.title text").text("");
     g_curvechart.selectAll("path.path" + posindex[d.chr][d.pos]).attr("stroke", null);
     g_curvechart.select("g.title text").text("");

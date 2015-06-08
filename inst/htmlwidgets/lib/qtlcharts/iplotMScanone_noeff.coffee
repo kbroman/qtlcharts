@@ -140,10 +140,10 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     console.log(mycurvechart.xscale())
     console.log(mycurvechart.yscale())
     points_in_curvechart = null
-    plotPointsInCurvechart = (lodindex) ->
+    plotPointsInCurvechart = (pos_index) ->
         g_curvechart.append("g").attr("id", "pointsInCurveChart")
                     .selectAll("empty")
-                    .data(lod4curves.data[lodindex])
+                    .data(lod4curves.data[pos_index])
                     .enter()
                     .append("circle")
                     .attr("cx", (d) -> mycurvechart.xscale()(d.x))
@@ -207,13 +207,13 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
                          plotLodCurve(d.lodindex)
                          g_lodchart.select("g.title text").text("#{lod_labels[d.lodindex]}")
                          g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}").attr("stroke", linecolor)
-                         plotPointsInCurvechart(d.lodindex)
+                         plotPointsInCurvechart(posindex[d.chr][d.pos]) if pointsize > 0
                          p = d3.format(".1f")(d.pos)
                          g_curvechart.select("g.title text").text("#{d.chr}@#{p}")
                          g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 1) unless times?
                 .on "mouseout", (d) ->
                          lodchart_curves.remove()
-                         g_curvechart.select("g#pointsInCurveChart").remove()
+                         g_curvechart.select("g#pointsInCurveChart").remove() if pointsize > 0
                          g_lodchart.select("g.title text").text("")
                          g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}").attr("stroke", null)
                          g_curvechart.select("g.title text").text("")

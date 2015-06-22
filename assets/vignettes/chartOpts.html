@@ -107,6 +107,16 @@
 <p><code>scattitle = &quot;&quot;</code> — title for scatterplot panel</p>
 <p><code>scatcolors = NULL</code> — vector of point colors for scatterplot</p>
 </div>
+<div id="iplotcorr-1" class="section level3">
+<h3><code>iplotCorr</code></h3>
+<p><code>height = 560</code> — height of each panel in pixels</p>
+<p><code>width = 1050</code> — total width of panels</p>
+<p><code>margin = list(left=70, top=40, right=5, bottom=70, inner=5)</code> — margins in pixels (left, top, right, bottom, inner)</p>
+<p><code>corcolors = c(&quot;darkslateblue&quot;, &quot;white&quot;, &quot;crimson&quot;)</code> — heat map colors (same length as <code>zlim</code>)</p>
+<p><code>zlim = c(-1, 0, 1)</code> — z-axis limits</p>
+<p><code>rectcolor = &quot;#E6E6E6&quot;</code> — color of background rectangle</p>
+<p><code>cortitle = &quot;&quot;</code> — title for heatmap panel</p>
+</div>
 <div id="iplotcurves" class="section level3">
 <h3><code>iplotCurves</code></h3>
 <p><code>height = 1000</code> — total height of chart in pixels</p>
@@ -291,8 +301,44 @@
 <p><code>lod_ylab = &quot;&quot;</code> — y-axis label for LOD heatmap (also used as x-axis label on effect plot)</p>
 <p><code>linecolor = &quot;darkslateblue&quot;</code> — color of lines</p>
 <p><code>linewidth = 2</code> — width of lines</p>
+<p><code>pointcolor = &quot;slateblue&quot;</code> — color of points in at markers in LOD curves</p>
+<p><code>pointsize = 0</code> — size of points in LOD curves (default = 0 corresponding to no visible points at markers)</p>
+<p><code>pointstroke = &quot;black&quot;</code> — color of outer circle for points at markers</p>
 <p><code>nxticks = 5</code> — no. ticks in x-axis on right-hand panel, if quantitative scale</p>
 <p><code>xticks = NULL</code> — tick positions in x-axis on right-hand panel, if quantitative scale</p>
+<p><code>lod_labels = NULL</code> — optional vector of strings, for LOD column labels</p>
+</div>
+<div id="iplotmscanone-with-effects" class="section level3">
+<h3><code>iplotMScanone</code> (with effects)</h3>
+<p><code>height = 700</code> — height of chart in pixels</p>
+<p><code>width = 1000</code> — width of chart in pixels</p>
+<p><code>wleft = width*0.65</code> — width of left panels in pixels</p>
+<p><code>htop = height/2</code> — height of top panels in pixels</p>
+<p><code>margin = list(left=60, top=40, right=40, bottom=40, inner=5)</code> — margins in pixels (left, top, right, bottom, inner)</p>
+<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)</p>
+<p><code>titlepos = 20</code> — position of chart title in pixels</p>
+<p><code>chrGap = 8</code> — gap between chromosomes in pixels</p>
+<p><code>darkrect = &quot;#C8C8C8&quot;</code> — color of darker background rectangle</p>
+<p><code>lightrect = &quot;#E6E6E6&quot;</code> — color of lighter background rectangle</p>
+<p><code>nullcolor = &quot;#E6E6E6&quot;</code> — color for pixels with null values</p>
+<p><code>colors = c(&quot;slateblue&quot;, &quot;white&quot;, &quot;crimson&quot;)</code> — heat map colors</p>
+<p><code>zlim = NULL</code> — z-axis limits</p>
+<p><code>zthresh = NULL</code> — lower z-axis threshold for display in heat map</p>
+<p><code>lod_ylab = &quot;&quot;</code> — y-axis label for LOD heatmap (also used as x-axis label on effect plot)</p>
+<p><code>eff_ylim = NULL</code> — y-axis limits for effect plot (right panel)</p>
+<p><code>eff_ylab = &quot;&quot;</code> — y-axis label for effect plot (right panel)</p>
+<p><code>linecolor = &quot;darkslateblue&quot;</code> — line color for LOD curves (lower panel)</p>
+<p><code>eff_linecolor = NULL</code> — line color for effect plot (right panel)</p>
+<p><code>linewidth = 2</code> — line width for LOD curves (lower panel)</p>
+<p><code>eff_linewidth = 2</code> — width of line for effect plot (right panel)</p>
+<p><code>pointcolor = &quot;slateblue&quot;</code> — point color for LOD curves (lower panel)</p>
+<p><code>pointsize = 0</code> — point size for LOD curves (lower panel); 0 means no points</p>
+<p><code>pointstroke = &quot;black&quot;</code> — stroke color for points in LOD curves (lower panel)</p>
+<p><code>eff_pointcolor = NULL</code> — point color for effect plot (right panel)</p>
+<p><code>eff_pointsize = 0</code> — point size for effect plot (right panel); 0 means no points</p>
+<p><code>eff_pointstroke = &quot;black&quot;</code> — stroke color for points in effect plot (right panel)</p>
+<p><code>nxticks = 5</code> — no. ticks in x-axis for effect plot (right panel), if quantitative scale</p>
+<p><code>xticks = NULL</code> — tick positions in x-axis for effect plot (right panel), if quantitative scale</p>
 <p><code>lod_labels = NULL</code> — optional vector of strings, for LOD column labels</p>
 </div>
 <div id="iplotrf" class="section level3">
@@ -339,33 +385,6 @@
 <p><code>pointsize = 3</code> — size of points in pixels</p>
 <p><code>pointstroke = &quot;black&quot;</code> — color of outer circle for points</p>
 <p><code>yNA = list(handle=true, force=false, width=15, gap=10)</code> — treatment of missing values (handle=T/F, force=T/F, width, gap)</p>
-</div>
-<div id="iplotmscanone-with-effects" class="section level3">
-<h3><code>iplotMScanone</code> (with effects)</h3>
-<p><code>height = 700</code> — height of chart in pixels</p>
-<p><code>width = 1000</code> — width of chart in pixels</p>
-<p><code>wleft = width*0.65</code> — width of left panels in pixels</p>
-<p><code>htop = height/2</code> — height of top panels in pixels</p>
-<p><code>margin = list(left=60, top=40, right=40, bottom=40, inner=5)</code> — margins in pixels (left, top, right, bottom, inner)</p>
-<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)</p>
-<p><code>titlepos = 20</code> — position of chart title in pixels</p>
-<p><code>chrGap = 8</code> — gap between chromosomes in pixels</p>
-<p><code>darkrect = &quot;#C8C8C8&quot;</code> — color of darker background rectangle</p>
-<p><code>lightrect = &quot;#E6E6E6&quot;</code> — color of lighter background rectangle</p>
-<p><code>nullcolor = &quot;#E6E6E6&quot;</code> — color for pixels with null values</p>
-<p><code>colors = c(&quot;slateblue&quot;, &quot;white&quot;, &quot;crimson&quot;)</code> — heat map colors</p>
-<p><code>zlim = NULL</code> — z-axis limits</p>
-<p><code>zthresh = NULL</code> — lower z-axis threshold for display in heat map</p>
-<p><code>lod_ylab = &quot;&quot;</code> — y-axis label for LOD heatmap (also used as x-axis label on effect plot)</p>
-<p><code>eff_ylim = NULL</code> — y-axis limits for effect plot (right panel)</p>
-<p><code>eff_ylab = &quot;&quot;</code> — y-axis label for effect plot (right panel)</p>
-<p><code>linecolor = &quot;darkslateblue&quot;</code> — line color for LOD curves (lower panel)</p>
-<p><code>eff_linecolor = NULL</code> — line color for effect plot (right panel)</p>
-<p><code>linewidth = 2</code> — line width for LOD curves (lower panel)</p>
-<p><code>eff_linewidth = 2</code> — width of line for effect plot (right panel)</p>
-<p><code>nxticks = 5</code> — no. ticks in x-axis for effect plot (right panel), if quantitative scale</p>
-<p><code>xticks = NULL</code> — tick positions in x-axis for effect plot (right panel), if quantitative scale</p>
-<p><code>lod_labels = NULL</code> — optional vector of strings, for LOD column labels</p>
 </div>
 <div id="iplotscantwo" class="section level3">
 <h3><code>iplotScantwo</code></h3>

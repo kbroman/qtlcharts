@@ -21,3 +21,4 @@ dependencies:
     version: 0.1.1
     script:
       - iplotCorr.js
+      - iplotCorr_noscat.js

@@ -1,3 +1,10 @@
+# qtlcharts 0.5-14
+
+- `iplotCorr` has argument `scatterplots` that, if controls whether
+  scatterplots will be shown when clicking on pixels in the heatmap.
+  (If `scatterplots=FALSE`, we skip the scatterplots.)
+
+
 # qtlcharts 0.5-13
 
 - `iplotMScanone` can plot just points (rather than curves) for the

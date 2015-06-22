@@ -155,6 +155,22 @@ customization options for each chart.
 
 `scatcolors = NULL` &mdash; vector of point colors for scatterplot
 
+### `iplotCorr`
+
+`height = 560` &mdash; height of each panel in pixels
+
+`width = 1050` &mdash; total width of panels
+
+`margin = list(left=70, top=40, right=5, bottom=70, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`corcolors = c("darkslateblue", "white", "crimson")` &mdash; heat map colors (same length as `zlim`)
+
+`zlim = c(-1, 0, 1)` &mdash; z-axis limits
+
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
+
+`cortitle = ""` &mdash; title for heatmap panel
+
 ### `iplotCurves`
 
 `height = 1000` &mdash; total height of chart in pixels
@@ -513,6 +529,68 @@ customization options for each chart.
 
 `lod_labels = NULL` &mdash; optional vector of strings, for LOD column labels
 
+### `iplotMScanone` (with effects)
+
+`height = 700` &mdash; height of chart in pixels
+
+`width = 1000` &mdash; width of chart in pixels
+
+`wleft = width*0.65` &mdash; width of left panels in pixels
+
+`htop = height/2` &mdash; height of top panels in pixels
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`chrGap = 8` &mdash; gap between chromosomes in pixels
+
+`darkrect = "#C8C8C8"` &mdash; color of darker background rectangle
+
+`lightrect = "#E6E6E6"` &mdash; color of lighter background rectangle
+
+`nullcolor = "#E6E6E6"` &mdash; color for pixels with null values
+
+`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
+
+`zlim = NULL` &mdash; z-axis limits
+
+`zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
+
+`lod_ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
+
+`eff_ylim = NULL` &mdash; y-axis limits for effect plot (right panel)
+
+`eff_ylab = ""` &mdash; y-axis label for effect plot (right panel)
+
+`linecolor = "darkslateblue"` &mdash; line color for LOD curves (lower panel)
+
+`eff_linecolor = NULL` &mdash; line color for effect plot (right panel)
+
+`linewidth = 2` &mdash; line width for LOD curves (lower panel)
+
+`eff_linewidth = 2` &mdash; width of line for effect plot (right panel)
+
+`pointcolor = "slateblue"` &mdash; point color for LOD curves (lower panel)
+
+`pointsize = 0` &mdash; point size for LOD curves (lower panel); 0 means no points
+
+`pointstroke = "black"` &mdash; stroke color for points in LOD curves (lower panel)
+
+`eff_pointcolor = NULL` &mdash; point color for effect plot (right panel)
+
+`eff_pointsize = 0` &mdash; point size for effect plot (right panel); 0 means no points
+
+`eff_pointstroke = "black"` &mdash; stroke color for points in effect plot (right panel)
+
+`nxticks = 5` &mdash; no. ticks in x-axis for effect plot (right panel), if quantitative scale
+
+`xticks = NULL` &mdash; tick positions in x-axis for effect plot (right panel), if quantitative scale
+
+`lod_labels = NULL` &mdash; optional vector of strings, for LOD column labels
+
 ### `iplotRF`
 
 `height = 1000` &mdash; total height of chart in pixels
@@ -594,68 +672,6 @@ customization options for each chart.
 `pointstroke = "black"` &mdash; color of outer circle for points
 
 `yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
-
-### `iplotMScanone` (with effects)
-
-`height = 700` &mdash; height of chart in pixels
-
-`width = 1000` &mdash; width of chart in pixels
-
-`wleft = width*0.65` &mdash; width of left panels in pixels
-
-`htop = height/2` &mdash; height of top panels in pixels
-
-`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`chrGap = 8` &mdash; gap between chromosomes in pixels
-
-`darkrect = "#C8C8C8"` &mdash; color of darker background rectangle
-
-`lightrect = "#E6E6E6"` &mdash; color of lighter background rectangle
-
-`nullcolor = "#E6E6E6"` &mdash; color for pixels with null values
-
-`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
-
-`zlim = NULL` &mdash; z-axis limits
-
-`zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
-
-`lod_ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
-
-`eff_ylim = NULL` &mdash; y-axis limits for effect plot (right panel)
-
-`eff_ylab = ""` &mdash; y-axis label for effect plot (right panel)
-
-`linecolor = "darkslateblue"` &mdash; line color for LOD curves (lower panel)
-
-`eff_linecolor = NULL` &mdash; line color for effect plot (right panel)
-
-`linewidth = 2` &mdash; line width for LOD curves (lower panel)
-
-`eff_linewidth = 2` &mdash; width of line for effect plot (right panel)
-
-`pointcolor = "slateblue"` &mdash; point color for LOD curves (lower panel)
-
-`pointsize = 0` &mdash; point size for LOD curves (lower panel); 0 means no points
-
-`pointstroke = "black"` &mdash; stroke color for points in LOD curves (lower panel)
-
-`eff_pointcolor = NULL` &mdash; point color for effect plot (right panel)
-
-`eff_pointsize = 0` &mdash; point size for effect plot (right panel); 0 means no points
-
-`eff_pointstroke = "black"` &mdash; stroke color for points in effect plot (right panel)
-
-`nxticks = 5` &mdash; no. ticks in x-axis for effect plot (right panel), if quantitative scale
-
-`xticks = NULL` &mdash; tick positions in x-axis for effect plot (right panel), if quantitative scale
-
-`lod_labels = NULL` &mdash; optional vector of strings, for LOD column labels
 
 ### `iplotScantwo`
 

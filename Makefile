@@ -21,7 +21,8 @@ doc:
 # javascript for the chart functions
 JSCHARTS = ${CHART_DIR}/iplotScanone_noeff.js ${CHART_DIR}/iplotScanone_pxg.js \
 		   ${CHART_DIR}/iplotScanone_ci.js ${CHART_DIR}/iplotPXG.js \
-		   ${CHART_DIR}/iplotCorr.js ${CHART_DIR}/iboxplot.js \
+		   ${CHART_DIR}/iplotCorr.js ${CHART_DIR}/iplotCorr_noscat.js \
+		   ${CHART_DIR}/iboxplot.js \
 		   ${CHART_DIR}/iplotCurves.js ${CHART_DIR}/iplotMap.js \
 		   ${CHART_DIR}/iplotRF.js ${CHART_DIR}/iplotMScanone_noeff.js \
 		   ${CHART_DIR}/iplotMScanone_eff.js ${CHART_DIR}/iheatmap.js \

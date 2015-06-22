@@ -16,6 +16,8 @@
 #'   clustering. Ignored if \code{corr} is provided as a subset of the
 #'   overall correlation matrix
 #' @param corr Correlation matrix (optional).
+#' @param scatterplots If \code{FALSE}, don't have the heat map be
+#'   linked to scatterplots.
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
@@ -47,7 +49,7 @@
 #' @export
 iplotCorr <-
 function(mat, group, rows, cols, reorder=FALSE, corr=stats::cor(mat, use="pairwise.complete.obs"),
-         chartOpts=NULL)
+         scatterplots=TRUE, chartOpts=NULL)
 {
     if(missing(group) || is.null(group)) group <- rep(1, nrow(mat))
     if(is.data.frame(mat)) mat <- as.matrix(mat)
@@ -81,7 +83,8 @@ function(mat, group, rows, cols, reorder=FALSE, corr=stats::cor(mat, use="pairwi
         corr_was_presubset <- FALSE
     }
 
-    data_list <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset)
+    data_list <- convert4iplotcorr(mat, group, rows, cols, reorder, corr, corr_was_presubset,
+                                   scatterplots)
 
     defaultAspect <- 2 # width/height
     browsersize <- getPlotSize(defaultAspect)

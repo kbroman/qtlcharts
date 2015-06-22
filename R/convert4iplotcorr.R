@@ -10,6 +10,8 @@
 # @param reorder If TRUE, reorder the variables by clustering
 # @param corr Correlation matrix
 # @param corr_was_presubset: If TRUE, no need to subset with selected rows and columns
+# @param scatterplots If FALSE, we won't be showing the scatterplots
+#   so we don't need to include all of the data.
 #
 # @return Character string with the input data in JSON format
 #
@@ -22,7 +24,8 @@
 #                                       rows=1:ncol(geneExpr$expr), cols=1:ncol(geneExpr$expr),
 #                                       corr=cor(geneExpr$expr, use="pair"))
 convert4iplotcorr <-
-function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE)
+    function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE,
+             scatterplots=TRUE)
 {
     indID <- rownames(dat)
     if(is.null(indID)) indID <- paste(1:nrow(dat))
@@ -68,11 +71,21 @@ function(dat, group, rows, cols, reorder=FALSE, corr, corr_was_presubset=FALSE)
     dimnames(corr) <- dimnames(dat) <- NULL
     names(group) <- NULL
 
-    output <- list(indID = indID,
-                   var = variables,
-                   corr = corr,
-                   rows = rows-1,
-                   cols = cols-1,
-                   dat =  t(dat), # columns as rows
-                   group = group)
+    if(scatterplots)
+      output <- list(indID = indID,
+                     var = variables,
+                     corr = corr,
+                     rows = rows-1,
+                     cols = cols-1,
+                     dat =  t(dat), # columns as rows
+                     group = group,
+                     scatterplots=scatterplots)
+    else
+      output <- list(indID = indID,
+                     var = variables,
+                     corr = corr,
+                     rows = rows-1,
+                     cols = cols-1,
+                     scatterplots=scatterplots)
+    output
 }

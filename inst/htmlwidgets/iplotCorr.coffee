@@ -23,7 +23,10 @@ HTMLWidgets.widget({
         svg.attr("width", chartOpts.width)
         svg.attr("height", chartOpts.height)
 
-        iplotCorr(widgetdiv, x.data, chartOpts)
+        if x.data.scatterplots
+            iplotCorr(widgetdiv, x.data, chartOpts)
+        else
+            iplotCorr_noscat(widgetdiv, x.data, chartOpts)
 
     resize: (widgetdiv, width, height) ->
         d3.select(widgetdiv).select("svg")

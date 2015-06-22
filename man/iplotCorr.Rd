@@ -5,7 +5,7 @@
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
 iplotCorr(mat, group, rows, cols, reorder = FALSE, corr = stats::cor(mat,
-  use = "pairwise.complete.obs"), chartOpts = NULL)
+  use = "pairwise.complete.obs"), scatterplots = TRUE, chartOpts = NULL)
 }
 \arguments{
 \item{mat}{Data matrix (individuals x variables)}
@@ -23,6 +23,9 @@ clustering. Ignored if \code{corr} is provided as a subset of the
 overall correlation matrix}
 
 \item{corr}{Correlation matrix (optional).}
+
+\item{scatterplots}{If \code{FALSE}, don't have the heat map be
+linked to scatterplots.}
 
 \item{chartOpts}{A list of options for configuring the chart (see
   the coffeescript code). Each element must be named using the

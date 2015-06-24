@@ -3,11 +3,9 @@
 \.Rhistory$
 \.Rprofile$
 ^ReadMe\.md$
+^NEWS\.md$
 ^Makefile$
-^notes\.txt$
-^License\.txt$
 inst/ToDo.html
 vignettes/chartOpt_vignette
 ^\.travis\.yml$
-NEWS.md
 bower

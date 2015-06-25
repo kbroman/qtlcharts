@@ -83,10 +83,12 @@ ${LIB_DIR}/jquery-ui/jquery-ui.min.js: ${BOWER_DIR}/jquery-ui/jquery-ui.min.js
 
 # d3-tip
 d3-tip: ${LIB_DIR}/d3-tip/bower.json \
-		${LIB_DIR}/d3-tip/index.js \
-		${LIB_DIR}/d3-tip/LICENSE
+		${LIB_DIR}/d3-tip/LICENSE \
+		${LIB_DIR}/d3-tip/index-min.js
 ${LIB_DIR}/d3-tip/%: ${BOWER_DIR}/d3-tip/%
 	cp $< $@
+${LIB_DIR}/d3-tip/index-min.js: ${BOWER_DIR}/d3-tip/index.js
+	uglifyjs $< -o $@
 
 # d3panels
 d3panels: ${LIB_DIR}/d3panels/d3panels.min.js \

@@ -22,3 +22,9 @@ everything that bower pulls down as part of the package.
 - To update the packages
 
       bower update
+
+For the d3-tip library, I use
+[UglifyJs](https://github.com/mishoo/UglifyJS2) to make it smaller.
+You can install UglifyJs with npm (as with bower):
+
+    npm install -g uglify-js

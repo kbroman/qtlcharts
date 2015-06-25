@@ -14,7 +14,7 @@ dependencies:
     src: htmlwidgets/lib/d3-tip
     version: 0.6.7
     script:
-      - index.js
+      - index-min.js
   - name: d3panels
     src: htmlwidgets/lib/d3panels
     version: 0.5.3

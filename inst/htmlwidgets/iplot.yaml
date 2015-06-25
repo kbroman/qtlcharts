@@ -12,13 +12,12 @@ dependencies:
     style: colorbrewer.css
   - name: d3-tip
     src: htmlwidgets/lib/d3-tip
-    version: 0.6.6
+    version: 0.6.7
     script:
-      - d3-tip.min.js
-    style: d3-tip.min.css
+      - index.js
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 0.5.2
+    version: 0.5.3
     script:
       - d3panels.min.js
     style: d3panels.min.css

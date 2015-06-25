@@ -83,8 +83,7 @@ ${LIB_DIR}/jquery-ui/jquery-ui.min.js: ${BOWER_DIR}/jquery-ui/jquery-ui.min.js
 
 # d3-tip
 d3-tip: ${LIB_DIR}/d3-tip/bower.json \
-		${LIB_DIR}/d3-tip/d3-tip.min.css \
-		${LIB_DIR}/d3-tip/d3-tip.min.js \
+		${LIB_DIR}/d3-tip/index.js \
 		${LIB_DIR}/d3-tip/LICENSE
 ${LIB_DIR}/d3-tip/%: ${BOWER_DIR}/d3-tip/%
 	cp $< $@

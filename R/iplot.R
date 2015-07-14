@@ -37,6 +37,7 @@ function(x, y, group, indID, chartOpts=NULL)
         group <- rep(1, length(x))
     else if(length(group) != length(x))
         stop("length(group) != length(x)")
+    group <- group2numeric(group) # convert to numeric
     if(missing(indID) || is.null(indID))
         indID <- as.character(seq(along=x))
     else if(length(indID) != length(x))

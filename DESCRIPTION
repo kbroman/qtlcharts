@@ -1,6 +1,6 @@
 Package: qtlcharts
-Version: 0.5-15
-Date: 2015-06-24
+Version: 0.5-16
+Date: 2015-07-14
 Title: Interactive graphics for QTL experiments
 Author: Karl W Broman <kbroman@biostat.wisc.edu>
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>

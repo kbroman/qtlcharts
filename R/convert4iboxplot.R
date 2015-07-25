@@ -29,7 +29,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE,
         rownames(dat) <- paste0(1:nrow(dat))
 
     if(orderByMedian)
-        dat <- dat[order(apply(dat, 1, median, na.rm=TRUE)),,drop=FALSE]
+        dat <- dat[order(apply(dat, 1, stats::median, na.rm=TRUE)),,drop=FALSE]
 
     # check quantiles
     if(any(qu <= 0)) {

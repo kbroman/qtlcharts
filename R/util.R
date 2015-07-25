@@ -115,5 +115,5 @@ function(vec, tol=1e-5)
         return(FALSE)
     }
 
-    return(sd(d)/abs(median(d)) < tol) # if TRUE, looks equally spaced
+    return(stats::sd(d)/abs(stats::median(d)) < tol) # if TRUE, looks equally spaced
 }

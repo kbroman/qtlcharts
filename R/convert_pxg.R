@@ -29,7 +29,7 @@ function(cross, pheno.col=1, fillgenoArgs=NULL)
 
     phe <- qtl::pull.pheno(cross, pheno.col)
     if(!is.numeric(phe))
-        stop("phenotype ", pheno.col, " is not numeric: ", paste(head(phe), collapse=" "))
+        stop("phenotype ", pheno.col, " is not numeric: ", paste(utils::head(phe), collapse=" "))
 
     # marker names
     markers <- qtl::markernames(cross)

@@ -85,7 +85,7 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         means = []
         se = []
         for j in [1..genonames.length]
-            phesub = (p for p,i in pxg_data.pheno when gabs[i] == j)
+            phesub = (p for p,i in pxg_data.pheno when gabs[i] == j and p?)
 
             if phesub.length>0
                 ave = (phesub.reduce (a,b) -> a+b)/phesub.length

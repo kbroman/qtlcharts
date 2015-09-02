@@ -1,3 +1,9 @@
+# qtlcharts 0.5-18
+
+- Fixed a bug in `iplotScanone` with `pxgtype="ci"`. In the case of
+  phenotypes with missing values, the confidence intervals were
+  incorrect.
+
 # qtlcharts 0.5-14
 
 - `iplotCorr` has argument `scatterplots` that, if controls whether

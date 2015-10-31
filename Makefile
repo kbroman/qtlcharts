@@ -1,6 +1,5 @@
-all: jscharts jswidgets json doc inst/ToDo.html vignettes/chartOpts.Rmd libs
-.PHONY: all jscharts json doc clean libs d3, jquery, jqueryui, colorbrewer
-
+all: jscharts jswidgets json doc inst/ToDo.html vignettes/chartOpts.Rmd libs longname vignettes
+.PHONY: all jscharts json doc clean libs d3, jquery, jqueryui, colorbrewer longname vignettes
 
 PANEL_DIR = inst/htmlwidgets/lib/d3panels
 CHART_DIR = inst/htmlwidgets/lib/qtlcharts
@@ -110,7 +109,34 @@ vignettes/chartOpts.Rmd: vignettes/chartOpts/grab_chartOpts.rb \
 	$<
 
 #------------------------------------------------------------
+# build all of the vignettes
+
+VIGNETTES = inst/doc/Rmarkdown.html \
+			inst/doc/chartOpts.html \
+			inst/doc/develGuide.html \
+			inst/doc/userGuide.html
+vignettes: $(VIGNETTES)
+
+inst/doc/%.Rmd: vignettes/%.Rmd
+	cp $< $@
+
+inst/doc/%.html: vignettes/%.Rmd
+	cp $< $(@D)
+	cd $(@D);R -e "knitr::purl('$(<F)')"
+	cd $(<D);R -e "rmarkdown::render('$(<F)')"
+	mv $(<D)/$(@F) $(@D)
+
+#------------------------------------------------------------
 
 # remove all data files and javascript files
 clean:
 	rm ${PANEL_DIR}/*.js ${CHART_DIR}/*.js
+
+#------------------------------------------------------------
+
+# deal with a jquery-ui file with a really long name
+# (by just renaming it, though I think then this won't work)
+
+longname: inst/htmlwidgets/lib/jquery-ui/themes/smoothness/images/ui-longname.png
+inst/htmlwidgets/lib/jquery-ui/themes/smoothness/images/ui-longname.png:
+	cd $(@D);mv ui-bg_highlight-soft_75_cccccc_1x100.png $(@F)

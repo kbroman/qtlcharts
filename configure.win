@@ -1,0 +1,8 @@
+# one of the jquery-ui files is too long for tar
+# but it needs to be that particular name
+#
+# so its name is modified in the tar.gz file
+# and then changed back with this configure script
+
+cd inst/htmlwidgets/lib/jquery-ui/themes/smoothness/images/
+cp ui-longname.png ui-bg_highlight-soft_75_cccccc_1x100.png

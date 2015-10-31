@@ -1,7 +1,7 @@
 dependencies:
   - name: d3
     src: htmlwidgets/lib/d3
-    version: 3.5.5
+    version: 3.5.6
     script:
       - d3.min.js
   - name: colorbrewer

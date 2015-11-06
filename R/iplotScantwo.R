@@ -290,6 +290,7 @@ cross4iplotScantwo <-
     # individual IDs
     indID <- qtl::getid(cross)
     if(is.null(indID)) indID <- 1:qtl::nind(cross)
+    indID <- as.character(indID)
 
     list(geno=geno, chr=as.list(chr), genonames=genonames, pheno=pheno, indID=indID)
 }

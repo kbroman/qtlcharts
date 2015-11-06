@@ -28,7 +28,8 @@ convert4iplotcorr <-
              scatterplots=TRUE)
 {
     indID <- rownames(dat)
-    if(is.null(indID)) indID <- paste(1:nrow(dat))
+    if(is.null(indID)) indID <- 1:nrow(dat)
+    indID <- as.character(indID)
 
     variables <- colnames(dat)
     if(is.null(variables)) variable <- paste0("var", 1:ncol(dat))

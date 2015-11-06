@@ -23,7 +23,7 @@ Suggests:
     roxygen2,
     rmarkdown,
     testthat
-License: MIT + file LICENSE
+License: BSD_3_clause + file LICENSE
 URL: http://kbroman.org/qtlcharts
 VignetteBuilder: knitr
 BuildVignettes: no

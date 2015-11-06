@@ -32,10 +32,12 @@ function(group, y, indID, chartOpts=NULL)
 {
     stopifnot(length(group) == length(y))
     if(missing(indID) || is.null(indID))
-        indID <- seq(along=group)
+        indID <- get_indID(length(group), names(group), names(y))
     stopifnot(length(indID) == length(group))
+    indID <- as.character(indID)
     group_levels <- sort(unique(group))
     group <- group2numeric(group)
+    names(y) <- NULL # strip off the names
 
     chartOpts <- add2chartOpts(chartOpts, ylab="y", title="", xlab="group")
 

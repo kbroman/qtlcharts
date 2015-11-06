@@ -117,3 +117,38 @@ function(vec, tol=1e-5)
 
     return(stats::sd(d)/abs(stats::median(d)) < tol) # if TRUE, looks equally spaced
 }
+
+# check that sets of individual IDs are all the same
+# and then return them
+# argument n = expected length
+get_indID <-
+    function(n, ...)
+{
+    ids <- list(...)
+
+    # get rid of NULLs
+    nulls <- vapply(ids, is.null, TRUE)
+    if(sum(!nulls)==0)
+        return(as.character(1:n))
+    ids <- ids[!nulls]
+
+    # there's just one
+    if(length(ids)==1)
+        ids <- ids[[1]]
+    else {
+        flag_incompat <- FALSE
+        for(i in 2:length(ids)) {
+            if(length(ids[[2]]) != length(ids[[1]]) ||
+               any(ids[[2]] != ids[[1]]))
+                flag_incompat <- TRUE
+        }
+        if(flag_incompat)
+            warning("Incompatibilities among possible individual IDs")
+        ids <- ids[[1]]
+    }
+
+    if(length(ids) != n)
+        warning("Number of ids (", length(ids), ") != expected length (", n, ")")
+
+    ids
+}

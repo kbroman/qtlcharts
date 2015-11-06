@@ -2,7 +2,7 @@
 title: R/qtlcharts Developer Guide
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{R/qtlcharts User Guide}
+  %\VignetteIndexEntry{R/qtlcharts Developer Guide}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8](inputenc)
 ---

@@ -2,7 +2,7 @@
 title: List of chart customization options
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{R/qtlcharts User Guide}
+  %\VignetteIndexEntry{List of chart customization options}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8](inputenc)
 ---

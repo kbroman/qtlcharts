@@ -1,4 +1,4 @@
-all: jscharts jswidgets json doc inst/ToDo.html vignettes/chartOpts.Rmd libs longname vignettes
+all: jscharts jswidgets json doc inst/ToDo.html vignettes/chartOpts.Rmd libs longname vignettes build/vignette.rds
 .PHONY: all jscharts json doc clean libs d3, jquery, jqueryui, colorbrewer longname vignettes
 
 PANEL_DIR = inst/htmlwidgets/lib/d3panels
@@ -125,6 +125,9 @@ inst/doc/%.html: vignettes/%.Rmd
 	cd $(@D);R -e "knitr::purl('$(<F)')"
 	cd $(<D);R -e "rmarkdown::render('$(<F)')"
 	mv $(<D)/$(@F) $(@D)
+
+build/vignette.rds: vignettes/make_vignette_index.R $(VIGNETTES)
+	cd $(<D);R -e "source('$(<F)')"
 
 #------------------------------------------------------------
 

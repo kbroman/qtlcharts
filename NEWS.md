@@ -1,4 +1,4 @@
-# qtlcharts 0.5-22
+# qtlcharts 0.5-23
 
 - Changed license and author list in order to post the package on
   CRAN, http://cran.r-project.org

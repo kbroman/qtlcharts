@@ -8,7 +8,7 @@ n <- length(Rmdfiles)
 vignettes <- data.frame(File=Rmdfiles,
                         Title=rep("", n),
                         PDF=sub("\\.Rmd", ".html", Rmdfiles),
-                        R=sub("\\.Rmd", ".html", Rmdfiles),
+                        R=sub("\\.Rmd", ".R", Rmdfiles),
                         Depends=rep("", n),
                         Keywords=rep("", n),
                         stringsAsFactors=FALSE)

@@ -1,8 +1,18 @@
 Package: qtlcharts
-Version: 0.5-21
-Date: 2015-11-06
+Version: 0.5-22
+Date: 2015-11-07
 Title: Interactive Graphics for QTL Experiments
-Author: Karl W Broman <kbroman@biostat.wisc.edu>
+Author: Karl W Broman [aut, cre],
+  Michael Bostock [ctb, cph] (d3.js library in htmlwidgets/lib, http://d3js.org),
+  Justin Palmer [ctb, cph] (d3.tip library in htmlwidgets/lib, https://github.com/caged/d3-tip),
+  Cynthia Brewer [cph] (ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org),
+  Mark Harrower [cph] (ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org),
+  The Pennsylvania State University [cph] (ColorBrewer library in htmlwidgets/lib,
+    http://colorbrewer2.org),
+  jQuery Foundation [cph] (jQuery library in htmlwidgets/lib, http://jquery.com),
+  jQuery contributors [ctb] (jQuery library in htmlwidgets/lib; see
+    https://github.com/jquery/jquery/blob/master/AUTHORS.txt),
+  jQuery UI contributors [ctb] (jQuery UI library in htmlwidgets/lib; see http://jqueryui.com/about)
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 Description: Web-based interactive charts (using D3.js) for the analysis of
     experimental crosses to identify genetic loci (quantitative trait
@@ -23,10 +33,28 @@ Suggests:
     roxygen2,
     rmarkdown,
     testthat
-License: BSD_3_clause + file LICENSE
+License: GPL-3 | file LICENSE
 URL: http://kbroman.org/qtlcharts
 VignetteBuilder: knitr
 BuildVignettes: no
 Roxygen: list(wrap=FALSE)
 LazyData: true
 RoxygenNote: 5.0.0
+Authors@R: c(
+    person("Karl W", "Broman", role=c("aut", "cre"), email="kbroman@biostat.wisc.edu"),
+    person("Michael", "Bostock", role=c("ctb", "cph"),
+           comment="d3.js library in htmlwidgets/lib, http://d3js.org"),
+    person("Justin", "Palmer", role=c("ctb", "cph"),
+           comment="d3.tip library in htmlwidgets/lib, https://github.com/caged/d3-tip"),
+    person("Cynthia", "Brewer", role="cph",
+           comment="ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org"),
+    person("Mark", "Harrower", role="cph",
+           comment="ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org"),
+    person(family="The Pennsylvania State University", role="cph",
+           comment="ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org"),
+    person(family="jQuery Foundation", role="cph",
+           comment="jQuery library in htmlwidgets/lib, http://jquery.com"),
+    person(family = "jQuery contributors", role = "ctb",
+           comment = "jQuery library in htmlwidgets/lib; see https://github.com/jquery/jquery/blob/master/AUTHORS.txt"),
+    person(family = "jQuery UI contributors", role = "ctb",
+           comment = "jQuery UI library in htmlwidgets/lib; see http://jqueryui.com/about"))

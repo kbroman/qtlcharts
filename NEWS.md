@@ -1,3 +1,11 @@
+# qtlcharts 0.5-22
+
+- Changed license and author list in order to post the package on
+  CRAN, http://cran.r-project.org
+
+- `idotplot` and `iplot` now use the names of the input data as
+  individual IDs if `indID` is missing or `NULL`.
+
 # qtlcharts 0.5-18
 
 - Fixed a bug in `iplotScanone` with `pxgtype="ci"`. In the case of

@@ -1,5 +1,4 @@
-library(qtlcharts)
-if(not_on_cran()) {
+if(identical(Sys.getenv("NOT_CRAN"), "true")) {
 
     files <- list.files("Rmdtest", pattern="\\.Rmd$")
     for(file in files)

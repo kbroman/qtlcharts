@@ -1,5 +1,4 @@
-library(qtlcharts)
-if(not_on_cran()) {
+if(identical(Sys.getenv("NOT_CRAN"), "true")) {
 
     # move to htmltest subdirectory
     initialwd <- getwd()

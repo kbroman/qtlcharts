@@ -152,12 +152,3 @@ get_indID <-
 
     ids
 }
-
-# to determine if not on CRAN so go ahead with tests
-not_on_cran <-
-    function()
-{
-    if (identical(Sys.getenv("NOT_CRAN"), "true"))
-        return(TRUE)
-    FALSE
-}

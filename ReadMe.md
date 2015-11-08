@@ -15,7 +15,13 @@ For example charts, see the [R/qtlcharts website](http://kbroman.org/qtlcharts).
 
 #### Installation
 
-Install R/qtlcharts from its
+Install R/qtlcharts from CRAN using
+
+```r
+install.packages("qtlcharts")
+```
+
+Alternatively, install it from its
 [GitHub repository](https://github.com/kbroman/qtlcharts). You first need to
 install the [R/qtl](http://www.rqtl.org),
 [htmlwidgets](http://htmlwidgets.org),
@@ -26,12 +32,11 @@ install.packages(c("qtl", "htmlwidgets", "devtools"))
 ```
 
 Then install R/qtlcharts using the `install_github` function in the
-[devtools](https://github.com/hadley/devtools) package. (With
-`build_vignettes=TRUE`, the vignettes will be built and installed.)
+[devtools](https://github.com/hadley/devtools) package.
 
 ```r
 library(devtools)
-install_github("kbroman/qtlcharts", build_vignettes=TRUE)
+install_github("kbroman/qtlcharts")
 ```
 
 #### Example use

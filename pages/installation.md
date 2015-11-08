@@ -10,7 +10,11 @@ R. We also recommend the use of [RStudio](http://www.rstudio.com/),
 which provides a very nice
 [user interface for R](http://www.rstudio.com/products/rstudio/download/).
 
-Install R/qtlcharts from its
+Install R/qtlcharts from CRAN using
+
+    install.packages("qtlcharts")
+
+Alternatively, install it from its
 [GitHub repository](https://github.com/kbroman/qtlcharts). You first need to
 install the [R/qtl](http://www.rqtl.org),
 [htmlwidgets](http://www.htmlwidgets.org/)
@@ -19,8 +23,7 @@ and [devtools](https://github.com/hadley/devtools) packages.
     install.packages(c("qtl", "htmlwidgets", "devtools"))
 
 Then install R/qtlcharts using the `install_github` function in the
-[devtools](https://github.com/hadley/devtools) package.  (With
-`build_vignettes=TRUE`, the vignettes will be built and installed.)
+[devtools](https://github.com/hadley/devtools) package.
 
     library(devtools)
-    install_github("kbroman/qtlcharts", build_vignettes=TRUE)
+    install_github("kbroman/qtlcharts")

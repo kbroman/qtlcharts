@@ -1,6 +1,7 @@
 ### R/qtlcharts: Interactive graphics for QTL experiments
 
 [![Build Status](https://travis-ci.org/kbroman/qtlcharts.svg?branch=master)](https://travis-ci.org/kbroman/qtlcharts)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/qtlcharts)](http://cran.r-project.org/package=qtlcharts)
 
 [Karl W Broman](http://kbroman.org)
 

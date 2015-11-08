@@ -1,4 +1,5 @@
-if(!testthat::skip_on_cran()) {
+library(qtlcharts)
+if(not_on_cran()) {
 
     # move to htmltest subdirectory
     initialwd <- getwd()

@@ -15,3 +15,5 @@ before_script:
   - rm ${PKG_TARBALL}
   - echo "Session info:"
   - Rscript -e "library(${PKG_NAME});devtools::session_info('${PKG_NAME}')"
+
+env: NOT_CRAN=true

@@ -1,3 +1,8 @@
+# qtlcharts 0.5-25
+
+- Skip Rmd and html tests run on CRAN (so faster, and because the Rmd
+  tests won't work on Solaris as they need pandoc).
+
 # qtlcharts 0.5-23
 
 - Changed license and author list in order to post the package on

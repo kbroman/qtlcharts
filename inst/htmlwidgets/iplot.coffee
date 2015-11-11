@@ -15,6 +15,7 @@ HTMLWidgets.widget({
     renderValue: (widgetdiv, x) ->
 
         svg = d3.select(widgetdiv).select("svg")
+        svg.selectAll("*").remove() # clear svg
 
         chartOpts = x.chartOpts ? [ ]
         chartOpts.width = chartOpts?.width ? svg.attr("width")

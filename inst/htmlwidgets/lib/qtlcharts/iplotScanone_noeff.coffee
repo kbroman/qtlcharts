@@ -26,6 +26,7 @@ iplotScanone_noeff = (widgetdiv, data, chartOpts) ->
     rotate_ylab = chartOpts?.rotate_ylab ? chartOpts?.lod_rotate_ylab ? null # indicates whether to rotate the y-axis label 90 degrees
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
+    widgetdivid = d3.select(widgetdiv).attr('id')
 
     halfh = (height+margin.top+margin.bottom)
     totalh = halfh*2
@@ -52,6 +53,7 @@ iplotScanone_noeff = (widgetdiv, data, chartOpts) ->
                            .xlab(xlab)
                            .ylab(ylab)
                            .rotate_ylab(rotate_ylab)
+                           .tipclass(widgetdivid)
 
     d3.select(widgetdiv).select("svg")
       .datum(data)

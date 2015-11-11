@@ -32,6 +32,7 @@ iheatmap = (widgetdiv, data, chartOpts) ->
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors (same length as `zlim`)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
+    widgetdivid = d3.select(widgetdiv).attr('id')
 
     hbot = height - htop
     wright = width - wleft
@@ -69,6 +70,7 @@ iheatmap = (widgetdiv, data, chartOpts) ->
                          .zthresh(zthresh)
                          .colors(colors)
                          .nullcolor(nullcolor)
+                         .tipclass(widgetdivid)
 
     horslice = curvechart().width(wleft-margin.left-margin.right)
                            .height(hbot-margin.top-margin.bottom)
@@ -86,6 +88,7 @@ iheatmap = (widgetdiv, data, chartOpts) ->
                            .ylab(zlab)
                            .strokecolor("")
                            .commonX(true)
+                           .tipclass(widgetdivid)
 
     verslice = curvechart().width(wright-margin.left-margin.right)
                            .height(htop-margin.top-margin.bottom)
@@ -103,6 +106,7 @@ iheatmap = (widgetdiv, data, chartOpts) ->
                            .ylab(zlab)
                            .strokecolor("")
                            .commonX(true)
+                           .tipclass(widgetdivid)
 
     ## now make the actual charts
     g_heatmap = svg.append("g")

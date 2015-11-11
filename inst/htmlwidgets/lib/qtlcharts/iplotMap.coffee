@@ -22,6 +22,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
     ylab = chartOpts?.ylab ? "Position (cM)" # y-axis label
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
+    widgetdivid = d3.select(widgetdiv).attr('id')
 
     mychart = mapchart().height(height-margin.top-margin.bottom)
                         .width(width-margin.left-margin.right)
@@ -39,10 +40,10 @@ iplotMap = (widgetdiv, data, chartOpts) ->
                         .title(title)
                         .xlab(xlab)
                         .ylab(ylab)
+                        .tipclass(widgetdivid)
 
     # select htmlwidget div and grab its ID
     div = d3.select(widgetdiv)
-    widgetid = div.attr("id")
 
     svg = div.select("svg")
                  .datum(data)
@@ -61,7 +62,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
 
     # create marker tip
     martip = d3.tip()
-               .attr('class', 'd3-tip #{widgetid}')
+               .attr('class', 'd3-tip #{widgetdivid}')
                .html((d) ->
                   pos = d3.format(".1f")(markerpos[d].pos)
                   "#{d} (#{pos})")
@@ -76,8 +77,8 @@ iplotMap = (widgetdiv, data, chartOpts) ->
 
     # grab selected marker from the search box
     selectedMarker = ""
-    $("div#markerinput_#{widgetid}").submit () ->
-        newSelection = document.getElementById("marker_#{widgetid}").value
+    $("div#markerinput_#{widgetdivid}").submit () ->
+        newSelection = document.getElementById("marker_#{widgetdivid}").value
         event.preventDefault()
         unless selectedMarker == ""
             div.select("line##{clean_marker_name(selectedMarker)}")
@@ -101,7 +102,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
 
 
     # autocomplete
-    $("input#marker_#{widgetid}").autocomplete({
+    $("input#marker_#{widgetdivid}").autocomplete({
         autoFocus: true,
         source: (request, response) ->
             matches = $.map(data.markernames, (tag) ->
@@ -109,22 +110,22 @@ iplotMap = (widgetdiv, data, chartOpts) ->
             response(matches)
         ,
         select: (event, ui) ->
-            $("input#marker_#{widgetid}").val(ui.item.label)
-            $("input#submit_#{widgetid}").submit()})
+            $("input#marker_#{widgetdivid}").val(ui.item.label)
+            $("input#submit_#{widgetdivid}").submit()})
 
 
     # grayed out "Marker name"
-    $("input#marker_#{widgetid}").each(() ->
-        $("div.searchbox#markerinput_#{widgetid}").addClass('inactive')
+    $("input#marker_#{widgetdivid}").each(() ->
+        $("div.searchbox#markerinput_#{widgetdivid}").addClass('inactive')
         $(this)
             .data('default', $(this).val())
             .focus(() ->
-                $("div.searchbox#markerinput_#{widgetid}").removeClass('inactive')
+                $("div.searchbox#markerinput_#{widgetdivid}").removeClass('inactive')
                 $(this).val('') if($(this).val() is $(this).data('default') or $(this).val() is '')
             )
             .blur(() ->
                 if($(this).val() is '')
-                    $("div.searchbox#markerinput_#{widgetid}").addClass('inactive')
+                    $("div.searchbox#markerinput_#{widgetdivid}").addClass('inactive')
                     $(this).val($(this).data('default'))
             )
         )
@@ -139,21 +140,21 @@ iplotMap = (widgetdiv, data, chartOpts) ->
 
 add_search_box = (widgetdiv) ->
     div = d3.select(widgetdiv)
-    widgetid = div.attr("id")
+    widgetdivid = div.attr("id")
 
     form = div.append("div")
                  .attr("class", "searchbox")
-                 .attr("id", "markerinput_#{widgetid}")
+                 .attr("id", "markerinput_#{widgetdivid}")
               .append("form")
-                 .attr("name", "markerinput_#{widgetid}")
+                 .attr("name", "markerinput_#{widgetdivid}")
     form.append("input")
-            .attr("id", "marker_#{widgetid}")
+            .attr("id", "marker_#{widgetdivid}")
             .attr("type", "text")
             .attr("value", "Marker name")
             .attr("name", "marker")
     form.append("input")
             .attr("type", "submit")
-            .attr("id", "submit_#{widgetid}")
+            .attr("id", "submit_#{widgetdivid}")
             .attr("value", "Submit")
     form.append("a")
             .attr("id", "currentmarker")

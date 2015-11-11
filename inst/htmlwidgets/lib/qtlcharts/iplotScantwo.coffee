@@ -32,7 +32,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
 
     # htmlwidget div element containing the chart, and its ID
     div = d3.select(widgetdiv)
-    widgetid = div.attr("id")
+    widgetdivid = div.attr("id")
 
     # size of heatmap region
     totmar = sumArray(scantwo_data.nmar)
@@ -76,7 +76,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
               .style("float", "left")
               .style("margin-left", "50px")
     leftsel = left.append("select")
-                  .attr("id", "leftselect_#{widgetid}")
+                  .attr("id", "leftselect_#{widgetdivid}")
                   .attr("name", "left")
     leftsel.selectAll("empty")
            .data(options)
@@ -92,7 +92,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                 .style("float", "left")
                 .style("margin-left", "50px")
     rightsel = right.append("select")
-                    .attr("id", "rightselect_#{widgetid}")
+                    .attr("id", "rightselect_#{widgetdivid}")
                     .attr("name", "right")
     rightsel.selectAll("empty")
             .data(options)
@@ -110,9 +110,9 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                  .attr("name", "refresh")
                  .text("Refresh")
                  .on "click", () ->
-                     leftsel = document.getElementById("leftselect_#{widgetid}")
+                     leftsel = document.getElementById("leftselect_#{widgetdivid}")
                      leftvalue = leftsel.options[leftsel.selectedIndex].value
-                     rightsel = document.getElementById("rightselect_#{widgetid}")
+                     rightsel = document.getElementById("rightselect_#{widgetdivid}")
                      rightvalue = rightsel.options[rightsel.selectedIndex].value
 
                      scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue)
@@ -144,6 +144,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                                .zthresh(zthresh)
                                .oneAtTop(oneAtTop)
                                .hover(false)
+                               .tipclass(widgetdivid)
 
     g_heatmap = svg.append("g")
                    .attr("id", "chrheatmap")
@@ -152,10 +153,9 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
 
     # function to add tool tips and handle clicking
     add_cell_tooltips = () ->
-        d3.selectAll(".d3-tip##{widgetid}").remove()
+        d3.selectAll("div.d3-tip.#{widgetdivid}").remove()
         celltip = d3.tip()
-                    .attr("class", "d3-tip")
-                    .attr("id", widgetid)
+                    .attr("class", "d3-tip #{widgetdivid}")
                     .html((d) ->
                             mari = scantwo_data.labels[d.i]
                             marj = scantwo_data.labels[d.j]
@@ -230,6 +230,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                                                    .lodvarname("lod")
                                                    .xlab("")
                                                    .title("#{data.markernames[markerindex]} : #{lod}")
+                                                   .tipclass(widgetdivid)
 
         g_scans = svg.append("g")
                      .attr("id", "scan_#{panelrow+1}_#{panelcol+1}")
@@ -284,6 +285,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                                .yvar("y")
                                .dataByInd(false)
                                .title("#{mar1} : #{mar2}")
+                               .tipclass(widgetdivid)
 
         g_eff[1] = svg.append("g")
                       .attr("id", "eff_1")
@@ -322,6 +324,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                              .ylab("Phenotype")
                              .xcatlabels(gn1)
                              .title("#{mar1} : #{mar2}")
+                             .tipclass(widgetdivid)
 
         g_eff[0] = svg.append("g")
                       .attr("id", "eff_0")

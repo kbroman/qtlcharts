@@ -30,6 +30,7 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
     min_paneldim = d3.min([panelheight, panelwidth])
     panelheight = min_paneldim
     panelwidth = min_paneldim
+    widgetdivid = d3.select(widgetdiv).attr('id')
 
     svg = d3.select(widgetdiv).select("svg")
 
@@ -58,7 +59,7 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
 
 
     corr_tip = d3.tip()
-                .attr('class', 'd3-tip')
+                .attr('class', "d3-tip #{widgetdivid}")
                 .html((d) -> d3.format(".2f")(d.value))
                 .direction('e')
                 .offset([0,10])

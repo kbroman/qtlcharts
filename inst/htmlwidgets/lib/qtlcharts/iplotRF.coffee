@@ -28,6 +28,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
     oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
+    widgetdivid = d3.select(widgetdiv).attr('id')
 
     # force things to be vectors
     rf_data.chrnames = forceAsArray(rf_data.chrnames)
@@ -102,6 +103,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                                .zthresh(lodlim[0])
                                .oneAtTop(oneAtTop)
                                .hover(false)
+                               .tipclass(widgetdivid)
 
     g_heatmap = svg.append("g")
                    .attr("id", "chrheatmap")
@@ -169,6 +171,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                                            .pointstroke(pointstroke)
                                            .lodvarname("lod")
                                            .title(data.markernames[markerindex])
+                                           .tipclass(widgetdivid)
 
         g_scans = svg.append("g")
                      .attr("id", "lod_rf_#{panelindex+1}")
@@ -185,7 +188,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                                           create_scan(rf_data.labels.indexOf(newmarker), 1-panelindex)
 
     celltip = d3.tip()
-                .attr('class', 'd3-tip')
+                .attr('class', "d3-tip #{widgetdivid}")
                 .html((d) ->
                         mari = rf_data.labels[d.i]
                         marj = rf_data.labels[d.j]

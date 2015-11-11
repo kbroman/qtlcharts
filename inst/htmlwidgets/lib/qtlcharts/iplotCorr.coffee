@@ -37,6 +37,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
     min_paneldim = d3.min([panelheight, panelwidth])
     panelheight = min_paneldim
     panelwidth = min_paneldim
+    widgetdivid = d3.select(widgetdiv).attr('id')
 
     svg = d3.select(widgetdiv).select("svg")
 
@@ -79,7 +80,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                .attr("pointer-events", "none")
 
     corr_tip = d3.tip()
-                .attr('class', 'd3-tip')
+                .attr('class', "d3-tip #{widgetdivid}")
                 .html((d) -> d3.format(".2f")(d.value))
                 .direction('e')
                 .offset([0,10])
@@ -136,7 +137,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
             scatcolors = (colorScale(i) for i of d3.range(nGroup))
 
     scat_tip = d3.tip()
-                .attr('class', 'd3-tip')
+                .attr('class', "d3-tip #{widgetdivid}")
                 .html((d,i) -> data.indID[i])
                 .direction('e')
                 .offset([0,10])

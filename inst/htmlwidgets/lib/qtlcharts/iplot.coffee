@@ -27,6 +27,7 @@ iplot = (widgetdiv, data, chartOpts) ->
     yNA = chartOpts?.yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values (handle=T/F, force=T/F, width, gap)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
+    widgetdivid = d3.select(widgetdiv).attr('id')
 
     mychart = scatterplot().height(height - margin.top - margin.bottom)
                            .width(width - margin.left - margin.right)
@@ -52,6 +53,7 @@ iplot = (widgetdiv, data, chartOpts) ->
                            .xvar('x')
                            .yvar('y')
                            .dataByInd(false)
+                           .tipclass(widgetdivid)
 
     d3.select(widgetdiv).select("svg")
       .datum({data:{x:data.x, y:data.y}, group:data.group, indID:data.indID})

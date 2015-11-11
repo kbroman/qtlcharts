@@ -43,6 +43,7 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     eff_yNA = chartOpts?.eff_yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
+    widgetdivid = d3.select(widgetdiv).attr('id')
 
     wright = width - wleft
 
@@ -67,6 +68,7 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
                            .xlab(lod_xlab)
                            .ylab(lod_ylab)
                            .rotate_ylab(lod_rotate_ylab)
+                           .tipclass(widgetdivid)
 
     svg = d3.select(widgetdiv).select("svg")
 
@@ -110,6 +112,7 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
                                .rectcolor(lightrect)
                                .xjitter(xjitter)
                                .yNA(eff_yNA)
+                               .tipclass(widgetdivid)
 
         svg.append("g")
            .attr("id", "pxgchart")

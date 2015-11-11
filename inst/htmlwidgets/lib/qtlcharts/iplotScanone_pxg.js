@@ -2,7 +2,7 @@
 var iplotScanone_pxg;
 
 iplotScanone_pxg = function(widgetdiv, lod_data, pxg_data, chartOpts) {
-  var chartdivid, chrGap, darkrect, eff_axispos, eff_nyticks, eff_pointcolor, eff_pointcolorhilit, eff_pointsize, eff_pointstroke, eff_rotate_ylab, eff_titlepos, eff_xlab, eff_yNA, eff_ylab, eff_ylim, eff_yticks, g_lod, height, lightrect, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_pointcolor, lod_pointsize, lod_pointstroke, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, markers, mylodchart, mypxgchart, plotPXG, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref37, ref38, ref39, ref4, ref40, ref41, ref42, ref43, ref44, ref5, ref6, ref7, ref8, ref9, svg, width, wleft, wright, x, xjitter;
+  var chartdivid, chrGap, darkrect, eff_axispos, eff_nyticks, eff_pointcolor, eff_pointcolorhilit, eff_pointsize, eff_pointstroke, eff_rotate_ylab, eff_titlepos, eff_xlab, eff_yNA, eff_ylab, eff_ylim, eff_yticks, g_lod, height, lightrect, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_pointcolor, lod_pointsize, lod_pointstroke, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, markers, mylodchart, mypxgchart, plotPXG, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref37, ref38, ref39, ref4, ref40, ref41, ref42, ref43, ref44, ref5, ref6, ref7, ref8, ref9, svg, widgetdivid, width, wleft, wright, x, xjitter;
   markers = (function() {
     var results;
     results = [];
@@ -68,8 +68,9 @@ iplotScanone_pxg = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     gap: 10
   };
   chartdivid = (ref44 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref44 : 'chart';
+  widgetdivid = d3.select(widgetdiv).attr('id');
   wright = width - wleft;
-  mylodchart = lodchart().lodvarname("lod").height(height - margin.top - margin.bottom).width(wleft - margin.left - margin.right).margin(margin).axispos(lod_axispos).titlepos(lod_titlepos).chrGap(chrGap).darkrect(darkrect).lightrect(lightrect).ylim(lod_ylim).nyticks(lod_nyticks).yticks(lod_yticks).linecolor(lod_linecolor).linewidth(lod_linewidth).pointcolor(lod_pointcolor).pointsize(lod_pointsize).pointstroke(lod_pointstroke).title(lod_title).xlab(lod_xlab).ylab(lod_ylab).rotate_ylab(lod_rotate_ylab);
+  mylodchart = lodchart().lodvarname("lod").height(height - margin.top - margin.bottom).width(wleft - margin.left - margin.right).margin(margin).axispos(lod_axispos).titlepos(lod_titlepos).chrGap(chrGap).darkrect(darkrect).lightrect(lightrect).ylim(lod_ylim).nyticks(lod_nyticks).yticks(lod_yticks).linecolor(lod_linecolor).linewidth(lod_linewidth).pointcolor(lod_pointcolor).pointsize(lod_pointsize).pointstroke(lod_pointstroke).title(lod_title).xlab(lod_xlab).ylab(lod_ylab).rotate_ylab(lod_rotate_ylab).tipclass(widgetdivid);
   svg = d3.select(widgetdiv).select("svg");
   g_lod = svg.append("g").attr("id", "lodchart").datum(lod_data).call(mylodchart);
   mypxgchart = null;
@@ -104,7 +105,7 @@ iplotScanone_pxg = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       results = [];
       for (var j = 1, ref45 = genonames.length; 1 <= ref45 ? j <= ref45 : j >= ref45; 1 <= ref45 ? j++ : j--){ results.push(j); }
       return results;
-    }).apply(this)).xcatlabels(genonames).dataByInd(false).title(markername).xvar('geno').yvar('pheno').axispos(eff_axispos).titlepos(eff_titlepos).xlab(eff_xlab).ylab(eff_ylab).rotate_ylab(eff_rotate_ylab).ylim(eff_ylim).nyticks(eff_nyticks).yticks(eff_yticks).pointcolor(eff_pointcolor).pointstroke(eff_pointstroke).pointsize(eff_pointsize).rectcolor(lightrect).xjitter(xjitter).yNA(eff_yNA);
+    }).apply(this)).xcatlabels(genonames).dataByInd(false).title(markername).xvar('geno').yvar('pheno').axispos(eff_axispos).titlepos(eff_titlepos).xlab(eff_xlab).ylab(eff_ylab).rotate_ylab(eff_rotate_ylab).ylim(eff_ylim).nyticks(eff_nyticks).yticks(eff_yticks).pointcolor(eff_pointcolor).pointstroke(eff_pointstroke).pointsize(eff_pointsize).rectcolor(lightrect).xjitter(xjitter).yNA(eff_yNA).tipclass(widgetdivid);
     svg.append("g").attr("id", "pxgchart").attr("transform", "translate(" + wleft + ",0)").datum({
       'geno': gabs,
       'pheno': pxg_data.pheno,

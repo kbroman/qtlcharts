@@ -2,7 +2,7 @@
 var add_symmetric_lod, iplotScantwo, lod_for_heatmap;
 
 iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
-  var add_cell_tooltips, axispos, bordercolor, chrGap, cicolors, color, darkrect, div, eff_hpos, eff_vpos, form, g_heatmap, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, mycichart, mydotchart, mylodchart, n, ncat, nullcolor, oneAtTop, options, pixelPerCell, plot_effects, plot_scan, pointsize, pointstroke, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, submit, svg, totalh, totalw, totmar, w, wbot, widgetid, width, wright, x, zthresh;
+  var add_cell_tooltips, axispos, bordercolor, chrGap, cicolors, color, darkrect, div, eff_hpos, eff_vpos, form, g_heatmap, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, mycichart, mydotchart, mylodchart, n, ncat, nullcolor, oneAtTop, options, pixelPerCell, plot_effects, plot_scan, pointsize, pointstroke, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, submit, svg, totalh, totalw, totmar, w, wbot, widgetdivid, width, wright, x, zthresh;
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 1000;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000;
   pixelPerCell = (ref2 = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? ref2 : null;
@@ -37,7 +37,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   scantwo_data.chrnames = forceAsArray(scantwo_data.chrnames);
   scantwo_data.nmar = forceAsArray(scantwo_data.nmar);
   div = d3.select(widgetdiv);
-  widgetid = div.attr("id");
+  widgetdivid = div.attr("id");
   totmar = sumArray(scantwo_data.nmar);
   if (pixelPerCell == null) {
     pixelPerCell = d3.max([2, Math.floor(600 / totmar)]);
@@ -82,7 +82,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   options = ["full", "fv1", "int", "add", "av1"];
   form = div.insert("div", ":first-child").attr("id", "form").attr("class", "qtlcharts").attr("height", "24px");
   left = form.append("div").text(oneAtTop ? "bottom-left: " : "top-left: ").style("float", "left").style("margin-left", "50px");
-  leftsel = left.append("select").attr("id", "leftselect_" + widgetid).attr("name", "left");
+  leftsel = left.append("select").attr("id", "leftselect_" + widgetdivid).attr("name", "left");
   leftsel.selectAll("empty").data(options).enter().append("option").attr("value", function(d) {
     return d;
   }).text(function(d) {
@@ -94,7 +94,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     return null;
   });
   right = form.append("div").text(oneAtTop ? "top-right: " : "bottom-right: ").style("float", "left").style("margin-left", "50px");
-  rightsel = right.append("select").attr("id", "rightselect_" + widgetid).attr("name", "right");
+  rightsel = right.append("select").attr("id", "rightselect_" + widgetdivid).attr("name", "right");
   rightsel.selectAll("empty").data(options).enter().append("option").attr("value", function(d) {
     return d;
   }).text(function(d) {
@@ -106,9 +106,9 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     return null;
   });
   submit = form.append("div").style("float", "left").style("margin-left", "50px").append("button").attr("name", "refresh").text("Refresh").on("click", function() {
-    leftsel = document.getElementById("leftselect_" + widgetid);
+    leftsel = document.getElementById("leftselect_" + widgetdivid);
     leftvalue = leftsel.options[leftsel.selectedIndex].value;
-    rightsel = document.getElementById("rightselect_" + widgetid);
+    rightsel = document.getElementById("rightselect_" + widgetdivid);
     rightvalue = rightsel.options[rightsel.selectedIndex].value;
     scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);
     div.select("g#chrheatmap svg").remove();
@@ -118,12 +118,12 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   svg = div.select("svg").attr("viewBox", [0, 0, totalw, totalh].join(" ")).attr("preserveAspectRatio", "xMinYMin meet").style("height", "100%").style("width", "100%");
   scantwo_data = add_symmetric_lod(scantwo_data);
   scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);
-  mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell).chrGap(chrGap).axispos(axispos).rectcolor("white").nullcolor(nullcolor).bordercolor(bordercolor).colors(["white", color]).zlim([0, scantwo_data.max.full]).zthresh(zthresh).oneAtTop(oneAtTop).hover(false);
+  mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell).chrGap(chrGap).axispos(axispos).rectcolor("white").nullcolor(nullcolor).bordercolor(bordercolor).colors(["white", color]).zlim([0, scantwo_data.max.full]).zthresh(zthresh).oneAtTop(oneAtTop).hover(false).tipclass(widgetdivid);
   g_heatmap = svg.append("g").attr("id", "chrheatmap").datum(scantwo_data).call(mychrheatmap);
   add_cell_tooltips = function() {
     var cells, celltip;
-    d3.selectAll(".d3-tip#" + widgetid).remove();
-    celltip = d3.tip().attr("class", "d3-tip").attr("id", widgetid).html(function(d) {
+    d3.selectAll("div.d3-tip." + widgetdivid).remove();
+    celltip = d3.tip().attr("class", "d3-tip " + widgetdivid).html(function(d) {
       var leftlod, mari, marj, rightlod;
       mari = scantwo_data.labels[d.i];
       marj = scantwo_data.labels[d.j];
@@ -191,7 +191,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     if (mylodchart[panelrow][panelcol] != null) {
       mylodchart[panelrow][panelcol].remove();
     }
-    mylodchart[panelrow][panelcol] = lodchart().height(hbot).width(wbot).margin(margin).axispos(axispos).ylim([0.0, scantwo_data.max[lod]]).lightrect(lightrect).darkrect(darkrect).linewidth(linewidth).linecolor(linecolor).pointsize(0).pointcolor("").pointstroke("").lodvarname("lod").xlab("").title(data.markernames[markerindex] + " : " + lod);
+    mylodchart[panelrow][panelcol] = lodchart().height(hbot).width(wbot).margin(margin).axispos(axispos).ylim([0.0, scantwo_data.max[lod]]).lightrect(lightrect).darkrect(darkrect).linewidth(linewidth).linecolor(linecolor).pointsize(0).pointcolor("").pointstroke("").lodvarname("lod").xlab("").title(data.markernames[markerindex] + " : " + lod).tipclass(widgetdivid);
     return g_scans = svg.append("g").attr("id", "scan_" + (panelrow + 1) + "_" + (panelcol + 1)).attr("transform", "translate(" + scans_hpos[panelcol] + ", " + scans_vpos[panelrow] + ")").datum(data).call(mylodchart[panelrow][panelcol]);
   };
   return plot_effects = function(markerindex1, markerindex2) {
@@ -240,7 +240,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       results = [];
       for (var m = 1, ref22 = gn1.length; 1 <= ref22 ? m <= ref22 : m >= ref22; 1 <= ref22 ? m++ : m--){ results.push(m); }
       return results;
-    }).apply(this)).xcatlabels(gn1).xlab("").ylab("Phenotype").xvar("g").yvar("y").dataByInd(false).title(mar1 + " : " + mar2);
+    }).apply(this)).xcatlabels(gn1).xlab("").ylab("Phenotype").xvar("g").yvar("y").dataByInd(false).title(mar1 + " : " + mar2).tipclass(widgetdivid);
     g_eff[1] = svg.append("g").attr("id", "eff_1").attr("transform", "translate(" + eff_hpos[1] + ", " + eff_vpos[1] + ")").datum(pxg_data).call(mydotchart);
     mydotchart.pointsSelect().attr("fill", function(d, i) {
       return cicolors_expanded[g[i] - 1];
@@ -280,7 +280,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     xs = mydotchart.xscale();
     dif = xs(2) - xs(1);
     segwidth = gn1.length > 9 ? dif * 0.5 : dif * 0.25;
-    mycichart = cichart().height(hright).width(wright).margin(margin).axispos(axispos).rectcolor(lightrect).segcolor(cicolors_expanded).segwidth(segwidth).vertsegcolor(cicolors_expanded).segstrokewidth(linewidth).xlab("").ylab("Phenotype").xcatlabels(gn1).title(mar1 + " : " + mar2);
+    mycichart = cichart().height(hright).width(wright).margin(margin).axispos(axispos).rectcolor(lightrect).segcolor(cicolors_expanded).segwidth(segwidth).vertsegcolor(cicolors_expanded).segstrokewidth(linewidth).xlab("").ylab("Phenotype").xcatlabels(gn1).title(mar1 + " : " + mar2).tipclass(widgetdivid);
     g_eff[0] = svg.append("g").attr("id", "eff_0").attr("transform", "translate(" + eff_hpos[0] + ", " + eff_vpos[0] + ")").datum(ci_data).call(mycichart);
     results2 = [];
     for (p = q = 0; q <= 1; p = ++q) {

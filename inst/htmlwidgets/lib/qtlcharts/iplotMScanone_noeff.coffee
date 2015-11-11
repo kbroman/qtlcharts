@@ -30,6 +30,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     lod_labels = chartOpts?.lod_labels ? null # optional vector of strings, for LOD column labels
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
+    widgetdivid = d3.select(widgetdiv).attr('id')
 
     wright = width - wleft
     hbot = height - htop
@@ -52,6 +53,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
                                .lod_labels(lod_labels)
                                .ylab(lod_ylab)
                                .nullcolor(nullcolor)
+                               .tipclass(widgetdivid)
 
     svg = d3.select(widgetdiv).select("svg")
 
@@ -72,6 +74,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
                            .lightrect(lightrect)
                            .ylim([0, d3.max(mylodheatmap.zlim())])
                            .pointsAtMarkers(false)
+                           .tipclass(widgetdivid)
 
     g_lodchart = svg.append("g")
                     .attr("transform", "translate(0,#{htop})")
@@ -130,6 +133,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
                                .ylim([0, d3.max(mylodheatmap.zlim())])
                                .nxticks(0)
                                .commonX(false)
+                               .tipclass(widgetdivid)
 
     g_curvechart = svg.append("g")
                       .attr("transform", "translate(#{wleft},0)")

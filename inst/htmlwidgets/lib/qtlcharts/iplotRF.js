@@ -2,7 +2,7 @@
 var iplotRF;
 
 iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
-  var axispos, bordercolor, cellHeight, cellPad, cellWidth, cells, celltip, chartdivid, chrGap, chrtype, col, colors, create_crosstab, create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, darkrect, fontsize, g_heatmap, hbot, heatmap_height, heatmap_width, height, hilitcolor, htop, j, k, l, lightrect, lodlim, m, margin, max_ngeno, mychrheatmap, mycrosstab, mylodchart, nullcolor, oneAtTop, pixelPerCell, pointcolor, pointsize, pointstroke, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref3, ref4, ref5, ref6, ref7, ref8, ref9, row, svg, totalh, totalw, totmar, w, wbot, width;
+  var axispos, bordercolor, cellHeight, cellPad, cellWidth, cells, celltip, chartdivid, chrGap, chrtype, col, colors, create_crosstab, create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, darkrect, fontsize, g_heatmap, hbot, heatmap_height, heatmap_width, height, hilitcolor, htop, j, k, l, lightrect, lodlim, m, margin, max_ngeno, mychrheatmap, mycrosstab, mylodchart, nullcolor, oneAtTop, pixelPerCell, pointcolor, pointsize, pointstroke, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref3, ref4, ref5, ref6, ref7, ref8, ref9, row, svg, totalh, totalw, totmar, w, wbot, widgetdivid, width;
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 1000;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000;
   pixelPerCell = (ref2 = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? ref2 : null;
@@ -37,6 +37,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
   lodlim = (ref20 = chartOpts != null ? chartOpts.lodlim : void 0) != null ? ref20 : [0, 12];
   oneAtTop = (ref21 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? ref21 : false;
   chartdivid = (ref22 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref22 : 'chart';
+  widgetdivid = d3.select(widgetdiv).attr('id');
   rf_data.chrnames = forceAsArray(rf_data.chrnames);
   rf_data.nmar = forceAsArray(rf_data.nmar);
   totmar = sumArray(rf_data.nmar);
@@ -99,7 +100,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
       }
     }
   }
-  mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell).chrGap(chrGap).axispos(axispos).rectcolor(lightrect).nullcolor(nullcolor).bordercolor(bordercolor).colors(colors).zthresh(lodlim[0]).oneAtTop(oneAtTop).hover(false);
+  mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell).chrGap(chrGap).axispos(axispos).rectcolor(lightrect).nullcolor(nullcolor).bordercolor(bordercolor).colors(colors).zthresh(lodlim[0]).oneAtTop(oneAtTop).hover(false).tipclass(widgetdivid);
   g_heatmap = svg.append("g").attr("id", "chrheatmap").datum(rf_data).call(mychrheatmap);
   mycrosstab = null;
   mylodchart = [null, null];
@@ -147,7 +148,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
     if (mylodchart[panelindex] != null) {
       mylodchart[panelindex].remove();
     }
-    mylodchart[panelindex] = lodchart().height(hbot - margin.top - margin.bottom).width(wbot - margin.left - margin.right).margin(margin).axispos(axispos).ylim([0.0, d3.max(data.lod)]).lightrect(lightrect).darkrect(darkrect).linewidth(0).linecolor("").pointsize(pointsize).pointcolor(pointcolor).pointstroke(pointstroke).lodvarname("lod").title(data.markernames[markerindex]);
+    mylodchart[panelindex] = lodchart().height(hbot - margin.top - margin.bottom).width(wbot - margin.left - margin.right).margin(margin).axispos(axispos).ylim([0.0, d3.max(data.lod)]).lightrect(lightrect).darkrect(darkrect).linewidth(0).linecolor("").pointsize(pointsize).pointcolor(pointcolor).pointstroke(pointstroke).lodvarname("lod").title(data.markernames[markerindex]).tipclass(widgetdivid);
     g_scans = svg.append("g").attr("id", "lod_rf_" + (panelindex + 1)).attr("transform", "translate(" + (wbot * panelindex) + ", " + htop + ")").datum(data).call(mylodchart[panelindex]);
     return mylodchart[panelindex].markerSelect().on("click", function(d) {
       var newmarker;
@@ -160,7 +161,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
       return create_scan(rf_data.labels.indexOf(newmarker), 1 - panelindex);
     });
   };
-  celltip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+  celltip = d3.tip().attr('class', "d3-tip " + widgetdivid).html(function(d) {
     var lod, mari, marj, rf;
     mari = rf_data.labels[d.i];
     marj = rf_data.labels[d.j];

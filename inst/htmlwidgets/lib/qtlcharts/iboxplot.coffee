@@ -20,6 +20,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
     histcolors = chartOpts?.histcolors ? ["#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black"] # vector of colors for selected histograms
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
+    widgetdivid = d3.select(widgetdiv).attr('id')
 
     # make sure histcolors and qucolors are arrays
     histcolors = forceAsArray(histcolors)
@@ -188,7 +189,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
            .attr("fill", "none")
 
     indtip = d3.tip()
-               .attr('class', 'd3-tip')
+               .attr('class', "d3-tip #{widgetdivid}")
                .html((d) -> d)
                .direction('e')
                .offset([0,10])

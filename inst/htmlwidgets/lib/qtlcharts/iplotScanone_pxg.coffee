@@ -75,8 +75,9 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
                .datum(lod_data)
                .call(mylodchart)
 
+    mypxgchart = null
     plotPXG = (markername, markerindex) ->
-        svg.select("g#pxgchart").remove()
+        mypxgchart.remove() if mypxgchart?
 
         g = pxg_data.geno[markerindex]
         gabs = (Math.abs(x) for x in g)

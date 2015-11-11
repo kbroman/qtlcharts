@@ -108,8 +108,8 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                    .datum(rf_data)
                    .call(mychrheatmap)
 
-    g_crosstab = null
-    g_scans = [null, null]
+    mycrosstab = null
+    mylodchart = [null, null]
 
     create_crosstab = (marker1, marker2) ->
         data =
@@ -120,7 +120,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
             xlabel: marker1
             ylabel: marker2
 
-        g_crosstab.remove() if g_crosstab?
+        mycrosstab.remove() if mycrosstab?
 
         mycrosstab = crosstab().cellHeight(cellHeight)
                                .cellWidth(cellWidth)
@@ -153,30 +153,30 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                 data.lod[row] = rf_data.rf[row][markerindex]
         data.lod[markerindex] = null # point at marker: set to maximum LOD
 
-        g_scans[panelindex].remove() if g_scans[panelindex]?
+        mylodchart[panelindex].remove() if mylodchart[panelindex]?
 
-        mylodchart = lodchart().height(hbot-margin.top-margin.bottom)
-                               .width(wbot-margin.left-margin.right)
-                               .margin(margin)
-                               .axispos(axispos)
-                               .ylim([0.0, d3.max(data.lod)])
-                               .lightrect(lightrect)
-                               .darkrect(darkrect)
-                               .linewidth(0)
-                               .linecolor("")
-                               .pointsize(pointsize)
-                               .pointcolor(pointcolor)
-                               .pointstroke(pointstroke)
-                               .lodvarname("lod")
-                               .title(data.markernames[markerindex])
+        mylodchart[panelindex] = lodchart().height(hbot-margin.top-margin.bottom)
+                                           .width(wbot-margin.left-margin.right)
+                                           .margin(margin)
+                                           .axispos(axispos)
+                                           .ylim([0.0, d3.max(data.lod)])
+                                           .lightrect(lightrect)
+                                           .darkrect(darkrect)
+                                           .linewidth(0)
+                                           .linecolor("")
+                                           .pointsize(pointsize)
+                                           .pointcolor(pointcolor)
+                                           .pointstroke(pointstroke)
+                                           .lodvarname("lod")
+                                           .title(data.markernames[markerindex])
 
-        g_scans[panelindex] = svg.append("g")
-                                 .attr("id", "lod_rf_#{panelindex+1}")
-                                 .attr("transform", "translate(#{wbot*panelindex}, #{htop})")
-                                 .datum(data)
-                                 .call(mylodchart)
+        g_scans = svg.append("g")
+                     .attr("id", "lod_rf_#{panelindex+1}")
+                     .attr("transform", "translate(#{wbot*panelindex}, #{htop})")
+                     .datum(data)
+                     .call(mylodchart[panelindex])
 
-        mylodchart.markerSelect().on "click", (d) ->
+        mylodchart[panelindex].markerSelect().on "click", (d) ->
                                           newmarker = d.name
                                           if panelindex == 0
                                               create_crosstab(rf_data.labels[markerindex], newmarker)
@@ -213,7 +213,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                      create_crosstab(rf_data.labels[d.j], rf_data.labels[d.i])
                      create_scan(d.i, 0)
                      if d.i != d.j
-                       create_scan(d.j, 1)
+                         create_scan(d.j, 1)
                      else # if same marker, just show the one panel
-                       g_scans[1].remove()
-                       g_scans[1] = null
+                         mylodchart[1].remove() if mylodchart[1]?
+                         mylodchart[1] = null

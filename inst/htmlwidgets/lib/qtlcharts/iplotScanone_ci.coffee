@@ -72,8 +72,9 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
                .datum(lod_data)
                .call(mylodchart)
 
+    mycichart = null
     plotCI = (markername, markerindex) ->
-        svg.select("g#cichart").remove()
+        mycichart.remove() if mycichart?
 
         g = pxg_data.geno[markerindex]
         gabs = (Math.abs(x) for x in g)

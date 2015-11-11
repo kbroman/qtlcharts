@@ -11,7 +11,7 @@ dependencies:
       - index-min.js
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 0.5.3
+    version: 0.6.2
     script:
       - d3panels.min.js
     style: d3panels.min.css

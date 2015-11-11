@@ -46,7 +46,7 @@ iplotMap = function(widgetdiv, data, chartOpts) {
       };
     }
   }
-  martip = d3.tip().attr('class', 'd3-tip #{widgetdivid}').html(function(d) {
+  martip = d3.tip().attr('class', "d3-tip " + widgetdivid).html(function(d) {
     var pos;
     pos = d3.format(".1f")(markerpos[d].pos);
     return d + " (" + pos + ")";

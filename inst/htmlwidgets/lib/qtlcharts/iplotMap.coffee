@@ -62,7 +62,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
 
     # create marker tip
     martip = d3.tip()
-               .attr('class', 'd3-tip #{widgetdivid}')
+               .attr('class', "d3-tip #{widgetdivid}")
                .html((d) ->
                   pos = d3.format(".1f")(markerpos[d].pos)
                   "#{d} (#{pos})")

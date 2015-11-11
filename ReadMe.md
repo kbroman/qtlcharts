@@ -82,9 +82,12 @@ iboxplot(expr)
 
 #### Licenses
 
-Licensed under the [MIT license](LICENSE). ([More information here](http://en.wikipedia.org/wiki/MIT_License).)
+The R/qtlcharts package as a whole is distributed under
+[GPL-3 (GNU General Public License version 3)[http://www.gnu.org/licenses/gpl-3.0.en.html].
 
-R/qtlcharts incorporates
+R/qtlcharts incorporates the following other open source software
+components, which have their own license agreements.
+
 - [D3.js](http://d3js.org) \[[license](inst/htmlwidgets/lib/d3/LICENSE)\]
 - [d3.tip](https://github.com/Caged/d3-tip) \[[license](inst/htmlwidgets/lib/d3-tip/LICENSE)\]
 - [ColorBrewer](http://colorbrewer2.org) \[[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)\]

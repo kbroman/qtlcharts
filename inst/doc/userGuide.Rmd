@@ -23,9 +23,8 @@ hard to accommodate all possible browser differences.
 
 Information on installing R/qtlcharts is available
 [here](http://kbroman.org/qtlcharts/pages/installation.html); it
-requires installation of the packages [R/qtl](http://www.rqtl.org),
-[htmlwidgets](http://htmlwidgets.org), and
-[devtools](https://github.com/hadley/devtools).
+requires installation of the packages [R/qtl](http://www.rqtl.org) and
+[htmlwidgets](http://htmlwidgets.org).
 
 ## Basic use
 

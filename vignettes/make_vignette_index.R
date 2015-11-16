@@ -22,5 +22,10 @@ for(i in seq(along=Rmdfiles)) {
     vignettes[i,"Title"] <- substr(index_entry, 2, nchar(index_entry)-1)
 }
 
+# reorder them, putting userGuide etc first
+putFirst <- c("userGuide.Rmd", "develGuide.Rmd", "Rmarkdown.Rmd")
+o <- match(putFirst, vignettes$File)
+vignettes <- vignettes[c(o, which(!(vignettes$File %in% putFirst))),]
+
 # save file
 saveRDS(vignettes, "../build/vignette.rds")

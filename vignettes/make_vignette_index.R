@@ -24,8 +24,11 @@ for(i in seq(along=Rmdfiles)) {
 
 # drop empty .R files
 for(i in 1:nrow(vignettes)) {
-    if(paste(readLines(file.path("..", "inst", "doc", vignettes$R[i])), collapse="")=="")
+    Rfile <- file.path("..", "inst", "doc", vignettes$R[i])
+    if(paste(readLines(Rfile), collapse="")=="") {
         vignettes$R[i] <- ""
+        unlink(Rfile)
+    }
 }
 
 # reorder them, putting userGuide etc first

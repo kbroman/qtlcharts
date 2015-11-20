@@ -9,4 +9,4 @@ inst/ToDo.html
 vignettes/chartOpt_vignette
 ^\.travis\.yml$
 bower
-vignettes/make_vignette_index.R
+^vignettes/make_vignette_index\.R$

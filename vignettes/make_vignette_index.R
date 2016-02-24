@@ -25,7 +25,7 @@ for(i in seq(along=Rmdfiles)) {
 # drop empty .R files
 for(i in 1:nrow(vignettes)) {
     Rfile <- file.path("..", "inst", "doc", vignettes$R[i])
-    if(paste(readLines(Rfile), collapse="")=="") {
+    if(!file.exists(Rfile) || paste(readLines(Rfile), collapse="")=="") {
         vignettes$R[i] <- ""
         unlink(Rfile)
     }

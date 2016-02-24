@@ -484,7 +484,7 @@ These are data on seedling gravitropism in Arabidopsis recombinant
 inbred lines; see
 [Moore et al. (2013)](http://www.ncbi.nlm.nih.gov/pubmed/23979570). The
 data are also available at the
-[QTL archive](http://qtlarchive.org/db/q?pg=projdetails&proj=moore_2013b).
+[Mouse Phenome Database](http://phenome.jax.org/db/q?rtn=projects/projdet&reqprojid=282).
 
 We first load the data.
 

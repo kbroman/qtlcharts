@@ -6,7 +6,7 @@
 \title{Arabidopsis QTL data on gravitropism}
 \format{An object of class \code{"cross"}; see \code{\link[qtl]{read.cross}}.}
 \source{
-\href{http://qtlarchive.org/db/q?pg=projdetails&proj=moore_2013b}{QTL Archive}
+\href{http://phenome.jax.org/db/q?rtn=projects/projdet&reqprojid=282}{Mouse Phenome Database}
 }
 \usage{
 data(grav)

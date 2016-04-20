@@ -1,3 +1,9 @@
+# qtlcharts 0.6-5
+
+- Fix proliferation of tool tips
+
+- For use with Shiny, clear SVG before drawing
+
 # qtlcharts 0.5-25
 
 - Skip Rmd and html tests run on CRAN (so faster, and because the Rmd

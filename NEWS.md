@@ -1,13 +1,15 @@
-# qtlcharts 0.6-5
+# qtlcharts 0.6-6
 
 - Fix proliferation of tool tips
 
 - For use with Shiny, clear SVG before drawing
 
+
 # qtlcharts 0.5-25
 
 - Skip Rmd and html tests run on CRAN (so faster, and because the Rmd
   tests won't work on Solaris as they need pandoc).
+
 
 # qtlcharts 0.5-23
 
@@ -17,11 +19,13 @@
 - `idotplot` and `iplot` now use the names of the input data as
   individual IDs if `indID` is missing or `NULL`.
 
+
 # qtlcharts 0.5-18
 
 - Fixed a bug in `iplotScanone` with `pxgtype="ci"`. In the case of
   phenotypes with missing values, the confidence intervals were
   incorrect.
+
 
 # qtlcharts 0.5-14
 
@@ -50,7 +54,7 @@
 - Got the package working with
   [jsonlite](https://github.com/jeroenooms/jsonlite), as
   [htmlwidgets](http://www.htmlwidgets.org) has now switched from
-  [RJSONIO](http://www.omegahat.org/RJSONIO/) to jsonlite, for
+  [RJSONIO](http://www.omegahat.net/RJSONIO/) to jsonlite, for
   converting R objects to [JSON](http://www.json.org/).
 
 

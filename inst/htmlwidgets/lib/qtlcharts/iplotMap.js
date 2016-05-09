@@ -2,7 +2,7 @@
 var add_search_box, iplotMap;
 
 iplotMap = function(widgetdiv, data, chartOpts) {
-  var axispos, chartdivid, chr, clean_marker_name, div, height, i, len, linecolor, linecolorhilit, linewidth, margin, marker, markerSelect, markerpos, martip, mychart, nyticks, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, selectedMarker, svg, tickwidth, title, titlepos, widgetdivid, width, xlab, ylab, ylim, yticks;
+  var axispos, chartdivid, clean_marker_name, div, height, linecolor, linecolorhilit, linewidth, margin, markerSelect, martip, mychart, nyticks, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, selectedMarker, svg, tickwidth, title, titlepos, widgetdivid, width, xlab, ylab, ylim, yticks;
   width = (ref = chartOpts != null ? chartOpts.width : void 0) != null ? ref : 1000;
   height = (ref1 = chartOpts != null ? chartOpts.height : void 0) != null ? ref1 : 600;
   margin = (ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? ref2 : {
@@ -32,23 +32,31 @@ iplotMap = function(widgetdiv, data, chartOpts) {
   ylab = (ref15 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref15 : "Position (cM)";
   chartdivid = (ref16 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref16 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
-  mychart = mapchart().height(height - margin.top - margin.bottom).width(width - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).ylim(ylim).yticks(yticks).nyticks(nyticks).tickwidth(tickwidth).rectcolor(rectcolor).linecolor(linecolor).linecolorhilit(linecolorhilit).linewidth(linewidth).title(title).xlab(xlab).ylab(ylab).tipclass(widgetdivid);
+  mychart = d3panels.mapchart({
+    height: height,
+    width: width,
+    margin: margin,
+    axispos: axispos,
+    titlepos: titlepos,
+    ylim: ylim,
+    yticks: yticks,
+    nyticks: nyticks,
+    tickwidth: tickwidth,
+    rectcolor: rectcolor,
+    linecolor: linecolor,
+    linecolorhilit: linecolorhilit,
+    linewidth: linewidth,
+    title: title,
+    xlab: xlab,
+    ylab: ylab,
+    tipclass: widgetdivid
+  });
   div = d3.select(widgetdiv);
-  svg = div.select("svg").datum(data).call(mychart);
-  markerpos = {};
-  ref17 = data.chr;
-  for (i = 0, len = ref17.length; i < len; i++) {
-    chr = ref17[i];
-    for (marker in data.map[chr]) {
-      markerpos[marker] = {
-        chr: chr,
-        pos: data.map[chr][marker]
-      };
-    }
-  }
+  mychart(div.select("svg"), data);
+  svg = mychart.svg();
   martip = d3.tip().attr('class', "d3-tip " + widgetdivid).html(function(d) {
     var pos;
-    pos = d3.format(".1f")(markerpos[d].pos);
+    pos = d3.format(".1f")(data.pos[data.marker.indexOf(d)]);
     return d + " (" + pos + ")";
   }).direction('e').offset([0, 10]);
   svg.call(martip);
@@ -65,7 +73,7 @@ iplotMap = function(widgetdiv, data, chartOpts) {
       martip.hide();
     }
     if (newSelection !== "") {
-      if (data.markernames.indexOf(newSelection) >= 0) {
+      if (data.marker.indexOf(newSelection) >= 0) {
         selectedMarker = newSelection;
         line = div.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolorhilit);
         martip.show(line.datum(), line.node());
@@ -81,7 +89,7 @@ iplotMap = function(widgetdiv, data, chartOpts) {
     autoFocus: true,
     source: function(request, response) {
       var matches;
-      matches = $.map(data.markernames, function(tag) {
+      matches = $.map(data.marker, function(tag) {
         if (tag.toUpperCase().indexOf(request.term.toUpperCase()) === 0) {
           return tag;
         }

@@ -11,8 +11,8 @@
 #   component being a vector of marker positions
 #
 # @return Map in special format for using in \code{\link{iplotMap}},
-#    includes an ordered vector of chromosome names and then the map,
-#    organized by chromosome and then by marker.
+#    includes ordered vectors of chromosome IDs, marker positions, and
+#    marker names, and then the distinct chromosome IDs in order
 #
 # @keywords interface
 #
@@ -28,8 +28,14 @@ function(map) {
     # remove the A/X classes
     map <- lapply(map, unclass)
 
+    chr <- rep(names(map), vapply(map, length, 1))
+    names(chr) <- NULL
+
+    pos <- unlist(map)
+    names(pos) <- NULL
+
     mnames <- unlist(lapply(map, names))
     names(mnames) <- NULL
 
-    list(chr=chrnames, map=map, markernames=mnames)
+    list(chr=chr, pos=pos, marker=mnames, chrname=chrnames)
 }

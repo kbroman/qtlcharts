@@ -639,9 +639,9 @@ customization options for each chart.
 
 ### `iplotPXG`
 
-`height = 450` &mdash; height of chart in pixels
+`height = 550` &mdash; height of chart in pixels
 
-`width = 300` &mdash; width of chart in pixels
+`width = 400` &mdash; width of chart in pixels
 
 `title = ""` &mdash; title for chart
 
@@ -655,7 +655,7 @@ customization options for each chart.
 
 `titlepos = 20` &mdash; position of chart title in pixels
 
-`xjitter = NULL` &mdash; amount of horizontal jittering in pixels
+`jitter = "beeswarm"` &mdash; method for jittering points (beeswarm|random|none)
 
 `ylim = NULL` &mdash; y-axis limits
 
@@ -672,6 +672,8 @@ customization options for each chart.
 `pointstroke = "black"` &mdash; color of outer circle for points
 
 `yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
+
+`horizontal = false` &mdash; If true, have genotypes on vertical axis and phenotype on horizontal axis
 
 ### `iplotScantwo`
 

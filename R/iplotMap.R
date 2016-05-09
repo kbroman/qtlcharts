@@ -61,22 +61,6 @@ function(map, chr, shift=FALSE, chartOpts=NULL)
                               package="qtlcharts")
 }
 
-# convert map to special list
-convert_map <-
-function(map) {
-    chrnames <- names(map)
-
-    # remove the A/X classes
-    map <- lapply(map, unclass)
-    # make sure each map is hash with scalars not vectors
-    map <- lapply(map, function(a) lapply(a, jsonlite::unbox))
-
-    mnames <- unlist(lapply(map, names))
-    names(mnames) <- NULL
-
-    list(chr=chrnames, map=map, markernames=mnames)
-}
-
 #' @rdname qtlcharts-shiny
 #' @export
 iplotMap_output <- function(outputId, width="100%", height="680") {

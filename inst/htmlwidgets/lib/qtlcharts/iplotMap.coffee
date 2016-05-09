@@ -24,47 +24,39 @@ iplotMap = (widgetdiv, data, chartOpts) ->
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
 
-    mychart = mapchart().height(height-margin.top-margin.bottom)
-                        .width(width-margin.left-margin.right)
-                        .margin(margin)
-                        .axispos(axispos)
-                        .titlepos(titlepos)
-                        .ylim(ylim)
-                        .yticks(yticks)
-                        .nyticks(nyticks)
-                        .tickwidth(tickwidth)
-                        .rectcolor(rectcolor)
-                        .linecolor(linecolor)
-                        .linecolorhilit(linecolorhilit)
-                        .linewidth(linewidth)
-                        .title(title)
-                        .xlab(xlab)
-                        .ylab(ylab)
-                        .tipclass(widgetdivid)
+    mychart = d3panels.mapchart({
+                  height:height
+                  width:width
+                  margin:margin
+                  axispos:axispos
+                  titlepos:titlepos
+                  ylim:ylim
+                  yticks:yticks
+                  nyticks:nyticks
+                  tickwidth:tickwidth
+                  rectcolor:rectcolor
+                  linecolor:linecolor
+                  linecolorhilit:linecolorhilit
+                  linewidth:linewidth
+                  title:title
+                  xlab:xlab
+                  ylab:ylab
+                  tipclass:widgetdivid})
 
     # select htmlwidget div and grab its ID
     div = d3.select(widgetdiv)
-
-    svg = div.select("svg")
-                 .datum(data)
-                 .call(mychart)
-
+    mychart(div.select("svg"), data)
+    svg = mychart.svg()
 
     ##############################
     # code for marker search box for iplotMap
     ##############################
 
-    # reorganize map information by marker
-    markerpos = {}
-    for chr in data.chr
-        for marker of data.map[chr]
-            markerpos[marker] = {chr:chr, pos:data.map[chr][marker]}
-
     # create marker tip
     martip = d3.tip()
                .attr('class', "d3-tip #{widgetdivid}")
                .html((d) ->
-                  pos = d3.format(".1f")(markerpos[d].pos)
+                  pos = d3.format(".1f")(data.pos[data.marker.indexOf(d)])
                   "#{d} (#{pos})")
                .direction('e')
                .offset([0,10])
@@ -86,7 +78,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
             martip.hide()
 
         if newSelection != ""
-            if data.markernames.indexOf(newSelection) >= 0
+            if data.marker.indexOf(newSelection) >= 0
                 selectedMarker = newSelection
                 line = div.select("line##{clean_marker_name(selectedMarker)}")
                           .attr("stroke", linecolorhilit)
@@ -105,7 +97,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
     $("input#marker_#{widgetdivid}").autocomplete({
         autoFocus: true,
         source: (request, response) ->
-            matches = $.map(data.markernames, (tag) ->
+            matches = $.map(data.marker, (tag) ->
                 tag if tag.toUpperCase().indexOf(request.term.toUpperCase()) is 0)
             response(matches)
         ,

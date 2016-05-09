@@ -2,7 +2,7 @@
 var iplotPXG;
 
 iplotPXG = function(widgetdiv, data, chartOpts) {
-  var axispos, chartdivid, gen, gnames, height, inferred, j, margin, mychart, nyticks, phe, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, results, title, titlepos, widgetdivid, width, x, xjitter, xlab, y, yNA, ylab, ylim, yticks;
+  var axispos, chartdivid, gen, gnames, height, horizontal, inferred, j, jitter, margin, mychart, nyticks, phe, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, results, title, titlepos, widgetdivid, width, x, xlab, y, yNA, ylab, ylim, yticks;
   gen = (function() {
     var j, len, ref, results;
     ref = data.geno[0];
@@ -32,8 +32,8 @@ iplotPXG = function(widgetdiv, data, chartOpts) {
     }
     return results;
   })())[0];
-  height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 450;
-  width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 300;
+  height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 550;
+  width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 400;
   title = (ref2 = chartOpts != null ? chartOpts.title : void 0) != null ? ref2 : "";
   margin = (ref3 = chartOpts != null ? chartOpts.margin : void 0) != null ? ref3 : {
     left: 60,
@@ -51,7 +51,7 @@ iplotPXG = function(widgetdiv, data, chartOpts) {
     ylabel: 5
   };
   titlepos = (ref7 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref7 : 20;
-  xjitter = (ref8 = chartOpts != null ? chartOpts.xjitter : void 0) != null ? ref8 : null;
+  jitter = (ref8 = chartOpts != null ? chartOpts.xjitter : void 0) != null ? ref8 : "beeswarm";
   ylim = (ref9 = chartOpts != null ? chartOpts.ylim : void 0) != null ? ref9 : null;
   yticks = (ref10 = chartOpts != null ? chartOpts.yticks : void 0) != null ? ref10 : null;
   nyticks = (ref11 = chartOpts != null ? chartOpts.nyticks : void 0) != null ? ref11 : 5;
@@ -65,18 +65,51 @@ iplotPXG = function(widgetdiv, data, chartOpts) {
     width: 15,
     gap: 10
   };
-  chartdivid = (ref17 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref17 : 'chart';
+  horizontal = (ref17 = chartOpts != null ? chartOpts.horizontal : void 0) != null ? ref17 : false;
+  chartdivid = (ref18 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref18 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
-  mychart = dotchart().height(height - margin.top - margin.bottom).width(width - margin.left - margin.right).margin(margin).xcategories((function() {
-    results = [];
-    for (var j = 1, ref18 = gnames.length; 1 <= ref18 ? j <= ref18 : j >= ref18; 1 <= ref18 ? j++ : j--){ results.push(j); }
-    return results;
-  }).apply(this)).xcatlabels(gnames).dataByInd(false).xlab(xlab).ylab(ylab).xvar('geno').yvar('pheno').title(title).axispos(axispos).titlepos(titlepos).xjitter(xjitter).ylim(ylim).yticks(yticks).nyticks(nyticks).rectcolor(rectcolor).pointcolor(pointcolor).pointsize(pointsize).pointstroke(pointstroke).yNA(yNA).tipclass(widgetdivid);
-  d3.select(widgetdiv).select("svg").datum({
-    geno: gen,
-    pheno: phe,
+  mychart = d3panels.dotchart({
+    height: height,
+    width: width,
+    margin: margin,
+    xcategories: (function() {
+      results = [];
+      for (var j = 1, ref19 = gnames.length; 1 <= ref19 ? j <= ref19 : j >= ref19; 1 <= ref19 ? j++ : j--){ results.push(j); }
+      return results;
+    }).apply(this),
+    xcatlabels: gnames,
+    xlab: xlab,
+    ylab: ylab,
+    xNA: {
+      handle: false,
+      force: false
+    },
+    yNA: {
+      handle: yNA.handle,
+      force: yNA.force
+    },
+    yNA_size: {
+      width: yNA.width,
+      gap: yNA.gap
+    },
+    title: title,
+    axispos: axispos,
+    titlepos: titlepos,
+    jitter: jitter,
+    ylim: ylim,
+    yticks: yticks,
+    nyticks: nyticks,
+    rectcolor: rectcolor,
+    pointcolor: pointcolor,
+    pointstroke: pointstroke,
+    pointsize: pointsize,
+    tipclass: widgetdivid
+  });
+  mychart(d3.select(widgetdiv).select("svg"), {
+    x: gen,
+    y: phe,
     indID: data.indID
-  }).call(mychart);
+  });
   return mychart.pointsSelect().attr("fill", function(d, i) {
     if (inferred[i]) {
       return "Orchid";

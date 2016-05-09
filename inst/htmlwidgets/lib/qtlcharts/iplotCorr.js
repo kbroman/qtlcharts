@@ -71,7 +71,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
     return drawScatter(d.col, d.row);
   });
   nGroup = d3.max(data.group);
-  scatcolors = expand2vector(scatcolors);
+  scatcolors = d3panels.expand2vector(scatcolors);
   if (!(scatcolors != null) || scatcolors.length < nGroup) {
     if (nGroup === 1) {
       scatcolors = ["#969696"];
@@ -111,12 +111,12 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
     xticks = xScale.ticks(5);
     yticks = yScale.ticks(5);
     scatterplot.selectAll("empty").data(xticks).enter().append("text").attr("class", "axes").text(function(d) {
-      return formatAxis(xticks)(d);
+      return d3panels.formatAxis(xticks)(d);
     }).attr("x", function(d) {
       return xScale(d);
     }).attr("y", panelheight + margin.bottom * 0.3).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
     scatterplot.selectAll("empty").data(yticks).enter().append("text").attr("class", "axes").text(function(d) {
-      return formatAxis(yticks)(d);
+      return d3panels.formatAxis(yticks)(d);
     }).attr("x", -margin.left * 0.1).attr("y", function(d) {
       return yScale(d);
     }).attr("dominant-baseline", "middle").attr("text-anchor", "end");

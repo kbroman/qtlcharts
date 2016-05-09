@@ -121,7 +121,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
 
     # colors for scatterplot
     nGroup = d3.max(data.group)
-    scatcolors = expand2vector(scatcolors) # make sure it's an array (or null)
+    scatcolors = d3panels.expand2vector(scatcolors) # make sure it's an array (or null)
     if !(scatcolors?) or scatcolors.length < nGroup
         if nGroup == 1
             scatcolors = [ "#969696" ]
@@ -181,7 +181,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                    .enter()
                    .append("text")
                    .attr("class", "axes")
-                   .text((d) -> formatAxis(xticks)(d))
+                   .text((d) -> d3panels.formatAxis(xticks)(d))
                    .attr("x", (d) -> xScale(d))
                    .attr("y", panelheight+margin.bottom*0.3)
                    .attr("dominant-baseline", "middle")
@@ -191,7 +191,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                    .enter()
                    .append("text")
                    .attr("class", "axes")
-                   .text((d) -> formatAxis(yticks)(d))
+                   .text((d) -> d3panels.formatAxis(yticks)(d))
                    .attr("x", -margin.left*0.1)
                    .attr("y", (d) -> yScale(d))
                    .attr("dominant-baseline", "middle")

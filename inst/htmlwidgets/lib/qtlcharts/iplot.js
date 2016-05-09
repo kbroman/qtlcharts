@@ -47,16 +47,51 @@ iplot = function(widgetdiv, data, chartOpts) {
   };
   chartdivid = (ref21 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref21 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
-  mychart = scatterplot().height(height - margin.top - margin.bottom).width(width - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).xlab(xlab).ylab(ylab).title(title).ylim(ylim).xlim(xlim).xticks(xticks).nxticks(nxticks).yticks(yticks).nyticks(nyticks).rectcolor(rectcolor).pointcolor(pointcolor).pointsize(pointsize).pointstroke(pointstroke).rotate_ylab(rotate_ylab).xNA(xNA).yNA(yNA).xvar('x').yvar('y').dataByInd(false).tipclass(widgetdivid);
-  d3.select(widgetdiv).select("svg").datum({
-    data: {
-      x: data.x,
-      y: data.y
+  mychart = d3panels.scatterplot({
+    height: height,
+    width: width,
+    margin: margin,
+    axispos: axispos,
+    titlepos: titlepos,
+    xlab: xlab,
+    ylab: ylab,
+    title: title,
+    ylim: ylim,
+    xlim: xlim,
+    xticks: xticks,
+    nxticks: nxticks,
+    yticks: yticks,
+    nyticks: nyticks,
+    rectcolor: rectcolor,
+    pointcolor: pointcolor,
+    pointsize: pointsize,
+    pointstroke: pointstroke,
+    rotate_ylab: rotate_ylab,
+    xNA: {
+      handle: xNA.handle,
+      force: xNA.force
     },
+    xNA_size: {
+      width: xNA.width,
+      gap: xNA.gap
+    },
+    yNA: {
+      handle: yNA.handle,
+      force: yNA.force
+    },
+    yNA_size: {
+      width: yNA.width,
+      gap: yNA.gap
+    },
+    tipclass: widgetdivid
+  });
+  mychart(d3.select(widgetdiv).select("svg"), {
+    x: data.x,
+    y: data.y,
     group: data.group,
     indID: data.indID
-  }).call(mychart);
-  return mychart.pointsSelect().on("mouseover", function(d) {
+  });
+  return mychart.points().on("mouseover", function(d) {
     return d3.select(this).attr("r", pointsize * 2);
   }).on("mouseout", function(d) {
     return d3.select(this).attr("r", pointsize);

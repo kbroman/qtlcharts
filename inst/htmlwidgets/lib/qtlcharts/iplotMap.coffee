@@ -20,6 +20,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
     title = chartOpts?.title ? "" # title for chart
     xlab = chartOpts?.xlab ? "Chromosome" # x-axis label
     ylab = chartOpts?.ylab ? "Position (cM)" # y-axis label
+    horizontal = chartOpts?.horizontal ? false # if true, have chromosomes on vertical axis and positions horizontally
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -41,6 +42,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
                   title:title
                   xlab:xlab
                   ylab:ylab
+                  horizontal:horizontal
                   tipclass:widgetdivid})
 
     # select htmlwidget div and grab its ID
@@ -58,8 +60,12 @@ iplotMap = (widgetdiv, data, chartOpts) ->
                .html((d) ->
                   pos = d3.format(".1f")(data.pos[data.marker.indexOf(d)])
                   "#{d} (#{pos})")
-               .direction('e')
-               .offset([0,10])
+               .direction(() ->
+                   return 'n' if horizontal
+                   'e')
+               .offset(() ->
+                   return [-10,0] if horizontal
+                   [0,10])
     svg.call(martip)
 
     clean_marker_name = (markername) ->
@@ -124,10 +130,11 @@ iplotMap = (widgetdiv, data, chartOpts) ->
 
     # on hover, remove tool tip from marker search
     markerSelect = mychart.markerSelect()
-    markerSelect.on "mouseover", () ->
+    markerSelect.on "mouseover", (d) ->
         unless selectedMarker == ""
-            div.select("line##{clean_marker_name(selectedMarker)}")
-              .attr("stroke", linecolor)
+            unless selectedMarker == d # de-highlight (if hovering over something other than the selected marker)
+                div.select("line##{clean_marker_name(selectedMarker)}")
+                   .attr("stroke", linecolor)
             martip.hide()
 
 add_search_box = (widgetdiv) ->

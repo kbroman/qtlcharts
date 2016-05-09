@@ -61,7 +61,7 @@ iplotPXG = function(widgetdiv, data, chartOpts) {
     ylabel: 5
   };
   titlepos = (ref7 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref7 : 20;
-  jitter = (ref8 = chartOpts != null ? chartOpts.xjitter : void 0) != null ? ref8 : "beeswarm";
+  jitter = (ref8 = chartOpts != null ? chartOpts.jitter : void 0) != null ? ref8 : "beeswarm";
   ylim = (ref9 = chartOpts != null ? chartOpts.ylim : void 0) != null ? ref9 : null;
   yticks = (ref10 = chartOpts != null ? chartOpts.yticks : void 0) != null ? ref10 : null;
   nyticks = (ref11 = chartOpts != null ? chartOpts.nyticks : void 0) != null ? ref11 : 5;

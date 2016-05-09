@@ -1,6 +1,6 @@
 {
   "name": "d3panels",
-  "version": "0.6.3",
+  "version": "1.0.1",
   "homepage": "https://github.com/kbroman/d3panels",
   "authors": [
     "Karl Broman <kbroman@gmail.com>"
@@ -12,13 +12,18 @@
   ],
   "license": "MIT",
   "ignore": [
-        "**/.*",
-        "Makefile",
-        "ToDo.md",
-        "Web",
-        "doc",
-        "libs",
-        "src",
-        "test"
-  ]
+    "**/.*",
+    "Makefile",
+    "ToDo.md",
+    "Web",
+    "doc",
+    "libs",
+    "src",
+    "test"
+  ],
+  "dependencies": {
+    "d3": "~3.5.5",
+    "d3-tip": "~0.6.7",
+    "colorbrewer": "~1.0.0"
+  }
 }

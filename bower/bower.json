@@ -1,13 +1,13 @@
 {
     "name": "qtlcharts",
-    "version": "0.5-9",
+    "version": "0.7-1",
     "dependencies": {
         "d3": "~3.5.5",
         "colorbrewer": "~1.0.0",
         "jquery": "~2.1.3",
         "jquery-ui": "~1.11.2",
         "d3-tip": "~0.6.7",
-        "d3panels": "~0.6.3"
+        "d3panels": "~1.0.1"
     },
     "private": true
 }

@@ -23,8 +23,8 @@ iboxplot = (widgetdiv, data, chartOpts) ->
     widgetdivid = d3.select(widgetdiv).attr('id')
 
     # make sure histcolors and qucolors are arrays
-    histcolors = forceAsArray(histcolors)
-    qucolors = forceAsArray(qucolors)
+    histcolors = d3panels.forceAsArray(histcolors)
+    qucolors = d3panels.forceAsArray(qucolors)
 
     halfheight = height/2
 
@@ -124,7 +124,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
        .enter()
        .append("text")
        .attr("class", "axis")
-       .text((d) -> formatAxis(LaxisData)(d))
+       .text((d) -> d3panels.formatAxis(LaxisData)(d))
        .attr("x", margin.left*0.9)
        .attr("y", (d) -> yScale(d))
        .attr("dominant-baseline", "middle")
@@ -317,7 +317,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
             .enter()
             .append("text")
             .attr("class", "axis")
-            .text((d) -> formatAxis(lowBaxisData)(d))
+            .text((d) -> d3panels.formatAxis(lowBaxisData)(d))
             .attr("y", halfheight-margin.bottom*0.75)
             .attr("x", (d) -> lowxScale(d))
             .attr("dominant-baseline", "middle")

@@ -18,8 +18,8 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   histcolors = (ref7 = chartOpts != null ? chartOpts.histcolors : void 0) != null ? ref7 : ["#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black"];
   chartdivid = (ref8 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref8 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
-  histcolors = forceAsArray(histcolors);
-  qucolors = forceAsArray(qucolors);
+  histcolors = d3panels.forceAsArray(histcolors);
+  qucolors = d3panels.forceAsArray(qucolors);
   halfheight = height / 2;
   topylim = [data.quant[0][0], data.quant[0][0]];
   for (i in data.quant) {
@@ -84,7 +84,7 @@ iboxplot = function(widgetdiv, data, chartOpts) {
     return yScale(d);
   }).attr("stroke", "white").attr("pointer-events", "none");
   Laxis.append("g").selectAll("empty").data(LaxisData).enter().append("text").attr("class", "axis").text(function(d) {
-    return formatAxis(LaxisData)(d);
+    return d3panels.formatAxis(LaxisData)(d);
   }).attr("x", margin.left * 0.9).attr("y", function(d) {
     return yScale(d);
   }).attr("dominant-baseline", "middle").attr("text-anchor", "end");
@@ -174,7 +174,7 @@ iboxplot = function(widgetdiv, data, chartOpts) {
     return lowxScale(d);
   }).attr("stroke", "white");
   lowBaxis.append("g").selectAll("empty").data(lowBaxisData).enter().append("text").attr("class", "axis").text(function(d) {
-    return formatAxis(lowBaxisData)(d);
+    return d3panels.formatAxis(lowBaxisData)(d);
   }).attr("y", halfheight - margin.bottom * 0.75).attr("x", function(d) {
     return lowxScale(d);
   }).attr("dominant-baseline", "middle").attr("text-anchor", "middle");

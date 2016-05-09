@@ -1,16 +1,21 @@
 {
   "name": "d3panels",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "description": "D3-based graphics panels",
   "homepage": "https://github.com/kbroman/d3panels",
   "authors": [
     "Karl Broman <kbroman@gmail.com>"
   ],
-  "description": "D3-based graphics panels",
+  "license": "MIT",
+  "dependencies": {
+    "d3": "~3.5.17",
+    "d3-tip": "~0.6.7",
+    "colorbrewer": "~1.0.0"
+  },
   "main": "d3panels.js",
   "keywords": [
     "graphics"
   ],
-  "license": "MIT",
   "ignore": [
     "**/.*",
     "Makefile",
@@ -21,9 +26,7 @@
     "src",
     "test"
   ],
-  "dependencies": {
-    "d3": "~3.5.5",
-    "d3-tip": "~0.6.7",
-    "colorbrewer": "~1.0.0"
+  "resolutions": {
+    "d3": "~3.5.17"
   }
 }

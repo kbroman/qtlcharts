@@ -5,6 +5,8 @@ iplotPXG = (widgetdiv, data, chartOpts) ->
 
     gen = (Math.abs(x) for x in data.geno[0])
     inferred = (x < 0 for x in data.geno[0])
+    group = (i+1 for i in inferred)
+    console.log(group)
     phe = data.pheno
     gnames = (data.genonames[y] for y of data.genonames)[0]
 
@@ -53,12 +55,13 @@ iplotPXG = (widgetdiv, data, chartOpts) ->
         pointcolor:pointcolor
         pointstroke:pointstroke
         pointsize:pointsize
+        horizontal:horizontal
         tipclass:widgetdivid})
 
-    mychart(d3.select(widgetdiv).select("svg"), {x:gen, y:phe, indID:data.indID})
+    mychart(d3.select(widgetdiv).select("svg"), {x:gen, y:phe, indID:data.indID, group:group})
 
     # animate points at markers on click
-    mychart.pointsSelect()
+    mychart.points()
                 .attr("fill", (d,i) ->
                       return "Orchid" if inferred[i]
                       "slateblue")

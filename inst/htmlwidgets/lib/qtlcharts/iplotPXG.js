@@ -2,7 +2,7 @@
 var iplotPXG;
 
 iplotPXG = function(widgetdiv, data, chartOpts) {
-  var axispos, chartdivid, gen, gnames, height, horizontal, inferred, j, jitter, margin, mychart, nyticks, phe, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, results, title, titlepos, widgetdivid, width, x, xlab, y, yNA, ylab, ylim, yticks;
+  var axispos, chartdivid, gen, gnames, group, height, horizontal, i, inferred, j, jitter, margin, mychart, nyticks, phe, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, results, title, titlepos, widgetdivid, width, x, xlab, y, yNA, ylab, ylim, yticks;
   gen = (function() {
     var j, len, ref, results;
     ref = data.geno[0];
@@ -23,6 +23,16 @@ iplotPXG = function(widgetdiv, data, chartOpts) {
     }
     return results;
   })();
+  group = (function() {
+    var j, len, results;
+    results = [];
+    for (j = 0, len = inferred.length; j < len; j++) {
+      i = inferred[j];
+      results.push(i + 1);
+    }
+    return results;
+  })();
+  console.log(group);
   phe = data.pheno;
   gnames = ((function() {
     var results;
@@ -103,14 +113,16 @@ iplotPXG = function(widgetdiv, data, chartOpts) {
     pointcolor: pointcolor,
     pointstroke: pointstroke,
     pointsize: pointsize,
+    horizontal: horizontal,
     tipclass: widgetdivid
   });
   mychart(d3.select(widgetdiv).select("svg"), {
     x: gen,
     y: phe,
-    indID: data.indID
+    indID: data.indID,
+    group: group
   });
-  return mychart.pointsSelect().attr("fill", function(d, i) {
+  return mychart.points().attr("fill", function(d, i) {
     if (inferred[i]) {
       return "Orchid";
     }

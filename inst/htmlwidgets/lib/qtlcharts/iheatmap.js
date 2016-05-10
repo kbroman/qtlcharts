@@ -127,7 +127,7 @@ iheatmap = function(widgetdiv, data, chartOpts) {
   verslice(g_verslice);
   formatX = d3panels.formatAxis(data.x);
   formatY = d3panels.formatAxis(data.y);
-  cells = myheatmap.cellSelect().on("mouseover", function(d, i) {
+  cells = myheatmap.cells().on("mouseover", function(d, i) {
     g_verslice.select("g.title text").text("X = " + (formatX(d.x)));
     g_horslice.select("g.title text").text("Y = " + (formatY(d.y)));
     plotVer(d.xindex);

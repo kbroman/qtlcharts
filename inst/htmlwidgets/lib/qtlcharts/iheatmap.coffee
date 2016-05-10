@@ -136,7 +136,7 @@ iheatmap = (widgetdiv, data, chartOpts) ->
     formatX = d3panels.formatAxis(data.x)
     formatY = d3panels.formatAxis(data.y)
 
-    cells = myheatmap.cellSelect()
+    cells = myheatmap.cells()
                      .on "mouseover", (d,i) ->
                              g_verslice.select("g.title text").text("X = #{formatX(d.x)}")
                              g_horslice.select("g.title text").text("Y = #{formatY(d.y)}")

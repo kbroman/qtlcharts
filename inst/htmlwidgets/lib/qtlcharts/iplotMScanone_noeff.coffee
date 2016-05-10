@@ -21,9 +21,10 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     lod_ylab = chartOpts?.lod_ylab ? "" # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
     linecolor = chartOpts?.linecolor ? "darkslateblue" # color of LOD curves
     linewidth = chartOpts?.linewidth ? 2 # width of LOD curves
-    pointcolor = chartOpts?.pointcolor ? "slateblue" # color of points at markers in LOD curves
-    pointsize = chartOpts?.pointsize ? 0 # size of points in LOD curves (default = 0 corresponding to no visible points at markers)
-    pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle for points at markers
+    pointsize = chartOpts?.pointsize ? 0 # size of points in vertical slice (default = 0 corresponds plotting curves rather than points)
+    pointcolor = chartOpts?.pointcolor ? "slateblue" # color of points in vertical slice
+    pointcolorhilit = chartOpts?.pointcolorhilit ? "Orchid" # color of highlighted point in vertical slice
+    pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle for points in vertical slice
     nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis on right-hand panel, if quantitative scale
     xticks = chartOpts?.xticks ? null # tick positions in x-axis on right-hand panel, if quantitative scale
     # chartOpts end
@@ -108,9 +109,9 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         horslice = d3panels.add_lodcurve({
             linecolor: linecolor
             linewidth: linewidth
-            pointsize: pointsize
-            pointcolor: pointcolor
-            pointstroke: pointstroke})
+            pointsize: 0
+            pointcolor: ""
+            pointstroke: ""})
         horslice(horpanel, {
             chr:lod_data.chr
             pos:lod_data.pos
@@ -154,12 +155,21 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     # plot lod versus phenotype curve
     verslice = null
     plotVerSlice = (posindex, lodindex) ->
-        verslice = d3panels.add_curves({
-            linecolor:linecolor
-            linewidth:linewidth})
-        verslice(verpanel, {
-            x:[x]
-            y:[(lod_data.lod[posindex][i] for i of lod_data.lod[posindex])]})
+        if pointsize > 0 # plot points rather than curves
+            verslice = d3panels.add_points({
+                pointsize:pointsize
+                pointcolor:pointcolor
+                pointstroke:pointstroke})
+            verslice(verpanel, {
+                x:x
+                y:(lod_data.lod[posindex][i] for i of lod_data.lod[posindex])})
+        else             # plot curves rather than points
+            verslice = d3panels.add_curves({
+                linecolor:linecolor
+                linewidth:linewidth})
+            verslice(verpanel, {
+                x:[x]
+                y:[(lod_data.lod[posindex][i] for i of lod_data.lod[posindex])]})
 
     mylodheatmap.cells()
                 .on "mouseover", (d) ->
@@ -171,9 +181,16 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
                          unless times?
                              verpanel_axis_text.text("#{lod_data.lodname[d.lodindex]}")
                                                .attr("x", verpanel_xscale(d.lodindex))
+                         if pointsize > 0
+                             verslice.points()
+                                     .attr("fill", (z,i) ->
+                                         return pointcolorhilit if i==d.lodindex
+                                         pointcolor)
                 .on "mouseout", (d) ->
                          horslice.remove() if horslice?
                          verslice.remove() if verslice?
                          g_horpanel.select("g.title text").text("")
                          g_verpanel.select("g.title text").text("")
                          verpanel_axis_text.text("") unless times?
+                         if pointsize > 0
+                             verslice.points().attr("fill", pointcolor)

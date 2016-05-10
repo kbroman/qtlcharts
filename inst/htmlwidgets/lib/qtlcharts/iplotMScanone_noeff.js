@@ -2,7 +2,7 @@
 var iplotMScanone_noeff;
 
 iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
-  var altrectcolor, axispos, c, chartdivid, chrGap, colors, g_heatmap, g_horpanel, g_verpanel, hbot, height, horpanel, horslice, htop, i, j, k, len, len1, linecolor, linewidth, lod_ylab, margin, mylodheatmap, nullcolor, nxticks, plotHorSlice, plotVerSlice, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref3, ref4, ref5, ref6, ref7, ref8, ref9, svg, these_pos, titlepos, verpanel, verpanel_axis_text, verpanel_xscale, verslice, widgetdivid, width, wleft, wright, x, xlim, xticks, zlim, zmax, zthresh;
+  var altrectcolor, axispos, c, chartdivid, chrGap, colors, g_heatmap, g_horpanel, g_verpanel, hbot, height, horpanel, horslice, htop, i, j, k, len, len1, linecolor, linewidth, lod_ylab, margin, mylodheatmap, nullcolor, nxticks, plotHorSlice, plotVerSlice, pointcolor, pointcolorhilit, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref3, ref4, ref5, ref6, ref7, ref8, ref9, svg, these_pos, titlepos, verpanel, verpanel_axis_text, verpanel_xscale, verslice, widgetdivid, width, wleft, wright, x, xlim, xticks, zlim, zmax, zthresh;
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 700;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000;
   wleft = (ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? ref2 : width * 0.65;
@@ -31,12 +31,13 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   lod_ylab = (ref14 = chartOpts != null ? chartOpts.lod_ylab : void 0) != null ? ref14 : "";
   linecolor = (ref15 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref15 : "darkslateblue";
   linewidth = (ref16 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref16 : 2;
-  pointcolor = (ref17 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? ref17 : "slateblue";
-  pointsize = (ref18 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref18 : 0;
-  pointstroke = (ref19 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref19 : "black";
-  nxticks = (ref20 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref20 : 5;
-  xticks = (ref21 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref21 : null;
-  chartdivid = (ref22 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref22 : 'chart';
+  pointsize = (ref17 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref17 : 0;
+  pointcolor = (ref18 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? ref18 : "slateblue";
+  pointcolorhilit = (ref19 = chartOpts != null ? chartOpts.pointcolorhilit : void 0) != null ? ref19 : "crimson";
+  pointstroke = (ref20 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref20 : "black";
+  nxticks = (ref21 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref21 : 5;
+  xticks = (ref22 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref22 : null;
+  chartdivid = (ref23 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref23 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   wright = width - wleft;
   hbot = height - htop;
@@ -60,9 +61,9 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   }
   if (lod_data.chrstart == null) {
     lod_data.chrstart = [];
-    ref23 = lod_data.chrname;
-    for (j = 0, len = ref23.length; j < len; j++) {
-      c = ref23[j];
+    ref24 = lod_data.chrname;
+    for (j = 0, len = ref24.length; j < len; j++) {
+      c = ref24[j];
       these_pos = (function() {
         var results;
         results = [];
@@ -78,9 +79,9 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   }
   if (lod_data.chrend == null) {
     lod_data.chrend = [];
-    ref24 = lod_data.chrname;
-    for (k = 0, len1 = ref24.length; k < len1; k++) {
-      c = ref24[k];
+    ref25 = lod_data.chrname;
+    for (k = 0, len1 = ref25.length; k < len1; k++) {
+      c = ref25[k];
       these_pos = (function() {
         var results;
         results = [];
@@ -137,9 +138,9 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     horslice = d3panels.add_lodcurve({
       linecolor: linecolor,
       linewidth: linewidth,
-      pointsize: pointsize,
-      pointcolor: pointcolor,
-      pointstroke: pointstroke
+      pointsize: 0,
+      pointcolor: "",
+      pointstroke: ""
     });
     return horslice(horpanel, {
       chr: lod_data.chr,
@@ -188,14 +189,15 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   }
   verslice = null;
   plotVerSlice = function(posindex, lodindex) {
-    verslice = d3panels.add_curves({
-      linecolor: linecolor,
-      linewidth: linewidth
-    });
-    return verslice(verpanel, {
-      x: [x],
-      y: [
-        (function() {
+    if (pointsize > 0) {
+      verslice = d3panels.add_points({
+        pointsize: pointsize,
+        pointcolor: pointcolor,
+        pointstroke: pointstroke
+      });
+      return verslice(verpanel, {
+        x: x,
+        y: (function() {
           var results;
           results = [];
           for (i in lod_data.lod[posindex]) {
@@ -203,8 +205,26 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
           }
           return results;
         })()
-      ]
-    });
+      });
+    } else {
+      verslice = d3panels.add_curves({
+        linecolor: linecolor,
+        linewidth: linewidth
+      });
+      return verslice(verpanel, {
+        x: [x],
+        y: [
+          (function() {
+            var results;
+            results = [];
+            for (i in lod_data.lod[posindex]) {
+              results.push(lod_data.lod[posindex][i]);
+            }
+            return results;
+          })()
+        ]
+      });
+    }
   };
   return mylodheatmap.cells().on("mouseover", function(d) {
     var p;
@@ -214,7 +234,15 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     p = d3.format(".1f")(d.pos);
     g_verpanel.select("g.title text").text(d.chr + "@" + p);
     if (times == null) {
-      return verpanel_axis_text.text("" + lod_data.lodname[d.lodindex]).attr("x", verpanel_xscale(d.lodindex));
+      verpanel_axis_text.text("" + lod_data.lodname[d.lodindex]).attr("x", verpanel_xscale(d.lodindex));
+    }
+    if (pointsize > 0) {
+      return verslice.points().attr("fill", function(z, i) {
+        if (i === d.lodindex) {
+          return pointcolorhilit;
+        }
+        return pointcolor;
+      });
     }
   }).on("mouseout", function(d) {
     if (horslice != null) {
@@ -226,7 +254,10 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     g_horpanel.select("g.title text").text("");
     g_verpanel.select("g.title text").text("");
     if (times == null) {
-      return verpanel_axis_text.text("");
+      verpanel_axis_text.text("");
+    }
+    if (pointsize > 0) {
+      return verslice.points().attr("fill", pointcolor);
     }
   });
 };

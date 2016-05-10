@@ -47,7 +47,7 @@ customization options for each chart.
 
 `wleft = width/2` &mdash; width of left charts in pixels
 
-`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+`margin = list(left=60, top=40, right=40, bottom=40, inner=0)` &mdash; margins in pixels (left, top, right, bottom, inner)
 
 `axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
 
@@ -57,9 +57,9 @@ customization options for each chart.
 
 `nullcolor = "#E6E6E6"` &mdash; color of pixels with null values
 
-`strokecolor = "slateblue"` &mdash; line color
+`linecolor = "slateblue"` &mdash; line color
 
-`strokewidth = 2` &mdash; line width
+`linewidth = 2` &mdash; line width
 
 `xlim = NULL` &mdash; x-axis limits
 
@@ -87,9 +87,11 @@ customization options for each chart.
 
 `zthresh = NULL` &mdash; lower threshold for plotting in heat map: only values with |z| > zthresh are shown
 
-`zlim = c(-max(z), 0, max(z))` &mdash; z-axis limits
+`zlim = c(-d3panels.max(z), 0, d3panels.max(z))` &mdash; z-axis limits
 
 `colors = c("slateblue", "white", "crimson")` &mdash; heat map colors (same length as `zlim`)
+
+`flip_vert_slice = false` &mdash; if true, flip the y- and z- axes in the vertical slice
 
 ### `iplot`
 
@@ -197,13 +199,13 @@ customization options for each chart.
 
 `pointsizehilit = 6` &mdash; zie of points in scatterplot, when highlighted
 
-`strokecolor = NULL` &mdash; vector of colors of curves
+`linecolor = NULL` &mdash; vector of colors of curves
 
-`strokecolorhilit = NULL` &mdash; vector of colors of curves, when highlighted
+`linecolorhilit = NULL` &mdash; vector of colors of curves, when highlighted
 
-`strokewidth = 2` &mdash; line width of curves
+`linewidth = 2` &mdash; line width of curves
 
-`strokewidthhilit = 2` &mdash; line widths of curves, when highlighted
+`linewidthhilit = 2` &mdash; line widths of curves, when highlighted
 
 `curves_xlim = NULL` &mdash; x-axis limits in curve plot
 
@@ -285,6 +287,8 @@ customization options for each chart.
 
 `yticks = NULL` &mdash; vector of tick positions on y-axis
 
+`xlineOpts = list(color="#cdcdcd", width=5)` &mdash; color and width of vertical lines
+
 `tickwidth = 10` &mdash; width of tick marks at markers, in pixels
 
 `rectcolor = "#E6E6E6"` &mdash; color of background rectangle
@@ -300,6 +304,10 @@ customization options for each chart.
 `xlab = "Chromosome"` &mdash; x-axis label
 
 `ylab = "Position (cM)"` &mdash; y-axis label
+
+`shiftStart = false` &mdash; if true, shift the start of chromosomes to 0
+
+`horizontal = false` &mdash; if true, have chromosomes on vertical axis and positions horizontally
 
 ### `iplotScanone` (no effects)
 

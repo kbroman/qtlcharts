@@ -14,11 +14,15 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     chrGap = chartOpts?.chrGap ? 8 # gap between chromosomes in pixels
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of lighter background rectangle
     altrectcolor = chartOpts?.altrectcolor ? "#C8C8C8" # color of darker background rectangle
+    chrlinecolor = chartOpts?.chrlinecolor ? ""        # color of lines between chromosomes (if "", leave off)
+    chrlinewidth = chartOpts?.chrlinewidth ? 2         # width of lines between chromosomes
     nullcolor = chartOpts?.nullcolor ? "#E6E6E6" # color for pixels with null values
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors
     zlim = chartOpts?.zlim ? null # z-axis limits
     zthresh = chartOpts?.zthresh ? null # lower z-axis threshold for display in heat map
-    lod_ylab = chartOpts?.lod_ylab ? "" # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
+    xlab = chartOpts?.xlab ? "Chromosome" # x-axis label for LOD heatmap)
+    ylab = chartOpts?.ylab ? "" # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
+    zlab = chartOpts?.zlab ? "LOD score" # z-axis label for LOD heatmap (really just used as y-axis label in the two slices)
     linecolor = chartOpts?.linecolor ? "darkslateblue" # color of LOD curves
     linewidth = chartOpts?.linewidth ? 2 # width of LOD curves
     pointsize = chartOpts?.pointsize ? 0 # size of points in vertical slice (default = 0 corresponds plotting curves rather than points)
@@ -70,10 +74,12 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         chrGap:chrGap
         rectcolor:rectcolor
         altrectcolor:altrectcolor
+        chrlinecolor:chrlinecolor
+        chrlinewidth:chrlinewidth
         colors:colors
         zlim:zlim
         zthresh:zthresh
-        ylab:lod_ylab
+        ylab:ylab
         nullcolor:nullcolor
         tipclass:widgetdivid})
 
@@ -93,6 +99,8 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         chrGap:chrGap
         rectcolor:rectcolor
         altrectcolor:altrectcolor
+        chrlinecolor:chrlinecolor
+        chrlinewidth:chrlinewidth
         ylim:[0, zlim[2]*1.05]
         pointsAtMarkers:false
         tipclass:widgetdivid})
@@ -107,6 +115,8 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     horslice = null
     plotHorSlice = (lodcolumn) ->
         horslice = d3panels.add_lodcurve({
+            xlab:xlab
+            ylab:zlab
             linecolor: linecolor
             linewidth: linewidth
             pointsize: 0
@@ -129,8 +139,8 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         margin:margin
         axispos:axispos
         titlepos:titlepos
-        xlab:lod_ylab
-        ylab:"LOD score"
+        xlab:ylab
+        ylab:zlab
         rectcolor:rectcolor
         xlim: xlim
         ylim:[0, zlim[2]*1.05]

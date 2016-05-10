@@ -230,21 +230,25 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
         var results;
         results = [];
         for (i in eff_data[posindex].names) {
-          results.push(i + 1);
+          results.push(+i + 1);
         }
         return results;
       })()
     });
     verslice.push(this_slice);
-    return effect_text = g_verpanel.append("g").attr("id", "effect_text").selectAll("empty").data(eff_data[posindex].names).enter().append("text").text(function(d) {
-      return d;
-    }).attr("x", function(d, i) {
-      return margin.left + wright + axispos.ylabel;
-    }).attr("y", function(d, i) {
-      var z;
-      z = eff_data[posindex].data[i];
-      return verpanel.yscale()(z[z.length - 1]);
-    }).style("dominant-baseline", "middle").style("text-anchor", "start");
+    if (eff_data[posindex].names.length > 1) {
+      return effect_text = g_verpanel.append("g").attr("id", "effect_text").selectAll("empty").data(eff_data[posindex].names).enter().append("text").text(function(d) {
+        return d;
+      }).attr("x", function(d, i) {
+        return wright - margin.right + axispos.ylabel;
+      }).attr("y", function(d, i) {
+        var z;
+        z = eff_data[posindex].data[i];
+        return verpanel.yscale()(z[z.length - 1]);
+      }).attr("fill", function(d, i) {
+        return eff_linecolor[i];
+      }).style("dominant-baseline", "middle").style("text-anchor", "start");
+    }
   };
   return mylodheatmap.cells().on("mouseover", function(d) {
     var p;

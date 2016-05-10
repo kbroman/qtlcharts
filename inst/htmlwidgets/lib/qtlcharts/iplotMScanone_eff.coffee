@@ -191,22 +191,24 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
         this_slice(verpanel, {
             x:[x],
             y:eff_data[posindex].data,
-            group:(i+1 for i of eff_data[posindex].names)})
+            group:(+i+1 for i of eff_data[posindex].names)})
         verslice.push(this_slice)
 
         # label on each curve
-        effect_text = g_verpanel.append("g").attr("id", "effect_text")
-                                .selectAll("empty")
-                                .data(eff_data[posindex].names)
-                                .enter()
-                                .append("text")
-                                .text((d) -> d)
-                                .attr("x", (d,i) -> margin.left + wright + axispos.ylabel)
-                                .attr("y", (d,i) ->
-                                     z = eff_data[posindex].data[i]
-                                     verpanel.yscale()(z[z.length-1]))
-                                .style("dominant-baseline", "middle")
-                                .style("text-anchor", "start")
+        if eff_data[posindex].names.length > 1 # label the curves only if there's >1
+            effect_text = g_verpanel.append("g").attr("id", "effect_text")
+                                    .selectAll("empty")
+                                    .data(eff_data[posindex].names)
+                                    .enter()
+                                    .append("text")
+                                    .text((d) -> d)
+                                    .attr("x", (d,i) -> wright-margin.right + axispos.ylabel)
+                                    .attr("y", (d,i) ->
+                                         z = eff_data[posindex].data[i]
+                                         verpanel.yscale()(z[z.length-1]))
+                                    .attr("fill", (d,i) -> eff_linecolor[i])
+                                    .style("dominant-baseline", "middle")
+                                    .style("text-anchor", "start")
 
     mylodheatmap.cells()
                 .on "mouseover", (d) ->

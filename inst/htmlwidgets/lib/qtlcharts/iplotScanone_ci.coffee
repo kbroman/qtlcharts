@@ -13,8 +13,8 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     lod_axispos = chartOpts?.lod_axispos ? chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
     lod_titlepos = chartOpts?.lod_titlepos ? chartOpts?.titlepos ? 20 # position of title for LOD curve panel, in pixels
     chrGap = chartOpts?.chrGap ? 8 # gap between chromosomes
-    darkrect = chartOpts?.darkrect ? "#C8C8C8" # color of darker background rectangle
-    lightrect = chartOpts?.lightrect ? "#E6E6E6" # color of lighter background rectangle
+    rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of lighter background rectangle
+    altrectcolor = chartOpts?.altrectcolor ? "#C8C8C8" # color of darker background rectangle
     lod_ylim = chartOpts?.lod_ylim ? null # y-axis limits in LOD curve panel
     lod_nyticks = chartOpts?.lod_nyticks ? 5 # number of ticks in y-axis in LOD curve panel
     lod_yticks = chartOpts?.lod_yticks ? null # vector of tick positions for y-axis in LOD curve panel
@@ -44,35 +44,34 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
     wright = width - wleft
 
-    mylodchart = lodchart().lodvarname("lod")
-                           .height(height-margin.top-margin.right)
-                           .width(wleft-margin.left-margin.right)
-                           .margin(margin)
-                           .axispos(lod_axispos)
-                           .titlepos(lod_titlepos)
-                           .chrGap(chrGap)
-                           .darkrect(darkrect)
-                           .lightrect(lightrect)
-                           .ylim(lod_ylim)
-                           .nyticks(lod_nyticks)
-                           .yticks(lod_yticks)
-                           .linecolor(lod_linecolor)
-                           .linewidth(lod_linewidth)
-                           .pointcolor(lod_pointcolor)
-                           .pointsize(lod_pointsize)
-                           .pointstroke(lod_pointstroke)
-                           .title(lod_title)
-                           .xlab(lod_xlab)
-                           .ylab(lod_ylab)
-                           .rotate_ylab(lod_rotate_ylab)
-                           .tipclass(widgetdivid)
+    mylodchart = d3panels.lodchart({
+        height:height
+        width:wleft
+        margin:margin
+        axispos:lod_axispos
+        titlepos:lod_titlepos
+        chrGap:chrGap
+        altrectcolor:altrectcolor
+        rectcolor:rectcolor
+        ylim:lod_ylim
+        nyticks:lod_nyticks
+        yticks:lod_yticks
+        linecolor:lod_linecolor
+        linewidth:lod_linewidth
+        pointcolor:lod_pointcolor
+        pointsize:lod_pointsize
+        pointstroke:lod_pointstroke
+        title:lod_title
+        xlab:lod_xlab
+        ylab:lod_ylab
+        rotate_ylab:lod_rotate_ylab
+        tipclass:widgetdivid})
 
     svg = d3.select(widgetdiv).select("svg")
 
     g_lod = svg.append("g")
                .attr("id", "lodchart")
-               .datum(lod_data)
-               .call(mylodchart)
+    mylodchart(g_lod, lod_data)
 
     mycichart = null
     plotCI = (markername, markerindex) ->
@@ -110,30 +109,31 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         else
             eff_ylim = range
 
-        mycichart = cichart().height(height-margin.top-margin.bottom)
-                             .width(wright-margin.left-margin.right)
-                             .margin(margin)
-                             .axispos(eff_axispos)
-                             .titlepos(eff_titlepos)
-                             .title(markername)
-                             .xlab(eff_xlab)
-                             .ylab(eff_ylab)
-                             .rotate_ylab(eff_rotate_ylab)
-                             .ylim(eff_ylim)
-                             .nyticks(eff_nyticks)
-                             .yticks(eff_yticks)
-                             .segcolor(eff_linecolor)
-                             .vertsegcolor(eff_linecolor)
-                             .segstrokewidth(eff_linewidth)
-                             .segwidth(eff_segwidth)
-                             .rectcolor(lightrect)
-                             .tipclass(widgetdivid)
+        mycichart = d3panels.cichart({
+            height:height
+            width:wright
+            margin:margin
+            axispos:eff_axispos
+            titlepos:eff_titlepos
+            title:markername
+            xlab:eff_xlab
+            ylab:eff_ylab
+            rotate_ylab:eff_rotate_ylab
+            ylim:eff_ylim
+            nyticks:eff_nyticks
+            yticks:eff_yticks
+            segcolor:eff_linecolor
+            vertsegcolor:eff_linecolor
+            segstrokewidth:eff_linewidth
+            segwidth:eff_segwidth
+            rectcolor:rectcolor
+            tipclass:widgetdivid
+            xcatlabels:genonames})
 
-        svg.append("g")
+        ci_g = svg.append("g")
            .attr("id", "cichart")
            .attr("transform", "translate(#{wleft},0)")
-           .datum({'means':means, 'low':low, 'high':high, 'categories':genonames})
-           .call(mycichart)
+        mycichart(ci_g, {'mean':means, 'low':low, 'high':high})
 
     # animate points at markers on click
     mylodchart.markerSelect()

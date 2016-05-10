@@ -2,7 +2,7 @@
 var iplotScanone_ci;
 
 iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
-  var chartdivid, chrGap, darkrect, eff_axispos, eff_linecolor, eff_linewidth, eff_nyticks, eff_rotate_ylab, eff_segwidth, eff_titlepos, eff_xlab, eff_ylab, eff_ylim, eff_yticks, g_lod, height, lightrect, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_pointcolor, lod_pointsize, lod_pointstroke, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, markers, mycichart, mylodchart, plotCI, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref4, ref5, ref6, ref7, ref8, ref9, svg, widgetdivid, width, wleft, wright, x;
+  var altrectcolor, chartdivid, chrGap, eff_axispos, eff_linecolor, eff_linewidth, eff_nyticks, eff_rotate_ylab, eff_segwidth, eff_titlepos, eff_xlab, eff_ylab, eff_ylim, eff_yticks, g_lod, height, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_pointcolor, lod_pointsize, lod_pointstroke, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, markers, mycichart, mylodchart, plotCI, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref4, ref5, ref6, ref7, ref8, ref9, svg, widgetdivid, width, wleft, wright, x;
   markers = (function() {
     var results;
     results = [];
@@ -29,8 +29,8 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   };
   lod_titlepos = (ref6 = (ref7 = chartOpts != null ? chartOpts.lod_titlepos : void 0) != null ? ref7 : chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref6 : 20;
   chrGap = (ref8 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref8 : 8;
-  darkrect = (ref9 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? ref9 : "#C8C8C8";
-  lightrect = (ref10 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? ref10 : "#E6E6E6";
+  rectcolor = (ref9 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref9 : "#E6E6E6";
+  altrectcolor = (ref10 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref10 : "#C8C8C8";
   lod_ylim = (ref11 = chartOpts != null ? chartOpts.lod_ylim : void 0) != null ? ref11 : null;
   lod_nyticks = (ref12 = chartOpts != null ? chartOpts.lod_nyticks : void 0) != null ? ref12 : 5;
   lod_yticks = (ref13 = chartOpts != null ? chartOpts.lod_yticks : void 0) != null ? ref13 : null;
@@ -62,12 +62,35 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   chartdivid = (ref36 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref36 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   wright = width - wleft;
-  mylodchart = lodchart().lodvarname("lod").height(height - margin.top - margin.right).width(wleft - margin.left - margin.right).margin(margin).axispos(lod_axispos).titlepos(lod_titlepos).chrGap(chrGap).darkrect(darkrect).lightrect(lightrect).ylim(lod_ylim).nyticks(lod_nyticks).yticks(lod_yticks).linecolor(lod_linecolor).linewidth(lod_linewidth).pointcolor(lod_pointcolor).pointsize(lod_pointsize).pointstroke(lod_pointstroke).title(lod_title).xlab(lod_xlab).ylab(lod_ylab).rotate_ylab(lod_rotate_ylab).tipclass(widgetdivid);
+  mylodchart = d3panels.lodchart({
+    height: height,
+    width: wleft,
+    margin: margin,
+    axispos: lod_axispos,
+    titlepos: lod_titlepos,
+    chrGap: chrGap,
+    altrectcolor: altrectcolor,
+    rectcolor: rectcolor,
+    ylim: lod_ylim,
+    nyticks: lod_nyticks,
+    yticks: lod_yticks,
+    linecolor: lod_linecolor,
+    linewidth: lod_linewidth,
+    pointcolor: lod_pointcolor,
+    pointsize: lod_pointsize,
+    pointstroke: lod_pointstroke,
+    title: lod_title,
+    xlab: lod_xlab,
+    ylab: lod_ylab,
+    rotate_ylab: lod_rotate_ylab,
+    tipclass: widgetdivid
+  });
   svg = d3.select(widgetdiv).select("svg");
-  g_lod = svg.append("g").attr("id", "lodchart").datum(lod_data).call(mylodchart);
+  g_lod = svg.append("g").attr("id", "lodchart");
+  mylodchart(g_lod, lod_data);
   mycichart = null;
   plotCI = function(markername, markerindex) {
-    var ave, chr, chrtype, g, gabs, genonames, high, i, j, k, low, means, p, phesub, range, ref37, se, variance;
+    var ave, chr, chrtype, ci_g, g, gabs, genonames, high, i, j, k, low, means, p, phesub, range, ref37, se, variance;
     if (mycichart != null) {
       mycichart.remove();
     }
@@ -138,13 +161,33 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     } else {
       eff_ylim = range;
     }
-    mycichart = cichart().height(height - margin.top - margin.bottom).width(wright - margin.left - margin.right).margin(margin).axispos(eff_axispos).titlepos(eff_titlepos).title(markername).xlab(eff_xlab).ylab(eff_ylab).rotate_ylab(eff_rotate_ylab).ylim(eff_ylim).nyticks(eff_nyticks).yticks(eff_yticks).segcolor(eff_linecolor).vertsegcolor(eff_linecolor).segstrokewidth(eff_linewidth).segwidth(eff_segwidth).rectcolor(lightrect).tipclass(widgetdivid);
-    return svg.append("g").attr("id", "cichart").attr("transform", "translate(" + wleft + ",0)").datum({
-      'means': means,
+    mycichart = d3panels.cichart({
+      height: height,
+      width: wright,
+      margin: margin,
+      axispos: eff_axispos,
+      titlepos: eff_titlepos,
+      title: markername,
+      xlab: eff_xlab,
+      ylab: eff_ylab,
+      rotate_ylab: eff_rotate_ylab,
+      ylim: eff_ylim,
+      nyticks: eff_nyticks,
+      yticks: eff_yticks,
+      segcolor: eff_linecolor,
+      vertsegcolor: eff_linecolor,
+      segstrokewidth: eff_linewidth,
+      segwidth: eff_segwidth,
+      rectcolor: rectcolor,
+      tipclass: widgetdivid,
+      xcatlabels: genonames
+    });
+    ci_g = svg.append("g").attr("id", "cichart").attr("transform", "translate(" + wleft + ",0)");
+    return mycichart(ci_g, {
+      'mean': means,
       'low': low,
-      'high': high,
-      'categories': genonames
-    }).call(mycichart);
+      'high': high
+    });
   };
   return mylodchart.markerSelect().on("click", function(d, i) {
     return plotCI(markers[i], i);

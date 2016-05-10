@@ -29,14 +29,20 @@ function(output)
     pmarkers <- grep("^c.+\\.loc-*[0-9]+", mnames)
     mnames[pmarkers] <- ""
 
+    # chromosome IDs factor -> character
+    output[,1] <- as.character(output[,1])
+
     # chromosome names
-    chrnames <- as.character(unique(output[,1]))
+    chrnames <- unique(output[,1])
 
     # lod column names
     lodnames <- names(output)[-(1:2)]
     if(length(lodnames) != length(unique(lodnames)))
         warning("lod column names are not unique")
 
-    c(list(chrnames = chrnames, lodnames=lodnames),
-      as.list(output), list(markernames = mnames))
+    list(chr=as.character(output[,1]),
+         pos=output[,2],
+         lod=output[,3],
+         marker=mnames,
+         chrname=chrnames)
 }

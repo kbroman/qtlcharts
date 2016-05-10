@@ -329,9 +329,9 @@ customization options for each chart.
 
 `chrGap = 8` &mdash; gap between chromosomes in pixels
 
-`darkrect = "#C8C8C8"` &mdash; color of darker background rectangle
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
 
-`lightrect = "#E6E6E6"` &mdash; color of lighter background rectangle
+`altrectcolor = "#C8C8C8"` &mdash; color of alternate background rectangle
 
 `linecolor = "darkslateblue"` &mdash; line color for LOD curves
 
@@ -367,9 +367,9 @@ customization options for each chart.
 
 `chrGap = 8` &mdash; gap between chromosomes
 
-`darkrect = "#C8C8C8"` &mdash; color of darker background rectangle
+`rectcolor = "#E6E6E6"` &mdash; color of lighter background rectangle
 
-`lightrect = "#E6E6E6"` &mdash; color of lighter background rectangle
+`altrectcolor = "#C8C8C8"` &mdash; color of darker background rectangle
 
 `lod_ylim = NULL` &mdash; y-axis limits in LOD curve panel
 
@@ -433,9 +433,9 @@ customization options for each chart.
 
 `chrGap = 8` &mdash; gap between chromosomes
 
-`darkrect = "#C8C8C8"` &mdash; color of darker background rectangle
+`rectcolor = "#E6E6E6"` &mdash; color of lighter background rectangle
 
-`lightrect = "#E6E6E6"` &mdash; color of lighter background rectangle
+`altrectcolor = "#C8C8C8"` &mdash; color of darker background rectangle
 
 `lod_ylim = NULL` &mdash; y-axis limits in LOD curve panel
 

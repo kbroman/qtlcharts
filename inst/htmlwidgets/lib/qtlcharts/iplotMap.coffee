@@ -12,6 +12,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
     ylim = chartOpts?.ylim ? null # y-axis limits
     nyticks = chartOpts?.nyticks ? 5 # no. ticks on y-axis
     yticks = chartOpts?.yticks ? null # vector of tick positions on y-axis
+    xlineOpts = chartOpts?.xlineOpts ? {color:"#cdcdcd", width:5} # color and width of vertical lines
     tickwidth = chartOpts?.tickwidth ? 10 # width of tick marks at markers, in pixels
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
     linecolor = chartOpts?.linecolor ? "slateblue" # color of lines
@@ -20,6 +21,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
     title = chartOpts?.title ? "" # title for chart
     xlab = chartOpts?.xlab ? "Chromosome" # x-axis label
     ylab = chartOpts?.ylab ? "Position (cM)" # y-axis label
+    shiftStart = chartOpts?.shiftStart ? false # if true, shift the start of chromosomes to 0
     horizontal = chartOpts?.horizontal ? false # if true, have chromosomes on vertical axis and positions horizontally
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
@@ -34,6 +36,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
                   ylim:ylim
                   yticks:yticks
                   nyticks:nyticks
+                  xlineOpts:xlineOpts
                   tickwidth:tickwidth
                   rectcolor:rectcolor
                   linecolor:linecolor
@@ -43,6 +46,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
                   xlab:xlab
                   ylab:ylab
                   horizontal:horizontal
+                  shiftStart:shiftStart
                   tipclass:widgetdivid})
 
     # select htmlwidget div and grab its ID

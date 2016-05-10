@@ -42,8 +42,8 @@ function(map, chr, shift=FALSE, chartOpts=NULL)
             stop("No chromosomes selected")
     }
 
-    if(shift) map <- qtl::shiftmap(map)
     map_list <- convert_map(map)
+    chartOpts <- add2chartOpts(chartOpts, shiftStart=shift)
     x <- list(data=map_list, chartOpts=chartOpts)
 
     defaultAspect <- 1.5 # width/height

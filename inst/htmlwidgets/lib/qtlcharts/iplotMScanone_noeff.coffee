@@ -14,9 +14,9 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     chrGap = chartOpts?.chrGap ? 6                                 # gap between chromosomes in pixels
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6"                   # color of lighter background rectangle
     altrectcolor = chartOpts?.altrectcolor ? "#C8C8C8"             # color of darker background rectangle
+    nullcolor = chartOpts?.nullcolor ? "#E6E6E6"                   # color for pixels with null values
     chrlinecolor = chartOpts?.chrlinecolor ? ""                    # color of lines between chromosomes (if "", leave off)
     chrlinewidth = chartOpts?.chrlinewidth ? 2                     # width of lines between chromosomes
-    nullcolor = chartOpts?.nullcolor ? "#E6E6E6"                   # color for pixels with null values
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors
     zlim = chartOpts?.zlim ? null                                  # z-axis limits
     zthresh = chartOpts?.zthresh ? null                            # lower z-axis threshold for display in heat map
@@ -164,7 +164,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
 
     # plot lod versus phenotype curve
     verslice = null
-    plotVerSlice = (posindex, lodindex) ->
+    plotVerSlice = (posindex) ->
         if pointsize > 0 # plot points rather than curves
             verslice = d3panels.add_points({
                 pointsize:pointsize

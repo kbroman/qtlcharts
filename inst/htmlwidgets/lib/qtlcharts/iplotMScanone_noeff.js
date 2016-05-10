@@ -24,9 +24,9 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   chrGap = (ref7 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref7 : 6;
   rectcolor = (ref8 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref8 : "#E6E6E6";
   altrectcolor = (ref9 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref9 : "#C8C8C8";
-  chrlinecolor = (ref10 = chartOpts != null ? chartOpts.chrlinecolor : void 0) != null ? ref10 : "";
-  chrlinewidth = (ref11 = chartOpts != null ? chartOpts.chrlinewidth : void 0) != null ? ref11 : 2;
-  nullcolor = (ref12 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref12 : "#E6E6E6";
+  nullcolor = (ref10 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref10 : "#E6E6E6";
+  chrlinecolor = (ref11 = chartOpts != null ? chartOpts.chrlinecolor : void 0) != null ? ref11 : "";
+  chrlinewidth = (ref12 = chartOpts != null ? chartOpts.chrlinewidth : void 0) != null ? ref12 : 2;
   colors = (ref13 = chartOpts != null ? chartOpts.colors : void 0) != null ? ref13 : ["slateblue", "white", "crimson"];
   zlim = (ref14 = chartOpts != null ? chartOpts.zlim : void 0) != null ? ref14 : null;
   zthresh = (ref15 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref15 : null;
@@ -198,7 +198,7 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     verpanel_xscale = verpanel.xscale();
   }
   verslice = null;
-  plotVerSlice = function(posindex, lodindex) {
+  plotVerSlice = function(posindex) {
     if (pointsize > 0) {
       verslice = d3panels.add_points({
         pointsize: pointsize,

@@ -41,7 +41,23 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     if times?
         lod_data.y = times
     else
-        lod_data.ycat = lod_data.lodnames
+        lod_data.ycat = lod_data.lodname
+
+    # hash for [chr][pos] -> posindex
+    lod_data.posIndexByChr = d3panels.reorgByChr(lod_data.chrname, lod_data.chr, (i for i of lod_data.pos))
+
+    # create chrname, chrstart, chrend if missing
+    lod_data.chrname = d3panels.unique(lod_data.chr) unless lod_data.chrname?
+    unless lod_data.chrstart?
+        lod_data.chrstart = []
+        for c in lod_data.chrname
+            these_pos = (lod_data.pos[i] for i of lod_data.chr when lod_data.chr[i] == c)
+            lod_data.chrstart.push(d3.min(these_pos))
+    unless lod_data.chrend?
+        lod_data.chrend = []
+        for c in lod_data.chrname
+            these_pos = (lod_data.pos[i] for i of lod_data.chr when lod_data.chr[i] == c)
+            lod_data.chrend.push(d3.max(these_pos))
 
     # set up heatmap
     mylodheatmap = d3panels.lodheatmap({
@@ -60,61 +76,53 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         nullcolor:nullcolor
         tipclass:widgetdivid})
 
+    # add the heatmap
     svg = d3.select(widgetdiv).select("svg")
-
     g_heatmap = svg.append("g")
                    .attr("id", "heatmap")
     mylodheatmap(g_heatmap, lod_data)
 
-    # lod vs position panel
-    mylodchart = d3panels.lodchart({
+    # lod vs position (horizontal) panel
+    horpanel = d3panels.chrpanelframe({
         height:hbot
         width:wleft
         margin:margin
         axispos:axispos
         titlepos:titlepos
         chrGap:chrGap
-        pad4heatmap:true
-        altrectcolor:altrectcolor
         rectcolor:rectcolor
-        linecolor: ""
+        altrectcolor:altrectcolor
         ylim:[0, zlim[2]*1.05]
         pointsAtMarkers:false
         tipclass:widgetdivid})
 
-    g_lodchart = svg.append("g")
+    # create empty panel
+    g_horpanel = svg.append("g")
                     .attr("transform", "translate(0,#{htop})")
                     .attr("id", "lodchart")
-    mylodchart(g_lodchart, {
-        chr:lod_data.chr
-        pos:lod_data.pos
-        lod:(lod_data.lod[i][0] for i of lod_data.pos)
-        marker:lod_data.marker
-        chrname:lod_data.chrname})
+    horpanel(g_horpanel, {chr:lod_data.chrname, start:lod_data.chrstart, end:lod_data.chrend})
 
     # plot lod curves for selected lod column
-    lodchart_curve = null
-    plotLodCurve = (lodcolumn) ->
-        lodchart_curve.remove() if lodchart_curve?
-
-        lodchart_curve = d3panels.add_lodcurve({
+    horslice = null
+    plotHorSlice = (lodcolumn) ->
+        horslice = d3panels.add_lodcurve({
             linecolor: linecolor
             linewidth: linewidth
             pointsize: pointsize
             pointcolor: pointcolor
             pointstroke: pointstroke})
-        lodchart_curve(mylodchart, {
+        horslice(horpanel, {
             chr:lod_data.chr
             pos:lod_data.pos
             marker:lod_data.marker
             lod:(lod_data.lod[i][lodcolumn] for i of lod_data.pos)
             chrname:lod_data.chrname})
 
-    # lod versus phenotype panel
+    # lod versus phenotype (vertical) panel
     x = if times? then times else (i for i of lod_data.lod[0])
     xlim = if times? then d3.extent(times) else [-0.5, x.length-0.5]
     nxticks = if times? then nxticks else 0
-    lodvphe = d3panels.panelframe({
+    verpanel = d3panels.panelframe({
         height:htop
         width:wright
         margin:margin
@@ -128,34 +136,44 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         nxticks:nxticks
         tipclass:widgetdivid})
 
-    g_lodvphe = svg.append("g")
+    g_verpanel = svg.append("g")
                       .attr("transform", "translate(#{wleft},0)")
                       .attr("id", "curvechart")
-    lodvphe(g_lodvphe)
+    verpanel(g_verpanel)
+
+    # add x-axis test if qualitative x-axis scale
+    unless times?
+        verpanel_axis_text = g_verpanel.append("g")
+                                       .attr("class", "x axis")
+                                       .append("text")
+                                       .text("")
+                                       .attr("y", htop-margin.bottom+axispos.xlabel)
+        verpanel_xscale = verpanel.xscale()
+
 
     # plot lod versus phenotype curve
-    lodvphe_curve = null
-    plot_lodvphe = (posindex) ->
-        lodvphe_curve.remove() if lodvphe_curve?
-        lodvphe_curve = d3panels.add_curves({
+    verslice = null
+    plotVerSlice = (posindex, lodindex) ->
+        verslice = d3panels.add_curves({
             linecolor:linecolor
             linewidth:linewidth})
-        lodvphe_curve(lodvphe, {
+        verslice(verpanel, {
             x:[x]
             y:[(lod_data.lod[posindex][i] for i of lod_data.lod[posindex])]})
 
-    # hash for [chr][pos] -> posindex
-    lod_data.posIndexByChr = d3panels.reorgByChr(lod_data.chrname, lod_data.chr, (i for i of lod_data.pos))
-
     mylodheatmap.cells()
                 .on "mouseover", (d) ->
-                         plotLodCurve(d.lodindex)
-                         g_lodchart.select("g.title text").text("#{lod_data.lodnames[d.lodindex]}")
-                         plot_lodvphe(lod_data.posIndexByChr[d.chr][d.posindex])
+                         plotHorSlice(d.lodindex)
+                         g_horpanel.select("g.title text").text("#{lod_data.lodname[d.lodindex]}")
+                         plotVerSlice(lod_data.posIndexByChr[d.chr][d.posindex])
                          p = d3.format(".1f")(d.pos)
-                         g_lodvphe.select("g.title text").text("#{d.chr}@#{p}")
-                         g_lodvphe.select("text#xaxis#{d.lodindex}").attr("opacity", 1) unless times?
+                         g_verpanel.select("g.title text").text("#{d.chr}@#{p}")
+                         unless times?
+                             verpanel_axis_text.text("#{lod_data.lodname[d.lodindex]}")
+                                               .attr("x", verpanel_xscale(d.lodindex))
                 .on "mouseout", (d) ->
-                         g_lodchart.select("g.title text").text("")
-                         g_lodvphe.select("g.title text").text("")
-                         g_lodvphe.select("text#xaxis#{d.lodindex}").attr("opacity", 0) unless times?
+                         horslice.remove() if horslice?
+                         verslice.remove() if verslice?
+                         g_horpanel.select("g.title text").text("")
+                         g_verpanel.select("g.title text").text("")
+                         verpanel_axis_text.text("") unless times?

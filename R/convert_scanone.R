@@ -49,5 +49,5 @@ function(output)
          lod=lod,
          marker=mnames,
          chrname=chrnames,
-         lodnames=lodnames)
+         lodname=lodnames)
 }

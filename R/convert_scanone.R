@@ -35,6 +35,10 @@ function(output)
     # chromosome names
     chrnames <- unique(output[,1])
 
+    # lod scores
+    lod <- as.matrix(output[,-(1:2)])
+    dimnames(lod) <- NULL
+
     # lod column names
     lodnames <- names(output)[-(1:2)]
     if(length(lodnames) != length(unique(lodnames)))
@@ -42,7 +46,8 @@ function(output)
 
     list(chr=as.character(output[,1]),
          pos=output[,2],
-         lod=output[,3],
+         lod=lod,
          marker=mnames,
-         chrname=chrnames)
+         chrname=chrnames,
+         lodnames=lodnames)
 }

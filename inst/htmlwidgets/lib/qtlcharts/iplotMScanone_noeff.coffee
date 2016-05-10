@@ -8,12 +8,12 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     width = chartOpts?.width ? 1000 # width of chart in pixels
     wleft = chartOpts?.wleft ? width*0.65 # width of left panels in pixels
     htop = chartOpts?.htop ? height/2 # height of top panels in pixels
-    margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
+    margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:0} # margins in pixels (left, top, right, bottom, inner)
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
     titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
     chrGap = chartOpts?.chrGap ? 8 # gap between chromosomes in pixels
-    darkrect = chartOpts?.darkrect ? "#C8C8C8" # color of darker background rectangle
-    lightrect = chartOpts?.lightrect ? "#E6E6E6" # color of lighter background rectangle
+    rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of lighter background rectangle
+    altrectcolor = chartOpts?.altrectcolor ? "#C8C8C8" # color of darker background rectangle
     nullcolor = chartOpts?.nullcolor ? "#E6E6E6" # color for pixels with null values
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors
     zlim = chartOpts?.zlim ? null # z-axis limits
@@ -24,10 +24,8 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     pointcolor = chartOpts?.pointcolor ? "slateblue" # color of points in at markers in LOD curves
     pointsize = chartOpts?.pointsize ? 0 # size of points in LOD curves (default = 0 corresponding to no visible points at markers)
     pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle for points at markers
-
     nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis on right-hand panel, if quantitative scale
     xticks = chartOpts?.xticks ? null # tick positions in x-axis on right-hand panel, if quantitative scale
-    lod_labels = chartOpts?.lod_labels ? null # optional vector of strings, for LOD column labels
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -35,188 +33,129 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     wright = width - wleft
     hbot = height - htop
 
-    # if quant scale, use times as labels; otherwise use lod_data.lodnames
-    unless lod_labels?
-        lod_labels = if times? then (formatAxis(times, extra_digits=1)(x) for x in times) else lod_data.lodnames
+    # fill in zlim
+    zmax = d3panels.matrixMaxAbs(lod_data.lod)
+    zlim = zlim ? [-zmax, 0, zmax]
 
-    mylodheatmap = lodheatmap().height(htop-margin.top-margin.bottom)
-                               .width(wleft-margin.left-margin.right)
-                               .margin(margin)
-                               .axispos(axispos)
-                               .titlepos(titlepos)
-                               .chrGap(chrGap)
-                               .rectcolor(lightrect)
-                               .colors(colors)
-                               .zlim(zlim)
-                               .zthresh(zthresh)
-                               .quantScale(times)
-                               .lod_labels(lod_labels)
-                               .ylab(lod_ylab)
-                               .nullcolor(nullcolor)
-                               .tipclass(widgetdivid)
+    # a bit more data set up
+    if times?
+        lod_data.y = times
+    else
+        lod_data.ycat = lod_data.lodnames
+
+    # set up heatmap
+    mylodheatmap = d3panels.lodheatmap({
+        height:htop
+        width:wleft
+        margin:margin
+        axispos:axispos
+        titlepos:titlepos
+        chrGap:chrGap
+        rectcolor:rectcolor
+        altrectcolor:altrectcolor
+        colors:colors
+        zlim:zlim
+        zthresh:zthresh
+        ylab:lod_ylab
+        nullcolor:nullcolor
+        tipclass:widgetdivid})
 
     svg = d3.select(widgetdiv).select("svg")
 
     g_heatmap = svg.append("g")
                    .attr("id", "heatmap")
-                   .datum(lod_data)
-                   .call(mylodheatmap)
+    mylodheatmap(g_heatmap, lod_data)
 
-    mylodchart = lodchart().height(hbot-margin.top-margin.bottom)
-                           .width(wleft-margin.left-margin.right)
-                           .margin(margin)
-                           .axispos(axispos)
-                           .titlepos(titlepos)
-                           .chrGap(chrGap)
-                           .linecolor("none")
-                           .pad4heatmap(true)
-                           .darkrect(darkrect)
-                           .lightrect(lightrect)
-                           .ylim([0, d3.max(mylodheatmap.zlim())])
-                           .pointsAtMarkers(false)
-                           .tipclass(widgetdivid)
+    # lod vs position panel
+    mylodchart = d3panels.lodchart({
+        height:hbot
+        width:wleft
+        margin:margin
+        axispos:axispos
+        titlepos:titlepos
+        chrGap:chrGap
+        pad4heatmap:true
+        altrectcolor:altrectcolor
+        rectcolor:rectcolor
+        linecolor: ""
+        ylim:[0, zlim[2]*1.05]
+        pointsAtMarkers:false
+        tipclass:widgetdivid})
 
     g_lodchart = svg.append("g")
                     .attr("transform", "translate(0,#{htop})")
                     .attr("id", "lodchart")
-                    .datum(lod_data)
-                    .call(mylodchart)
-
-    # function for lod curve path
-    lodcurve = (chr, lodcolumn) ->
-            d3.svg.line()
-                  .x((d) -> mylodchart.xscale()[chr](d))
-                  .y((d,i) -> mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn])))
+    mylodchart(g_lodchart, {
+        chr:lod_data.chr
+        pos:lod_data.pos
+        lod:(lod_data.lod[i][0] for i of lod_data.pos)
+        marker:lod_data.marker
+        chrname:lod_data.chrname})
 
     # plot lod curves for selected lod column
-    lodchart_curves = null
+    lodchart_curve = null
     plotLodCurve = (lodcolumn) ->
-        lodchart_curves = g_lodchart.append("g").attr("id", "lodcurves")
-        for chr in lod_data.chrnames
-            lodchart_curves.append("path")
-                           .datum(lod_data.posByChr[chr])
-                           .attr("d", lodcurve(chr, lodcolumn))
-                           .attr("stroke", linecolor)
-                           .attr("fill", "none")
-                           .attr("stroke-width", linewidth)
-                           .style("pointer-events", "none")
-            if pointsize > 0
-                lodchart_curves.append("g").attr("id", "lodpoints")
-                               .selectAll("empty")
-                               .data(lod_data.posByChr[chr])
-                               .enter()
-                               .append("circle")
-                               .attr("cx", (d) -> mylodchart.xscale()[chr](d))
-                               .attr("cy", (d,i) ->
-                                   mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn])))
-                               .attr("r", pointsize)
-                               .attr("fill", pointcolor)
-                               .attr("stroke", pointstroke)
+        lodchart_curve.remove() if lodchart_curve?
 
-    # rearrange data for curves of time x LOD
-    lod4curves = {data:[]}
-    for pos of lod_data.pos
-        y = (Math.abs(lod_data[lodcolumn][pos]) for lodcolumn in lod_data.lodnames)
-        x = (+i for i of lod_data.lodnames)
-        lod4curves.data.push({x:x, y:y})
+        lodchart_curve = d3panels.add_lodcurve({
+            linecolor: linecolor
+            linewidth: linewidth
+            pointsize: pointsize
+            pointcolor: pointcolor
+            pointstroke: pointstroke})
+        lodchart_curve(mylodchart, {
+            chr:lod_data.chr
+            pos:lod_data.pos
+            marker:lod_data.marker
+            lod:(lod_data.lod[i][lodcolumn] for i of lod_data.pos)
+            chrname:lod_data.chrname})
 
-    mycurvechart = curvechart().height(htop-margin.top-margin.bottom)
-                               .width(wright-margin.left-margin.right)
-                               .margin(margin)
-                               .axispos(axispos)
-                               .titlepos(titlepos)
-                               .xlab(lod_ylab)
-                               .ylab("LOD score")
-                               .strokecolor("none")
-                               .rectcolor(lightrect)
-                               .xlim([-0.5, lod_data.lodnames.length-0.5])
-                               .ylim([0, d3.max(mylodheatmap.zlim())])
-                               .nxticks(0)
-                               .commonX(false)
-                               .tipclass(widgetdivid)
+    # lod versus phenotype panel
+    x = if times? then times else (i for i of lod_data.lod[0])
+    xlim = if times? then d3.extent(times) else [-0.5, x.length-0.5]
+    nxticks = if times? then nxticks else 0
+    lodvphe = d3panels.panelframe({
+        height:htop
+        width:wright
+        margin:margin
+        axispos:axispos
+        titlepos:titlepos
+        xlab:lod_ylab
+        ylab:"LOD score"
+        rectcolor:rectcolor
+        xlim: xlim
+        ylim:[0, zlim[2]*1.05]
+        nxticks:nxticks
+        tipclass:widgetdivid})
 
-    g_curvechart = svg.append("g")
+    g_lodvphe = svg.append("g")
                       .attr("transform", "translate(#{wleft},0)")
                       .attr("id", "curvechart")
-                      .datum(lod4curves)
-                      .call(mycurvechart)
+    lodvphe(g_lodvphe)
 
-    points_in_curvechart = null
-    plotPointsInCurvechart = (pos_index) ->
-        g_curvechart.append("g").attr("id", "pointsInCurveChart")
-                    .selectAll("empty")
-                    .data(lod4curves.data[pos_index])
-                    .enter()
-                    .append("circle")
-                    .attr("cx", (d) -> mycurvechart.xscale()(d.x))
-                    .attr("cy", (d) -> mycurvechart.yscale()(d.y))
-                    .attr("r", pointsize)
-                    .attr("fill", pointcolor)
-                    .attr("stroke", pointstroke)
-
-    # add X axis
-    if times? # use quantitative axis
-        xscale = d3.scale.linear().range(mycurvechart.xscale().range())
-        xscale.domain([times[0], times[times.length-1]])
-        xticks = xticks ? xscale.ticks(nxticks)
-        curvechart_xaxis = g_curvechart.select("g.x.axis")
-        curvechart_xaxis.selectAll("empty")
-                        .data(xticks)
-                        .enter()
-                        .append("line")
-                        .attr("x1", (d) -> xscale(d))
-                        .attr("x2", (d) -> xscale(d))
-                        .attr("y1", margin.top)
-                        .attr("y2", htop-margin.bottom)
-                        .attr("fill", "none")
-                        .attr("stroke", "white")
-                        .attr("stroke-width", 1)
-                        .style("pointer-events", "none")
-        curvechart_xaxis.selectAll("empty")
-                        .data(xticks)
-                        .enter()
-                        .append("text")
-                        .attr("x", (d) -> xscale(d))
-                        .attr("y", htop-margin.bottom+axispos.xlabel)
-                        .text((d) -> formatAxis(xticks)(d))
-    else # qualitative axis
-        curvechart_xaxis = g_curvechart.select("g.x.axis")
-                                       .selectAll("empty")
-                                       .data(lod_labels)
-                                       .enter()
-                                       .append("text")
-                                       .attr("id", (d,i) -> "xaxis#{i}")
-                                       .attr("x", (d,i) -> mycurvechart.xscale()(i))
-                                       .attr("y", htop-margin.bottom+axispos.xlabel)
-                                       .text((d) -> d)
-                                       .attr("opacity", 0)
+    # plot lod versus phenotype curve
+    lodvphe_curve = null
+    plot_lodvphe = (posindex) ->
+        lodvphe_curve.remove() if lodvphe_curve?
+        lodvphe_curve = d3panels.add_curves({
+            linecolor:linecolor
+            linewidth:linewidth})
+        lodvphe_curve(lodvphe, {
+            x:[x]
+            y:[(lod_data.lod[posindex][i] for i of lod_data.lod[posindex])]})
 
     # hash for [chr][pos] -> posindex
-    posindex = {}
-    curindex = 0
-    for chr in lod_data.chrnames
-        posindex[chr] = {}
-        for pos in lod_data.posByChr[chr]
-            posindex[chr][pos] = curindex
-            curindex += 1
+    lod_data.posIndexByChr = d3panels.reorgByChr(lod_data.chrname, lod_data.chr, (i for i of lod_data.pos))
 
-    mycurvechart.curvesSelect()
-                .on("mouseover.panel", null)
-                .on("mouseout.panel", null)
-
-    mylodheatmap.cellSelect()
+    mylodheatmap.cells()
                 .on "mouseover", (d) ->
                          plotLodCurve(d.lodindex)
-                         g_lodchart.select("g.title text").text("#{lod_labels[d.lodindex]}")
-                         g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}").attr("stroke", linecolor)
-                         plotPointsInCurvechart(posindex[d.chr][d.pos]) if pointsize > 0
+                         g_lodchart.select("g.title text").text("#{lod_data.lodnames[d.lodindex]}")
+                         plot_lodvphe(lod_data.posIndexByChr[d.chr][d.posindex])
                          p = d3.format(".1f")(d.pos)
-                         g_curvechart.select("g.title text").text("#{d.chr}@#{p}")
-                         g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 1) unless times?
+                         g_lodvphe.select("g.title text").text("#{d.chr}@#{p}")
+                         g_lodvphe.select("text#xaxis#{d.lodindex}").attr("opacity", 1) unless times?
                 .on "mouseout", (d) ->
-                         lodchart_curves.remove()
-                         g_curvechart.select("g#pointsInCurveChart").remove() if pointsize > 0
                          g_lodchart.select("g.title text").text("")
-                         g_curvechart.selectAll("path.path#{posindex[d.chr][d.pos]}").attr("stroke", null)
-                         g_curvechart.select("g.title text").text("")
-                         g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 0) unless times?
+                         g_lodvphe.select("g.title text").text("")
+                         g_lodvphe.select("text#xaxis#{d.lodindex}").attr("opacity", 0) unless times?

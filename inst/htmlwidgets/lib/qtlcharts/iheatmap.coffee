@@ -8,13 +8,13 @@ iheatmap = (widgetdiv, data, chartOpts) ->
     width  = chartOpts?.width  ? 800 # total width of chart
     htop = chartOpts?.htop ? height/2 # height of top charts in pixels
     wleft = chartOpts?.wleft ? width/2 # width of left charts in pixels
-    margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
+    margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:0} # margins in pixels (left, top, right, bottom, inner)
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
     titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
     nullcolor = chartOpts?.nullcolor ? "#E6E6E6" # color of pixels with null values
-    strokecolor = chartOpts?.strokecolor ? "slateblue" # line color
-    strokewidth = chartOpts?.strokewidth ? 2 # line width
+    linecolor = chartOpts?.linecolor ? "slateblue" # line color
+    linewidth = chartOpts?.linewidth ? 2 # line width
     xlim = chartOpts?.xlim ? null # x-axis limits
     ylim = chartOpts?.ylim ? null # y-axis limits
     nxticks = chartOpts?.nxticks ? 5 # no. ticks on x-axis
@@ -28,8 +28,9 @@ iheatmap = (widgetdiv, data, chartOpts) ->
     ylab = chartOpts?.ylab ? "Y" # y-axis label
     zlab = chartOpts?.zlab ? "Z" # z-axis label
     zthresh = chartOpts?.zthresh ? null # lower threshold for plotting in heat map: only values with |z| > zthresh are shown
-    zlim = chartOpts?.zlim ? [-matrixMaxAbs(data.z), 0, matrixMaxAbs(data.z)] # z-axis limits
+    zlim = chartOpts?.zlim ? [-d3panels.matrixMaxAbs(data.z), 0, d3panels.matrixMaxAbs(data.z)] # z-axis limits
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors (same length as `zlim`)
+    flip_vert_slice = chartOpts.flip_vert_slice ? false # if true, flip the y- and z- axes in the vertical slice
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -51,129 +52,116 @@ iheatmap = (widgetdiv, data, chartOpts) ->
         ylim[0] -= ydif
         ylim[1] += ydif
 
+    # transpose of z matrix
+    z_transpose = d3panels.transpose(data.z)
+
     ## configure the three charts
-    myheatmap = heatmap().width(wleft-margin.left-margin.right)
-                         .height(htop-margin.top-margin.bottom)
-                         .margin(margin)
-                         .axispos(axispos)
-                         .titlepos(titlepos)
-                         .rectcolor(rectcolor)
-                         .xlim(xlim)
-                         .ylim(ylim)
-                         .nxticks(nxticks)
-                         .xticks(xticks)
-                         .nyticks(nyticks)
-                         .yticks(yticks)
-                         .xlab(xlab)
-                         .ylab(ylab)
-                         .zlim(zlim)
-                         .zthresh(zthresh)
-                         .colors(colors)
-                         .nullcolor(nullcolor)
-                         .tipclass(widgetdivid)
+    myheatmap = d3panels.heatmap({
+        width:wleft
+        height:htop
+        margin:margin
+        axispos:axispos
+        titlepos:titlepos
+        rectcolor:rectcolor
+        xlim:xlim
+        ylim:ylim
+        nxticks:nxticks
+        xticks:xticks
+        nyticks:nyticks
+        yticks:yticks
+        xlab:xlab
+        ylab:ylab
+        zlim:zlim
+        zthresh:zthresh
+        colors:colors
+        nullcolor:nullcolor
+        tipclass:widgetdivid})
 
-    horslice = curvechart().width(wleft-margin.left-margin.right)
-                           .height(hbot-margin.top-margin.bottom)
-                           .margin(margin)
-                           .axispos(axispos)
-                           .titlepos(titlepos)
-                           .rectcolor(rectcolor)
-                           .xlim(xlim)
-                           .ylim(d3.extent(zlim))
-                           .nxticks(nxticks)
-                           .xticks(xticks)
-                           .nyticks(nzticks)
-                           .yticks(zticks)
-                           .xlab(xlab)
-                           .ylab(zlab)
-                           .strokecolor("")
-                           .commonX(true)
-                           .tipclass(widgetdivid)
+    horslice = d3panels.panelframe({
+        width:wleft
+        height:hbot
+        margin:margin
+        axispos:axispos
+        titlepos:titlepos
+        rectcolor:rectcolor
+        xlim:xlim
+        ylim:d3.extent(zlim)
+        nxticks:nxticks
+        xticks:xticks
+        nyticks:nzticks
+        yticks:zticks
+        xlab:xlab
+        ylab:zlab})
 
-    verslice = curvechart().width(wright-margin.left-margin.right)
-                           .height(htop-margin.top-margin.bottom)
-                           .margin(margin)
-                           .axispos(axispos)
-                           .titlepos(titlepos)
-                           .rectcolor(rectcolor)
-                           .xlim(ylim)
-                           .ylim(d3.extent(zlim))
-                           .nxticks(nyticks)
-                           .xticks(yticks)
-                           .nyticks(nzticks)
-                           .yticks(zticks)
-                           .xlab(ylab)
-                           .ylab(zlab)
-                           .strokecolor("")
-                           .commonX(true)
-                           .tipclass(widgetdivid)
+    ver_opts = {
+        width:wright
+        height:htop
+        margin:margin
+        axispos:axispos
+        titlepos:titlepos
+        rectcolor:rectcolor
+        xlim:ylim
+        ylim:d3.extent(zlim)
+        nxticks:nyticks
+        xticks:yticks
+        nyticks:nzticks
+        yticks:zticks
+        xlab:ylab
+        ylab:zlab}
+    if flip_vert_slice # flip the vertical slice (top-right panel)
+        [ver_opts.xlab, ver_opts.ylab] = [ver_opts.ylab, ver_opts.xlab]
+        [ver_opts.xlim, ver_opts.ylim] = [ver_opts.ylim, ver_opts.xlim]
+        [ver_opts.xticks, ver_opts.yticks] = [ver_opts.yticks, ver_opts.xticks]
+        [ver_opts.nxticks, ver_opts.nyticks] = [ver_opts.nyticks, ver_opts.nxticks]
+    verslice = d3panels.panelframe(ver_opts)
 
     ## now make the actual charts
+    # heatmap
     g_heatmap = svg.append("g")
                    .attr("id", "heatmap")
-                   .datum(data)
-                   .call(myheatmap)
+    myheatmap(g_heatmap, data)
 
-    formatX = formatAxis(data.x)
-    formatY = formatAxis(data.y)
+    # horizontal slice (below)
+    g_horslice = svg.append("g")
+                    .attr("id", "horslice")
+                    .attr("transform", "translate(0,#{htop})")
+    horslice(g_horslice)
+
+    # vertical slice (to the right)
+    g_verslice = svg.append("g")
+                    .attr("id", "verslice")
+                    .attr("transform", "translate(#{wleft},0)")
+    verslice(g_verslice)
+
+    formatX = d3panels.formatAxis(data.x)
+    formatY = d3panels.formatAxis(data.y)
 
     cells = myheatmap.cellSelect()
                      .on "mouseover", (d,i) ->
                              g_verslice.select("g.title text").text("X = #{formatX(d.x)}")
                              g_horslice.select("g.title text").text("Y = #{formatY(d.y)}")
-                             plotVer(d.i)
-                             plotHor(d.j)
+                             plotVer(d.xindex)
+                             plotHor(d.yindex)
                      .on "mouseout", (d,i) ->
                              g_verslice.select("g.title text").text("")
                              g_horslice.select("g.title text").text("")
-                             removeVer()
-                             removeHor()
 
-    g_horslice = svg.append("g")
-                    .attr("id", "horslice")
-                    .attr("transform", "translate(0,#{htop})")
-                    .datum({x:data.x, data:[pullVarAsArray(data.z, 0)]})
-                    .call(horslice)
-
-    g_verslice = svg.append("g")
-                    .attr("id", "verslice")
-                    .attr("transform", "translate(#{wleft},0)")
-                    .datum({x:data.y, data:[data.z[0]]})
-                    .call(verslice)
-
-    # functions for paths
-    horcurvefunc = (j) ->
-            d3.svg.line()
-              .x((d) -> horslice.xscale()(d))
-              .y((d,i) -> horslice.yscale()(data.z[i][j]))
-    vercurvefunc = (i) ->
-            d3.svg.line()
-              .x((d) -> verslice.xscale()(d))
-              .y((d,j) -> verslice.yscale()(data.z[i][j]))
-
+    vercurve = null
+    horcurve = null
 
     plotHor = (j) ->
-        g_horslice.append("g").attr("id", "horcurve")
-                  .append("path")
-                  .datum(data.x)
-                  .attr("d", horcurvefunc(j))
-                  .attr("stroke", strokecolor)
-                  .attr("fill", "none")
-                  .attr("stroke-width", strokewidth)
-                  .attr("style", "pointer-events", "none")
-
-    removeHor = () ->
-        g_horslice.selectAll("g#horcurve").remove()
+        horcurve.remove() if horcurve?
+        horcurve = d3panels.add_curves({
+            linecolor: linecolor
+            linewidth: linewidth})
+        horcurve(horslice, {x:[data.x], y:[z_transpose[j]]})
 
     plotVer = (i) ->
-        g_verslice.append("g").attr("id", "vercurve")
-                  .append("path")
-                  .datum(data.y)
-                  .attr("d", vercurvefunc(i))
-                  .attr("stroke", strokecolor)
-                  .attr("fill", "none")
-                  .attr("stroke-width", strokewidth)
-                  .attr("style", "pointer-events", "none")
-
-    removeVer = () ->
-        g_verslice.selectAll("g#vercurve").remove()
+        vercurve.remove() if vercurve?
+        vercurve = d3panels.add_curves({
+            linecolor: linecolor
+            linewidth: linewidth})
+        if flip_vert_slice
+            vercurve(verslice, {y:[data.y], x:[data.z[i]]})
+        else
+            vercurve(verslice, {x:[data.y], y:[data.z[i]]})

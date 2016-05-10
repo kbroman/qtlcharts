@@ -19,9 +19,9 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     zlim = chartOpts?.zlim ? null # z-axis limits
     zthresh = chartOpts?.zthresh ? null # lower z-axis threshold for display in heat map
     lod_ylab = chartOpts?.lod_ylab ? "" # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
-    linecolor = chartOpts?.linecolor ? "darkslateblue" # color of lines
-    linewidth = chartOpts?.linewidth ? 2 # width of lines
-    pointcolor = chartOpts?.pointcolor ? "slateblue" # color of points in at markers in LOD curves
+    linecolor = chartOpts?.linecolor ? "darkslateblue" # color of LOD curves
+    linewidth = chartOpts?.linewidth ? 2 # width of LOD curves
+    pointcolor = chartOpts?.pointcolor ? "slateblue" # color of points at markers in LOD curves
     pointsize = chartOpts?.pointsize ? 0 # size of points in LOD curves (default = 0 corresponding to no visible points at markers)
     pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle for points at markers
     nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis on right-hand panel, if quantitative scale

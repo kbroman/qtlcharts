@@ -51,6 +51,9 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     # hash for [chr][pos] -> posindex
     lod_data.posIndexByChr = d3panels.reorgByChr(lod_data.chrname, lod_data.chr, (i for i of lod_data.pos))
 
+    # use the lod labels for the lod names
+    lod_data.lodname = lod_labels if lod_labels?
+
     # create chrname, chrstart, chrend if missing
     lod_data.chrname = d3panels.unique(lod_data.chr) unless lod_data.chrname?
     unless lod_data.chrstart?
@@ -63,6 +66,12 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         for c in lod_data.chrname
             these_pos = (lod_data.pos[i] for i of lod_data.chr when lod_data.chr[i] == c)
             lod_data.chrend.push(d3.max(these_pos))
+
+    # phenotype x-axis
+    x = if times? then times else (i for i of lod_data.lod[0])
+    xlim = if times? then d3.extent(times) else [-0.5, x.length-0.5]
+    nxticks = if times? then nxticks else 0
+    xticks = if times? then xticks else null
 
     # set up heatmap
     mylodheatmap = d3panels.lodheatmap({
@@ -80,6 +89,8 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         zlim:zlim
         zthresh:zthresh
         ylab:ylab
+        yticks:xticks
+        nyticks:nxticks
         nullcolor:nullcolor
         tipclass:widgetdivid})
 
@@ -101,8 +112,9 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         altrectcolor:altrectcolor
         chrlinecolor:chrlinecolor
         chrlinewidth:chrlinewidth
+        xlab:xlab
+        ylab:zlab
         ylim:[0, zlim[2]*1.05]
-        pointsAtMarkers:false
         tipclass:widgetdivid})
 
     # create empty panel
@@ -115,8 +127,6 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     horslice = null
     plotHorSlice = (lodcolumn) ->
         horslice = d3panels.add_lodcurve({
-            xlab:xlab
-            ylab:zlab
             linecolor: linecolor
             linewidth: linewidth
             pointsize: 0
@@ -126,13 +136,10 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
             chr:lod_data.chr
             pos:lod_data.pos
             marker:lod_data.marker
-            lod:(lod_data.lod[i][lodcolumn] for i of lod_data.pos)
+            lod:(d3panels.abs(lod_data.lod[i][lodcolumn]) for i of lod_data.pos)
             chrname:lod_data.chrname})
 
     # lod versus phenotype (vertical) panel
-    x = if times? then times else (i for i of lod_data.lod[0])
-    xlim = if times? then d3.extent(times) else [-0.5, x.length-0.5]
-    nxticks = if times? then nxticks else 0
     verpanel = d3panels.panelframe({
         height:htop
         width:wright
@@ -145,6 +152,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         xlim: xlim
         ylim:[0, zlim[2]*1.05]
         nxticks:nxticks
+        xticks:xticks
         tipclass:widgetdivid})
 
     g_verpanel = svg.append("g")

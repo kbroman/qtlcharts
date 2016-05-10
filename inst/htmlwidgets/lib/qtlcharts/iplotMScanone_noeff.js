@@ -60,6 +60,9 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     }
     return results;
   })());
+  if (typeof lod_labels !== "undefined" && lod_labels !== null) {
+    lod_data.lodname = lod_labels;
+  }
   if (lod_data.chrname == null) {
     lod_data.chrname = d3panels.unique(lod_data.chr);
   }
@@ -99,6 +102,17 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
       lod_data.chrend.push(d3.max(these_pos));
     }
   }
+  x = times != null ? times : (function() {
+    var results;
+    results = [];
+    for (i in lod_data.lod[0]) {
+      results.push(i);
+    }
+    return results;
+  })();
+  xlim = times != null ? d3.extent(times) : [-0.5, x.length - 0.5];
+  nxticks = times != null ? nxticks : 0;
+  xticks = times != null ? xticks : null;
   mylodheatmap = d3panels.lodheatmap({
     height: htop,
     width: wleft,
@@ -114,6 +128,8 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     zlim: zlim,
     zthresh: zthresh,
     ylab: ylab,
+    yticks: xticks,
+    nyticks: nxticks,
     nullcolor: nullcolor,
     tipclass: widgetdivid
   });
@@ -131,8 +147,9 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     altrectcolor: altrectcolor,
     chrlinecolor: chrlinecolor,
     chrlinewidth: chrlinewidth,
+    xlab: xlab,
+    ylab: zlab,
     ylim: [0, zlim[2] * 1.05],
-    pointsAtMarkers: false,
     tipclass: widgetdivid
   });
   g_horpanel = svg.append("g").attr("transform", "translate(0," + htop + ")").attr("id", "lodchart");
@@ -144,8 +161,6 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   horslice = null;
   plotHorSlice = function(lodcolumn) {
     horslice = d3panels.add_lodcurve({
-      xlab: xlab,
-      ylab: zlab,
       linecolor: linecolor,
       linewidth: linewidth,
       pointsize: 0,
@@ -160,23 +175,13 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
         var results;
         results = [];
         for (i in lod_data.pos) {
-          results.push(lod_data.lod[i][lodcolumn]);
+          results.push(d3panels.abs(lod_data.lod[i][lodcolumn]));
         }
         return results;
       })(),
       chrname: lod_data.chrname
     });
   };
-  x = times != null ? times : (function() {
-    var results;
-    results = [];
-    for (i in lod_data.lod[0]) {
-      results.push(i);
-    }
-    return results;
-  })();
-  xlim = times != null ? d3.extent(times) : [-0.5, x.length - 0.5];
-  nxticks = times != null ? nxticks : 0;
   verpanel = d3panels.panelframe({
     height: htop,
     width: wright,
@@ -189,6 +194,7 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     xlim: xlim,
     ylim: [0, zlim[2] * 1.05],
     nxticks: nxticks,
+    xticks: xticks,
     tipclass: widgetdivid
   });
   g_verpanel = svg.append("g").attr("transform", "translate(" + wleft + ",0)").attr("id", "curvechart");

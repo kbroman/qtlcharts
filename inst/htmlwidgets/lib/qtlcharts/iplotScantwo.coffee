@@ -4,26 +4,26 @@
 iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
 
     # chartOpts start
-    height = chartOpts?.height ? 1000 # total height of chart in pixels
-    width = chartOpts?.width ? 1000 # total width of chart in pixels
-    pixelPerCell = chartOpts?.pixelPerCell ? null # pixels per cell in heat map
-    chrGap = chartOpts?.chrGap ? 2 # gaps between chr in heat map
-    wright = chartOpts?.wright ? 500 # width (in pixels) of right panels
-    hbot = chartOpts?.hbot ? 150 # height (in pixels) of each of the lower panels
+    height = chartOpts?.height ? 1000              # total height of chart in pixels
+    width = chartOpts?.width ? 1000                # total width of chart in pixels
+    pixelPerCell = chartOpts?.pixelPerCell ? null  # pixels per cell in heat map
+    chrGap = chartOpts?.chrGap ? 2                 # gaps between chr in heat map
+    wright = chartOpts?.wright ? 500               # width (in pixels) of right panels
+    hbot = chartOpts?.hbot ? 150                   # height (in pixels) of each of the lower panels
     margin = chartOpts?.margin ? {left:60, top:50, right:10, bottom: 40, inner: 5} # margins in each panel
-    axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # axis positions in heatmap
-    lightrect = chartOpts?.lightrect ? "#e6e6e6" # color for light rect in lower panels and backgrd in right panels
-    darkrect = chartOpts?.darkrect ? "#c8c8c8" # dark rectangle in lower panels
-    nullcolor = chartOpts?.nullcolor ? "#e6e6e6" # color of null pixels in heat map
+    axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}      # axis positions in heatmap
+    lightrect = chartOpts?.lightrect ? "#e6e6e6"   # color for light rect in lower panels and backgrd in right panels
+    darkrect = chartOpts?.darkrect ? "#c8c8c8"     # dark rectangle in lower panels
+    nullcolor = chartOpts?.nullcolor ? "#e6e6e6"   # color of null pixels in heat map
     bordercolor = chartOpts?.bordercolor ? "black" # border color in heat map
     linecolor = chartOpts?.linecolor ? "slateblue" # line color in lower panels
-    linewidth = chartOpts?.linewidth ? 2 # line width in lower panels
-    pointsize = chartOpts?.pointsize ? 3 # point size in right panels
+    linewidth = chartOpts?.linewidth ? 2           # line width in lower panels
+    pointsize = chartOpts?.pointsize ? 3           # point size in right panels
     pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle in right panels
-    cicolors = chartOpts?.cicolors ? null # colors for CIs in QTL effect plot; also used for points in phe x gen plot
-    color = chartOpts?.color ? "slateblue" # color for heat map
-    oneAtTop = chartOpts?.oneAtTop ? false # whether to put chr 1 at top of heatmap
-    zthresh = chartOpts?.zthresh ? 0 # LOD values below this threshold aren't shown (on LOD_full scale)
+    cicolors = chartOpts?.cicolors ? null          # colors for CIs in QTL effect plot; also used for points in phe x gen plot
+    color = chartOpts?.color ? "slateblue"         # color for heat map
+    oneAtTop = chartOpts?.oneAtTop ? false         # whether to put chr 1 at top of heatmap
+    zthresh = chartOpts?.zthresh ? 0               # LOD values below this threshold aren't shown (on LOD_full scale)
     # chartOpts end
 
     # force chrnames to be a list

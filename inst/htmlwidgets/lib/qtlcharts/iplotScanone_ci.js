@@ -28,7 +28,7 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     ylabel: 5
   };
   lod_titlepos = (ref6 = (ref7 = chartOpts != null ? chartOpts.lod_titlepos : void 0) != null ? ref7 : chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref6 : 20;
-  chrGap = (ref8 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref8 : 8;
+  chrGap = (ref8 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref8 : 6;
   rectcolor = (ref9 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref9 : "#E6E6E6";
   altrectcolor = (ref10 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref10 : "#C8C8C8";
   lod_ylim = (ref11 = chartOpts != null ? chartOpts.lod_ylim : void 0) != null ? ref11 : null;

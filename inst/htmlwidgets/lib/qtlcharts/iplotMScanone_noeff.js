@@ -21,7 +21,7 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
     ylabel: 5
   };
   titlepos = (ref6 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref6 : 20;
-  chrGap = (ref7 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref7 : 8;
+  chrGap = (ref7 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref7 : 6;
   rectcolor = (ref8 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref8 : "#E6E6E6";
   altrectcolor = (ref9 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref9 : "#C8C8C8";
   chrlinecolor = (ref10 = chartOpts != null ? chartOpts.chrlinecolor : void 0) != null ? ref10 : "";

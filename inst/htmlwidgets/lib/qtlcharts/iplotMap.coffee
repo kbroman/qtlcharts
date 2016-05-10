@@ -4,25 +4,25 @@
 iplotMap = (widgetdiv, data, chartOpts) ->
 
     # chartOpts start
-    width = chartOpts?.width ? 1000 # width of chart in pixels
-    height = chartOpts?.height ? 600 # height of chart in pixels
+    width = chartOpts?.width ? 1000                               # width of chart in pixels
+    height = chartOpts?.height ? 600                              # height of chart in pixels
     margin = chartOpts?.margin ? {left:60, top:40, right:100, bottom: 40, inner:10} # margins in pixels (left, top, right, bottom, inner)
-    axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-    titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
-    ylim = chartOpts?.ylim ? null # y-axis limits
-    nyticks = chartOpts?.nyticks ? 5 # no. ticks on y-axis
-    yticks = chartOpts?.yticks ? null # vector of tick positions on y-axis
+    axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}       # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+    titlepos = chartOpts?.titlepos ? 20                           # position of chart title in pixels
+    ylim = chartOpts?.ylim ? null                                 # y-axis limits
+    nyticks = chartOpts?.nyticks ? 5                              # no. ticks on y-axis
+    yticks = chartOpts?.yticks ? null                             # vector of tick positions on y-axis
     xlineOpts = chartOpts?.xlineOpts ? {color:"#cdcdcd", width:5} # color and width of vertical lines
-    tickwidth = chartOpts?.tickwidth ? 10 # width of tick marks at markers, in pixels
-    rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
-    linecolor = chartOpts?.linecolor ? "slateblue" # color of lines
-    linecolorhilit = chartOpts?.linecolorhilit ? "Orchid" # color of lines, when highlighted
-    linewidth = chartOpts?.linewidth ? 3 # width of lines
-    title = chartOpts?.title ? "" # title for chart
-    xlab = chartOpts?.xlab ? "Chromosome" # x-axis label
-    ylab = chartOpts?.ylab ? "Position (cM)" # y-axis label
-    shiftStart = chartOpts?.shiftStart ? false # if true, shift the start of chromosomes to 0
-    horizontal = chartOpts?.horizontal ? false # if true, have chromosomes on vertical axis and positions horizontally
+    tickwidth = chartOpts?.tickwidth ? 10                         # width of tick marks at markers, in pixels
+    rectcolor = chartOpts?.rectcolor ? "#E6E6E6"                  # color of background rectangle
+    linecolor = chartOpts?.linecolor ? "slateblue"                # color of lines
+    linecolorhilit = chartOpts?.linecolorhilit ? "Orchid"         # color of lines, when highlighted
+    linewidth = chartOpts?.linewidth ? 3                          # width of lines
+    title = chartOpts?.title ? ""                                 # title for chart
+    xlab = chartOpts?.xlab ? "Chromosome"                         # x-axis label
+    ylab = chartOpts?.ylab ? "Position (cM)"                      # y-axis label
+    shiftStart = chartOpts?.shiftStart ? false                    # if true, shift the start of chromosomes to 0
+    horizontal = chartOpts?.horizontal ? false                    # if true, have chromosomes on vertical axis and positions horizontally
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

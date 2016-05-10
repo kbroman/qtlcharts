@@ -13,15 +13,15 @@ iplot = function(widgetdiv, data, chartOpts) {
     bottom: 40,
     inner: 5
   };
-  xlab = (ref4 = chartOpts != null ? chartOpts.xlab : void 0) != null ? ref4 : "X";
-  ylab = (ref5 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref5 : "Y";
-  axispos = (ref6 = chartOpts != null ? chartOpts.axispos : void 0) != null ? ref6 : {
+  axispos = (ref4 = chartOpts != null ? chartOpts.axispos : void 0) != null ? ref4 : {
     xtitle: 25,
     ytitle: 30,
     xlabel: 5,
     ylabel: 5
   };
-  titlepos = (ref7 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref7 : 20;
+  titlepos = (ref5 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref5 : 20;
+  xlab = (ref6 = chartOpts != null ? chartOpts.xlab : void 0) != null ? ref6 : "X";
+  ylab = (ref7 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref7 : "Y";
   xlim = (ref8 = chartOpts != null ? chartOpts.xlim : void 0) != null ? ref8 : null;
   xticks = (ref9 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref9 : null;
   nxticks = (ref10 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref10 : 5;

@@ -11,24 +11,24 @@ iplotPXG = (widgetdiv, data, chartOpts) ->
     gnames = (data.genonames[y] for y of data.genonames)[0]
 
     # chartOpts start
-    height = chartOpts?.height ? 550 # height of chart in pixels
-    width = chartOpts?.width ? 400 # width of chart in pixels
-    title = chartOpts?.title ? "" # title for chart
+    height = chartOpts?.height ? 550                 # height of chart in pixels
+    width = chartOpts?.width ? 400                   # width of chart in pixels
+    title = chartOpts?.title ? ""                    # title for chart
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
-    xlab = chartOpts?.xlab ? "Genotype" # x-axis label
-    ylab = chartOpts?.ylab ? "Phenotype" # y-axis label
-    axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-    titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
-    jitter = chartOpts?.jitter ? "beeswarm" # method for jittering points (beeswarm|random|none)
-    ylim = chartOpts?.ylim ? null # y-axis limits
-    yticks = chartOpts?.yticks ? null # vector of tick positions on y-axis
-    nyticks = chartOpts?.nyticks ? 5 # no. ticks on y-axis
-    rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
+    xlab = chartOpts?.xlab ? "Genotype"              # x-axis label
+    ylab = chartOpts?.ylab ? "Phenotype"             # y-axis label
+    axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}     # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+    titlepos = chartOpts?.titlepos ? 20              # position of chart title in pixels
+    jitter = chartOpts?.jitter ? "beeswarm"          # method for jittering points (beeswarm|random|none)
+    ylim = chartOpts?.ylim ? null                    # y-axis limits
+    yticks = chartOpts?.yticks ? null                # vector of tick positions on y-axis
+    nyticks = chartOpts?.nyticks ? 5                 # no. ticks on y-axis
+    rectcolor = chartOpts?.rectcolor ? "#E6E6E6"     # color of background rectangle
     pointcolor = chartOpts?.pointcolor ? "slateblue" # color for points
-    pointsize = chartOpts?.pointsize ? 3 # size of points in pixels
-    pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle for points
+    pointsize = chartOpts?.pointsize ? 3             # size of points in pixels
+    pointstroke = chartOpts?.pointstroke ? "black"   # color of outer circle for points
     yNA = chartOpts?.yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values (handle=T/F, force=T/F, width, gap)
-    horizontal = chartOpts?.horizontal ? false # If true, have genotypes on vertical axis and phenotype on horizontal axis
+    horizontal = chartOpts?.horizontal ? false       # If true, have genotypes on vertical axis and phenotype on horizontal axis
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

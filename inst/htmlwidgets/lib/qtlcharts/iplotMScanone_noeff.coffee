@@ -4,33 +4,33 @@
 iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
 
     # chartOpts start
-    height = chartOpts?.height ? 700 # height of chart in pixels
-    width = chartOpts?.width ? 1000 # width of chart in pixels
-    wleft = chartOpts?.wleft ? width*0.65 # width of left panels in pixels
-    htop = chartOpts?.htop ? height/2 # height of top panels in pixels
+    height = chartOpts?.height ? 700                               # height of chart in pixels
+    width = chartOpts?.width ? 1000                                # width of chart in pixels
+    wleft = chartOpts?.wleft ? width*0.65                          # width of left panels in pixels
+    htop = chartOpts?.htop ? height/2                              # height of top panels in pixels
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:0} # margins in pixels (left, top, right, bottom, inner)
-    axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-    titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
-    chrGap = chartOpts?.chrGap ? 8 # gap between chromosomes in pixels
-    rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of lighter background rectangle
-    altrectcolor = chartOpts?.altrectcolor ? "#C8C8C8" # color of darker background rectangle
-    chrlinecolor = chartOpts?.chrlinecolor ? ""        # color of lines between chromosomes (if "", leave off)
-    chrlinewidth = chartOpts?.chrlinewidth ? 2         # width of lines between chromosomes
-    nullcolor = chartOpts?.nullcolor ? "#E6E6E6" # color for pixels with null values
+    axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}     # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+    titlepos = chartOpts?.titlepos ? 20                            # position of chart title in pixels
+    chrGap = chartOpts?.chrGap ? 6                                 # gap between chromosomes in pixels
+    rectcolor = chartOpts?.rectcolor ? "#E6E6E6"                   # color of lighter background rectangle
+    altrectcolor = chartOpts?.altrectcolor ? "#C8C8C8"             # color of darker background rectangle
+    chrlinecolor = chartOpts?.chrlinecolor ? ""                    # color of lines between chromosomes (if "", leave off)
+    chrlinewidth = chartOpts?.chrlinewidth ? 2                     # width of lines between chromosomes
+    nullcolor = chartOpts?.nullcolor ? "#E6E6E6"                   # color for pixels with null values
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors
-    zlim = chartOpts?.zlim ? null # z-axis limits
-    zthresh = chartOpts?.zthresh ? null # lower z-axis threshold for display in heat map
-    xlab = chartOpts?.xlab ? "Chromosome" # x-axis label for LOD heatmap)
-    ylab = chartOpts?.ylab ? "" # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
-    zlab = chartOpts?.zlab ? "LOD score" # z-axis label for LOD heatmap (really just used as y-axis label in the two slices)
-    linecolor = chartOpts?.linecolor ? "darkslateblue" # color of LOD curves
-    linewidth = chartOpts?.linewidth ? 2 # width of LOD curves
-    pointsize = chartOpts?.pointsize ? 0 # size of points in vertical slice (default = 0 corresponds plotting curves rather than points)
-    pointcolor = chartOpts?.pointcolor ? "slateblue" # color of points in vertical slice
-    pointcolorhilit = chartOpts?.pointcolorhilit ? "crimson" # color of highlighted point in vertical slice
-    pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle for points in vertical slice
-    nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis on right-hand panel, if quantitative scale
-    xticks = chartOpts?.xticks ? null # tick positions in x-axis on right-hand panel, if quantitative scale
+    zlim = chartOpts?.zlim ? null                                  # z-axis limits
+    zthresh = chartOpts?.zthresh ? null                            # lower z-axis threshold for display in heat map
+    xlab = chartOpts?.xlab ? "Chromosome"                          # x-axis label for LOD heatmap)
+    ylab = chartOpts?.ylab ? ""                                    # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
+    zlab = chartOpts?.zlab ? "LOD score"                           # z-axis label for LOD heatmap (really just used as y-axis label in the two slices)
+    linecolor = chartOpts?.linecolor ? "darkslateblue"             # color of LOD curves
+    linewidth = chartOpts?.linewidth ? 2                           # width of LOD curves
+    pointsize = chartOpts?.pointsize ? 0                           # size of points in vertical slice (default = 0 corresponds plotting curves rather than points)
+    pointcolor = chartOpts?.pointcolor ? "slateblue"               # color of points in vertical slice
+    pointcolorhilit = chartOpts?.pointcolorhilit ? "crimson"       # color of highlighted point in vertical slice
+    pointstroke = chartOpts?.pointstroke ? "black"                 # color of outer circle for points in vertical slice
+    nxticks = chartOpts?.nxticks ? 5     # no. ticks in x-axis on right-hand panel, if quantitative scale
+    xticks = chartOpts?.xticks ? null    # tick positions in x-axis on right-hand panel, if quantitative scale
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

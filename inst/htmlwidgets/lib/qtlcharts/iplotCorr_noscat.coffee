@@ -14,13 +14,13 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
     #                  for each column in data.corr, it says which is the corresponding column in data.dat
 
     # chartOpts start
-    height = chartOpts?.height ? 560 # height of each panel in pixels
-    width = chartOpts?.width ? 1050 # total width of panels
+    height = chartOpts?.height ? 560             # height of each panel in pixels
+    width = chartOpts?.width ? 1050              # total width of panels
     margin = chartOpts?.margin ? {left:70, top:40, right:5, bottom: 70, inner:5} # margins in pixels (left, top, right, bottom, inner)
-    corcolors = chartOpts?.corcolors ? ["darkslateblue", "white", "crimson"] # heat map colors (same length as `zlim`)
-    zlim = chartOpts?.zlim ? [-1, 0, 1] # z-axis limits
+    corcolors = chartOpts?.corcolors ? ["darkslateblue", "white", "crimson"]     # heat map colors (same length as `zlim`)
+    zlim = chartOpts?.zlim ? [-1, 0, 1]          # z-axis limits
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
-    cortitle = chartOpts?.cortitle ? "" # title for heatmap panel
+    cortitle = chartOpts?.cortitle ? ""          # title for heatmap panel
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 

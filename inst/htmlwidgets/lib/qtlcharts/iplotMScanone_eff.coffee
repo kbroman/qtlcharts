@@ -4,36 +4,33 @@
 iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
 
     # chartOpts start
-    height = chartOpts?.height ? 700 # height of chart in pixels
-    width = chartOpts?.width ? 1000 # width of chart in pixels
-    wleft = chartOpts?.wleft ? width*0.65 # width of left panels in pixels
-    htop = chartOpts?.htop ? height/2 # height of top panels in pixels
+    height = chartOpts?.height ? 700                               # height of chart in pixels
+    width = chartOpts?.width ? 1000                                # width of chart in pixels
+    wleft = chartOpts?.wleft ? width*0.65                          # width of left panels in pixels
+    htop = chartOpts?.htop ? height/2                              # height of top panels in pixels
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
-    axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-    titlepos = chartOpts?.titlepos ? 20 # position of chart title in pixels
-    chrGap = chartOpts?.chrGap ? 8 # gap between chromosomes in pixels
-    darkrect = chartOpts?.darkrect ? "#C8C8C8" # color of darker background rectangle
-    lightrect = chartOpts?.lightrect ? "#E6E6E6" # color of lighter background rectangle
-    nullcolor = chartOpts?.nullcolor ? "#E6E6E6" # color for pixels with null values
+    axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}     # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+    titlepos = chartOpts?.titlepos ? 20                            # position of chart title in pixels
+    chrGap = chartOpts?.chrGap ? 6                                 # gap between chromosomes in pixels
+    rectcolor = chartOpts?.rectcolor ? "#c8c8c8"                   # color of darker background rectangle
+    altrectcolor = chartOpts?.altrectcolor ? "#e6e6e6"             # color of lighter background rectangle
+    nullcolor = chartOpts?.nullcolor ? "#e6e6e6"                   # color for pixels with null values
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors
-    zlim = chartOpts?.zlim ? null # z-axis limits
-    zthresh = chartOpts?.zthresh ? null # lower z-axis threshold for display in heat map
-    lod_ylab = chartOpts?.lod_ylab ? "" # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
-    eff_ylim = chartOpts?.eff_ylim ? null # y-axis limits for effect plot (right panel)
-    eff_ylab = chartOpts?.eff_ylab ? "" # y-axis label for effect plot (right panel)
-    linecolor = chartOpts?.linecolor ? "darkslateblue" # line color for LOD curves (lower panel)
-    eff_linecolor = chartOpts?.eff_linecolor ? null # line color for effect plot (right panel)
-    linewidth = chartOpts?.linewidth ? 2 # line width for LOD curves (lower panel)
-    eff_linewidth = chartOpts?.eff_linewidth ? 2 # width of line for effect plot (right panel)
-    pointcolor = chartOpts?.pointcolor ? "slateblue" # point color for LOD curves (lower panel)
-    pointsize = chartOpts?.pointsize ? 0 # point size for LOD curves (lower panel); 0 means no points
-    pointstroke = chartOpts?.pointstroke ? "black" # stroke color for points in LOD curves (lower panel)
-    eff_pointcolor = chartOpts?.eff_pointcolor ? null # point color for effect plot (right panel)
-    eff_pointsize = chartOpts?.eff_pointsize ? 0 # point size for effect plot (right panel); 0 means no points
-    eff_pointstroke = chartOpts?.eff_pointstroke ? "black" # stroke color for points in effect plot (right panel)
-    nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis for effect plot (right panel), if quantitative scale
-    xticks = chartOpts?.xticks ? null # tick positions in x-axis for effect plot (right panel), if quantitative scale
-    lod_labels = chartOpts?.lod_labels ? null # optional vector of strings, for LOD column labels
+    zlim = chartOpts?.zlim ? null                                  # z-axis limits
+    zthresh = chartOpts?.zthresh ? null                            # lower z-axis threshold for display in heat map
+    xlab = chartOpts?.xlab ? "Chromosome"                          # x-axis label for LOD heatmap (also used in lower panel)
+    ylab = chartOpts?.ylab ? ""                                    # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
+    eff_ylim = chartOpts?.eff_ylim ? null                          # y-axis limits for effect plot (right panel)
+    eff_ylab = chartOpts?.eff_ylab ? ""                            # y-axis label for effect plot (right panel)
+    linecolor = chartOpts?.linecolor ? "darkslateblue"             # line color for LOD curves (lower panel)
+    linewidth = chartOpts?.linewidth ? 2                           # line width for LOD curves (lower panel)
+    eff_linecolor = chartOpts?.eff_linecolor ? null                # line color for effect plot (right panel)
+    eff_linewidth = chartOpts?.eff_linewidth ? 2                   # width of line for effect plot (right panel)
+    eff_pointcolor = chartOpts?.eff_pointcolor ? null              # point color for effect plot (right panel)
+    eff_pointsize = chartOpts?.eff_pointsize ? 0                   # point size for effect plot (right panel); 0 means no points
+    eff_pointstroke = chartOpts?.eff_pointstroke ? "black"         # stroke color for points in effect plot (right panel)
+    nxticks = chartOpts?.nxticks ? 5          # no. ticks in x-axis for effect plot (right panel), if quantitative scale
+    xticks = chartOpts?.xticks ? null         # tick positions in x-axis for effect plot (right panel), if quantitative scale
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -51,7 +48,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                                .axispos(axispos)
                                .titlepos(titlepos)
                                .chrGap(chrGap)
-                               .rectcolor(lightrect)
+                               .rectcolor(altrectcolor)
                                .colors(colors)
                                .zlim(zlim)
                                .zthresh(zthresh)
@@ -76,8 +73,8 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                            .chrGap(chrGap)
                            .linecolor("none")
                            .pad4heatmap(true)
-                           .darkrect(darkrect)
-                           .lightrect(lightrect)
+                           .rectcolor(rectcolor)
+                           .altrectcolor(altrectcolor)
                            .ylim([0, d3.max(mylodheatmap.zlim())])
                            .pointsAtMarkers(false)
                            .tipclass(widgetdivid)
@@ -135,7 +132,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                                .xlab(lod_ylab)
                                .ylab(eff_ylab)
                                .strokecolor("none")
-                               .rectcolor(lightrect)
+                               .rectcolor(altrectcolor)
                                .xlim([-0.5, lod_data.lodnames.length-0.5])
                                .ylim(eff_ylim)
                                .nxticks(0)

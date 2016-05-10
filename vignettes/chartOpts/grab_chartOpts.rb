@@ -47,10 +47,10 @@ def parse_coffeescript_file (filename)
         variable = line.split(/\=/)[0].strip()
         comment = line.split(/\s\#\s/)[1].strip()
 
-        opts_variable = line.strip.split[2]
+        opts_variable = line.strip.split[2].strip()
         print "Inconsistent chartOpt: #{filename}: #{line}\n" if opts_variable != "chartOpts?.#{variable}"
 
-        default = line.split(/\s[\#\?]\s/)[-2]
+        default = line.split(/\s[\#\?]\s/)[-2].strip()
 
         chartOpts[variable] = {comment: comment, default: default}
     end

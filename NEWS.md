@@ -1,3 +1,15 @@
+# qtlcharts 0.7-1
+
+- Rewrite underlying javascript to use new version of
+  [d3panels](http://kbroman.org/d3panels).
+
+- Add some additional options, such as `horizontal` for `iplotMap`
+  and `iplotPXG`.
+
+- Change the name of some options, such as `linecolor` and `linewidth`
+  in `iplotCurves` (in place of `strokecolor` and `strokewidth`).
+
+
 # qtlcharts 0.6-6
 
 - Fix proliferation of tool tips

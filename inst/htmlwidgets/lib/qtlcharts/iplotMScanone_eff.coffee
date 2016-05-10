@@ -183,6 +183,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
 
     # plot effect curves for a given position
     verslice = []
+    effect_text = null
     plotVerSlice = (posindex) ->
         this_slice = d3panels.add_curves({
             linecolor:eff_linecolor
@@ -192,6 +193,20 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
             y:eff_data[posindex].data,
             group:(i+1 for i of eff_data[posindex].names)})
         verslice.push(this_slice)
+
+        # label on each curve
+        effect_text = g_verpanel.append("g").attr("id", "effect_text")
+                                .selectAll("empty")
+                                .data(eff_data[posindex].names)
+                                .enter()
+                                .append("text")
+                                .text((d) -> d)
+                                .attr("x", (d,i) -> margin.left + wright + axispos.ylabel)
+                                .attr("y", (d,i) ->
+                                     z = eff_data[posindex].data[i]
+                                     verpanel.yscale()(z[z.length-1]))
+                                .style("dominant-baseline", "middle")
+                                .style("text-anchor", "start")
 
     mylodheatmap.cells()
                 .on "mouseover", (d) ->
@@ -209,3 +224,4 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                          verslice.forEach((p) -> p.remove()) if verslice.length > 0
                          g_verpanel.select("g.title text").text("")
                          verpanel_axis_text.text("") unless times?
+                         effect_text.remove() if effect_text?

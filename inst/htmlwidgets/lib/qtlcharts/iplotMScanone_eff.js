@@ -2,7 +2,7 @@
 var iplotMScanone_eff;
 
 iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
-  var altrectcolor, axispos, c, chartdivid, chrGap, chrlinecolor, chrlinewidth, colors, eff_linecolor, eff_linewidth, eff_nlines, eff_pointcolor, eff_pointsize, eff_pointstroke, eff_ylab, eff_ylim, g_heatmap, g_horpanel, g_verpanel, hbot, height, horpanel, horslice, htop, i, j, k, len, len1, linecolor, linewidth, lod_labels, margin, mylodheatmap, nullcolor, nxticks, plotHorSlice, plotVerSlice, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, svg, these_pos, titlepos, verpanel, verpanel_axis_text, verpanel_xscale, verslice, widgetdivid, width, wleft, wright, x, xlab, xlim, xticks, ylab, zlab, zlim, zmax, zthresh;
+  var altrectcolor, axispos, c, chartdivid, chrGap, chrlinecolor, chrlinewidth, colors, eff_linecolor, eff_linewidth, eff_nlines, eff_pointcolor, eff_pointsize, eff_pointstroke, eff_ylab, eff_ylim, effect_text, g_heatmap, g_horpanel, g_verpanel, hbot, height, horpanel, horslice, htop, i, j, k, len, len1, linecolor, linewidth, lod_labels, margin, mylodheatmap, nullcolor, nxticks, plotHorSlice, plotVerSlice, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, svg, these_pos, titlepos, verpanel, verpanel_axis_text, verpanel_xscale, verslice, widgetdivid, width, wleft, wright, x, xlab, xlim, xticks, ylab, zlab, zlim, zmax, zthresh;
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 700;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000;
   wleft = (ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? ref2 : width * 0.65;
@@ -216,6 +216,7 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
     verpanel_xscale = verpanel.xscale();
   }
   verslice = [];
+  effect_text = null;
   plotVerSlice = function(posindex) {
     var this_slice;
     this_slice = d3panels.add_curves({
@@ -234,7 +235,16 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
         return results;
       })()
     });
-    return verslice.push(this_slice);
+    verslice.push(this_slice);
+    return effect_text = g_verpanel.append("g").attr("id", "effect_text").selectAll("empty").data(eff_data[posindex].names).enter().append("text").text(function(d) {
+      return d;
+    }).attr("x", function(d, i) {
+      return margin.left + wright + axispos.ylabel;
+    }).attr("y", function(d, i) {
+      var z;
+      z = eff_data[posindex].data[i];
+      return verpanel.yscale()(z[z.length - 1]);
+    }).style("dominant-baseline", "middle").style("text-anchor", "start");
   };
   return mylodheatmap.cells().on("mouseover", function(d) {
     var p;
@@ -258,7 +268,10 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
     }
     g_verpanel.select("g.title text").text("");
     if (times == null) {
-      return verpanel_axis_text.text("");
+      verpanel_axis_text.text("");
+    }
+    if (effect_text != null) {
+      return effect_text.remove();
     }
   });
 };

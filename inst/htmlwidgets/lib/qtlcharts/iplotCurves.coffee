@@ -16,10 +16,10 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
     pointsize = chartOpts?.pointsize ? 3 # size of points in scatterplots
     pointcolorhilit = chartOpts?.pointcolorhilit ? chartOpts?.colorhilit ? null # vector of colors for points in scatterplots, when highlighted
     pointsizehilit = chartOpts?.pointsizehilit ? 6 # zie of points in scatterplot, when highlighted
-    strokecolor = chartOpts?.strokecolor ? chartOpts?.color ? null # vector of colors of curves
-    strokecolorhilit = chartOpts?.strokecolorhilit ? chartOpts?.colorhilit ? null # vector of colors of curves, when highlighted
-    strokewidth = chartOpts?.strokewidth ? 2 # line width of curves
-    strokewidthhilit = chartOpts?.strokewidthhilit ? 2 # line widths of curves, when highlighted
+    linecolor = chartOpts?.linecolor ? chartOpts?.color ? null # vector of colors of curves
+    linecolorhilit = chartOpts?.linecolorhilit ? chartOpts?.colorhilit ? null # vector of colors of curves, when highlighted
+    linewidth = chartOpts?.linewidth ? 2 # line width of curves
+    linewidthhilit = chartOpts?.linewidthhilit ? 2 # line widths of curves, when highlighted
 
     curves_xlim = chartOpts?.curves_xlim ? null # x-axis limits in curve plot
     curves_ylim = chartOpts?.curves_ylim ? null # y-axis limits in curve plot
@@ -64,133 +64,132 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
     # panel heights and widths
     htop = if nscatter==0 then height else htop
     hbot = height - htop
-    htop = htop - (margin.top + margin.bottom) # remove margins
-    hbot = hbot - (margin.top + margin.bottom) # remove margins
-    wtop = (width - (margin.left + margin.top))
-    wbot = (width - 2*(margin.left + margin.right))/2
+    htop = htop
+    hbot = hbot
+    wtop = width
+    wbot = width/2
 
     # Select the svg element, if it exists.
     svg = d3.select(widgetdiv).select("svg")
 
     # groups of colors
-    nind = curve_data.data.length
+    nind = curve_data.y.length
     group = curve_data?.group ? (1 for i in curve_data.data)
     ngroup = d3.max(group)
     group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
 
     # colors of the points in the different groups
-    pointcolor = pointcolor ? selectGroupColors(ngroup, "light")
-    pointcolorhilit = pointcolorhilit ? selectGroupColors(ngroup, "dark")
-    strokecolor = strokecolor ? selectGroupColors(ngroup, "light")
-    strokecolorhilit = strokecolorhilit ? selectGroupColors(ngroup, "dark")
+    pointcolor = pointcolor ? d3panels.selectGroupColors(ngroup, "light")
+    pointcolorhilit = pointcolorhilit ? d3panels.selectGroupColors(ngroup, "dark")
+    linecolor = linecolor ? d3panels.selectGroupColors(ngroup, "light")
+    linecolorhilit = linecolorhilit ? d3panels.selectGroupColors(ngroup, "dark")
 
     ## configure the three charts
-    mycurvechart = curvechart().width(wtop)
-                               .height(htop)
-                               .margin(margin)
-                               .axispos(axispos)
-                               .titlepos(titlepos)
-                               .rectcolor(rectcolor)
-                               .strokecolor(strokecolor)
-                               .strokecolorhilit(strokecolorhilit)
-                               .strokewidth(strokewidth)
-                               .strokewidthhilit(strokewidthhilit)
-                               .xlim(curves_xlim)
-                               .ylim(curves_ylim)
-                               .nxticks(curves_nxticks)
-                               .xticks(curves_xticks)
-                               .nyticks(curves_nyticks)
-                               .yticks(curves_yticks)
-                               .title(curves_title)
-                               .xlab(curves_xlab)
-                               .ylab(curves_ylab)
-                               .tipclass(widgetdivid)
+    mycurvechart = d3panels.curvechart({
+        width:wtop
+        height:htop
+        margin:margin
+        axispos:axispos
+        titlepos:titlepos
+        rectcolor:rectcolor
+        linecolor:linecolor
+        linecolorhilit:linecolorhilit
+        linewidth:linewidth
+        linewidthhilit:linewidthhilit
+        xlim:curves_xlim
+        ylim:curves_ylim
+        nxticks:curves_nxticks
+        xticks:curves_xticks
+        nyticks:curves_nyticks
+        yticks:curves_yticks
+        title:curves_title
+        xlab:curves_xlab
+        ylab:curves_ylab
+        tipclass:widgetdivid})
 
     if nscatter > 0
-         myscatterplot1 = scatterplot().width(wbot)
-                                       .height(hbot)
-                                       .margin(margin)
-                                       .axispos(axispos)
-                                       .titlepos(titlepos)
-                                       .rectcolor(rectcolor)
-                                       .pointcolor(pointcolor)
-                                       .pointstroke(pointstroke)
-                                       .pointsize(pointsize)
-                                       .xlim(scat1_xlim)
-                                       .ylim(scat1_ylim)
-                                       .xNA(scat1_xNA)
-                                       .yNA(scat1_yNA)
-                                       .nxticks(scat1_nxticks)
-                                       .xticks(scat1_xticks)
-                                       .nyticks(scat1_nyticks)
-                                       .yticks(scat1_yticks)
-                                       .title(scat1_title)
-                                       .xlab(scat1_xlab)
-                                       .ylab(scat1_ylab)
-                                       .tipclass(widgetdivid)
+         myscatterplot1 = d3panels.scatterplot({
+             width:wbot
+             height:hbot
+             margin:margin
+             axispos:axispos
+             titlepos:titlepos
+             rectcolor:rectcolor
+             pointcolor:pointcolor
+             pointstroke:pointstroke
+             pointsize:pointsize
+             xlim:scat1_xlim
+             ylim:scat1_ylim
+             xNA:scat1_xNA
+             yNA:scat1_yNA
+             nxticks:scat1_nxticks
+             xticks:scat1_xticks
+             nyticks:scat1_nyticks
+             yticks:scat1_yticks
+             title:scat1_title
+             xlab:scat1_xlab
+             ylab:scat1_ylab
+             tipclass:widgetdivid})
 
     if nscatter == 2
-          myscatterplot2 = scatterplot().width(wbot)
-                                        .height(hbot)
-                                        .margin(margin)
-                                        .axispos(axispos)
-                                        .titlepos(titlepos)
-                                        .rectcolor(rectcolor)
-                                        .pointcolor(pointcolor)
-                                        .pointstroke(pointstroke)
-                                        .pointsize(pointsize)
-                                        .xlim(scat2_xlim)
-                                        .ylim(scat2_ylim)
-                                        .xNA(scat2_xNA)
-                                        .yNA(scat2_yNA)
-                                        .nxticks(scat2_nxticks)
-                                        .xticks(scat2_xticks)
-                                        .nyticks(scat2_nyticks)
-                                        .yticks(scat2_yticks)
-                                        .title(scat2_title)
-                                        .xlab(scat2_xlab)
-                                        .ylab(scat2_ylab)
-                                        .tipclass(widgetdivid)
+          myscatterplot2 = d3panels.scatterplot({
+              width:wbot
+              height:hbot
+              margin:margin
+              axispos:axispos
+              titlepos:titlepos
+              rectcolor:rectcolor
+              pointcolor:pointcolor
+              pointstroke:pointstroke
+              pointsize:pointsize
+              xlim:scat2_xlim
+              ylim:scat2_ylim
+              xNA:scat2_xNA
+              yNA:scat2_yNA
+              nxticks:scat2_nxticks
+              xticks:scat2_xticks
+              nyticks:scat2_nyticks
+              yticks:scat2_yticks
+              title:scat2_title
+              xlab:scat2_xlab
+              ylab:scat2_ylab
+              tipclass:widgetdivid})
 
     ## now make the actual charts
     g_curves = svg.append("g")
                   .attr("id", "curvechart")
-                .datum(curve_data)
-                .call(mycurvechart)
+    mycurvechart(g_curves, curve_data)
 
-    shiftdown = htop+margin.top+margin.bottom
     if nscatter > 0
         g_scat1 = svg.append("g")
                      .attr("id", "scatterplot1")
-                     .attr("transform", "translate(0,#{shiftdown})")
-                     .datum(scatter1_data)
-                     .call(myscatterplot1)
+                     .attr("transform", "translate(0,#{htop})")
+        myscatterplot1(g_scat1, scatter1_data)
 
     if nscatter == 2
         g_scat2 = svg.append("g")
                      .attr("id", "scatterplot2")
-                     .attr("transform", "translate(#{wbot+margin.left+margin.right},#{shiftdown})")
-                     .datum(scatter2_data)
-                     .call(myscatterplot2)
+                     .attr("transform", "translate(#{wbot},#{htop})")
+        myscatterplot2(g_scat2, scatter2_data)
 
-    points1 = myscatterplot1.pointsSelect() if nscatter > 0
-    points2 = myscatterplot2.pointsSelect() if nscatter == 2
+    points1 = myscatterplot1.points() if nscatter > 0
+    points2 = myscatterplot2.points() if nscatter == 2
     allpoints = [points1] if nscatter == 1
     allpoints = [points1, points2] if nscatter == 2
-    curves = mycurvechart.curvesSelect()
+    curves = mycurvechart.curves()
 
     # expand pointcolor and pointcolorhilit to length of group
-    pointcolor = expand2vector(pointcolor, ngroup)
-    pointcolorhilit = expand2vector(pointcolorhilit, ngroup)
-    strokecolor = expand2vector(strokecolor, ngroup)
-    strokecolorhilit = expand2vector(strokecolorhilit, ngroup)
+    pointcolor = d3panels.expand2vector(pointcolor, ngroup)
+    pointcolorhilit = d3panels.expand2vector(pointcolorhilit, ngroup)
+    linecolor = d3panels.expand2vector(linecolor, ngroup)
+    linecolorhilit = d3panels.expand2vector(linecolorhilit, ngroup)
 
     curves.on "mouseover", (d,i) ->
-                             d3.select(this).attr("stroke", strokecolorhilit[group[i]]).moveToFront()
+                             d3.select(this).attr("stroke", linecolorhilit[group[i]]).moveToFront()
                              d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit) if nscatter > 0
                              d3.selectAll("circle.pt#{i}").attr("fill", pointcolorhilit[group[i]]) if nscatter > 0
           .on "mouseout", (d,i) ->
-                             d3.select(this).attr("stroke", strokecolor[group[i]]).moveToBack()
+                             d3.select(this).attr("stroke", linecolor[group[i]]).moveToBack()
                              d3.selectAll("circle.pt#{i}").attr("r", pointsize) if nscatter > 0
                              d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]]) if nscatter > 0
 
@@ -200,8 +199,8 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
             points.on "mouseover", (d,i) ->
                                        d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit)
                                        d3.selectAll("circle.pt#{i}").attr("fill", pointcolorhilit[group[i]])
-                                       d3.select("path.path#{i}").attr("stroke", strokecolorhilit[group[i]]).moveToFront()
+                                       d3.select("path.path#{i}").attr("stroke", linecolorhilit[group[i]]).moveToFront()
                   .on "mouseout", (d,i) ->
                                        d3.selectAll("circle.pt#{i}").attr("r", pointsize)
                                        d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]])
-                                       d3.select("path.path#{i}").attr("stroke", strokecolor[group[i]]).moveToBack()
+                                       d3.select("path.path#{i}").attr("stroke", linecolor[group[i]]).moveToBack()

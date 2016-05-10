@@ -77,9 +77,9 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
     dimnames(curveMatrix) <- dimnames(scatter1) <- dimnames(scatter2) <- names(group) <- names(times) <- NULL
 
 
-    data_list <- list(curve_data=convert_curves(times, curveMatrix, group, indID),
-                      scatter1_data=convert_scat(scatter1, group, indID),
-                      scatter2_data=convert_scat(scatter2, group, indID))
+    data_list <- list(curve_data=list(x=list(times), y=curveMatrix, group=group, indID=indID),
+                      scatter1_data=list(x=scatter1[,1], y=scatter1[,2], group=group, indID=indID),
+                      scatter2_data=list(x=scatter2[,1], y=scatter2[,2], group=group, indID=indID))
 
     defaultAspect <- 1.25 # width/height
     browsersize <- getPlotSize(defaultAspect)
@@ -107,19 +107,4 @@ iplotCurves_output <- function(outputId, width="100%", height="1000") {
 iplotCurves_render <- function(expr, env=parent.frame(), quoted=FALSE) {
     if(!quoted) { expr <- substitute(expr) } # force quoted
     htmlwidgets::shinyRenderWidget(expr, iplotCurves_output, env, quoted=TRUE)
-}
-
-
-convert_curves <-
-function(times, curvedata, group, indID)
-{
-    list(x=times, data=curvedata, group=group, indID=indID)
-}
-
-convert_scat <-
-function(scatdata, group, indID)
-{
-    if(is.null(scatdata)) return(NULL)
-
-    list(data=scatdata, group=group, indID=indID)
 }

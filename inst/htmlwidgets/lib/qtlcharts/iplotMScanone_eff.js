@@ -2,7 +2,7 @@
 var iplotMScanone_eff;
 
 iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
-  var altrectcolor, axispos, chartdivid, chr, chrGap, colors, curindex, curvechart_xaxis, eff_linecolor, eff_linewidth, eff_nlines, eff_pointcolor, eff_pointsize, eff_pointstroke, eff_ylab, eff_ylim, effchart_curves, effcurve, extra_digits, g_curvechart, g_heatmap, g_lodchart, hbot, height, htop, j, k, len, len1, linecolor, linewidth, lod_labels, lodchart_curves, lodcurve, margin, mycurvechart, mylodchart, mylodheatmap, nullcolor, nxticks, plotEffCurves, plotLodCurve, pos, posindex, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref4, ref5, ref6, ref7, ref8, ref9, svg, titlepos, widgetdivid, width, wleft, wright, x, xlab, xscale, xticks, ylab, zlim, zthresh;
+  var altrectcolor, axispos, c, chartdivid, chrGap, chrlinecolor, chrlinewidth, colors, eff_linecolor, eff_linewidth, eff_nlines, eff_pointcolor, eff_pointsize, eff_pointstroke, eff_ylab, eff_ylim, g_heatmap, g_horpanel, g_verpanel, hbot, height, horpanel, horslice, htop, i, j, k, len, len1, linecolor, linewidth, lod_labels, margin, mylodheatmap, nullcolor, nxticks, plotHorSlice, plotVerSlice, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, svg, these_pos, titlepos, verpanel, verpanel_axis_text, verpanel_xscale, verslice, widgetdivid, width, wleft, wright, x, xlab, xlim, xticks, ylab, zlab, zlim, zmax, zthresh;
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 700;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000;
   wleft = (ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? ref2 : width * 0.65;
@@ -22,171 +22,243 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
   };
   titlepos = (ref6 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref6 : 20;
   chrGap = (ref7 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref7 : 6;
-  rectcolor = (ref8 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref8 : "#c8c8c8";
-  altrectcolor = (ref9 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref9 : "#e6e6e6";
+  rectcolor = (ref8 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref8 : "#e6e6e6";
+  altrectcolor = (ref9 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref9 : "#c8c8c8";
   nullcolor = (ref10 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref10 : "#e6e6e6";
-  colors = (ref11 = chartOpts != null ? chartOpts.colors : void 0) != null ? ref11 : ["slateblue", "white", "crimson"];
-  zlim = (ref12 = chartOpts != null ? chartOpts.zlim : void 0) != null ? ref12 : null;
-  zthresh = (ref13 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref13 : null;
-  xlab = (ref14 = chartOpts != null ? chartOpts.xlab : void 0) != null ? ref14 : "Chromosome";
-  ylab = (ref15 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref15 : "";
-  eff_ylim = (ref16 = chartOpts != null ? chartOpts.eff_ylim : void 0) != null ? ref16 : null;
-  eff_ylab = (ref17 = chartOpts != null ? chartOpts.eff_ylab : void 0) != null ? ref17 : "";
-  linecolor = (ref18 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref18 : "darkslateblue";
-  linewidth = (ref19 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref19 : 2;
-  eff_linecolor = (ref20 = chartOpts != null ? chartOpts.eff_linecolor : void 0) != null ? ref20 : null;
-  eff_linewidth = (ref21 = chartOpts != null ? chartOpts.eff_linewidth : void 0) != null ? ref21 : 2;
-  eff_pointcolor = (ref22 = chartOpts != null ? chartOpts.eff_pointcolor : void 0) != null ? ref22 : null;
-  eff_pointsize = (ref23 = chartOpts != null ? chartOpts.eff_pointsize : void 0) != null ? ref23 : 0;
-  eff_pointstroke = (ref24 = chartOpts != null ? chartOpts.eff_pointstroke : void 0) != null ? ref24 : "black";
-  nxticks = (ref25 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref25 : 5;
-  xticks = (ref26 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref26 : null;
-  chartdivid = (ref27 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref27 : 'chart';
+  chrlinecolor = (ref11 = chartOpts != null ? chartOpts.chrlinecolor : void 0) != null ? ref11 : "";
+  chrlinewidth = (ref12 = chartOpts != null ? chartOpts.chrlinewidth : void 0) != null ? ref12 : 2;
+  colors = (ref13 = chartOpts != null ? chartOpts.colors : void 0) != null ? ref13 : ["slateblue", "white", "crimson"];
+  zlim = (ref14 = chartOpts != null ? chartOpts.zlim : void 0) != null ? ref14 : null;
+  zthresh = (ref15 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref15 : null;
+  xlab = (ref16 = chartOpts != null ? chartOpts.xlab : void 0) != null ? ref16 : "Chromosome";
+  ylab = (ref17 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref17 : "";
+  zlab = (ref18 = chartOpts != null ? chartOpts.zlab : void 0) != null ? ref18 : "LOD score";
+  eff_ylim = (ref19 = chartOpts != null ? chartOpts.eff_ylim : void 0) != null ? ref19 : null;
+  eff_ylab = (ref20 = chartOpts != null ? chartOpts.eff_ylab : void 0) != null ? ref20 : "";
+  linecolor = (ref21 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref21 : "darkslateblue";
+  linewidth = (ref22 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref22 : 2;
+  eff_linecolor = (ref23 = chartOpts != null ? chartOpts.eff_linecolor : void 0) != null ? ref23 : null;
+  eff_linewidth = (ref24 = chartOpts != null ? chartOpts.eff_linewidth : void 0) != null ? ref24 : 2;
+  eff_pointcolor = (ref25 = chartOpts != null ? chartOpts.eff_pointcolor : void 0) != null ? ref25 : null;
+  eff_pointsize = (ref26 = chartOpts != null ? chartOpts.eff_pointsize : void 0) != null ? ref26 : 0;
+  eff_pointstroke = (ref27 = chartOpts != null ? chartOpts.eff_pointstroke : void 0) != null ? ref27 : "black";
+  nxticks = (ref28 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref28 : 5;
+  xticks = (ref29 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref29 : null;
+  lod_labels = (ref30 = chartOpts != null ? chartOpts.lod_labels : void 0) != null ? ref30 : null;
+  chartdivid = (ref31 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref31 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   wright = width - wleft;
   hbot = height - htop;
-  if (typeof lod_labels === "undefined" || lod_labels === null) {
-    lod_labels = times != null ? (function() {
-      var j, len, results;
-      results = [];
-      for (j = 0, len = times.length; j < len; j++) {
-        x = times[j];
-        results.push(formatAxis(times, extra_digits = 1)(x));
-      }
-      return results;
-    })() : lod_data.lodnames;
-  }
-  mylodheatmap = lodheatmap().height(htop - margin.top - margin.bottom).width(wleft - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).chrGap(chrGap).rectcolor(altrectcolor).colors(colors).zlim(zlim).zthresh(zthresh).quantScale(times).lod_labels(lod_labels).ylab(lod_ylab).nullcolor(nullcolor).tipclass(widgetdivid);
-  svg = d3.select(widgetdiv).select("svg");
-  g_heatmap = svg.append("g").attr("id", "heatmap").datum(lod_data).call(mylodheatmap);
-  mylodchart = lodchart().height(hbot - margin.top - margin.bottom).width(wleft - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).chrGap(chrGap).linecolor("none").pad4heatmap(true).rectcolor(rectcolor).altrectcolor(altrectcolor).ylim([0, d3.max(mylodheatmap.zlim())]).pointsAtMarkers(false).tipclass(widgetdivid);
-  g_lodchart = svg.append("g").attr("transform", "translate(0," + htop + ")").attr("id", "lodchart").datum(lod_data).call(mylodchart);
-  lodcurve = function(chr, lodcolumn) {
-    return d3.svg.line().x(function(d) {
-      return mylodchart.xscale()[chr](d);
-    }).y(function(d, i) {
-      return mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn]));
-    });
-  };
-  lodchart_curves = null;
-  plotLodCurve = function(lodcolumn) {
-    var chr, j, len, ref28, results;
-    lodchart_curves = g_lodchart.append("g").attr("id", "lodcurves");
-    ref28 = lod_data.chrnames;
-    results = [];
-    for (j = 0, len = ref28.length; j < len; j++) {
-      chr = ref28[j];
-      lodchart_curves.append("path").datum(lod_data.posByChr[chr]).attr("d", lodcurve(chr, lodcolumn)).attr("stroke", linecolor).attr("fill", "none").attr("stroke-width", linewidth).style("pointer-events", "none");
-      if (pointsize > 0) {
-        results.push(lodchart_curves.append("g").attr("id", "lodpoints").selectAll("empty").data(lod_data.posByChr[chr]).enter().append("circle").attr("cx", function(d) {
-          return mylodchart.xscale()[chr](d);
-        }).attr("cy", function(d, i) {
-          return mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn]));
-        }).attr("r", pointsize).attr("fill", pointcolor).attr("stroke", pointstroke));
-      } else {
-        results.push(void 0);
-      }
-    }
-    return results;
-  };
-  eff_ylim = eff_ylim != null ? eff_ylim : matrixExtent(eff_data.map(function(d) {
-    return matrixExtent(d.data);
-  }));
-  eff_nlines = d3.max(eff_data.map(function(d) {
-    return d.names.length;
-  }));
-  eff_linecolor = eff_linecolor != null ? eff_linecolor : selectGroupColors(eff_nlines, "dark");
-  eff_pointcolor = eff_pointcolor != null ? eff_pointcolor : selectGroupColors(eff_nlines, "dark");
-  eff_linecolor = forceAsArray(eff_linecolor);
-  eff_pointcolor = forceAsArray(eff_pointcolor);
-  mycurvechart = curvechart().height(htop - margin.top - margin.bottom).width(wright - margin.left - margin.right).margin(margin).axispos(axispos).titlepos(titlepos).xlab(lod_ylab).ylab(eff_ylab).strokecolor("none").rectcolor(altrectcolor).xlim([-0.5, lod_data.lodnames.length - 0.5]).ylim(eff_ylim).nxticks(0).commonX(true).tipclass(widgetdivid);
-  g_curvechart = svg.append("g").attr("transform", "translate(" + wleft + ",0)").attr("id", "curvechart").datum(eff_data[0]).call(mycurvechart);
-  effcurve = function(posindex, column) {
-    return d3.svg.line().x(function(d) {
-      return mycurvechart.xscale()(d);
-    }).y(function(d, i) {
-      return mycurvechart.yscale()(eff_data[posindex].data[column][i]);
-    });
-  };
-  effchart_curves = null;
-  plotEffCurves = function(posindex) {
-    var curveindex, results;
-    effchart_curves = g_curvechart.append("g").attr("id", "curves");
-    results = [];
-    for (curveindex in eff_data[posindex].names) {
-      effchart_curves.append("path").datum(eff_data[posindex].x).attr("d", effcurve(posindex, curveindex)).attr("fill", "none").attr("stroke", eff_linecolor[curveindex]).attr("stroke-width", eff_linewidth);
-      effchart_curves.selectAll("empty").data(eff_data[posindex].names).enter().append("text").text(function(d) {
-        return d;
-      }).attr("x", function(d, i) {
-        return margin.left + wright + axispos.ylabel;
-      }).attr("y", function(d, i) {
-        var z;
-        z = eff_data[posindex].data[i];
-        return mycurvechart.yscale()(z[z.length - 1]);
-      }).style("dominant-baseline", "middle").style("text-anchor", "start");
-      if (eff_pointsize > 0) {
-        results.push(effchart_curves.append("g").attr("id", "eff_points").selectAll("empty").data(eff_data[posindex].x).enter().append("circle").attr("cx", function(d) {
-          return mycurvechart.xscale()(d);
-        }).attr("cy", function(d, i) {
-          return mycurvechart.yscale()(eff_data[posindex].data[curveindex][i]);
-        }).attr("r", eff_pointsize).attr("fill", eff_pointcolor[curveindex]).attr("stroke", eff_pointstroke));
-      } else {
-        results.push(void 0);
-      }
-    }
-    return results;
-  };
+  zmax = d3panels.matrixMaxAbs(lod_data.lod);
+  zlim = zlim != null ? zlim : [-zmax, 0, zmax];
   if (times != null) {
-    xscale = d3.scale.linear().range(mycurvechart.xscale().range());
-    xscale.domain([times[0], times[times.length - 1]]);
-    xticks = xticks != null ? xticks : xscale.ticks(nxticks);
-    curvechart_xaxis = g_curvechart.select("g.x.axis");
-    curvechart_xaxis.selectAll("empty").data(xticks).enter().append("line").attr("x1", function(d) {
-      return xscale(d);
-    }).attr("x2", function(d) {
-      return xscale(d);
-    }).attr("y1", margin.top).attr("y2", htop - margin.bottom).attr("fill", "none").attr("stroke", "white").attr("stroke-width", 1).style("pointer-events", "none");
-    curvechart_xaxis.selectAll("empty").data(xticks).enter().append("text").attr("x", function(d) {
-      return xscale(d);
-    }).attr("y", htop - margin.bottom + axispos.xlabel).text(function(d) {
-      return formatAxis(xticks)(d);
-    });
+    lod_data.y = times;
   } else {
-    curvechart_xaxis = g_curvechart.select("g.x.axis").selectAll("empty").data(lod_labels).enter().append("text").attr("class", "y axis").attr("id", function(d, i) {
-      return "xaxis" + i;
-    }).attr("x", function(d, i) {
-      return mycurvechart.xscale()(i);
-    }).attr("y", htop - margin.bottom + axispos.xlabel).text(function(d) {
-      return d;
-    }).attr("opacity", 0);
+    lod_data.ycat = lod_data.lodname;
   }
-  posindex = {};
-  curindex = 0;
-  ref28 = lod_data.chrnames;
-  for (j = 0, len = ref28.length; j < len; j++) {
-    chr = ref28[j];
-    posindex[chr] = {};
-    ref29 = lod_data.posByChr[chr];
-    for (k = 0, len1 = ref29.length; k < len1; k++) {
-      pos = ref29[k];
-      posindex[chr][pos] = curindex;
-      curindex += 1;
+  lod_data.posIndexByChr = d3panels.reorgByChr(lod_data.chrname, lod_data.chr, (function() {
+    var results;
+    results = [];
+    for (i in lod_data.pos) {
+      results.push(i);
+    }
+    return results;
+  })());
+  if (lod_labels != null) {
+    lod_data.lodname = lod_labels;
+  }
+  if (lod_data.chrname == null) {
+    lod_data.chrname = d3panels.unique(lod_data.chr);
+  }
+  if (lod_data.chrstart == null) {
+    lod_data.chrstart = [];
+    ref32 = lod_data.chrname;
+    for (j = 0, len = ref32.length; j < len; j++) {
+      c = ref32[j];
+      these_pos = (function() {
+        var results;
+        results = [];
+        for (i in lod_data.chr) {
+          if (lod_data.chr[i] === c) {
+            results.push(lod_data.pos[i]);
+          }
+        }
+        return results;
+      })();
+      lod_data.chrstart.push(d3.min(these_pos));
     }
   }
-  mycurvechart.curvesSelect().on("mouseover.panel", null).on("mouseout.panel", null);
-  return mylodheatmap.cellSelect().on("mouseover", function(d) {
+  if (lod_data.chrend == null) {
+    lod_data.chrend = [];
+    ref33 = lod_data.chrname;
+    for (k = 0, len1 = ref33.length; k < len1; k++) {
+      c = ref33[k];
+      these_pos = (function() {
+        var results;
+        results = [];
+        for (i in lod_data.chr) {
+          if (lod_data.chr[i] === c) {
+            results.push(lod_data.pos[i]);
+          }
+        }
+        return results;
+      })();
+      lod_data.chrend.push(d3.max(these_pos));
+    }
+  }
+  x = times != null ? times : (function() {
+    var results;
+    results = [];
+    for (i in lod_data.lod[0]) {
+      results.push(i);
+    }
+    return results;
+  })();
+  xlim = times != null ? d3.extent(times) : [-0.5, x.length - 0.5];
+  nxticks = times != null ? nxticks : 0;
+  xticks = times != null ? xticks : null;
+  mylodheatmap = d3panels.lodheatmap({
+    height: htop,
+    width: wleft,
+    margin: margin,
+    axispos: axispos,
+    titlepos: titlepos,
+    chrGap: chrGap,
+    rectcolor: rectcolor,
+    altrectcolor: altrectcolor,
+    chrlinecolor: chrlinecolor,
+    chrlinewidth: chrlinewidth,
+    colors: colors,
+    zlim: zlim,
+    zthresh: zthresh,
+    ylab: ylab,
+    yticks: xticks,
+    nyticks: nxticks,
+    nullcolor: nullcolor,
+    tipclass: widgetdivid
+  });
+  svg = d3.select(widgetdiv).select("svg");
+  g_heatmap = svg.append("g").attr("id", "heatmap");
+  mylodheatmap(g_heatmap, lod_data);
+  horpanel = d3panels.chrpanelframe({
+    height: hbot,
+    width: wleft,
+    margin: margin,
+    axispos: axispos,
+    titlepos: titlepos,
+    chrGap: chrGap,
+    rectcolor: rectcolor,
+    altrectcolor: altrectcolor,
+    chrlinecolor: chrlinecolor,
+    chrlinewidth: chrlinewidth,
+    xlab: xlab,
+    ylab: zlab,
+    ylim: [0, zlim[2] * 1.05],
+    tipclass: widgetdivid
+  });
+  g_horpanel = svg.append("g").attr("transform", "translate(0," + htop + ")").attr("id", "lodchart");
+  horpanel(g_horpanel, {
+    chr: lod_data.chrname,
+    start: lod_data.chrstart,
+    end: lod_data.chrend
+  });
+  horslice = null;
+  plotHorSlice = function(lodcolumn) {
+    horslice = d3panels.add_lodcurve({
+      linecolor: linecolor,
+      linewidth: linewidth,
+      pointsize: 0,
+      pointcolor: "",
+      pointstroke: ""
+    });
+    return horslice(horpanel, {
+      chr: lod_data.chr,
+      pos: lod_data.pos,
+      marker: lod_data.marker,
+      lod: (function() {
+        var results;
+        results = [];
+        for (i in lod_data.pos) {
+          results.push(d3panels.abs(lod_data.lod[i][lodcolumn]));
+        }
+        return results;
+      })(),
+      chrname: lod_data.chrname
+    });
+  };
+  eff_ylim = eff_ylim != null ? eff_ylim : d3panels.matrixExtent(eff_data.map(function(d) {
+    return d3panels.matrixExtent(d.data);
+  }));
+  eff_nlines = eff_data[0].data.length;
+  eff_linecolor = eff_linecolor != null ? eff_linecolor : d3panels.selectGroupColors(eff_nlines, "dark");
+  eff_pointcolor = eff_pointcolor != null ? eff_pointcolor : d3panels.selectGroupColors(eff_nlines, "dark");
+  eff_linecolor = d3panels.forceAsArray(eff_linecolor);
+  eff_pointcolor = d3panels.forceAsArray(eff_pointcolor);
+  verpanel = d3panels.panelframe({
+    height: htop,
+    width: wright,
+    margin: margin,
+    axispos: axispos,
+    titlepos: titlepos,
+    xlab: ylab,
+    ylab: eff_ylab,
+    rectcolor: rectcolor,
+    xlim: xlim,
+    ylim: eff_ylim,
+    nxticks: nxticks,
+    xticks: xticks,
+    tipclass: widgetdivid
+  });
+  g_verpanel = svg.append("g").attr("transform", "translate(" + wleft + ",0)").attr("id", "curvechart");
+  verpanel(g_verpanel);
+  if (times == null) {
+    verpanel_axis_text = g_verpanel.append("g").attr("class", "x axis").append("text").text("").attr("y", htop - margin.bottom + axispos.xlabel);
+    verpanel_xscale = verpanel.xscale();
+  }
+  verslice = [];
+  plotVerSlice = function(posindex) {
+    var this_slice;
+    this_slice = d3panels.add_curves({
+      linecolor: eff_linecolor,
+      linewidth: eff_linewidth
+    });
+    this_slice(verpanel, {
+      x: [x],
+      y: eff_data[posindex].data,
+      group: (function() {
+        var results;
+        results = [];
+        for (i in eff_data[posindex].names) {
+          results.push(i + 1);
+        }
+        return results;
+      })()
+    });
+    return verslice.push(this_slice);
+  };
+  return mylodheatmap.cells().on("mouseover", function(d) {
     var p;
-    plotLodCurve(d.lodindex);
-    g_lodchart.select("g.title text").text("" + lod_labels[d.lodindex]);
-    plotEffCurves(posindex[d.chr][d.pos]);
+    plotHorSlice(d.lodindex);
+    g_horpanel.select("g.title text").text("" + lod_data.lodname[d.lodindex]);
+    plotVerSlice(lod_data.posIndexByChr[d.chr][d.pos]);
     p = d3.format(".1f")(d.pos);
-    g_curvechart.select("g.title text").text(d.chr + "@" + p);
-    return g_curvechart.select("text#xaxis" + d.lodindex).attr("opacity", 1);
+    g_verpanel.select("g.title text").text(d.chr + "@" + p);
+    if (times == null) {
+      return verpanel_axis_text.text("" + lod_data.lodname[d.lodindex]).attr("x", verpanel_xscale(d.lodindex));
+    }
   }).on("mouseout", function(d) {
-    lodchart_curves.remove();
-    g_lodchart.select("g.title text").text("");
-    effchart_curves.remove();
-    g_curvechart.select("g.title text").text("");
-    return g_curvechart.select("text#xaxis" + d.lodindex).attr("opacity", 0);
+    if (horslice != null) {
+      horslice.remove();
+    }
+    g_horpanel.select("g.title text").text("");
+    if (verslice.length > 0) {
+      verslice.forEach(function(p) {
+        return p.remove();
+      });
+    }
+    g_verpanel.select("g.title text").text("");
+    if (times == null) {
+      return verpanel_axis_text.text("");
+    }
   });
 };

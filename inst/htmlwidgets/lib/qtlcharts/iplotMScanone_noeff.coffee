@@ -23,7 +23,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     linewidth = chartOpts?.linewidth ? 2 # width of LOD curves
     pointsize = chartOpts?.pointsize ? 0 # size of points in vertical slice (default = 0 corresponds plotting curves rather than points)
     pointcolor = chartOpts?.pointcolor ? "slateblue" # color of points in vertical slice
-    pointcolorhilit = chartOpts?.pointcolorhilit ? "Orchid" # color of highlighted point in vertical slice
+    pointcolorhilit = chartOpts?.pointcolorhilit ? "crimson" # color of highlighted point in vertical slice
     pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle for points in vertical slice
     nxticks = chartOpts?.nxticks ? 5 # no. ticks in x-axis on right-hand panel, if quantitative scale
     xticks = chartOpts?.xticks ? null # tick positions in x-axis on right-hand panel, if quantitative scale

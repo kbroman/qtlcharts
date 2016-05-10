@@ -33,7 +33,7 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   linewidth = (ref16 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref16 : 2;
   pointsize = (ref17 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref17 : 0;
   pointcolor = (ref18 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? ref18 : "slateblue";
-  pointcolorhilit = (ref19 = chartOpts != null ? chartOpts.pointcolorhilit : void 0) != null ? ref19 : "Orchid";
+  pointcolorhilit = (ref19 = chartOpts != null ? chartOpts.pointcolorhilit : void 0) != null ? ref19 : "crimson";
   pointstroke = (ref20 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref20 : "black";
   nxticks = (ref21 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref21 : 5;
   xticks = (ref22 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref22 : null;

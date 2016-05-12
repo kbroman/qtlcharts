@@ -40,7 +40,7 @@ iheatmap = function(widgetdiv, data, chartOpts) {
   zthresh = (ref23 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref23 : null;
   zlim = (ref24 = chartOpts != null ? chartOpts.zlim : void 0) != null ? ref24 : [-d3panels.matrixMaxAbs(data.z), 0, d3panels.matrixMaxAbs(data.z)];
   colors = (ref25 = chartOpts != null ? chartOpts.colors : void 0) != null ? ref25 : ["slateblue", "white", "crimson"];
-  flip_vert_slice = (ref26 = chartOpts.flip_vert_slice) != null ? ref26 : false;
+  flip_vert_slice = (ref26 = chartOpts != null ? chartOpts.flip_vert_slice : void 0) != null ? ref26 : false;
   chartdivid = (ref27 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref27 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   hbot = height - htop;

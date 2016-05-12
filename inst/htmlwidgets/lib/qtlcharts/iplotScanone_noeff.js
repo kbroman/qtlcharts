@@ -23,8 +23,8 @@ iplotScanone_noeff = function(widgetdiv, data, chartOpts) {
   nyticks = (ref7 = (ref8 = chartOpts != null ? chartOpts.nyticks : void 0) != null ? ref8 : chartOpts != null ? chartOpts.lod_nyticks : void 0) != null ? ref7 : 5;
   yticks = (ref9 = (ref10 = chartOpts != null ? chartOpts.yticks : void 0) != null ? ref10 : chartOpts != null ? chartOpts.lod_yticks : void 0) != null ? ref9 : null;
   chrGap = (ref11 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref11 : 6;
-  rectcolor = (ref12 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? ref12 : "#E6E6E6";
-  altrectcolor = (ref13 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? ref13 : "#C8C8C8";
+  rectcolor = (ref12 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref12 : "#E6E6E6";
+  altrectcolor = (ref13 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref13 : "#C8C8C8";
   linecolor = (ref14 = (ref15 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref15 : chartOpts != null ? chartOpts.lod_linecolor : void 0) != null ? ref14 : "darkslateblue";
   linewidth = (ref16 = (ref17 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref17 : chartOpts != null ? chartOpts.lod_linewidth : void 0) != null ? ref16 : 2;
   pointcolor = (ref18 = (ref19 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? ref19 : chartOpts != null ? chartOpts.lod_pointcolor : void 0) != null ? ref18 : "#E9CFEC";

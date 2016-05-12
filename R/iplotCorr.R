@@ -118,6 +118,7 @@ iplotCorr_render <- function(expr, env=parent.frame(), quoted=FALSE) {
 group2numeric <-
 function(group)
 {
+    if(is.null(group)) return(NULL)
     if(is.factor(group)) return(as.numeric(group))
 
     match(group, sort(unique(group)))

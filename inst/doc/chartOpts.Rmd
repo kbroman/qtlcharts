@@ -611,37 +611,49 @@ customization options for each chart.
 
 ### `iplotRF`
 
-`height = 1000` &mdash; total height of chart in pixels
+`height = 800` &mdash; total height of chart in pixels
 
 `width = 1000` &mdash; total width of chart in pixels
 
-`pixelPerCell = NULL` &mdash; pixels per cell in heat map
+`hbot = 300` &mdash; height (in pixels) of each of the lower panels with LOD scores
 
-`chrGap = 2` &mdash; gaps between chr in heat map
-
-`cellHeight = 30` &mdash; cell height (in pixels) in crosstab
-
-`cellWidth = 80` &mdash; cell width (in pixels) in crosstab
-
-`cellPad = 20` &mdash; cell padding (in pixels) to right of text in crosstab
-
-`hbot = 300` &mdash; height (in pixels) of each of the lower panels with LOD scores across the genome
-
-`fontsize = cellHeight*0.7` &mdash; font size in crosstab
-
-`margin = list(left=60, top=30, right=10, bottom=40, inner=5)` &mdash; margins in each panel
+`margin = list(left=60, top=40, right=40, bottom=60)` &mdash; margins in pixels (left, top, right, bottom)
 
 `axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
 
-`lightrect = "#e6e6e6"` &mdash; background color in heatmap and crosstab; light rect in lower panels with LOD and rf
+`titlepos = 20` &mdash; position of chart title in pixels
 
-`darkrect = "#c8c8c8"` &mdash; dark rectangle in lower panels with LOD and rf
+`chrGap = 2` &mdash; gaps between chr in heat map
 
-`hilitcolor = "#e9cfec"` &mdash; highlight color in crosstab
+`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
 
-`nullcolor = "#e6e6e6"` &mdash; color of null pixels in heat map
+`chrlinewidth = 2` &mdash; width of lines between chromosomes
 
-`bordercolor = "black"` &mdash; border color in heat map and in cross-tab
+`oneAtTop = false` &mdash; if true, put chromosome 1 at the top rather than bottom
+
+`colors = c("crimson", "white", "slateblue")` &mdash; vector of three colors for the color scale (negative - zero - positive)
+
+`nullcolor = "#e6e6e6"` &mdash; color for empty cells
+
+`zlim = NULL` &mdash; z-axis limits (if null take from data, symmetric about 0)
+
+`zthresh = NULL` &mdash; z threshold; if |z| < zthresh, not shown
+
+`hilitCellcolor = "black"` &mdash; color of box around highlighted cell
+
+`cellPad = NULL` &mdash; padding of cells (if null, we take cell width * 0.1)
+
+`fontsize = NULL` &mdash; font size in crosstab
+
+`rectcolor = "#e6e6e6"` &mdash; background rectangle color (and color of cells in crosstab)
+
+`altrectcolor = "#c8c8c8"` &mdash; alternate rectangle color in lower panels with LOD and rf
+
+`hilitcolor = "#e9cfec"` &mdash; color of rectangle in heatmap when highlighted
+
+`boxcolor = "black"` &mdash; color of outer box of panels
+
+`boxwidth = 2` &mdash; width of outer box in pixels
 
 `pointsize = 2` &mdash; point size in lower panels with LOD and rf
 
@@ -649,11 +661,9 @@ customization options for each chart.
 
 `pointstroke = "black"` &mdash; stroke color for points in lower panels with LOD and rf
 
-`colors = c("crimson", "white", "slateblue")` &mdash; colors for heat map
+`lodlim = c(0, 12)` &mdash; range of LOD values to display; omit below 1st, truncate above 2nd
 
-`lodlim = c(0, 12)` &mdash; range of LOD values to display; omit below 1st, truncate about 2nd
-
-`oneAtTop = false` &mdash; whether to put chr 1 at top of heatmap
+`tipclass = "tooltip"` &mdash; class name for tool tips
 
 ### `iplotPXG`
 

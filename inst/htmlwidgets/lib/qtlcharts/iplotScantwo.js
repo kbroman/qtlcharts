@@ -346,14 +346,12 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
         return mydotchart.xscale()(i + 1);
       }).attr("y", hright - margin.bottom / 2 + axispos.xlabel).text(function(d) {
         return d;
-      }).style("font-size", "10pt");
-      effcharts[p].svg().append("g").attr("class", "x axis").selectAll("empty").data([mar1, mar2]).enter().append("text").attr("x", (margin.left + mydotchart.xscale()(1)) / 2.0).attr("y", function(d, i) {
+      });
+      results2.push(effcharts[p].svg().append("g").attr("class", "x axis").selectAll("empty").data([mar1, mar2]).enter().append("text").attr("x", (margin.left + mydotchart.xscale()(1)) / 2.0).attr("y", function(d, i) {
         return hright - margin.bottom / (i + 1) + axispos.xlabel;
       }).style("text-anchor", "end").text(function(d) {
         return d + ":";
-      }).style("font-size", "10pt");
-      effcharts[p].svg().select("g#xlabels").style("font-size", "10pt");
-      results2.push(effcharts[p].svg().select("g#ylabels").style("font-size", "10pt"));
+      }));
     }
     return results2;
   };

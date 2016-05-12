@@ -321,7 +321,6 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                     .attr("x", (d,i) -> mydotchart.xscale()(i+1))
                     .attr("y", hright-margin.bottom/2+axispos.xlabel)
                     .text((d) -> d)
-                    .style("font-size", "10pt")
             effcharts[p].svg() # marker name labels
                     .append("g").attr("class", "x axis")
                     .selectAll("empty")
@@ -333,11 +332,6 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                         hright - margin.bottom/(i+1) + axispos.xlabel)
                     .style("text-anchor", "end")
                     .text((d) -> d + ":")
-                    .style("font-size", "10pt")
-            # reduce size of other text
-            effcharts[p].svg().select("g#xlabels").style("font-size", "10pt")
-            effcharts[p].svg().select("g#ylabels").style("font-size", "10pt")
-
 
 # add full,add,int,av1,fv1 lod scores to scantwo_data
 add_symmetric_lod = (scantwo_data) ->

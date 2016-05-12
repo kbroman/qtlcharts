@@ -144,8 +144,8 @@ data4iplotScantwo <-
     dimnames(lod) <- NULL
     dimnames(lodv1) <- NULL
     list(lod=lod, lodv1=lodv1,
-         nmar=n.mar, chrnames=chrnam,
-         labels=labels, chr=chr, pos=map$pos)
+         nmar=n.mar, chrname=chrnam,
+         marker=labels, chr=chr, pos=map$pos)
 }
 
 

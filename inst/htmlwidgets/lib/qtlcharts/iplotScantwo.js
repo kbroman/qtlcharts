@@ -2,53 +2,51 @@
 var add_symmetric_lod, iplotScantwo, lod_for_heatmap;
 
 iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
-  var add_cell_tooltips, axispos, bordercolor, chrGap, cicolors, color, darkrect, div, eff_hpos, eff_vpos, form, g_heatmap, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, lightrect, linecolor, linewidth, margin, mychrheatmap, mycichart, mydotchart, mylodchart, n, ncat, nullcolor, oneAtTop, options, pixelPerCell, plot_effects, plot_scan, pointsize, pointstroke, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, submit, svg, totalh, totalw, totmar, w, wbot, widgetdivid, width, wright, x, zthresh;
-  height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 1000;
-  width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000;
-  pixelPerCell = (ref2 = chartOpts != null ? chartOpts.pixelPerCell : void 0) != null ? ref2 : null;
-  chrGap = (ref3 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref3 : 2;
-  wright = (ref4 = chartOpts != null ? chartOpts.wright : void 0) != null ? ref4 : 500;
-  hbot = (ref5 = chartOpts != null ? chartOpts.hbot : void 0) != null ? ref5 : 150;
-  margin = (ref6 = chartOpts != null ? chartOpts.margin : void 0) != null ? ref6 : {
+  var add_cell_tooltips, altrectcolor, axispos, boxcolor, boxwidth, chrGap, cicolors, color, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, linecolor, linewidth, margin, mycichart, mydotchart, mylod2dheatmap, mylodchart, n, ncat, nullcolor, oneAtTop, options, plot_effects, plot_scan, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref3, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, segwidth, submit, svg, w, wbot, widgetdivid, width, wright, x, zthresh;
+  height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 1200;
+  width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1100;
+  chrGap = (ref2 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref2 : 2;
+  wright = (ref3 = chartOpts != null ? chartOpts.wright : void 0) != null ? ref3 : width / 2;
+  hbot = (ref4 = chartOpts != null ? chartOpts.hbot : void 0) != null ? ref4 : height / 5;
+  margin = (ref5 = chartOpts != null ? chartOpts.margin : void 0) != null ? ref5 : {
     left: 60,
     top: 50,
     right: 10,
     bottom: 40,
     inner: 5
   };
-  axispos = (ref7 = chartOpts != null ? chartOpts.axispos : void 0) != null ? ref7 : {
+  axispos = (ref6 = chartOpts != null ? chartOpts.axispos : void 0) != null ? ref6 : {
     xtitle: 25,
     ytitle: 30,
     xlabel: 5,
     ylabel: 5
   };
-  lightrect = (ref8 = chartOpts != null ? chartOpts.lightrect : void 0) != null ? ref8 : "#e6e6e6";
-  darkrect = (ref9 = chartOpts != null ? chartOpts.darkrect : void 0) != null ? ref9 : "#c8c8c8";
-  nullcolor = (ref10 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref10 : "#e6e6e6";
-  bordercolor = (ref11 = chartOpts != null ? chartOpts.bordercolor : void 0) != null ? ref11 : "black";
+  rectcolor = (ref7 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref7 : "#e6e6e6";
+  altrectcolor = (ref8 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref8 : "#c8c8c8";
+  nullcolor = (ref9 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref9 : "#e6e6e6";
+  boxcolor = (ref10 = chartOpts != null ? chartOpts.boxcolor : void 0) != null ? ref10 : "black";
+  boxwidth = (ref11 = chartOpts != null ? chartOpts.boxwidth : void 0) != null ? ref11 : 2;
   linecolor = (ref12 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref12 : "slateblue";
   linewidth = (ref13 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref13 : 2;
-  pointsize = (ref14 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref14 : 3;
+  pointsize = (ref14 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref14 : 2;
   pointstroke = (ref15 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref15 : "black";
   cicolors = (ref16 = chartOpts != null ? chartOpts.cicolors : void 0) != null ? ref16 : null;
-  color = (ref17 = chartOpts != null ? chartOpts.color : void 0) != null ? ref17 : "slateblue";
-  oneAtTop = (ref18 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? ref18 : false;
-  zthresh = (ref19 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref19 : 0;
-  scantwo_data.chrnames = forceAsArray(scantwo_data.chrnames);
-  scantwo_data.nmar = forceAsArray(scantwo_data.nmar);
+  segwidth = (ref17 = chartOpts != null ? chartOpts.segwidth : void 0) != null ? ref17 : 0.4;
+  color = (ref18 = chartOpts != null ? chartOpts.color : void 0) != null ? ref18 : "slateblue";
+  oneAtTop = (ref19 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? ref19 : false;
+  zthresh = (ref20 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref20 : 0;
   div = d3.select(widgetdiv);
   widgetdivid = div.attr("id");
-  totmar = sumArray(scantwo_data.nmar);
-  if (pixelPerCell == null) {
-    pixelPerCell = d3.max([2, Math.floor(600 / totmar)]);
-  }
-  w = chrGap * scantwo_data.chrnames.length + pixelPerCell * totmar;
-  heatmap_width = w + margin.left + margin.right;
-  heatmap_height = w + margin.top + margin.bottom;
-  hright = heatmap_height / 2 - margin.top - margin.bottom;
-  totalw = heatmap_width + wright + margin.left + margin.right;
-  totalh = heatmap_height + (hbot + margin.top + margin.bottom) * 2;
-  wbot = totalw / 2 - margin.left - margin.right;
+  svg = div.select("svg");
+  scantwo_data.chrnames = d3panels.forceAsArray(scantwo_data.chrnames);
+  scantwo_data.nmar = d3panels.forceAsArray(scantwo_data.nmar);
+  w = d3.min([height - hbot * 2, width - wright]);
+  heatmap_width = w;
+  heatmap_height = w;
+  hright = heatmap_height / 2;
+  width = heatmap_width + wright;
+  height = heatmap_height + hbot * 2;
+  wbot = width / 2;
   leftvalue = "int";
   rightvalue = "fv1";
   if (pheno_and_geno != null) {
@@ -62,21 +60,21 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       return results;
     })());
     if (cicolors != null) {
-      cicolors = expand2vector(cicolors, ncat);
+      cicolors = d3panels.expand2vector(cicolors, ncat);
       n = cicolors.length;
       if (n < ncat) {
-        displayError("length(cicolors) (" + n + ") < maximum no. genotypes (" + ncat + ")");
+        d3panels.displayError("length(cicolors) (" + n + ") < maximum no. genotypes (" + ncat + ")");
         cicolors = (function() {
-          var k, ref20, results;
+          var k, ref21, results;
           results = [];
-          for (i = k = 0, ref20 = ncat; 0 <= ref20 ? k < ref20 : k > ref20; i = 0 <= ref20 ? ++k : --k) {
+          for (i = k = 0, ref21 = ncat; 0 <= ref21 ? k < ref21 : k > ref21; i = 0 <= ref21 ? ++k : --k) {
             results.push(cicolors[i % n]);
           }
           return results;
         })();
       }
     } else {
-      cicolors = selectGroupColors(ncat, "dark");
+      cicolors = d3panels.selectGroupColors(ncat, "dark");
     }
   }
   options = ["full", "fv1", "int", "add", "av1"];
@@ -110,94 +108,120 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     leftvalue = leftsel.options[leftsel.selectedIndex].value;
     rightsel = document.getElementById("rightselect_" + widgetdivid);
     rightvalue = rightsel.options[rightsel.selectedIndex].value;
-    scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);
+    scantwo_data.lod = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);
     div.select("g#chrheatmap svg").remove();
-    div.select("g#chrheatmap").datum(scantwo_data).call(mychrheatmap);
+    mylod2dheatmap(div.select("g#chrheatmap"), scantwo_data);
     return add_cell_tooltips();
   });
-  svg = div.select("svg").attr("viewBox", [0, 0, totalw, totalh].join(" ")).attr("preserveAspectRatio", "xMinYMin meet").style("height", "100%").style("width", "100%");
   scantwo_data = add_symmetric_lod(scantwo_data);
-  scantwo_data.z = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);
-  mychrheatmap = chrheatmap().pixelPerCell(pixelPerCell).chrGap(chrGap).axispos(axispos).rectcolor("white").nullcolor(nullcolor).bordercolor(bordercolor).colors(["white", color]).zlim([0, scantwo_data.max.full]).zthresh(zthresh).oneAtTop(oneAtTop).hover(false).tipclass(widgetdivid);
-  g_heatmap = svg.append("g").attr("id", "chrheatmap").datum(scantwo_data).call(mychrheatmap);
+  scantwo_data.lod = lod_for_heatmap(scantwo_data, leftvalue, rightvalue);
+  mylod2dheatmap = d3panels.lod2dheatmap({
+    height: heatmap_height,
+    width: heatmap_width,
+    chrGap: chrGap,
+    axispos: axispos,
+    rectcolor: "white",
+    nullcolor: nullcolor,
+    boxcolor: boxcolor,
+    colors: ["white", color],
+    zlim: [0, scantwo_data.max.full],
+    zthresh: zthresh,
+    oneAtTop: oneAtTop,
+    tipclass: widgetdivid
+  });
+  g_heatmap = svg.append("g").attr("id", "chrheatmap");
+  mylod2dheatmap(g_heatmap, scantwo_data);
   add_cell_tooltips = function() {
-    var cells, celltip;
-    d3.selectAll("div.d3-tip." + widgetdivid).remove();
-    celltip = d3.tip().attr("class", "d3-tip " + widgetdivid).html(function(d) {
+    mylod2dheatmap.celltip().html(function(d) {
       var leftlod, mari, marj, rightlod;
-      mari = scantwo_data.labels[d.i];
-      marj = scantwo_data.labels[d.j];
-      if (+d.i > +d.j) {
-        leftlod = d3.format(".1f")(scantwo_data[leftvalue][d.i][d.j]);
-        rightlod = d3.format(".1f")(scantwo_data[rightvalue][d.j][d.i]);
+      mari = scantwo_data.marker[d.xindex];
+      marj = scantwo_data.marker[d.yindex];
+      if (+d.xindex > +d.yindex) {
+        leftlod = d3.format(".1f")(scantwo_data[leftvalue][d.xindex][d.yindex]);
+        rightlod = d3.format(".1f")(scantwo_data[rightvalue][d.yindex][d.xindex]);
         return "(" + marj + " " + mari + ") " + rightvalue + " = " + rightlod + ", " + leftvalue + " = " + leftlod;
-      } else if (+d.j > +d.i) {
-        leftlod = d3.format(".1f")(scantwo_data[leftvalue][d.j][d.i]);
-        rightlod = d3.format(".1f")(scantwo_data[rightvalue][d.i][d.j]);
+      } else if (+d.yindex > +d.xindex) {
+        leftlod = d3.format(".1f")(scantwo_data[leftvalue][d.yindex][d.xindex]);
+        rightlod = d3.format(".1f")(scantwo_data[rightvalue][d.xindex][d.yindex]);
         return "(" + marj + " " + mari + ") " + leftvalue + " = " + leftlod + ", " + rightvalue + " = " + rightlod;
       } else {
         return mari;
       }
-    }).direction('e').offset([0, 10]);
-    svg.call(celltip);
-    cells = mychrheatmap.cellSelect();
-    return cells.on("mouseover", function(d) {
-      return celltip.show(d);
-    }).on("mouseout", function() {
-      return celltip.hide();
-    }).on("click", function(d) {
+    });
+    return mylod2dheatmap.cells().on("click", function(d) {
       var mari, marj;
-      mari = scantwo_data.labels[d.i];
-      marj = scantwo_data.labels[d.j];
-      if (d.i === d.j) {
+      mari = scantwo_data.marker[d.xindex];
+      marj = scantwo_data.marker[d.yindex];
+      if (d.xindex === d.yindex) {
         return null;
       }
-      plot_scan(d.i, 0, 0, leftvalue);
-      plot_scan(d.i, 1, 0, rightvalue);
-      plot_scan(d.j, 0, 1, leftvalue);
-      plot_scan(d.j, 1, 1, rightvalue);
+      plot_scan(d.xindex, 0, 0, leftvalue);
+      plot_scan(d.xindex, 1, 0, rightvalue);
+      plot_scan(d.yindex, 0, 1, leftvalue);
+      plot_scan(d.yindex, 1, 1, rightvalue);
       if (pheno_and_geno != null) {
-        return plot_effects(d.i, d.j);
+        return plot_effects(d.xindex, d.yindex);
       }
     });
   };
   add_cell_tooltips();
   mylodchart = [[null, null], [null, null]];
-  scans_hpos = [0, wbot + margin.left + margin.right];
-  scans_vpos = [heatmap_height, heatmap_height + hbot + margin.top + margin.bottom];
+  scans_hpos = [0, wbot];
+  scans_vpos = [heatmap_height, heatmap_height + hbot];
   mydotchart = null;
   mycichart = null;
   eff_hpos = [heatmap_width, heatmap_width];
   eff_vpos = [0, heatmap_height / 2];
+  g_scans = [[null, null], [null, null]];
   plot_scan = function(markerindex, panelrow, panelcol, lod) {
-    var data, g_scans;
+    var data;
     data = {
-      chrnames: scantwo_data.chrnames,
-      lodnames: ["lod"],
+      chrname: scantwo_data.chrnames,
       chr: scantwo_data.chr,
       pos: scantwo_data.pos,
       lod: (function() {
-        var k, len, ref20, results;
-        ref20 = scantwo_data[lod][markerindex];
+        var k, len, ref21, results;
+        ref21 = scantwo_data[lod][markerindex];
         results = [];
-        for (k = 0, len = ref20.length; k < len; k++) {
-          x = ref20[k];
+        for (k = 0, len = ref21.length; k < len; k++) {
+          x = ref21[k];
           results.push(x);
         }
         return results;
       })(),
-      markernames: scantwo_data.labels
+      marker: scantwo_data.marker
     };
     if (mylodchart[panelrow][panelcol] != null) {
       mylodchart[panelrow][panelcol].remove();
     }
-    mylodchart[panelrow][panelcol] = lodchart().height(hbot).width(wbot).margin(margin).axispos(axispos).ylim([0.0, scantwo_data.max[lod]]).lightrect(lightrect).darkrect(darkrect).linewidth(linewidth).linecolor(linecolor).pointsize(0).pointcolor("").pointstroke("").lodvarname("lod").xlab("").title(data.markernames[markerindex] + " : " + lod).tipclass(widgetdivid);
-    return g_scans = svg.append("g").attr("id", "scan_" + (panelrow + 1) + "_" + (panelcol + 1)).attr("transform", "translate(" + scans_hpos[panelcol] + ", " + scans_vpos[panelrow] + ")").datum(data).call(mylodchart[panelrow][panelcol]);
+    mylodchart[panelrow][panelcol] = d3panels.lodchart({
+      height: hbot,
+      width: wbot,
+      margin: margin,
+      axispos: axispos,
+      ylim: [0.0, scantwo_data.max[lod] * 1.05],
+      rectcolor: rectcolor,
+      altrectcolor: altrectcolor,
+      linewidth: linewidth,
+      linecolor: linecolor,
+      pointsize: 0,
+      pointcolor: "",
+      pointstroke: "",
+      lodvarname: "lod",
+      xlab: "",
+      title: data.marker[markerindex] + " : " + lod,
+      tipclass: widgetdivid
+    });
+    if (g_scans[panelrow][panelcol] == null) {
+      g_scans[panelrow][panelcol] = svg.append("g").attr("id", "scan_" + (panelrow + 1) + "_" + (panelcol + 1)).attr("transform", "translate(" + scans_hpos[panelcol] + ", " + scans_vpos[panelrow] + ")");
+    }
+    return mylodchart[panelrow][panelcol](g_scans[panelrow][panelcol], data);
   };
+  g_eff = [null, null];
   return plot_effects = function(markerindex1, markerindex2) {
-    var chr1, chr2, ci_data, cicolors_expanded, cis, dif, g, g1, g2, g_eff, gn1, gn2, gnames1, gnames2, j, k, l, m, mar1, mar2, ng1, ng2, o, p, pxg_data, q, ref20, ref21, ref22, ref23, results, results1, results2, segwidth, xs;
-    mar1 = scantwo_data.labels[markerindex1];
-    mar2 = scantwo_data.labels[markerindex2];
+    var chr1, chr2, ci_data, cicolors_expanded, cis, effcharts, g, g1, g2, gn1, gn2, gnames1, gnames2, j, k, l, m, mar1, mar2, ng1, ng2, o, p, pxg_data, q, ref21, ref22, ref23, ref24, results, results1, results2;
+    mar1 = scantwo_data.marker[markerindex1];
+    mar2 = scantwo_data.marker[markerindex2];
     g1 = pheno_and_geno.geno[mar1];
     g2 = pheno_and_geno.geno[mar2];
     chr1 = pheno_and_geno.chr[mar1];
@@ -217,8 +241,8 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     gn1 = [];
     gn2 = [];
     cicolors_expanded = [];
-    for (i = k = 0, ref20 = ng2; 0 <= ref20 ? k < ref20 : k > ref20; i = 0 <= ref20 ? ++k : --k) {
-      for (j = l = 0, ref21 = ng1; 0 <= ref21 ? l < ref21 : l > ref21; j = 0 <= ref21 ? ++l : --l) {
+    for (i = k = 0, ref21 = ng2; 0 <= ref21 ? k < ref21 : k > ref21; i = 0 <= ref21 ? ++k : --k) {
+      for (j = l = 0, ref22 = ng1; 0 <= ref22 ? l < ref22 : l > ref22; j = 0 <= ref22 ? ++l : --l) {
         gn1.push(gnames1[j]);
         gn2.push(gnames2[i]);
         cicolors_expanded.push(cicolors[i]);
@@ -230,70 +254,106 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     if (mycichart != null) {
       mycichart.remove();
     }
-    g_eff = [null, null];
     pxg_data = {
-      g: g,
+      x: g,
       y: pheno_and_geno.pheno,
       indID: pheno_and_geno.indID
     };
-    mydotchart = dotchart().height(hright).width(wright).margin(margin).axispos(axispos).rectcolor(lightrect).pointsize(3).pointstroke(pointstroke).xcategories((function() {
-      results = [];
-      for (var m = 1, ref22 = gn1.length; 1 <= ref22 ? m <= ref22 : m >= ref22; 1 <= ref22 ? m++ : m--){ results.push(m); }
-      return results;
-    }).apply(this)).xcatlabels(gn1).xlab("").ylab("Phenotype").xvar("g").yvar("y").dataByInd(false).title(mar1 + " : " + mar2).tipclass(widgetdivid);
-    g_eff[1] = svg.append("g").attr("id", "eff_1").attr("transform", "translate(" + eff_hpos[1] + ", " + eff_vpos[1] + ")").datum(pxg_data).call(mydotchart);
-    mydotchart.pointsSelect().attr("fill", function(d, i) {
+    mydotchart = d3panels.dotchart({
+      height: hright,
+      width: wright,
+      margin: margin,
+      axispos: axispos,
+      rectcolor: rectcolor,
+      pointsize: pointsize,
+      pointstroke: pointstroke,
+      xcategories: (function() {
+        results = [];
+        for (var m = 1, ref23 = gn1.length; 1 <= ref23 ? m <= ref23 : m >= ref23; 1 <= ref23 ? m++ : m--){ results.push(m); }
+        return results;
+      }).apply(this),
+      xcatlabels: gn1,
+      xlab: "",
+      ylab: "Phenotype",
+      yvar: "y",
+      dataByInd: false,
+      title: mar1 + " : " + mar2,
+      tipclass: widgetdivid
+    });
+    if (g_eff[1] == null) {
+      g_eff[1] = svg.append("g").attr("id", "eff_1").attr("transform", "translate(" + eff_hpos[1] + ", " + eff_vpos[1] + ")");
+    }
+    mydotchart(g_eff[1], pxg_data);
+    mydotchart.points().attr("fill", function(d, i) {
       return cicolors_expanded[g[i] - 1];
     });
-    cis = ci_by_group(g, pheno_and_geno.pheno, 2);
+    cis = d3panels.ci_by_group(g, pheno_and_geno.pheno, 2);
     ci_data = {
-      means: (function() {
-        var o, ref23, ref24, ref25, results1;
+      mean: (function() {
+        var o, ref24, ref25, ref26, results1;
         results1 = [];
-        for (x = o = 1, ref23 = gn1.length; 1 <= ref23 ? o <= ref23 : o >= ref23; x = 1 <= ref23 ? ++o : --o) {
-          results1.push((ref24 = (ref25 = cis[x]) != null ? ref25.mean : void 0) != null ? ref24 : null);
+        for (x = o = 1, ref24 = gn1.length; 1 <= ref24 ? o <= ref24 : o >= ref24; x = 1 <= ref24 ? ++o : --o) {
+          results1.push((ref25 = (ref26 = cis[x]) != null ? ref26.mean : void 0) != null ? ref25 : null);
         }
         return results1;
       })(),
       low: (function() {
-        var o, ref23, ref24, ref25, results1;
+        var o, ref24, ref25, ref26, results1;
         results1 = [];
-        for (x = o = 1, ref23 = gn1.length; 1 <= ref23 ? o <= ref23 : o >= ref23; x = 1 <= ref23 ? ++o : --o) {
-          results1.push((ref24 = (ref25 = cis[x]) != null ? ref25.low : void 0) != null ? ref24 : null);
+        for (x = o = 1, ref24 = gn1.length; 1 <= ref24 ? o <= ref24 : o >= ref24; x = 1 <= ref24 ? ++o : --o) {
+          results1.push((ref25 = (ref26 = cis[x]) != null ? ref26.low : void 0) != null ? ref25 : null);
         }
         return results1;
       })(),
       high: (function() {
-        var o, ref23, ref24, ref25, results1;
+        var o, ref24, ref25, ref26, results1;
         results1 = [];
-        for (x = o = 1, ref23 = gn1.length; 1 <= ref23 ? o <= ref23 : o >= ref23; x = 1 <= ref23 ? ++o : --o) {
-          results1.push((ref24 = (ref25 = cis[x]) != null ? ref25.high : void 0) != null ? ref24 : null);
+        for (x = o = 1, ref24 = gn1.length; 1 <= ref24 ? o <= ref24 : o >= ref24; x = 1 <= ref24 ? ++o : --o) {
+          results1.push((ref25 = (ref26 = cis[x]) != null ? ref26.high : void 0) != null ? ref25 : null);
         }
         return results1;
       })(),
       categories: (function() {
         results1 = [];
-        for (var o = 1, ref23 = gn1.length; 1 <= ref23 ? o <= ref23 : o >= ref23; 1 <= ref23 ? o++ : o--){ results1.push(o); }
+        for (var o = 1, ref24 = gn1.length; 1 <= ref24 ? o <= ref24 : o >= ref24; 1 <= ref24 ? o++ : o--){ results1.push(o); }
         return results1;
       }).apply(this)
     };
-    xs = mydotchart.xscale();
-    dif = xs(2) - xs(1);
-    segwidth = gn1.length > 9 ? dif * 0.5 : dif * 0.25;
-    mycichart = cichart().height(hright).width(wright).margin(margin).axispos(axispos).rectcolor(lightrect).segcolor(cicolors_expanded).segwidth(segwidth).vertsegcolor(cicolors_expanded).segstrokewidth(linewidth).xlab("").ylab("Phenotype").xcatlabels(gn1).title(mar1 + " : " + mar2).tipclass(widgetdivid);
-    g_eff[0] = svg.append("g").attr("id", "eff_0").attr("transform", "translate(" + eff_hpos[0] + ", " + eff_vpos[0] + ")").datum(ci_data).call(mycichart);
+    mycichart = d3panels.cichart({
+      height: hright,
+      width: wright,
+      margin: margin,
+      axispos: axispos,
+      rectcolor: rectcolor,
+      segcolor: cicolors_expanded,
+      segwidth: segwidth,
+      vertsegcolor: cicolors_expanded,
+      segstrokewidth: linewidth,
+      xlab: "",
+      ylab: "Phenotype",
+      xcatlabels: gn1,
+      title: mar1 + " : " + mar2,
+      tipclass: widgetdivid
+    });
+    if (g_eff[0] == null) {
+      g_eff[0] = svg.append("g").attr("id", "eff_0").attr("transform", "translate(" + eff_hpos[0] + ", " + eff_vpos[0] + ")");
+    }
+    mycichart(g_eff[0], ci_data);
+    effcharts = [mydotchart, mycichart];
     results2 = [];
     for (p = q = 0; q <= 1; p = ++q) {
-      g_eff[p].select("svg").append("g").attr("class", "x axis").selectAll("empty").data(gn2).enter().append("text").attr("x", function(d, i) {
+      effcharts[p].svg().append("g").attr("class", "x axis").selectAll("empty").data(gn2).enter().append("text").attr("x", function(d, i) {
         return mydotchart.xscale()(i + 1);
-      }).attr("y", margin.top + hright + margin.bottom / 2 + axispos.xlabel).text(function(d) {
+      }).attr("y", hright - margin.bottom / 2 + axispos.xlabel).text(function(d) {
         return d;
-      });
-      results2.push(g_eff[p].select("svg").append("g").attr("class", "x axis").selectAll("empty").data([mar1, mar2]).enter().append("text").attr("x", (margin.left + mydotchart.xscale()(1)) / 2.0).attr("y", function(d, i) {
-        return margin.top + hright + margin.bottom / 2 * i + axispos.xlabel;
+      }).style("font-size", "10pt");
+      effcharts[p].svg().append("g").attr("class", "x axis").selectAll("empty").data([mar1, mar2]).enter().append("text").attr("x", (margin.left + mydotchart.xscale()(1)) / 2.0).attr("y", function(d, i) {
+        return hright - margin.bottom / (i + 1) + axispos.xlabel;
       }).style("text-anchor", "end").text(function(d) {
         return d + ":";
-      }));
+      }).style("font-size", "10pt");
+      effcharts[p].svg().select("g#xlabels").style("font-size", "10pt");
+      results2.push(effcharts[p].svg().select("g#ylabels").style("font-size", "10pt"));
     }
     return results2;
   };
@@ -347,7 +407,7 @@ add_symmetric_lod = function(scantwo_data) {
   ref5 = ["full", "add", "fv1", "av1", "int"];
   for (q = 0, len = ref5.length; q < len; q++) {
     i = ref5[q];
-    scantwo_data.max[i] = matrixMax(scantwo_data[i]);
+    scantwo_data.max[i] = d3panels.matrixMax(scantwo_data[i]);
   }
   return scantwo_data;
 };

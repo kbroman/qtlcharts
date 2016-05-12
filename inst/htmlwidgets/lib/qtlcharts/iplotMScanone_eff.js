@@ -254,7 +254,7 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
     var p;
     plotHorSlice(d.lodindex);
     g_horpanel.select("g.title text").text("" + lod_data.lodname[d.lodindex]);
-    plotVerSlice(lod_data.posIndexByChr[d.chr][d.pos]);
+    plotVerSlice(lod_data.posIndexByChr[d.chr][d.posindex]);
     p = d3.format(".1f")(d.pos);
     g_verpanel.select("g.title text").text(d.chr + "@" + p);
     if (times == null) {

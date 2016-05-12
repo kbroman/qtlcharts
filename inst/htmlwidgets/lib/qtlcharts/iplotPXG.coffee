@@ -6,7 +6,6 @@ iplotPXG = (widgetdiv, data, chartOpts) ->
     gen = (Math.abs(x) for x in data.geno[0])
     inferred = (x < 0 for x in data.geno[0])
     group = (i+1 for i in inferred)
-    console.log(group)
     phe = data.pheno
     gnames = (data.genonames[y] for y of data.genonames)[0]
 

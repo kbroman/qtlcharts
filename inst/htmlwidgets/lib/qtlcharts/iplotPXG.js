@@ -32,7 +32,6 @@ iplotPXG = function(widgetdiv, data, chartOpts) {
     }
     return results;
   })();
-  console.log(group);
   phe = data.pheno;
   gnames = ((function() {
     var results;

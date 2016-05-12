@@ -22,10 +22,11 @@ HTMLWidgets.widget({
 
         chartOpts = x.chartOpts ? {}
         chartOpts.width = chartOpts?.width ? svg.attr("width")
-        chartOpts.height = chartOpts?.height ? +svg.attr("height")+24 # 24 = form div height
+        chartOpts.height = chartOpts?.height ? +svg.attr("height")+24 # 24 = form height
+        chartOpts.height -= 24 # 24 = form height
 
         svg.attr("width", chartOpts.width)
-        svg.attr("height", chartOpts.height-24)
+        svg.attr("height", chartOpts.height)
 
         iplotScantwo(widgetdiv, x.scantwo_data, x.phenogeno_data, chartOpts)
 

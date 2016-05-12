@@ -22,12 +22,12 @@ Depends:
 Imports:
     qtl (>= 1.30-4),
     htmlwidgets,
-    jsonlite,
     graphics,
     stats,
     utils
 Suggests:
     htmltools,
+    jsonlite,
     knitr,
     devtools,
     roxygen2,

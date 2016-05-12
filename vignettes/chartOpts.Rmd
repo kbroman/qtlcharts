@@ -705,39 +705,41 @@ customization options for each chart.
 
 ### `iplotScantwo`
 
-`height = 1000` &mdash; total height of chart in pixels
+`height = 1200` &mdash; total height of chart in pixels
 
-`width = 1000` &mdash; total width of chart in pixels
-
-`pixelPerCell = NULL` &mdash; pixels per cell in heat map
+`width = 1100` &mdash; total width of chart in pixels
 
 `chrGap = 2` &mdash; gaps between chr in heat map
 
-`wright = 500` &mdash; width (in pixels) of right panels
+`wright = width/2` &mdash; width (in pixels) of right panels
 
-`hbot = 150` &mdash; height (in pixels) of each of the lower panels
+`hbot = height/5` &mdash; height (in pixels) of each of the lower panels
 
 `margin = list(left=60, top=50, right=10, bottom=40, inner=5)` &mdash; margins in each panel
 
 `axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
 
-`lightrect = "#e6e6e6"` &mdash; color for light rect in lower panels and backgrd in right panels
+`rectcolor = "#e6e6e6"` &mdash; color for background rectangle
 
-`darkrect = "#c8c8c8"` &mdash; dark rectangle in lower panels
+`altrectcolor = "#c8c8c8"` &mdash; alternate rectangle in lower panels
 
 `nullcolor = "#e6e6e6"` &mdash; color of null pixels in heat map
 
-`bordercolor = "black"` &mdash; border color in heat map
+`boxcolor = "black"` &mdash; color of box around each panel
+
+`boxwidth = 2` &mdash; width of box around each panel
 
 `linecolor = "slateblue"` &mdash; line color in lower panels
 
 `linewidth = 2` &mdash; line width in lower panels
 
-`pointsize = 3` &mdash; point size in right panels
+`pointsize = 2` &mdash; point size in right panels
 
 `pointstroke = "black"` &mdash; color of outer circle in right panels
 
 `cicolors = NULL` &mdash; colors for CIs in QTL effect plot; also used for points in phe x gen plot
+
+`segwidth = 0.4` &mdash; segment width in CI chart as proportion of distance between categories
 
 `color = "slateblue"` &mdash; color for heat map
 

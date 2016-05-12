@@ -99,6 +99,6 @@ function(cross)
     chr <- as.character(map[,1])
     pos <- map[,2]
 
-    list(rf=rf, nmar=n.mar, chrnames=chrnam,
-         labels=mnames, chr=chr, pos=pos)
+    list(rf=rf, nmar=n.mar, chrname=chrnam,
+         marker=mnames, chr=chr, pos=pos)
 }

@@ -61,8 +61,8 @@ function(cross, chr)
         }
         geno[,chrtype=="X"] <- genoX
     }
-    # make it a list, and convert to 0, 1, 2, ...
-    geno <- as.list(as.data.frame(geno - 1))
+    # make it a list
+    geno <- as.list(as.data.frame(geno))
 
     list(geno=geno, genocat=genocat, chrtype=as.list(chrtype))
 }

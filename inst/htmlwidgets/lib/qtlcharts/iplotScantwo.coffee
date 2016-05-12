@@ -114,7 +114,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                      rightvalue = rightsel.options[rightsel.selectedIndex].value
 
                      scantwo_data.lod = lod_for_heatmap(scantwo_data, leftvalue, rightvalue)
-                     div.select("g#chrheatmap svg").remove()
+                     mylod2dheatmap.remove()
                      mylod2dheatmap(div.select("g#chrheatmap"), scantwo_data)
                      add_cell_tooltips()
 

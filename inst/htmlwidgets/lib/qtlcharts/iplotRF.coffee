@@ -54,13 +54,11 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
     crosstab_ypos = (heatmap_height - crosstab_height)/2
     crosstab_ypos = 0 if crosstab_ypos < 0
 
-    # height of lower panels
+    # width of bottom panels
     wbot = heatmap_width
 
-    # total size of SVG
-    totalw = heatmap_width + crosstab_width
+    # height of top panels
     htop = d3.max([heatmap_height, crosstab_height])
-    totalh =  heatmap_height + hbot
 
     svg = d3.select(widgetdiv).select("svg")
 
@@ -93,6 +91,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
             if col > row and rf_data.rf[col][row] > 0.5
                 rf_data.lod[row][col] = -rf_data.lod[row][col]
 
+    # create the heatmap
     mylodheatmap = d3panels.lod2dheatmap({
         width:heatmap_width
         height:heatmap_height
@@ -121,6 +120,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
     mycrosstab = null
     mylodchart = [null, null]
 
+    # function to create the crosstab panel
     create_crosstab = (marker1, marker2) ->
         data =
             x: geno.geno[marker1]
@@ -147,6 +147,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                         .attr("transform", "translate(#{crosstab_xpos}, #{crosstab_ypos})")
         mycrosstab(g_crosstab, data)
 
+    # function to create a lod chart
     create_scan = (markerindex, panelindex) -> # panelindex = 0 or 1 for left or right panels
         data =
             chrname: rf_data.chrname
@@ -155,6 +156,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
             lod: (i for i of rf_data.pos)
             marker: rf_data.marker
 
+        # grab lod scores for this marker
         for row in [0...rf_data.rf.length]
             if row > markerindex
                 data.lod[row] = rf_data.rf[markerindex][row]
@@ -185,6 +187,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                      .attr("transform", "translate(#{wbot*panelindex}, #{htop})")
         mylodchart[panelindex](g_scans, data)
 
+        # when clicking a point, change the other panel
         mylodchart[panelindex].markerSelect().on "click", (d) ->
                                           newmarker = d.name
                                           if panelindex == 0
@@ -209,8 +212,8 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                         rf = if rf >= 0.1 then d3.format(".2f")(rf) else d3.format(".3f")(rf)
                         "(#{mari} #{marj}), LOD = #{d3.format(".1f")(lod)}, rf = #{rf}")
 
-    cells = mylodheatmap.cells()
-    cells.on "click", (d) ->
+    # when clicking cell, add crosstab and lod charts
+    mylodheatmap.cells().on "click", (d) ->
                      create_scan(d.xindex, 0)
                      if d.xindex != d.yindex
                          create_scan(d.yindex, 1)

@@ -2,7 +2,7 @@
 var iplotRF;
 
 iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
-  var altrectcolor, axispos, boxcolor, boxwidth, cellPad, cells, chartdivid, chrGap, chrlinecolor, chrlinewidth, col, colors, create_crosstab, create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, fontsize, g_heatmap, hbot, heatmap_height, heatmap_width, height, hilitCellcolor, hilitcolor, htop, j, k, l, lodlim, m, margin, mycrosstab, mylodchart, mylodheatmap, nullcolor, oneAtTop, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref4, ref5, ref6, ref7, ref8, ref9, row, svg, tipclass, titlepos, totalh, totalw, totmar, wbot, widgetdivid, width, zlim, zthresh;
+  var altrectcolor, axispos, boxcolor, boxwidth, cellPad, chartdivid, chrGap, chrlinecolor, chrlinewidth, col, colors, create_crosstab, create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, fontsize, g_heatmap, hbot, heatmap_height, heatmap_width, height, hilitCellcolor, hilitcolor, htop, j, k, l, lodlim, m, margin, mycrosstab, mylodchart, mylodheatmap, nullcolor, oneAtTop, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref4, ref5, ref6, ref7, ref8, ref9, row, svg, tipclass, titlepos, totmar, wbot, widgetdivid, width, zlim, zthresh;
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 800;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000;
   hbot = (ref2 = chartOpts != null ? chartOpts.hbot : void 0) != null ? ref2 : 300;
@@ -59,9 +59,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
     crosstab_ypos = 0;
   }
   wbot = heatmap_width;
-  totalw = heatmap_width + crosstab_width;
   htop = d3.max([heatmap_height, crosstab_height]);
-  totalh = heatmap_height + hbot;
   svg = d3.select(widgetdiv).select("svg");
   if (d3.min(lodlim) < 0) {
     displayError("lodlim values must be non-negative; ignored", "error_" + chartdivid);
@@ -219,8 +217,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
     rf = rf >= 0.1 ? d3.format(".2f")(rf) : d3.format(".3f")(rf);
     return "(" + mari + " " + marj + "), LOD = " + (d3.format(".1f")(lod)) + ", rf = " + rf;
   });
-  cells = mylodheatmap.cells();
-  return cells.on("click", function(d) {
+  return mylodheatmap.cells().on("click", function(d) {
     create_scan(d.xindex, 0);
     if (d.xindex !== d.yindex) {
       create_scan(d.yindex, 1);

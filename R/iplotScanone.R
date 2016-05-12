@@ -92,7 +92,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
 
     scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2), drop=FALSE]
     colnames(scanoneOutput)[3] <- 'lod'
-    scanone_list <- convert_scanone(scanoneOutput)
+    scanone_list <- convert_scanone(scanoneOutput, lod_as_matrix=FALSE)
 
     if(missing(cross) || is.null(cross)) { # no effect plot
         pxgtype <- "none"

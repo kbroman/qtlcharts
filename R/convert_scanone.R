@@ -10,6 +10,7 @@
 #
 # @param output An object of class \code{"scanone"}, as output by
 #   \code{\link[qtl]{scanone}}.
+# @param lod_as_matrix If TRUE, keep lod scores as a matrix; if FALSE, make a vector
 #
 # @return A list with the data reformatted
 #
@@ -22,7 +23,7 @@
 # out <- scanone(hyper)
 # out_as_list <- convert_scanone(out)
 convert_scanone <-
-function(output)
+function(output, lod_as_matrix=TRUE)
 {
     # marker names: replace pseudomarkers with blanks
     mnames <- rownames(output)
@@ -36,8 +37,14 @@ function(output)
     chrnames <- unique(output[,1])
 
     # lod scores
-    lod <- as.matrix(output[,-(1:2)])
-    dimnames(lod) <- NULL
+    if(lod_as_matrix) {
+        lod <- as.matrix(output[,-(1:2)])
+        dimnames(lod) <- NULL
+    }
+    else {
+        lod <- output[,3]
+        names(lod) <- NULL
+    }
 
     # lod column names
     lodnames <- names(output)[-(1:2)]

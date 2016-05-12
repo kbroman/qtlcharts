@@ -134,7 +134,7 @@ function(scanoneOutput, cross, lodcolumn, pheno.col, times=NULL,
         show_effects <- TRUE
     }
 
-    scanone_list <- convert_scanone(scanoneOutput)
+    scanone_list <- convert_scanone(scanoneOutput, lod_as_matrix=TRUE)
 
     defaultAspect <- 1.5 # width/height
     browsersize <- getPlotSize(defaultAspect)

@@ -4,6 +4,12 @@ dependencies:
     version: 3.5.17
     script:
       - d3.min.js
+  - name: colorbrewer
+    src: htmlwidgets/lib/colorbrewer
+    version: 1.0.0
+    script:
+      - colorbrewer.js
+    style: colorbrewer.css
   - name: d3-tip
     src: htmlwidgets/lib/d3-tip
     version: 0.6.7

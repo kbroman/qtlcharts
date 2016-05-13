@@ -108,7 +108,7 @@ iplotCurves = function(widgetdiv, curve_data, scatter1_data, scatter2_data, char
     results = [];
     for (j = 0, len = group.length; j < len; j++) {
       g = group[j];
-      results.push(g - 1);
+      results.push(g != null ? g - 1 : g);
     }
     return results;
   })();

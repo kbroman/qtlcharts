@@ -5,7 +5,7 @@
 \title{Interactive phenotype x genotype plot}
 \usage{
 iplotPXG(cross, marker, pheno.col = 1, chartOpts = NULL,
-  fillgenoArgs = NULL)
+  fillgenoArgs = NULL, digits = 5)
 }
 \arguments{
 \item{cross}{Object of class \code{"cross"}, see
@@ -20,6 +20,9 @@ element must be named using the corresponding option.}
 
 \item{fillgenoArgs}{List of named arguments to pass to
 \code{\link[qtl]{fill.geno}}, if needed.}
+
+\item{digits}{Round data to this number of significant digits
+before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
 An object of class \code{htmlwidget} that will

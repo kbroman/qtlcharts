@@ -11,6 +11,8 @@
 #' @param indID Optional vector of character strings, shown with tool tips
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option.
+#' @param digits Round data to this number of significant digits
+#'     before passing to the chart function. (Use NULL to not round.)
 #'
 #' @return An object of class \code{htmlwidget} that will
 #' intelligently print itself into HTML in a variety of contexts
@@ -29,7 +31,7 @@
 #'
 #' @export
 iplot <-
-function(x, y, group, indID, chartOpts=NULL)
+function(x, y, group, indID, chartOpts=NULL, digits=5)
 {
     if(length(x) != length(y))
         stop("length(x) != length(y)")
@@ -47,6 +49,8 @@ function(x, y, group, indID, chartOpts=NULL)
 
     x <- list(data = data.frame(x=x, y=y, group=group, indID=indID),
               chartOpts=chartOpts)
+    if(!is.null(digits))
+        attr(x, "TOJSON_ARGS") <- list(digits=digits)
 
     defaultAspect <- 1.33 # width/height
     browsersize <- getPlotSize(defaultAspect)

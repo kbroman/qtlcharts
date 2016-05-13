@@ -12,6 +12,8 @@
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
+#' @param digits Round data to this number of significant digits
+#'     before passing to the chart function. (Use NULL to not round.)
 #'
 #' @return An object of class \code{htmlwidget} that will
 #' intelligently print itself into HTML in a variety of contexts
@@ -39,7 +41,7 @@
 #'
 #' @export
 iheatmap <-
-function(z, x, y, chartOpts=NULL)
+function(z, x, y, chartOpts=NULL, digits=5)
 {
     z <- as.matrix(z)
     if(missing(x) || is.null(x)) x <- 1:nrow(z)
@@ -51,8 +53,11 @@ function(z, x, y, chartOpts=NULL)
     defaultAspect <- 1 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
-    htmlwidgets::createWidget("iheatmap",
-                              list(data=list(x=x, y=y, z=z), chartOpts=chartOpts),
+    dat <- list(data=list(x=x, y=y, z=z), chartOpts=chartOpts)
+    if(!is.null(digits))
+        attr(dat, "TOJSON_ARGS") <- list(digits=digits)
+
+    htmlwidgets::createWidget("iheatmap", dat,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(

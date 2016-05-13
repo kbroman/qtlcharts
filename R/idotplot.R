@@ -10,6 +10,8 @@
 #' @param indID Optional vector of character strings, shown with tool tips
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option.
+#' @param digits Round data to this number of significant digits
+#'     before passing to the chart function. (Use NULL to not round.)
 #'
 #' @return An object of class \code{htmlwidget} that will
 #' intelligently print itself into HTML in a variety of contexts
@@ -28,7 +30,7 @@
 #'
 #' @export
 idotplot <-
-function(group, y, indID, chartOpts=NULL)
+function(group, y, indID, chartOpts=NULL, digits=5)
 {
     stopifnot(length(group) == length(y))
     if(missing(indID) || is.null(indID))
@@ -49,6 +51,8 @@ function(group, y, indID, chartOpts=NULL)
                         chrtype=list(un="A"),
                         genonames=list(A=group_levels)),
               chartOpts=chartOpts)
+    if(!is.null(digits))
+        attr(x, "TOJSON_ARGS") <- list(digits=digits)
 
     defaultAspect <- 1 # width/height
     browsersize <- getPlotSize(defaultAspect)

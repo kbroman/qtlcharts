@@ -1,13 +1,21 @@
-## qtlcharts 0.7-1
+## qtlcharts 0.7-2
 
 - Rewrite underlying javascript to use new version of
   [d3panels](http://kbroman.org/d3panels).
+
+- Add a new chart, `scat2scat`. The idea is to summarize each of a
+  long series of scatterplots with a pair of numbers. Then a
+  scatterplot of those summary statistics is linked to the underlying
+  details: click on a point in the main scatterplot and have the
+  underlying scatterplot be shown.
 
 - Add some additional options, such as `horizontal` for `iplotMap`
   and `iplotPXG`.
 
 - Change the name of some options, such as `linecolor` and `linewidth`
   in `iplotCurves` (in place of `strokecolor` and `strokewidth`).
+
+- Add a `digits` argument for all plot functions.
 
 
 ## qtlcharts 0.6-6

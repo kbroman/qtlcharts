@@ -4,7 +4,8 @@
 \alias{scat2scat}
 \title{Scatterplot driving another scatterplot}
 \usage{
-scat2scat(scat1data, scat2data, group = NULL, chartOpts = NULL)
+scat2scat(scat1data, scat2data, group = NULL, chartOpts = NULL,
+  digits = 5)
 }
 \arguments{
 \item{scat1data}{Matrix with two columns; rownames are used as identifiers.}
@@ -20,6 +21,9 @@ scatterplot; length should be the number of rows in
 
 \item{chartOpts}{A list of options for configuring the chart.  Each
 element must be named using the corresponding option.}
+
+\item{digits}{Round data to this number of significant digits
+before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
 An object of class \code{htmlwidget} that will

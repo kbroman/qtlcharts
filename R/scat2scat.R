@@ -18,6 +18,8 @@
 #' \code{scat1data}.
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option.
+#' @param digits Round data to this number of significant digits
+#'     before passing to the chart function. (Use NULL to not round.)
 #'
 #' @return An object of class \code{htmlwidget} that will
 #' intelligently print itself into HTML in a variety of contexts
@@ -40,13 +42,14 @@
 #' # plot it
 #' scat2scat(scat1, scat2)
 #'
+#' @importFrom stats setNames
 #' @export
 scat2scat <-
-function(scat1data, scat2data, group=NULL, chartOpts=NULL)
+function(scat1data, scat2data, group=NULL, chartOpts=NULL, digits=5)
 {
     stopifnot(ncol(scat1data) == 2)
     stopifnot(nrow(scat1data) == length(scat2data))
-    if(!is.null(group)) stopifnot(nrow(scat1dat) == length(group))
+    if(!is.null(group)) stopifnot(nrow(scat1data) == length(group))
 
     # if there are names, check that they match
     nam1 <- rownames(scat1data)
@@ -85,8 +88,11 @@ function(scat1data, scat2data, group=NULL, chartOpts=NULL)
     defaultAspect <- 2 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
-    htmlwidgets::createWidget("scat2scat",
-                              list(scat1data=scat1data, scat2data=scat2data, chartOpts=chartOpts),
+    x <- list(scat1data=scat1data, scat2data=scat2data, chartOpts=chartOpts)
+    if(!is.null(digits))
+        attr(x, "TOJSON_ARGS") <- list(digits=digits)
+
+    htmlwidgets::createWidget("scat2scat", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(

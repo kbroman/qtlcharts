@@ -4,7 +4,7 @@
 \alias{iheatmap}
 \title{Interactive heat map}
 \usage{
-iheatmap(z, x, y, chartOpts = NULL)
+iheatmap(z, x, y, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{z}{Numeric matrix of dim \code{length(x)} x \code{length(y)}}
@@ -16,6 +16,9 @@ iheatmap(z, x, y, chartOpts = NULL)
 \item{chartOpts}{A list of options for configuring the chart (see
 the coffeescript code). Each element must be named using the
 corresponding option.}
+
+\item{digits}{Round data to this number of significant digits
+before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
 An object of class \code{htmlwidget} that will

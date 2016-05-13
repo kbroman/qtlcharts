@@ -5,7 +5,8 @@
 \title{Interactive LOD curve}
 \usage{
 iplotScanone(scanoneOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
-  pxgtype = c("ci", "raw"), fillgenoArgs = NULL, chartOpts = NULL)
+  pxgtype = c("ci", "raw"), fillgenoArgs = NULL, chartOpts = NULL,
+  digits = 5)
 }
 \arguments{
 \item{scanoneOutput}{Object of class \code{"scanone"}, as output
@@ -35,6 +36,9 @@ phenotypes (\code{"raw"})?}
 \item{chartOpts}{A list of options for configuring the chart (see
 the coffeescript code). Each element must be named using the
 corresponding option.}
+
+\item{digits}{Round data to this number of significant digits
+before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
 An object of class \code{htmlwidget} that will

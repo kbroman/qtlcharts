@@ -5,7 +5,7 @@
 \title{Modern boxplot linked to underlying histrograms}
 \usage{
 iboxplot(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian = TRUE,
-  breaks = 251, chartOpts = NULL)
+  breaks = 251, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{dat}{Data matrix (individuals x variables)}
@@ -20,6 +20,9 @@ locations of the breakpoints between bins (as in \code{\link[graphics]{hist}})}
 \item{chartOpts}{A list of options for configuring the chart (see
 the coffeescript code). Each element must be named using the
 corresponding option.}
+
+\item{digits}{Round data to this number of significant digits
+before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
 An object of class \code{htmlwidget} that will

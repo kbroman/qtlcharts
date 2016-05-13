@@ -5,7 +5,8 @@
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
 iplotCorr(mat, group, rows, cols, reorder = FALSE, corr = stats::cor(mat,
-  use = "pairwise.complete.obs"), scatterplots = TRUE, chartOpts = NULL)
+  use = "pairwise.complete.obs"), scatterplots = TRUE, chartOpts = NULL,
+  digits = 5)
 }
 \arguments{
 \item{mat}{Data matrix (individuals x variables)}
@@ -30,6 +31,9 @@ linked to scatterplots.}
 \item{chartOpts}{A list of options for configuring the chart (see
 the coffeescript code). Each element must be named using the
 corresponding option.}
+
+\item{digits}{Round data to this number of significant digits
+before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
 An object of class \code{htmlwidget} that will

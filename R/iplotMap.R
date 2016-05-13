@@ -14,6 +14,8 @@
 #'   is at position 0.
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option.
+#' @param digits Round data to this number of significant digits
+#'     before passing to the chart function. (Use NULL to not round.)
 #'
 #' @return An object of class \code{htmlwidget} that will
 #' intelligently print itself into HTML in a variety of contexts
@@ -32,7 +34,7 @@
 #'
 #' @export
 iplotMap <-
-function(map, chr, shift=FALSE, chartOpts=NULL)
+function(map, chr, shift=FALSE, chartOpts=NULL, digits=5)
 {
     if("cross" %in% class(map)) map <- qtl::pull.map(map)
 
@@ -45,6 +47,8 @@ function(map, chr, shift=FALSE, chartOpts=NULL)
     map_list <- convert_map(map)
     chartOpts <- add2chartOpts(chartOpts, shiftStart=shift)
     x <- list(data=map_list, chartOpts=chartOpts)
+    if(!is.null(digits))
+        attr(x, "TOJSON_ARGS") <- list(digits=digits)
 
     defaultAspect <- 1.5 # width/height
     browsersize <- getPlotSize(defaultAspect)

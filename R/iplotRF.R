@@ -14,6 +14,8 @@
 #'     those considered.  A logical (TRUE/FALSE) vector may also be used.
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'     element must be named using the corresponding option.
+#' @param digits Round data to this number of significant digits
+#'     before passing to the chart function. (Use NULL to not round.)
 #'
 #' @return An object of class \code{htmlwidget} that will
 #' intelligently print itself into HTML in a variety of contexts
@@ -42,7 +44,7 @@
 #'
 #' @export
 iplotRF <-
-function(cross, chr, chartOpts=NULL)
+function(cross, chr, chartOpts=NULL, digits=5)
 {
     if(!missing(chr)) cross <- cross[chr,]
 
@@ -52,8 +54,11 @@ function(cross, chr, chartOpts=NULL)
     defaultAspect <- 1 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
-    htmlwidgets::createWidget("iplotRF", list(rfdata=rf, genodata=geno,
-                                              chartOpts=chartOpts),
+    x <- list(rfdata=rf, genodata=geno, chartOpts=chartOpts)
+    if(!is.null(digits))
+        attr(x, "TOJSON_ARGS") <- list(digits=digits)
+
+    htmlwidgets::createWidget("iplotRF", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(

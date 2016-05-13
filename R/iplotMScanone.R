@@ -30,6 +30,8 @@
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
+#' @param digits Round data to this number of significant digits
+#'     before passing to the chart function. (Use NULL to not round.)
 #'
 #' @return An object of class \code{htmlwidget} that will
 #' intelligently print itself into HTML in a variety of contexts
@@ -76,7 +78,7 @@
 #' @export
 iplotMScanone <-
 function(scanoneOutput, cross, lodcolumn, pheno.col, times=NULL,
-         effects, chr, chartOpts=NULL)
+         effects, chr, chartOpts=NULL, digits=5)
 {
     if(!any(class(scanoneOutput) == "scanone"))
         stop('"scanoneOutput" should have class "scanone".')
@@ -139,12 +141,13 @@ function(scanoneOutput, cross, lodcolumn, pheno.col, times=NULL,
     defaultAspect <- 1.5 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
-    htmlwidgets::createWidget("iplotMScanone",
-                              list(lod_data=scanone_list,
-                                   eff_data=effects_list,
-                                   times=times,
-                                   show_effects=show_effects,
-                                   chartOpts=chartOpts),
+    x <- list(lod_data=scanone_list, eff_data=effects_list,
+              times=times, show_effects=show_effects,
+              chartOpts=chartOpts)
+    if(!is.null(digits))
+        attr(x, "TOJSON_ARGS") <- list(digits=digits)
+
+    htmlwidgets::createWidget("iplotMScanone", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(

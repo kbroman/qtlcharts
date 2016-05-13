@@ -4,7 +4,7 @@
 \alias{iplotMap}
 \title{Interactive genetic map plot}
 \usage{
-iplotMap(map, chr, shift = FALSE, chartOpts = NULL)
+iplotMap(map, chr, shift = FALSE, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{map}{Object of class \code{"map"}, a list with each component
@@ -19,6 +19,9 @@ is at position 0.}
 
 \item{chartOpts}{A list of options for configuring the chart.  Each
 element must be named using the corresponding option.}
+
+\item{digits}{Round data to this number of significant digits
+before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
 An object of class \code{htmlwidget} that will

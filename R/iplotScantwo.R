@@ -20,6 +20,8 @@
 #'   (TRUE/FALSE) vector may also be used.
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option.
+#' @param digits Round data to this number of significant digits
+#'     before passing to the chart function. (Use NULL to not round.)
 #'
 #' @return An object of class \code{htmlwidget} that will
 #' intelligently print itself into HTML in a variety of contexts
@@ -53,7 +55,7 @@
 #' @export
 iplotScantwo <-
 function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
-         chartOpts=NULL)
+         chartOpts=NULL, digits=5)
 {
     if(!any(class(scantwoOutput) == "scantwo"))
         stop('"scantwoOutput" should have class "scantwo".')
@@ -94,10 +96,13 @@ function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
     defaultAspect <- 1 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
-    htmlwidgets::createWidget("iplotScantwo",
-                              list(scantwo_data=scantwo_list,
-                                   phenogeno_data=phenogeno_list,
-                                   chartOpts=chartOpts),
+    x <- list(scantwo_data=scantwo_list,
+              phenogeno_data=phenogeno_list,
+              chartOpts=chartOpts)
+    if(!is.null(digits))
+        attr(x, "TOJSON_ARGS") <- list(digits=digits)
+
+    htmlwidgets::createWidget("iplotScantwo", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(

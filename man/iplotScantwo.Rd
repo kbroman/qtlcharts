@@ -5,7 +5,7 @@
 \title{Interactive plot of 2d genome scan}
 \usage{
 iplotScantwo(scantwoOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
-  chartOpts = NULL)
+  chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{scantwoOutput}{Output of \code{\link[qtl]{scantwo}}}
@@ -26,6 +26,9 @@ preceding - to have all chromosomes but those considered. A logical
 
 \item{chartOpts}{A list of options for configuring the chart.  Each
 element must be named using the corresponding option.}
+
+\item{digits}{Round data to this number of significant digits
+before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
 An object of class \code{htmlwidget} that will

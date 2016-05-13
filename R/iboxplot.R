@@ -14,6 +14,8 @@
 #' @param chartOpts A list of options for configuring the chart (see
 #'     the coffeescript code). Each element must be named using the
 #'     corresponding option.
+#' @param digits Round data to this number of significant digits
+#'     before passing to the chart function. (Use NULL to not round.)
 #'
 #' @return An object of class \code{htmlwidget} that will
 #' intelligently print itself into HTML in a variety of contexts
@@ -35,14 +37,18 @@
 #' @export
 iboxplot <-
 function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
-         chartOpts=NULL)
+         chartOpts=NULL, digits=5)
 {
     data_list <- convert4iboxplot(dat, qu, orderByMedian, breaks)
 
     defaultAspect <- 1.25 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
-    htmlwidgets::createWidget("iboxplot", list(data=data_list, chartOpts=chartOpts),
+    x <- list(data=data_list, chartOpts=chartOpts)
+    if(!is.null(digits))
+        attr(x, "TOJSON_ARGS") <- list(digits=digits)
+
+    htmlwidgets::createWidget("iboxplot", x,
                               width=chartOpts$width,
                               height=chartOpts$height,
                               sizingPolicy=htmlwidgets::sizingPolicy(

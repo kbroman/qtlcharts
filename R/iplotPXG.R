@@ -13,6 +13,8 @@
 #'   element must be named using the corresponding option.
 #' @param fillgenoArgs List of named arguments to pass to
 #'   \code{\link[qtl]{fill.geno}}, if needed.
+#' @param digits Round data to this number of significant digits
+#'     before passing to the chart function. (Use NULL to not round.)
 #'
 #' @return An object of class \code{htmlwidget} that will
 #' intelligently print itself into HTML in a variety of contexts
@@ -41,7 +43,7 @@
 #' @export
 iplotPXG <-
 function(cross, marker, pheno.col=1,
-         chartOpts=NULL, fillgenoArgs=NULL)
+         chartOpts=NULL, fillgenoArgs=NULL, digits=5)
 {
     if(class(cross)[2] != "cross")
         stop('"cross" should have class "cross".')
@@ -58,6 +60,8 @@ function(cross, marker, pheno.col=1,
 
     x <- list(data=convert_pxg(qtl::pull.markers(cross, marker), pheno.col, fillgenoArgs=fillgenoArgs),
               chartOpts=chartOpts)
+    if(!is.null(digits))
+        attr(x, "TOJSON_ARGS") <- list(digits=digits)
 
     defaultAspect <- 1 # width/height
     browsersize <- getPlotSize(defaultAspect)

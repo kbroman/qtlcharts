@@ -76,7 +76,7 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
     nind = curve_data.y.length
     group = curve_data?.group ? (1 for i in curve_data.data)
     ngroup = d3.max(group)
-    group = (g-1 for g in group) # changed from (1,2,3,...) to (0,1,2,...)
+    group = ((if g? then g-1 else g) for g in group) # changed from (1,2,3,...) to (0,1,2,...)
 
     # colors of the points in the different groups
     pointcolor = pointcolor ? d3panels.selectGroupColors(ngroup, "light")

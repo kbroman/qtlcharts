@@ -152,3 +152,22 @@ get_indID <-
 
     ids
 }
+
+# ensure that a "group" vector is really the numbers 1, 2, ..., k
+# if missing values, put in the last group
+group2numeric <-
+function(group, preserveNA=FALSE)
+{
+    if(is.null(group)) return(NULL)
+
+    if(is.factor(group))
+        group <- as.numeric(group)
+    else
+        group <-  match(group, sort(unique(group)))
+
+    # NAs -> last group
+    if(!preserveNA && any(is.na(group)))
+        group[is.na(group)] <- max(group, na.rm=TRUE)+1
+
+    group
+}

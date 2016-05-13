@@ -113,13 +113,3 @@ iplotCorr_render <- function(expr, env=parent.frame(), quoted=FALSE) {
     if(!quoted) { expr <- substitute(expr) } # force quoted
     htmlwidgets::shinyRenderWidget(expr, iplotCorr_output, env, quoted=TRUE)
 }
-
-# ensure that a "group" vector is really the numbers 1, 2, ..., k
-group2numeric <-
-function(group)
-{
-    if(is.null(group)) return(NULL)
-    if(is.factor(group)) return(as.numeric(group))
-
-    match(group, sort(unique(group)))
-}

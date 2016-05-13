@@ -15,7 +15,8 @@
 - Change the name of some options, such as `linecolor` and `linewidth`
   in `iplotCurves` (in place of `strokecolor` and `strokewidth`).
 
-- Add a `digits` argument for all plot functions.
+- Add a `digits` argument for all plot functions, with the aim to
+  reduce the size of the datasets included in the resulting charts.
 
 
 ## qtlcharts 0.6-6

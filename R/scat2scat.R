@@ -8,7 +8,10 @@
 #' scatterplot. The first scatterplot corresponds to a pair of summary
 #' measures for a larger dataset.
 #'
-#' @param scat1data Matrix with two columns; rownames are used as identifiers.
+#' @param scat1data Matrix with two columns; rownames are used as
+#' identifiers. Can have an optional third column with categories for
+#' coloring points in the first scatterplot (to be used if
+#' \code{group} is not provided).
 #' @param scat2data List of matrices each with at least two columns,
 #' to be shown in the second scatterplot. The components of the list
 #' correspond to the rows in \code{scat1dat}. An option third column
@@ -47,9 +50,14 @@
 scat2scat <-
 function(scat1data, scat2data, group=NULL, chartOpts=NULL, digits=5)
 {
-    stopifnot(ncol(scat1data) == 2)
+    stopifnot(ncol(scat1data) == 2 || ncol(scat1data)==3)
     stopifnot(nrow(scat1data) == length(scat2data))
-    if(!is.null(group)) stopifnot(nrow(scat1data) == length(group))
+
+    if(is.null(group) && ncol(scat1data)==3)
+        group <- scat1data[,3]
+
+    if(!is.null(group))
+        stopifnot(nrow(scat1data) == length(group))
 
     # if there are names, check that they match
     nam1 <- rownames(scat1data)

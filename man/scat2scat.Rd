@@ -8,7 +8,10 @@ scat2scat(scat1data, scat2data, group = NULL, chartOpts = NULL,
   digits = 5)
 }
 \arguments{
-\item{scat1data}{Matrix with two columns; rownames are used as identifiers.}
+\item{scat1data}{Matrix with two columns; rownames are used as
+identifiers. Can have an optional third column with categories for
+coloring points in the first scatterplot (to be used if
+\code{group} is not provided).}
 
 \item{scat2data}{List of matrices each with at least two columns,
 to be shown in the second scatterplot. The components of the list

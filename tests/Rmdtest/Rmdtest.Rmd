@@ -137,3 +137,21 @@ iplotScantwo(out2)
 ```{r iplotScantwo_eff}
 iplotScantwo(out2, grav, pheno.col=32)
 ```
+
+### scat2scat
+
+```{r simulate_data_for_scat2scat}
+set.seed(69891250)
+p <- 500
+n <- 300
+SD <- runif(p, 1, 5)
+r <- runif(p, -1, 1)
+scat2 <- vector("list", p)
+for(i in 1:p)
+   scat2[[i]] <- matrix(rnorm(2*n), ncol=2) %*% chol(SD[i]^2*matrix(c(1, r[i], r[i], 1), ncol=2))
+scat1 <- cbind(SD=SD, r=r)
+```
+
+```{r scat2scat}
+scat2scat(scat1, scat2, chartOpts=list(width=1000, height=500))
+```

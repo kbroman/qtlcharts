@@ -59,6 +59,8 @@ scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
   };
   chartdivid = (ref33 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref33 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
+  console.log(scat1data);
+  console.log(scat2data);
   leftchart = d3panels.scatterplot({
     height: height,
     width: width / 2,
@@ -101,9 +103,9 @@ scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
   g_left = svg.append("g").attr("id", "scat1");
   leftchart(g_left, scat1data);
   leftchart.points().on("mouseover", function(d) {
-    return d3.select(this).attr("r", pointsize * 2);
+    return d3.select(this).attr("r", pointsize1 * 2);
   }).on("mouseout", function(d) {
-    return d3.select(this).attr("r", pointsize);
+    return d3.select(this).attr("r", pointsize1);
   }).on("click", function(d, i) {
     if (typeof rightchart !== "undefined" && rightchart !== null) {
       rightchart.remove();

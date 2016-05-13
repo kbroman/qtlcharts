@@ -48,6 +48,16 @@ function(scat1data, scat2data, group=NULL, chartOpts=NULL)
     stopifnot(nrow(scat1data) == length(scat2data))
     if(!is.null(group)) stopifnot(nrow(scat1dat) == length(group))
 
+    # if there are names, check that they match
+    nam1 <- rownames(scat1data)
+    nam2 <- names(scat2data)
+    if(!is.null(nam1) && !is.null(nam2) && any(nam1 != nam2)) {
+        # try to reorder
+        if(all(sort(nam1) == sort(nam2)))
+            scat2data <- scat2data[match(nam1, nam2)]
+        else stop("rownames(scat1data) != names(scat2data)")
+    }
+
     # xlab and ylab
     cn <- colnames(scat1data)
     if(!is.null(cn))
@@ -61,13 +71,16 @@ function(scat1data, scat2data, group=NULL, chartOpts=NULL)
                       y = setNames(scat1data[,2], NULL),
                       indID = get_indID(nrow(scat1data), rownames(scat1data)),
                       group=group2numeric(group))
-    names(scat2data) <- NULL
+
     scat2data <- lapply(scat2data, function(a) {
         z <- list(x=setNames(a[,1], NULL),
                   y=setNames(a[,2], NULL),
-                  indID=get_indID(length(nrow(a)), rownames(a)))
+                  indID=get_indID(nrow(a), rownames(a)))
         if(ncol(a)==3) z$group <- group2numeric(a[,3])
         z})
+
+    # drop names to ensure it's an array rather than associative array
+    names(scat2data) <- NULL
 
     defaultAspect <- 2 # width/height
     browsersize <- getPlotSize(defaultAspect)

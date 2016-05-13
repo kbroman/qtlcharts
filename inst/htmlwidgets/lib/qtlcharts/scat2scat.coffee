@@ -41,6 +41,9 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
 
+    console.log(scat1data)
+    console.log(scat2data)
+
     leftchart = d3panels.scatterplot({
         height:height
         width:width/2
@@ -74,9 +77,9 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
     # increase size of point on mouseover
     leftchart.points()
            .on "mouseover", (d) ->
-                    d3.select(this).attr("r", pointsize*2)
+                    d3.select(this).attr("r", pointsize1*2)
            .on "mouseout", (d) ->
-                    d3.select(this).attr("r", pointsize)
+                    d3.select(this).attr("r", pointsize1)
            .on "click", (d,i) ->
                     rightchart.remove() if rightchart?
                     make_right_chart(i)

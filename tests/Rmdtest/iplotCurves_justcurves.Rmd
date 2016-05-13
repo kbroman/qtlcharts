@@ -18,11 +18,12 @@ data(grav)
 Reduce size of data.
 
 ```{r subset_pheno}
-grav$pheno <- grav$pheno[,seq(1, nphe(grav), by=5)]
+phe <- grav$pheno[,seq(1, nphe(grav), by=5)]
+phe[14,ncol(phe)] <- NA
 times <- as.numeric(sub("T", "", phenames(grav)))/60
 ```
 
 ```{r iplotCurves}
-iplotCurves(grav$pheno, times,
+iplotCurves(phe, times,
             chartOpts=list(curves_xlab="Time", curves_ylab="Root tip angle"))
 ```

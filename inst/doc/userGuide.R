@@ -301,3 +301,17 @@ badorder <- est.rf(badorder)
 ## ----iplotRF_lodlim, eval=FALSE------------------------------------------
 ## iplotRF(badorder, chartOpts=list(lodlim=c(2, 15)))
 
+## ----sim_scat2scat, eval=FALSE-------------------------------------------
+## p <- 500
+## n <- 300
+## SD <- runif(p, 1, 5)
+## r <- runif(p, -1, 1)
+## scat2 <- vector("list", p)
+## V <- SD[i]^2*matrix(c(1, r[i], r[i], 1), ncol=2)
+## for(i in 1:p)
+##    scat2[[i]] <- matrix(rnorm(2*n), ncol=2) %*% chol(V)
+## scat1 <- cbind(SD=SD, r=r)
+
+## ----scat2scat, eval=FALSE-----------------------------------------------
+## scat2scat(scat1, scat2)
+

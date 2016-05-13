@@ -385,6 +385,24 @@ badorder &lt;-<span class="st"> </span><span class="kw">est.rf</span>(badorder)<
 <p>By default, the LOD scores in the heatmap are truncated at 12. This can be changed with the chart option <code>lodlim</code>, which takes an interval. Marker pairs with LOD below the lower limit will be omitted from the heat map, which can give greater performance in the case of a very large number of markers.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">iplotRF</span>(badorder, <span class="dt">chartOpts=</span><span class="kw">list</span>(<span class="dt">lodlim=</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">15</span>)))</code></pre></div>
 </div>
+<div id="scat2scat" class="section level3">
+<h3><code>scat2scat</code></h3>
+<p><code>scat2scat</code> produces a pair of linked scatterplots, where the points in the first scatterplot drive the contents in the second scatterplot.</p>
+<p>For example, consider a large set of scatterplots, with a pair of statistics summarizing each. The first plot in <code>scat2scat</code> will be a scatterplot of those summary statistics, and if you click on a point, the corresponding scatterplot will be shown on the right.</p>
+<p>The input data is a <span class="math inline">\(n \times 2\)</span> matrix that will be shown in first scatterplot, and a list (of length <span class="math inline">\(n\)</span>) of 2-column matrices that will be shown shown in the second scatterplot when clicking on the corresponding point in the first scatterplot. (The matrices can have three columns, in which case the third column is used as a grouping factor for coloring the points in the scatterplot.)</p>
+<p>To illustrate the plot, we’ll first simulate some data: random pairs of SDs and correlations, and multivariate normal datasets with those SDs and correlations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="dv">500</span>
+n &lt;-<span class="st"> </span><span class="dv">300</span>
+SD &lt;-<span class="st"> </span><span class="kw">runif</span>(p, <span class="dv">1</span>, <span class="dv">5</span>)
+r &lt;-<span class="st"> </span><span class="kw">runif</span>(p, -<span class="dv">1</span>, <span class="dv">1</span>)
+scat2 &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, p)
+V &lt;-<span class="st"> </span>SD[i]^<span class="dv">2</span>*<span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, r[i], r[i], <span class="dv">1</span>), <span class="dt">ncol=</span><span class="dv">2</span>)
+for(i in <span class="dv">1</span>:p)
+   scat2[[i]] &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">2</span>*n), <span class="dt">ncol=</span><span class="dv">2</span>) %*%<span class="st"> </span><span class="kw">chol</span>(V)
+scat1 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">SD=</span>SD, <span class="dt">r=</span>r)</code></pre></div>
+<p>We then create the plot as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scat2scat</span>(scat1, scat2)</code></pre></div>
+</div>
 </div>
 
 

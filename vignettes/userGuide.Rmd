@@ -912,3 +912,42 @@ very large number of markers.
 ```{r iplotRF_lodlim, eval=FALSE}
 iplotRF(badorder, chartOpts=list(lodlim=c(2, 15)))
 ```
+
+### `scat2scat`
+
+`scat2scat` produces a pair of linked scatterplots, where the points
+in the first scatterplot drive the contents in the second scatterplot.
+
+For example, consider a large set of scatterplots, with a pair of
+statistics summarizing each. The first plot in `scat2scat` will be a
+scatterplot of those summary statistics, and if you click on a point,
+the corresponding scatterplot will be shown on the right.
+
+The input data is a $n \times 2$ matrix that will be shown in first
+scatterplot, and a list (of length $n$) of 2-column matrices that will
+be shown shown in the second scatterplot when clicking on the
+corresponding point in the first scatterplot. (The matrices can have
+three columns, in which case the third column is used as a grouping
+factor for coloring the points in the scatterplot.)
+
+To illustrate the plot, we'll first simulate some data: random pairs
+of SDs and correlations, and multivariate normal datasets with those
+SDs and correlations.
+
+```{r sim_scat2scat, eval=FALSE}
+p <- 500
+n <- 300
+SD <- runif(p, 1, 5)
+r <- runif(p, -1, 1)
+scat2 <- vector("list", p)
+V <- SD[i]^2*matrix(c(1, r[i], r[i], 1), ncol=2)
+for(i in 1:p)
+   scat2[[i]] <- matrix(rnorm(2*n), ncol=2) %*% chol(V)
+scat1 <- cbind(SD=SD, r=r)
+```
+
+We then create the plot as follows:
+
+```{r scat2scat, eval=FALSE}
+scat2scat(scat1, scat2)
+```

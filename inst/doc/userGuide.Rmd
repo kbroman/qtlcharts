@@ -505,7 +505,7 @@ We'll perform a genome scan by Haley-Knott regression at each of the
 
 ```{r, grav_scanone}
 phecol <- 1:nphe(grav)
-out <- scanone(grav, phe=phecol)
+out <- scanone(grav, phe=phecol, method="hk")
 ```
 
 If we pass the `scanone` output to `iplotMScanone`, we get a basic

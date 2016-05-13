@@ -161,7 +161,7 @@ grav <- reduce2grid(grav)
 
 ## ---- grav_scanone-------------------------------------------------------
 phecol <- 1:nphe(grav)
-out <- scanone(grav, phe=phecol)
+out <- scanone(grav, phe=phecol, method="hk")
 
 ## ----iplotMScanone_example, eval=FALSE-----------------------------------
 ## iplotMScanone(out)

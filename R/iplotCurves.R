@@ -77,11 +77,16 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
     if(is.data.frame(scatter1)) scatter1 <- as.matrix(scatter1)
     if(is.data.frame(scatter2)) scatter2 <- as.matrix(scatter2)
     dimnames(curveMatrix) <- dimnames(scatter1) <- dimnames(scatter2) <- names(group) <- names(times) <- NULL
+    if(!is.null(scatter1) && ncol(scatter1) < 2)
+        stop("scatter1 should have two columns")
+    if(!is.null(scatter2) && ncol(scatter2) < 2)
+        stop("scatter2 should have two columns")
 
-
-    data_list <- list(curve_data=list(x=list(times), y=curveMatrix, group=group, indID=indID),
-                      scatter1_data=list(x=scatter1[,1], y=scatter1[,2], group=group, indID=indID),
-                      scatter2_data=list(x=scatter2[,1], y=scatter2[,2], group=group, indID=indID))
+    data_list <- list(curve_data=list(x=list(times), y=curveMatrix, group=group, indID=indID))
+    if(!is.null(scatter1))
+        data_list$scatter1_data <- list(x=scatter1[,1], y=scatter1[,2], group=group, indID=indID)
+    if(!is.null(scatter2))
+        data_list$scatter2_data <- list(x=scatter2[,1], y=scatter2[,2], group=group, indID=indID)
 
     defaultAspect <- 1.25 # width/height
     browsersize <- getPlotSize(defaultAspect)

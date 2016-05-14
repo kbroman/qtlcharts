@@ -3,6 +3,9 @@ HTMLWidgets.widget({
   name: "iplotCorr",
   type: "output",
   initialize: function(widgetdiv, width, height) {
+    if (height > width / 2) {
+      height = width / 2;
+    }
     return d3.select(widgetdiv).append("svg").attr("width", width).attr("height", height).attr("class", "qtlcharts");
   },
   renderValue: function(widgetdiv, x) {
@@ -16,6 +19,7 @@ HTMLWidgets.widget({
     chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : svg.attr("height");
     svg.attr("width", chartOpts.width);
     svg.attr("height", chartOpts.height);
+    d3.select(widgetdiv).attr("style", "width:" + chartOpts.width + "px;height:" + chartOpts.height + "px;");
     if (x.data.scatterplots) {
       return iplotCorr(widgetdiv, x.data, chartOpts);
     } else {

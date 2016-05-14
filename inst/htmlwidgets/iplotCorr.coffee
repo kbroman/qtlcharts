@@ -7,6 +7,8 @@ HTMLWidgets.widget({
     type: "output",
 
     initialize: (widgetdiv, width, height) ->
+        # prefer aspect ratio width/height = 2
+        height = width/2 if height > width/2
         d3.select(widgetdiv).append("svg")
           .attr("width", width)
           .attr("height", height)
@@ -25,8 +27,10 @@ HTMLWidgets.widget({
         chartOpts.width = chartOpts?.width ? svg.attr("width")
         chartOpts.height = chartOpts?.height ? svg.attr("height")
 
+        # revise size of svg and div container
         svg.attr("width", chartOpts.width)
         svg.attr("height", chartOpts.height)
+        d3.select(widgetdiv).attr("style", "width:#{chartOpts.width}px;height:#{chartOpts.height}px;")
 
         if x.data.scatterplots
             iplotCorr(widgetdiv, x.data, chartOpts)

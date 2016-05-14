@@ -1,5 +1,7 @@
-# plug in a missing value
-phe <- grav$pheno[14,ncol(grav$pheno)] <- NA
+# plug in some missing values
+phe <- as.matrix(grav$pheno)
+phe[14,ncol(grav$pheno)] <- NA
+phe[sample(prod(dim(phe)), 200)] <- NA
 
 theplot <- iplotCurves(phe, times,
                        chartOpts=list(curves_xlab="Time", curves_ylab="Root tip angle"))

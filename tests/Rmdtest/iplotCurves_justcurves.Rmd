@@ -20,7 +20,7 @@ Reduce size of data.
 ```{r subset_pheno}
 phe <- grav$pheno[,seq(1, nphe(grav), by=5)]
 phe[14,ncol(phe)] <- NA
-times <- as.numeric(sub("T", "", phenames(grav)))/60
+times <- as.numeric(sub("T", "", colnames(phe)))/60
 ```
 
 ```{r iplotCurves}

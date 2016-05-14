@@ -49,6 +49,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
 
     # size of crosstab region
     crosstab_width = width - heatmap_width
+    crosstab_width = heatmap_width if crosstab_width > heatmap_width
     crosstab_height = heatmap_height*0.7
     crosstab_xpos = heatmap_width
     crosstab_ypos = (heatmap_height - crosstab_height)/2

@@ -41,9 +41,6 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
 
-    console.log(scat1data)
-    console.log(scat2data)
-
     leftchart = d3panels.scatterplot({
         height:height
         width:width/2

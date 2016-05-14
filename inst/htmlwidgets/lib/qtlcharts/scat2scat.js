@@ -59,8 +59,6 @@ scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
   };
   chartdivid = (ref33 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref33 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
-  console.log(scat1data);
-  console.log(scat2data);
   leftchart = d3panels.scatterplot({
     height: height,
     width: width / 2,

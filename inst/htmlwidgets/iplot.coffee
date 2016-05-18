@@ -28,8 +28,6 @@ HTMLWidgets.widget({
         svg.attr("width", chartOpts.width)
         svg.attr("height", chartOpts.height)
 
-        console.log(x.data)
-
         iplot(widgetdiv, x.data, chartOpts)
 
     resize: (widgetdiv, width, height) ->

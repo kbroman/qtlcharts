@@ -16,7 +16,6 @@ HTMLWidgets.widget({
     chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : svg.attr("height");
     svg.attr("width", chartOpts.width);
     svg.attr("height", chartOpts.height);
-    console.log(x.data);
     return iplot(widgetdiv, x.data, chartOpts);
   },
   resize: function(widgetdiv, width, height) {

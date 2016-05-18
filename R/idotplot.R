@@ -1,4 +1,4 @@
-## iplotPXG
+## idotplot
 ## Karl W Broman
 
 #' Interactive phenotype x genotype plot

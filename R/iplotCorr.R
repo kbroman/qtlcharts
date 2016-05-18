@@ -39,7 +39,7 @@
 #' \code{names(group)}.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iheatmap}}, \code{\link{iplotCurves}}
+#' @seealso \code{\link{iheatmap}}, \code{\link{scat2scat}}, \code{\link{iplotCurves}}
 #'
 #' @examples
 #' data(geneExpr)

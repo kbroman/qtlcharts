@@ -62,7 +62,7 @@ iplotCurves(y, times, y[,c(1,5)], y[,c(5,16)],
 
 }
 \seealso{
-\code{\link{iplotCorr}}
+\code{\link{iplotCorr}}, \code{\link{iplot}}, \code{\link{scat2scat}}
 }
 \keyword{hplot}
 

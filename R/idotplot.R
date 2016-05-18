@@ -30,10 +30,10 @@
 #'
 #' @export
 idotplot <-
-function(group, y, indID, chartOpts=NULL, digits=5)
+function(group, y, indID=NULL, chartOpts=NULL, digits=5)
 {
     stopifnot(length(group) == length(y))
-    if(missing(indID) || is.null(indID))
+    if(is.null(indID))
         indID <- get_indID(length(group), names(group), names(y))
     stopifnot(length(indID) == length(group))
     indID <- as.character(indID)

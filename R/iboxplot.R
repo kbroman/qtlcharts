@@ -23,7 +23,7 @@
 #' Shiny output bindings.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotCorr}}
+#' @seealso \code{\link{iplotCorr}}, \code{\link{scat2scat}}
 #'
 #' @examples
 #' n.ind <- 500

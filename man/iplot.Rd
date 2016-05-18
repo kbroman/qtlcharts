@@ -39,7 +39,8 @@ iplot(x, y, grp)}
 
 }
 \seealso{
-\code{\link{iplotCorr}}, \code{\link{iplotCurves}}
+\code{\link{iplotCorr}}, \code{\link{iplotCurves}}, \code{\link{itriplot}},
+\code{\link{idotplot}}, \code{\link{iplotPXG}}
 }
 \keyword{hplot}
 

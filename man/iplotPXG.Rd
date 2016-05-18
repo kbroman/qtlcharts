@@ -52,7 +52,8 @@ iplotPXG(hyper, marker)}
 
 }
 \seealso{
-\code{\link{iplotScanone}}, \code{\link{iplotMap}}
+\code{\link{idotplot}}, \code{\link{iplot}}, \code{\link{iplotScanone}},
+\code{\link{iplotMap}}
 }
 \keyword{hplot}
 

@@ -31,7 +31,8 @@
 #' function in R/qtl.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotScanone}}, \code{\link{iplotMap}}
+#' @seealso \code{\link{idotplot}}, \code{\link{iplot}}, \code{\link{iplotScanone}},
+#' \code{\link{iplotMap}}
 #'
 #' @examples
 #' library(qtl)

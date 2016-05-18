@@ -27,7 +27,7 @@
 #' Shiny output bindings.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotCorr}}
+#' @seealso \code{\link{iplotCorr}}, \code{\link{iplot}}, \code{\link{scat2scat}}
 #'
 #' @examples
 #' # random growth curves, based on some data

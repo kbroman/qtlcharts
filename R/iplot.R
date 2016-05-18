@@ -20,7 +20,8 @@
 #' Shiny output bindings.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotCorr}}, \code{\link{iplotCurves}}
+#' @seealso \code{\link{iplotCorr}}, \code{\link{iplotCurves}}, \code{\link{itriplot}},
+#' \code{\link{idotplot}}, \code{\link{iplotPXG}}
 #'
 #' @examples
 #' x <- rnorm(100)

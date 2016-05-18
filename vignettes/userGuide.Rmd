@@ -955,3 +955,26 @@ We then create the plot as follows:
 ```{r scat2scat, eval=FALSE}
 scat2scat(scat1, scat2)
 ```
+
+### `itriplot`
+
+`itriplot` produces a scatterplot on an equilateral triangle, with
+each point representing a trinomial probability, ($p_0$, $p_1$, $p_2$).
+
+To illustrate the plot, we'll first simulate some data.
+
+```{r sim_itriplot, eval=FALSE}
+n <- 26
+p <- matrix(runif(3*n), ncol=3)
+p <- p / colSums(p)
+ind <- LETTERS
+g <- sample(1:3, n, replace=TRUE)
+```
+
+We then create the plot as follows. The `indID` argument is a vector
+of individual identifiers for tool tip labels, and the `group`
+argument is a vector of categories for coloring the points.
+
+```{r itriplot, eval=FALSE}
+itriplot(p, indID=ind, group=g)
+```

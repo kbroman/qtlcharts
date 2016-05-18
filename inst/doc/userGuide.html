@@ -348,7 +348,7 @@ mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw
 <p>Here’s an example specifying the number of bins.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">iboxplot</span>(mat, <span class="dt">breaks=</span><span class="dv">151</span>)</code></pre></div>
 <p>Here’s an example specifying actual bins. (This will issue a warning.)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">iboxplot</span>(mat, <span class="dt">breaks=</span><span class="kw">seq</span>(<span class="dv">2</span>, <span class="dv">8</span>, <span class="dt">by=</span><span class="fl">0.1</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">iboxplot</span>(mat, <span class="dt">breaks=</span><span class="kw">seq</span>(-<span class="dv">2</span>, <span class="fl">12.1</span>, <span class="dt">by=</span><span class="fl">0.1</span>))</code></pre></div>
 <p>To change the axis labels, use the <code>chartOpts</code> options <code>xlab</code> and <code>ylab</code>, for the x- and y-axes, respectively, in the top panel. The y-axis label in the top panel will be used as the x-axis label in the lower panel.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">iboxplot</span>(mat, <span class="dt">chartOpts=</span><span class="kw">list</span>(<span class="dt">xlab=</span><span class="st">&quot;Mice&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Expression level&quot;</span>))</code></pre></div>
 </div>
@@ -402,6 +402,18 @@ for(i in <span class="dv">1</span>:p)
 scat1 &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">SD=</span>SD, <span class="dt">r=</span>r)</code></pre></div>
 <p>We then create the plot as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scat2scat</span>(scat1, scat2)</code></pre></div>
+</div>
+<div id="itriplot" class="section level3">
+<h3><code>itriplot</code></h3>
+<p><code>itriplot</code> produces a scatterplot on an equilateral triangle, with each point representing a trinomial probability, (<span class="math inline">\(p_0\)</span>, <span class="math inline">\(p_1\)</span>, <span class="math inline">\(p_2\)</span>).</p>
+<p>To illustrate the plot, we’ll first simulate some data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">26</span>
+p &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">3</span>*n), <span class="dt">ncol=</span><span class="dv">3</span>)
+p &lt;-<span class="st"> </span>p /<span class="st"> </span><span class="kw">colSums</span>(p)
+ind &lt;-<span class="st"> </span>LETTERS
+g &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">3</span>, n, <span class="dt">replace=</span><span class="ot">TRUE</span>)</code></pre></div>
+<p>We then create the plot as follows. The <code>indID</code> argument is a vector of individual identifiers for tool tip labels, and the <code>group</code> argument is a vector of categories for coloring the points.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">itriplot</span>(p, <span class="dt">indID=</span>ind, <span class="dt">group=</span>g)</code></pre></div>
 </div>
 </div>
 

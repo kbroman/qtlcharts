@@ -1,0 +1,21 @@
+---
+title: itriplot within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](http://kbroman.org/qtlcharts) function `itriplot`.
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+n <- 100
+p <- matrix(runif(3*n), ncol=3)
+p <- p / colSums(p)
+g <- sample(1:3, n, replace=TRUE)
+```
+
+```{r itriplot}
+itriplot(p, group=g)
+```

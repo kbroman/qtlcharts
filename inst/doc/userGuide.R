@@ -1,3 +1,6 @@
+## ----setseed, echo=FALSE-------------------------------------------------
+set.seed(2046413)
+
 ## ----load_library--------------------------------------------------------
 library(qtlcharts)
 
@@ -267,7 +270,7 @@ dimnames(mat) <- list(paste0("ind", 1:n.ind),
 ## iboxplot(mat, breaks=151)
 
 ## ----iboxplot_breaks2, eval=FALSE----------------------------------------
-## iboxplot(mat, breaks=seq(2, 8, by=0.1))
+## iboxplot(mat, breaks=seq(-2, 12.1, by=0.1))
 
 ## ----iboxplot_axislab, eval=FALSE----------------------------------------
 ## iboxplot(mat, chartOpts=list(xlab="Mice", ylab="Expression level"))
@@ -314,4 +317,14 @@ badorder <- est.rf(badorder)
 
 ## ----scat2scat, eval=FALSE-----------------------------------------------
 ## scat2scat(scat1, scat2)
+
+## ----sim_itriplot, eval=FALSE--------------------------------------------
+## n <- 26
+## p <- matrix(runif(3*n), ncol=3)
+## p <- p / colSums(p)
+## ind <- LETTERS
+## g <- sample(1:3, n, replace=TRUE)
+
+## ----itriplot, eval=FALSE------------------------------------------------
+## itriplot(p, indID=ind, group=g)
 

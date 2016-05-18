@@ -50,16 +50,16 @@
 #'
 #' @export
 iplotCorr <-
-function(mat, group, rows, cols, reorder=FALSE, corr=stats::cor(mat, use="pairwise.complete.obs"),
+function(mat, group=NULL, rows=NULL, cols=NULL, reorder=FALSE, corr=stats::cor(mat, use="pairwise.complete.obs"),
          scatterplots=TRUE, chartOpts=NULL, digits=5)
 {
-    if(missing(group) || is.null(group)) group <- rep(1, nrow(mat))
+    if(is.null(group)) group <- rep(1, nrow(mat))
     if(is.data.frame(mat)) mat <- as.matrix(mat)
     stopifnot(length(group) == nrow(mat))
     group <- group2numeric(group)
 
-    if(!missing(corr) && !is.null(corr)) {
-        if(!missing(rows) || !missing(cols)) warning("rows and cols ignored when corr provided.")
+    if(!is.null(corr)) {
+        if(!is.null(rows) || !is.null(cols)) warning("rows and cols ignored when corr provided.")
         if(!missing(reorder)) warning("reorder ignored when corr provided")
         reorder <- FALSE
 
@@ -78,9 +78,9 @@ function(mat, group, rows, cols, reorder=FALSE, corr=stats::cor(mat, use="pairwi
         corr_was_presubset <- TRUE
     }
     else {
-        if(missing(rows) || is.null(rows)) rows <- (1:ncol(mat))
+        if(is.null(rows)) rows <- (1:ncol(mat))
         else rows <- selectMatrixColumns(mat, rows)
-        if(missing(cols) || is.null(cols)) cols <- (1:ncol(mat))
+        if(is.null(cols)) cols <- (1:ncol(mat))
         else cols <- selectMatrixColumns(mat, cols)
         corr_was_presubset <- FALSE
     }

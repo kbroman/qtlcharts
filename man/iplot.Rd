@@ -4,7 +4,7 @@
 \alias{iplot}
 \title{Interactive scatterplot}
 \usage{
-iplot(x, y, group, indID, chartOpts = NULL, digits = 5)
+iplot(x, y, group = NULL, indID = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{x}{Numeric vector of x values}

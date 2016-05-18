@@ -4,7 +4,7 @@
 \alias{iheatmap}
 \title{Interactive heat map}
 \usage{
-iheatmap(z, x, y, chartOpts = NULL, digits = 5)
+iheatmap(z, x = NULL, y = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{z}{Numeric matrix of dim \code{length(x)} x \code{length(y)}}

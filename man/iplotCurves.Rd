@@ -4,7 +4,7 @@
 \alias{iplotCurves}
 \title{Plot of a bunch of curves, linked to points in scatterplots}
 \usage{
-iplotCurves(curveMatrix, times, scatter1 = NULL, scatter2 = NULL,
+iplotCurves(curveMatrix, times = NULL, scatter1 = NULL, scatter2 = NULL,
   group = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{

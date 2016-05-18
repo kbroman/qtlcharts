@@ -32,15 +32,15 @@
 #'
 #' @export
 iplot <-
-function(x, y, group, indID, chartOpts=NULL, digits=5)
+function(x, y, group=NULL, indID=NULL, chartOpts=NULL, digits=5)
 {
     if(length(x) != length(y))
         stop("length(x) != length(y)")
-    if(missing(group) || is.null(group))
+    if(is.null(group))
         group <- rep(1, length(x))
     else if(length(group) != length(x))
         stop("length(group) != length(x)")
-    if(missing(indID) || is.null(indID))
+    if(is.null(indID))
         indID <- get_indID(length(x), names(x), names(y), names(group))
     if(length(indID) != length(x))
         stop("length(indID) != length(x)")

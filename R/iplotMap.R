@@ -34,11 +34,11 @@
 #'
 #' @export
 iplotMap <-
-function(map, chr, shift=FALSE, chartOpts=NULL, digits=5)
+function(map, chr=NULL, shift=FALSE, chartOpts=NULL, digits=5)
 {
     if("cross" %in% class(map)) map <- qtl::pull.map(map)
 
-    if(!missing(chr) && !is.null(chr)) {
+    if(!is.null(chr)) {
         map <- map[chr]
         if(length(map) == 0)
             stop("No chromosomes selected")

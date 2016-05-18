@@ -52,12 +52,12 @@
 #'
 #' @export
 iplotCurves <-
-function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
+function(curveMatrix, times=NULL, scatter1=NULL, scatter2=NULL, group=NULL,
          chartOpts=NULL, digits=5)
 {
     n.ind <- nrow(curveMatrix)
     n.times <- ncol(curveMatrix)
-    if(missing(times) || is.null(times)) times <- 1:ncol(curveMatrix)
+    if(is.null(times)) times <- 1:ncol(curveMatrix)
     if(length(times) != n.times)
         stop("length(times) != ncol(curveMatrix)")
     if(!is.null(scatter1) && nrow(scatter1) != n.ind)
@@ -68,7 +68,7 @@ function(curveMatrix, times, scatter1=NULL, scatter2=NULL, group=NULL,
         scatter1 <- scatter2
         scatter2 <- NULL
     }
-    if(missing(group) || is.null(group)) group <- rep(1, n.ind)
+    if(is.null(group)) group <- rep(1, n.ind)
     stopifnot(length(group) == n.ind)
     group <- group2numeric(group)
     indID <- rownames(curveMatrix)

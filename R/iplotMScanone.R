@@ -77,20 +77,20 @@
 #'
 #' @export
 iplotMScanone <-
-function(scanoneOutput, cross, lodcolumn, pheno.col, times=NULL,
-         effects, chr, chartOpts=NULL, digits=5)
+function(scanoneOutput, cross=NULL, lodcolumn=NULL, pheno.col=NULL, times=NULL,
+         effects=NULL, chr=NULL, chartOpts=NULL, digits=5)
 {
     if(!any(class(scanoneOutput) == "scanone"))
         stop('"scanoneOutput" should have class "scanone".')
 
-    if(!missing(chr) && !is.null(chr)) {
+    if(!is.null(chr)) {
         rn <- rownames(scanoneOutput)
         scanoneOutput <- subset(scanoneOutput, chr=chr)
-        if(!missing(effects) && !is.null(effects)) effects <- effects[match(rownames(scanoneOutput), rn)]
-        if(!missing(cross) && !is.null(cross)) cross <- subset(cross, chr=chr)
+        if(!is.null(effects)) effects <- effects[match(rownames(scanoneOutput), rn)]
+        if(!is.null(cross)) cross <- subset(cross, chr=chr)
     }
 
-    if(missing(lodcolumn) || is.null(lodcolumn)) lodcolumn <- 1:(ncol(scanoneOutput)-2)
+    if(is.null(lodcolumn)) lodcolumn <- 1:(ncol(scanoneOutput)-2)
     stopifnot(all(lodcolumn >= 1 & lodcolumn <= ncol(scanoneOutput)-2))
     scanoneOutput <- scanoneOutput[,c(1,2,lodcolumn+2),drop=FALSE]
 
@@ -110,14 +110,14 @@ function(scanoneOutput, cross, lodcolumn, pheno.col, times=NULL,
     }
     if(is.null(times)) times <- NULL
 
-    if(missing(pheno.col) || is.null(pheno.col)) pheno.col <- seq(along=lodcolumn)
+    if(is.null(pheno.col)) pheno.col <- seq(along=lodcolumn)
 
-    if((missing(cross) || is.null(cross)) && (missing(effects) || is.null(effects))) { # no effects
+    if(is.null(cross) && is.null(effects)) { # no effects
         show_effects <- FALSE
         effects_list <- NULL
     }
     else {
-        if(missing(effects) || is.null(effects)) {
+        if(is.null(effects)) {
             stopifnot(length(pheno.col) == length(lodcolumn))
             stopifnot(class(cross)[2] == "cross")
 

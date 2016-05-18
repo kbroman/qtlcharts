@@ -4,8 +4,8 @@
 \alias{iplotScantwo}
 \title{Interactive plot of 2d genome scan}
 \usage{
-iplotScantwo(scantwoOutput, cross, lodcolumn = 1, pheno.col = 1, chr,
-  chartOpts = NULL, digits = 5)
+iplotScantwo(scantwoOutput, cross = NULL, lodcolumn = 1, pheno.col = 1,
+  chr = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{scantwoOutput}{Output of \code{\link[qtl]{scantwo}}}

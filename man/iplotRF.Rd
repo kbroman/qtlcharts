@@ -4,7 +4,7 @@
 \alias{iplotRF}
 \title{Interactive plot of recombination fractions}
 \usage{
-iplotRF(cross, chr, chartOpts = NULL, digits = 5)
+iplotRF(cross, chr = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{cross}{Object of class \code{"cross"}, see

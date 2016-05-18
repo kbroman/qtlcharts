@@ -54,15 +54,15 @@
 #'
 #' @export
 iplotScantwo <-
-function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
+function(scantwoOutput, cross=NULL, lodcolumn=1, pheno.col=1, chr=NULL,
          chartOpts=NULL, digits=5)
 {
     if(!any(class(scantwoOutput) == "scantwo"))
         stop('"scantwoOutput" should have class "scantwo".')
 
-    if(!missing(chr) && !is.null(chr)) {
+    if(!is.null(chr)) {
         scantwoOutput <- subset(scantwoOutput, chr=chr)
-        if(!missing(cross) && !is.null(cross)) cross <- subset(cross, chr=chr)
+        if(!is.null(cross)) cross <- subset(cross, chr=chr)
     }
 
     if(length(lodcolumn) > 1) {
@@ -86,7 +86,7 @@ function(scantwoOutput, cross, lodcolumn=1, pheno.col=1, chr,
         pheno.col <- pheno.col[1]
         warning("pheno.col should have length 1; using first value")
     }
-    if(!missing(cross) && !is.null(cross))
+    if(!is.null(cross))
         pheno <- qtl::pull.pheno(cross, pheno.col)
     else cross <- pheno <- NULL
 
@@ -204,10 +204,10 @@ get_lodv1 <-
 
 # convert genotype/phenotype information to JSON format
 cross4iplotScantwo <-
-    function(scantwoOutput, cross, pheno)
+    function(scantwoOutput, cross=NULL, pheno=NULL)
 {
     # if no cross or phenotype, just return null
-    if(missing(cross) || is.null(cross) || missing(pheno) || is.null(pheno))
+    if(is.null(cross) || is.null(pheno))
         return(NULL)
 
     # pull out locations of LOD calculations, on grid

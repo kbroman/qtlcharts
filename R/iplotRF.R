@@ -44,9 +44,9 @@
 #'
 #' @export
 iplotRF <-
-function(cross, chr, chartOpts=NULL, digits=5)
+function(cross, chr=NULL, chartOpts=NULL, digits=5)
 {
-    if(!missing(chr)) cross <- cross[chr,]
+    if(!is.null(chr)) cross <- cross[chr,]
 
     rf <- data4iplotRF(cross)
     geno <- convert4crosstab(cross)

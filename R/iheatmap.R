@@ -41,12 +41,12 @@
 #'
 #' @export
 iheatmap <-
-function(z, x, y, chartOpts=NULL, digits=5)
+function(z, x=NULL, y=NULL, chartOpts=NULL, digits=5)
 {
     z <- as.matrix(z)
-    if(missing(x) || is.null(x)) x <- 1:nrow(z)
+    if(is.null(x)) x <- 1:nrow(z)
     else stopifnot(length(x) == nrow(z))
-    if(missing(y) || is.null(y)) y <- 1:ncol(z)
+    if(is.null(y)) y <- 1:ncol(z)
     else stopifnot(length(y) == ncol(z))
     names(x) <- names(y) <- dimnames(z) <- NULL
 

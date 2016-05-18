@@ -4,9 +4,9 @@
 \alias{iplotCorr}
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
-iplotCorr(mat, group, rows, cols, reorder = FALSE, corr = stats::cor(mat,
-  use = "pairwise.complete.obs"), scatterplots = TRUE, chartOpts = NULL,
-  digits = 5)
+iplotCorr(mat, group = NULL, rows = NULL, cols = NULL, reorder = FALSE,
+  corr = stats::cor(mat, use = "pairwise.complete.obs"),
+  scatterplots = TRUE, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{mat}{Data matrix (individuals x variables)}

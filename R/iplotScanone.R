@@ -71,16 +71,16 @@
 #'
 #' @export
 iplotScanone <-
-function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
+function(scanoneOutput, cross=NULL, lodcolumn=1, pheno.col=1, chr=NULL,
          pxgtype = c("ci", "raw"),
          fillgenoArgs=NULL, chartOpts=NULL, digits=5)
 {
     if(!any(class(scanoneOutput) == "scanone"))
         stop('"scanoneOutput" should have class "scanone".')
 
-    if(!missing(chr) && !is.null(chr)) {
+    if(!is.null(chr)) {
         scanoneOutput <- subset(scanoneOutput, chr=chr)
-        if(!missing(cross) && !is.null(cross)) cross <- subset(cross, chr=chr)
+        if(!is.null(cross)) cross <- subset(cross, chr=chr)
     }
 
     pxgtype <- match.arg(pxgtype)
@@ -96,7 +96,7 @@ function(scanoneOutput, cross, lodcolumn=1, pheno.col=1, chr,
     colnames(scanoneOutput)[3] <- 'lod'
     scanone_list <- convert_scanone(scanoneOutput, lod_as_matrix=FALSE)
 
-    if(missing(cross) || is.null(cross)) { # no effect plot
+    if(is.null(cross)) { # no effect plot
         pxgtype <- "none"
         pxg_list <- NULL
     } else { # include QTL effects

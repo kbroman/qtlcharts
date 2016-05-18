@@ -4,8 +4,9 @@
 \alias{iplotMScanone}
 \title{Interactive LOD curve}
 \usage{
-iplotMScanone(scanoneOutput, cross, lodcolumn, pheno.col, times = NULL,
-  effects, chr, chartOpts = NULL, digits = 5)
+iplotMScanone(scanoneOutput, cross = NULL, lodcolumn = NULL,
+  pheno.col = NULL, times = NULL, effects = NULL, chr = NULL,
+  chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{scanoneOutput}{Object of class \code{"scanone"}, as output

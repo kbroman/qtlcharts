@@ -22,7 +22,7 @@ test_that("estQTLeffects works for X chromosome in F2", {
     data(fake.f2)
     fake.f2 <- qtl::calc.genoprob(fake.f2["X",])
 
-    pr <- qtl::reviseXdata("f2", "full", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
+    pr <- qtl::reviseXdata("f2", "standard", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
                            cross.attr=attributes(fake.f2))
 
     pheno.col <- 1
@@ -31,6 +31,10 @@ test_that("estQTLeffects works for X chromosome in F2", {
 
     expect_equivalent( estQTLeffects(fake.f2, pheno.col=pheno.col), eff )
 
+    pr_alt <- qtl::reviseXdata("f2", "full", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
+                               cross.attr=attributes(fake.f2))
+    eff <- apply(pr_alt, 2, function(a,b) lm(b ~ -1 + a)$coef, fake.f2$pheno[,1])
+    eff <- lapply(as.data.frame(eff), function(a) matrix(a, nrow=1))
     eff.a <- lapply(eff, function(a) matrix(a[seq(2,length(a), by=2)] - a[seq(1,length(a), by=2)], nrow=1))
     expect_equivalent( estQTLeffects(fake.f2, pheno.col=pheno.col, "effects"), eff.a )
 
@@ -38,7 +42,7 @@ test_that("estQTLeffects works for X chromosome in F2", {
     origsex <- fake.f2$pheno$sex
     fake.f2$pheno$sex <- rep(1, nind(fake.f2))
 
-    pr <- qtl::reviseXdata("f2", "full", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
+    pr <- qtl::reviseXdata("f2", "standard", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
                            cross.attr=attributes(fake.f2))
 
     pheno.col <- 1
@@ -54,7 +58,7 @@ test_that("estQTLeffects works for X chromosome in F2", {
     # treat as all females
     fake.f2$pheno$sex <- rep(0, nind(fake.f2))
 
-    pr <- qtl::reviseXdata("f2", "full", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
+    pr <- qtl::reviseXdata("f2", "standard", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
                            cross.attr=attributes(fake.f2))
 
     pheno.col <- 1
@@ -63,6 +67,10 @@ test_that("estQTLeffects works for X chromosome in F2", {
 
     expect_equivalent( estQTLeffects(fake.f2, pheno.col=pheno.col), eff )
 
+    pralt <- qtl::reviseXdata("f2", "full", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
+                              cross.attr=attributes(fake.f2))
+    eff <- apply(pralt, 2, function(a,b) lm(b ~ -1 + a)$coef, fake.f2$pheno[,1])
+    eff <- lapply(as.data.frame(eff), function(a) matrix(a, nrow=1))
     eff.a <- lapply(eff, function(a) matrix(a[seq(2,length(a), by=2)] - a[seq(1,length(a), by=2)], nrow=1))
     expect_equivalent( estQTLeffects(fake.f2, pheno.col=pheno.col, "effects"), eff.a )
 
@@ -71,7 +79,7 @@ test_that("estQTLeffects works for X chromosome in F2", {
     fake.f2$pheno$sex <- origsex
     fake.f2$pheno$pgm <- rep(1, nind(fake.f2))
 
-    pr <- qtl::reviseXdata("f2", "full", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
+    pr <- qtl::reviseXdata("f2", "standard", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
                            cross.attr=attributes(fake.f2))
 
     pheno.col <- 1
@@ -87,7 +95,7 @@ test_that("estQTLeffects works for X chromosome in F2", {
     # treat as all reverse direction
     fake.f2$pheno$pgm <- rep(0, nind(fake.f2))
 
-    pr <- qtl::reviseXdata("f2", "full", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
+    pr <- qtl::reviseXdata("f2", "standard", getsex(fake.f2), prob=fake.f2$geno[["X"]]$prob,
                            cross.attr=attributes(fake.f2))
 
     pheno.col <- 1

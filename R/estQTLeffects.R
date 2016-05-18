@@ -61,8 +61,10 @@ function(cross, pheno.col=1, what=c("means", "effects"))
     for(i in 1:qtl::nchr(cross)) {
         pr[[i]] <- cross$geno[[i]]$prob
         if(chrtype[i] == "X")
-            pr[[i]] <- qtl::reviseXdata(crosstype, "standard", qtl::getsex(cross),
-                                        prob=pr[[i]], cross.attr=attributes(cross))
+            # if what="effects", use full X encoding (AA/ABf/ABr/BB/AY/BY)
+            # if what="means", use standard (AA/AB/BB/AY/BY)
+            pr[[i]] <- qtl::reviseXdata(crosstype, ifelse(what=="effects", "full", "standard"),
+                                        qtl::getsex(cross), prob=pr[[i]], cross.attr=attributes(cross))
     }
 
     eff <- vector("list", sum(vapply(pr, ncol, 1)))

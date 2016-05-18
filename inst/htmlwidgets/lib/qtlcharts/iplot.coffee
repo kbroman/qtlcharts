@@ -55,7 +55,7 @@ iplot = (widgetdiv, data, chartOpts) ->
         yNA_size:{width:yNA.width, gap:yNA.gap}
         tipclass:widgetdivid})
 
-    mychart(d3.select(widgetdiv).select("svg"), {x:data.x, y:data.y, group:data.group, indID:data.indID})
+    mychart(d3.select(widgetdiv).select("svg"), data)
 
     # increase size of point on mouseover
     mychart.points()

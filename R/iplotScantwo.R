@@ -265,7 +265,7 @@ cross4iplotScantwo <-
     cross.attr <- attributes(cross)
     if(crosstype %in% c("f2", "bc", "bcsft") && any(chrtype=="X")) {
         for(i in which(chrtype=="X")) {
-            cross$geno[[i]]$draws <- qtl::reviseXdata(crosstype, "full", sexpgm,
+            cross$geno[[i]]$draws <- qtl::reviseXdata(crosstype, "standard", sexpgm,
                                                       draws=cross$geno[[i]]$draws,
                                                       cross.attr=cross.attr)
         }
@@ -286,7 +286,7 @@ cross4iplotScantwo <-
     names(genonames) <- names(cross$geno)
     for(i in seq(along=genonames))
         genonames[[i]] <- qtl::getgenonames(crosstype, class(cross$geno[[i]]),
-                                            "full", sexpgm, cross.attr)
+                                            "standard", sexpgm, cross.attr)
 
     # chr for each marker
     chr <- as.character(map$chr)

@@ -37,6 +37,48 @@ customization options for each chart.
 
 `histcolors = c("#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black")` &mdash; vector of colors for selected histograms
 
+### `idotplot`
+
+`height = 550` &mdash; height of chart in pixels
+
+`width = 400` &mdash; width of chart in pixels
+
+`title = ""` &mdash; title for chart
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`xlab = "group"` &mdash; x-axis label
+
+`ylab = "response"` &mdash; y-axis label
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`jitter = "beeswarm"` &mdash; method for jittering points (beeswarm|random|none)
+
+`ylim = NULL` &mdash; y-axis limits
+
+`yticks = NULL` &mdash; vector of tick positions on y-axis
+
+`nyticks = 5` &mdash; no. ticks on y-axis
+
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
+
+`pointcolor = NULL` &mdash; color for points
+
+`pointsize = 3` &mdash; size of points in pixels
+
+`pointstroke = "black"` &mdash; color of outer circle for points
+
+`yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
+
+`xcategories = NULL` &mdash; group categories
+
+`xcatlabels = NULL` &mdash; labels for group categories
+
+`horizontal = false` &mdash; If true, have genotypes on vertical axis and phenotype on horizontal axis
+
 ### `iheatmap`
 
 `height = 800` &mdash; total height of chart
@@ -545,100 +587,6 @@ customization options for each chart.
 
 `xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale
 
-### `iplotRF`
-
-`height = 800` &mdash; total height of chart in pixels
-
-`width = 1000` &mdash; total width of chart in pixels
-
-`hbot = 300` &mdash; height (in pixels) of each of the lower panels with LOD scores
-
-`margin = list(left=60, top=40, right=40, bottom=60)` &mdash; margins in pixels (left, top, right, bottom)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`chrGap = 2` &mdash; gaps between chr in heat map
-
-`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
-
-`chrlinewidth = 2` &mdash; width of lines between chromosomes
-
-`oneAtTop = false` &mdash; if true, put chromosome 1 at the top rather than bottom
-
-`colors = c("crimson", "white", "slateblue")` &mdash; vector of three colors for the color scale (negative - zero - positive)
-
-`nullcolor = "#e6e6e6"` &mdash; color for empty cells
-
-`zlim = NULL` &mdash; z-axis limits (if null take from data, symmetric about 0)
-
-`zthresh = NULL` &mdash; z threshold; if |z| < zthresh, not shown
-
-`hilitCellcolor = "black"` &mdash; color of box around highlighted cell
-
-`cellPad = NULL` &mdash; padding of cells (if null, we take cell width * 0.1)
-
-`fontsize = NULL` &mdash; font size in crosstab
-
-`rectcolor = "#e6e6e6"` &mdash; background rectangle color (and color of cells in crosstab)
-
-`altrectcolor = "#c8c8c8"` &mdash; alternate rectangle color in lower panels with LOD and rf
-
-`hilitcolor = "#e9cfec"` &mdash; color of rectangle in heatmap when highlighted
-
-`boxcolor = "black"` &mdash; color of outer box of panels
-
-`boxwidth = 2` &mdash; width of outer box in pixels
-
-`pointsize = 2` &mdash; point size in lower panels with LOD and rf
-
-`pointcolor = "slateblue"` &mdash; point color in lower panels with LOD and rf
-
-`pointstroke = "black"` &mdash; stroke color for points in lower panels with LOD and rf
-
-`lodlim = c(0, 12)` &mdash; range of LOD values to display; omit below 1st, truncate above 2nd
-
-`tipclass = "tooltip"` &mdash; class name for tool tips
-
-### `iplotPXG`
-
-`height = 550` &mdash; height of chart in pixels
-
-`width = 400` &mdash; width of chart in pixels
-
-`title = ""` &mdash; title for chart
-
-`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`xlab = "Genotype"` &mdash; x-axis label
-
-`ylab = "Phenotype"` &mdash; y-axis label
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`jitter = "beeswarm"` &mdash; method for jittering points (beeswarm|random|none)
-
-`ylim = NULL` &mdash; y-axis limits
-
-`yticks = NULL` &mdash; vector of tick positions on y-axis
-
-`nyticks = 5` &mdash; no. ticks on y-axis
-
-`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
-
-`pointcolor = "slateblue"` &mdash; color for points
-
-`pointsize = 3` &mdash; size of points in pixels
-
-`pointstroke = "black"` &mdash; color of outer circle for points
-
-`yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
-
-`horizontal = false` &mdash; If true, have genotypes on vertical axis and phenotype on horizontal axis
-
 ### `iplotMScanone` (with effects)
 
 `height = 700` &mdash; height of chart in pixels
@@ -702,6 +650,62 @@ customization options for each chart.
 `xticks = NULL` &mdash; tick positions in x-axis for effect plot (right panel), if quantitative scale
 
 `lod_labels = NULL` &mdash; labels on the LOD score columns
+
+### `iplotRF`
+
+`height = 800` &mdash; total height of chart in pixels
+
+`width = 1000` &mdash; total width of chart in pixels
+
+`hbot = 300` &mdash; height (in pixels) of each of the lower panels with LOD scores
+
+`margin = list(left=60, top=40, right=40, bottom=60)` &mdash; margins in pixels (left, top, right, bottom)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`chrGap = 2` &mdash; gaps between chr in heat map
+
+`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
+
+`chrlinewidth = 2` &mdash; width of lines between chromosomes
+
+`oneAtTop = false` &mdash; if true, put chromosome 1 at the top rather than bottom
+
+`colors = c("crimson", "white", "slateblue")` &mdash; vector of three colors for the color scale (negative - zero - positive)
+
+`nullcolor = "#e6e6e6"` &mdash; color for empty cells
+
+`zlim = NULL` &mdash; z-axis limits (if null take from data, symmetric about 0)
+
+`zthresh = NULL` &mdash; z threshold; if |z| < zthresh, not shown
+
+`hilitCellcolor = "black"` &mdash; color of box around highlighted cell
+
+`cellPad = NULL` &mdash; padding of cells (if null, we take cell width * 0.1)
+
+`fontsize = NULL` &mdash; font size in crosstab
+
+`rectcolor = "#e6e6e6"` &mdash; background rectangle color (and color of cells in crosstab)
+
+`altrectcolor = "#c8c8c8"` &mdash; alternate rectangle color in lower panels with LOD and rf
+
+`hilitcolor = "#e9cfec"` &mdash; color of rectangle in heatmap when highlighted
+
+`boxcolor = "black"` &mdash; color of outer box of panels
+
+`boxwidth = 2` &mdash; width of outer box in pixels
+
+`pointsize = 2` &mdash; point size in lower panels with LOD and rf
+
+`pointcolor = "slateblue"` &mdash; point color in lower panels with LOD and rf
+
+`pointstroke = "black"` &mdash; stroke color for points in lower panels with LOD and rf
+
+`lodlim = c(0, 12)` &mdash; range of LOD values to display; omit below 1st, truncate above 2nd
+
+`tipclass = "tooltip"` &mdash; class name for tool tips
 
 ### `iplotScantwo`
 

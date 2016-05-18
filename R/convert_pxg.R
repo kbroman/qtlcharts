@@ -44,7 +44,7 @@ function(cross, pheno.col=1, fillgenoArgs=NULL)
     genonames <- vector("list", length(uchrtype))
     names(genonames) <- uchrtype
     for(i in uchrtype)
-        genonames[[i]] <- qtl::getgenonames(class(cross)[1], i, "full", sexpgm, attributes(cross))
+        genonames[[i]] <- qtl::getgenonames(class(cross)[1], i, "standard", sexpgm, attributes(cross))
 
     id <- qtl::getid(cross)
     if(is.null(id)) id <- 1:qtl::nind(cross)
@@ -84,11 +84,11 @@ function(cross, fillgenoArgs=NULL, imputed_negative=TRUE)
     sexpgm <- qtl::getsex(cross)
     if(any(chrtype == "X")) {
         for(i in chr[chrtype=="X"]) {
-            geno_X <- qtl::reviseXdata(class(cross)[1], "full", sexpgm, geno=qtl::pull.geno(cross, chr=i),
+            geno_X <- qtl::reviseXdata(class(cross)[1], "standard", sexpgm, geno=qtl::pull.geno(cross, chr=i),
                                        cross.attr=attributes(cross))
             geno[,colnames(geno_X)] <- geno_X
 
-            geno_imp_X <- qtl::reviseXdata(class(cross)[1], "full", sexpgm, geno=qtl::pull.geno(cross_filled, chr=i),
+            geno_imp_X <- qtl::reviseXdata(class(cross)[1], "standard", sexpgm, geno=qtl::pull.geno(cross_filled, chr=i),
                                            cross.attr=attributes(cross))
             geno_imp[,colnames(geno_imp_X)] <- geno_imp_X
         }

@@ -12,6 +12,9 @@
 - Add a new chart, `itriplot`, for plotting trinomial probabilities,
   represented as points in an equilateral triangle.
 
+- Refactor `iplotPXG` and `idotplot` so that `idotplot` is the main
+  function, and `iplotPXG` calls it.
+
 - Add some additional options, such as `horizontal` for `iplotMap`
   and `iplotPXG`.
 

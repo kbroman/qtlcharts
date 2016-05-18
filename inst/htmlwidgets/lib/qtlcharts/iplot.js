@@ -87,7 +87,7 @@ iplot = function(widgetdiv, data, chartOpts) {
   });
   mychart(d3.select(widgetdiv).select("svg"), data);
   return mychart.points().on("mouseover", function(d) {
-    return d3.select(this).attr("r", pointsize * 2);
+    return d3.select(this).attr("r", pointsize * 2).moveToFront();
   }).on("mouseout", function(d) {
     return d3.select(this).attr("r", pointsize);
   });

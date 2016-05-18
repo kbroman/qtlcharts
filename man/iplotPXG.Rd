@@ -42,13 +42,19 @@ map.function="c-f")}.
 Individual IDs (viewable when hovering over a point) are taken from
 the input \code{cross} object, using the \code{\link[qtl]{getid}}
 function in R/qtl.
+
+By default, points are colored blue and pink according to whether
+the marker genotype is observed or inferred, respectively.
 }
 \examples{
 library(qtl)
 data(hyper)
 marker <- sample(markernames(hyper), 1)
 \donttest{
-iplotPXG(hyper, marker)}
+iplotPXG(hyper, marker)
+
+# different colors
+iplotPXG(hyper, marker, chartOpts=list(pointcolor=c("black", "gray")))}
 
 }
 \seealso{

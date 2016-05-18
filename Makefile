@@ -18,15 +18,23 @@ doc:
 #------------------------------------------------------------
 
 # javascript for the chart functions
-JSCHARTS = $(CHART_DIR)/iplotScanone_noeff.js $(CHART_DIR)/iplotScanone_pxg.js \
-		   $(CHART_DIR)/iplotScanone_ci.js $(CHART_DIR)/iplotPXG.js \
-		   $(CHART_DIR)/iplotCorr.js $(CHART_DIR)/iplotCorr_noscat.js \
+JSCHARTS = $(CHART_DIR)/iplotScanone_noeff.js \
+		   $(CHART_DIR)/iplotScanone_pxg.js \
+		   $(CHART_DIR)/iplotScanone_ci.js \
+		   $(CHART_DIR)/idotplot.js \
+		   $(CHART_DIR)/iplotCorr.js \
+		   $(CHART_DIR)/iplotCorr_noscat.js \
 		   $(CHART_DIR)/iboxplot.js \
-		   $(CHART_DIR)/iplotCurves.js $(CHART_DIR)/iplotMap.js \
-		   $(CHART_DIR)/iplotRF.js $(CHART_DIR)/iplotMScanone_noeff.js \
-		   $(CHART_DIR)/iplotMScanone_eff.js $(CHART_DIR)/iheatmap.js \
-		   $(CHART_DIR)/iplot.js $(CHART_DIR)/iplotScantwo.js \
-		   $(CHART_DIR)/scat2scat.js $(CHART_DIR)/itriplot.js
+		   $(CHART_DIR)/iplotCurves.js \
+		   $(CHART_DIR)/iplotMap.js \
+		   $(CHART_DIR)/iplotRF.js \
+		   $(CHART_DIR)/iplotMScanone_noeff.js \
+		   $(CHART_DIR)/iplotMScanone_eff.js \
+		   $(CHART_DIR)/iheatmap.js \
+		   $(CHART_DIR)/iplot.js \
+		   $(CHART_DIR)/iplotScantwo.js \
+		   $(CHART_DIR)/scat2scat.js \
+		   $(CHART_DIR)/itriplot.js
 jscharts: $(JSCHARTS)
 
 $(CHART_DIR)/%.js: $(CHART_DIR)/%.coffee
@@ -35,12 +43,18 @@ $(CHART_DIR)/%.js: $(CHART_DIR)/%.coffee
 #------------------------------------------------------------
 
 # javascript for the widgets called from R
-JSWIDGETS = $(WIDGET_DIR)/iplot.js $(WIDGET_DIR)/iplotPXG.js \
-			$(WIDGET_DIR)/iplotMap.js $(WIDGET_DIR)/iheatmap.js \
-			$(WIDGET_DIR)/iboxplot.js $(WIDGET_DIR)/iplotCorr.js \
-			$(WIDGET_DIR)/iplotCurves.js $(WIDGET_DIR)/iplotRF.js \
-			$(WIDGET_DIR)/iplotScanone.js $(WIDGET_DIR)/iplotMScanone.js \
-			$(WIDGET_DIR)/iplotScantwo.js $(WIDGET_DIR)/scat2scat.js \
+JSWIDGETS = $(WIDGET_DIR)/iplot.js \
+			$(WIDGET_DIR)/idotplot.js \
+			$(WIDGET_DIR)/iplotMap.js \
+			$(WIDGET_DIR)/iheatmap.js \
+			$(WIDGET_DIR)/iboxplot.js \
+			$(WIDGET_DIR)/iplotCorr.js \
+			$(WIDGET_DIR)/iplotCurves.js \
+			$(WIDGET_DIR)/iplotRF.js \
+			$(WIDGET_DIR)/iplotScanone.js \
+			$(WIDGET_DIR)/iplotMScanone.js \
+			$(WIDGET_DIR)/iplotScantwo.js \
+			$(WIDGET_DIR)/scat2scat.js \
 			$(WIDGET_DIR)/itriplot.js
 jswidgets: $(JSWIDGETS)
 

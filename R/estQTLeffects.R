@@ -61,7 +61,7 @@ function(cross, pheno.col=1, what=c("means", "effects"))
     for(i in 1:qtl::nchr(cross)) {
         pr[[i]] <- cross$geno[[i]]$prob
         if(chrtype[i] == "X")
-            pr[[i]] <- qtl::reviseXdata(crosstype, "full", qtl::getsex(cross),
+            pr[[i]] <- qtl::reviseXdata(crosstype, "standard", qtl::getsex(cross),
                                         prob=pr[[i]], cross.attr=attributes(cross))
     }
 

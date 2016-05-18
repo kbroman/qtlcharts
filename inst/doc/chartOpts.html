@@ -46,6 +46,29 @@
 <p><code>qucolors = NULL</code> — vector of colors for the quantile curves</p>
 <p><code>histcolors = c(&quot;#0074D9&quot;, &quot;#FF4136&quot;, &quot;#3D9970&quot;, &quot;MediumVioletRed&quot;, &quot;black&quot;)</code> — vector of colors for selected histograms</p>
 </div>
+<div id="idotplot" class="section level3">
+<h3><code>idotplot</code></h3>
+<p><code>height = 550</code> — height of chart in pixels</p>
+<p><code>width = 400</code> — width of chart in pixels</p>
+<p><code>title = &quot;&quot;</code> — title for chart</p>
+<p><code>margin = list(left=60, top=40, right=40, bottom=40, inner=5)</code> — margins in pixels (left, top, right, bottom, inner)</p>
+<p><code>xlab = &quot;group&quot;</code> — x-axis label</p>
+<p><code>ylab = &quot;response&quot;</code> — y-axis label</p>
+<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)</p>
+<p><code>titlepos = 20</code> — position of chart title in pixels</p>
+<p><code>jitter = &quot;beeswarm&quot;</code> — method for jittering points (beeswarm|random|none)</p>
+<p><code>ylim = NULL</code> — y-axis limits</p>
+<p><code>yticks = NULL</code> — vector of tick positions on y-axis</p>
+<p><code>nyticks = 5</code> — no. ticks on y-axis</p>
+<p><code>rectcolor = &quot;#E6E6E6&quot;</code> — color of background rectangle</p>
+<p><code>pointcolor = NULL</code> — color for points</p>
+<p><code>pointsize = 3</code> — size of points in pixels</p>
+<p><code>pointstroke = &quot;black&quot;</code> — color of outer circle for points</p>
+<p><code>yNA = list(handle=true, force=false, width=15, gap=10)</code> — treatment of missing values (handle=T/F, force=T/F, width, gap)</p>
+<p><code>xcategories = NULL</code> — group categories</p>
+<p><code>xcatlabels = NULL</code> — labels for group categories</p>
+<p><code>horizontal = false</code> — If true, have genotypes on vertical axis and phenotype on horizontal axis</p>
+</div>
 <div id="iheatmap" class="section level3">
 <h3><code>iheatmap</code></h3>
 <p><code>height = 800</code> — total height of chart</p>
@@ -320,57 +343,6 @@
 <p><code>nxticks = 5</code> — no. ticks in x-axis on right-hand panel, if quantitative scale</p>
 <p><code>xticks = NULL</code> — tick positions in x-axis on right-hand panel, if quantitative scale</p>
 </div>
-<div id="iplotrf" class="section level3">
-<h3><code>iplotRF</code></h3>
-<p><code>height = 800</code> — total height of chart in pixels</p>
-<p><code>width = 1000</code> — total width of chart in pixels</p>
-<p><code>hbot = 300</code> — height (in pixels) of each of the lower panels with LOD scores</p>
-<p><code>margin = list(left=60, top=40, right=40, bottom=60)</code> — margins in pixels (left, top, right, bottom)</p>
-<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — axis positions in heatmap</p>
-<p><code>titlepos = 20</code> — position of chart title in pixels</p>
-<p><code>chrGap = 2</code> — gaps between chr in heat map</p>
-<p><code>chrlinecolor = &quot;&quot;</code> — color of lines between chromosomes (if “”, leave off)</p>
-<p><code>chrlinewidth = 2</code> — width of lines between chromosomes</p>
-<p><code>oneAtTop = false</code> — if true, put chromosome 1 at the top rather than bottom</p>
-<p><code>colors = c(&quot;crimson&quot;, &quot;white&quot;, &quot;slateblue&quot;)</code> — vector of three colors for the color scale (negative - zero - positive)</p>
-<p><code>nullcolor = &quot;#e6e6e6&quot;</code> — color for empty cells</p>
-<p><code>zlim = NULL</code> — z-axis limits (if null take from data, symmetric about 0)</p>
-<p><code>zthresh = NULL</code> — z threshold; if |z| &lt; zthresh, not shown</p>
-<p><code>hilitCellcolor = &quot;black&quot;</code> — color of box around highlighted cell</p>
-<p><code>cellPad = NULL</code> — padding of cells (if null, we take cell width * 0.1)</p>
-<p><code>fontsize = NULL</code> — font size in crosstab</p>
-<p><code>rectcolor = &quot;#e6e6e6&quot;</code> — background rectangle color (and color of cells in crosstab)</p>
-<p><code>altrectcolor = &quot;#c8c8c8&quot;</code> — alternate rectangle color in lower panels with LOD and rf</p>
-<p><code>hilitcolor = &quot;#e9cfec&quot;</code> — color of rectangle in heatmap when highlighted</p>
-<p><code>boxcolor = &quot;black&quot;</code> — color of outer box of panels</p>
-<p><code>boxwidth = 2</code> — width of outer box in pixels</p>
-<p><code>pointsize = 2</code> — point size in lower panels with LOD and rf</p>
-<p><code>pointcolor = &quot;slateblue&quot;</code> — point color in lower panels with LOD and rf</p>
-<p><code>pointstroke = &quot;black&quot;</code> — stroke color for points in lower panels with LOD and rf</p>
-<p><code>lodlim = c(0, 12)</code> — range of LOD values to display; omit below 1st, truncate above 2nd</p>
-<p><code>tipclass = &quot;tooltip&quot;</code> — class name for tool tips</p>
-</div>
-<div id="iplotpxg" class="section level3">
-<h3><code>iplotPXG</code></h3>
-<p><code>height = 550</code> — height of chart in pixels</p>
-<p><code>width = 400</code> — width of chart in pixels</p>
-<p><code>title = &quot;&quot;</code> — title for chart</p>
-<p><code>margin = list(left=60, top=40, right=40, bottom=40, inner=5)</code> — margins in pixels (left, top, right, bottom, inner)</p>
-<p><code>xlab = &quot;Genotype&quot;</code> — x-axis label</p>
-<p><code>ylab = &quot;Phenotype&quot;</code> — y-axis label</p>
-<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)</p>
-<p><code>titlepos = 20</code> — position of chart title in pixels</p>
-<p><code>jitter = &quot;beeswarm&quot;</code> — method for jittering points (beeswarm|random|none)</p>
-<p><code>ylim = NULL</code> — y-axis limits</p>
-<p><code>yticks = NULL</code> — vector of tick positions on y-axis</p>
-<p><code>nyticks = 5</code> — no. ticks on y-axis</p>
-<p><code>rectcolor = &quot;#E6E6E6&quot;</code> — color of background rectangle</p>
-<p><code>pointcolor = &quot;slateblue&quot;</code> — color for points</p>
-<p><code>pointsize = 3</code> — size of points in pixels</p>
-<p><code>pointstroke = &quot;black&quot;</code> — color of outer circle for points</p>
-<p><code>yNA = list(handle=true, force=false, width=15, gap=10)</code> — treatment of missing values (handle=T/F, force=T/F, width, gap)</p>
-<p><code>horizontal = false</code> — If true, have genotypes on vertical axis and phenotype on horizontal axis</p>
-</div>
 <div id="iplotmscanone-with-effects" class="section level3">
 <h3><code>iplotMScanone</code> (with effects)</h3>
 <p><code>height = 700</code> — height of chart in pixels</p>
@@ -404,6 +376,36 @@
 <p><code>nxticks = 5</code> — no. ticks in x-axis for effect plot (right panel), if quantitative scale</p>
 <p><code>xticks = NULL</code> — tick positions in x-axis for effect plot (right panel), if quantitative scale</p>
 <p><code>lod_labels = NULL</code> — labels on the LOD score columns</p>
+</div>
+<div id="iplotrf" class="section level3">
+<h3><code>iplotRF</code></h3>
+<p><code>height = 800</code> — total height of chart in pixels</p>
+<p><code>width = 1000</code> — total width of chart in pixels</p>
+<p><code>hbot = 300</code> — height (in pixels) of each of the lower panels with LOD scores</p>
+<p><code>margin = list(left=60, top=40, right=40, bottom=60)</code> — margins in pixels (left, top, right, bottom)</p>
+<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — axis positions in heatmap</p>
+<p><code>titlepos = 20</code> — position of chart title in pixels</p>
+<p><code>chrGap = 2</code> — gaps between chr in heat map</p>
+<p><code>chrlinecolor = &quot;&quot;</code> — color of lines between chromosomes (if “”, leave off)</p>
+<p><code>chrlinewidth = 2</code> — width of lines between chromosomes</p>
+<p><code>oneAtTop = false</code> — if true, put chromosome 1 at the top rather than bottom</p>
+<p><code>colors = c(&quot;crimson&quot;, &quot;white&quot;, &quot;slateblue&quot;)</code> — vector of three colors for the color scale (negative - zero - positive)</p>
+<p><code>nullcolor = &quot;#e6e6e6&quot;</code> — color for empty cells</p>
+<p><code>zlim = NULL</code> — z-axis limits (if null take from data, symmetric about 0)</p>
+<p><code>zthresh = NULL</code> — z threshold; if |z| &lt; zthresh, not shown</p>
+<p><code>hilitCellcolor = &quot;black&quot;</code> — color of box around highlighted cell</p>
+<p><code>cellPad = NULL</code> — padding of cells (if null, we take cell width * 0.1)</p>
+<p><code>fontsize = NULL</code> — font size in crosstab</p>
+<p><code>rectcolor = &quot;#e6e6e6&quot;</code> — background rectangle color (and color of cells in crosstab)</p>
+<p><code>altrectcolor = &quot;#c8c8c8&quot;</code> — alternate rectangle color in lower panels with LOD and rf</p>
+<p><code>hilitcolor = &quot;#e9cfec&quot;</code> — color of rectangle in heatmap when highlighted</p>
+<p><code>boxcolor = &quot;black&quot;</code> — color of outer box of panels</p>
+<p><code>boxwidth = 2</code> — width of outer box in pixels</p>
+<p><code>pointsize = 2</code> — point size in lower panels with LOD and rf</p>
+<p><code>pointcolor = &quot;slateblue&quot;</code> — point color in lower panels with LOD and rf</p>
+<p><code>pointstroke = &quot;black&quot;</code> — stroke color for points in lower panels with LOD and rf</p>
+<p><code>lodlim = c(0, 12)</code> — range of LOD values to display; omit below 1st, truncate above 2nd</p>
+<p><code>tipclass = &quot;tooltip&quot;</code> — class name for tool tips</p>
 </div>
 <div id="iplotscantwo" class="section level3">
 <h3><code>iplotScantwo</code></h3>

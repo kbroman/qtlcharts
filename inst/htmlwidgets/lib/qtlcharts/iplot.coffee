@@ -61,5 +61,6 @@ iplot = (widgetdiv, data, chartOpts) ->
     mychart.points()
            .on "mouseover", (d) ->
                     d3.select(this).attr("r", pointsize*2)
+                                   .moveToFront()
            .on "mouseout", (d) ->
                     d3.select(this).attr("r", pointsize)

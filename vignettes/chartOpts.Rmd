@@ -747,6 +747,36 @@ customization options for each chart.
 
 `zthresh = 0` &mdash; LOD values below this threshold aren't shown (on LOD_full scale)
 
+### `itriplot`
+
+`width = 600` &mdash; overall width of chart in pixels
+
+`height = 520` &mdash; overall height of chart in pixels
+
+`margin = list(left=60, top=40, right=60, bottom=10)` &mdash; margins in pixels (left, top, right, bottom)
+
+`labelpos = 10` &mdash; pixels between vertex and vertex label (horizontally)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`title = ""` &mdash; chart title
+
+`labels = c("(1,0,0)", "(0,1,0)", "(0,0,1)")` &mdash; labels on the corners
+
+`rectcolor = "#e6e6e6"` &mdash; color of background rectangle
+
+`boxcolor = "black"` &mdash; color of outer rectangle box
+
+`boxwidth = 2` &mdash; width of outer box in pixels
+
+`pointcolor = NULL` &mdash; fill color of points
+
+`pointstroke = "black"` &mdash; color of points' outer circle
+
+`pointsize = 3` &mdash; color of points
+
+`tipclass = "tooltip"` &mdash; class name for tool tips
+
 ### `scat2scat`
 
 `height = 500` &mdash; height of chart in pixels

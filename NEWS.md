@@ -1,4 +1,4 @@
-## qtlcharts 0.7-2
+## qtlcharts 0.7-3 (2016-05-18)
 
 - Rewrite underlying javascript to use new version of
   [d3panels](http://kbroman.org/d3panels).
@@ -8,6 +8,9 @@
   scatterplot of those summary statistics is linked to the underlying
   details: click on a point in the main scatterplot and have the
   underlying scatterplot be shown.
+
+- Add a new chart, `itriplot`, for plotting trinomial probabilities,
+  represented as points in an equilateral triangle.
 
 - Add some additional options, such as `horizontal` for `iplotMap`
   and `iplotPXG`.
@@ -19,20 +22,20 @@
   reduce the size of the datasets included in the resulting charts.
 
 
-## qtlcharts 0.6-6
+## qtlcharts 0.6-6 (2016-04-21)
 
 - Fix proliferation of tool tips
 
 - For use with Shiny, clear SVG before drawing
 
 
-## qtlcharts 0.5-25
+## qtlcharts 0.5-25 (2015-11-09)
 
 - Skip Rmd and html tests run on CRAN (so faster, and because the Rmd
   tests won't work on Solaris as they need pandoc).
 
 
-## qtlcharts 0.5-23
+## qtlcharts 0.5-23 (2015-11-07)
 
 - Changed license and author list in order to post the package on
   CRAN, http://cran.r-project.org
@@ -41,21 +44,21 @@
   individual IDs if `indID` is missing or `NULL`.
 
 
-## qtlcharts 0.5-18
+## qtlcharts 0.5-18 (2015-09-02)
 
 - Fixed a bug in `iplotScanone` with `pxgtype="ci"`. In the case of
   phenotypes with missing values, the confidence intervals were
   incorrect.
 
 
-## qtlcharts 0.5-14
+## qtlcharts 0.5-15 (2015-06-24)
 
-- `iplotCorr` has argument `scatterplots` that, if controls whether
+- `iplotCorr` has argument `scatterplots` that controls whether
   scatterplots will be shown when clicking on pixels in the heatmap.
   (If `scatterplots=FALSE`, we skip the scatterplots.)
 
 
-## qtlcharts 0.5-13
+## qtlcharts 0.5-13 (2015-06-08)
 
 - `iplotMScanone` can plot just points (rather than curves) for the
   LOD scores and QTL effects in the lower and right-hand panels.
@@ -64,13 +67,13 @@
   weren't being shown)
 
 
-## qtlcharts 0.5-10
+## qtlcharts 0.5-10 (2015-05-28)
 
 - Included [bower](http://bower.io) information, about the javascript
   libraries, within the source package.
 
 
-## qtlcharts 0.5-8
+## qtlcharts 0.5-8 (2015-05-13)
 
 - Got the package working with
   [jsonlite](https://github.com/jeroenooms/jsonlite), as
@@ -79,13 +82,13 @@
   converting R objects to [JSON](http://www.json.org/).
 
 
-## qtlcharts 0.5-4
+## qtlcharts 0.5-4 (2015-03-10)
 
 - Added `setScreenSize` function for controlling the default sizes of
   charts.
 
 
-## qtlcharts 0.5-3
+## qtlcharts 0.5-3 (2015-03-05)
 
 - Added `idotplot` function for plotting a quantitative variable in
   different categories.  (It's just like `iplotPXG`, but with data
@@ -96,7 +99,7 @@
   to js code for individual panels.
 
 
-## qtlcharts 0.5-1
+## qtlcharts 0.5-1 (2015-03-05)
 
 - Refactored the entire package to use
   [htmlwidgets](http://www.htmlwidgets.org).

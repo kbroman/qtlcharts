@@ -2,7 +2,7 @@
 var add_symmetric_lod, iplotScantwo, lod_for_heatmap;
 
 iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
-  var add_cell_tooltips, altrectcolor, axispos, boxcolor, boxwidth, chrGap, cicolors, color, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, linecolor, linewidth, margin, mycichart, mydotchart, mylod2dheatmap, mylodchart, n, ncat, nullcolor, oneAtTop, options, plot_effects, plot_scan, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref3, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, segwidth, submit, svg, w, wbot, widgetdivid, width, wright, x, zthresh;
+  var add_cell_tooltips, altrectcolor, axispos, boxcolor, boxwidth, chrGap, chrlinecolor, chrlinewidth, cicolors, color, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, linecolor, linewidth, margin, mycichart, mydotchart, mylod2dheatmap, mylodchart, n, ncat, nullcolor, nyticks_ci, nyticks_lod, nyticks_pxg, oneAtTop, options, plot_effects, plot_scan, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, segstrokewidth, segwidth, submit, svg, titlepos, w, wbot, widgetdivid, width, wright, x, xlab_lod, ylab_eff, ylab_lod, yticks_ci, yticks_lod, yticks_pxg, zthresh;
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 1200;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1100;
   chrGap = (ref2 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref2 : 2;
@@ -21,20 +21,33 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     xlabel: 5,
     ylabel: 5
   };
-  rectcolor = (ref7 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref7 : "#e6e6e6";
-  altrectcolor = (ref8 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref8 : "#c8c8c8";
-  nullcolor = (ref9 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref9 : "#e6e6e6";
-  boxcolor = (ref10 = chartOpts != null ? chartOpts.boxcolor : void 0) != null ? ref10 : "black";
-  boxwidth = (ref11 = chartOpts != null ? chartOpts.boxwidth : void 0) != null ? ref11 : 2;
-  linecolor = (ref12 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref12 : "slateblue";
-  linewidth = (ref13 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref13 : 2;
-  pointsize = (ref14 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref14 : 2;
-  pointstroke = (ref15 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref15 : "black";
-  cicolors = (ref16 = chartOpts != null ? chartOpts.cicolors : void 0) != null ? ref16 : null;
-  segwidth = (ref17 = chartOpts != null ? chartOpts.segwidth : void 0) != null ? ref17 : 0.4;
-  color = (ref18 = chartOpts != null ? chartOpts.color : void 0) != null ? ref18 : "slateblue";
-  oneAtTop = (ref19 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? ref19 : false;
-  zthresh = (ref20 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref20 : 0;
+  titlepos = (ref7 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref7 : 20;
+  rectcolor = (ref8 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref8 : "#e6e6e6";
+  altrectcolor = (ref9 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref9 : "#c8c8c8";
+  chrlinecolor = (ref10 = chartOpts != null ? chartOpts.chrlinecolor : void 0) != null ? ref10 : "";
+  chrlinewidth = (ref11 = chartOpts != null ? chartOpts.chrlinewidth : void 0) != null ? ref11 : 2;
+  nullcolor = (ref12 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref12 : "#e6e6e6";
+  boxcolor = (ref13 = chartOpts != null ? chartOpts.boxcolor : void 0) != null ? ref13 : "black";
+  boxwidth = (ref14 = chartOpts != null ? chartOpts.boxwidth : void 0) != null ? ref14 : 2;
+  linecolor = (ref15 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref15 : "slateblue";
+  linewidth = (ref16 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref16 : 2;
+  pointsize = (ref17 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref17 : 2;
+  pointstroke = (ref18 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref18 : "black";
+  cicolors = (ref19 = chartOpts != null ? chartOpts.cicolors : void 0) != null ? ref19 : null;
+  segwidth = (ref20 = chartOpts != null ? chartOpts.segwidth : void 0) != null ? ref20 : 0.4;
+  segstrokewidth = (ref21 = chartOpts != null ? chartOpts.segstrokewidth : void 0) != null ? ref21 : 3;
+  color = (ref22 = chartOpts != null ? chartOpts.color : void 0) != null ? ref22 : "slateblue";
+  oneAtTop = (ref23 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? ref23 : false;
+  zthresh = (ref24 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref24 : 0;
+  ylab_eff = (ref25 = chartOpts != null ? chartOpts.ylab_eff : void 0) != null ? ref25 : "Phenotype";
+  xlab_lod = (ref26 = chartOpts != null ? chartOpts.xlab_lod : void 0) != null ? ref26 : "Chromosome";
+  ylab_lod = (ref27 = chartOpts != null ? chartOpts.ylab_lod : void 0) != null ? ref27 : "LOD score";
+  nyticks_lod = (ref28 = chartOpts != null ? chartOpts.nyticks_lod : void 0) != null ? ref28 : 5;
+  yticks_lod = (ref29 = chartOpts != null ? chartOpts.yticks_lod : void 0) != null ? ref29 : null;
+  nyticks_ci = (ref30 = chartOpts != null ? chartOpts.nyticks_ci : void 0) != null ? ref30 : 5;
+  yticks_ci = (ref31 = chartOpts != null ? chartOpts.yticks_ci : void 0) != null ? ref31 : null;
+  nyticks_pxg = (ref32 = chartOpts != null ? chartOpts.nyticks_pxg : void 0) != null ? ref32 : 5;
+  yticks_pxg = (ref33 = chartOpts != null ? chartOpts.yticks_pxg : void 0) != null ? ref33 : null;
   div = d3.select(widgetdiv);
   widgetdivid = div.attr("id");
   svg = div.select("svg");
@@ -65,9 +78,9 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       if (n < ncat) {
         d3panels.displayError("length(cicolors) (" + n + ") < maximum no. genotypes (" + ncat + ")");
         cicolors = (function() {
-          var k, ref21, results;
+          var k, ref34, results;
           results = [];
-          for (i = k = 0, ref21 = ncat; 0 <= ref21 ? k < ref21 : k > ref21; i = 0 <= ref21 ? ++k : --k) {
+          for (i = k = 0, ref34 = ncat; 0 <= ref34 ? k < ref34 : k > ref34; i = 0 <= ref34 ? ++k : --k) {
             results.push(cicolors[i % n]);
           }
           return results;
@@ -118,11 +131,17 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   mylod2dheatmap = d3panels.lod2dheatmap({
     height: heatmap_height,
     width: heatmap_width,
-    chrGap: chrGap,
+    margin: margin,
     axispos: axispos,
+    chrGap: chrGap,
+    chrlinecolor: chrlinecolor,
+    chrlinewidth: chrlinewidth,
+    xlab: xlab_lod,
+    ylab: ylab_lod,
     rectcolor: "white",
     nullcolor: nullcolor,
     boxcolor: boxcolor,
+    boxwidth: boxwidth,
     colors: ["white", color],
     zlim: [0, scantwo_data.max.full],
     zthresh: zthresh,
@@ -180,11 +199,11 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       chr: scantwo_data.chr,
       pos: scantwo_data.pos,
       lod: (function() {
-        var k, len, ref21, results;
-        ref21 = scantwo_data[lod][markerindex];
+        var k, len, ref34, results;
+        ref34 = scantwo_data[lod][markerindex];
         results = [];
-        for (k = 0, len = ref21.length; k < len; k++) {
-          x = ref21[k];
+        for (k = 0, len = ref34.length; k < len; k++) {
+          x = ref34[k];
           results.push(x);
         }
         return results;
@@ -200,16 +219,25 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       margin: margin,
       axispos: axispos,
       ylim: [0.0, scantwo_data.max[lod] * 1.05],
+      nyticks: nyticks_lod,
+      yticks: yticks_lod,
       rectcolor: rectcolor,
       altrectcolor: altrectcolor,
+      chrlinecolor: chrlinecolor,
+      chrlinewidth: chrlinewidth,
+      boxcolor: boxcolor,
+      boxwidth: boxwidth,
       linewidth: linewidth,
       linecolor: linecolor,
       pointsize: 0,
       pointcolor: "",
       pointstroke: "",
       lodvarname: "lod",
-      xlab: "",
+      chrGap: chrGap,
+      xlab: xlab_lod,
+      ylab: ylab_lod,
       title: data.marker[markerindex] + " : " + lod,
+      titlepos: titlepos,
       tipclass: widgetdivid
     });
     if (g_scans[panelrow][panelcol] == null) {
@@ -219,7 +247,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   };
   g_eff = [null, null];
   return plot_effects = function(markerindex1, markerindex2) {
-    var chr1, chr2, ci_data, cicolors_expanded, cis, effcharts, g, g1, g2, gn1, gn2, gnames1, gnames2, j, k, l, m, mar1, mar2, ng1, ng2, o, p, pxg_data, q, ref21, ref22, ref23, ref24, results, results1, results2;
+    var chr1, chr2, ci_data, cicolors_expanded, cis, effcharts, g, g1, g2, gn1, gn2, gnames1, gnames2, j, k, l, m, mar1, mar2, ng1, ng2, o, p, pxg_data, q, ref34, ref35, ref36, ref37, results, results1, results2;
     mar1 = scantwo_data.marker[markerindex1];
     mar2 = scantwo_data.marker[markerindex2];
     g1 = pheno_and_geno.geno[mar1];
@@ -241,8 +269,8 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     gn1 = [];
     gn2 = [];
     cicolors_expanded = [];
-    for (i = k = 0, ref21 = ng2; 0 <= ref21 ? k < ref21 : k > ref21; i = 0 <= ref21 ? ++k : --k) {
-      for (j = l = 0, ref22 = ng1; 0 <= ref22 ? l < ref22 : l > ref22; j = 0 <= ref22 ? ++l : --l) {
+    for (i = k = 0, ref34 = ng2; 0 <= ref34 ? k < ref34 : k > ref34; i = 0 <= ref34 ? ++k : --k) {
+      for (j = l = 0, ref35 = ng1; 0 <= ref35 ? l < ref35 : l > ref35; j = 0 <= ref35 ? ++l : --l) {
         gn1.push(gnames1[j]);
         gn2.push(gnames2[i]);
         cicolors_expanded.push(cicolors[i]);
@@ -265,19 +293,23 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       margin: margin,
       axispos: axispos,
       rectcolor: rectcolor,
+      boxcolor: boxcolor,
+      boxwidth: boxwidth,
       pointsize: pointsize,
       pointstroke: pointstroke,
       xcategories: (function() {
         results = [];
-        for (var m = 1, ref23 = gn1.length; 1 <= ref23 ? m <= ref23 : m >= ref23; 1 <= ref23 ? m++ : m--){ results.push(m); }
+        for (var m = 1, ref36 = gn1.length; 1 <= ref36 ? m <= ref36 : m >= ref36; 1 <= ref36 ? m++ : m--){ results.push(m); }
         return results;
       }).apply(this),
       xcatlabels: gn1,
       xlab: "",
-      ylab: "Phenotype",
-      yvar: "y",
+      ylab: ylab_eff,
+      nyticks: nyticks_pxg,
+      yticks: yticks_pxg,
       dataByInd: false,
       title: mar1 + " : " + mar2,
+      titlepos: titlepos,
       tipclass: widgetdivid
     });
     if (g_eff[1] == null) {
@@ -290,32 +322,32 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     cis = d3panels.ci_by_group(g, pheno_and_geno.pheno, 2);
     ci_data = {
       mean: (function() {
-        var o, ref24, ref25, ref26, results1;
+        var o, ref37, ref38, ref39, results1;
         results1 = [];
-        for (x = o = 1, ref24 = gn1.length; 1 <= ref24 ? o <= ref24 : o >= ref24; x = 1 <= ref24 ? ++o : --o) {
-          results1.push((ref25 = (ref26 = cis[x]) != null ? ref26.mean : void 0) != null ? ref25 : null);
+        for (x = o = 1, ref37 = gn1.length; 1 <= ref37 ? o <= ref37 : o >= ref37; x = 1 <= ref37 ? ++o : --o) {
+          results1.push((ref38 = (ref39 = cis[x]) != null ? ref39.mean : void 0) != null ? ref38 : null);
         }
         return results1;
       })(),
       low: (function() {
-        var o, ref24, ref25, ref26, results1;
+        var o, ref37, ref38, ref39, results1;
         results1 = [];
-        for (x = o = 1, ref24 = gn1.length; 1 <= ref24 ? o <= ref24 : o >= ref24; x = 1 <= ref24 ? ++o : --o) {
-          results1.push((ref25 = (ref26 = cis[x]) != null ? ref26.low : void 0) != null ? ref25 : null);
+        for (x = o = 1, ref37 = gn1.length; 1 <= ref37 ? o <= ref37 : o >= ref37; x = 1 <= ref37 ? ++o : --o) {
+          results1.push((ref38 = (ref39 = cis[x]) != null ? ref39.low : void 0) != null ? ref38 : null);
         }
         return results1;
       })(),
       high: (function() {
-        var o, ref24, ref25, ref26, results1;
+        var o, ref37, ref38, ref39, results1;
         results1 = [];
-        for (x = o = 1, ref24 = gn1.length; 1 <= ref24 ? o <= ref24 : o >= ref24; x = 1 <= ref24 ? ++o : --o) {
-          results1.push((ref25 = (ref26 = cis[x]) != null ? ref26.high : void 0) != null ? ref25 : null);
+        for (x = o = 1, ref37 = gn1.length; 1 <= ref37 ? o <= ref37 : o >= ref37; x = 1 <= ref37 ? ++o : --o) {
+          results1.push((ref38 = (ref39 = cis[x]) != null ? ref39.high : void 0) != null ? ref38 : null);
         }
         return results1;
       })(),
       categories: (function() {
         results1 = [];
-        for (var o = 1, ref24 = gn1.length; 1 <= ref24 ? o <= ref24 : o >= ref24; 1 <= ref24 ? o++ : o--){ results1.push(o); }
+        for (var o = 1, ref37 = gn1.length; 1 <= ref37 ? o <= ref37 : o >= ref37; 1 <= ref37 ? o++ : o--){ results1.push(o); }
         return results1;
       }).apply(this)
     };
@@ -325,14 +357,20 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       margin: margin,
       axispos: axispos,
       rectcolor: rectcolor,
+      boxcolor: boxcolor,
+      boxwidth: boxwidth,
       segcolor: cicolors_expanded,
       segwidth: segwidth,
+      segstrokewidth: segstrokewidth,
       vertsegcolor: cicolors_expanded,
       segstrokewidth: linewidth,
       xlab: "",
-      ylab: "Phenotype",
+      ylab: ylab_eff,
+      nyticks: nyticks_ci,
+      yticks: yticks_ci,
       xcatlabels: gn1,
       title: mar1 + " : " + mar2,
+      titlepos: titlepos,
       tipclass: widgetdivid
     });
     if (g_eff[0] == null) {

@@ -11,8 +11,11 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     hbot = chartOpts?.hbot ? height/5                  # height (in pixels) of each of the lower panels
     margin = chartOpts?.margin ? {left:60, top:50, right:10, bottom: 40, inner: 5} # margins in each panel
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}      # axis positions in heatmap
+    titlepos = chartOpts?.titlepos ? 20                # position of chart title in pixels
     rectcolor = chartOpts?.rectcolor ? "#e6e6e6"       # color for background rectangle
     altrectcolor = chartOpts?.altrectcolor ? "#c8c8c8" # alternate rectangle in lower panels
+    chrlinecolor = chartOpts?.chrlinecolor ? ""        # color of lines between chromosomes (if "", leave off)
+    chrlinewidth = chartOpts?.chrlinewidth ? 2         # width of lines between chromosomes
     nullcolor = chartOpts?.nullcolor ? "#e6e6e6"       # color of null pixels in heat map
     boxcolor = chartOpts?.boxcolor ? "black"           # color of box around each panel
     boxwidth = chartOpts?.boxwidth ? 2                 # width of box around each panel
@@ -22,9 +25,19 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     pointstroke = chartOpts?.pointstroke ? "black"     # color of outer circle in right panels
     cicolors = chartOpts?.cicolors ? null              # colors for CIs in QTL effect plot; also used for points in phe x gen plot
     segwidth = chartOpts?.segwidth ? 0.4               # segment width in CI chart as proportion of distance between categories
+    segstrokewidth = chartOpts?.segstrokewidth ? 3     # stroke width for segments in CI chart
     color = chartOpts?.color ? "slateblue"             # color for heat map
     oneAtTop = chartOpts?.oneAtTop ? false             # whether to put chr 1 at top of heatmap
     zthresh = chartOpts?.zthresh ? 0                   # LOD values below this threshold aren't shown (on LOD_full scale)
+    ylab_eff = chartOpts?.ylab_eff ? "Phenotype"       # y-axis label in dot and ci charts
+    xlab_lod = chartOpts?.xlab_lod ? "Chromosome"      # x-axis label in lod charts
+    ylab_lod = chartOpts?.ylab_lod ? "LOD score"       # y-axis label in lod charts
+    nyticks_lod = chartOpts?.nyticks_lod ? 5           # no. ticks on y-axis in LOD curve panels
+    yticks_lod = chartOpts?.yticks_lod ? null          # vector of tick positions on y-axis in LOD curve panels
+    nyticks_ci = chartOpts?.nyticks_ci ? 5             # no. ticks on y-axis in CI panel
+    yticks_ci = chartOpts?.yticks_ci ? null            # vector of tick positions on y-axis in CI panel
+    nyticks_pxg = chartOpts?.nyticks_pxg ? 5           # no. ticks on y-axis in dot chart of phenotype x genotype
+    yticks_pxg = chartOpts?.yticks_pxg ? null          # vector of tick positions on y-axis in dot chart of phenotype x genotype
     # chartOpts end
 
     # htmlwidget div element containing the chart, and its ID
@@ -127,11 +140,17 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     mylod2dheatmap = d3panels.lod2dheatmap({
         height:heatmap_height
         width:heatmap_width
-        chrGap:chrGap
+        margin:margin
         axispos:axispos
+        chrGap:chrGap
+        chrlinecolor:chrlinecolor
+        chrlinewidth:chrlinewidth
+        xlab: xlab_lod
+        ylab: ylab_lod
         rectcolor:"white"
         nullcolor:nullcolor
         boxcolor:boxcolor
+        boxwidth:boxwidth
         colors:["white",color]
         zlim:[0, scantwo_data.max.full]
         zthresh:zthresh
@@ -203,16 +222,25 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
             margin:margin
             axispos:axispos
             ylim:[0.0, scantwo_data.max[lod]*1.05]
+            nyticks:nyticks_lod
+            yticks:yticks_lod
             rectcolor:rectcolor
             altrectcolor:altrectcolor
+            chrlinecolor:chrlinecolor
+            chrlinewidth:chrlinewidth
+            boxcolor:boxcolor
+            boxwidth:boxwidth
             linewidth:linewidth
             linecolor:linecolor
             pointsize:0
             pointcolor:""
             pointstroke:""
             lodvarname:"lod"
-            xlab:""
+            chrGap:chrGap
+            xlab:xlab_lod
+            ylab:ylab_lod
             title:"#{data.marker[markerindex]} : #{lod}"
+            titlepos:titlepos
             tipclass:widgetdivid})
 
         unless g_scans[panelrow][panelcol]? # only create it once
@@ -258,15 +286,19 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
             margin:margin
             axispos:axispos
             rectcolor:rectcolor
+            boxcolor:boxcolor
+            boxwidth:boxwidth
             pointsize:pointsize
             pointstroke:pointstroke
             xcategories:[1..gn1.length]
             xcatlabels:gn1
             xlab:""
-            ylab:"Phenotype"
-            yvar:"y"
+            ylab:ylab_eff
+            nyticks:nyticks_pxg
+            yticks:yticks_pxg
             dataByInd:false
             title:"#{mar1} : #{mar2}"
+            titlepos:titlepos
             tipclass:widgetdivid})
 
         unless g_eff[1]? # only create it once
@@ -293,14 +325,20 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
             margin:margin
             axispos:axispos
             rectcolor:rectcolor
+            boxcolor:boxcolor
+            boxwidth:boxwidth
             segcolor:cicolors_expanded
             segwidth:segwidth
+            segstrokewidth:segstrokewidth
             vertsegcolor:cicolors_expanded
             segstrokewidth:linewidth
             xlab:""
-            ylab:"Phenotype"
+            ylab:ylab_eff
+            nyticks:nyticks_ci
+            yticks:yticks_ci
             xcatlabels:gn1
             title:"#{mar1} : #{mar2}"
+            titlepos:titlepos
             tipclass:widgetdivid})
 
         unless g_eff[0]? # only create it once

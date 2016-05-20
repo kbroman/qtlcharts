@@ -405,6 +405,8 @@
 <p><code>pointcolor = &quot;slateblue&quot;</code> — point color in lower panels with LOD and rf</p>
 <p><code>pointstroke = &quot;black&quot;</code> — stroke color for points in lower panels with LOD and rf</p>
 <p><code>lodlim = c(0, 12)</code> — range of LOD values to display; omit below 1st, truncate above 2nd</p>
+<p><code>nyticks = 5</code> — no. ticks on y-axis in LOD curve panels</p>
+<p><code>yticks = NULL</code> — vector of tick positions on y-axis in LOD curve panels</p>
 <p><code>tipclass = &quot;tooltip&quot;</code> — class name for tool tips</p>
 </div>
 <div id="iplotscantwo" class="section level3">
@@ -416,8 +418,11 @@
 <p><code>hbot = height/5</code> — height (in pixels) of each of the lower panels</p>
 <p><code>margin = list(left=60, top=50, right=10, bottom=40, inner=5)</code> — margins in each panel</p>
 <p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — axis positions in heatmap</p>
+<p><code>titlepos = 20</code> — position of chart title in pixels</p>
 <p><code>rectcolor = &quot;#e6e6e6&quot;</code> — color for background rectangle</p>
 <p><code>altrectcolor = &quot;#c8c8c8&quot;</code> — alternate rectangle in lower panels</p>
+<p><code>chrlinecolor = &quot;&quot;</code> — color of lines between chromosomes (if “”, leave off)</p>
+<p><code>chrlinewidth = 2</code> — width of lines between chromosomes</p>
 <p><code>nullcolor = &quot;#e6e6e6&quot;</code> — color of null pixels in heat map</p>
 <p><code>boxcolor = &quot;black&quot;</code> — color of box around each panel</p>
 <p><code>boxwidth = 2</code> — width of box around each panel</p>
@@ -427,9 +432,19 @@
 <p><code>pointstroke = &quot;black&quot;</code> — color of outer circle in right panels</p>
 <p><code>cicolors = NULL</code> — colors for CIs in QTL effect plot; also used for points in phe x gen plot</p>
 <p><code>segwidth = 0.4</code> — segment width in CI chart as proportion of distance between categories</p>
+<p><code>segstrokewidth = 3</code> — stroke width for segments in CI chart</p>
 <p><code>color = &quot;slateblue&quot;</code> — color for heat map</p>
 <p><code>oneAtTop = false</code> — whether to put chr 1 at top of heatmap</p>
 <p><code>zthresh = 0</code> — LOD values below this threshold aren’t shown (on LOD_full scale)</p>
+<p><code>ylab_eff = &quot;Phenotype&quot;</code> — y-axis label in dot and ci charts</p>
+<p><code>xlab_lod = &quot;Chromosome&quot;</code> — x-axis label in lod charts</p>
+<p><code>ylab_lod = &quot;LOD score&quot;</code> — y-axis label in lod charts</p>
+<p><code>nyticks_lod = 5</code> — no. ticks on y-axis in LOD curve panels</p>
+<p><code>yticks_lod = NULL</code> — vector of tick positions on y-axis in LOD curve panels</p>
+<p><code>nyticks_ci = 5</code> — no. ticks on y-axis in CI panel</p>
+<p><code>yticks_ci = NULL</code> — vector of tick positions on y-axis in CI panel</p>
+<p><code>nyticks_pxg = 5</code> — no. ticks on y-axis in dot chart of phenotype x genotype</p>
+<p><code>yticks_pxg = NULL</code> — vector of tick positions on y-axis in dot chart of phenotype x genotype</p>
 </div>
 <div id="itriplot" class="section level3">
 <h3><code>itriplot</code></h3>

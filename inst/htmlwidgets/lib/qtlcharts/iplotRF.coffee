@@ -18,7 +18,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
     nullcolor = chartOpts?.nullcolor ? "#e6e6e6"       # color for empty cells
     zlim = chartOpts?.zlim ? null                      # z-axis limits (if null take from data, symmetric about 0)
     zthresh = chartOpts?.zthresh ? null                # z threshold; if |z| < zthresh, not shown
-    hilitCellcolor = chartOpts?.hilitcolor ? "black"   # color of box around highlighted cell
+    hilitCellcolor = chartOpts?.hilitCellcolor ? "black"   # color of box around highlighted cell
     cellPad = chartOpts?.cellPad ? null                # padding of cells (if null, we take cell width * 0.1)
     fontsize = chartOpts?.fontsize ? null              # font size in crosstab
     rectcolor = chartOpts?.rectcolor ? "#e6e6e6"       # background rectangle color (and color of cells in crosstab)
@@ -30,6 +30,8 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
     pointcolor = chartOpts?.pointcolor ? "slateblue"   # point color in lower panels with LOD and rf
     pointstroke = chartOpts?.pointstroke ? "black"     # stroke color for points in lower panels with LOD and rf
     lodlim = chartOpts?.lodlim ? [0, 12]               # range of LOD values to display; omit below 1st, truncate above 2nd
+    nyticks = chartOpts?.nyticks ? 5                   # no. ticks on y-axis in LOD curve panels
+    yticks = chartOpts?.yticks ? null                  # vector of tick positions on y-axis in LOD curve panels
     tipclass = chartOpts?.tipclass ? "tooltip"         # class name for tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
@@ -109,6 +111,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
         boxcolor:boxcolor
         boxwidth:boxwidth
         colors:colors
+        hilitcolor:hilitCellcolor
         zthresh:lodlim[0]
         oneAtTop:oneAtTop
         equalCells:true
@@ -177,6 +180,13 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
             altrectcolor:altrectcolor
             linewidth:0
             linecolor:""
+            chrGap:chrGap
+            chrlinecolor:chrlinecolor
+            chrlinewidth:chrlinewidth
+            boxcolor:boxcolor
+            boxwidth:boxwidth
+            nyticks:nyticks
+            yticks:yticks
             pointsize:pointsize
             pointcolor:pointcolor
             pointstroke:pointstroke

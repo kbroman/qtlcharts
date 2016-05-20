@@ -705,6 +705,10 @@ customization options for each chart.
 
 `lodlim = c(0, 12)` &mdash; range of LOD values to display; omit below 1st, truncate above 2nd
 
+`nyticks = 5` &mdash; no. ticks on y-axis in LOD curve panels
+
+`yticks = NULL` &mdash; vector of tick positions on y-axis in LOD curve panels
+
 `tipclass = "tooltip"` &mdash; class name for tool tips
 
 ### `iplotScantwo`
@@ -723,9 +727,15 @@ customization options for each chart.
 
 `axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
 
+`titlepos = 20` &mdash; position of chart title in pixels
+
 `rectcolor = "#e6e6e6"` &mdash; color for background rectangle
 
 `altrectcolor = "#c8c8c8"` &mdash; alternate rectangle in lower panels
+
+`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
+
+`chrlinewidth = 2` &mdash; width of lines between chromosomes
 
 `nullcolor = "#e6e6e6"` &mdash; color of null pixels in heat map
 
@@ -745,11 +755,31 @@ customization options for each chart.
 
 `segwidth = 0.4` &mdash; segment width in CI chart as proportion of distance between categories
 
+`segstrokewidth = 3` &mdash; stroke width for segments in CI chart
+
 `color = "slateblue"` &mdash; color for heat map
 
 `oneAtTop = false` &mdash; whether to put chr 1 at top of heatmap
 
 `zthresh = 0` &mdash; LOD values below this threshold aren't shown (on LOD_full scale)
+
+`ylab_eff = "Phenotype"` &mdash; y-axis label in dot and ci charts
+
+`xlab_lod = "Chromosome"` &mdash; x-axis label in lod charts
+
+`ylab_lod = "LOD score"` &mdash; y-axis label in lod charts
+
+`nyticks_lod = 5` &mdash; no. ticks on y-axis in LOD curve panels
+
+`yticks_lod = NULL` &mdash; vector of tick positions on y-axis in LOD curve panels
+
+`nyticks_ci = 5` &mdash; no. ticks on y-axis in CI panel
+
+`yticks_ci = NULL` &mdash; vector of tick positions on y-axis in CI panel
+
+`nyticks_pxg = 5` &mdash; no. ticks on y-axis in dot chart of phenotype x genotype
+
+`yticks_pxg = NULL` &mdash; vector of tick positions on y-axis in dot chart of phenotype x genotype
 
 ### `itriplot`
 

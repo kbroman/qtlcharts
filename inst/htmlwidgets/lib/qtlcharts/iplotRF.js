@@ -2,7 +2,7 @@
 var iplotRF;
 
 iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
-  var altrectcolor, axispos, boxcolor, boxwidth, cellPad, chartdivid, chrGap, chrlinecolor, chrlinewidth, col, colors, create_crosstab, create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, fontsize, g_heatmap, hbot, heatmap_height, heatmap_width, height, hilitCellcolor, hilitcolor, htop, j, k, l, lodlim, m, margin, mycrosstab, mylodchart, mylodheatmap, nullcolor, oneAtTop, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref4, ref5, ref6, ref7, ref8, ref9, row, svg, tipclass, titlepos, totmar, wbot, widgetdivid, width, zlim, zthresh;
+  var altrectcolor, axispos, boxcolor, boxwidth, cellPad, chartdivid, chrGap, chrlinecolor, chrlinewidth, col, colors, create_crosstab, create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, fontsize, g_heatmap, hbot, heatmap_height, heatmap_width, height, hilitCellcolor, hilitcolor, htop, j, k, l, lodlim, m, margin, mycrosstab, mylodchart, mylodheatmap, nullcolor, nyticks, oneAtTop, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, row, svg, tipclass, titlepos, totmar, wbot, widgetdivid, width, yticks, zlim, zthresh;
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 800;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000;
   hbot = (ref2 = chartOpts != null ? chartOpts.hbot : void 0) != null ? ref2 : 300;
@@ -27,7 +27,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
   nullcolor = (ref11 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref11 : "#e6e6e6";
   zlim = (ref12 = chartOpts != null ? chartOpts.zlim : void 0) != null ? ref12 : null;
   zthresh = (ref13 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref13 : null;
-  hilitCellcolor = (ref14 = chartOpts != null ? chartOpts.hilitcolor : void 0) != null ? ref14 : "black";
+  hilitCellcolor = (ref14 = chartOpts != null ? chartOpts.hilitCellcolor : void 0) != null ? ref14 : "black";
   cellPad = (ref15 = chartOpts != null ? chartOpts.cellPad : void 0) != null ? ref15 : null;
   fontsize = (ref16 = chartOpts != null ? chartOpts.fontsize : void 0) != null ? ref16 : null;
   rectcolor = (ref17 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref17 : "#e6e6e6";
@@ -39,8 +39,10 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
   pointcolor = (ref23 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? ref23 : "slateblue";
   pointstroke = (ref24 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref24 : "black";
   lodlim = (ref25 = chartOpts != null ? chartOpts.lodlim : void 0) != null ? ref25 : [0, 12];
-  tipclass = (ref26 = chartOpts != null ? chartOpts.tipclass : void 0) != null ? ref26 : "tooltip";
-  chartdivid = (ref27 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref27 : 'chart';
+  nyticks = (ref26 = chartOpts != null ? chartOpts.nyticks : void 0) != null ? ref26 : 5;
+  yticks = (ref27 = chartOpts != null ? chartOpts.yticks : void 0) != null ? ref27 : null;
+  tipclass = (ref28 = chartOpts != null ? chartOpts.tipclass : void 0) != null ? ref28 : "tooltip";
+  chartdivid = (ref29 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref29 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   rf_data.chrname = d3panels.forceAsArray(rf_data.chrname);
   rf_data.nmar = d3panels.forceAsArray(rf_data.nmar);
@@ -77,15 +79,15 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
       return dd;
     });
   });
-  for (row = j = 0, ref28 = rf_data.lod.length; 0 <= ref28 ? j < ref28 : j > ref28; row = 0 <= ref28 ? ++j : --j) {
-    for (col = k = 0, ref29 = rf_data.lod.length; 0 <= ref29 ? k < ref29 : k > ref29; col = 0 <= ref29 ? ++k : --k) {
+  for (row = j = 0, ref30 = rf_data.lod.length; 0 <= ref30 ? j < ref30 : j > ref30; row = 0 <= ref30 ? ++j : --j) {
+    for (col = k = 0, ref31 = rf_data.lod.length; 0 <= ref31 ? k < ref31 : k > ref31; col = 0 <= ref31 ? ++k : --k) {
       if (row > col) {
         rf_data.lod[row][col] = rf_data.lod[col][row];
       }
     }
   }
-  for (row = l = 0, ref30 = rf_data.lod.length; 0 <= ref30 ? l < ref30 : l > ref30; row = 0 <= ref30 ? ++l : --l) {
-    for (col = m = 0, ref31 = rf_data.lod.length; 0 <= ref31 ? m < ref31 : m > ref31; col = 0 <= ref31 ? ++m : --m) {
+  for (row = l = 0, ref32 = rf_data.lod.length; 0 <= ref32 ? l < ref32 : l > ref32; row = 0 <= ref32 ? ++l : --l) {
+    for (col = m = 0, ref33 = rf_data.lod.length; 0 <= ref33 ? m < ref33 : m > ref33; col = 0 <= ref33 ? ++m : --m) {
       if (row === col || ((rf_data.lod[row][col] != null) && rf_data.lod[row][col] > lodlim[1])) {
         rf_data.lod[row][col] = lodlim[1];
       }
@@ -113,6 +115,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
     boxcolor: boxcolor,
     boxwidth: boxwidth,
     colors: colors,
+    hilitcolor: hilitCellcolor,
     zthresh: lodlim[0],
     oneAtTop: oneAtTop,
     equalCells: true,
@@ -149,7 +152,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
     return mycrosstab(g_crosstab, data);
   };
   create_scan = function(markerindex, panelindex) {
-    var data, g_scans, i, n, ref32;
+    var data, g_scans, i, n, ref34;
     data = {
       chrname: rf_data.chrname,
       chr: rf_data.chr,
@@ -164,7 +167,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
       })(),
       marker: rf_data.marker
     };
-    for (row = n = 0, ref32 = rf_data.rf.length; 0 <= ref32 ? n < ref32 : n > ref32; row = 0 <= ref32 ? ++n : --n) {
+    for (row = n = 0, ref34 = rf_data.rf.length; 0 <= ref34 ? n < ref34 : n > ref34; row = 0 <= ref34 ? ++n : --n) {
       if (row > markerindex) {
         data.lod[row] = rf_data.rf[markerindex][row];
       } else if (row < markerindex) {
@@ -185,6 +188,13 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
       altrectcolor: altrectcolor,
       linewidth: 0,
       linecolor: "",
+      chrGap: chrGap,
+      chrlinecolor: chrlinecolor,
+      chrlinewidth: chrlinewidth,
+      boxcolor: boxcolor,
+      boxwidth: boxwidth,
+      nyticks: nyticks,
+      yticks: yticks,
       pointsize: pointsize,
       pointcolor: pointcolor,
       pointstroke: pointstroke,

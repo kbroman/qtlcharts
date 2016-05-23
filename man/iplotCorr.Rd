@@ -5,8 +5,7 @@
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
 iplotCorr(mat, group = NULL, rows = NULL, cols = NULL, reorder = FALSE,
-  corr = stats::cor(mat, use = "pairwise.complete.obs"),
-  scatterplots = TRUE, chartOpts = NULL, digits = 5)
+  corr = NULL, scatterplots = TRUE, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{mat}{Data matrix (individuals x variables)}
@@ -61,7 +60,6 @@ data(geneExpr)
 iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
           chartOpts=list(cortitle="Correlation matrix",
                          scattitle="Scatterplot"))}
-
 }
 \seealso{
 \code{\link{iheatmap}}, \code{\link{scat2scat}}, \code{\link{iplotCurves}}

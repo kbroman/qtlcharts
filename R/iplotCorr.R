@@ -47,10 +47,9 @@
 #' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
 #'           chartOpts=list(cortitle="Correlation matrix",
 #'                          scattitle="Scatterplot"))}
-#'
 #' @export
 iplotCorr <-
-function(mat, group=NULL, rows=NULL, cols=NULL, reorder=FALSE, corr=stats::cor(mat, use="pairwise.complete.obs"),
+function(mat, group=NULL, rows=NULL, cols=NULL, reorder=FALSE, corr=NULL,
          scatterplots=TRUE, chartOpts=NULL, digits=5)
 {
     if(is.null(group)) group <- rep(1, nrow(mat))
@@ -78,6 +77,7 @@ function(mat, group=NULL, rows=NULL, cols=NULL, reorder=FALSE, corr=stats::cor(m
         corr_was_presubset <- TRUE
     }
     else {
+        corr <- stats::cor(mat, use="pairwise.complete.obs")
         if(is.null(rows)) rows <- (1:ncol(mat))
         else rows <- selectMatrixColumns(mat, rows)
         if(is.null(cols)) cols <- (1:ncol(mat))

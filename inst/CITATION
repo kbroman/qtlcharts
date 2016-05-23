@@ -2,7 +2,7 @@ citHeader("To cite R/qtlcharts in publications, use:")
 
 citEntry(entry="article",
          title = "R/qtlcharts: interactive graphics for quantitative trait locus mapping",
-         author = personList(person("Karl", "Broman", "W.")),
+         author = personList(person("Karl W.", "Broman")),
          journal = "Genetics",
          year = 2015,
          volume = 199,

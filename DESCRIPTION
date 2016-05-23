@@ -1,6 +1,6 @@
 Package: qtlcharts
-Version: 0.7-3
-Date: 2016-05-19
+Version: 0.7-4
+Date: 2016-05-21
 Title: Interactive Graphics for QTL Experiments
 Author: Karl W Broman [aut, cre], Michael Bostock [ctb, cph] (d3.js library
     in htmlwidgets/lib, http://d3js.org), Justin Palmer [ctb, cph] (d3.tip library
@@ -50,11 +50,11 @@ Authors@R: c(
            comment="ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org"),
     person("Mark", "Harrower", role="cph",
            comment="ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org"),
-    person(family="The Pennsylvania State University", role="cph",
+    person("The Pennsylvania State University", role="cph",
            comment="ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org"),
-    person(family="jQuery Foundation", role="cph",
+    person("jQuery Foundation", role="cph",
            comment="jQuery library in htmlwidgets/lib, http://jquery.com"),
-    person(family = "jQuery contributors", role = "ctb",
+    person("jQuery contributors", role = "ctb",
            comment = "jQuery library in htmlwidgets/lib; see https://github.com/jquery/jquery/blob/master/AUTHORS.txt"),
-    person(family = "jQuery UI contributors", role = "ctb",
+    person("jQuery UI contributors", role = "ctb",
            comment = "jQuery UI library in htmlwidgets/lib; see http://jqueryui.com/about"))

@@ -47,6 +47,15 @@
 #' iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE,
 #'           chartOpts=list(cortitle="Correlation matrix",
 #'                          scattitle="Scatterplot"))}
+#'
+#' # use Spearman's correlation
+#' corr <- cor(geneExpr$expr, method="spearman", use="pairwise.complete.obs")
+#' # order by hierarchical clustering
+#' o <- hclust(as.dist(1-corr))$order
+#' \donttest{
+#' iplotCorr(geneExpr$expr[,o], geneExpr$genotype, corr=corr[o,o],
+#'           chartOpts=list(cortitle="Spearman correlation",
+#'                          scattitle="Scatterplot"))}
 #' @export
 iplotCorr <-
 function(mat, group=NULL, rows=NULL, cols=NULL, reorder=FALSE, corr=NULL,

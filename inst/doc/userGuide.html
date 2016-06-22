@@ -72,7 +72,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <p><a href="http://kbroman.org/qtlcharts">R/qtlcharts</a> is an <a href="http://www.r-project.org">R</a> package to create interactive charts for quantitative trait locus (QTL) mapping data, for use with <a href="http://www.rqtl.org">R/qtl</a>.</p>
 <p>The charts are saved to a temporary file and opened in a web browser, though you may also save them to a specific file, to be viewed later. We are focusing development on the <a href="http://www.google.com/chrome/browser">Chrome</a> browser. The graphs may also be viewed in other browsers, such as <a href="https://www.apple.com/safari/">Safari</a>, <a href="http://www.opera.com/">Opera</a> and <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>, but it can be hard to accommodate all possible browser differences.</p>
-<p>Information on installing R/qtlcharts is available <a href="http://kbroman.org/qtlcharts/pages/installation.html">here</a>; it requires installation of the packages <a href="http://www.rqtl.org">R/qtl</a> and <a href="http://htmlwidgets.org">htmlwidgets</a>.</p>
+<p>Information on installing R/qtlcharts is available <a href="http://kbroman.org/qtlcharts/pages/installation.html">here</a>; it requires installation of the packages <a href="http://www.rqtl.org">R/qtl</a> and <a href="http://www.htmlwidgets.org">htmlwidgets</a>.</p>
 <div id="basic-use" class="section level2">
 <h2>Basic use</h2>
 <p>You first need to load the package.</p>
@@ -103,7 +103,7 @@ geno &lt;-<span class="st"> </span>geneExpr$genotype</code></pre></div>
 </div>
 <div id="saving-to-a-file" class="section level2">
 <h2>Saving to a file</h2>
-<p>The interactive graphs produced by R/qtlcharts are, by default, saved to a temporary file and then opened in the default web browser. If you want to save a chart to a <em>particular</em> file, assign the result to some object and use the function <code>saveWidget()</code> in the <a href="http://htmlwidgets.org">htmlwidgets</a> package, as follows:</p>
+<p>The interactive graphs produced by R/qtlcharts are, by default, saved to a temporary file and then opened in the default web browser. If you want to save a chart to a <em>particular</em> file, assign the result to some object and use the function <code>saveWidget()</code> in the <a href="http://www.htmlwidgets.org">htmlwidgets</a> package, as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corrplot &lt;-<span class="st"> </span><span class="kw">iplotCorr</span>(expr, <span class="dt">reorder=</span><span class="ot">TRUE</span>)
 htmlwidgets::<span class="kw">saveWidget</span>(corrplot, <span class="dt">file=</span><span class="st">&quot;~/Desktop/iplotCorr_example.html&quot;</span>)</code></pre></div>
 <p>The chart will not be opened for viewing. If you wish to view the chart, type the name of the object that you created, as so:</p>

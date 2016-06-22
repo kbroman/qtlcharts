@@ -28,7 +28,7 @@ hard to accommodate all possible browser differences.
 Information on installing R/qtlcharts is available
 [here](http://kbroman.org/qtlcharts/pages/installation.html); it
 requires installation of the packages [R/qtl](http://www.rqtl.org) and
-[htmlwidgets](http://htmlwidgets.org).
+[htmlwidgets](http://www.htmlwidgets.org).
 
 ## Basic use
 
@@ -106,7 +106,7 @@ The interactive graphs produced by R/qtlcharts are, by default, saved
 to a temporary file and then opened in the default web browser. If you
 want to save a chart to a _particular_ file, assign the result to some
 object and use the function `saveWidget()` in the
-[htmlwidgets](http://htmlwidgets.org) package, as follows:
+[htmlwidgets](http://www.htmlwidgets.org) package, as follows:
 
 ```{r iplotCorr_specify_file, eval=FALSE}
 corrplot <- iplotCorr(expr, reorder=TRUE)

@@ -1,4 +1,4 @@
-## qtlcharts 0.7-6 (2016-06-22)
+## qtlcharts 0.7-7 (2016-06-22)
 
 - Rewrite underlying javascript to use new version of
   [d3panels](http://kbroman.org/d3panels).

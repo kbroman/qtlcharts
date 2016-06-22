@@ -43,7 +43,7 @@ function(x, y, indID=NULL, group=NULL, chartOpts=NULL, digits=5)
     indID <- as.character(indID)
     if(is.factor(x)) x_levels <- levels(x)
     else x_levels <- sort(unique(x))
-    x <- group2numeric(x)
+    x <- group2numeric(x, preserveNA=TRUE)
 
     # strip off the names
     names(x) <- NULL

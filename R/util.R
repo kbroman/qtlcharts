@@ -162,7 +162,7 @@ function(group, preserveNA=FALSE)
 
     if(is.factor(group))
         group <- as.numeric(group)
-    else
+    else if(!is.numeric(group)) # if numeric, leave as it is
         group <-  match(group, sort(unique(group)))
 
     # NAs -> last group

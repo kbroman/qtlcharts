@@ -1,5 +1,5 @@
-all: jscharts jswidgets json doc inst/ToDo.html vignettes/chartOpts.Rmd libs longname vignettes build/vignette.rds
-.PHONY: all jscharts json doc clean libs d3, jquery, jqueryui, colorbrewer longname vignettes
+all: jscharts jswidgets json doc inst/ToDo.html libs longname
+.PHONY: all jscharts json doc clean libs d3, jquery, jqueryui, colorbrewer longname
 
 PANEL_DIR = inst/htmlwidgets/lib/d3panels
 CHART_DIR = inst/htmlwidgets/lib/qtlcharts
@@ -7,7 +7,6 @@ WIDGET_DIR = inst/htmlwidgets
 
 COFFEE_ARGS = -c # use -cm for debugging; -c otherwise
 
-# build html version of ToDo list
 inst/ToDo.html: inst/ToDo.md
 	cd inst;R -e 'markdown::markdownToHTML("ToDo.md", "ToDo.html")'
 
@@ -113,37 +112,6 @@ d3panels: $(LIB_DIR)/d3panels/d3panels.min.js \
 		  $(LIB_DIR)/d3panels/bower.json
 $(LIB_DIR)/d3panels/%: $(BOWER_DIR)/d3panels/%
 	cp $< $@
-
-#------------------------------------------------------------
-
-# Add list of chartOpts to vignette
-
-vignettes/chartOpts.Rmd: vignettes/chartOpts/grab_chartOpts.rb \
-						 vignettes/chartOpts/chartOpts_source.Rmd \
-						 vignettes/chartOpts/multiversions.csv \
-						 $(JSCHARTS)
-	$<
-
-#------------------------------------------------------------
-# build all of the vignettes
-
-VIGNETTES = inst/doc/Rmarkdown.html \
-			inst/doc/chartOpts.html \
-			inst/doc/develGuide.html \
-			inst/doc/userGuide.html
-vignettes: $(VIGNETTES)
-
-inst/doc/%.Rmd: vignettes/%.Rmd
-	cp $< $@
-
-inst/doc/%.html: vignettes/%.Rmd
-	cp $< $(@D)
-	cd $(@D);R -e "knitr::purl('$(<F)')"
-	cd $(<D);R -e "rmarkdown::render('$(<F)')"
-	mv $(<D)/$(@F) $(@D)
-
-build/vignette.rds: vignettes/make_vignette_index.R $(VIGNETTES)
-	cd $(<D);R -e "source('$(<F)')"
 
 #------------------------------------------------------------
 

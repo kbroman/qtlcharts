@@ -1,4 +1,4 @@
-## qtlcharts 0.7-7 (2016-06-22)
+## qtlcharts 0.7-8 (2016-06-28)
 
 - Rewrite underlying javascript to use new version of
   [d3panels](http://kbroman.org/d3panels).
@@ -23,6 +23,10 @@
 
 - Add a `digits` argument for all plot functions, with the aim to
   reduce the size of the datasets included in the resulting charts.
+
+- Removed the vignettes from the package (for complicated reasons);
+  they're available at the
+  [R/qtlcharts website](http://kbroman.org/qtlcharts).
 
 
 ## qtlcharts 0.6-6 (2016-04-21)

@@ -1,6 +1,6 @@
 Package: qtlcharts
-Version: 0.7-7
-Date: 2016-06-22
+Version: 0.7-8
+Date: 2016-06-28
 Title: Interactive Graphics for QTL Experiments
 Author: Karl W Broman [aut, cre], Michael Bostock [ctb, cph] (d3.js library
     in htmlwidgets/lib, http://d3js.org), Justin Palmer [ctb, cph] (d3.tip library
@@ -35,8 +35,6 @@ Suggests:
     testthat
 License: GPL-3 | file LICENSE
 URL: http://kbroman.org/qtlcharts
-VignetteBuilder: knitr
-BuildVignettes: no
 Roxygen: list(wrap=FALSE)
 LazyData: true
 RoxygenNote: 5.0.1

@@ -185,11 +185,11 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
     linecolorhilit = d3panels.expand2vector(linecolorhilit, ngroup)
 
     curves.on "mouseover", (d,i) ->
-                             d3.select(this).attr("stroke", linecolorhilit[group[i]]).moveToFront()
+                             d3.select(this).attr("stroke", linecolorhilit[group[i]]).raise()
                              d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit) if nscatter > 0
                              d3.selectAll("circle.pt#{i}").attr("fill", pointcolorhilit[group[i]]) if nscatter > 0
           .on "mouseout", (d,i) ->
-                             d3.select(this).attr("stroke", linecolor[group[i]]).moveToBack()
+                             d3.select(this).attr("stroke", linecolor[group[i]]).lower()
                              d3.selectAll("circle.pt#{i}").attr("r", pointsize) if nscatter > 0
                              d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]]) if nscatter > 0
 
@@ -199,8 +199,8 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
             points.on "mouseover", (d,i) ->
                                        d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit)
                                        d3.selectAll("circle.pt#{i}").attr("fill", pointcolorhilit[group[i]])
-                                       d3.select("path.path#{i}").attr("stroke", linecolorhilit[group[i]]).moveToFront()
+                                       d3.select("path.path#{i}").attr("stroke", linecolorhilit[group[i]]).raise()
                   .on "mouseout", (d,i) ->
                                        d3.selectAll("circle.pt#{i}").attr("r", pointsize)
                                        d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]])
-                                       d3.select("path.path#{i}").attr("stroke", linecolor[group[i]]).moveToBack()
+                                       d3.select("path.path#{i}").attr("stroke", linecolor[group[i]]).lower()

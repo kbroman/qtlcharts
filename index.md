@@ -12,17 +12,23 @@ with [R/qtl](http://www.rqtl.org).
 A QTL is a _quantitative trait locus_: a genetic locus that
 contributes to variation in a quantitative trait. The
 goal of R/qtlcharts is to provide interactive data visualizations for QTL
-analyses, and to make these visualizations available from [R](http://www.r-project.org).
+analyses, and to make these visualizations available from [R](https://www.r-project.org).
 
 The interactive visualizations are built with the JavaScript library
-[D3](http://d3js.org), and are viewed in a web browser. We are
+[D3](https://d3js.org), and are viewed in a web browser. We are
 targeting Chrome and Safari and, as much as possible, Firefox.
 
 A set of [reusable graphics panels](http://kbroman.org/d3panels) form the basis
 for the larger visualizations.
 
+The package was recently updated for [D3](https://d3js.org)
+[version 4](https://github.com/d3/d3/blob/master/API.md). This new
+version is not yet on [CRAN](https://cran.r-project.org), but can be
+installed with [devtools](https://github.com/hadley/devtools), using
+`devtools::install_github("kbroman/qtlcharts")`.
+
 To cite R/qtlcharts in publications, please use
-[Broman KW (2015) R/qtlcharts: interactive graphics for quantitative trait locus mapping. Genetics 199:359-361](http://www.ncbi.nlm.nih.gov/pubmed/25527287).
+[Broman KW (2015) R/qtlcharts: interactive graphics for quantitative trait locus mapping. Genetics 199:359-361](https://www.ncbi.nlm.nih.gov/pubmed/25527287).
 
 ---
 

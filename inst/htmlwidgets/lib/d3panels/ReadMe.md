@@ -6,6 +6,9 @@ This is a set of [D3](http://d3js.org)-based graphic panels, to
 be combined into larger multi-panel charts.  They were developed for
 the [R/qtlcharts](http://kbroman.org/qtlcharts) package.
 
+Note that d3panels uses
+[D3 version 4](https://github.com/d3/d3/blob/master/API.md).
+
 There are other libraries with similar goals that are of more general
 use (e.g., [C3.js](http://c3js.org) and
 [d3.Chart](http://misoproject.com/d3-chart/); see

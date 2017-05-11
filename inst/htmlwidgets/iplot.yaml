@@ -1,7 +1,7 @@
 dependencies:
   - name: d3
     src: htmlwidgets/lib/d3
-    version: 3.5.17
+    version: 4.8.0
     script:
       - d3.min.js
   - name: colorbrewer
@@ -12,17 +12,17 @@ dependencies:
     style: colorbrewer.css
   - name: d3-tip
     src: htmlwidgets/lib/d3-tip
-    version: 0.6.7
+    version: 0.7.1
     script:
       - index-min.js
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 1.1.4
+    version: 1.2.2
     script:
       - d3panels.min.js
     style: d3panels.min.css
   - name: qtlcharts_iplot
     src: htmlwidgets/lib/qtlcharts
-    version: 0.2.1
+    version: 0.8.1
     script:
       - iplot.js

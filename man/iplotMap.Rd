@@ -44,4 +44,3 @@ iplotMap(map, shift=TRUE)}
 \code{\link{iplotScanone}}, \code{\link{iplotPXG}}
 }
 \keyword{hplot}
-

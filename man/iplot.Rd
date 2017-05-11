@@ -43,4 +43,3 @@ iplot(x, y, grp)}
 \code{\link{idotplot}}, \code{\link{iplotPXG}}
 }
 \keyword{hplot}
-

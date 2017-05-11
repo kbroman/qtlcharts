@@ -48,4 +48,3 @@ iboxplot(expr, chartOpts=list(xlab="Mice", ylab="Gene expression"))}
 \code{\link{iplotCorr}}, \code{\link{scat2scat}}
 }
 \keyword{hplot}
-

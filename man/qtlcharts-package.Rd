@@ -2,8 +2,8 @@
 % Please edit documentation in R/qtlcharts.R
 \docType{package}
 \name{qtlcharts-package}
-\alias{qtlcharts}
 \alias{qtlcharts-package}
+\alias{qtlcharts}
 \title{R/qtlcharts: Interactive charts for QTL data}
 \description{
 A QTL is a \emph{quantitative trait locus}: a genetic locus that
@@ -24,4 +24,3 @@ Vignettes online at the \href{http://kbroman.org/qtlcharts}{R/qtlcharts website}
 \item \href{http://kbroman.org/qtlcharts/assets/vignettes/chartOpts.html}{List of chart customization options}
 }
 }
-

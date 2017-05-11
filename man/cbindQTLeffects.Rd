@@ -33,4 +33,3 @@ eff <- cbindQTLeffects(eff.fem, eff.mal, labels=c("female", "male"))
 \code{\link{estQTLeffects}}
 }
 \keyword{utilities}
-

@@ -58,4 +58,3 @@ scat2scat(scat1, scat2)
 \code{\link{iplotCorr}}
 }
 \keyword{hplot}
-

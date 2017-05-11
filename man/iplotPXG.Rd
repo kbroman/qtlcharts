@@ -62,4 +62,3 @@ iplotPXG(hyper, marker, chartOpts=list(pointcolor=c("black", "gray")))}
 \code{\link{iplotMap}}
 }
 \keyword{hplot}
-

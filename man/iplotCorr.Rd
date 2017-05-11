@@ -74,4 +74,3 @@ iplotCorr(geneExpr$expr[,o], geneExpr$genotype, corr=corr[o,o],
 \code{\link{iheatmap}}, \code{\link{scat2scat}}, \code{\link{iplotCurves}}
 }
 \keyword{hplot}
-

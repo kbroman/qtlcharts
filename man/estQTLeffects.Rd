@@ -45,4 +45,3 @@ out <- estQTLeffects(grav, phe=seq(1, nphe(grav), by=5))
 \code{\link{cbindQTLeffects}}
 }
 \keyword{regression}
-

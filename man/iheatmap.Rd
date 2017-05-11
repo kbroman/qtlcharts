@@ -50,4 +50,3 @@ iheatmap(z, x, y)}
 \code{\link{iplotCorr}}
 }
 \keyword{hplot}
-

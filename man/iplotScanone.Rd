@@ -88,4 +88,3 @@ iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
 \code{\link{iplotMScanone}}, \code{\link{iplotPXG}}, \code{\link{iplotMap}}
 }
 \keyword{hplot}
-

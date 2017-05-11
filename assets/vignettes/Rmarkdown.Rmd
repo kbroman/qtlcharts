@@ -11,8 +11,8 @@ exploratory data analysis within R, they may also be included within
 [R Markdown](http://rmarkdown.rstudio.com)-based reports.
 
 [R Markdown](http://rmarkdown.rstudio.com) is a
-extension of [Markdown](http://daringfireball.net/projects/markdown/),
-using [knitr](http://yihui.name/knitr/), to write simply-marked-up
+extension of [Markdown](https://daringfireball.net/projects/markdown/),
+using [knitr](https://yihui.name/knitr/), to write simply-marked-up
 text, with chunks of R code, that is converted to an html file, for
 viewing in a web browser. The chunks of code are processed by knitr and
 replaced with the results or graphs produced.
@@ -38,7 +38,7 @@ knitr::opts_chunk$set(fig.width=8, fig.height=6, message=FALSE)
 
 As an example, we'll consider the `grav` dataset included with
 R/qtlcharts. These are data from
-[Moore et al. Genetics 195:1077-1086, 2013](http://www.ncbi.nlm.nih.gov/pubmed/23979570),
+[Moore et al. Genetics 195:1077-1086, 2013](https://www.ncbi.nlm.nih.gov/pubmed/23979570),
 on a QTL experiment on gravitropism in Arabidopsis, with data on 162
 recombinant inbred lines (Ler &times; Cvi). Seedlings were sprouted
 and then rotated 90 degrees with respect to gravity; the growth of the

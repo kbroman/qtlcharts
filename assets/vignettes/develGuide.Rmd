@@ -7,14 +7,14 @@ output:
 ---
 
 [R/qtlcharts](http://kbroman.org/qtlcharts) is an
-[R](http://www.r-project.org) package to create interactive charts for
+[R](https://www.r-project.org) package to create interactive charts for
 QTL data, for use with [R/qtl](http://www.rqtl.org).
 R/qtlcharts is written in
-[R](http://www.r-project.org) and
+[R](https://www.r-project.org) and
 [CoffeeScript](http://coffeescript.org), making use of the JavaScript
-libraries [D3](http://d3js.org),
+libraries [D3](https://d3js.org),
 [d3-tip](https://github.com/caged/d3-tip),
-[jQuery](http://jquery.com), and [jQueryUI](http://jqueryui.com),
+[jQuery](https://jquery.com), and [jQueryUI](https://jqueryui.com),
 as well as
 [ColorBrewer](http://colorbrewer2.org).
 
@@ -45,9 +45,9 @@ directory anymore.)
 
 The JavaScript libraries are located in subdirectories of
 [`inst/htmlwidgets/lib`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib).
-This includes [D3](http://d3js.org),
+This includes [D3](https://d3js.org),
 [d3-tip](https://github.com/caged/d3-tip),
-[jQuery](http://jquery.com), [jQueryUI](http://jqueryui.com), and
+[jQuery](https://jquery.com), [jQueryUI](https://jqueryui.com), and
 [ColorBrewer](http://colorbrewer2.org), as well as a set of basic
 graphic panels, [d3panels](http://kbroman.org/d3panels).
 
@@ -72,7 +72,7 @@ CoffeeScript? CoffeeScript is a nicer language
 and is more fun to code, and a number of things are easier or more
 compact than JavaScript.
 
-For example, [D3](http://d3js.org) code generally includes a lot of anonymous
+For example, [D3](https://d3js.org) code generally includes a lot of anonymous
 functions, like
 
     blah.attr("x", function(d) { return xscale(d); });
@@ -197,10 +197,10 @@ in the R code are converted to the R manual page format with the
 For further information on Roxygen2, see
 [Documenting Functions](http://adv-r.had.co.nz/Documenting-functions.html)
 in [Hadley Wickham](http://had.co.nz/)'s [Advanced R Programming](http://adv-r.had.co.nz/)
-or the [Roxygen2 vignettes](http://cran.r-project.org/package=roxygen2), such as
-[Getting started with Roxygen2](http://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
+or the [Roxygen2 vignettes](https://cran.r-project.org/package=roxygen2), such as
+[Getting started with Roxygen2](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
 and
-[Generating Rd files](http://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html).
+[Generating Rd files](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html).
 
 ## Tests
 
@@ -226,12 +226,12 @@ inspected individually by eye.
 ## Licenses
 
 Licensed under the
-[MIT license](LICENSE). ([More information here](http://en.wikipedia.org/wiki/MIT_License).)
+[MIT license](LICENSE). ([More information here](https://en.wikipedia.org/wiki/MIT_License).)
 
 R/qtlcharts incorporates
 
-- [D3.js](http://d3js.org) [[license](inst/htmlwidgets/lib/d3/LICENSE)]
+- [D3.js](https://d3js.org) [[license](inst/htmlwidgets/lib/d3/LICENSE)]
 - [d3.tip](https://github.com/Caged/d3-tip) [[license](inst/htmlwidgets/lib/d3-tip/LICENSE)]
 - [ColorBrewer](http://colorbrewer2.org) [[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)]
-- [jQuery](http://jquery.com) [[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)]
-- [jQuery UI](http://jqueryui.com/) [[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)]
+- [jQuery](https://jquery.com) [[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)]
+- [jQuery UI](https://jqueryui.com/) [[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)]

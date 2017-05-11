@@ -67,20 +67,20 @@ iboxplot = (widgetdiv, data, chartOpts) ->
     midQuant = (nQuant+1)/2 - 1
 
     # x and y scales for top figure
-    xScale = d3.scale.linear()
+    xScale = d3.scaleLinear()
                .domain([-1, data.ind.length])
                .range([margin.left, width-margin.right])
 
     # width of rectangles in top panel
     recWidth = xScale(1) - xScale(0)
 
-    yScale = d3.scale.linear()
+    yScale = d3.scaleLinear()
                .domain(topylim)
                .range([halfheight-margin.bottom, margin.top])
 
     # function to create quantile lines
     quline = (j) ->
-        d3.svg.line()
+        d3.line()
             .x((d) -> xScale(d))
             .y((d) -> yScale(data.quant[j][d]))
 
@@ -166,11 +166,10 @@ iboxplot = (widgetdiv, data, chartOpts) ->
                      "error_#{chartdivid}")
         qucolors = null
     unless qucolors?
-        colindex = d3.range((nQuant-1)/2)
-        tmp = d3.scale.category10().domain(colindex)
+        tmp = d3.schemeCategory10
         qucolors = ["black"]
-        for j in colindex
-            qucolors.push(tmp(j))
+        for j in d3.range((nQuant-1)/2)
+            qucolors.push(tmp[j])
     qucolors = qucolors[0...(nQuant-1)/2+1] if qucolors.length > (nQuant-1)/2+1
     qucolors = qucolors.reverse()
     for color in qucolors[...-1].reverse()
@@ -277,11 +276,11 @@ iboxplot = (widgetdiv, data, chartOpts) ->
     lo = data.breaks[0] - (data.breaks[1] - data.breaks[0])
     hi = data.breaks[data.breaks.length-1] + (data.breaks[1] - data.breaks[0])
 
-    lowxScale = d3.scale.linear()
+    lowxScale = d3.scaleLinear()
                   .domain([lo, hi])
                   .range([margin.left, width-margin.right])
 
-    lowyScale = d3.scale.linear()
+    lowyScale = d3.scaleLinear()
                   .domain([0, botylim[1]+1])
                   .range([halfheight-margin.bottom, margin.top])
 
@@ -325,7 +324,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
 
     grp4BkgdHist = lowsvg.append("g").attr("id", "bkgdHist")
 
-    histline = d3.svg.line()
+    histline = d3.line()
                  .x((d,i) -> lowxScale(br2[i]))
                  .y((d) -> lowyScale(d))
 

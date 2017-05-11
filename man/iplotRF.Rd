@@ -54,4 +54,3 @@ iplotRF(fake.f2)}
 \code{\link[qtl]{est.rf}}, \code{\link[qtl]{plotRF}}
 }
 \keyword{hplot}
-

@@ -94,4 +94,3 @@ iplotMScanone(out, effects=eff, times=times,
 \code{\link{iplotScanone}}
 }
 \keyword{hplot}
-

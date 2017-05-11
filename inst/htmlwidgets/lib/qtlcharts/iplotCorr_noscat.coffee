@@ -45,9 +45,9 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
     ncorrX = data.cols.length
     ncorrY = data.rows.length
 
-    corXscale = d3.scale.ordinal().domain(d3.range(ncorrX)).rangeBands([0, panelwidth])
-    corYscale = d3.scale.ordinal().domain(d3.range(ncorrY)).rangeBands([panelheight, 0])
-    corZscale = d3.scale.linear().domain(zlim).range(corcolors)
+    corXscale = d3.scaleBand().domain(d3.range(ncorrX)).range([0, panelwidth])
+    corYscale = d3.scaleBand().domain(d3.range(ncorrY)).range([panelheight, 0])
+    corZscale = d3.scaleLinear().domain(zlim).range(corcolors)
     pixel_width = corXscale(1)-corXscale(0)
     pixel_height = corYscale(0)-corYscale(1)
 
@@ -72,8 +72,8 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
                .attr("class", "cell")
                .attr("x", (d) -> corXscale(d.col))
                .attr("y", (d) -> corYscale(d.row))
-               .attr("width", corXscale.rangeBand())
-               .attr("height", corYscale.rangeBand())
+               .attr("width", Math.abs(corXscale(1) - corXscale(0)))
+               .attr("height",Math.abs(corYscale(0) - corYscale(1)))
                .attr("fill", (d) -> corZscale(d.value))
                .attr("stroke", "none")
                .attr("stroke-width", 2)

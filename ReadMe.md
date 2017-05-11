@@ -1,15 +1,15 @@
 ### R/qtlcharts: Interactive graphics for QTL experiments
 
 [![Build Status](https://travis-ci.org/kbroman/qtlcharts.svg?branch=master)](https://travis-ci.org/kbroman/qtlcharts)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/qtlcharts)](http://cran.r-project.org/package=qtlcharts)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qtlcharts)](https://cran.r-project.org/package=qtlcharts)
 
 [Karl W Broman](http://kbroman.org)
 
-[R/qtlcharts](http://kbroman.org/qtlcharts) is an [R](http://www.r-project.org) package to create
+[R/qtlcharts](http://kbroman.org/qtlcharts) is an [R](https://www.r-project.org) package to create
 interactive charts for QTL data, for use
 with [R/qtl](http://www.rqtl.org). \[[website](http://kbroman.org/qtlcharts)\]
 
-It is built with [D3](http://d3js.org), using a set of reusable
+It is built with [D3](https://d3js.org), using a set of reusable
 panels (also available separately, as [d3panels](http://kbroman.org/d3panels)).
 
 For example charts, see the [R/qtlcharts website](http://kbroman.org/qtlcharts).
@@ -83,14 +83,14 @@ iboxplot(expr)
 #### Licenses
 
 The R/qtlcharts package as a whole is distributed under
-[GPL-3 (GNU General Public License version 3)[http://www.gnu.org/licenses/gpl-3.0.en.html].
+[GPL-3 (GNU General Public License version 3)[https://www.gnu.org/licenses/gpl-3.0.en.html].
 
 R/qtlcharts incorporates the following other open source software
 components, which have their own license agreements.
 
-- [D3.js](http://d3js.org) \[[license](inst/htmlwidgets/lib/d3/LICENSE)\]
+- [D3.js](https://d3js.org) \[[license](inst/htmlwidgets/lib/d3/LICENSE)\]
 - [d3.tip](https://github.com/Caged/d3-tip) \[[license](inst/htmlwidgets/lib/d3-tip/LICENSE)\]
 - [ColorBrewer](http://colorbrewer2.org) \[[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)\]
-- [jQuery](http://jquery.com) \[[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)\]
-- [jQuery UI](http://jqueryui.com/) \[[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
+- [jQuery](https://jquery.com) \[[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)\]
+- [jQuery UI](https://jqueryui.com/) \[[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
 - [d3panels](https://github.com/kbroman/d3panels) \[[license](inst/htmlwidgets/lib/d3panels/License.md)\]

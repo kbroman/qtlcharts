@@ -16,4 +16,3 @@ print the installed version of R/qtlcharts
 qtlchartsversion()
 
 }
-

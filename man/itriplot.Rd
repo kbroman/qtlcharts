@@ -42,4 +42,3 @@ itriplot(p, group=g)}
 \code{\link{iplot}}, \code{\link{iplotPXG}}, \code{\link{idotplot}}
 }
 \keyword{hplot}
-

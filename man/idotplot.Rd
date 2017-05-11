@@ -42,4 +42,3 @@ idotplot(g, y)}
 \code{\link{iplot}}, \code{\link{iplotPXG}}
 }
 \keyword{hplot}
-

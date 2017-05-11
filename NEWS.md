@@ -1,3 +1,9 @@
+## qtlcharts 0.8-1 (2017-05-11)
+
+- Updated to use [D3](https://d3js.org)
+  [version 4](https://github.com/d3/d3/blob/master/API.md).
+
+
 ## qtlcharts 0.7-8 (2016-06-28)
 
 - Rewrite underlying javascript to use new version of

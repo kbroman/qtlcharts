@@ -68,4 +68,3 @@ iplotScantwo(out, fake.f2)}
 \code{\link{iplotScanone}}
 }
 \keyword{hplot}
-

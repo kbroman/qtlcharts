@@ -8,7 +8,7 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     # chartOpts start
     height = chartOpts?.height ? 450                                    # height of image in pixels
     width = chartOpts?.width ? 900                                      # width of image in pixels
-    wleft = chartOpts?.wleft ? width*0.5                                # width of left panel in pixels
+    wleft = chartOpts?.wleft ? width*0.5                                # width of left panel in pixels (ignored if LOD scores not provided)
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
     lod_axispos = chartOpts?.lod_axispos ? chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
     lod_titlepos = chartOpts?.lod_titlepos ? chartOpts?.titlepos ? 20   # position of title for LOD curve panel, in pixels
@@ -32,20 +32,26 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     scat_ylab = chartOpts?.scat_ylab ? "Phenotype 2"                    # y-axis label in scatterplot
     scat_rotate_ylab = chartOpts?.scat_rotate_ylab ? null               # indicates whether to rotate the y-axis label 90 degrees, in scatterplot
     scat_axispos = chartOpts?.scat_axispos ? chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
-    scat_titlepos = chartOpts?.scat_titlepos ? chartOpts?.titlepos ? 20   # position of title for scatterplot, in pixels
+    scat_titlepos = chartOpts?.scat_titlepos ? chartOpts?.titlepos ? 20 # position of title for scatterplot, in pixels
+    slider_height = chartOpts?.slider_height ? 80                       # height of slider
+    slider_color  = chartOpts?.slider_color ? "#E6E6E6"                 # color of slider bar
+    button_color  = chartOpts?.button_color ? "#E6E6E6"                 # color of rectangular part of buttons
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
 
-    wright = width - wleft
+    svg = d3.select(widgetdiv).select("svg")
+
+    #####
+    # lod curve plot
+    #####
 
     if lod_data.lod? # is there any lod score data?
-
         # y-axis limits for LOD curves
         lod_ylim = [0, 1.05*d3.max([d3.max(lod_data.lod), d3.max(lod_data.lod2)])] unless lod_ylim?
 
         mylodchart = d3panels.lodchart({
-            height:height
+            height:height-slider_height
             width:wleft
             margin:margin
             axispos:lod_axispos
@@ -67,8 +73,6 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
             rotate_ylab:lod_rotate_ylab
             tipclass:widgetdivid})
 
-        svg = d3.select(widgetdiv).select("svg")
-
         g_lod = svg.append("g")
                    .attr("id", "lodchart")
         mylodchart(g_lod, lod_data)
@@ -83,3 +87,61 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
         lod2_data = {chr:lod_data.chr, pos:lod_data.pos, lod:lod_data.lod2, marker:lod_data.marker}
         my_second_curve(mylodchart, lod2_data)
+
+    #####
+    # scatterplot
+    #####
+
+    g_scat = svg.append("g")
+                .attr("id", "scatterplot")
+    if lod_data.lod?
+        g_scat.attr("transform", "translate(#{wleft},0)")
+        wright = width - wleft
+    else
+        wright = width
+        wleft = width
+
+    myscatter = d3panels.scatterplot({
+        height:height-slider_height
+        width:wright
+        margin:margin
+        pointcolor:pointcolor
+        pointstroke:pointstroke
+        pointsize:pointsize
+        ylim:scat_ylim
+        nyticks:scat_nyticks
+        yticks:scat_yticks
+        xlab:scat_xlab
+        ylab:scat_ylab
+        rotate_ylab:scat_rotate_ylab
+        axispos:scat_axispos
+        titlepos:scat_titlepos
+        xNA:{handle:false,force:false}
+        yNA:{handle:false,force:false}
+        rectcolor:rectcolor
+        tipclass:widgetdivid})
+
+    point_data = {x:pxg_data.pheno1, y:pxg_data.pheno2, indID:pxg_data.indID}
+
+    myscatter(g_scat, point_data)
+
+    #####
+    # slider
+    #####
+
+    g_slider = svg.insert("g").attr("transform", "translate(0,#{height-slider_height})")
+
+    myslider = d3panels.double_slider({
+        width:wleft
+        height:slider_height
+        width:wleft
+        margin:margin.left
+        buttoncolor:button_color
+        rectcolor:rectcolor})
+
+    marker_pos = (lod_data.pos[i] for i of lod_data.pos when lod_data.marker[i] != "")
+
+    callback1 = (sl) -> null
+    callback2 = (sl) -> null
+
+    myslider(g_slider, callback1, callback2, d3.extent(lod_data.pos), marker_pos)

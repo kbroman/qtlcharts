@@ -2,7 +2,7 @@
 var ipleiotropy;
 
 ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
-  var chartdivid, g_lod, height, lod2_data, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, markers, my_second_curve, mylodchart, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref4, ref5, ref6, ref7, ref8, ref9, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, svg, widgetdivid, width, wleft, wright, x;
+  var button_color, callback1, callback2, chartdivid, g_lod, g_scat, g_slider, height, i, lod2_data, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, point_data, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref4, ref5, ref6, ref7, ref8, ref9, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, widgetdivid, width, wleft, wright, x;
   markers = (function() {
     var results;
     results = [];
@@ -54,15 +54,18 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     ylabel: 5
   };
   scat_titlepos = (ref29 = (ref30 = chartOpts != null ? chartOpts.scat_titlepos : void 0) != null ? ref30 : chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref29 : 20;
-  chartdivid = (ref31 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref31 : 'chart';
+  slider_height = (ref31 = chartOpts != null ? chartOpts.slider_height : void 0) != null ? ref31 : 80;
+  slider_color = (ref32 = chartOpts != null ? chartOpts.slider_color : void 0) != null ? ref32 : "#E6E6E6";
+  button_color = (ref33 = chartOpts != null ? chartOpts.button_color : void 0) != null ? ref33 : "#E6E6E6";
+  chartdivid = (ref34 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref34 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
-  wright = width - wleft;
+  svg = d3.select(widgetdiv).select("svg");
   if (lod_data.lod != null) {
     if (lod_ylim == null) {
       lod_ylim = [0, 1.05 * d3.max([d3.max(lod_data.lod), d3.max(lod_data.lod2)])];
     }
     mylodchart = d3panels.lodchart({
-      height: height,
+      height: height - slider_height,
       width: wleft,
       margin: margin,
       axispos: lod_axispos,
@@ -84,7 +87,6 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       rotate_ylab: lod_rotate_ylab,
       tipclass: widgetdivid
     });
-    svg = d3.select(widgetdiv).select("svg");
     g_lod = svg.append("g").attr("id", "lodchart");
     mylodchart(g_lod, lod_data);
     my_second_curve = d3panels.add_lodcurve({
@@ -101,6 +103,72 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       lod: lod_data.lod2,
       marker: lod_data.marker
     };
-    return my_second_curve(mylodchart, lod2_data);
+    my_second_curve(mylodchart, lod2_data);
   }
+  g_scat = svg.append("g").attr("id", "scatterplot");
+  if (lod_data.lod != null) {
+    g_scat.attr("transform", "translate(" + wleft + ",0)");
+    wright = width - wleft;
+  } else {
+    wright = width;
+    wleft = width;
+  }
+  myscatter = d3panels.scatterplot({
+    height: height - slider_height,
+    width: wright,
+    margin: margin,
+    pointcolor: pointcolor,
+    pointstroke: pointstroke,
+    pointsize: pointsize,
+    ylim: scat_ylim,
+    nyticks: scat_nyticks,
+    yticks: scat_yticks,
+    xlab: scat_xlab,
+    ylab: scat_ylab,
+    rotate_ylab: scat_rotate_ylab,
+    axispos: scat_axispos,
+    titlepos: scat_titlepos,
+    xNA: {
+      handle: false,
+      force: false
+    },
+    yNA: {
+      handle: false,
+      force: false
+    },
+    rectcolor: rectcolor,
+    tipclass: widgetdivid
+  });
+  point_data = {
+    x: pxg_data.pheno1,
+    y: pxg_data.pheno2,
+    indID: pxg_data.indID
+  };
+  myscatter(g_scat, point_data);
+  g_slider = svg.insert("g").attr("transform", "translate(0," + (height - slider_height) + ")");
+  myslider = d3panels.double_slider({
+    width: wleft,
+    height: slider_height,
+    width: wleft,
+    margin: margin.left,
+    buttoncolor: button_color,
+    rectcolor: rectcolor
+  });
+  marker_pos = (function() {
+    var results;
+    results = [];
+    for (i in lod_data.pos) {
+      if (lod_data.marker[i] !== "") {
+        results.push(lod_data.pos[i]);
+      }
+    }
+    return results;
+  })();
+  callback1 = function(sl) {
+    return null;
+  };
+  callback2 = function(sl) {
+    return null;
+  };
+  return myslider(g_slider, callback1, callback2, d3.extent(lod_data.pos), marker_pos);
 };

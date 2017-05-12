@@ -148,7 +148,7 @@ function(cross, scanoneOutput=NULL, pheno.col=1:2, lodcolumn=1:2,
     pxg_list$pheno <- NULL
     pxg_list$phenames <- colnames(cross$pheno)[pheno.col]
 
-    defaultAspect <- 2 # width/height
+    defaultAspect <- ifelse(is.null(scanoneOutput), 1, 2) # width/height
     browsersize <- getPlotSize(defaultAspect)
 
     # add phenotype names to chartOpts

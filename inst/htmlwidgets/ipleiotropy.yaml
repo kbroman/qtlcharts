@@ -1,0 +1,22 @@
+dependencies:
+  - name: d3
+    src: htmlwidgets/lib/d3
+    version: 4.8.0
+    script:
+      - d3.min.js
+  - name: d3-tip
+    src: htmlwidgets/lib/d3-tip
+    version: 0.7.1
+    script:
+      - index-min.js
+  - name: d3panels
+    src: htmlwidgets/lib/d3panels
+    version: 1.3.0
+    script:
+      - d3panels.min.js
+    style: d3panels.min.css
+  - name: qtlcharts_ipleiotropy
+    src: htmlwidgets/lib/qtlcharts
+    version: 0.9.1
+    script:
+      - ipleiotropy.js

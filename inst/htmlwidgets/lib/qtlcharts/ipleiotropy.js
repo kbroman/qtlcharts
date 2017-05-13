@@ -2,7 +2,7 @@
 var ipleiotropy;
 
 ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
-  var button_color, callback, chartdivid, g_lod, g_scat, g_slider, geno1, geno2, group, height, i, lod2_data, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, m1_current, m2_current, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, n_color, n_geno, n_geno_sq, point_data, pointcolor, points, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref4, ref5, ref6, ref7, ref8, ref9, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, widgetdivid, width, wleft, wright, x;
+  var button_color, callback, chartdivid, dark, g_lod, g_scat, g_slider, geno1, geno2, group, height, i, j, light, linecolor, linewidth, lod2_data, lod_at_marker, lod_axispos, lod_nyticks, lod_points, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, m1_current, m2_current, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, n_geno, n_geno_sq, point_data, pointcolor, points, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref4, ref5, ref6, ref7, ref8, ref9, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, widgetdivid, width, wleft, wright, x;
   markers = (function() {
     var results;
     results = [];
@@ -32,8 +32,8 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   lod_ylim = (ref9 = chartOpts != null ? chartOpts.lod_ylim : void 0) != null ? ref9 : null;
   lod_nyticks = (ref10 = chartOpts != null ? chartOpts.lod_nyticks : void 0) != null ? ref10 : 5;
   lod_yticks = (ref11 = chartOpts != null ? chartOpts.lod_yticks : void 0) != null ? ref11 : null;
-  lod_linecolor = (ref12 = chartOpts != null ? chartOpts.lod_linecolor : void 0) != null ? ref12 : ["darkslateblue", "orchid"];
-  lod_linewidth = (ref13 = chartOpts != null ? chartOpts.lod_linewidth : void 0) != null ? ref13 : 2;
+  linecolor = (ref12 = chartOpts != null ? chartOpts.lod_linecolor : void 0) != null ? ref12 : ["darkslateblue", "orchid"];
+  linewidth = (ref13 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref13 : 2;
   lod_title = (ref14 = chartOpts != null ? chartOpts.lod_title : void 0) != null ? ref14 : "";
   lod_xlab = (ref15 = chartOpts != null ? chartOpts.lod_xlab : void 0) != null ? ref15 : "Chromosome";
   lod_ylab = (ref16 = chartOpts != null ? chartOpts.lod_ylab : void 0) != null ? ref16 : "LOD score";
@@ -60,10 +60,31 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   chartdivid = (ref34 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref34 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   svg = d3.select(widgetdiv).select("svg");
+  lod_at_marker = [null, null];
   if (lod_data.lod != null) {
     if (lod_ylim == null) {
       lod_ylim = [0, 1.05 * d3.max([d3.max(lod_data.lod), d3.max(lod_data.lod2)])];
     }
+    lod_at_marker[0] = (function() {
+      var results;
+      results = [];
+      for (i in lod_data.lod) {
+        if (lod_data.marker[i] !== "") {
+          results.push(lod_data.lod[i]);
+        }
+      }
+      return results;
+    })();
+    lod_at_marker[1] = (function() {
+      var results;
+      results = [];
+      for (i in lod_data.lod) {
+        if (lod_data.marker[i] !== "") {
+          results.push(lod_data.lod2[i]);
+        }
+      }
+      return results;
+    })();
     mylodchart = d3panels.lodchart({
       height: height - slider_height,
       width: wleft,
@@ -76,8 +97,8 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       ylim: lod_ylim,
       nyticks: lod_nyticks,
       yticks: lod_yticks,
-      linecolor: lod_linecolor[0],
-      linewidth: lod_linewidth,
+      linecolor: linecolor[0],
+      linewidth: linewidth,
       pointcolor: null,
       pointsize: null,
       pointstroke: null,
@@ -90,12 +111,17 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     g_lod = svg.append("g").attr("id", "lodchart");
     mylodchart(g_lod, lod_data);
     my_second_curve = d3panels.add_lodcurve({
-      linecolor: lod_linecolor[1],
-      linewidth: lod_linewidth,
+      linecolor: linecolor[1],
+      linewidth: linewidth,
       pointcolor: null,
       pointsize: null,
       pointstroke: null,
       tipclass: widgetdivid
+    });
+    lod_points = g_lod.selectAll("empty").data([0, 1]).enter().insert("circle").attr("cx", null).attr("cy", null).attr("r", pointsize).attr("fill", function(i) {
+      return linecolor[i];
+    }).attr("stroke", function(i) {
+      return pointstroke;
     });
     lod2_data = {
       chr: lod_data.chr,
@@ -148,31 +174,40 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   points = myscatter.points();
   n_geno = d3panels.matrixMaxAbs(pxg_data.geno);
   n_geno_sq = n_geno * n_geno;
-  if (pointcolor == null) {
-    pointcolor = d3panels.selectGroupColors(n_geno_sq, "dark");
+  if (pointcolor != null) {
+    if (pointcolor.length < n_geno_sq) {
+      d3.range(n_geno_sq - n_color).map(function(i) {
+        return pointcolor.push("#aaa");
+      });
+    }
+    dark = pointcolor.slice(0, n_geno);
+    light = pointcolor.slice(n_geno, n_geno_sq);
+  } else {
+    dark = d3panels.selectGroupColors(n_geno, "dark");
+    light = d3panels.selectGroupColors(n_geno_sq, "light").slice(n_geno, n_geno_sq);
   }
-  n_color = pointcolor.length;
-  if (n_color < n_geno_sq) {
-    d3.range(n_geno_sq - n_color).map(function(i) {
-      return pointcolor.push("#aaa");
-    });
+  pointcolor = [];
+  dark.reverse();
+  light.reverse();
+  for (i = j = 0, ref35 = n_geno_sq; 0 <= ref35 ? j < ref35 : j > ref35; i = 0 <= ref35 ? ++j : --j) {
+    if (Math.abs(Math.sqrt(i + 1) - Math.round(Math.sqrt(i + 1))) < 1e-6) {
+      pointcolor.push(dark.pop());
+    } else {
+      pointcolor.push(light.pop());
+    }
   }
   geno1 = [];
   geno2 = [];
   group = [];
   m1_current = -1;
   m2_current = -1;
-  console.log("pxg_data.pheno1.length = " + pxg_data.pheno1.length);
-  console.log("pxg_data.geno.length = " + pxg_data.geno.length);
-  console.log("pxg_data.geno[0].length = " + pxg_data.geno[0].length);
   callback = function(sl) {
-    var i, update, v;
-    v = sl.stopindex().sort();
+    var update, v;
+    v = sl.stopindex();
     update = m1_current !== v[0] || m2_current !== v[1];
     m1_current = v[0];
     m2_current = v[1];
     if (update) {
-      console.log("updating");
       geno1 = d3.range(point_data.x.length).map(function(i) {
         return Math.abs(pxg_data.geno[v[0]][i]);
       });
@@ -190,7 +225,13 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       points.attr("fill", function(d, i) {
         return pointcolor[group[i]];
       });
-      return console.log(("geno1 extent: " + (d3.extent(geno1)) + "      geno2 extent: " + (d3.extent(geno2)) + "     group extent: " + (d3.extent(group)) + "     ") + ("pointcolor.length: " + pointcolor.length));
+      if (lod_data.lod != null) {
+        return lod_points.attr("cx", function(d, i) {
+          return mylodchart.xscale()[lod_data.chr[0]](marker_pos[v[i]]);
+        }).attr("cy", function(d, i) {
+          return mylodchart.yscale()(lod_at_marker[i][v[i]]);
+        });
+      }
     }
   };
   g_slider = svg.insert("g").attr("transform", "translate(0," + (height - slider_height) + ")");
@@ -198,7 +239,7 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     width: wleft,
     height: slider_height,
     width: wleft,
-    margin: margin.left,
+    margin: margin,
     buttoncolor: button_color,
     rectcolor: rectcolor
   });
@@ -212,5 +253,6 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     }
     return results;
   })();
-  return myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos);
+  myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos);
+  return callback(myslider);
 };

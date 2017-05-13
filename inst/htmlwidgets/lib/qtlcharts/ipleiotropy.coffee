@@ -16,8 +16,8 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     lod_ylim = chartOpts?.lod_ylim ? null                               # y-axis limits in LOD curve panel
     lod_nyticks = chartOpts?.lod_nyticks ? 5                            # number of ticks in y-axis in LOD curve panel
     lod_yticks = chartOpts?.lod_yticks ? null                           # vector of tick positions for y-axis in LOD curve panel
-    lod_linecolor = chartOpts?.lod_linecolor ? ["darkslateblue", "orchid"]  # line colors for LOD curves
-    lod_linewidth = chartOpts?.lod_linewidth ? 2                        # line width for LOD curves
+    linecolor = chartOpts?.lod_linecolor ? ["darkslateblue", "orchid"]  # line colors for LOD curves
+    linewidth = chartOpts?.linewidth ? 2                            # line width for LOD curves
     lod_title = chartOpts?.lod_title ? ""                               # title of LOD curve panel
     lod_xlab = chartOpts?.lod_xlab ? "Chromosome"                       # x-axis label for LOD curve panel
     lod_ylab = chartOpts?.lod_ylab ? "LOD score"                        # y-axis label for LOD curve panel
@@ -46,9 +46,14 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     # lod curve plot
     #####
 
+    lod_at_marker = [null, null]
+
     if lod_data.lod? # is there any lod score data?
         # y-axis limits for LOD curves
         lod_ylim = [0, 1.05*d3.max([d3.max(lod_data.lod), d3.max(lod_data.lod2)])] unless lod_ylim?
+
+        lod_at_marker[0] = (lod_data.lod[i] for i of lod_data.lod when lod_data.marker[i] != "")
+        lod_at_marker[1] = (lod_data.lod2[i] for i of lod_data.lod when lod_data.marker[i] != "")
 
         mylodchart = d3panels.lodchart({
             height:height-slider_height
@@ -62,8 +67,8 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
             ylim:lod_ylim
             nyticks:lod_nyticks
             yticks:lod_yticks
-            linecolor:lod_linecolor[0]
-            linewidth:lod_linewidth
+            linecolor:linecolor[0]
+            linewidth:linewidth
             pointcolor:null
             pointsize:null
             pointstroke:null
@@ -78,12 +83,23 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         mylodchart(g_lod, lod_data)
 
         my_second_curve = d3panels.add_lodcurve({
-            linecolor:lod_linecolor[1]
-            linewidth:lod_linewidth
+            linecolor:linecolor[1]
+            linewidth:linewidth
             pointcolor:null
             pointsize:null
             pointstroke:null
             tipclass:widgetdivid})
+
+
+        lod_points = g_lod.selectAll("empty")
+                          .data([0,1])
+                          .enter()
+                          .insert("circle")
+                          .attr("cx", null)
+                          .attr("cy", null)
+                          .attr("r", pointsize)
+                          .attr("fill", (i) -> linecolor[i])
+                          .attr("stroke", (i) -> pointstroke)
 
         lod2_data = {chr:lod_data.chr, pos:lod_data.pos, lod:lod_data.lod2, marker:lod_data.marker}
         my_second_curve(mylodchart, lod2_data)
@@ -130,12 +146,26 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     # callback for sliders
     #####
 
+    # set up colors
     n_geno = d3panels.matrixMaxAbs(pxg_data.geno)
     n_geno_sq = n_geno*n_geno
-    pointcolor = d3panels.selectGroupColors(n_geno_sq, "dark") unless pointcolor?
-    n_color = pointcolor.length
-    if n_color < n_geno_sq
-        d3.range(n_geno_sq-n_color).map( (i) -> pointcolor.push("#aaa"))
+    if pointcolor?
+        if pointcolor.length < n_geno_sq
+            d3.range(n_geno_sq-n_color).map( (i) -> pointcolor.push("#aaa"))
+        dark = pointcolor[0...n_geno]
+        light = pointcolor[n_geno...n_geno_sq]
+    else
+        dark = d3panels.selectGroupColors(n_geno, "dark")
+        light = d3panels.selectGroupColors(n_geno_sq, "light")[n_geno...n_geno_sq]
+    # re-arrange colors
+    pointcolor = []
+    dark.reverse()
+    light.reverse()
+    for i in [0...n_geno_sq]
+        if Math.abs(Math.sqrt(i+1) - Math.round(Math.sqrt(i+1))) < 1e-6
+            pointcolor.push(dark.pop())
+        else
+            pointcolor.push(light.pop())
 
     geno1 = []
     geno2 = []
@@ -143,27 +173,22 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     m1_current = -1
     m2_current = -1
 
-    console.log("pxg_data.pheno1.length = #{pxg_data.pheno1.length}")
-    console.log("pxg_data.geno.length = #{pxg_data.geno.length}")
-    console.log("pxg_data.geno[0].length = #{pxg_data.geno[0].length}")
-
     callback = (sl) ->
-        v = sl.stopindex().sort() # current selected positions
+        v = sl.stopindex() # current selected positions
 
         update = (m1_current != v[0] or m2_current != v[1])
         m1_current = v[0]
         m2_current = v[1]
 
         if update
-            console.log("updating")
             geno1 = d3.range(point_data.x.length).map((i) -> Math.abs(pxg_data.geno[v[0]][i]))
             geno2 = d3.range(point_data.x.length).map((i) -> Math.abs(pxg_data.geno[v[1]][i]))
             group = (geno1[i]-1 + (geno2[i]-1)*n_geno for i of geno1)
             points.attr("fill", (d,i) -> pointcolor[group[i]])
 
-            console.log("geno1 extent: #{d3.extent(geno1)}      geno2 extent: #{d3.extent(geno2)}     group extent: #{d3.extent(group)}     " +
-                "pointcolor.length: #{pointcolor.length}")
-
+            if lod_data.lod?
+                lod_points.attr("cx", (d,i) -> mylodchart.xscale()[lod_data.chr[0]](marker_pos[v[i]]))
+                          .attr("cy", (d,i) -> mylodchart.yscale()(lod_at_marker[i][v[i]]))
 
     #####
     # slider
@@ -175,10 +200,13 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         width:wleft
         height:slider_height
         width:wleft
-        margin:margin.left
+        margin:margin
         buttoncolor:button_color
         rectcolor:rectcolor})
 
     marker_pos = (lod_data.pos[i] for i of lod_data.pos when lod_data.marker[i] != "")
 
     myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos)
+
+    # call it once to set colors
+    callback(myslider)

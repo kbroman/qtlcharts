@@ -20,7 +20,7 @@ For snapshots and live tests, see <http://kbroman.org/d3panels>.
 
 #### Documentation
 
-For documentation, see <https://github.com/kbroman/d3panels/doc>.
+For documentation, see <https://github.com/kbroman/d3panels/tree/master/doc>.
 
 #### Usage
 

@@ -1,4 +1,4 @@
-## qtlcharts 0.9-1 (2017-05-22)
+## qtlcharts 0.9-1 (2017-05-13)
 
 - Added new tool for exploring pleiotropy between two traits,
   `ipleiotropy()`.

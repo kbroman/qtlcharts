@@ -2,7 +2,7 @@
 var ipleiotropy;
 
 ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
-  var button_color, callback1, callback2, chartdivid, g_lod, g_scat, g_slider, height, i, lod2_data, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, point_data, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref4, ref5, ref6, ref7, ref8, ref9, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, widgetdivid, width, wleft, wright, x;
+  var button_color, callback, chartdivid, g_lod, g_scat, g_slider, geno1, geno2, group, height, i, lod2_data, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, m1_current, m2_current, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, n_color, n_geno, n_geno_sq, point_data, pointcolor, points, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref4, ref5, ref6, ref7, ref8, ref9, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, widgetdivid, width, wleft, wright, x;
   markers = (function() {
     var results;
     results = [];
@@ -145,6 +145,54 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     indID: pxg_data.indID
   };
   myscatter(g_scat, point_data);
+  points = myscatter.points();
+  n_geno = d3panels.matrixMaxAbs(pxg_data.geno);
+  n_geno_sq = n_geno * n_geno;
+  if (pointcolor == null) {
+    pointcolor = d3panels.selectGroupColors(n_geno_sq, "dark");
+  }
+  n_color = pointcolor.length;
+  if (n_color < n_geno_sq) {
+    d3.range(n_geno_sq - n_color).map(function(i) {
+      return pointcolor.push("#aaa");
+    });
+  }
+  geno1 = [];
+  geno2 = [];
+  group = [];
+  m1_current = -1;
+  m2_current = -1;
+  console.log("pxg_data.pheno1.length = " + pxg_data.pheno1.length);
+  console.log("pxg_data.geno.length = " + pxg_data.geno.length);
+  console.log("pxg_data.geno[0].length = " + pxg_data.geno[0].length);
+  callback = function(sl) {
+    var i, update, v;
+    v = sl.stopindex().sort();
+    update = m1_current !== v[0] || m2_current !== v[1];
+    m1_current = v[0];
+    m2_current = v[1];
+    if (update) {
+      console.log("updating");
+      geno1 = d3.range(point_data.x.length).map(function(i) {
+        return Math.abs(pxg_data.geno[v[0]][i]);
+      });
+      geno2 = d3.range(point_data.x.length).map(function(i) {
+        return Math.abs(pxg_data.geno[v[1]][i]);
+      });
+      group = (function() {
+        var results;
+        results = [];
+        for (i in geno1) {
+          results.push(geno1[i] - 1 + (geno2[i] - 1) * n_geno);
+        }
+        return results;
+      })();
+      points.attr("fill", function(d, i) {
+        return pointcolor[group[i]];
+      });
+      return console.log(("geno1 extent: " + (d3.extent(geno1)) + "      geno2 extent: " + (d3.extent(geno2)) + "     group extent: " + (d3.extent(group)) + "     ") + ("pointcolor.length: " + pointcolor.length));
+    }
+  };
   g_slider = svg.insert("g").attr("transform", "translate(0," + (height - slider_height) + ")");
   myslider = d3panels.double_slider({
     width: wleft,
@@ -164,11 +212,5 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     }
     return results;
   })();
-  callback1 = function(sl) {
-    return null;
-  };
-  callback2 = function(sl) {
-    return null;
-  };
-  return myslider(g_slider, callback1, callback2, d3.extent(lod_data.pos), marker_pos);
+  return myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos);
 };

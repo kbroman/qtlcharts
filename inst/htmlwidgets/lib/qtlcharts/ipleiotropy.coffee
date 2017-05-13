@@ -124,6 +124,46 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     point_data = {x:pxg_data.pheno1, y:pxg_data.pheno2, indID:pxg_data.indID}
 
     myscatter(g_scat, point_data)
+    points = myscatter.points()
+
+    #####
+    # callback for sliders
+    #####
+
+    n_geno = d3panels.matrixMaxAbs(pxg_data.geno)
+    n_geno_sq = n_geno*n_geno
+    pointcolor = d3panels.selectGroupColors(n_geno_sq, "dark") unless pointcolor?
+    n_color = pointcolor.length
+    if n_color < n_geno_sq
+        d3.range(n_geno_sq-n_color).map( (i) -> pointcolor.push("#aaa"))
+
+    geno1 = []
+    geno2 = []
+    group = []
+    m1_current = -1
+    m2_current = -1
+
+    console.log("pxg_data.pheno1.length = #{pxg_data.pheno1.length}")
+    console.log("pxg_data.geno.length = #{pxg_data.geno.length}")
+    console.log("pxg_data.geno[0].length = #{pxg_data.geno[0].length}")
+
+    callback = (sl) ->
+        v = sl.stopindex().sort() # current selected positions
+
+        update = (m1_current != v[0] or m2_current != v[1])
+        m1_current = v[0]
+        m2_current = v[1]
+
+        if update
+            console.log("updating")
+            geno1 = d3.range(point_data.x.length).map((i) -> Math.abs(pxg_data.geno[v[0]][i]))
+            geno2 = d3.range(point_data.x.length).map((i) -> Math.abs(pxg_data.geno[v[1]][i]))
+            group = (geno1[i]-1 + (geno2[i]-1)*n_geno for i of geno1)
+            points.attr("fill", (d,i) -> pointcolor[group[i]])
+
+            console.log("geno1 extent: #{d3.extent(geno1)}      geno2 extent: #{d3.extent(geno2)}     group extent: #{d3.extent(group)}     " +
+                "pointcolor.length: #{pointcolor.length}")
+
 
     #####
     # slider
@@ -141,7 +181,4 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
     marker_pos = (lod_data.pos[i] for i of lod_data.pos when lod_data.marker[i] != "")
 
-    callback1 = (sl) -> null
-    callback2 = (sl) -> null
-
-    myslider(g_slider, callback1, callback2, d3.extent(lod_data.pos), marker_pos)
+    myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos)

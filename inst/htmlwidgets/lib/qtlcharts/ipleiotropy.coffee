@@ -206,7 +206,15 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
     marker_pos = (lod_data.pos[i] for i of lod_data.pos when lod_data.marker[i] != "")
 
-    myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos)
+    if lod_data.lod?
+        initial_value = [0..1].map((j) ->
+            max_lod = d3.max(lod_at_marker[j])
+            max_index = lod_at_marker[j].indexOf(max_lod)
+            marker_pos[max_index])
+    else
+        initial_value = null
+
+    myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos, initial_value)
 
     # call it once to set colors
     callback(myslider)

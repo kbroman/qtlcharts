@@ -101,6 +101,18 @@ Click on a chart for the corresponding interactive version.
 </tr>
 <tr>
   <td class="left">
+    <a href="example/ipleiotropy.html">
+        <img src="assets/pics/ipleiotropy.png" alt="ipleiotropy example" title="ipleiotropy example"/>
+    </a>
+  </td>
+  <td class="right">
+    <a href="example/scat2scat.html">
+        <img src="assets/pics/scat2scat.png" alt="scat2scat example" title="scat2scat example"/>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td class="left">
     <a href="example/iplotScantwo.html">
         <img src="assets/pics/iplotScantwo.png" alt="iplotScantwo example" title="iplotScantwo example"/>
     </a>

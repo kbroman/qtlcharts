@@ -2,7 +2,7 @@
 var ipleiotropy;
 
 ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
-  var button_color, callback, chartdivid, dark, g_lod, g_scat, g_slider, geno1, geno2, group, height, homozygotes, i, initial_value, k, l, light, linecolor, linewidth, lod2_data, lod_at_marker, lod_axispos, lod_nyticks, lod_points, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, m1_current, m2_current, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, n_color, n_geno, n_geno_sq, point_data, pointcolor, points, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref4, ref5, ref6, ref7, ref8, ref9, results, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, widgetdivid, width, wleft, wright, x;
+  var button_color, callback, chartdivid, dark, g_lod, g_scat, g_slider, geno1, geno2, group, height, homozygotes, i, indtip, initial_value, k, l, light, linecolor, linewidth, lod2_data, lod_at_marker, lod_axispos, lod_nyticks, lod_points, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, m1_current, m2_current, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, n_color, n_geno, n_geno_sq, point_data, pointcolor, points, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref4, ref5, ref6, ref7, ref8, ref9, results, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, widgetdivid, width, wleft, wright, x;
   markers = (function() {
     var results;
     results = [];
@@ -32,7 +32,7 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   lod_ylim = (ref9 = chartOpts != null ? chartOpts.lod_ylim : void 0) != null ? ref9 : null;
   lod_nyticks = (ref10 = chartOpts != null ? chartOpts.lod_nyticks : void 0) != null ? ref10 : 5;
   lod_yticks = (ref11 = chartOpts != null ? chartOpts.lod_yticks : void 0) != null ? ref11 : null;
-  linecolor = (ref12 = chartOpts != null ? chartOpts.lod_linecolor : void 0) != null ? ref12 : ["darkslateblue", "orchid"];
+  linecolor = (ref12 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref12 : ["darkslateblue", "orchid"];
   linewidth = (ref13 = chartOpts != null ? chartOpts.linewidth : void 0) != null ? ref13 : 2;
   lod_title = (ref14 = chartOpts != null ? chartOpts.lod_title : void 0) != null ? ref14 : "";
   lod_xlab = (ref15 = chartOpts != null ? chartOpts.lod_xlab : void 0) != null ? ref15 : "Chromosome";
@@ -118,11 +118,6 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       pointstroke: null,
       tipclass: widgetdivid
     });
-    lod_points = g_lod.selectAll("empty").data([0, 1]).enter().insert("circle").attr("cx", null).attr("cy", null).attr("r", pointsize).attr("fill", function(i) {
-      return linecolor[i];
-    }).attr("stroke", function(i) {
-      return pointstroke;
-    });
     lod2_data = {
       chr: lod_data.chr,
       pos: lod_data.pos,
@@ -130,6 +125,11 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       marker: lod_data.marker
     };
     my_second_curve(mylodchart, lod2_data);
+    lod_points = g_lod.selectAll("empty").data([0, 1]).enter().insert("circle").attr("cx", null).attr("cy", null).attr("r", pointsize).attr("fill", function(i) {
+      return linecolor[i];
+    }).attr("stroke", function(i) {
+      return pointstroke;
+    }).style("pointer-events", "none");
   }
   g_scat = svg.append("g").attr("id", "scatterplot");
   if (lod_data.lod != null) {
@@ -172,6 +172,7 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   };
   myscatter(g_scat, point_data);
   points = myscatter.points();
+  indtip = myscatter.indtip();
   n_geno = d3panels.matrixMaxAbs(pxg_data.geno);
   n_geno_sq = n_geno * n_geno;
   if (pointcolor != null) {
@@ -210,29 +211,74 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   m1_current = -1;
   m2_current = -1;
   callback = function(sl) {
-    var update, v;
+    var abs_g1, abs_g2, g1, g1_lab, g2, g2_lab, update, v;
     v = sl.stopindex();
     update = m1_current !== v[0] || m2_current !== v[1];
     m1_current = v[0];
     m2_current = v[1];
     if (update) {
-      geno1 = d3.range(point_data.x.length).map(function(i) {
-        return Math.abs(pxg_data.geno[v[0]][i]);
+      g1 = d3.range(point_data.x.length).map(function(i) {
+        return pxg_data.geno[v[0]][i];
       });
-      geno2 = d3.range(point_data.x.length).map(function(i) {
-        return Math.abs(pxg_data.geno[v[1]][i]);
+      g2 = d3.range(point_data.x.length).map(function(i) {
+        return pxg_data.geno[v[1]][i];
       });
+      abs_g1 = (function() {
+        var len, m, results1;
+        results1 = [];
+        for (m = 0, len = g1.length; m < len; m++) {
+          x = g1[m];
+          results1.push(Math.abs(x));
+        }
+        return results1;
+      })();
+      abs_g2 = (function() {
+        var len, m, results1;
+        results1 = [];
+        for (m = 0, len = g2.length; m < len; m++) {
+          x = g2[m];
+          results1.push(Math.abs(x));
+        }
+        return results1;
+      })();
       group = (function() {
         var results1;
         results1 = [];
-        for (i in geno1) {
-          results1.push(geno1[i] - 1 + (geno2[i] - 1) * n_geno);
+        for (i in g1) {
+          results1.push(abs_g1[i] - 1 + (abs_g2[i] - 1) * n_geno);
         }
         return results1;
       })();
       points.attr("fill", function(d, i) {
         return pointcolor[group[i]];
       });
+      g1_lab = g1.map(function(g) {
+        var glab;
+        glab = pxg_data.genonames[Math.abs(g) - 1];
+        if (g < 0) {
+          return "(" + glab + ")";
+        } else {
+          return "" + glab;
+        }
+      });
+      g2_lab = g2.map(function(g) {
+        var glab;
+        glab = pxg_data.genonames[Math.abs(g) - 1];
+        if (g < 0) {
+          return "(" + glab + ")";
+        } else {
+          return "" + glab;
+        }
+      });
+      if (v[0] > v[1]) {
+        indtip.html(function(d, i) {
+          return pxg_data.indID[i] + ": " + g2_lab[i] + "&rarr;" + g1_lab[i];
+        });
+      } else {
+        indtip.html(function(d, i) {
+          return pxg_data.indID[i] + ": " + g1_lab[i] + "&rarr;" + g2_lab[i];
+        });
+      }
       if (lod_data.lod != null) {
         return lod_points.attr("cx", function(d, i) {
           return mylodchart.xscale()[lod_data.chr[0]](marker_pos[v[i]]);

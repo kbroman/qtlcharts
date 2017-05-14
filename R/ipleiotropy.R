@@ -148,6 +148,9 @@ function(cross, scanoneOutput=NULL, pheno.col=1:2, lodcolumn=1:2,
     pxg_list$pheno <- NULL
     pxg_list$phenames <- colnames(cross$pheno)[pheno.col]
 
+    # simplify grabbing the genonames for this case
+    pxg_list$genonames <- pxg_list$genonames[[1]]
+
     defaultAspect <- ifelse(is.null(scanoneOutput), 1, 2) # width/height
     browsersize <- getPlotSize(defaultAspect)
 

@@ -16,13 +16,13 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     lod_ylim = chartOpts?.lod_ylim ? null                               # y-axis limits in LOD curve panel
     lod_nyticks = chartOpts?.lod_nyticks ? 5                            # number of ticks in y-axis in LOD curve panel
     lod_yticks = chartOpts?.lod_yticks ? null                           # vector of tick positions for y-axis in LOD curve panel
-    linecolor = chartOpts?.lod_linecolor ? ["darkslateblue", "orchid"]  # line colors for LOD curves
-    linewidth = chartOpts?.linewidth ? 2                            # line width for LOD curves
+    linecolor = chartOpts?.linecolor ? ["darkslateblue", "orchid"]      # line colors for LOD curves
+    linewidth = chartOpts?.linewidth ? 2                                # line width for LOD curves
     lod_title = chartOpts?.lod_title ? ""                               # title of LOD curve panel
     lod_xlab = chartOpts?.lod_xlab ? "Chromosome"                       # x-axis label for LOD curve panel
     lod_ylab = chartOpts?.lod_ylab ? "LOD score"                        # y-axis label for LOD curve panel
     lod_rotate_ylab = chartOpts?.lod_rotate_ylab ? null                 # indicates whether to rotate the y-axis label 90 degrees, in LOD curve panel
-    pointcolor = chartOpts?.pointcolor ? null                           # vector of point colors for phenotype scatter plot
+    pointcolor = chartOpts?.pointcolor ? null                           # vector of point colors for phenotype scatter plot (non-recombinants first, then all of the recombinants)
     pointstroke = chartOpts?.pointstroke ? "black"                      # color of outer circle for points, in scatterplot
     pointsize = chartOpts?.pointsize ? 3                                # point size in phe-by-gen paenl
     scat_ylim = chartOpts?.scat_ylim ? null                             # y-axis limits in scatterplot
@@ -91,6 +91,9 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
             tipclass:widgetdivid})
 
 
+        lod2_data = {chr:lod_data.chr, pos:lod_data.pos, lod:lod_data.lod2, marker:lod_data.marker}
+        my_second_curve(mylodchart, lod2_data)
+
         lod_points = g_lod.selectAll("empty")
                           .data([0,1])
                           .enter()
@@ -100,9 +103,8 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
                           .attr("r", pointsize)
                           .attr("fill", (i) -> linecolor[i])
                           .attr("stroke", (i) -> pointstroke)
+                          .style("pointer-events", "none")
 
-        lod2_data = {chr:lod_data.chr, pos:lod_data.pos, lod:lod_data.lod2, marker:lod_data.marker}
-        my_second_curve(mylodchart, lod2_data)
 
     #####
     # scatterplot
@@ -141,6 +143,7 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
     myscatter(g_scat, point_data)
     points = myscatter.points()
+    indtip = myscatter.indtip()
 
     #####
     # callback for sliders
@@ -183,10 +186,24 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         m2_current = v[1]
 
         if update
-            geno1 = d3.range(point_data.x.length).map((i) -> Math.abs(pxg_data.geno[v[0]][i]))
-            geno2 = d3.range(point_data.x.length).map((i) -> Math.abs(pxg_data.geno[v[1]][i]))
-            group = (geno1[i]-1 + (geno2[i]-1)*n_geno for i of geno1)
+            g1 = d3.range(point_data.x.length).map((i) -> pxg_data.geno[v[0]][i])
+            g2 = d3.range(point_data.x.length).map((i) -> pxg_data.geno[v[1]][i])
+            abs_g1 = (Math.abs(x) for x in g1)
+            abs_g2 = (Math.abs(x) for x in g2)
+            group = (abs_g1[i]-1 + (abs_g2[i]-1)*n_geno for i of g1)
             points.attr("fill", (d,i) -> pointcolor[group[i]])
+
+            g1_lab = g1.map((g) ->
+                glab = pxg_data.genonames[Math.abs(g)-1]
+                if g < 0 then "(#{glab})" else "#{glab}")
+            g2_lab = g2.map((g) ->
+                glab = pxg_data.genonames[Math.abs(g)-1]
+                if g < 0 then "(#{glab})" else "#{glab}")
+
+            if v[0] > v[1] # make sure the genotypes show in the right order
+                indtip.html((d,i) -> "#{pxg_data.indID[i]}: #{g2_lab[i]}&rarr;#{g1_lab[i]}")
+            else
+                indtip.html((d,i) -> "#{pxg_data.indID[i]}: #{g1_lab[i]}&rarr;#{g2_lab[i]}")
 
             if lod_data.lod?
                 lod_points.attr("cx", (d,i) -> mylodchart.xscale()[lod_data.chr[0]](marker_pos[v[i]]))

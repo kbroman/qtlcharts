@@ -2,7 +2,7 @@
 var ipleiotropy;
 
 ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
-  var button_color, callback, chartdivid, dark, g_lod, g_scat, g_slider, geno1, geno2, group, height, i, j, light, linecolor, linewidth, lod2_data, lod_at_marker, lod_axispos, lod_nyticks, lod_points, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, m1_current, m2_current, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, n_geno, n_geno_sq, point_data, pointcolor, points, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref4, ref5, ref6, ref7, ref8, ref9, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, widgetdivid, width, wleft, wright, x;
+  var button_color, callback, chartdivid, dark, g_lod, g_scat, g_slider, geno1, geno2, group, height, homozygotes, i, initial_value, k, l, light, linecolor, linewidth, lod2_data, lod_at_marker, lod_axispos, lod_nyticks, lod_points, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, m1_current, m2_current, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, n_color, n_geno, n_geno_sq, point_data, pointcolor, points, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref4, ref5, ref6, ref7, ref8, ref9, results, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, widgetdivid, width, wleft, wright, x;
   markers = (function() {
     var results;
     results = [];
@@ -175,7 +175,8 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   n_geno = d3panels.matrixMaxAbs(pxg_data.geno);
   n_geno_sq = n_geno * n_geno;
   if (pointcolor != null) {
-    if (pointcolor.length < n_geno_sq) {
+    n_color = pointcolor.length;
+    if (n_color < n_geno_sq) {
       d3.range(n_geno_sq - n_color).map(function(i) {
         return pointcolor.push("#aaa");
       });
@@ -189,8 +190,15 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   pointcolor = [];
   dark.reverse();
   light.reverse();
-  for (i = j = 0, ref35 = n_geno_sq; 0 <= ref35 ? j < ref35 : j > ref35; i = 0 <= ref35 ? ++j : --j) {
-    if (Math.abs(Math.sqrt(i + 1) - Math.round(Math.sqrt(i + 1))) < 1e-6) {
+  homozygotes = (function() {
+    results = [];
+    for (var k = 0; 0 <= n_geno ? k < n_geno : k > n_geno; 0 <= n_geno ? k++ : k--){ results.push(k); }
+    return results;
+  }).apply(this).map(function(i) {
+    return i * n_geno + i;
+  });
+  for (i = l = 0, ref35 = n_geno_sq; 0 <= ref35 ? l < ref35 : l > ref35; i = 0 <= ref35 ? ++l : --l) {
+    if (homozygotes.indexOf(i) > -1) {
       pointcolor.push(dark.pop());
     } else {
       pointcolor.push(light.pop());
@@ -215,12 +223,12 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
         return Math.abs(pxg_data.geno[v[1]][i]);
       });
       group = (function() {
-        var results;
-        results = [];
+        var results1;
+        results1 = [];
         for (i in geno1) {
-          results.push(geno1[i] - 1 + (geno2[i] - 1) * n_geno);
+          results1.push(geno1[i] - 1 + (geno2[i] - 1) * n_geno);
         }
-        return results;
+        return results1;
       })();
       points.attr("fill", function(d, i) {
         return pointcolor[group[i]];
@@ -244,15 +252,25 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     rectcolor: rectcolor
   });
   marker_pos = (function() {
-    var results;
-    results = [];
+    var results1;
+    results1 = [];
     for (i in lod_data.pos) {
       if (lod_data.marker[i] !== "") {
-        results.push(lod_data.pos[i]);
+        results1.push(lod_data.pos[i]);
       }
     }
-    return results;
+    return results1;
   })();
-  myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos);
+  if (lod_data.lod != null) {
+    initial_value = [0, 1].map(function(j) {
+      var max_index, max_lod;
+      max_lod = d3.max(lod_at_marker[j]);
+      max_index = lod_at_marker[j].indexOf(max_lod);
+      return marker_pos[max_index];
+    });
+  } else {
+    initial_value = null;
+  }
+  myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos, initial_value);
   return callback(myslider);
 };

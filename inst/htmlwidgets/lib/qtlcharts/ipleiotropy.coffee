@@ -150,7 +150,8 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     n_geno = d3panels.matrixMaxAbs(pxg_data.geno)
     n_geno_sq = n_geno*n_geno
     if pointcolor?
-        if pointcolor.length < n_geno_sq
+        n_color = pointcolor.length
+        if n_color < n_geno_sq
             d3.range(n_geno_sq-n_color).map( (i) -> pointcolor.push("#aaa"))
         dark = pointcolor[0...n_geno]
         light = pointcolor[n_geno...n_geno_sq]
@@ -161,8 +162,9 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     pointcolor = []
     dark.reverse()
     light.reverse()
+    homozygotes = [0...n_geno].map((i) -> i*n_geno+i)
     for i in [0...n_geno_sq]
-        if Math.abs(Math.sqrt(i+1) - Math.round(Math.sqrt(i+1))) < 1e-6
+        if homozygotes.indexOf(i) > -1
             pointcolor.push(dark.pop())
         else
             pointcolor.push(light.pop())

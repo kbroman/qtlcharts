@@ -36,6 +36,7 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     slider_height = chartOpts?.slider_height ? 80                       # height of slider
     slider_color  = chartOpts?.slider_color ? "#E6E6E6"                 # color of slider bar
     button_color  = chartOpts?.button_color ? "#E6E6E6"                 # color of rectangular part of buttons
+    ticks_at_markers = chartOpts?.ticks_at_markers ? true               # if true, put tick marks at the marker positions (above the slider)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -221,7 +222,8 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         width:wleft
         margin:margin
         buttoncolor:button_color
-        rectcolor:rectcolor})
+        rectcolor:rectcolor
+        ticks_at_stops:ticks_at_markers})
 
     marker_pos = (lod_data.pos[i] for i of lod_data.pos when lod_data.marker[i] != "")
 

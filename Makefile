@@ -19,19 +19,6 @@ ${CHARTEX}/%.html: ${CHARTEX}/R/%_example.R
 
 #------------------------------------------------------------
 
-THIS_VIGNETTES= assets/vignettes
-QTLCHARTS_VIGNETTES = ../qtlcharts/vignettes
-
-VIGNETTES = ${THIS_VIGNETTES}/Rmarkdown.html ${THIS_VIGNETTES}/userGuide.html ${THIS_VIGNETTES}/chartOpts.html ${THIS_VIGNETTES}/develGuide.html
-vignettes: ${VIGNETTES}
-
-${THIS_VIGNETTES}/%.html: ${QTLCHARTS_VIGNETTES}/%.Rmd
-	cd $(<D); \
-	R -e "rmarkdown::render('$(<F)')"; \
-	mv $(@F) ../../Web/$(@D)/
-
-#------------------------------------------------------------
-
 # Add list of chartOpts to vignette
 
 # javascript for the chart functions (outside this repo, in ../qtlcharts/)
@@ -52,9 +39,10 @@ CHARTS = $(CHART_DIR)/iplotScanone_noeff.coffee \
 		 $(CHART_DIR)/iplot.coffee \
 		 $(CHART_DIR)/iplotScantwo.coffee \
 		 $(CHART_DIR)/scat2scat.coffee \
-		 $(CHART_DIR)/itriplot.coffee
+		 $(CHART_DIR)/itriplot.coffee \
+		 $(CHART_DIR)/ipleiotropy.coffee \
 
-vignettes/chartOpts.Rmd: assets/vignettes/chartOpts/grab_chartOpts.rb \
+assets/vignettes/chartOpts.Rmd: assets/vignettes/chartOpts/grab_chartOpts.rb \
 						 assets/vignettes/chartOpts/chartOpts_source.Rmd \
 						 assets/vignettes/chartOpts/multiversions.csv \
 						 $(CHARTS)

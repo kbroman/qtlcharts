@@ -86,7 +86,7 @@ function(cross, scanoneOutput=NULL, pheno.col=1:2, lodcolumn=1:2,
         pheno.col <- m
     }
     if(any(is.na(pheno.col) | pheno.col < 1 | pheno.col > qtl::nphe(cross)))
-       stop("pheno.col should be in {1, 2, ..., ", qtl::nphe(cross))
+       stop("pheno.col should be in {1, 2, ..., ", qtl::nphe(cross), "}")
 
     if(class(cross)[2] != "cross")
         stop('"cross" should have class "cross".')

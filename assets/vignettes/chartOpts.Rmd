@@ -658,9 +658,9 @@ customization options for each chart.
 
 `scat_yticks = NULL` &mdash; vector of tick positions for y-axis in scatterplot
 
-`scat_xlab = "Phenotype 1"` &mdash; x-axis label in scatterplot
+`scat_xlab = NULL` &mdash; x-axis label in scatterplot
 
-`scat_ylab = "Phenotype 2"` &mdash; y-axis label in scatterplot
+`scat_ylab = NULL` &mdash; y-axis label in scatterplot
 
 `scat_rotate_ylab = NULL` &mdash; indicates whether to rotate the y-axis label 90 degrees, in scatterplot
 

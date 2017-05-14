@@ -4,17 +4,17 @@ all: chartexamples vignettes
 # Examples
 CHARTEX = example
 
-CHARTEXAMPLES = ${CHARTEX}/iboxplot.html ${CHARTEX}/iplotCorr.html \
-				${CHARTEX}/iplotCurves.html ${CHARTEX}/iplotMScanone.html \
-				${CHARTEX}/iplotMap.html ${CHARTEX}/iplotScanone.html \
-				${CHARTEX}/iheatmap.html ${CHARTEX}/iplotRF.html \
-				${CHARTEX}/iplotScantwo.html
-chartexamples: ${CHARTEXAMPLES}
+CHARTEXAMPLES = $(CHARTEX)/iboxplot.html $(CHARTEX)/iplotCorr.html \
+				$(CHARTEX)/iplotCurves.html $(CHARTEX)/iplotMScanone.html \
+				$(CHARTEX)/iplotMap.html $(CHARTEX)/iplotScanone.html \
+				$(CHARTEX)/iheatmap.html $(CHARTEX)/iplotRF.html \
+				$(CHARTEX)/iplotScantwo.html
+chartexamples: $(CHARTEXAMPLES)
 
-${CHARTEX}/iboxplot.html: ${CHARTEX}/R/iboxplot_example.R ${CHARTEX}/R/iboxplot_data.RData
+$(CHARTEX)/iboxplot.html: $(CHARTEX)/R/iboxplot_example.R $(CHARTEX)/R/iboxplot_data.RData
 	cd $(<D); R CMD BATCH --no-save $(<F)
 
-${CHARTEX}/%.html: ${CHARTEX}/R/%_example.R
+$(CHARTEX)/%.html: $(CHARTEX)/R/%_example.R
 	cd $(<D); R CMD BATCH --no-save $(<F)
 
 #------------------------------------------------------------

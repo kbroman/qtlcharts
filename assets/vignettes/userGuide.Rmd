@@ -230,7 +230,7 @@ vignette("Rmarkdown", "qtlcharts")
 
 
 
-## Examples of the use of the charts
+## Examples of the charts' use
 
 ### `iplotCorr`
 
@@ -915,6 +915,32 @@ very large number of markers.
 ```{r iplotRF_lodlim, eval=FALSE}
 iplotRF(badorder, chartOpts=list(lodlim=c(2, 15)))
 ```
+
+### `ipleiotropy`
+
+`ipleiotropy` is for exploring potential pleiotropy for a pair of
+traits: a double-slider can be used to select two QTL positions on a
+chromosome which are then used to color the points in a scatterplot of
+two phenotypes.
+
+Let's look at the gravitropism phenotype for a pair of times in the
+`grav` data ([Moore et al.
+2013](https://www.ncbi.nlm.nih.gov/pubmed/23979570)).
+
+```{r prep_ipleiotropy, eval=FALSE}
+data(grav)
+grav <- calc.genoprob(grav, step=1)
+out <- scanone(grav, pheno.col=c(156, 241), method="hk")
+```
+
+We then call `ipleiotropy` with the cross, the `scanone` output, and
+indications of the phenotype columns, LOD score columns, and
+chromosome (a single one chromosome must be selected).
+
+```{r ipleiotropy, eval=FALSE}
+ipleiotropy(grav, out, pheno.col=c(156, 241), lodcolumn=1:2, chr=1)
+```
+
 
 ### `scat2scat`
 

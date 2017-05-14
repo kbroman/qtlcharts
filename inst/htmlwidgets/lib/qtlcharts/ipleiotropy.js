@@ -44,8 +44,8 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   scat_ylim = (ref21 = chartOpts != null ? chartOpts.scat_ylim : void 0) != null ? ref21 : null;
   scat_nyticks = (ref22 = chartOpts != null ? chartOpts.scat_nyticks : void 0) != null ? ref22 : 5;
   scat_yticks = (ref23 = chartOpts != null ? chartOpts.scat_yticks : void 0) != null ? ref23 : null;
-  scat_xlab = (ref24 = chartOpts != null ? chartOpts.scat_xlab : void 0) != null ? ref24 : "Phenotype 1";
-  scat_ylab = (ref25 = chartOpts != null ? chartOpts.scat_ylab : void 0) != null ? ref25 : "Phenotype 2";
+  scat_xlab = (ref24 = chartOpts != null ? chartOpts.scat_xlab : void 0) != null ? ref24 : null;
+  scat_ylab = (ref25 = chartOpts != null ? chartOpts.scat_ylab : void 0) != null ? ref25 : null;
   scat_rotate_ylab = (ref26 = chartOpts != null ? chartOpts.scat_rotate_ylab : void 0) != null ? ref26 : null;
   scat_axispos = (ref27 = (ref28 = chartOpts != null ? chartOpts.scat_axispos : void 0) != null ? ref28 : chartOpts != null ? chartOpts.axispos : void 0) != null ? ref27 : {
     xtitle: 25,
@@ -139,6 +139,12 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   } else {
     wright = width;
     wleft = width;
+  }
+  if (scat_xlab == null) {
+    scat_xlab = pxg_data.phenames[0];
+  }
+  if (scat_ylab == null) {
+    scat_ylab = pxg_data.phenames[1];
   }
   myscatter = d3panels.scatterplot({
     height: height - slider_height,

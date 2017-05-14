@@ -28,8 +28,8 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     scat_ylim = chartOpts?.scat_ylim ? null                             # y-axis limits in scatterplot
     scat_nyticks = chartOpts?.scat_nyticks ? 5                          # number of ticks in y-axis in scatterplot
     scat_yticks = chartOpts?.scat_yticks ? null                         # vector of tick positions for y-axis in scatterplot
-    scat_xlab = chartOpts?.scat_xlab ? "Phenotype 1"                    # x-axis label in scatterplot
-    scat_ylab = chartOpts?.scat_ylab ? "Phenotype 2"                    # y-axis label in scatterplot
+    scat_xlab = chartOpts?.scat_xlab ? null                             # x-axis label in scatterplot
+    scat_ylab = chartOpts?.scat_ylab ? null                             # y-axis label in scatterplot
     scat_rotate_ylab = chartOpts?.scat_rotate_ylab ? null               # indicates whether to rotate the y-axis label 90 degrees, in scatterplot
     scat_axispos = chartOpts?.scat_axispos ? chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
     scat_titlepos = chartOpts?.scat_titlepos ? chartOpts?.titlepos ? 20 # position of title for scatterplot, in pixels
@@ -119,6 +119,9 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     else
         wright = width
         wleft = width
+
+    scat_xlab = pxg_data.phenames[0] unless scat_xlab?
+    scat_ylab = pxg_data.phenames[1] unless scat_ylab?
 
     myscatter = d3panels.scatterplot({
         height:height-slider_height

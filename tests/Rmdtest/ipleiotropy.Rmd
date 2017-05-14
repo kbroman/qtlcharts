@@ -26,3 +26,8 @@ ipleiotropy(grav, out.hk, lodcolumn=1:2, pheno.col=c(156, 241), chr=1)
 ```{r ipleiotropy_nolod}
 ipleiotropy(grav, pheno.col=c(156, 241), chr=1)
 ```
+
+```{r ipleiotropy_interval}
+ipleiotropy(grav, out.hk, lodcolumn=1:2, pheno.col=c(156, 241), chr=1,
+            interval=c(53,68))
+```

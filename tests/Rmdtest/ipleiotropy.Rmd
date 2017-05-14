@@ -1,0 +1,33 @@
+---
+title: ipleiotropy within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](http://kbroman.org/qtlcharts) function `ipleiotropy`.
+
+```{r load_data, message=FALSE}
+knitr::opts_chunk$set(fig.width=9, fig.height=6)
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+data(grav)
+```
+
+```{r run_scanone}
+grav <- calc.genoprob(grav, step=1)
+out.hk <- scanone(grav, pheno.col=c(156, 241), method="hk")
+```
+
+```{r ipleiotropy}
+ipleiotropy(grav, out.hk, lodcolumn=1:2, pheno.col=c(156, 241), chr=1)
+```
+
+```{r ipleiotropy_nolod}
+ipleiotropy(grav, pheno.col=c(156, 241), chr=1)
+```
+
+```{r ipleiotropy_interval}
+ipleiotropy(grav, out.hk, lodcolumn=1:2, pheno.col=c(156, 241), chr=1,
+            interval=c(53,68))
+```

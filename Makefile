@@ -24,6 +24,7 @@ JSCHARTS = $(CHART_DIR)/iplotScanone_noeff.js \
 		   $(CHART_DIR)/iplotCorr.js \
 		   $(CHART_DIR)/iplotCorr_noscat.js \
 		   $(CHART_DIR)/iboxplot.js \
+		   $(CHART_DIR)/ipleiotropy.js \
 		   $(CHART_DIR)/iplotCurves.js \
 		   $(CHART_DIR)/iplotMap.js \
 		   $(CHART_DIR)/iplotRF.js \
@@ -48,6 +49,7 @@ JSWIDGETS = $(WIDGET_DIR)/iplot.js \
 			$(WIDGET_DIR)/iheatmap.js \
 			$(WIDGET_DIR)/iboxplot.js \
 			$(WIDGET_DIR)/iplotCorr.js \
+			$(WIDGET_DIR)/ipleiotropy.js \
 			$(WIDGET_DIR)/iplotCurves.js \
 			$(WIDGET_DIR)/iplotRF.js \
 			$(WIDGET_DIR)/iplotScanone.js \

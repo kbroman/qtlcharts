@@ -6,7 +6,7 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
     # chartOpts start
     height = chartOpts?.height ? 500                 # height of chart in pixels
     width = chartOpts?.width ? 800                   # width of chart in pixels
-    title1 = chartOpts?.title1 ? ""                  # title for left panel
+    title1 = chartOpts?.title1 ? chartOpts?.title ? ""  # title for left panel
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}     # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
     titlepos = chartOpts?.titlepos ? 20              # position of chart title in pixels

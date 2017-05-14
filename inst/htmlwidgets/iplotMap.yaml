@@ -22,7 +22,7 @@ dependencies:
     style: themes/smoothness/jquery-ui.min.css
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 1.3.2
+    version: 1.3.3
     script:
       - d3panels.min.js
     style: d3panels.min.css

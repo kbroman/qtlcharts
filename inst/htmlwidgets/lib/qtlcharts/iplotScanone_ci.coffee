@@ -86,6 +86,8 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
         means = []
         se = []
+        low = []
+        high = []
         for j in [1..genonames.length]
             phesub = (p for p,i in pxg_data.pheno when gabs[i] == j and p?)
 
@@ -97,11 +99,12 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
             if phesub.length>1
                 variance = (phesub.reduce (a,b) -> a+Math.pow(b-ave, 2))/(phesub.length-1)
                 se.push((Math.sqrt(variance/phesub.length)))
+                low.push(means[j-1] - 2*se[j-1])
+                high.push(means[j-1] + 2*se[j-1])
             else
                 se.push(null)
-
-        low = (means[i]-2*se[i] for i of means)
-        high = (means[i]+2*se[i] for i of means)
+                low.push(null)
+                high.push(null)
 
         range = [d3.min(low), d3.max(high)]
         if eff_ylim?

@@ -1,7 +1,9 @@
-## qtlcharts 0.9-1 (2017-05-14)
+## qtlcharts 0.9-2 (2017-05-15)
 
 - Added new tool for exploring pleiotropy between two traits,
   `ipleiotropy()`.
+
+- Added new chart option `pointsize` for `iplotCorr`.
 
 
 ## qtlcharts 0.8-2 (2017-05-11)

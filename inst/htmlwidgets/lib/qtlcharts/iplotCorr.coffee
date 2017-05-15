@@ -28,6 +28,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
     cortitle = chartOpts?.cortitle ? ""          # title for heatmap panel
     scattitle = chartOpts?.scattitle ? ""        # title for scatterplot panel
     scatcolors = chartOpts?.scatcolors ? null    # vector of point colors for scatterplot
+    pointsize = chartOpts?.pointsize ? 3         # size of points in scatterplot
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
@@ -229,7 +230,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                    .attr("r", (d) ->
                          x = data.dat[data.cols[i]][d]
                          y = data.dat[data.rows[j]][d]
-                         if x? and y? then 3 else null)
+                         if x? and y? then pointsize else null)
                    .attr("stroke", "black")
                    .attr("stroke-width", 1)
                    .attr("fill", (d) -> scatcolors[data.group[d]-1])

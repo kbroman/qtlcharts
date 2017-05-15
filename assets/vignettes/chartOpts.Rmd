@@ -612,6 +612,8 @@ customization options for each chart.
 
 `scatcolors = NULL` &mdash; vector of point colors for scatterplot
 
+`pointsize = 3` &mdash; size of points in scatterplot
+
 ### `ipleiotropy`
 
 `height = 450` &mdash; height of image in pixels

@@ -1,7 +1,10 @@
-## qtlcharts 0.9-2 (2017-05-15)
+## qtlcharts 0.9-3 (2017-05-15)
 
 - Added new tool for exploring pleiotropy between two traits,
   `ipleiotropy()`.
+
+- Fixed X chromosome case in iplotScantwo, so that only relevant
+  two-locus genotypes are shown.
 
 - Added new chart option `pointsize` for `iplotCorr`.
 

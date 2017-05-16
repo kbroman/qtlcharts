@@ -91,6 +91,7 @@ function(scantwoOutput, cross=NULL, lodcolumn=1, pheno.col=1, chr=NULL,
     else cross <- pheno <- NULL
 
     scantwo_list <- data4iplotScantwo(scantwoOutput)
+
     phenogeno_list <- cross4iplotScantwo(scantwoOutput, cross, pheno)
 
     defaultAspect <- 1 # width/height
@@ -288,6 +289,19 @@ cross4iplotScantwo <-
         genonames[[i]] <- qtl::getgenonames(crosstype, class(cross$geno[[i]]),
                                             "standard", sexpgm, cross.attr)
 
+    X_geno_by_sex <- NULL
+    chrtype <- vapply(cross$geno, class, "")
+    if(any(chrtype=="X")) {
+        f_sexpgm <- m_sexpgm <- sexpgm
+        f_sexpgm$sex[f_sexpgm$sex==1] <- 0
+        m_sexpgm$sex[m_sexpgm$sex==0] <- 1
+        X_geno_by_sex <- list(
+            qtl::getgenonames(crosstype, class(cross$geno[[i]]), "standard", f_sexpgm, cross.attr),
+            qtl::getgenonames(crosstype, class(cross$geno[[i]]), "standard", m_sexpgm, cross.attr)
+        )
+    }
+
+
     # chr for each marker
     chr <- as.character(map$chr)
     names(chr) <- names(geno) # the revised pseudomarker names
@@ -297,5 +311,6 @@ cross4iplotScantwo <-
     if(is.null(indID)) indID <- 1:qtl::nind(cross)
     indID <- as.character(indID)
 
-    list(geno=geno, chr=as.list(chr), genonames=genonames, pheno=pheno, indID=indID)
+    list(geno=geno, chr=as.list(chr), genonames=genonames, X_geno_by_sex=X_geno_by_sex,
+         pheno=pheno, indID=indID, chrtype=as.list(chrtype))
 }

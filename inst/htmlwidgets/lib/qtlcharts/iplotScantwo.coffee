@@ -257,20 +257,53 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
         g2 = pheno_and_geno.geno[mar2]
         chr1 = pheno_and_geno.chr[mar1]
         chr2 = pheno_and_geno.chr[mar2]
-        gnames1 = pheno_and_geno.genonames[chr1]
-        gnames2 = pheno_and_geno.genonames[chr2]
-        ng1 = gnames1.length
-        ng2 = gnames2.length
+        chrtype1 = pheno_and_geno.chrtype[chr1]
+        chrtype2 = pheno_and_geno.chrtype[chr2]
 
-        g = (g1[i] + (g2[i]-1)*ng1 for i of g1)
+        g = []
         gn1 = []
         gn2 = []
         cicolors_expanded = []
-        for i in [0...ng2]
-            for j in [0...ng1]
-                gn1.push(gnames1[j])
-                gn2.push(gnames2[i])
-                cicolors_expanded.push(cicolors[i])
+
+        # need to deal separately with X chr
+        # [this mess is because if females are AA/AB/BB and males AY/BY
+        #  we want to just show 3x3 + 2x2 = 13 possible two-locus genotypes,
+        #  not all (3+2)x(3+2) = 25]
+        if chr1 == chr2 and chrtype1=="X" and pheno_and_geno.X_geno_by_sex?
+            fgnames = pheno_and_geno.X_geno_by_sex[0]
+            mgnames = pheno_and_geno.X_geno_by_sex[1]
+            ngf = fgnames.length
+            ngm = mgnames.length
+            tmp = [0...(ngf+ngm)]
+            m = ((-1 for i of tmp) for j of tmp)
+            k = 0
+            for i in [0...ngf]
+                for j in [0...ngf]
+                    gn1.push(fgnames[j])
+                    gn2.push(fgnames[i])
+                    cicolors_expanded.push(cicolors[i])
+                    m[i][j] = k
+                    k++
+            for i in [0...ngm]
+                for j in [0...ngm]
+                    gn1.push(mgnames[j])
+                    gn2.push(mgnames[i])
+                    cicolors_expanded.push(cicolors[i])
+                    m[i+ngf][j+ngf] = k
+                    k++
+            g = (m[g1[i]-1][g2[i]-1]+1 for i of g1)
+        else
+            gnames1 = pheno_and_geno.genonames[chr1]
+            gnames2 = pheno_and_geno.genonames[chr2]
+            ng1 = gnames1.length
+            ng2 = gnames2.length
+
+            g = (g1[i] + (g2[i]-1)*ng1 for i of g1)
+            for i in [0...ng2]
+                for j in [0...ng1]
+                    gn1.push(gnames1[j])
+                    gn2.push(gnames2[i])
+                    cicolors_expanded.push(cicolors[i])
 
         mydotchart.remove() if mydotchart?
         mycichart.remove() if mycichart?

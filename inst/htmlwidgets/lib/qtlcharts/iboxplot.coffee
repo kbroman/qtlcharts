@@ -22,6 +22,9 @@ iboxplot = (widgetdiv, data, chartOpts) ->
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
 
+    # make sure list args have all necessary bits
+    margin = d3panels.check_listarg_v_default(margin, {left:60, top:20, right:60, bottom: 40})
+
     # make sure histcolors and qucolors are arrays
     histcolors = d3panels.forceAsArray(histcolors)
     qucolors = d3panels.forceAsArray(qucolors)

@@ -20,6 +20,13 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   scatcolors = (ref8 = chartOpts != null ? chartOpts.scatcolors : void 0) != null ? ref8 : null;
   pointsize = (ref9 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref9 : 3;
   chartdivid = (ref10 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref10 : 'chart';
+  margin = d3panels.check_listarg_v_default(margin, {
+    left: 70,
+    top: 40,
+    right: 5,
+    bottom: 70,
+    inner: 5
+  });
   panelheight = height - margin.top - margin.bottom;
   panelwidth = (width - 2 * margin.left - 2 * margin.right) / 2;
   min_paneldim = d3.min([panelheight, panelwidth]);

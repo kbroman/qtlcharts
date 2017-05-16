@@ -48,6 +48,19 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   yticks_ci = (ref31 = chartOpts != null ? chartOpts.yticks_ci : void 0) != null ? ref31 : null;
   nyticks_pxg = (ref32 = chartOpts != null ? chartOpts.nyticks_pxg : void 0) != null ? ref32 : 5;
   yticks_pxg = (ref33 = chartOpts != null ? chartOpts.yticks_pxg : void 0) != null ? ref33 : null;
+  margin = d3panels.check_listarg_v_default(margin, {
+    left: 60,
+    top: 50,
+    right: 10,
+    bottom: 40,
+    inner: 5
+  });
+  axispos = d3panels.check_listarg_v_default(axispos, {
+    xtitle: 25,
+    ytitle: 30,
+    xlabel: 5,
+    ylabel: 5
+  });
   div = d3.select(widgetdiv);
   widgetdivid = div.attr("id");
   svg = div.select("svg");

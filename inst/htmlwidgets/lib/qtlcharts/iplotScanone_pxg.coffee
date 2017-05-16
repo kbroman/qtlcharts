@@ -45,6 +45,12 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
 
+    # make sure list args have all necessary bits
+    margin = d3panels.check_listarg_v_default(margin, {left:60, top:40, right:40, bottom: 40, inner:5})
+    lod_axispos = d3panels.check_listarg_v_default(lod_axispos, {xtitle:25, ytitle:30, xlabel:5, ylabel:5})
+    eff_axispos = d3panels.check_listarg_v_default(eff_axispos, {xtitle:25, ytitle:30, xlabel:5, ylabel:5})
+    eff_yNA = d3panels.check_listarg_v_default(eff_yNA, {handle:true, force:false, width:15, gap:10})
+
     wright = width - wleft
 
     mylodchart = d3panels.lodchart({

@@ -58,6 +58,14 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
 
+    # make sure list args have all necessary bits
+    margin = d3panels.check_listarg_v_default(margin, {left:60, top:40, right:40, bottom: 40, inner:5})
+    axispos = d3panels.check_listarg_v_default(axispos, {xtitle:25, ytitle:30, xlabel:5, ylabel:5})
+    scat1_xNA = d3panels.check_listarg_v_default(scat1_xNA, {handle:true, force:false, width:15, gap:10})
+    scan1_yNA = d3panels.check_listarg_v_default(scat1_yNA, {handle:true, force:false, width:15, gap:10})
+    scat2_xNA = d3panels.check_listarg_v_default(scat2_xNA, {handle:true, force:false, width:15, gap:10})
+    scan2_yNA = d3panels.check_listarg_v_default(scat2_yNA, {handle:true, force:false, width:15, gap:10})
+
     # number of scatterplots
     nscatter = (scatter1_data?) + (scatter2_data?)
 

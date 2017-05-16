@@ -32,6 +32,9 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
+    # make sure list args have all necessary bits
+    margin = d3panels.check_listarg_v_default(margin, {left:70, top:40, right:5, bottom: 70, inner:5})
+
     panelheight = height - margin.top - margin.bottom
     panelwidth = (width - 2*margin.left - 2*margin.right)/2
     # force panelheight == panelwidth by taking minimum of the two

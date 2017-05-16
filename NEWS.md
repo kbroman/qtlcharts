@@ -1,4 +1,4 @@
-## qtlcharts 0.9-3 (2017-05-15)
+## qtlcharts 0.9-3 (2017-05-16)
 
 - Added new tool for exploring pleiotropy between two traits,
   `ipleiotropy()`.
@@ -7,6 +7,11 @@
   two-locus genotypes are shown.
 
 - Added new chart option `pointsize` for `iplotCorr`.
+
+- In the coffeescript functions, ensure that list arguments like
+  `margin` have all of the necessary components. This avoid the
+  problem of everything being messed up if for example `margin` is
+  specified within defining `margin.inner`.
 
 
 ## qtlcharts 0.8-2 (2017-05-11)

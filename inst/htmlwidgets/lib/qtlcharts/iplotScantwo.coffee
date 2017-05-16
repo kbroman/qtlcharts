@@ -40,6 +40,10 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     yticks_pxg = chartOpts?.yticks_pxg ? null          # vector of tick positions on y-axis in dot chart of phenotype x genotype
     # chartOpts end
 
+    # make sure list args have all necessary bits
+    margin = d3panels.check_listarg_v_default(margin, {left:60, top:50, right:10, bottom: 40, inner: 5})
+    axispos = d3panels.check_listarg_v_default(axispos, {xtitle:25, ytitle:30, xlabel:5, ylabel:5})
+
     # htmlwidget div element containing the chart, and its ID
     div = d3.select(widgetdiv)
     widgetdivid = div.attr("id")

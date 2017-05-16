@@ -61,6 +61,25 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   eff_titlepos = (ref34 = (ref35 = chartOpts != null ? chartOpts.eff_titlepos : void 0) != null ? ref35 : chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref34 : 20;
   chartdivid = (ref36 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref36 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
+  margin = d3panels.check_listarg_v_default(margin, {
+    left: 60,
+    top: 40,
+    right: 40,
+    bottom: 40,
+    inner: 5
+  });
+  lod_axispos = d3panels.check_listarg_v_default(lod_axispos, {
+    xtitle: 25,
+    ytitle: 30,
+    xlabel: 5,
+    ylabel: 5
+  });
+  eff_axispos = d3panels.check_listarg_v_default(eff_axispos, {
+    xtitle: 25,
+    ytitle: 30,
+    xlabel: 5,
+    ylabel: 5
+  });
   wright = width - wleft;
   mylodchart = d3panels.lodchart({
     height: height,

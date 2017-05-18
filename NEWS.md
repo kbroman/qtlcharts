@@ -1,4 +1,4 @@
-## qtlcharts 0.9-3 (2017-05-16)
+## qtlcharts 0.9-5 (2017-05-18)
 
 - Added new tool for exploring pleiotropy between two traits,
   `ipleiotropy()`.
@@ -12,6 +12,9 @@
   `margin` have all of the necessary components. This avoid the
   problem of everything being messed up if for example `margin` is
   specified within defining `margin.inner`.
+
+- `lodcharts` now includes a quantitative scale for position on the
+  x-axis in the case of a single chromosome
 
 
 ## qtlcharts 0.8-2 (2017-05-11)

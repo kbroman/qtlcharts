@@ -21,7 +21,7 @@ iplotScanone_noeff = (widgetdiv, data, chartOpts) ->
     pointsize = chartOpts?.pointsize ? chartOpts?.lod_pointsize ? 0               # size of points at markers (default = 0 corresponding to no visible points at markers)
     pointstroke = chartOpts?.pointstroke ? chartOpts?.lod_pointstroke ? "black"   # color of outer circle for points at markers
     title = chartOpts?.title ? chartOpts?.lod_title ? ""        # title of chart
-    xlab = chartOpts?.xlab ? chartOpts?.lod_xlab ? "Chromosome" # x-axis label
+    xlab = chartOpts?.xlab ? chartOpts?.lod_xlab ? null         # x-axis label
     ylab = chartOpts?.ylab ? chartOpts?.lod_ylab ? "LOD score"  # y-axis label
     rotate_ylab = chartOpts?.rotate_ylab ? chartOpts?.lod_rotate_ylab ? null      # indicates whether to rotate the y-axis label 90 degrees
     # chartOpts end

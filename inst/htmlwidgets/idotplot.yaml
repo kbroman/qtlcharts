@@ -17,12 +17,12 @@ dependencies:
       - index-min.js
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 1.3.5
+    version: 1.3.6
     script:
       - d3panels.min.js
     style: d3panels.min.css
   - name: qtlcharts_idotplot
     src: htmlwidgets/lib/qtlcharts
-    version: 0.9.1
+    version: 0.9.5
     script:
       - idotplot.js

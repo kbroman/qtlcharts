@@ -31,7 +31,7 @@ iplotScanone_noeff = function(widgetdiv, data, chartOpts) {
   pointsize = (ref20 = (ref21 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref21 : chartOpts != null ? chartOpts.lod_pointsize : void 0) != null ? ref20 : 0;
   pointstroke = (ref22 = (ref23 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref23 : chartOpts != null ? chartOpts.lod_pointstroke : void 0) != null ? ref22 : "black";
   title = (ref24 = (ref25 = chartOpts != null ? chartOpts.title : void 0) != null ? ref25 : chartOpts != null ? chartOpts.lod_title : void 0) != null ? ref24 : "";
-  xlab = (ref26 = (ref27 = chartOpts != null ? chartOpts.xlab : void 0) != null ? ref27 : chartOpts != null ? chartOpts.lod_xlab : void 0) != null ? ref26 : "Chromosome";
+  xlab = (ref26 = (ref27 = chartOpts != null ? chartOpts.xlab : void 0) != null ? ref27 : chartOpts != null ? chartOpts.lod_xlab : void 0) != null ? ref26 : null;
   ylab = (ref28 = (ref29 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref29 : chartOpts != null ? chartOpts.lod_ylab : void 0) != null ? ref28 : "LOD score";
   rotate_ylab = (ref30 = (ref31 = chartOpts != null ? chartOpts.rotate_ylab : void 0) != null ? ref31 : chartOpts != null ? chartOpts.lod_rotate_ylab : void 0) != null ? ref30 : null;
   chartdivid = (ref32 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref32 : 'chart';

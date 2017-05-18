@@ -40,7 +40,7 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   lod_pointsize = (ref17 = chartOpts != null ? chartOpts.lod_pointsize : void 0) != null ? ref17 : 0;
   lod_pointstroke = (ref18 = chartOpts != null ? chartOpts.lod_pointstroke : void 0) != null ? ref18 : "black";
   lod_title = (ref19 = chartOpts != null ? chartOpts.lod_title : void 0) != null ? ref19 : "";
-  lod_xlab = (ref20 = chartOpts != null ? chartOpts.lod_xlab : void 0) != null ? ref20 : "Chromosome";
+  lod_xlab = (ref20 = chartOpts != null ? chartOpts.lod_xlab : void 0) != null ? ref20 : null;
   lod_ylab = (ref21 = chartOpts != null ? chartOpts.lod_ylab : void 0) != null ? ref21 : "LOD score";
   lod_rotate_ylab = (ref22 = chartOpts != null ? chartOpts.lod_rotate_ylab : void 0) != null ? ref22 : null;
   eff_ylim = (ref23 = chartOpts != null ? chartOpts.eff_ylim : void 0) != null ? ref23 : null;

@@ -30,7 +30,7 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   colors = (ref13 = chartOpts != null ? chartOpts.colors : void 0) != null ? ref13 : ["slateblue", "white", "crimson"];
   zlim = (ref14 = chartOpts != null ? chartOpts.zlim : void 0) != null ? ref14 : null;
   zthresh = (ref15 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref15 : null;
-  xlab = (ref16 = chartOpts != null ? chartOpts.xlab : void 0) != null ? ref16 : "Chromosome";
+  xlab = (ref16 = chartOpts != null ? chartOpts.xlab : void 0) != null ? ref16 : null;
   ylab = (ref17 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref17 : "";
   zlab = (ref18 = chartOpts != null ? chartOpts.zlab : void 0) != null ? ref18 : "LOD score";
   linecolor = (ref19 = chartOpts != null ? chartOpts.linecolor : void 0) != null ? ref19 : "darkslateblue";

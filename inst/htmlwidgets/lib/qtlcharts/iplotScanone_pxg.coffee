@@ -4,6 +4,7 @@
 iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
     markers = (x for x of pxg_data.chrByMarkers)
+    cur_chr = ""
 
     # chartOpts start
     height = chartOpts?.height ? 450                                    # height of image in pixels
@@ -84,8 +85,6 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
     mypxgchart = null
     plotPXG = (markername, markerindex) ->
-        mypxgchart.remove() if mypxgchart?
-
         g = pxg_data.geno[markerindex]
         gabs = (Math.abs(x) for x in g)
         inferred = (x < 0 for x in g)
@@ -94,39 +93,82 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         chrtype = pxg_data.chrtype[chr]
         genonames = pxg_data.genonames[chrtype]
 
-        mypxgchart = d3panels.dotchart({
-            height:height
-            width:wright
-            margin:margin
-            xcategories:[1..genonames.length]
-            xcatlabels:genonames
-            dataByInd:false
-            title:markername
-            axispos:eff_axispos
-            titlepos:eff_titlepos
-            xlab:eff_xlab
-            ylab:eff_ylab
-            rotate_ylab:eff_rotate_ylab
-            ylim:eff_ylim
-            nyticks:eff_nyticks
-            yticks:eff_yticks
-            pointcolor:eff_pointcolor
-            pointstroke:eff_pointstroke
-            pointsize:eff_pointsize
-            rectcolor:rectcolor
-            xjitter:xjitter
-            yNA:eff_yNA
-            tipclass:widgetdivid})
+        if cur_chr != chr # changing chromosome
+            # remove and re-create panel
+            mypxgchart.remove() if mypxgchart?
 
-        g_pxg = svg.append("g")
-           .attr("id", "pxgchart")
-           .attr("transform", "translate(#{wleft},0)")
-        mypxgchart(g_pxg, {x:gabs, y:pxg_data.pheno, indID:pxg_data.indID})
+            mypxgchart = d3panels.dotchart({
+                height:height
+                width:wright
+                margin:margin
+                xcategories:[1..genonames.length]
+                xcatlabels:genonames
+                dataByInd:false
+                title:markername
+                axispos:eff_axispos
+                titlepos:eff_titlepos
+                xlab:eff_xlab
+                ylab:eff_ylab
+                rotate_ylab:eff_rotate_ylab
+                ylim:eff_ylim
+                nyticks:eff_nyticks
+                yticks:eff_yticks
+                pointcolor:eff_pointcolor
+                pointstroke:eff_pointstroke
+                pointsize:eff_pointsize
+                rectcolor:rectcolor
+                xjitter:xjitter
+                yNA:eff_yNA
+                tipclass:widgetdivid})
 
-        mypxgchart.points()
-                  .attr("fill", (d,i) ->
-                            return eff_pointcolorhilit if inferred[i]
-                            eff_pointcolor)
+            g_pxg = svg.append("g")
+               .attr("id", "pxgchart")
+               .attr("transform", "translate(#{wleft},0)")
+            mypxgchart(g_pxg, {x:gabs, y:pxg_data.pheno, indID:pxg_data.indID})
+
+            # re-color points
+            mypxgchart.points()
+                      .attr("fill", (d,i) ->
+                                return eff_pointcolorhilit if inferred[i]
+                                eff_pointcolor)
+
+        else # same chromosome; animate points
+            # grab scale and get info to take inverse
+            xscale = mypxgchart.xscale()
+            pos1 = xscale(1)
+            dpos = xscale(2) - xscale(1)
+            point_jitter = (d) ->
+                u = (d - pos1)/dpos
+                u - Math.round(u)
+
+            # move points to new x-axis position
+            points = mypxgchart.points()
+                      .transition().duration(1000)
+                      .attr("cx", (d,i) ->
+                          cx = d3.select(this).attr("cx")
+                          u = point_jitter(cx)
+                          xscale(gabs[i] + u))
+                      .attr("fill", (d,i) ->
+                          return eff_pointcolorhilit if inferred[i]
+                          eff_pointcolor)
+
+            # use force to move them apart again
+            scaledPoints = []
+            points.each((d,i) -> scaledPoints.push({
+                x: +d3.select(this).attr("cx")
+                y: +d3.select(this).attr("cy")
+                fy: +d3.select(this).attr("cy")
+                truex: xscale(gabs[i])}))
+
+            force = d3.forceSimulation(scaledPoints)
+                      .force("x", d3.forceX((d) -> d.truex))
+                      .force("collide", d3.forceCollide(eff_pointsize*1.1))
+                      .stop()
+            [0..30].map((d) ->
+                force.tick()
+                points.attr("cx", (d,i) -> scaledPoints[i].x))
+
+        cur_chr = chr
 
     # animate points at markers on click
     mylodchart.markerSelect()

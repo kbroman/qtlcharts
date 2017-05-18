@@ -2,7 +2,7 @@
 var iplotScanone_pxg;
 
 iplotScanone_pxg = function(widgetdiv, lod_data, pxg_data, chartOpts) {
-  var altrectcolor, chartdivid, chrGap, eff_axispos, eff_nyticks, eff_pointcolor, eff_pointcolorhilit, eff_pointsize, eff_pointstroke, eff_rotate_ylab, eff_titlepos, eff_xlab, eff_yNA, eff_ylab, eff_ylim, eff_yticks, g_lod, height, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_pointcolor, lod_pointsize, lod_pointstroke, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, markers, mylodchart, mypxgchart, plotPXG, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref37, ref38, ref39, ref4, ref40, ref41, ref42, ref43, ref44, ref5, ref6, ref7, ref8, ref9, svg, widgetdivid, width, wleft, wright, x, xjitter;
+  var altrectcolor, chartdivid, chrGap, cur_chr, eff_axispos, eff_nyticks, eff_pointcolor, eff_pointcolorhilit, eff_pointsize, eff_pointstroke, eff_rotate_ylab, eff_titlepos, eff_xlab, eff_yNA, eff_ylab, eff_ylim, eff_yticks, g_lod, height, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_pointcolor, lod_pointsize, lod_pointstroke, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, markers, mylodchart, mypxgchart, plotPXG, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref37, ref38, ref39, ref4, ref40, ref41, ref42, ref43, ref44, ref5, ref6, ref7, ref8, ref9, svg, widgetdivid, width, wleft, wright, x, xjitter;
   markers = (function() {
     var results;
     results = [];
@@ -11,6 +11,7 @@ iplotScanone_pxg = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     }
     return results;
   })();
+  cur_chr = "";
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 450;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1200;
   wleft = (ref2 = chartOpts != null ? chartOpts.wleft : void 0) != null ? ref2 : width * 0.7;
@@ -123,10 +124,7 @@ iplotScanone_pxg = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   mylodchart(g_lod, lod_data);
   mypxgchart = null;
   plotPXG = function(markername, markerindex) {
-    var chr, chrtype, g, g_pxg, gabs, genonames, inferred, j, ref45, results;
-    if (mypxgchart != null) {
-      mypxgchart.remove();
-    }
+    var chr, chrtype, dpos, force, g, g_pxg, gabs, genonames, inferred, j, k, point_jitter, points, pos1, ref45, results, results1, scaledPoints, xscale;
     g = pxg_data.geno[markerindex];
     gabs = (function() {
       var j, len, results;
@@ -149,46 +147,94 @@ iplotScanone_pxg = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     chr = pxg_data.chrByMarkers[markername];
     chrtype = pxg_data.chrtype[chr];
     genonames = pxg_data.genonames[chrtype];
-    mypxgchart = d3panels.dotchart({
-      height: height,
-      width: wright,
-      margin: margin,
-      xcategories: (function() {
-        results = [];
-        for (var j = 1, ref45 = genonames.length; 1 <= ref45 ? j <= ref45 : j >= ref45; 1 <= ref45 ? j++ : j--){ results.push(j); }
-        return results;
-      }).apply(this),
-      xcatlabels: genonames,
-      dataByInd: false,
-      title: markername,
-      axispos: eff_axispos,
-      titlepos: eff_titlepos,
-      xlab: eff_xlab,
-      ylab: eff_ylab,
-      rotate_ylab: eff_rotate_ylab,
-      ylim: eff_ylim,
-      nyticks: eff_nyticks,
-      yticks: eff_yticks,
-      pointcolor: eff_pointcolor,
-      pointstroke: eff_pointstroke,
-      pointsize: eff_pointsize,
-      rectcolor: rectcolor,
-      xjitter: xjitter,
-      yNA: eff_yNA,
-      tipclass: widgetdivid
-    });
-    g_pxg = svg.append("g").attr("id", "pxgchart").attr("transform", "translate(" + wleft + ",0)");
-    mypxgchart(g_pxg, {
-      x: gabs,
-      y: pxg_data.pheno,
-      indID: pxg_data.indID
-    });
-    return mypxgchart.points().attr("fill", function(d, i) {
-      if (inferred[i]) {
-        return eff_pointcolorhilit;
+    if (cur_chr !== chr) {
+      if (mypxgchart != null) {
+        mypxgchart.remove();
       }
-      return eff_pointcolor;
-    });
+      mypxgchart = d3panels.dotchart({
+        height: height,
+        width: wright,
+        margin: margin,
+        xcategories: (function() {
+          results = [];
+          for (var j = 1, ref45 = genonames.length; 1 <= ref45 ? j <= ref45 : j >= ref45; 1 <= ref45 ? j++ : j--){ results.push(j); }
+          return results;
+        }).apply(this),
+        xcatlabels: genonames,
+        dataByInd: false,
+        title: markername,
+        axispos: eff_axispos,
+        titlepos: eff_titlepos,
+        xlab: eff_xlab,
+        ylab: eff_ylab,
+        rotate_ylab: eff_rotate_ylab,
+        ylim: eff_ylim,
+        nyticks: eff_nyticks,
+        yticks: eff_yticks,
+        pointcolor: eff_pointcolor,
+        pointstroke: eff_pointstroke,
+        pointsize: eff_pointsize,
+        rectcolor: rectcolor,
+        xjitter: xjitter,
+        yNA: eff_yNA,
+        tipclass: widgetdivid
+      });
+      g_pxg = svg.append("g").attr("id", "pxgchart").attr("transform", "translate(" + wleft + ",0)");
+      mypxgchart(g_pxg, {
+        x: gabs,
+        y: pxg_data.pheno,
+        indID: pxg_data.indID
+      });
+      mypxgchart.points().attr("fill", function(d, i) {
+        if (inferred[i]) {
+          return eff_pointcolorhilit;
+        }
+        return eff_pointcolor;
+      });
+    } else {
+      xscale = mypxgchart.xscale();
+      pos1 = xscale(1);
+      dpos = xscale(2) - xscale(1);
+      point_jitter = function(d) {
+        var u;
+        u = (d - pos1) / dpos;
+        return u - Math.round(u);
+      };
+      points = mypxgchart.points().transition().duration(1000).attr("cx", function(d, i) {
+        var cx, u;
+        cx = d3.select(this).attr("cx");
+        u = point_jitter(cx);
+        return xscale(gabs[i] + u);
+      }).attr("fill", function(d, i) {
+        if (inferred[i]) {
+          return eff_pointcolorhilit;
+        }
+        return eff_pointcolor;
+      });
+      scaledPoints = [];
+      points.each(function(d, i) {
+        return scaledPoints.push({
+          x: +d3.select(this).attr("cx"),
+          y: +d3.select(this).attr("cy"),
+          fy: +d3.select(this).attr("cy"),
+          truex: xscale(gabs[i])
+        });
+      });
+      force = d3.forceSimulation(scaledPoints).force("x", d3.forceX(function(d) {
+        return d.truex;
+      })).force("collide", d3.forceCollide(eff_pointsize * 1.1)).stop();
+      (function() {
+        results1 = [];
+        for (k = 0; k <= 30; k++){ results1.push(k); }
+        return results1;
+      }).apply(this).map(function(d) {
+        force.tick();
+        return points.attr("cx", function(d, i) {
+          return scaledPoints[i].x;
+        });
+      });
+    }
+    return cur_chr = chr;
   };
   return mylodchart.markerSelect().on("click", function(d, i) {
     return plotPXG(markers[i], i);

@@ -67,6 +67,9 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     leftvalue = "int"
     rightvalue = "fv1"
 
+    # keep track of chromosome heatmap selections
+    cur_chr1 = cur_chr2 = ''
+
     # cicolors: check they're the right length or construct them
     if pheno_and_geno?
         gn = pheno_and_geno.genonames
@@ -125,6 +128,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                  .attr("name", "refresh")
                  .text("Refresh")
                  .on "click", () ->
+                     cur_chr1 = cur_chr2 = ''
                      leftsel = document.getElementById("leftselect_#{widgetdivid}")
                      leftvalue = leftsel.options[leftsel.selectedIndex].value
                      rightsel = document.getElementById("rightselect_#{widgetdivid}")
@@ -309,45 +313,85 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                     gn2.push(gnames2[i])
                     cicolors_expanded.push(cicolors[i])
 
-        mydotchart.remove() if mydotchart?
-        mycichart.remove() if mycichart?
-
         pxg_data =
             x:g
             y:pheno_and_geno.pheno
             indID:pheno_and_geno.indID
 
-        mydotchart = d3panels.dotchart({
-            height:hright
-            width:wright
-            margin:margin
-            axispos:axispos
-            rectcolor:rectcolor
-            boxcolor:boxcolor
-            boxwidth:boxwidth
-            pointsize:pointsize
-            pointstroke:pointstroke
-            xcategories:[1..gn1.length]
-            xcatlabels:gn1
-            xlab:""
-            ylab:ylab_eff
-            nyticks:nyticks_pxg
-            yticks:yticks_pxg
-            dataByInd:false
-            title:"#{mar1} : #{mar2}"
-            titlepos:titlepos
-            tipclass:widgetdivid})
+        # remove the CI chart no matter what
+        mycichart.remove() if mycichart?
 
-        unless g_eff[1]? # only create it once
-            g_eff[1] = svg.append("g")
-                          .attr("id", "eff_1")
-                          .attr("transform", "translate(#{eff_hpos[1]}, #{eff_vpos[1]})")
-        mydotchart(g_eff[1], pxg_data)
+        if cur_chr1 != chr1 or cur_chr2 != chr2
+            mydotchart.remove() if mydotchart?
 
-        # revise point colors
-        mydotchart.points()
-                  .attr("fill", (d,i) ->
-                          cicolors_expanded[g[i]-1])
+            mydotchart = d3panels.dotchart({
+                height:hright
+                width:wright
+                margin:margin
+                axispos:axispos
+                rectcolor:rectcolor
+                boxcolor:boxcolor
+                boxwidth:boxwidth
+                pointsize:pointsize
+                pointstroke:pointstroke
+                xcategories:[1..gn1.length]
+                xcatlabels:gn1
+                xlab:""
+                ylab:ylab_eff
+                nyticks:nyticks_pxg
+                yticks:yticks_pxg
+                dataByInd:false
+                title:"#{mar1} : #{mar2}"
+                titlepos:titlepos
+                tipclass:widgetdivid})
+
+            unless g_eff[1]? # only create it once
+                g_eff[1] = svg.append("g")
+                              .attr("id", "eff_1")
+                              .attr("transform", "translate(#{eff_hpos[1]}, #{eff_vpos[1]})")
+            mydotchart(g_eff[1], pxg_data)
+
+            # revise point colors
+            mydotchart.points()
+                      .attr("fill", (d,i) ->
+                              cicolors_expanded[g[i]-1])
+
+        else # same chr pair as before: animate points
+            # grab scale and get info to take inverse
+            xscale = mydotchart.xscale()
+            pos1 = xscale(1)
+            dpos = xscale(2) - xscale(1)
+            point_jitter = (d) ->
+                u = (d - pos1)/dpos
+                u - Math.round(u)
+
+            # move points to new x-axis position
+            points = mydotchart.points()
+                      .transition().duration(1000)
+                      .attr("cx", (d,i) ->
+                          cx = d3.select(this).attr("cx")
+                          u = point_jitter(cx)
+                          xscale(g[i] + u))
+                      .attr("fill", (d,i) -> cicolors_expanded[g[i]-1])
+
+            # use force to move them apart again
+            scaledPoints = []
+            points.each((d,i) -> scaledPoints.push({
+                x: +d3.select(this).attr("cx")
+                y: +d3.select(this).attr("cy")
+                fy: +d3.select(this).attr("cy")
+                truex: xscale(g[i])}))
+
+            force = d3.forceSimulation(scaledPoints)
+                      .force("x", d3.forceX((d) -> d.truex))
+                      .force("collide", d3.forceCollide(pointsize*1.1))
+                      .stop()
+            [0..30].map((d) ->
+                force.tick()
+                points.attr("cx", (d,i) -> scaledPoints[i].x))
+
+        cur_chr1 = chr1
+        cur_chr2 = chr2
 
         cis = d3panels.ci_by_group(g, pheno_and_geno.pheno, 2)
         ci_data =
@@ -387,8 +431,10 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
 
         # add second row of labels
         for p in [0..1]
+            d3.select("#xaxislab#{p}").remove()
+            d3.select("#markerlab#{p}").remove()
             effcharts[p].svg() # second row of genotypes
-                    .append("g").attr("class", "x axis")
+                    .append("g").attr("class", "x axis").attr("id", "xaxislab#{p}")
                     .selectAll("empty")
                     .data(gn2)
                     .enter()
@@ -397,7 +443,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                     .attr("y", hright-margin.bottom/2+axispos.xlabel)
                     .text((d) -> d)
             effcharts[p].svg() # marker name labels
-                    .append("g").attr("class", "x axis")
+                    .append("g").attr("class", "x axis").attr("id", "markerlab#{p}")
                     .selectAll("empty")
                     .data([mar1, mar2])
                     .enter()

@@ -1,4 +1,4 @@
-## qtlcharts 0.9-5 (2017-05-18)
+## qtlcharts 0.9-5 (2017-05-19)
 
 - Added new tool for exploring pleiotropy between two traits,
   `ipleiotropy()`.
@@ -16,10 +16,10 @@
 - `lodcharts` now includes a quantitative scale for position on the
   x-axis in the case of a single chromosome
 
-- In `iplotScanone` with raw phenotype x genotype plots, when
-  switching between markers on the same chromosome, animate the
+- In `iplotScanone` and `iplotScantwo`, in phenotype x genotype plots
+  when switching between markers on the same chromosome, animate the
   movement of the points rather than destroying and re-creating the
-  pheno x geno panel.
+  panel.
 
 
 ## qtlcharts 0.8-2 (2017-05-11)

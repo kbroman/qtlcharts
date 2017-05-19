@@ -2,7 +2,7 @@
 var add_symmetric_lod, iplotScantwo, lod_for_heatmap;
 
 iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
-  var add_cell_tooltips, altrectcolor, axispos, boxcolor, boxwidth, chrGap, chrlinecolor, chrlinewidth, cicolors, color, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, linecolor, linewidth, margin, mycichart, mydotchart, mylod2dheatmap, mylodchart, n, ncat, nullcolor, nyticks_ci, nyticks_lod, nyticks_pxg, oneAtTop, options, plot_effects, plot_scan, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, segstrokewidth, segwidth, submit, svg, titlepos, w, wbot, widgetdivid, width, wright, x, xlab_lod, ylab_eff, ylab_lod, yticks_ci, yticks_lod, yticks_pxg, zthresh;
+  var add_cell_tooltips, altrectcolor, axispos, boxcolor, boxwidth, chrGap, chrlinecolor, chrlinewidth, cicolors, color, cur_chr1, cur_chr2, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, linecolor, linewidth, margin, mycichart, mydotchart, mylod2dheatmap, mylodchart, n, ncat, nullcolor, nyticks_ci, nyticks_lod, nyticks_pxg, oneAtTop, options, plot_effects, plot_scan, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, segstrokewidth, segwidth, submit, svg, titlepos, w, wbot, widgetdivid, width, wright, x, xlab_lod, ylab_eff, ylab_lod, yticks_ci, yticks_lod, yticks_pxg, zthresh;
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 1200;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1100;
   chrGap = (ref2 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref2 : 2;
@@ -75,6 +75,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   wbot = width / 2;
   leftvalue = "int";
   rightvalue = "fv1";
+  cur_chr1 = cur_chr2 = '';
   if (pheno_and_geno != null) {
     gn = pheno_and_geno.genonames;
     ncat = d3.max((function() {
@@ -130,6 +131,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     return null;
   });
   submit = form.append("div").style("float", "left").style("margin-left", "50px").append("button").attr("name", "refresh").text("Refresh").on("click", function() {
+    cur_chr1 = cur_chr2 = '';
     leftsel = document.getElementById("leftselect_" + widgetdivid);
     leftvalue = leftsel.options[leftsel.selectedIndex].value;
     rightsel = document.getElementById("rightselect_" + widgetdivid);
@@ -260,7 +262,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   };
   g_eff = [null, null];
   return plot_effects = function(markerindex1, markerindex2) {
-    var chr1, chr2, chrtype1, chrtype2, ci_data, cicolors_expanded, cis, effcharts, fgnames, g, g1, g2, gn1, gn2, gnames1, gnames2, i1, j, k, l, m, mar1, mar2, mgnames, ng1, ng2, ngf, ngm, o, p, pxg_data, q, r, ref34, ref35, ref36, ref37, ref38, ref39, ref40, ref41, ref42, results, results1, results2, results3, s, t, tmp, u, v, y;
+    var chr1, chr2, chrtype1, chrtype2, ci_data, cicolors_expanded, cis, dpos, effcharts, fgnames, force, g, g1, g2, gn1, gn2, gnames1, gnames2, i1, j, j1, k, k1, l, m, mar1, mar2, mgnames, ng1, ng2, ngf, ngm, o, p, point_jitter, points, pos1, pxg_data, q, r, ref34, ref35, ref36, ref37, ref38, ref39, ref40, ref41, ref42, results, results1, results2, results3, results4, s, scaledPoints, t, tmp, v, xscale, y;
     mar1 = scantwo_data.marker[markerindex1];
     mar2 = scantwo_data.marker[markerindex2];
     g1 = pheno_and_geno.geno[mar1];
@@ -339,86 +341,129 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
         return results1;
       })();
       for (i = t = 0, ref39 = ng2; 0 <= ref39 ? t < ref39 : t > ref39; i = 0 <= ref39 ? ++t : --t) {
-        for (j = u = 0, ref40 = ng1; 0 <= ref40 ? u < ref40 : u > ref40; j = 0 <= ref40 ? ++u : --u) {
+        for (j = v = 0, ref40 = ng1; 0 <= ref40 ? v < ref40 : v > ref40; j = 0 <= ref40 ? ++v : --v) {
           gn1.push(gnames1[j]);
           gn2.push(gnames2[i]);
           cicolors_expanded.push(cicolors[i]);
         }
       }
     }
-    if (mydotchart != null) {
-      mydotchart.remove();
-    }
-    if (mycichart != null) {
-      mycichart.remove();
-    }
     pxg_data = {
       x: g,
       y: pheno_and_geno.pheno,
       indID: pheno_and_geno.indID
     };
-    mydotchart = d3panels.dotchart({
-      height: hright,
-      width: wright,
-      margin: margin,
-      axispos: axispos,
-      rectcolor: rectcolor,
-      boxcolor: boxcolor,
-      boxwidth: boxwidth,
-      pointsize: pointsize,
-      pointstroke: pointstroke,
-      xcategories: (function() {
-        results1 = [];
-        for (var v = 1, ref41 = gn1.length; 1 <= ref41 ? v <= ref41 : v >= ref41; 1 <= ref41 ? v++ : v--){ results1.push(v); }
-        return results1;
-      }).apply(this),
-      xcatlabels: gn1,
-      xlab: "",
-      ylab: ylab_eff,
-      nyticks: nyticks_pxg,
-      yticks: yticks_pxg,
-      dataByInd: false,
-      title: mar1 + " : " + mar2,
-      titlepos: titlepos,
-      tipclass: widgetdivid
-    });
-    if (g_eff[1] == null) {
-      g_eff[1] = svg.append("g").attr("id", "eff_1").attr("transform", "translate(" + eff_hpos[1] + ", " + eff_vpos[1] + ")");
+    if (mycichart != null) {
+      mycichart.remove();
     }
-    mydotchart(g_eff[1], pxg_data);
-    mydotchart.points().attr("fill", function(d, i) {
-      return cicolors_expanded[g[i] - 1];
-    });
+    if (cur_chr1 !== chr1 || cur_chr2 !== chr2) {
+      if (mydotchart != null) {
+        mydotchart.remove();
+      }
+      mydotchart = d3panels.dotchart({
+        height: hright,
+        width: wright,
+        margin: margin,
+        axispos: axispos,
+        rectcolor: rectcolor,
+        boxcolor: boxcolor,
+        boxwidth: boxwidth,
+        pointsize: pointsize,
+        pointstroke: pointstroke,
+        xcategories: (function() {
+          results1 = [];
+          for (var y = 1, ref41 = gn1.length; 1 <= ref41 ? y <= ref41 : y >= ref41; 1 <= ref41 ? y++ : y--){ results1.push(y); }
+          return results1;
+        }).apply(this),
+        xcatlabels: gn1,
+        xlab: "",
+        ylab: ylab_eff,
+        nyticks: nyticks_pxg,
+        yticks: yticks_pxg,
+        dataByInd: false,
+        title: mar1 + " : " + mar2,
+        titlepos: titlepos,
+        tipclass: widgetdivid
+      });
+      if (g_eff[1] == null) {
+        g_eff[1] = svg.append("g").attr("id", "eff_1").attr("transform", "translate(" + eff_hpos[1] + ", " + eff_vpos[1] + ")");
+      }
+      mydotchart(g_eff[1], pxg_data);
+      mydotchart.points().attr("fill", function(d, i) {
+        return cicolors_expanded[g[i] - 1];
+      });
+    } else {
+      xscale = mydotchart.xscale();
+      pos1 = xscale(1);
+      dpos = xscale(2) - xscale(1);
+      point_jitter = function(d) {
+        var u;
+        u = (d - pos1) / dpos;
+        return u - Math.round(u);
+      };
+      points = mydotchart.points().transition().duration(1000).attr("cx", function(d, i) {
+        var cx, u;
+        cx = d3.select(this).attr("cx");
+        u = point_jitter(cx);
+        return xscale(g[i] + u);
+      }).attr("fill", function(d, i) {
+        return cicolors_expanded[g[i] - 1];
+      });
+      scaledPoints = [];
+      points.each(function(d, i) {
+        return scaledPoints.push({
+          x: +d3.select(this).attr("cx"),
+          y: +d3.select(this).attr("cy"),
+          fy: +d3.select(this).attr("cy"),
+          truex: xscale(g[i])
+        });
+      });
+      force = d3.forceSimulation(scaledPoints).force("x", d3.forceX(function(d) {
+        return d.truex;
+      })).force("collide", d3.forceCollide(pointsize * 1.1)).stop();
+      (function() {
+        results2 = [];
+        for (i1 = 0; i1 <= 30; i1++){ results2.push(i1); }
+        return results2;
+      }).apply(this).map(function(d) {
+        force.tick();
+        return points.attr("cx", function(d, i) {
+          return scaledPoints[i].x;
+        });
+      });
+    }
+    cur_chr1 = chr1;
+    cur_chr2 = chr2;
     cis = d3panels.ci_by_group(g, pheno_and_geno.pheno, 2);
     ci_data = {
       mean: (function() {
-        var ref42, ref43, ref44, results2, y;
-        results2 = [];
-        for (x = y = 1, ref42 = gn1.length; 1 <= ref42 ? y <= ref42 : y >= ref42; x = 1 <= ref42 ? ++y : --y) {
-          results2.push((ref43 = (ref44 = cis[x]) != null ? ref44.mean : void 0) != null ? ref43 : null);
+        var j1, ref42, ref43, ref44, results3;
+        results3 = [];
+        for (x = j1 = 1, ref42 = gn1.length; 1 <= ref42 ? j1 <= ref42 : j1 >= ref42; x = 1 <= ref42 ? ++j1 : --j1) {
+          results3.push((ref43 = (ref44 = cis[x]) != null ? ref44.mean : void 0) != null ? ref43 : null);
         }
-        return results2;
+        return results3;
       })(),
       low: (function() {
-        var ref42, ref43, ref44, results2, y;
-        results2 = [];
-        for (x = y = 1, ref42 = gn1.length; 1 <= ref42 ? y <= ref42 : y >= ref42; x = 1 <= ref42 ? ++y : --y) {
-          results2.push((ref43 = (ref44 = cis[x]) != null ? ref44.low : void 0) != null ? ref43 : null);
+        var j1, ref42, ref43, ref44, results3;
+        results3 = [];
+        for (x = j1 = 1, ref42 = gn1.length; 1 <= ref42 ? j1 <= ref42 : j1 >= ref42; x = 1 <= ref42 ? ++j1 : --j1) {
+          results3.push((ref43 = (ref44 = cis[x]) != null ? ref44.low : void 0) != null ? ref43 : null);
         }
-        return results2;
+        return results3;
       })(),
       high: (function() {
-        var ref42, ref43, ref44, results2, y;
-        results2 = [];
-        for (x = y = 1, ref42 = gn1.length; 1 <= ref42 ? y <= ref42 : y >= ref42; x = 1 <= ref42 ? ++y : --y) {
-          results2.push((ref43 = (ref44 = cis[x]) != null ? ref44.high : void 0) != null ? ref43 : null);
+        var j1, ref42, ref43, ref44, results3;
+        results3 = [];
+        for (x = j1 = 1, ref42 = gn1.length; 1 <= ref42 ? j1 <= ref42 : j1 >= ref42; x = 1 <= ref42 ? ++j1 : --j1) {
+          results3.push((ref43 = (ref44 = cis[x]) != null ? ref44.high : void 0) != null ? ref43 : null);
         }
-        return results2;
+        return results3;
       })(),
       categories: (function() {
-        results2 = [];
-        for (var y = 1, ref42 = gn1.length; 1 <= ref42 ? y <= ref42 : y >= ref42; 1 <= ref42 ? y++ : y--){ results2.push(y); }
-        return results2;
+        results3 = [];
+        for (var j1 = 1, ref42 = gn1.length; 1 <= ref42 ? j1 <= ref42 : j1 >= ref42; 1 <= ref42 ? j1++ : j1--){ results3.push(j1); }
+        return results3;
       }).apply(this)
     };
     mycichart = d3panels.cichart({
@@ -448,20 +493,22 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     }
     mycichart(g_eff[0], ci_data);
     effcharts = [mydotchart, mycichart];
-    results3 = [];
-    for (p = i1 = 0; i1 <= 1; p = ++i1) {
-      effcharts[p].svg().append("g").attr("class", "x axis").selectAll("empty").data(gn2).enter().append("text").attr("x", function(d, i) {
+    results4 = [];
+    for (p = k1 = 0; k1 <= 1; p = ++k1) {
+      d3.select("#xaxislab" + p).remove();
+      d3.select("#markerlab" + p).remove();
+      effcharts[p].svg().append("g").attr("class", "x axis").attr("id", "xaxislab" + p).selectAll("empty").data(gn2).enter().append("text").attr("x", function(d, i) {
         return mydotchart.xscale()(i + 1);
       }).attr("y", hright - margin.bottom / 2 + axispos.xlabel).text(function(d) {
         return d;
       });
-      results3.push(effcharts[p].svg().append("g").attr("class", "x axis").selectAll("empty").data([mar1, mar2]).enter().append("text").attr("x", (margin.left + mydotchart.xscale()(1)) / 2.0).attr("y", function(d, i) {
+      results4.push(effcharts[p].svg().append("g").attr("class", "x axis").attr("id", "markerlab" + p).selectAll("empty").data([mar1, mar2]).enter().append("text").attr("x", (margin.left + mydotchart.xscale()(1)) / 2.0).attr("y", function(d, i) {
         return hright - margin.bottom / (i + 1) + axispos.xlabel;
       }).style("text-anchor", "end").text(function(d) {
         return d + ":";
       }));
     }
-    return results3;
+    return results4;
   };
 };
 

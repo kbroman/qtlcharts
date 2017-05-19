@@ -393,6 +393,8 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
         return cicolors_expanded[g[i] - 1];
       });
     } else {
+      d3.select("#markerlab1").remove();
+      d3.select("#xaxislab1").remove();
       xscale = mydotchart.xscale();
       pos1 = xscale(1);
       dpos = xscale(2) - xscale(1);
@@ -492,11 +494,9 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       g_eff[0] = svg.append("g").attr("id", "eff_0").attr("transform", "translate(" + eff_hpos[0] + ", " + eff_vpos[0] + ")");
     }
     mycichart(g_eff[0], ci_data);
-    effcharts = [mydotchart, mycichart];
+    effcharts = [mycichart, mydotchart];
     results4 = [];
     for (p = k1 = 0; k1 <= 1; p = ++k1) {
-      d3.select("#xaxislab" + p).remove();
-      d3.select("#markerlab" + p).remove();
       effcharts[p].svg().append("g").attr("class", "x axis").attr("id", "xaxislab" + p).selectAll("empty").data(gn2).enter().append("text").attr("x", function(d, i) {
         return mydotchart.xscale()(i + 1);
       }).attr("y", hright - margin.bottom / 2 + axispos.xlabel).text(function(d) {

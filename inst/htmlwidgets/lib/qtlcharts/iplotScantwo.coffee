@@ -357,6 +357,10 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                               cicolors_expanded[g[i]-1])
 
         else # same chr pair as before: animate points
+            # remove marker text
+            d3.select("#markerlab1").remove()
+            d3.select("#xaxislab1").remove()
+
             # grab scale and get info to take inverse
             xscale = mydotchart.xscale()
             pos1 = xscale(1)
@@ -427,12 +431,10 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                           .attr("id", "eff_0")
                           .attr("transform", "translate(#{eff_hpos[0]}, #{eff_vpos[0]})")
         mycichart(g_eff[0], ci_data)
-        effcharts = [mydotchart, mycichart]
+        effcharts = [mycichart, mydotchart]
 
         # add second row of labels
         for p in [0..1]
-            d3.select("#xaxislab#{p}").remove()
-            d3.select("#markerlab#{p}").remove()
             effcharts[p].svg() # second row of genotypes
                     .append("g").attr("class", "x axis").attr("id", "xaxislab#{p}")
                     .selectAll("empty")

@@ -1,3 +1,10 @@
+## qtlcharts 0.9-6 (2017-05-24)
+
+- All charts now can take a `caption` within `chartOpts` which will
+  show up as text below the figure. This is indended for stand-alone
+  html files.
+
+
 ## qtlcharts 0.9-5 (2017-05-19)
 
 - Added new tool for exploring pleiotropy between two traits,

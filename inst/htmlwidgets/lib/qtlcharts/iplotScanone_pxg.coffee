@@ -174,3 +174,8 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     mylodchart.markerSelect()
               .on "click", (d,i) ->
                     plotPXG(markers[i], i)
+
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

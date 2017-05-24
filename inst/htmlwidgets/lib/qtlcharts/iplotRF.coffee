@@ -236,3 +236,8 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                          mylodchart[1].remove() if mylodchart[1]?
                          mylodchart[1] = null
                      create_crosstab(rf_data.marker[d.yindex], rf_data.marker[d.xindex])
+
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

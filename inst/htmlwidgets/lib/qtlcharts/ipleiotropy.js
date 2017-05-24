@@ -345,5 +345,8 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     initial_value = null;
   }
   myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos, initial_value);
-  return callback(myslider);
+  callback(myslider);
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };

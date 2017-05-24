@@ -212,3 +212,7 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
                                        d3.selectAll("circle.pt#{i}").attr("r", pointsize)
                                        d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]])
                                        d3.select("path.path#{i}").attr("stroke", linecolor[group[i]]).lower()
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

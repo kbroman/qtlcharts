@@ -64,3 +64,8 @@ iplotScanone_noeff = (widgetdiv, data, chartOpts) ->
                     d3.select(this)
                       .transition().duration(500).attr("r", r*3)
                       .transition().duration(500).attr("r", r)
+
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

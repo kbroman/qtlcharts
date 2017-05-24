@@ -70,3 +70,8 @@ iplot = (widgetdiv, data, chartOpts) ->
                                    .raise()
            .on "mouseout", (d) ->
                     d3.select(this).attr("r", pointsize)
+
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

@@ -121,3 +121,8 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
             tipclass:widgetdivid})
 
         rightchart(g_right, scat2data[index])
+
+    if chartOpts?.caption
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

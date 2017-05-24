@@ -263,7 +263,7 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
       }).style("dominant-baseline", "middle").style("text-anchor", "start");
     }
   };
-  return mylodheatmap.cells().on("mouseover", function(d) {
+  mylodheatmap.cells().on("mouseover", function(d) {
     var p;
     plotHorSlice(d.lodindex);
     g_horpanel.select("g.title text").text("" + lod_data.lodname[d.lodindex]);
@@ -291,4 +291,7 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
       return effect_text.remove();
     }
   });
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };

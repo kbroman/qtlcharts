@@ -242,7 +242,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
     rf = rf >= 0.1 ? d3.format(".2f")(rf) : d3.format(".3f")(rf);
     return "(" + mari + " " + marj + "), LOD = " + (d3.format(".1f")(lod)) + ", rf = " + rf;
   });
-  return mylodheatmap.cells().on("click", function(d) {
+  mylodheatmap.cells().on("click", function(d) {
     create_scan(d.xindex, 0);
     if (d.xindex !== d.yindex) {
       create_scan(d.yindex, 1);
@@ -254,4 +254,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
     }
     return create_crosstab(rf_data.marker[d.yindex], rf_data.marker[d.xindex]);
   });
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };

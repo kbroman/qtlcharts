@@ -164,7 +164,7 @@ iheatmap = function(widgetdiv, data, chartOpts) {
       y: [z_transpose[j]]
     });
   };
-  return plotVer = function(i) {
+  plotVer = function(i) {
     if (vercurve != null) {
       vercurve.remove();
     }
@@ -184,4 +184,7 @@ iheatmap = function(widgetdiv, data, chartOpts) {
       });
     }
   };
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };

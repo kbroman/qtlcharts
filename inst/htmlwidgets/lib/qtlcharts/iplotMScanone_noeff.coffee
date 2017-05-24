@@ -216,3 +216,8 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
                          verpanel_axis_text.text("") unless times?
                          if pointsize > 0
                              verslice.points().attr("fill", pointcolor)
+
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

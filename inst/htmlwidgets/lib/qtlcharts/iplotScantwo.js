@@ -261,7 +261,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     return mylodchart[panelrow][panelcol](g_scans[panelrow][panelcol], data);
   };
   g_eff = [null, null];
-  return plot_effects = function(markerindex1, markerindex2) {
+  plot_effects = function(markerindex1, markerindex2) {
     var chr1, chr2, chrtype1, chrtype2, ci_data, cicolors_expanded, cis, dpos, effcharts, fgnames, force, g, g1, g2, gn1, gn2, gnames1, gnames2, i1, j, j1, k, k1, l, m, mar1, mar2, mgnames, ng1, ng2, ngf, ngm, o, p, point_jitter, points, pos1, pxg_data, q, r, ref34, ref35, ref36, ref37, ref38, ref39, ref40, ref41, ref42, results, results1, results2, results3, results4, s, scaledPoints, t, tmp, v, xscale, y;
     mar1 = scantwo_data.marker[markerindex1];
     mar2 = scantwo_data.marker[markerindex2];
@@ -510,6 +510,9 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     }
     return results4;
   };
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };
 
 add_symmetric_lod = function(scantwo_data) {

@@ -231,3 +231,8 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                          g_verpanel.select("g.title text").text("")
                          verpanel_axis_text.text("") unless times?
                          effect_text.remove() if effect_text?
+
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

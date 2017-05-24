@@ -255,7 +255,7 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
       });
     }
   };
-  return mylodheatmap.cells().on("mouseover", function(d) {
+  mylodheatmap.cells().on("mouseover", function(d) {
     var p;
     plotHorSlice(d.lodindex);
     g_horpanel.select("g.title text").text("" + lod_data.lodname[d.lodindex]);
@@ -289,4 +289,7 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
       return verslice.points().attr("fill", pointcolor);
     }
   });
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };

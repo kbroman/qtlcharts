@@ -274,5 +274,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                .attr("dominant-baseline", "middle")
                .attr("text-anchor", "middle")
 
-    d3.select("div#caption")
-      .style("opacity", 1)
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

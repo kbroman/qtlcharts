@@ -169,3 +169,8 @@ iheatmap = (widgetdiv, data, chartOpts) ->
             vercurve(verslice, {y:[data.y], x:[data.z[i]]})
         else
             vercurve(verslice, {x:[data.y], y:[data.z[i]]})
+
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

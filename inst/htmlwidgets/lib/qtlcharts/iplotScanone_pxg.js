@@ -236,7 +236,10 @@ iplotScanone_pxg = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     }
     return cur_chr = chr;
   };
-  return mylodchart.markerSelect().on("click", function(d, i) {
+  mylodchart.markerSelect().on("click", function(d, i) {
     return plotPXG(markers[i], i);
   });
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };

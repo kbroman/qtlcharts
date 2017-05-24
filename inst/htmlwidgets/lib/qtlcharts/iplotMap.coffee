@@ -145,6 +145,11 @@ iplotMap = (widgetdiv, data, chartOpts) ->
                    .attr("stroke", linecolor)
             martip.hide()
 
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)
+
 add_search_box = (widgetdiv) ->
     div = d3.select(widgetdiv)
     widgetdivid = div.attr("id")

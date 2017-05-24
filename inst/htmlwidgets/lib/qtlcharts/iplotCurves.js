@@ -270,7 +270,7 @@ iplotCurves = function(widgetdiv, curve_data, scatter1_data, scatter2_data, char
     }
   });
   if (nscatter > 0) {
-    return allpoints.forEach(function(points) {
+    allpoints.forEach(function(points) {
       return points.on("mouseover", function(d, i) {
         d3.selectAll("circle.pt" + i).attr("r", pointsizehilit);
         d3.selectAll("circle.pt" + i).attr("fill", pointcolorhilit[group[i]]);
@@ -281,5 +281,8 @@ iplotCurves = function(widgetdiv, curve_data, scatter1_data, scatter2_data, char
         return d3.select("path.path" + i).attr("stroke", linecolor[group[i]]).lower();
       });
     });
+  }
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
   }
 };

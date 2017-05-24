@@ -73,9 +73,12 @@ iplotScanone_noeff = function(widgetdiv, data, chartOpts) {
     tipclass: widgetdivid
   });
   mylodchart(d3.select(widgetdiv).select("svg"), data);
-  return mylodchart.markerSelect().on("click", function(d) {
+  mylodchart.markerSelect().on("click", function(d) {
     var r;
     r = d3.select(this).attr("r");
     return d3.select(this).transition().duration(500).attr("r", r * 3).transition().duration(500).attr("r", r);
   });
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };

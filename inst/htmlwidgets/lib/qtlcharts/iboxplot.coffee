@@ -412,3 +412,8 @@ iboxplot = (widgetdiv, data, chartOpts) ->
        .attr("fill", "slateblue")
        .attr("dominant-baseline", "middle")
        .attr("text-anchor", "middle")
+
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

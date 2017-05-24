@@ -224,5 +224,8 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   lowsvg.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", halfheight - margin.bottom - margin.top).attr("width", width - margin.left - margin.right).attr("stroke", "black").attr("stroke-width", 2).attr("fill", "none");
   svg.append("text").text(ylab).attr("x", margin.left * 0.2).attr("y", halfheight / 2).attr("fill", "slateblue").attr("transform", "rotate(270 " + (margin.left * 0.2) + " " + (halfheight / 2) + ")").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   lowsvg.append("text").text(ylab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", halfheight - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
-  return svg.append("text").text(xlab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", halfheight - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
+  svg.append("text").text(xlab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", halfheight - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };

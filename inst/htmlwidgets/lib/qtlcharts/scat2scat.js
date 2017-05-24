@@ -137,7 +137,7 @@ scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
   });
   rightchart = null;
   g_right = svg.append("g").attr("id", "scat2").attr("transform", "translate(" + (width / 2) + ",0)");
-  return make_right_chart = function(index) {
+  make_right_chart = function(index) {
     rightchart = d3panels.scatterplot({
       height: height,
       width: width / 2,
@@ -178,4 +178,7 @@ scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
     });
     return rightchart(g_right, scat2data[index]);
   };
+  if (chartOpts != null ? chartOpts.caption : void 0) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };

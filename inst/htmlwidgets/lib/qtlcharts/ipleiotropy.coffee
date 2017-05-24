@@ -247,3 +247,8 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
 
     # call it once to set colors
     callback(myslider)
+
+    if chartOpts.caption?
+        d3.select(widgetdiv).insert("p")
+                            .attr("class", "caption")
+                            .text(chartOpts.caption)

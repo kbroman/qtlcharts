@@ -148,7 +148,7 @@ iplotMap = function(widgetdiv, data, chartOpts) {
     });
   });
   markerSelect = mychart.markerSelect();
-  return markerSelect.on("mouseover", function(d) {
+  markerSelect.on("mouseover", function(d) {
     if (selectedMarker !== "") {
       if (selectedMarker !== d) {
         div.select("line#" + (clean_marker_name(selectedMarker))).attr("stroke", linecolor);
@@ -156,6 +156,9 @@ iplotMap = function(widgetdiv, data, chartOpts) {
       return martip.hide();
     }
   });
+  if (chartOpts.caption != null) {
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+  }
 };
 
 add_search_box = function(widgetdiv) {

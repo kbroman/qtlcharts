@@ -272,8 +272,12 @@ htmlwidgets::saveWidget(corrplot, file=&quot;~/Desktop/iplotCorr_example.html&qu
 <p>If the points are to be colored by genotype, you need to specify the same number of colors as there are genotype groups.</p>
 <pre class="r"><code>iplotCorr(expr, geno, reorder=TRUE,
           chartOpts=list(scatcolors=c(&quot;lightblue&quot;, &quot;lightgreen&quot;, &quot;pink&quot;)))</code></pre>
-<p>A full list of options is available in the <a href="chartOpts.html"><code>chartOpts</code> vignette</a>:</p>
-<pre class="r"><code>vignette(&quot;chartOpts&quot;, &quot;qtlcharts&quot;)</code></pre>
+<p>If you want a caption below the chart, use <code>caption</code>. This is intended largely for charts <a href="http://localhost:4000/assets/vignettes/userGuide.html#saving_to_a_file">saved to a file</a> with <code>htmlwidgets::saveWidget()</code>.</p>
+<pre class="r"><code>iplotCorr(expr, geno, reorder=TRUE,
+          chartOpts=list(scatcolors=c(&quot;lightblue&quot;, &quot;lightgreen&quot;, &quot;pink&quot;),
+                         caption=paste(&quot;Click on the heatmap on the left to see&quot;,
+                                 &quot;corresponding scatterplots on the right.&quot;) ))</code></pre>
+<p>A full list of options is available in the <a href="chartOpts.html"><code>chartOpts</code> vignette</a>.</p>
 </div>
 <div id="further-control-of-chart-dimensions" class="section level2">
 <h2>Further control of chart dimensions</h2>
@@ -291,8 +295,7 @@ htmlwidgets::saveWidget(corrplot, file=&quot;~/Desktop/iplotCorr_example.html&qu
 </div>
 <div id="including-a-chart-in-an-r-markdown-document" class="section level2">
 <h2>Including a chart in an R Markdown document</h2>
-<p>The interactive charts may be included within an <a href="http://rmarkdown.rstudio.com/">R Markdown</a>-based report. See the separate <a href="Rmarkdown.html"><code>Rmarkdown</code> vignette</a>:</p>
-<pre class="r"><code>vignette(&quot;Rmarkdown&quot;, &quot;qtlcharts&quot;)</code></pre>
+<p>The interactive charts may be included within an <a href="http://rmarkdown.rstudio.com/">R Markdown</a>-based report. See the separate <a href="Rmarkdown.html"><code>Rmarkdown</code> vignette</a>.</p>
 </div>
 <div id="examples-of-the-charts-use" class="section level2">
 <h2>Examples of the charts’ use</h2>

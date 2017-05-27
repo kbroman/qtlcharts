@@ -54,7 +54,7 @@ customization options for each chart.
 
 `title = ""` &mdash; title of chart
 
-`xlab = "Chromosome"` &mdash; x-axis label
+`xlab = NULL` &mdash; x-axis label
 
 `ylab = "LOD score"` &mdash; y-axis label
 
@@ -98,7 +98,7 @@ customization options for each chart.
 
 `lod_title = ""` &mdash; title of LOD curve panel
 
-`lod_xlab = "Chromosome"` &mdash; x-axis label for LOD curve panel
+`lod_xlab = NULL` &mdash; x-axis label for LOD curve panel
 
 `lod_ylab = "LOD score"` &mdash; y-axis label for LOD curve panel
 
@@ -164,7 +164,7 @@ customization options for each chart.
 
 `lod_title = ""` &mdash; title of LOD curve panel
 
-`lod_xlab = "Chromosome"` &mdash; x-axis label for LOD curve panel
+`lod_xlab = NULL` &mdash; x-axis label for LOD curve panel
 
 `lod_ylab = "LOD score"` &mdash; y-axis label for LOD curve panel
 
@@ -232,7 +232,7 @@ customization options for each chart.
 
 `zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
 
-`xlab = "Chromosome"` &mdash; x-axis label for LOD heatmap)
+`xlab = NULL` &mdash; x-axis label for LOD heatmap)
 
 `ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
 
@@ -288,7 +288,7 @@ customization options for each chart.
 
 `zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
 
-`xlab = "Chromosome"` &mdash; x-axis label for LOD heatmap (also used in lower panel)
+`xlab = NULL` &mdash; x-axis label for LOD heatmap (also used in lower panel)
 
 `ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
 

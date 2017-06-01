@@ -24,6 +24,7 @@ theplot <- iheatmap(z, x, y, chartOpts=list(heading = "<code>iheatmap</code>",
                                             caption=paste("<b><code>iheatmap</code> example:</b>",
                                                           "Hover over pixels in the heatmap on the top-left to see the values",
                                                           "and to see the horizontal slice (below) and the vertical slice (to the right)."),
-                                            footer=footer))
+                                            footer=footer,
+                                            axispos=list(xtitle=25, ytitle=35, xlabel=5, ylabel=5)))
 htmlwidgets::saveWidget(theplot, file=file, selfcontained=TRUE)
 file.rename(file, file.path("..", file))

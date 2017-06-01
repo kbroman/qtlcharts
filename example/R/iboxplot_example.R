@@ -18,9 +18,9 @@ qtlcharts::setScreenSize("normal")
 theplot <- iboxplot(exdat, chartOpts=list(xlab="Mice", ylab="Gene expression",
                                           heading="<code>iboxplot</code>",
                                           caption=paste("<b><code>iboxplot</code> example:</b>",
-                                                        "The top panel is like a set of 494 box plots: lines are drawn at a series ",
-                                                        "of percentiles for each of the distributions. Hover over a column in the top panel ",
-                                                        "and the corresponding distribution is show below; click for it to persist; click ",
+                                                        "The top panel is like a set of 494 box plots: lines are drawn at a series",
+                                                        "of percentiles for each of the distributions. Hover over a column in the top panel",
+                                                        "and the corresponding distribution is show below; click for it to persist; click",
                                                         "again to make it go away."),
                                           footer=footer),
                     orderByMedian=FALSE, qu=c(0.01, 0.1, 0.25))

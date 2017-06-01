@@ -21,12 +21,20 @@ function(times)
     paste(hr, min, sep=":")
 }
 
-file <- "../iplotMScanone.html"
+file <- "iplotMScanone.html"
 if(file.exists(file)) unlink(file)
 
-iplotMScanone(out, effects=eff, times=times, title="iplotMScanone example",
-              chartOpts=list(eff_ylab="QTL effect", lod_ylab="Time (hrs)", lod_labels=to_hrmin(times)),
-              onefile=TRUE, openfile=FALSE, file=file,
-              caption=c("Hover over LOD heat map to view individual curves ",
-                "below and estimated QTL effects to the right.<br><br>\n",
-                "</p><hr/><p class=\"caption\"><a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">R/qtlcharts</a>"))
+footer <- paste(readLines("footer.txt"), collapse="\n")
+
+qtlcharts::setScreenSize("normal")
+theplot <- iplotMScanone(out, effects=eff, times=times,
+                         chartOpts=list(eff_ylab="QTL effect", lod_ylab="Time (hrs)",
+                                        lod_labels=to_hrmin(times),
+                                        heading="<code>iplotMScanone</code>",
+                                        footer=footer,
+                                        caption=paste("<b><code>iplotMScanone</code> example:</b>",
+                                                      "Hover over LOD heat map to view individual curves",
+                                                      "below and estimated QTL effects to the right.")))
+
+htmlwidgets::saveWidget(theplot, file=file, selfcontained=TRUE)
+file.rename(file, file.path("..", file))

@@ -5,10 +5,19 @@ library(qtl)
 data(hyper)
 map <- pull.map(hyper)
 
-file <- "../iplotMap.html"
+file <- "iplotMap.html"
 if(file.exists(file)) unlink(file)
 
-iplotMap(map, shift=TRUE, title="iplotMap example",
-         onefile=TRUE, openfile=FALSE, file=file)
-cat('<hr/><p class="caption"><a style="text-decoration:none;" href="http://kbroman.org/qtlcharts">R/qtlcharts</a></p>',
-    file=file, append=TRUE)
+footer <- paste(readLines("footer.txt"), collapse="\n")
+
+qtlcharts::setScreenSize("normal")
+theplot <- iplotMap(map, shift=TRUE,
+                    chartOpts=list(heading="<code>iplotMap</code>",
+                                   caption=paste("<b><code>iplotMap</code> example:</b>",
+                                                 "Hover over marker positions to view the marker names and positions.",
+                                                 "Enter a marker name in the search box, to have it highlighted."),
+                                   footer=footer,
+                                   axispos=list(xtitle=25, ytitle=35, xlabel=5, ylabel=5)))
+
+htmlwidgets::saveWidget(theplot, file=file, selfcontained=TRUE)
+file.rename(file, file.path("..", file))

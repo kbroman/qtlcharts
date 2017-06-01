@@ -456,10 +456,15 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                     .style("text-anchor", "end")
                     .text((d) -> d + ":")
 
+    if chartOpts.heading?
+        d3.select("div#htmlwidget_container")
+          .insert("h2", ":first-child")
+          .html(chartOpts.heading)
+
     if chartOpts.caption?
         d3.select(widgetdiv).insert("p")
                             .attr("class", "caption")
-                            .text(chartOpts.caption)
+                            .html(chartOpts.caption)
 
 # add full,add,int,av1,fv1 lod scores to scantwo_data
 add_symmetric_lod = (scantwo_data) ->

@@ -346,7 +346,10 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   }
   myslider(g_slider, callback, callback, d3.extent(lod_data.pos), marker_pos, initial_value);
   callback(myslider);
+  if (chartOpts.heading != null) {
+    d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading);
+  }
   if (chartOpts.caption != null) {
-    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").html(chartOpts.caption);
   }
 };

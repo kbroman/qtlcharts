@@ -67,7 +67,12 @@ idotplot = (widgetdiv, data, chartOpts) ->
                 .on "mouseout", (d) ->
                     d3.select(this).attr("r", pointsize)
 
+    if chartOpts.heading?
+        d3.select("div#htmlwidget_container")
+          .insert("h2", ":first-child")
+          .html(chartOpts.heading)
+
     if chartOpts.caption?
         d3.select(widgetdiv).insert("p")
                             .attr("class", "caption")
-                            .text(chartOpts.caption)
+                            .html(chartOpts.caption)

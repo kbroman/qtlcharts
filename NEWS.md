@@ -1,3 +1,14 @@
+## qtlcharts 0.10-1 (2017-06-01)
+
+- All charts can now take a `heading` within `chartOpts` which will
+  show an `<h2>` heading above the figure. This is intended for
+  stand-alone html files.
+
+- In the `caption` chart option, now using `.html()` rather than
+  `.text()` so that you can insert a bit of html (such as `<b>` or
+  `<code>`).
+
+
 ## qtlcharts 0.9-6 (2017-05-24)
 
 - All charts now can take a `caption` within `chartOpts` which will

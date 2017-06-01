@@ -178,7 +178,10 @@ scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
     });
     return rightchart(g_right, scat2data[index]);
   };
+  if (chartOpts.heading != null) {
+    d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading);
+  }
   if (chartOpts != null ? chartOpts.caption : void 0) {
-    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").html(chartOpts.caption);
   }
 };

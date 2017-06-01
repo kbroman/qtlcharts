@@ -122,7 +122,12 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
 
         rightchart(g_right, scat2data[index])
 
+    if chartOpts.heading?
+        d3.select("div#htmlwidget_container")
+          .insert("h2", ":first-child")
+          .html(chartOpts.heading)
+
     if chartOpts?.caption
         d3.select(widgetdiv).insert("p")
                             .attr("class", "caption")
-                            .text(chartOpts.caption)
+                            .html(chartOpts.caption)

@@ -159,7 +159,10 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   scatterplot.append("rect").attr("height", panelheight).attr("width", panelwidth).attr("fill", "none").attr("stroke", "black").attr("stroke-width", 1).attr("pointer-events", "none");
   corrplot.append("text").text(cortitle).attr("id", "corrtitle").attr("x", panelwidth / 2).attr("y", -margin.top / 2).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   scatterplot.append("text").text(scattitle).attr("id", "scattitle").attr("x", panelwidth / 2).attr("y", -margin.top / 2).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
+  if (chartOpts.heading != null) {
+    d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading);
+  }
   if (chartOpts.caption != null) {
-    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").html(chartOpts.caption);
   }
 };

@@ -225,7 +225,10 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   svg.append("text").text(ylab).attr("x", margin.left * 0.2).attr("y", halfheight / 2).attr("fill", "slateblue").attr("transform", "rotate(270 " + (margin.left * 0.2) + " " + (halfheight / 2) + ")").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   lowsvg.append("text").text(ylab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", halfheight - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   svg.append("text").text(xlab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", halfheight - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
+  if (chartOpts.heading != null) {
+    d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading);
+  }
   if (chartOpts.caption != null) {
-    return d3.select(widgetdiv).insert("p").attr("class", "caption").text(chartOpts.caption);
+    return d3.select(widgetdiv).insert("p").attr("class", "caption").html(chartOpts.caption);
   }
 };

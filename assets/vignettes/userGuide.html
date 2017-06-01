@@ -272,11 +272,12 @@ htmlwidgets::saveWidget(corrplot, file=&quot;~/Desktop/iplotCorr_example.html&qu
 <p>If the points are to be colored by genotype, you need to specify the same number of colors as there are genotype groups.</p>
 <pre class="r"><code>iplotCorr(expr, geno, reorder=TRUE,
           chartOpts=list(scatcolors=c(&quot;lightblue&quot;, &quot;lightgreen&quot;, &quot;pink&quot;)))</code></pre>
-<p>If you want a caption below the chart, use <code>caption</code>. This is intended largely for charts <a href="http://localhost:4000/assets/vignettes/userGuide.html#saving_to_a_file">saved to a file</a> with <code>htmlwidgets::saveWidget()</code>.</p>
+<p>If you want a caption below the chart, use <code>caption</code>. Similarly, you can use <code>heading</code> to get an <code>&lt;h2&gt;</code> heading above the plot, and <code>footer</code> to add a footer below. These is intended largely for charts <a href="http://localhost:4000/assets/vignettes/userGuide.html#saving_to_a_file">saved to a file</a> with <code>htmlwidgets::saveWidget()</code>.</p>
 <pre class="r"><code>iplotCorr(expr, geno, reorder=TRUE,
           chartOpts=list(scatcolors=c(&quot;lightblue&quot;, &quot;lightgreen&quot;, &quot;pink&quot;),
+                         heading=&quot;iplotCorr example&quot;,
                          caption=paste(&quot;Click on the heatmap on the left to see&quot;,
-                                 &quot;corresponding scatterplots on the right.&quot;) ))</code></pre>
+                                       &quot;corresponding scatterplots on the right.&quot;) ))</code></pre>
 <p>A full list of options is available in the <a href="chartOpts.html"><code>chartOpts</code> vignette</a>.</p>
 </div>
 <div id="further-control-of-chart-dimensions" class="section level2">

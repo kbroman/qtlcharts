@@ -167,7 +167,9 @@ iplotCorr(expr, geno, reorder=TRUE,
           chartOpts=list(scatcolors=c("lightblue", "lightgreen", "pink")))
 ```
 
-If you want a caption below the chart, use `caption`. This is intended
+If you want a caption below the chart, use `caption`. Similarly, you
+can use `heading` to get an `<h2>` heading above the plot, and
+`footer` to add a footer below. These is intended
 largely for charts [saved to a
 file](http://localhost:4000/assets/vignettes/userGuide.html#saving_to_a_file)
 with `htmlwidgets::saveWidget()`.
@@ -175,8 +177,9 @@ with `htmlwidgets::saveWidget()`.
 ```{r iplotCorr_caption, eval=FALSE}
 iplotCorr(expr, geno, reorder=TRUE,
           chartOpts=list(scatcolors=c("lightblue", "lightgreen", "pink"),
+                         heading="iplotCorr example",
                          caption=paste("Click on the heatmap on the left to see",
-                                 "corresponding scatterplots on the right.") ))
+                                       "corresponding scatterplots on the right.") ))
 ```
 
 

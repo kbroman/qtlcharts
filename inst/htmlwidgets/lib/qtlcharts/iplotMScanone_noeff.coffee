@@ -221,6 +221,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         d3.select("div#htmlwidget_container")
           .insert("h2", ":first-child")
           .html(chartOpts.heading)
+          .style("font-family", "sans-serif")
 
     if chartOpts.caption?
         d3.select("body")
@@ -232,3 +233,4 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         d3.select("body")
           .append("div")
           .html(chartOpts.footer)
+          .style("font-family", "sans-serif")

@@ -226,12 +226,12 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   lowsvg.append("text").text(ylab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", halfheight - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   svg.append("text").text(xlab).attr("x", (width - margin.left - margin.bottom) / 2 + margin.left).attr("y", halfheight - margin.bottom * 0.2).attr("fill", "slateblue").attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   if (chartOpts.heading != null) {
-    d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading);
+    d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading).style("font-family", "sans-serif");
   }
   if (chartOpts.caption != null) {
     d3.select("body").append("p").attr("class", "caption").html(chartOpts.caption);
   }
   if (chartOpts.footer != null) {
-    return d3.select("body").append("div").html(chartOpts.footer);
+    return d3.select("body").append("div").html(chartOpts.footer).style("font-family", "sans-serif");
   }
 };

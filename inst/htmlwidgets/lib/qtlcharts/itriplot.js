@@ -53,12 +53,12 @@ itriplot = function(widgetdiv, data, chartOpts) {
     return d3.select(this).attr("r", pointsize);
   });
   if (chartOpts.heading != null) {
-    d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading);
+    d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading).style("font-family", "sans-serif");
   }
   if (chartOpts.caption != null) {
     d3.select("body").append("p").attr("class", "caption").html(chartOpts.caption);
   }
   if (chartOpts.footer != null) {
-    return d3.select("body").append("div").html(chartOpts.footer);
+    return d3.select("body").append("div").html(chartOpts.footer).style("font-family", "sans-serif");
   }
 };

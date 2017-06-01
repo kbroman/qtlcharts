@@ -160,12 +160,12 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   corrplot.append("text").text(cortitle).attr("id", "corrtitle").attr("x", panelwidth / 2).attr("y", -margin.top / 2).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   scatterplot.append("text").text(scattitle).attr("id", "scattitle").attr("x", panelwidth / 2).attr("y", -margin.top / 2).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
   if (chartOpts.heading != null) {
-    d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading);
+    d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading).style("font-family", "sans-serif");
   }
   if (chartOpts.caption != null) {
     d3.select("body").append("p").attr("class", "caption").html(chartOpts.caption);
   }
   if (chartOpts.footer != null) {
-    return d3.select("body").append("div").html(chartOpts.footer);
+    return d3.select("body").append("div").html(chartOpts.footer).style("font-family", "sans-serif");
   }
 };

@@ -14,13 +14,16 @@ for(i in seq(along=x))
 # http://dmpeli.mcmaster.ca/Matlab/Math1J03/LectureNotes/Lecture2_5.htm
 
 # remove the target file, if it exists
-file <- "../iheatmap.html"
+file <- "iheatmap.html"
 if(file.exists(file)) unlink(file)
 
-# onefile=TRUE makes the resulting html file all-inclusive (javascript + css + data)
-#     this is a bit wasteful of space, but it's easy
-iheatmap(z, x, y, title = "iheatmap example", onefile=TRUE, openfile=FALSE,
-         file=file,
-         caption=c("Hover over pixels in the heatmap on the top-left to see the values ",
-           "and to see the horizontal slice (below) and the vertical slice (to the right).<br><br>\n",
-           "</p><hr/><p class=\"caption\"><a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">R/qtlcharts</a>"))
+footer <- paste(readLines("footer.txt"), collapse="\n")
+
+qtlcharts::setScreenSize("normal")
+theplot <- iheatmap(z, x, y, chartOpts=list(heading = "<code>iheatmap</code>",
+                                            caption=paste("<b><code>iheatmap</code> example:</b>",
+                                                          "Hover over pixels in the heatmap on the top-left to see the values",
+                                                          "and to see the horizontal slice (below) and the vertical slice (to the right)."),
+                                            footer=footer))
+htmlwidgets::saveWidget(theplot, file=file, selfcontained=TRUE)
+file.rename(file, file.path("..", file))

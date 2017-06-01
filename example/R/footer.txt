@@ -1,0 +1,4 @@
+<hr/>
+<p class="caption">
+    <a style="text-decoration:none;" href="http://kbroman.org/qtlcharts">R/qtlcharts</a>
+</p>

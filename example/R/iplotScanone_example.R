@@ -7,14 +7,21 @@ data(hyper)
 hyper <- calc.genoprob(hyper, step=1)
 out <- scanone(hyper)
 
-file <- "../iplotScanone.html"
+file <- "iplotScanone.html"
 if(file.exists(file)) unlink(file)
 
-iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
-             title="iplotScanone example",
-             onefile=TRUE, openfile=FALSE, file=file,
-             caption=c("Hover over marker positions on the LOD curve to see the marker names. ",
-               "Click on a marker to view the phenotype &times; genotype plot on the right. ",
-               "In the phenotype &times; genotype plot, the intervals indicate the mean ",
-               "&plusmn; 2 SE.<br><br>\n",
-               "</p><hr/><p class=\"caption\"><a style=\"text-decoration:none;\" href=\"http://kbroman.org/qtlcharts\">R/qtlcharts</a>"))
+footer <- paste(readLines("footer.txt"), collapse="\n")
+
+qtlcharts::setScreenSize("normal")
+theplot <- iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
+                        chartOpts=list(heading="<code>iplotScanone</code>",
+                                       caption=paste("<b><code>iplotScanone</code> example:</b>",
+                                                     "Hover over marker positions on the LOD curve to see the marker names.",
+                                                     "Click on a marker to view the phenotype &times; genotype plot on the right.",
+                                                     "In the phenotype &times; genotype plot, the intervals indicate the mean",
+                                                     "&plusmn; 2 SE."),
+                                       footer=footer,
+                                       axispos=list(xtitle=25, ytitle=40, xlabel=5, ylabel=5)))
+
+htmlwidgets::saveWidget(theplot, file=file, selfcontained=TRUE)
+file.rename(file, file.path("..", file))

@@ -127,7 +127,13 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
           .insert("h2", ":first-child")
           .html(chartOpts.heading)
 
-    if chartOpts?.caption
-        d3.select(widgetdiv).insert("p")
-                            .attr("class", "caption")
-                            .html(chartOpts.caption)
+    if chartOpts.caption?
+        d3.select("body")
+          .append("p")
+          .attr("class", "caption")
+          .html(chartOpts.caption)
+
+    if chartOpts.footer?
+        d3.select("body")
+          .append("div")
+          .html(chartOpts.footer)

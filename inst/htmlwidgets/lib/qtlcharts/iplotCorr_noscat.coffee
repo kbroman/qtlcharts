@@ -1,7 +1,3 @@
-# iplotCorr_noscat.coffee
-#
-# This is like iplotCorr_coffee, but without the right scatterplot panel
-
 iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
 
     # data is an object with 7 components
@@ -124,6 +120,12 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
           .html(chartOpts.heading)
 
     if chartOpts.caption?
-        d3.select(widgetdiv).insert("p")
-                            .attr("class", "caption")
-                            .html(chartOpts.caption)
+        d3.select("body")
+          .append("p")
+          .attr("class", "caption")
+          .html(chartOpts.caption)
+
+    if chartOpts.footer?
+        d3.select("body")
+          .append("div")
+          .html(chartOpts.footer)

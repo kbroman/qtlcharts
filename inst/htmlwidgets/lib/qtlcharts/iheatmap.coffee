@@ -176,6 +176,12 @@ iheatmap = (widgetdiv, data, chartOpts) ->
           .html(chartOpts.heading)
 
     if chartOpts.caption?
-        d3.select(widgetdiv).insert("p")
-                            .attr("class", "caption")
-                            .html(chartOpts.caption)
+        d3.select("body")
+          .append("p")
+          .attr("class", "caption")
+          .html(chartOpts.caption)
+
+    if chartOpts.footer?
+        d3.select("body")
+          .append("div")
+          .html(chartOpts.footer)

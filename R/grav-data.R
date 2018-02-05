@@ -17,9 +17,9 @@
 #' Spalding EP (2013) High-throughput computer vision introduces the
 #' time axis to a quantitative trait map of a plant growth
 #' response. Genetics 195:1077-1086
-#' (\href{http://www.ncbi.nlm.nih.gov/pubmed/23979570}{PubMed})
+#' (\href{https://www.ncbi.nlm.nih.gov/pubmed/23979570}{PubMed})
 #'
-#' @source \href{http://phenome.jax.org/db/q?rtn=projects/projdet&reqprojid=282}{Mouse Phenome Database}
+#' @source \href{https://phenome.jax.org/projects/Moore1b}{Mouse Phenome Database}
 #'
 #' @examples
 #' data(grav)

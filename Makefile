@@ -117,9 +117,11 @@ d3panels: $(LIB_DIR)/d3panels/d3panels.min.js \
 $(LIB_DIR)/d3panels/%: $(JSDEPS_DIR)/d3panels/%
 	cp $< $@
 
+# these next to are to deal with a problem in "R CMD build"
+# ...because yarn is creating a symlink bower_components -> node_modules/@bower_components
+# (need that node_modules/@bower_components to exist)
 $(JSDEPS_DIR)/d3panels/node_modules:
 	mkdir $@
-
 $(JSDEPS_DIR)/d3panels/node_modules/@bower_components: $(JSDEPS_DIR)/d3panels/node_modules
 	mkdir $@
 

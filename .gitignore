@@ -3,4 +3,5 @@ notes.txt
 inst/ToDo.html
 .Rhistory
 .RData
-bower/bower_components
+js_deps/bower_components
+js_deps/node_modules

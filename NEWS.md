@@ -1,3 +1,12 @@
+## qtlcharts 0.11-1 (2018-03-02)
+
+- Update to use CoffeeScript v 2.2.2.
+
+- Switch from [bower](https://bower.io) to
+  [yarn](https://yarnpkg.com/en/) for javascript dependency
+  management.
+
+
 ## qtlcharts 0.10-1 (2017-06-01)
 
 - All charts can now take a `heading` and a `footer` within

@@ -17,13 +17,13 @@ dependencies:
       - index-min.js
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 1.3.7
+    version: 1.4.6
     script:
       - d3panels.min.js
     style: d3panels.min.css
   - name: qtlcharts_iplotMScanone
     src: htmlwidgets/lib/qtlcharts
-    version: 0.9.5
+    version: 0.11.1
     script:
       - iplotMScanone_eff.js
       - iplotMScanone_noeff.js

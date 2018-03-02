@@ -1,0 +1,23 @@
+{
+  "name": "qtlcharts",
+  "version": "0.11.1",
+  "description": "Interactive Graphics for QTL Experiments",
+  "author": "Karl Broman <kbroman@biostat.wisc.edu> (http://kbroman.org)",
+  "repository": "github:kbroman/qtlcharts",
+  "homepage": "http://kbroman.org/qtlcharts",
+  "license": "MIT",
+  "dependencies": {
+    "@bower_components/colorbrewer": "undashes/colorbrewer#^1.0.0",
+    "@bower_components/d3": "mbostock-bower/d3-bower#^4.9.0",
+    "@bower_components/d3-tip": "Caged/d3-tip#^0.7.1",
+    "d3panels": "kbroman/d3panels#^1.4.6",
+    "@bower_components/jquery": "jquery/jquery-dist#^3.3.1",
+    "@bower_components/jquery-ui": "components/jqueryui#^1.12.1"
+  },
+  "engines": {
+    "yarn": ">= 1.0.0"
+  },
+  "scripts": {
+    "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@bower_components'), 'bower_components', 'junction') } catch (e) { }\""
+  }
+}

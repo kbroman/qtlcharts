@@ -8,5 +8,5 @@
 inst/ToDo.html
 vignettes/chartOpt_vignette
 ^\.travis\.yml$
-bower
+js_deps/
 ^vignettes/make_vignette_index\.R$

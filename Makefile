@@ -13,6 +13,7 @@ inst/ToDo.html: inst/ToDo.md
 # build package documentation
 doc:
 	R -e 'devtools::document()'
+	\rm js_deps/node_modules/d3panels/bower_components
 
 #------------------------------------------------------------
 
@@ -66,11 +67,11 @@ $(WIDGET_DIR)/%.js: $(WIDGET_DIR)/%.coffee
 # d3, jquery, jquery-ui, colorbrewer, d3panels
 libs: d3 jquery jqueryui colorbrewer d3-tip d3panels
 LIB_DIR = inst/htmlwidgets/lib
-BOWER_DIR = bower/bower_components
+JSDEPS_DIR = js_deps/node_modules
 
 # d3
 d3: $(LIB_DIR)/d3/d3.min.js $(LIB_DIR)/d3/LICENSE $(LIB_DIR)/d3/bower.json
-$(LIB_DIR)/d3/%: $(BOWER_DIR)/d3/%
+$(LIB_DIR)/d3/%: $(YARN_DIR)/d3/%
 	cp $< $@
 
 # colorbrewer
@@ -78,19 +79,19 @@ colorbrewer: $(LIB_DIR)/colorbrewer/LICENSE \
 			 $(LIB_DIR)/colorbrewer/colorbrewer.js \
 			 $(LIB_DIR)/colorbrewer/colorbrewer.css \
 			 $(LIB_DIR)/colorbrewer/bower.json
-$(LIB_DIR)/colorbrewer/%: $(BOWER_DIR)/colorbrewer/%
+$(LIB_DIR)/colorbrewer/%: $(JSDEPS_DIR)/@bower_components/colorbrewer/%
 	cp $< $@
 
 # jquery
 jquery: $(LIB_DIR)/jquery/MIT-LICENSE.txt \
 		$(LIB_DIR)/jquery/dist/jquery.min.js \
 		$(LIB_DIR)/jquery/bower.json
-$(LIB_DIR)/jquery/%: $(BOWER_DIR)/jquery/%
+$(LIB_DIR)/jquery/%: $(JSDEPS_DIR)/@bower_components/jquery/%
 	cp $< $@
 
 # jquery-ui
 jqueryui: $(LIB_DIR)/jquery-ui/jquery-ui.min.js
-$(LIB_DIR)/jquery-ui/jquery-ui.min.js: $(BOWER_DIR)/jquery-ui/jquery-ui.min.js
+$(LIB_DIR)/jquery-ui/jquery-ui.min.js: $(JSDEPS_DIR)/@bower_components/jquery-ui/jquery-ui.min.js
 	cp $< $@
 	cp $(<D)/LICENSE.txt $(@D)/
 	cp $(<D)/bower.json $(@D)/
@@ -101,9 +102,9 @@ $(LIB_DIR)/jquery-ui/jquery-ui.min.js: $(BOWER_DIR)/jquery-ui/jquery-ui.min.js
 d3-tip: $(LIB_DIR)/d3-tip/bower.json \
 		$(LIB_DIR)/d3-tip/LICENSE \
 		$(LIB_DIR)/d3-tip/index-min.js
-$(LIB_DIR)/d3-tip/%: $(BOWER_DIR)/d3-tip/%
+$(LIB_DIR)/d3-tip/%: $(JSDEPS_DIR)/@bower_components/d3-tip/%
 	cp $< $@
-$(LIB_DIR)/d3-tip/index-min.js: $(BOWER_DIR)/d3-tip/index.js
+$(LIB_DIR)/d3-tip/index-min.js: $(JSDEPS_DIR)/@bower_components/d3-tip/index.js
 	uglifyjs $< -o $@
 
 # d3panels
@@ -111,8 +112,8 @@ d3panels: $(LIB_DIR)/d3panels/d3panels.min.js \
 		  $(LIB_DIR)/d3panels/d3panels.min.css \
 		  $(LIB_DIR)/d3panels/ReadMe.md \
 		  $(LIB_DIR)/d3panels/License.md \
-		  $(LIB_DIR)/d3panels/bower.json
-$(LIB_DIR)/d3panels/%: $(BOWER_DIR)/d3panels/%
+		  $(LIB_DIR)/d3panels/package.json
+$(LIB_DIR)/d3panels/%: $(JSDEPS_DIR)/d3panels/%
 	cp $< $@
 
 #------------------------------------------------------------

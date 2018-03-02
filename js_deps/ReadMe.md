@@ -1,8 +1,8 @@
 ## Bower to grab javascript libraries
 
-I use [bower](http://bower.io/) (a packaging system for javascript) to
+I use [yarn](https://yarnpkg.com) (a packaging system for javascript) to
 grab d3, colorbrewer, jquery, jquery-ui, d3-tip, and d3panels. The
-[`bower/bower.json`](https://github.com/kbroman/qtlcharts/tree/master/bower/bower.json)
+[`yarn/package.json`](https://github.com/kbroman/qtlcharts/tree/master/yarn/package.json)
 file indicates the libraries (and minimal versions) to get.
 
 In the package
@@ -11,17 +11,13 @@ I pull out just the individual files I want, rather than include
 everything that bower pulls down as part of the package.
 
 
-- To install bower
+- To install yarn
 
-      npm install -g bower
+      npm install -g yarn
 
-- Install these packages (indicated within the `bower.json` file)
+- Install (or update) the dependent packages (indicated within the `package.json` file)
 
-      bower install
-
-- To update the packages
-
-      bower update
+      yarn install
 
 For the d3-tip library, I use
 [UglifyJs](https://github.com/mishoo/UglifyJS2) to make it smaller.

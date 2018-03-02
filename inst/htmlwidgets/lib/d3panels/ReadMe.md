@@ -84,6 +84,34 @@ to link to [colorbrewer.js](https://github.com/mbostock/d3/blob/master/lib/color
 <script type="text/javascript" src="https://rawgit.com/mbostock/d3/master/lib/colorbrewer/colorbrewer.js"></script>
 ```
 
+
+#### Build
+
+To build the javascript (and CSS) files from the coffeescript source,
+you first need to install [npm](https://www.npmjs.com/get-npm).
+
+Then use npm to install [yarn](https://yarnpkg.com/en/), [coffeescript](https://coffeescript.org), [uglifyjs](https://github.com/mishoo/UglifyJS2) (for
+ES6), and [uglifycss](https://github.com/mishoo/UglifyJS2).
+
+```script
+npm install -g yarn coffeescript uglifycss mishoo/UglifyJS2#harmony
+```
+
+Then install the dependencies ([d3](https://d3js.org),
+[d3-tip](http://labratrevenge.com/d3-tip/), and
+[colorbrewer](https://github.com/jeanlauliac/colorbrewer):
+
+```script
+yarn install
+```
+
+Finally, run make to create the compiled javascript code.
+
+```script
+make
+```
+
+
 #### License
 
 Licensed under the

@@ -20,6 +20,356 @@ chart. You can also use the chart option `caption` to provide a
 caption for the chart. (The `caption` option is mostly intended for
 stand-alone html files.)
 
+### `iplotCurves`
+
+`height = 1000` &mdash; total height of chart in pixels
+
+`width = 1000` &mdash; total width of chart in pixels
+
+`htop = height/2` &mdash; height of curves chart in pixels
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
+
+`pointcolor = NULL` &mdash; vector of colors for points in scatterplots
+
+`pointstroke = "black"` &mdash; color of line outline for points in scatterplots
+
+`pointsize = 3` &mdash; size of points in scatterplots
+
+`pointcolorhilit = NULL` &mdash; vector of colors for points in scatterplots, when highlighted
+
+`pointsizehilit = 6` &mdash; size of points in scatterplot, when highlighted
+
+`linecolor = NULL` &mdash; vector of colors of curves
+
+`linecolorhilit = NULL` &mdash; vector of colors of curves, when highlighted
+
+`linewidth = 2` &mdash; line width of curves
+
+`linewidthhilit = 2` &mdash; line widths of curves, when highlighted
+
+`curves_xlim = NULL` &mdash; x-axis limits in curve plot
+
+`curves_ylim = NULL` &mdash; y-axis limits in curve plot
+
+`curves_nxticks = 5` &mdash; no. ticks on x-axis in curve plot
+
+`curves_xticks = NULL` &mdash; vector of tick positions on x-axis in curve plot
+
+`curves_nyticks = 5` &mdash; no. ticks on y-axis in curve plot
+
+`curves_yticks = NULL` &mdash; vector of tick positions on y-axis in curve plot
+
+`curves_title = ""` &mdash; title for curve plot
+
+`curves_xlab = "X"` &mdash; x-axis label for curve plot
+
+`curves_ylab = "Y"` &mdash; y-axis label for curve plot
+
+`scat1_xlim = NULL` &mdash; x-axis limits in first scatterplot
+
+`scat1_ylim = NULL` &mdash; y-axis limits in first scatterplot
+
+`scat1_xNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values for x variable in first scatterplot (handle=T/F, force=T/F, width, gap)
+
+`scat1_yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values for x variable in first scatterplot (handle=T/F, force=T/F, width, gap)
+
+`scat1_nxticks = 5` &mdash; no. ticks on x-axis in first scatterplot
+
+`scat1_xticks = NULL` &mdash; vector of tick positions on x-axis in first scatterplot
+
+`scat1_nyticks = 5` &mdash; no. ticks on y-axis in first scatterplot
+
+`scat1_yticks = NULL` &mdash; vector of tick positions on y-axis in first scatterplot
+
+`scat1_title = ""` &mdash; title for first scatterplot
+
+`scat1_xlab = "X"` &mdash; x-axis label for first scatterplot
+
+`scat1_ylab = "Y"` &mdash; y-axis label for first scatterplot
+
+`scat2_xlim = NULL` &mdash; x-axis limits in second scatterplot
+
+`scat2_ylim = NULL` &mdash; y-axis limits in second scatterplot
+
+`scat2_xNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values for x variable in second scatterplot (handle=T/F, force=T/F, width, gap)
+
+`scat2_yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values for x variable in second scatterplot (handle=T/F, force=T/F, width, gap)
+
+`scat2_nxticks = 5` &mdash; no. ticks on x-axis in second scatterplot
+
+`scat2_xticks = NULL` &mdash; vector of tick positions on x-axis in second scatterplot
+
+`scat2_nyticks = 5` &mdash; no. ticks on y-axis in second scatterplot
+
+`scat2_yticks = NULL` &mdash; vector of tick positions on y-axis in second scatterplot
+
+`scat2_title = ""` &mdash; title for second scatterplot
+
+`scat2_xlab = "X"` &mdash; x-axis label for second scatterplot
+
+`scat2_ylab = "Y"` &mdash; y-axis label for second scatterplot
+
+### `iplotCorr`
+
+`height = 560` &mdash; height of each panel in pixels
+
+`width = 1050` &mdash; total width of panels
+
+`margin = list(left=70, top=40, right=5, bottom=70, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`corcolors = c("darkslateblue", "white", "crimson")` &mdash; heat map colors (same length as `zlim`)
+
+`zlim = c(-1, 0, 1)` &mdash; z-axis limits
+
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
+
+`cortitle = ""` &mdash; title for heatmap panel
+
+### `iheatmap`
+
+`height = 800` &mdash; total height of chart
+
+`width = 800` &mdash; total width of chart
+
+`htop = height/2` &mdash; height of top charts in pixels
+
+`wleft = width/2` &mdash; width of left charts in pixels
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=0)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
+
+`nullcolor = "#E6E6E6"` &mdash; color of pixels with null values
+
+`linecolor = "slateblue"` &mdash; line color
+
+`linewidth = 2` &mdash; line width
+
+`xlim = NULL` &mdash; x-axis limits
+
+`ylim = NULL` &mdash; y-axis limits
+
+`nxticks = 5` &mdash; no. ticks on x-axis
+
+`xticks = NULL` &mdash; vector of tick positions on x-axis
+
+`nyticks = 5` &mdash; no. ticks on y-axis
+
+`yticks = NULL` &mdash; vector of tick positions on y-axis
+
+`nzticks = 5` &mdash; no. ticks on z-axis
+
+`zticks = NULL` &mdash; vector of tick positions on z-axis
+
+`title = ""` &mdash; title for chart
+
+`xlab = "X"` &mdash; x-axis label
+
+`ylab = "Y"` &mdash; y-axis label
+
+`zlab = "Z"` &mdash; z-axis label
+
+`zthresh = NULL` &mdash; lower threshold for plotting in heat map: only values with |z| > zthresh are shown
+
+`zlim = c(-d3panels.max(z), 0, d3panels.max(z))` &mdash; z-axis limits
+
+`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors (same length as `zlim`)
+
+`flip_vert_slice = false` &mdash; if true, flip the y- and z- axes in the vertical slice
+
+### `iplotMScanone` (no effects)
+
+`height = 700` &mdash; height of chart in pixels
+
+`width = 1000` &mdash; width of chart in pixels
+
+`wleft = width*0.65` &mdash; width of left panels in pixels
+
+`htop = height/2` &mdash; height of top panels in pixels
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=0)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`chrGap = 6` &mdash; gap between chromosomes in pixels
+
+`rectcolor = "#E6E6E6"` &mdash; color of lighter background rectangle
+
+`altrectcolor = "#C8C8C8"` &mdash; color of darker background rectangle
+
+`nullcolor = "#E6E6E6"` &mdash; color for pixels with null values
+
+`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
+
+`chrlinewidth = 2` &mdash; width of lines between chromosomes
+
+`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
+
+`zlim = NULL` &mdash; z-axis limits
+
+`zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
+
+`xlab = NULL` &mdash; x-axis label for LOD heatmap)
+
+`ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
+
+`zlab = "LOD score"` &mdash; z-axis label for LOD heatmap (really just used as y-axis label in the two slices)
+
+`linecolor = "darkslateblue"` &mdash; color of LOD curves
+
+`linewidth = 2` &mdash; width of LOD curves
+
+`pointsize = 0` &mdash; size of points in vertical slice (default = 0 corresponds plotting curves rather than points)
+
+`pointcolor = "slateblue"` &mdash; color of points in vertical slice
+
+`pointcolorhilit = "crimson"` &mdash; color of highlighted point in vertical slice
+
+`pointstroke = "black"` &mdash; color of outer circle for points in vertical slice
+
+`nxticks = 5` &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale
+
+`xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale
+
+### `iplot`
+
+`height = 500` &mdash; height of chart in pixels
+
+`width = 800` &mdash; width of chart in pixels
+
+`title = ""` &mdash; title for chart
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`xlab = "X"` &mdash; x-axis label
+
+`ylab = "Y"` &mdash; y-axis label
+
+`xlim = NULL` &mdash; x-axis limits
+
+`xticks = NULL` &mdash; vector of tick positions on x-axis
+
+`nxticks = 5` &mdash; no. ticks on x-axis
+
+`ylim = NULL` &mdash; y-axis limits
+
+`yticks = NULL` &mdash; vector of tick positions on y-axis
+
+`nyticks = 5` &mdash; no. ticks on y-axis
+
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
+
+`pointcolor = NULL` &mdash; colors for points
+
+`pointsize = 3` &mdash; size of points in pixels
+
+`pointstroke = "black"` &mdash; color of outer circle for points
+
+`rotate_ylab = NULL` &mdash; whether to rotate the y-axis label
+
+`xNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
+
+`yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
+
+### `iplotMScanone` (with effects)
+
+`height = 700` &mdash; height of chart in pixels
+
+`width = 1000` &mdash; width of chart in pixels
+
+`wleft = width*0.65` &mdash; width of left panels in pixels
+
+`htop = height/2` &mdash; height of top panels in pixels
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`chrGap = 6` &mdash; gap between chromosomes in pixels
+
+`rectcolor = "#e6e6e6"` &mdash; color of background rectangle
+
+`altrectcolor = "#c8c8c8"` &mdash; color of alternate background rectangle
+
+`nullcolor = "#e6e6e6"` &mdash; color for pixels with null values
+
+`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
+
+`chrlinewidth = 2` &mdash; width of lines between chromosomes
+
+`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
+
+`zlim = NULL` &mdash; z-axis limits
+
+`zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
+
+`xlab = NULL` &mdash; x-axis label for LOD heatmap (also used in lower panel)
+
+`ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
+
+`zlab = "LOD score"` &mdash; z-axis label for LOD heatmap (really the y-axis label in the lower panel)
+
+`eff_ylim = NULL` &mdash; y-axis limits for effect plot (right panel)
+
+`eff_ylab = ""` &mdash; y-axis label for effect plot (right panel)
+
+`linecolor = "darkslateblue"` &mdash; line color for LOD curves (lower panel)
+
+`linewidth = 2` &mdash; line width for LOD curves (lower panel)
+
+`eff_linecolor = NULL` &mdash; line color for effect plot (right panel)
+
+`eff_linewidth = 2` &mdash; width of line for effect plot (right panel)
+
+`eff_pointcolor = NULL` &mdash; point color for effect plot (right panel)
+
+`eff_pointsize = 0` &mdash; point size for effect plot (right panel); 0 means no points
+
+`eff_pointstroke = "black"` &mdash; stroke color for points in effect plot (right panel)
+
+`nxticks = 5` &mdash; no. ticks in x-axis for effect plot (right panel), if quantitative scale
+
+`xticks = NULL` &mdash; tick positions in x-axis for effect plot (right panel), if quantitative scale
+
+`lod_labels = NULL` &mdash; labels on the LOD score columns
+
+### `iboxplot`
+
+`width = 1000` &mdash; width of image in pixels
+
+`height = 900` &mdash; total height of image in pixels
+
+`margin = list(left=60, top=20, right=60, bottom=40)` &mdash; margins in pixels (left, top, right, bottom)
+
+`ylab = "Response"` &mdash; y-axis label
+
+`xlab = "Individuals"` &mdash; x-axis label
+
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
+
+`qucolors = NULL` &mdash; vector of colors for the quantile curves
+
+`histcolors = c("#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black")` &mdash; vector of colors for selected histograms
+
 ### `iplotScanone` (no effects)
 
 `height = 450` &mdash; height of image in pixels
@@ -61,6 +411,136 @@ stand-alone html files.)
 `ylab = "LOD score"` &mdash; y-axis label
 
 `rotate_ylab = NULL` &mdash; indicates whether to rotate the y-axis label 90 degrees
+
+### `iplotMap`
+
+`width = 1000` &mdash; width of chart in pixels
+
+`height = 600` &mdash; height of chart in pixels
+
+`margin = list(left=60, top=40, right=100, bottom=40, inner=10)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`ylim = NULL` &mdash; y-axis limits
+
+`nyticks = 5` &mdash; no. ticks on y-axis
+
+`yticks = NULL` &mdash; vector of tick positions on y-axis
+
+`xlineOpts = list(color="#cdcdcd", width=5)` &mdash; color and width of vertical lines
+
+`tickwidth = 10` &mdash; width of tick marks at markers, in pixels
+
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
+
+`linecolor = "slateblue"` &mdash; color of lines
+
+`linecolorhilit = "Orchid"` &mdash; color of lines, when highlighted
+
+`linewidth = 3` &mdash; width of lines
+
+`title = ""` &mdash; title for chart
+
+`xlab = "Chromosome"` &mdash; x-axis label
+
+`ylab = "Position (cM)"` &mdash; y-axis label
+
+`shiftStart = false` &mdash; if true, shift the start of chromosomes to 0
+
+`horizontal = false` &mdash; if true, have chromosomes on vertical axis and positions horizontally
+
+### `iplotRF`
+
+`height = 800` &mdash; total height of chart in pixels
+
+`width = 1000` &mdash; total width of chart in pixels
+
+`hbot = 300` &mdash; height (in pixels) of each of the lower panels with LOD scores
+
+`margin = list(left=60, top=40, right=40, bottom=60)` &mdash; margins in pixels (left, top, right, bottom)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`chrGap = 2` &mdash; gaps between chr in heat map
+
+`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
+
+`chrlinewidth = 2` &mdash; width of lines between chromosomes
+
+`oneAtTop = false` &mdash; if true, put chromosome 1 at the top rather than bottom
+
+`colors = c("crimson", "white", "slateblue")` &mdash; vector of three colors for the color scale (negative - zero - positive)
+
+`nullcolor = "#e6e6e6"` &mdash; color for empty cells
+
+`zlim = NULL` &mdash; z-axis limits (if null take from data, symmetric about 0)
+
+`zthresh = NULL` &mdash; z threshold; if |z| < zthresh, not shown
+
+`hilitCellcolor = "black"` &mdash; color of box around highlighted cell
+
+`cellPad = NULL` &mdash; padding of cells (if null, we take cell width * 0.1)
+
+`fontsize = NULL` &mdash; font size in crosstab
+
+`rectcolor = "#e6e6e6"` &mdash; background rectangle color (and color of cells in crosstab)
+
+`altrectcolor = "#c8c8c8"` &mdash; alternate rectangle color in lower panels with LOD and rf
+
+`hilitcolor = "#e9cfec"` &mdash; color of rectangle in heatmap when highlighted
+
+`boxcolor = "black"` &mdash; color of outer box of panels
+
+`boxwidth = 2` &mdash; width of outer box in pixels
+
+`pointsize = 2` &mdash; point size in lower panels with LOD and rf
+
+`pointcolor = "slateblue"` &mdash; point color in lower panels with LOD and rf
+
+`pointstroke = "black"` &mdash; stroke color for points in lower panels with LOD and rf
+
+`lodlim = c(0, 12)` &mdash; range of LOD values to display; omit below 1st, truncate above 2nd
+
+`nyticks = 5` &mdash; no. ticks on y-axis in LOD curve panels
+
+`yticks = NULL` &mdash; vector of tick positions on y-axis in LOD curve panels
+
+`tipclass = "tooltip"` &mdash; class name for tool tips
+
+### `itriplot`
+
+`width = 600` &mdash; overall width of chart in pixels
+
+`height = 520` &mdash; overall height of chart in pixels
+
+`margin = list(left=60, top=40, right=60, bottom=10)` &mdash; margins in pixels (left, top, right, bottom)
+
+`labelpos = 10` &mdash; pixels between vertex and vertex label (horizontally)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`title = ""` &mdash; chart title
+
+`labels = c("(1,0,0)", "(0,1,0)", "(0,0,1)")` &mdash; labels on the corners
+
+`rectcolor = "#e6e6e6"` &mdash; color of background rectangle
+
+`boxcolor = "black"` &mdash; color of outer rectangle box
+
+`boxwidth = 2` &mdash; width of outer box in pixels
+
+`pointcolor = NULL` &mdash; fill color of points
+
+`pointstroke = "black"` &mdash; color of points' outer circle
+
+`pointsize = 3` &mdash; color of points
+
+`tipclass = "tooltip"` &mdash; class name for tool tips
 
 ### `iplotScanone` (`pxgtype="ci"`)
 
@@ -200,422 +680,6 @@ stand-alone html files.)
 
 `eff_yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
 
-### `iplotMScanone` (no effects)
-
-`height = 700` &mdash; height of chart in pixels
-
-`width = 1000` &mdash; width of chart in pixels
-
-`wleft = width*0.65` &mdash; width of left panels in pixels
-
-`htop = height/2` &mdash; height of top panels in pixels
-
-`margin = list(left=60, top=40, right=40, bottom=40, inner=0)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`chrGap = 6` &mdash; gap between chromosomes in pixels
-
-`rectcolor = "#E6E6E6"` &mdash; color of lighter background rectangle
-
-`altrectcolor = "#C8C8C8"` &mdash; color of darker background rectangle
-
-`nullcolor = "#E6E6E6"` &mdash; color for pixels with null values
-
-`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
-
-`chrlinewidth = 2` &mdash; width of lines between chromosomes
-
-`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
-
-`zlim = NULL` &mdash; z-axis limits
-
-`zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
-
-`xlab = NULL` &mdash; x-axis label for LOD heatmap)
-
-`ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
-
-`zlab = "LOD score"` &mdash; z-axis label for LOD heatmap (really just used as y-axis label in the two slices)
-
-`linecolor = "darkslateblue"` &mdash; color of LOD curves
-
-`linewidth = 2` &mdash; width of LOD curves
-
-`pointsize = 0` &mdash; size of points in vertical slice (default = 0 corresponds plotting curves rather than points)
-
-`pointcolor = "slateblue"` &mdash; color of points in vertical slice
-
-`pointcolorhilit = "crimson"` &mdash; color of highlighted point in vertical slice
-
-`pointstroke = "black"` &mdash; color of outer circle for points in vertical slice
-
-`nxticks = 5` &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale
-
-`xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale
-
-### `iplotMScanone` (with effects)
-
-`height = 700` &mdash; height of chart in pixels
-
-`width = 1000` &mdash; width of chart in pixels
-
-`wleft = width*0.65` &mdash; width of left panels in pixels
-
-`htop = height/2` &mdash; height of top panels in pixels
-
-`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`chrGap = 6` &mdash; gap between chromosomes in pixels
-
-`rectcolor = "#e6e6e6"` &mdash; color of background rectangle
-
-`altrectcolor = "#c8c8c8"` &mdash; color of alternate background rectangle
-
-`nullcolor = "#e6e6e6"` &mdash; color for pixels with null values
-
-`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
-
-`chrlinewidth = 2` &mdash; width of lines between chromosomes
-
-`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
-
-`zlim = NULL` &mdash; z-axis limits
-
-`zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
-
-`xlab = NULL` &mdash; x-axis label for LOD heatmap (also used in lower panel)
-
-`ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
-
-`zlab = "LOD score"` &mdash; z-axis label for LOD heatmap (really the y-axis label in the lower panel)
-
-`eff_ylim = NULL` &mdash; y-axis limits for effect plot (right panel)
-
-`eff_ylab = ""` &mdash; y-axis label for effect plot (right panel)
-
-`linecolor = "darkslateblue"` &mdash; line color for LOD curves (lower panel)
-
-`linewidth = 2` &mdash; line width for LOD curves (lower panel)
-
-`eff_linecolor = NULL` &mdash; line color for effect plot (right panel)
-
-`eff_linewidth = 2` &mdash; width of line for effect plot (right panel)
-
-`eff_pointcolor = NULL` &mdash; point color for effect plot (right panel)
-
-`eff_pointsize = 0` &mdash; point size for effect plot (right panel); 0 means no points
-
-`eff_pointstroke = "black"` &mdash; stroke color for points in effect plot (right panel)
-
-`nxticks = 5` &mdash; no. ticks in x-axis for effect plot (right panel), if quantitative scale
-
-`xticks = NULL` &mdash; tick positions in x-axis for effect plot (right panel), if quantitative scale
-
-`lod_labels = NULL` &mdash; labels on the LOD score columns
-
-### `iplotRF`
-
-`height = 800` &mdash; total height of chart in pixels
-
-`width = 1000` &mdash; total width of chart in pixels
-
-`hbot = 300` &mdash; height (in pixels) of each of the lower panels with LOD scores
-
-`margin = list(left=60, top=40, right=40, bottom=60)` &mdash; margins in pixels (left, top, right, bottom)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; axis positions in heatmap
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`chrGap = 2` &mdash; gaps between chr in heat map
-
-`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
-
-`chrlinewidth = 2` &mdash; width of lines between chromosomes
-
-`oneAtTop = false` &mdash; if true, put chromosome 1 at the top rather than bottom
-
-`colors = c("crimson", "white", "slateblue")` &mdash; vector of three colors for the color scale (negative - zero - positive)
-
-`nullcolor = "#e6e6e6"` &mdash; color for empty cells
-
-`zlim = NULL` &mdash; z-axis limits (if null take from data, symmetric about 0)
-
-`zthresh = NULL` &mdash; z threshold; if |z| < zthresh, not shown
-
-`hilitCellcolor = "black"` &mdash; color of box around highlighted cell
-
-`cellPad = NULL` &mdash; padding of cells (if null, we take cell width * 0.1)
-
-`fontsize = NULL` &mdash; font size in crosstab
-
-`rectcolor = "#e6e6e6"` &mdash; background rectangle color (and color of cells in crosstab)
-
-`altrectcolor = "#c8c8c8"` &mdash; alternate rectangle color in lower panels with LOD and rf
-
-`hilitcolor = "#e9cfec"` &mdash; color of rectangle in heatmap when highlighted
-
-`boxcolor = "black"` &mdash; color of outer box of panels
-
-`boxwidth = 2` &mdash; width of outer box in pixels
-
-`pointsize = 2` &mdash; point size in lower panels with LOD and rf
-
-`pointcolor = "slateblue"` &mdash; point color in lower panels with LOD and rf
-
-`pointstroke = "black"` &mdash; stroke color for points in lower panels with LOD and rf
-
-`lodlim = c(0, 12)` &mdash; range of LOD values to display; omit below 1st, truncate above 2nd
-
-`nyticks = 5` &mdash; no. ticks on y-axis in LOD curve panels
-
-`yticks = NULL` &mdash; vector of tick positions on y-axis in LOD curve panels
-
-`tipclass = "tooltip"` &mdash; class name for tool tips
-
-### `iplotCorr`
-
-`height = 560` &mdash; height of each panel in pixels
-
-`width = 1050` &mdash; total width of panels
-
-`margin = list(left=70, top=40, right=5, bottom=70, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`corcolors = c("darkslateblue", "white", "crimson")` &mdash; heat map colors (same length as `zlim`)
-
-`zlim = c(-1, 0, 1)` &mdash; z-axis limits
-
-`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
-
-`cortitle = ""` &mdash; title for heatmap panel
-
-### `iplotCurves`
-
-`height = 1000` &mdash; total height of chart in pixels
-
-`width = 1000` &mdash; total width of chart in pixels
-
-`htop = height/2` &mdash; height of curves chart in pixels
-
-`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
-
-`pointcolor = NULL` &mdash; vector of colors for points in scatterplots
-
-`pointstroke = "black"` &mdash; color of line outline for points in scatterplots
-
-`pointsize = 3` &mdash; size of points in scatterplots
-
-`pointcolorhilit = NULL` &mdash; vector of colors for points in scatterplots, when highlighted
-
-`pointsizehilit = 6` &mdash; size of points in scatterplot, when highlighted
-
-`linecolor = NULL` &mdash; vector of colors of curves
-
-`linecolorhilit = NULL` &mdash; vector of colors of curves, when highlighted
-
-`linewidth = 2` &mdash; line width of curves
-
-`linewidthhilit = 2` &mdash; line widths of curves, when highlighted
-
-`curves_xlim = NULL` &mdash; x-axis limits in curve plot
-
-`curves_ylim = NULL` &mdash; y-axis limits in curve plot
-
-`curves_nxticks = 5` &mdash; no. ticks on x-axis in curve plot
-
-`curves_xticks = NULL` &mdash; vector of tick positions on x-axis in curve plot
-
-`curves_nyticks = 5` &mdash; no. ticks on y-axis in curve plot
-
-`curves_yticks = NULL` &mdash; vector of tick positions on y-axis in curve plot
-
-`curves_title = ""` &mdash; title for curve plot
-
-`curves_xlab = "X"` &mdash; x-axis label for curve plot
-
-`curves_ylab = "Y"` &mdash; y-axis label for curve plot
-
-`scat1_xlim = NULL` &mdash; x-axis limits in first scatterplot
-
-`scat1_ylim = NULL` &mdash; y-axis limits in first scatterplot
-
-`scat1_xNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values for x variable in first scatterplot (handle=T/F, force=T/F, width, gap)
-
-`scat1_yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values for x variable in first scatterplot (handle=T/F, force=T/F, width, gap)
-
-`scat1_nxticks = 5` &mdash; no. ticks on x-axis in first scatterplot
-
-`scat1_xticks = NULL` &mdash; vector of tick positions on x-axis in first scatterplot
-
-`scat1_nyticks = 5` &mdash; no. ticks on y-axis in first scatterplot
-
-`scat1_yticks = NULL` &mdash; vector of tick positions on y-axis in first scatterplot
-
-`scat1_title = ""` &mdash; title for first scatterplot
-
-`scat1_xlab = "X"` &mdash; x-axis label for first scatterplot
-
-`scat1_ylab = "Y"` &mdash; y-axis label for first scatterplot
-
-`scat2_xlim = NULL` &mdash; x-axis limits in second scatterplot
-
-`scat2_ylim = NULL` &mdash; y-axis limits in second scatterplot
-
-`scat2_xNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values for x variable in second scatterplot (handle=T/F, force=T/F, width, gap)
-
-`scat2_yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values for x variable in second scatterplot (handle=T/F, force=T/F, width, gap)
-
-`scat2_nxticks = 5` &mdash; no. ticks on x-axis in second scatterplot
-
-`scat2_xticks = NULL` &mdash; vector of tick positions on x-axis in second scatterplot
-
-`scat2_nyticks = 5` &mdash; no. ticks on y-axis in second scatterplot
-
-`scat2_yticks = NULL` &mdash; vector of tick positions on y-axis in second scatterplot
-
-`scat2_title = ""` &mdash; title for second scatterplot
-
-`scat2_xlab = "X"` &mdash; x-axis label for second scatterplot
-
-`scat2_ylab = "Y"` &mdash; y-axis label for second scatterplot
-
-### `iplotMap`
-
-`width = 1000` &mdash; width of chart in pixels
-
-`height = 600` &mdash; height of chart in pixels
-
-`margin = list(left=60, top=40, right=100, bottom=40, inner=10)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`ylim = NULL` &mdash; y-axis limits
-
-`nyticks = 5` &mdash; no. ticks on y-axis
-
-`yticks = NULL` &mdash; vector of tick positions on y-axis
-
-`xlineOpts = list(color="#cdcdcd", width=5)` &mdash; color and width of vertical lines
-
-`tickwidth = 10` &mdash; width of tick marks at markers, in pixels
-
-`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
-
-`linecolor = "slateblue"` &mdash; color of lines
-
-`linecolorhilit = "Orchid"` &mdash; color of lines, when highlighted
-
-`linewidth = 3` &mdash; width of lines
-
-`title = ""` &mdash; title for chart
-
-`xlab = "Chromosome"` &mdash; x-axis label
-
-`ylab = "Position (cM)"` &mdash; y-axis label
-
-`shiftStart = false` &mdash; if true, shift the start of chromosomes to 0
-
-`horizontal = false` &mdash; if true, have chromosomes on vertical axis and positions horizontally
-
-### `iboxplot`
-
-`width = 1000` &mdash; width of image in pixels
-
-`height = 900` &mdash; total height of image in pixels
-
-`margin = list(left=60, top=20, right=60, bottom=40)` &mdash; margins in pixels (left, top, right, bottom)
-
-`ylab = "Response"` &mdash; y-axis label
-
-`xlab = "Individuals"` &mdash; x-axis label
-
-`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
-
-`qucolors = NULL` &mdash; vector of colors for the quantile curves
-
-`histcolors = c("#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black")` &mdash; vector of colors for selected histograms
-
-### `iplot`
-
-`height = 500` &mdash; height of chart in pixels
-
-`width = 800` &mdash; width of chart in pixels
-
-`title = ""` &mdash; title for chart
-
-`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`xlab = "X"` &mdash; x-axis label
-
-`ylab = "Y"` &mdash; y-axis label
-
-`xlim = NULL` &mdash; x-axis limits
-
-`xticks = NULL` &mdash; vector of tick positions on x-axis
-
-`nxticks = 5` &mdash; no. ticks on x-axis
-
-`ylim = NULL` &mdash; y-axis limits
-
-`yticks = NULL` &mdash; vector of tick positions on y-axis
-
-`nyticks = 5` &mdash; no. ticks on y-axis
-
-`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
-
-`pointcolor = NULL` &mdash; colors for points
-
-`pointsize = 3` &mdash; size of points in pixels
-
-`pointstroke = "black"` &mdash; color of outer circle for points
-
-`rotate_ylab = NULL` &mdash; whether to rotate the y-axis label
-
-`xNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
-
-`yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
-
-### `iplotCorr`
-
-`height = 560` &mdash; height of each panel in pixels
-
-`width = 1050` &mdash; total width of panels
-
-`margin = list(left=70, top=40, right=5, bottom=70, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`corcolors = c("darkslateblue", "white", "crimson")` &mdash; heat map colors (same length as `zlim`)
-
-`zlim = c(-1, 0, 1)` &mdash; z-axis limits
-
-`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
-
-`cortitle = ""` &mdash; title for heatmap panel
-
-`scattitle = ""` &mdash; title for scatterplot panel
-
-`scatcolors = NULL` &mdash; vector of point colors for scatterplot
-
-`pointsize = 3` &mdash; size of points in scatterplot
-
 ### `ipleiotropy`
 
 `height = 450` &mdash; height of image in pixels
@@ -680,103 +744,73 @@ stand-alone html files.)
 
 `ticks_at_markers = true` &mdash; if true, put tick marks at the marker positions (above the slider)
 
-### `iheatmap`
+### `scat2scat`
 
-`height = 800` &mdash; total height of chart
+`height = 500` &mdash; height of chart in pixels
 
-`width = 800` &mdash; total width of chart
+`width = 800` &mdash; width of chart in pixels
 
-`htop = height/2` &mdash; height of top charts in pixels
-
-`wleft = width/2` &mdash; width of left charts in pixels
-
-`margin = list(left=60, top=40, right=40, bottom=40, inner=0)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
-
-`nullcolor = "#E6E6E6"` &mdash; color of pixels with null values
-
-`linecolor = "slateblue"` &mdash; line color
-
-`linewidth = 2` &mdash; line width
-
-`xlim = NULL` &mdash; x-axis limits
-
-`ylim = NULL` &mdash; y-axis limits
-
-`nxticks = 5` &mdash; no. ticks on x-axis
-
-`xticks = NULL` &mdash; vector of tick positions on x-axis
-
-`nyticks = 5` &mdash; no. ticks on y-axis
-
-`yticks = NULL` &mdash; vector of tick positions on y-axis
-
-`nzticks = 5` &mdash; no. ticks on z-axis
-
-`zticks = NULL` &mdash; vector of tick positions on z-axis
-
-`title = ""` &mdash; title for chart
-
-`xlab = "X"` &mdash; x-axis label
-
-`ylab = "Y"` &mdash; y-axis label
-
-`zlab = "Z"` &mdash; z-axis label
-
-`zthresh = NULL` &mdash; lower threshold for plotting in heat map: only values with |z| > zthresh are shown
-
-`zlim = c(-d3panels.max(z), 0, d3panels.max(z))` &mdash; z-axis limits
-
-`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors (same length as `zlim`)
-
-`flip_vert_slice = false` &mdash; if true, flip the y- and z- axes in the vertical slice
-
-### `idotplot`
-
-`height = 550` &mdash; height of chart in pixels
-
-`width = 400` &mdash; width of chart in pixels
-
-`title = ""` &mdash; title for chart
+`title1 = ""` &mdash; title for left panel
 
 `margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
 
-`xlab = "group"` &mdash; x-axis label
-
-`ylab = "response"` &mdash; y-axis label
-
 `axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
 
 `titlepos = 20` &mdash; position of chart title in pixels
 
-`jitter = "beeswarm"` &mdash; method for jittering points (beeswarm|random|none)
+`xlab1 = "X"` &mdash; x-axis label for left panel
 
-`ylim = NULL` &mdash; y-axis limits
+`ylab1 = "Y"` &mdash; y-axis label for left panel
 
-`yticks = NULL` &mdash; vector of tick positions on y-axis
+`xlab2 = "X"` &mdash; x-axis label for right panel
 
-`nyticks = 5` &mdash; no. ticks on y-axis
+`ylab2 = "Y"` &mdash; y-axis label for right panel
+
+`xlim1 = NULL` &mdash; x-axis limits for left panel
+
+`xticks1 = NULL` &mdash; vector of tick positions on x-axis for left panel
+
+`nxticks1 = 5` &mdash; no. ticks on x-axis for left panel
+
+`ylim1 = NULL` &mdash; y-axis limits for left panel
+
+`yticks1 = NULL` &mdash; vector of tick positions on y-axis for left panel
+
+`nyticks1 = 5` &mdash; no. ticks on y-axis for left panel
+
+`xlim2 = NULL` &mdash; x-axis limits for right panel
+
+`xticks2 = NULL` &mdash; vector of tick positions on x-axis for right panel
+
+`nxticks2 = 5` &mdash; no. ticks on x-axis for right panel
+
+`ylim2 = NULL` &mdash; y-axis limits for right panel
+
+`yticks2 = NULL` &mdash; vector of tick positions on y-axis for right panel
+
+`nyticks2 = 5` &mdash; no. ticks on y-axis for right panel
 
 `rectcolor = "#E6E6E6"` &mdash; color of background rectangle
 
-`pointcolor = NULL` &mdash; color for points
+`pointcolor1 = NULL` &mdash; colors for points for left panel
 
-`pointsize = 3` &mdash; size of points in pixels
+`pointsize1 = 3` &mdash; size of points in pixels for left panel
 
-`pointstroke = "black"` &mdash; color of outer circle for points
+`pointstroke1 = "black"` &mdash; color of outer circle for points for left panel
+
+`pointcolor2 = NULL` &mdash; colors for points for right panel
+
+`pointsize2 = 3` &mdash; size of points in pixels for right panel
+
+`pointstroke2 = "black"` &mdash; color of outer circle for points for right panel
+
+`rotate_ylab1 = NULL` &mdash; whether to rotate the y-axis label in left panel
+
+`rotate_ylab2 = NULL` &mdash; whether to rotate the y-axis label in right panel
+
+`xNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
 
 `yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
-
-`xcategories = NULL` &mdash; group categories
-
-`xcatlabels = NULL` &mdash; labels for group categories
-
-`horizontal = false` &mdash; If true, have genotypes on vertical axis and phenotype on horizontal axis
 
 ### `iplotScantwo`
 
@@ -848,101 +882,67 @@ stand-alone html files.)
 
 `yticks_pxg = NULL` &mdash; vector of tick positions on y-axis in dot chart of phenotype x genotype
 
-### `itriplot`
+### `iplotCorr`
 
-`width = 600` &mdash; overall width of chart in pixels
+`height = 560` &mdash; height of each panel in pixels
 
-`height = 520` &mdash; overall height of chart in pixels
+`width = 1050` &mdash; total width of panels
 
-`margin = list(left=60, top=40, right=60, bottom=10)` &mdash; margins in pixels (left, top, right, bottom)
+`margin = list(left=70, top=40, right=5, bottom=70, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
 
-`labelpos = 10` &mdash; pixels between vertex and vertex label (horizontally)
+`corcolors = c("darkslateblue", "white", "crimson")` &mdash; heat map colors (same length as `zlim`)
 
-`titlepos = 20` &mdash; position of chart title in pixels
+`zlim = c(-1, 0, 1)` &mdash; z-axis limits
 
-`title = ""` &mdash; chart title
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
 
-`labels = c("(1,0,0)", "(0,1,0)", "(0,0,1)")` &mdash; labels on the corners
+`cortitle = ""` &mdash; title for heatmap panel
 
-`rectcolor = "#e6e6e6"` &mdash; color of background rectangle
+`scattitle = ""` &mdash; title for scatterplot panel
 
-`boxcolor = "black"` &mdash; color of outer rectangle box
+`scatcolors = NULL` &mdash; vector of point colors for scatterplot
 
-`boxwidth = 2` &mdash; width of outer box in pixels
+`pointsize = 3` &mdash; size of points in scatterplot
 
-`pointcolor = NULL` &mdash; fill color of points
+### `idotplot`
 
-`pointstroke = "black"` &mdash; color of points' outer circle
+`height = 550` &mdash; height of chart in pixels
 
-`pointsize = 3` &mdash; color of points
+`width = 400` &mdash; width of chart in pixels
 
-`tipclass = "tooltip"` &mdash; class name for tool tips
-
-### `scat2scat`
-
-`height = 500` &mdash; height of chart in pixels
-
-`width = 800` &mdash; width of chart in pixels
-
-`title1 = ""` &mdash; title for left panel
+`title = ""` &mdash; title for chart
 
 `margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`xlab = "group"` &mdash; x-axis label
+
+`ylab = "response"` &mdash; y-axis label
 
 `axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
 
 `titlepos = 20` &mdash; position of chart title in pixels
 
-`xlab1 = "X"` &mdash; x-axis label for left panel
+`jitter = "beeswarm"` &mdash; method for jittering points (beeswarm|random|none)
 
-`ylab1 = "Y"` &mdash; y-axis label for left panel
+`ylim = NULL` &mdash; y-axis limits
 
-`xlab2 = "X"` &mdash; x-axis label for right panel
+`yticks = NULL` &mdash; vector of tick positions on y-axis
 
-`ylab2 = "Y"` &mdash; y-axis label for right panel
-
-`xlim1 = NULL` &mdash; x-axis limits for left panel
-
-`xticks1 = NULL` &mdash; vector of tick positions on x-axis for left panel
-
-`nxticks1 = 5` &mdash; no. ticks on x-axis for left panel
-
-`ylim1 = NULL` &mdash; y-axis limits for left panel
-
-`yticks1 = NULL` &mdash; vector of tick positions on y-axis for left panel
-
-`nyticks1 = 5` &mdash; no. ticks on y-axis for left panel
-
-`xlim2 = NULL` &mdash; x-axis limits for right panel
-
-`xticks2 = NULL` &mdash; vector of tick positions on x-axis for right panel
-
-`nxticks2 = 5` &mdash; no. ticks on x-axis for right panel
-
-`ylim2 = NULL` &mdash; y-axis limits for right panel
-
-`yticks2 = NULL` &mdash; vector of tick positions on y-axis for right panel
-
-`nyticks2 = 5` &mdash; no. ticks on y-axis for right panel
+`nyticks = 5` &mdash; no. ticks on y-axis
 
 `rectcolor = "#E6E6E6"` &mdash; color of background rectangle
 
-`pointcolor1 = NULL` &mdash; colors for points for left panel
+`pointcolor = NULL` &mdash; color for points
 
-`pointsize1 = 3` &mdash; size of points in pixels for left panel
+`pointsize = 3` &mdash; size of points in pixels
 
-`pointstroke1 = "black"` &mdash; color of outer circle for points for left panel
-
-`pointcolor2 = NULL` &mdash; colors for points for right panel
-
-`pointsize2 = 3` &mdash; size of points in pixels for right panel
-
-`pointstroke2 = "black"` &mdash; color of outer circle for points for right panel
-
-`rotate_ylab1 = NULL` &mdash; whether to rotate the y-axis label in left panel
-
-`rotate_ylab2 = NULL` &mdash; whether to rotate the y-axis label in right panel
-
-`xNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
+`pointstroke = "black"` &mdash; color of outer circle for points
 
 `yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
+
+`xcategories = NULL` &mdash; group categories
+
+`xcatlabels = NULL` &mdash; labels for group categories
+
+`horizontal = false` &mdash; If true, have genotypes on vertical axis and phenotype on horizontal axis
 

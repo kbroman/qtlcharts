@@ -13,7 +13,6 @@ inst/ToDo.html: inst/ToDo.md
 # build package documentation
 doc:
 	R -e 'devtools::document()'
-	\rm js_deps/node_modules/d3panels/bower_components
 
 #------------------------------------------------------------
 
@@ -93,7 +92,6 @@ $(LIB_DIR)/jquery/%: $(JSDEPS_DIR)/@bower_components/jquery/%
 jqueryui: $(LIB_DIR)/jquery-ui/jquery-ui.min.js
 $(LIB_DIR)/jquery-ui/jquery-ui.min.js: $(JSDEPS_DIR)/@bower_components/jquery-ui/jquery-ui.min.js
 	cp $< $@
-	cp $(<D)/LICENSE.txt $(@D)/
 	cp $(<D)/bower.json $(@D)/
 	cp $(<D)/themes/smoothness/*.* $(@D)/themes/smoothness/
 	cp $(<D)/themes/smoothness/images/*.* $(@D)/themes/smoothness/images/
@@ -112,9 +110,18 @@ d3panels: $(LIB_DIR)/d3panels/d3panels.min.js \
 		  $(LIB_DIR)/d3panels/d3panels.min.css \
 		  $(LIB_DIR)/d3panels/ReadMe.md \
 		  $(LIB_DIR)/d3panels/License.md \
-		  $(LIB_DIR)/d3panels/package.json
+		  $(LIB_DIR)/d3panels/package.json \
+		  $(JSDEPS_DIR)/d3panels/node_modules \
+		  $(JSDEPS_DIR)/d3panels/node_modules/@bower_components
+
 $(LIB_DIR)/d3panels/%: $(JSDEPS_DIR)/d3panels/%
 	cp $< $@
+
+$(JSDEPS_DIR)/d3panels/node_modules:
+	mkdir $@
+
+$(JSDEPS_DIR)/d3panels/node_modules/@bower_components: $(JSDEPS_DIR)/d3panels/node_modules
+	mkdir $@
 
 #------------------------------------------------------------
 

@@ -5,7 +5,7 @@ PANEL_DIR = inst/htmlwidgets/lib/d3panels
 CHART_DIR = inst/htmlwidgets/lib/qtlcharts
 WIDGET_DIR = inst/htmlwidgets
 
-COFFEE_ARGS = -c # use -cm for debugging; -c otherwise
+COFFEE_ARGS = -ct # use -cm for debugging; -c otherwise
 
 inst/ToDo.html: inst/ToDo.md
 	cd inst;R -e 'markdown::markdownToHTML("ToDo.md", "ToDo.html")'
@@ -38,7 +38,7 @@ JSCHARTS = $(CHART_DIR)/iplotScanone_noeff.js \
 jscharts: $(JSCHARTS)
 
 $(CHART_DIR)/%.js: $(CHART_DIR)/%.coffee
-	coffee $(COFFEE_ARGS) -b $^
+	cd $(^D);coffee $(COFFEE_ARGS) -b $(^F)
 
 #------------------------------------------------------------
 
@@ -60,7 +60,7 @@ JSWIDGETS = $(WIDGET_DIR)/iplot.js \
 jswidgets: $(JSWIDGETS)
 
 $(WIDGET_DIR)/%.js: $(WIDGET_DIR)/%.coffee
-	coffee $(COFFEE_ARGS) -b $^
+	cd $(^D);coffee $(COFFEE_ARGS) -b $(^F)
 
 #------------------------------------------------------------
 # d3, jquery, jquery-ui, colorbrewer, d3panels

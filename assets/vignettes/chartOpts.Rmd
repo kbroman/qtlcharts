@@ -762,9 +762,9 @@ stand-alone html files.)
 
 `ylab1 = "Y"` &mdash; y-axis label for left panel
 
-`xlab2 = "X"` &mdash; x-axis label for right panel
+`xlab2 = "X"` &mdash; x-axis label for right panel (can be a vector, with separate values for each dataset in `scat2data`)
 
-`ylab2 = "Y"` &mdash; y-axis label for right panel
+`ylab2 = "Y"` &mdash; y-axis label for right panel (can be a vector, with separate values for each dataset in `scat2data`)
 
 `xlim1 = NULL` &mdash; x-axis limits for left panel
 

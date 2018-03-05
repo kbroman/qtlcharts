@@ -238,9 +238,9 @@ d3@^4.2:
     d3-voronoi "1.1.2"
     d3-zoom "1.7.1"
 
-d3panels@kbroman/d3panels#^1.4.7:
-  version "1.4.7"
-  resolved "https://codeload.github.com/kbroman/d3panels/tar.gz/ecf4fcbad15d67fbc954e92e5c1e059f4fd46d3e"
+d3panels@kbroman/d3panels#^1.4.8:
+  version "1.4.8"
+  resolved "https://codeload.github.com/kbroman/d3panels/tar.gz/8259d2040cb524ed2bf0bfaffa692c3b891b0398"
   dependencies:
     "@bower_components/colorbrewer" undashes/colorbrewer#^1.0.0
     "@bower_components/d3" mbostock-bower/d3-bower#^4.9.0

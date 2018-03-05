@@ -90,11 +90,11 @@ to link to [colorbrewer.js](https://github.com/mbostock/d3/blob/master/lib/color
 To build the javascript (and CSS) files from the coffeescript source,
 you first need to install [npm](https://www.npmjs.com/get-npm).
 
-Then use npm to install [yarn](https://yarnpkg.com/en/), [coffeescript](https://coffeescript.org), [uglifyjs](https://github.com/mishoo/UglifyJS2) (for
-ES6), and [uglifycss](https://github.com/mishoo/UglifyJS2).
+Then use npm to install [yarn](https://yarnpkg.com/en/), [coffeescript](https://coffeescript.org), [uglify-js](https://github.com/mishoo/UglifyJS2)
+[uglifycss](https://github.com/fmarcia/UglifyCSS), and [babel-core](https://github.com/babel/babel/tree/master/packages/babel-core)
 
 ```script
-npm install -g yarn coffeescript uglifycss mishoo/UglifyJS2#harmony
+npm install -g yarn coffeescript uglifycss uglify-js babel-core
 ```
 
 Then install the dependencies ([d3](https://d3js.org),

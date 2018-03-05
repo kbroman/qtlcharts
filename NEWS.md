@@ -1,6 +1,7 @@
-## qtlcharts 0.11-1 (2018-03-02)
+## qtlcharts 0.11-2 (2018-03-05)
 
-- Update to use CoffeeScript v 2.2.2.
+- Update to use CoffeeScript v 2.2.2. Using
+  [babel](https://babeljs.io) to compile to ES5.
 
 - Switch from [bower](https://bower.io) to
   [yarn](https://yarnpkg.com/en/) for javascript dependency

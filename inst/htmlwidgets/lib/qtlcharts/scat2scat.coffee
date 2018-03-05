@@ -12,8 +12,8 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
     titlepos = chartOpts?.titlepos ? 20              # position of chart title in pixels
     xlab1 = chartOpts?.xlab1 ? "X"                   # x-axis label for left panel
     ylab1 = chartOpts?.ylab1 ? "Y"                   # y-axis label for left panel
-    xlab2 = chartOpts?.xlab2 ? "X"                   # x-axis label for right panel
-    ylab2 = chartOpts?.ylab2 ? "Y"                   # y-axis label for right panel
+    xlab2 = chartOpts?.xlab2 ? "X"                   # x-axis label for right panel (can be a vector, with separate values for each dataset in `scat2data`)
+    ylab2 = chartOpts?.ylab2 ? "Y"                   # y-axis label for right panel (can be a vector, with separate values for each dataset in `scat2data`)
     xlim1 = chartOpts?.xlim1 ? null                  # x-axis limits for left panel
     xticks1 = chartOpts?.xticks1 ? null              # vector of tick positions on x-axis for left panel
     nxticks1 = chartOpts?.nxticks1 ? 5               # no. ticks on x-axis for left panel
@@ -46,6 +46,10 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
     axispos = d3panels.check_listarg_v_default(axispos, {xtitle:25, ytitle:30, xlabel:5, ylabel:5})
     xNA = d3panels.check_listarg_v_default(xNA, {handle:true, force:false, width:15, gap:10})
     yNA = d3panels.check_listarg_v_default(yNA, {handle:true, force:false, width:15, gap:10})
+
+    # force xlab2, ylab2 to be arrays of character strings of length scat2data
+    xlab2 = d3panels.expand2vector(xlab2, scat2data.length)
+    ylab2 = d3panels.expand2vector(ylab2, scat2data.length)
 
     leftchart = d3panels.scatterplot({
         height:height
@@ -100,8 +104,8 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
             margin:margin
             axispos:axispos
             titlepos:titlepos
-            xlab:xlab2
-            ylab:ylab2
+            xlab:xlab2[index]
+            ylab:ylab2[index]
             title:scat1data.indID[index]
             ylim:ylim2
             xlim:xlim2

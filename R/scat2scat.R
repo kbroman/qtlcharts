@@ -73,9 +73,10 @@ function(scat1data, scat2data, group=NULL, chartOpts=NULL, digits=5)
     cn <- colnames(scat1data)
     if(!is.null(cn))
         chartOpts <- add2chartOpts(chartOpts, xlab1=cn[1], ylab1=cn[2])
-    cn <- colnames(scat2data[[1]])
-    if(!is.null(cn))
-        chartOpts <- add2chartOpts(chartOpts, xlab2=cn[1], ylab2=cn[2])
+    # xlab and ylab for 2nd panel (from 2nd data set)
+    xlab2 <- vapply(scat2data, function(a) { cn <- colnames(a); ifelse(is.null(cn), "", cn[1]) }, "")
+    ylab2 <- vapply(scat2data, function(a) { cn <- colnames(a); ifelse(is.null(cn), "", cn[2]) }, "")
+    chartOpts <- add2chartOpts(chartOpts, xlab2=xlab2, ylab2=ylab2)
 
     # reorganize data
     scat1data <- list(x = setNames(scat1data[,1], NULL),

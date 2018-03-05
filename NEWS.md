@@ -1,4 +1,4 @@
-## qtlcharts 0.11-2 (2018-03-05)
+## qtlcharts 0.11-3 (2018-03-05)
 
 - Update to use CoffeeScript v 2.2.2. Using
   [babel](https://babeljs.io) to compile to ES5.
@@ -6,6 +6,11 @@
 - Switch from [bower](https://bower.io) to
   [yarn](https://yarnpkg.com/en/) for javascript dependency
   management.
+
+- Revise `scat2scat()` so that the chart options `xlab2` and `ylab2`
+  can be vectors of length of `scat2data`, so that each dataset can
+  have different x- and y-axis labels. Default is to take them from
+  the column names of the datasets in `scat2data`.
 
 
 ## qtlcharts 0.10-1 (2017-06-01)

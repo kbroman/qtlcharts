@@ -27,8 +27,8 @@ scat2scat = function scat2scat(widgetdiv, scat1data, scat2data, chartOpts) {
   titlepos = (ref6 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref6 : 20; // position of chart title in pixels
   xlab1 = (ref7 = chartOpts != null ? chartOpts.xlab1 : void 0) != null ? ref7 : "X"; // x-axis label for left panel
   ylab1 = (ref8 = chartOpts != null ? chartOpts.ylab1 : void 0) != null ? ref8 : "Y"; // y-axis label for left panel
-  xlab2 = (ref9 = chartOpts != null ? chartOpts.xlab2 : void 0) != null ? ref9 : "X"; // x-axis label for right panel
-  ylab2 = (ref10 = chartOpts != null ? chartOpts.ylab2 : void 0) != null ? ref10 : "Y"; // y-axis label for right panel
+  xlab2 = (ref9 = chartOpts != null ? chartOpts.xlab2 : void 0) != null ? ref9 : "X"; // x-axis label for right panel (can be a vector, with separate values for each dataset in `scat2data`)
+  ylab2 = (ref10 = chartOpts != null ? chartOpts.ylab2 : void 0) != null ? ref10 : "Y"; // y-axis label for right panel (can be a vector, with separate values for each dataset in `scat2data`)
   xlim1 = (ref11 = chartOpts != null ? chartOpts.xlim1 : void 0) != null ? ref11 : null; // x-axis limits for left panel
   xticks1 = (ref12 = chartOpts != null ? chartOpts.xticks1 : void 0) != null ? ref12 : null; // vector of tick positions on x-axis for left panel
   nxticks1 = (ref13 = chartOpts != null ? chartOpts.nxticks1 : void 0) != null ? ref13 : 5; // no. ticks on x-axis for left panel
@@ -91,6 +91,9 @@ scat2scat = function scat2scat(widgetdiv, scat1data, scat2data, chartOpts) {
     width: 15,
     gap: 10
   });
+  // force xlab2, ylab2 to be arrays of character strings of length scat2data
+  xlab2 = d3panels.expand2vector(xlab2, scat2data.length);
+  ylab2 = d3panels.expand2vector(ylab2, scat2data.length);
   leftchart = d3panels.scatterplot({
     height: height,
     width: width / 2,
@@ -152,8 +155,8 @@ scat2scat = function scat2scat(widgetdiv, scat1data, scat2data, chartOpts) {
       margin: margin,
       axispos: axispos,
       titlepos: titlepos,
-      xlab: xlab2,
-      ylab: ylab2,
+      xlab: xlab2[index],
+      ylab: ylab2[index],
       title: scat1data.indID[index],
       ylim: ylim2,
       xlim: xlim2,

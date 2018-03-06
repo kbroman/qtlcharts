@@ -19,7 +19,7 @@ The following is a listing of the customization options for each
 chart. You can also use the chart option `caption` to provide a
 caption for the chart, `heading` to add an `<h2>` heading above the
 chart, and `footer` to add something extra at the bottom. (The
-`caption`, `heading`, and `footer` options intended for stand-alone
+`caption`, `heading`, and `footer` options are intended for stand-alone
 html files.)
 
 ### `iplotScantwo`

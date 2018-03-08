@@ -1,4 +1,4 @@
-## qtlcharts 0.11-3 (2018-03-05)
+## qtlcharts 0.11-4 (2018-03-08)
 
 - Update to use CoffeeScript v 2.2.2. Using
   [babel](https://babeljs.io) to compile to ES5.

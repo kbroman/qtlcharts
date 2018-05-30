@@ -10,9 +10,9 @@ output:
 set.seed(2046413)
 ```
 
-[R/qtlcharts](http://kbroman.org/qtlcharts) is an
+[R/qtlcharts](https://kbroman.org/qtlcharts) is an
 [R](https://www.r-project.org) package to create interactive charts for
-quantitative trait locus (QTL) mapping data, for use with [R/qtl](http://www.rqtl.org).
+quantitative trait locus (QTL) mapping data, for use with [R/qtl](https://rqtl.org).
 
 The charts are saved to a temporary file and opened in a web browser,
 though you may also save them to a specific file, to be viewed later.
@@ -25,8 +25,8 @@ also be viewed in other browsers, such as
 hard to accommodate all possible browser differences.
 
 Information on installing R/qtlcharts is available
-[here](http://kbroman.org/qtlcharts/pages/installation.html); it
-requires installation of the packages [R/qtl](http://www.rqtl.org) and
+[here](https://kbroman.org/qtlcharts/pages/installation.html); it
+requires installation of the packages [R/qtl](https://rqtl.org) and
 [htmlwidgets](http://www.htmlwidgets.org).
 
 ## Basic use
@@ -79,7 +79,7 @@ are reordered (by hierarchical clustering with the R function
 other.
 
 The following is a snapshot. (See a live example at the
-[R/qtlcharts website](http://kbroman.org/qtlcharts/example/iplotCorr.html).)
+[R/qtlcharts website](https://kbroman.org/qtlcharts/example/iplotCorr.html).)
 
 ![iplotCorr example](Figs/iplotCorr1.png)
 
@@ -95,7 +95,7 @@ iplotCorr(expr, geno, reorder=TRUE)
 ```
 
 Here's a snapshot of the result.  (Again, see a live example at the
-[R/qtlcharts website](http://kbroman.org/qtlcharts/example/iplotCorr.html).)
+[R/qtlcharts website](https://kbroman.org/qtlcharts/example/iplotCorr.html).)
 
 ![iplotCorr example with scatterplot colored by genotype](Figs/iplotCorr2.png)
 
@@ -130,7 +130,7 @@ placed in an adjacent directory.
 
 There are a number of ways in which one may customize the
 interactive graphs produced by
-[R/qtlcharts](http://kbroman.org/qtlcharts), such as different
+[R/qtlcharts](https://kbroman.org/qtlcharts), such as different
 colors or axis labels. The main method for such customization
 is through a function argument, `chartOpts`, which takes a named list.
 
@@ -169,7 +169,7 @@ iplotCorr(expr, geno, reorder=TRUE,
 
 If you want a caption below the chart, use `caption`. This is intended
 largely for charts [saved to a
-file](http://localhost:4000/assets/vignettes/userGuide.html#saving_to_a_file)
+file](userGuide.html#saving_to_a_file)
 with `htmlwidgets::saveWidget()`.
 
 ```{r iplotCorr_caption, eval=FALSE}
@@ -231,7 +231,7 @@ iplotCorr(expr, chartOpts=list(height=400, width=800))
 ## Including a chart in an R Markdown document
 
 The interactive charts may be included within an
-[R Markdown](http://rmarkdown.rstudio.com/)-based
+[R Markdown](https://rmarkdown.rstudio.com/)-based
 report. See the separate [`Rmarkdown` vignette](Rmarkdown.html).
 
 
@@ -346,7 +346,7 @@ marker position to view the marker name. There's also a search box,
 for searching for a particular marker.
 
 Let's first load the `hyper` data included with
-[R/qtl](http://www.rqtl.org) and pull out the genetic map with
+[R/qtl](https://rqtl.org) and pull out the genetic map with
 `pull.map`. We need to load R/qtl, too.
 
 
@@ -403,7 +403,7 @@ iplotMap(map, chr=c(5, 10, 15, "X"),
 `iplotScanone` creates an interactive chart with LOD
 curves from a genome scan linked to estimated QTL effects.
 
-Let's first load the `hyper` data, included with [R/qtl](http://www.rqtl.org)
+Let's first load the `hyper` data, included with [R/qtl](https://rqtl.org)
 
 ```{r, load_hyper_and_scan}
 data(hyper)
@@ -435,7 +435,7 @@ iplotScanone(out, hyper)
 
 By default, in calculating the means and standard errors, a single
 imputation is used to handle missing genotype information, using the
-[R/qtl](http://www.rqtl.org) function `fill.geno`. Arguments may be
+[R/qtl](https://rqtl.org) function `fill.geno`. Arguments may be
 passed to `fill.geno` as a list, with the argument `fillgenoArgs`. For
 example, to do the imputation by Viterbi, assuming a 1% genotyping
 error rate, do the following:
@@ -458,7 +458,7 @@ To change the color of the LOD curves, use the `chartOpts` option
 `lod_linecolor`. Colors are named as in html, or with hex RGB codes
 like `"#842DCE"` or `#82C`. (See examples
 [here](https://www.computerhope.com/htmcolor.htm) and a list of named
-colors [here](http://html-color-codes.info/color-names/).)
+colors [here](https://html-color-codes.info/color-names/).)
 
 ```{r iplotScanone_lodlinecolor, eval=FALSE}
 iplotScanone(out, hyper, chartOpts=list(lod_linecolor="black"))
@@ -495,7 +495,7 @@ These are data on seedling gravitropism in Arabidopsis recombinant
 inbred lines; see
 [Moore et al. (2013)](https://www.ncbi.nlm.nih.gov/pubmed/23979570). The
 data are also available at the
-[Mouse Phenome Database](http://phenome.jax.org/db/q?rtn=projects/projdet&reqprojid=282).
+[Mouse Phenome Database](https://phenome.jax.org/projects/Moore1b).
 
 We first load the data.
 
@@ -580,7 +580,7 @@ iplotMScanone(out, grav, times=times)
 ### `iplotScantwo`
 
 `iplotScantwo` creates an interactive plot of the output of the
-[R/qtl](http://rqtl.org) function `scantwo`, of a two-dimensional,
+[R/qtl](https://rqtl.org) function `scantwo`, of a two-dimensional,
 two-QTL genome scan.
 
 Let's first run `scantwo` using a coarse step size and focusing on
@@ -707,7 +707,7 @@ You can also include a numeric vector of groups assignments for the
 curves, to have groups of curves and points with common colors. For
 example, we can pull out the genotype for a marker and color the
 curves by their genotype. We'll use the `fill.geno` function in
-[R/qtl](http://www.rqtl.org) to impute any missing genotypes.
+[R/qtl](https://rqtl.org) to impute any missing genotypes.
 
 ```{r iplotCurves_groups, eval=FALSE}
 g <- pull.geno(fill.geno(grav))[,"BF.206L-Col"]

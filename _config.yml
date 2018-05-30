@@ -16,7 +16,7 @@ author :
   twitter : kwbroman
   feedburner : nil
 
-production_url : http://kbroman.github.io/qtlcharts
+production_url : https://kbroman.github.io/qtlcharts
 
 # Tell Github to use the Kramdown markdown interpreter
 # (see https://help.github.com/articles/migrating-your-pages-site-from-maruku)
@@ -49,7 +49,7 @@ JB :
   #   - Only the following values are falsy: ["", null, false]
   #   - When setting BASE_PATH it must be a valid url.
   #     This means always setting the protocol (http|https) or prefixing with "/"
-  BASE_PATH : http://kbroman.org/qtlcharts
+  BASE_PATH : https://kbroman.org/qtlcharts
 
   # By default, the asset_path is automatically defined relative to BASE_PATH plus the enabled theme.
   # ex: [BASE_PATH]/assets/themes/[THEME-NAME]

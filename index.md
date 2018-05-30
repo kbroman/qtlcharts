@@ -5,9 +5,9 @@ tagline: Interactive charts for QTL data
 description: R/qtlcharts is an R package to create interactive charts for quantitative trait locus (QTL) mapping data, for use with R/qtl.
 ---
 
-R/qtlcharts is an [R](http://www.r-project.org) package to create
+R/qtlcharts is an [R](https://www.r-project.org) package to create
 interactive charts for QTL data, for use
-with [R/qtl](http://www.rqtl.org).
+with [R/qtl](https://rqtl.org).
 
 A QTL is a _quantitative trait locus_: a genetic locus that
 contributes to variation in a quantitative trait. The
@@ -18,7 +18,7 @@ The interactive visualizations are built with the JavaScript library
 [D3](https://d3js.org), and are viewed in a web browser. We are
 targeting Chrome and Safari and, as much as possible, Firefox.
 
-A set of [reusable graphics panels](http://kbroman.org/d3panels) form the basis
+A set of [reusable graphics panels](https://kbroman.org/d3panels) form the basis
 for the larger visualizations.
 
 The package was recently updated for [D3](https://d3js.org)
@@ -35,7 +35,7 @@ To cite R/qtlcharts in publications, please use
 - [Installation](pages/installation.html)
 - [User guide](assets/vignettes/userGuide.html)
 - [Developer guide](assets/vignettes/develGuide.html)
-- [d3panels](http://kbroman.org/d3panels): reusable graphic panels
+- [d3panels](https://kbroman.org/d3panels): reusable graphic panels
 - [Use with R Markdown](assets/vignettes/Rmarkdown.html) [[Rmd source](https://github.com/kbroman/qtlcharts/blob/master/vignettes/Rmarkdown.Rmd)]
 - [List of chart customization options](assets/vignettes/chartOpts.html)
 

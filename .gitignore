@@ -1,6 +1,5 @@
 notes.txt
 *.map
-inst/ToDo.html
 .Rhistory
 .RData
 js_deps/bower_components

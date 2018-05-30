@@ -2,10 +2,7 @@
 \.RData$
 \.Rhistory$
 \.Rprofile$
-^ReadMe\.md$
-^NEWS\.md$
 ^Makefile$
-inst/ToDo.html
 vignettes/chartOpt_vignette
 ^\.travis\.yml$
 ^js_deps

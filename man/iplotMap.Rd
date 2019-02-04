@@ -4,7 +4,8 @@
 \alias{iplotMap}
 \title{Interactive genetic map plot}
 \usage{
-iplotMap(map, chr = NULL, shift = FALSE, chartOpts = NULL, digits = 5)
+iplotMap(map, chr = NULL, shift = FALSE, chartOpts = NULL,
+  digits = 5)
 }
 \arguments{
 \item{map}{Object of class \code{"map"}, a list with each component

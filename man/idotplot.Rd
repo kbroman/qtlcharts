@@ -4,7 +4,8 @@
 \alias{idotplot}
 \title{Interactive phenotype x genotype plot}
 \usage{
-idotplot(x, y, indID = NULL, group = NULL, chartOpts = NULL, digits = 5)
+idotplot(x, y, indID = NULL, group = NULL, chartOpts = NULL,
+  digits = 5)
 }
 \arguments{
 \item{x}{Vector of groups of individuals (e.g., a genotype)}

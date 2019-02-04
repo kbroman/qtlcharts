@@ -4,7 +4,8 @@
 \alias{itriplot}
 \title{Interactive plot of trinomial probabilities}
 \usage{
-itriplot(p, indID = NULL, group = NULL, chartOpts = NULL, digits = 5)
+itriplot(p, indID = NULL, group = NULL, chartOpts = NULL,
+  digits = 5)
 }
 \arguments{
 \item{p}{Matrix of trinomial probabilities (n x 3); each row should sum to 1.}

@@ -1,4 +1,4 @@
-all: jscharts jswidgets json doc inst/ToDo.html libs longname
+all: jscharts jswidgets json doc libs longname
 .PHONY: all jscharts json doc clean libs d3, jquery, jqueryui, colorbrewer longname
 
 PANEL_DIR = inst/htmlwidgets/lib/d3panels
@@ -6,9 +6,6 @@ CHART_DIR = inst/htmlwidgets/lib/qtlcharts
 WIDGET_DIR = inst/htmlwidgets
 
 COFFEE_ARGS = -ct # use -cm for debugging; -c otherwise
-
-inst/ToDo.html: inst/ToDo.md
-	cd inst;R -e 'markdown::markdownToHTML("ToDo.md", "ToDo.html")'
 
 # build package documentation
 doc:

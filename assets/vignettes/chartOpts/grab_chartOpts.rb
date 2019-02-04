@@ -140,7 +140,8 @@ ofile = "assets/vignettes/chartOpts.Rmd"
 mvfile = "assets/vignettes/chartOpts/multiversions.csv"
 
 # find coffeescript files
-coffee_files = find_coffeescript_files(chart_dir)
+coffee_files = find_coffeescript_files(chart_dir).sort()
+puts coffee_files
 
 # multi-version functions: get comment information
 mvcomments = load_multiversions(mvfile)

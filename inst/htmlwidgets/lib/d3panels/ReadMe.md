@@ -1,22 +1,21 @@
-### [d3panels](http://kbroman.org/d3panels): D3-based graphic panels
+### [d3panels](https://kbroman.org/d3panels): D3-based graphic panels
 
-[Karl W Broman](http://kbroman.org)
+[Karl W Broman](https://kbroman.org)
 
-This is a set of [D3](http://d3js.org)-based graphic panels, to
+This is a set of [D3](https://d3js.org)-based graphic panels, to
 be combined into larger multi-panel charts.  They were developed for
-the [R/qtlcharts](http://kbroman.org/qtlcharts) package.
+the [R/qtlcharts](https://kbroman.org/qtlcharts) package.
 
 Note that d3panels uses
 [D3 version 4](https://github.com/d3/d3/blob/master/API.md).
 
 There are other libraries with similar goals that are of more general
-use (e.g., [C3.js](http://c3js.org) and
-[d3.Chart](http://misoproject.com/d3-chart/); see
-[this list of javascript chart libraries](http://blog.webkid.io/javascript-chart-libraries/)),
+use (e.g., [C3.js](https://c3js.org)); see
+[this list of javascript chart libraries](https://blog.webkid.io/javascript-chart-libraries/)),
 but I wanted charts that were a bit _less_ general and flexible, but
 rather more specific to my particular applications (and style).
 
-For snapshots and live tests, see <http://kbroman.org/d3panels>.
+For snapshots and live tests, see <https://kbroman.org/d3panels>.
 
 #### Documentation
 
@@ -98,7 +97,7 @@ npm install -g yarn coffeescript uglifycss uglify-js babel-core
 ```
 
 Then install the dependencies ([d3](https://d3js.org),
-[d3-tip](http://labratrevenge.com/d3-tip/), and
+[d3-tip](https://labratrevenge.com/d3-tip/), and
 [colorbrewer](https://github.com/jeanlauliac/colorbrewer):
 
 ```script
@@ -115,4 +114,4 @@ make
 #### License
 
 Licensed under the
-[MIT license](License.md). ([More information here](http://en.wikipedia.org/wiki/MIT_License).)
+[MIT license](License.md). ([More information here](https://en.wikipedia.org/wiki/MIT_License).)

@@ -6,16 +6,16 @@ components. The following is a list of these components (full copies
 of the license agreegments used by these components are included
 below):
 
-- D3.js, http://d3js.org
+- D3.js, https://d3js.org
 - d3.tip, https://github.com/caged/d3-tip
 - ColorBrewer, http://colorbrewer2.org
-- jQuery, http://jquery.com
-- jQuery UI, http://jqueryui.com
-- d3panels, http://kbroman.org/d3panels
+- jQuery, https://jquery.com
+- jQuery UI, https://jqueryui.com
+- d3panels, https://kbroman.org/d3panels
 
 ----
 
-D3.js (http://d3js.org) has the following license:
+D3.js (https://d3js.org) has the following license:
 
 Copyright (c) 2010-2014, Michael Bostock
 All rights reserved.
@@ -84,7 +84,7 @@ Licensed under the Apache License, Version 2.0 (the "License"); you may not
 use this file except in compliance with the License. You may obtain a copy of
 the License at
 
-http://www.apache.org/licenses/LICENSE-2.0
+https://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
@@ -115,10 +115,10 @@ Cynthia Brewer.
 
 ----
 
-jQuery (http://jquery.com) has the following license:
+jQuery (https://jquery.com) has the following license:
 
 Copyright 2014 jQuery Foundation and other contributors
-http://jquery.com/
+https://jquery.com/
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -141,7 +141,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 -----
 
-jQuery UI (http://jqueryui.com) has the following license:
+jQuery UI (https://jqueryui.com) has the following license:
 
 Copyright 2007, 2014 jQuery Foundation and other contributors,
 https://jquery.org/
@@ -179,7 +179,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Copyright and related rights for sample code are waived via CC0. Sample
 code is defined as all source code contained within the demos directory.
 
-CC0: http://creativecommons.org/publicdomain/zero/1.0/
+CC0: https://creativecommons.org/publicdomain/zero/1.0/
 
 ====
 
@@ -190,7 +190,7 @@ the terms above.
 
 ---
 
-d3panels (http://kbroman.org/d3panels) has the following license:
+d3panels (https://kbroman.org/d3panels) has the following license:
 
 The MIT License (MIT)
 Copyright (c) 2014 Karl W Broman

@@ -3,16 +3,16 @@
 [![Build Status](https://travis-ci.org/kbroman/qtlcharts.svg?branch=master)](https://travis-ci.org/kbroman/qtlcharts)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qtlcharts)](https://cran.r-project.org/package=qtlcharts)
 
-[Karl W Broman](http://kbroman.org)
+[Karl W Broman](https://kbroman.org)
 
-[R/qtlcharts](http://kbroman.org/qtlcharts) is an [R](https://www.r-project.org) package to create
+[R/qtlcharts](https://kbroman.org/qtlcharts) is an [R](https://www.r-project.org) package to create
 interactive charts for QTL data, for use
-with [R/qtl](http://www.rqtl.org). \[[website](http://kbroman.org/qtlcharts)\]
+with [R/qtl](https://rqtl.org). \[[website](https://kbroman.org/qtlcharts)\]
 
 It is built with [D3](https://d3js.org), using a set of reusable
-panels (also available separately, as [d3panels](http://kbroman.org/d3panels)).
+panels (also available separately, as [d3panels](https://kbroman.org/d3panels)).
 
-For example charts, see the [R/qtlcharts website](http://kbroman.org/qtlcharts).
+For example charts, see the [R/qtlcharts website](https://kbroman.org/qtlcharts).
 
 #### Installation
 
@@ -24,7 +24,7 @@ install.packages("qtlcharts")
 
 Alternatively, install it from its
 [GitHub repository](https://github.com/kbroman/qtlcharts). You first need to
-install the [R/qtl](http://www.rqtl.org),
+install the [R/qtl](https://rqtl.org),
 [htmlwidgets](http://www.htmlwidgets.org),
 and [devtools](https://github.com/hadley/devtools) packages.
 

@@ -4,7 +4,7 @@ output: html_document
 ---
 
 This document serves to test the
-[R/qtlcharts](http://kbroman.org/qtlcharts) function `iplotScantwo`.
+[R/qtlcharts](https://kbroman.org/qtlcharts) function `iplotScantwo`.
 
 ```{r load_data, message=FALSE}
 set.seed(69891250)

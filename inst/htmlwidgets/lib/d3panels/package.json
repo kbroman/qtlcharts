@@ -1,10 +1,10 @@
 {
   "name": "d3panels",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "D3-based graphics panels",
-  "author": "Karl Broman <kbroman@gmail.com> (http://kbroman.org)",
+  "author": "Karl Broman <kbroman@gmail.com> (https://kbroman.org)",
   "repository": "github:kbroman/d3panels",
-  "homepage": "http://kbroman.org/d3panels",
+  "homepage": "https://kbroman.org/d3panels",
   "license": "MIT",
   "dependencies": {
     "@bower_components/colorbrewer": "undashes/colorbrewer#^1.0.0",

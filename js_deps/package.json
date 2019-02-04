@@ -10,7 +10,7 @@
     "@bower_components/colorbrewer": "undashes/colorbrewer#^1.0.0",
     "@bower_components/d3": "mbostock-bower/d3-bower#^4.9.0",
     "@bower_components/d3-tip": "Caged/d3-tip#^0.7.1",
-    "d3panels": "kbroman/d3panels#^1.4.8",
+    "d3panels": "kbroman/d3panels#^1.4.9",
     "@bower_components/jquery": "jquery/jquery-dist#^3.3.1",
     "@bower_components/jquery-ui": "components/jqueryui#^1.12.1"
   },

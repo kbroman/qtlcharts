@@ -4,8 +4,8 @@
 \alias{iplotCurves}
 \title{Plot of a bunch of curves, linked to points in scatterplots}
 \usage{
-iplotCurves(curveMatrix, times = NULL, scatter1 = NULL, scatter2 = NULL,
-  group = NULL, chartOpts = NULL, digits = 5)
+iplotCurves(curveMatrix, times = NULL, scatter1 = NULL,
+  scatter2 = NULL, group = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{curveMatrix}{Matrix (dim n_ind x n_times) with outcomes}

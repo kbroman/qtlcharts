@@ -1,18 +1,18 @@
 Package: qtlcharts
-Version: 0.11-4
-Date: 2018-03-08
+Version: 0.11-5
+Date: 2019-02-04
 Title: Interactive Graphics for QTL Experiments
 Author: Karl W Broman [aut, cre], Michael Bostock [ctb, cph] (d3.js library
-    in htmlwidgets/lib, http://d3js.org), Justin Palmer [ctb, cph] (d3.tip library
+    in htmlwidgets/lib, https://d3js.org), Justin Palmer [ctb, cph] (d3.tip library
     in htmlwidgets/lib, https://github.com/caged/d3-tip), Cynthia Brewer [cph]
     (ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org), Mark Harrower
     [cph] (ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org),
     The Pennsylvania State University [cph] (ColorBrewer library in htmlwidgets/lib,
     http://colorbrewer2.org), jQuery Foundation [cph] (jQuery library
-    in htmlwidgets/lib, http://jquery.com), jQuery contributors [ctb] (jQuery
+    in htmlwidgets/lib, https://jquery.com), jQuery contributors [ctb] (jQuery
     library in htmlwidgets/lib; see https://github.com/jquery/jquery/blob/master/AUTHORS.txt),
     jQuery UI contributors [ctb] (jQuery UI library in htmlwidgets/lib;
-    see http://jqueryui.com/about)
+    see https://jqueryui.com/about)
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 Description: Web-based interactive charts (using D3.js) for the analysis of
     experimental crosses to identify genetic loci (quantitative trait
@@ -34,17 +34,17 @@ Suggests:
     rmarkdown,
     testthat
 License: GPL-3 | file LICENSE
-URL: http://kbroman.org/qtlcharts, https://github.com/kbroman/qtlcharts
+URL: https://kbroman.org/qtlcharts, https://github.com/kbroman/qtlcharts
 BugReports: https://github.com/kbroman/qtlcharts/issues
 Roxygen: list(wrap=FALSE)
 LazyData: true
 Encoding: UTF-8
 ByteCompile: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Authors@R: c(
     person("Karl W", "Broman", role=c("aut", "cre"), email="kbroman@biostat.wisc.edu"),
     person("Michael", "Bostock", role=c("ctb", "cph"),
-           comment="d3.js library in htmlwidgets/lib, http://d3js.org"),
+           comment="d3.js library in htmlwidgets/lib, https://d3js.org"),
     person("Justin", "Palmer", role=c("ctb", "cph"),
            comment="d3.tip library in htmlwidgets/lib, https://github.com/caged/d3-tip"),
     person("Cynthia", "Brewer", role="cph",
@@ -54,8 +54,8 @@ Authors@R: c(
     person("The Pennsylvania State University", role="cph",
            comment="ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org"),
     person("jQuery Foundation", role="cph",
-           comment="jQuery library in htmlwidgets/lib, http://jquery.com"),
+           comment="jQuery library in htmlwidgets/lib, https://jquery.com"),
     person("jQuery contributors", role = "ctb",
            comment = "jQuery library in htmlwidgets/lib; see https://github.com/jquery/jquery/blob/master/AUTHORS.txt"),
     person("jQuery UI contributors", role = "ctb",
-           comment = "jQuery UI library in htmlwidgets/lib; see http://jqueryui.com/about"))
+           comment = "jQuery UI library in htmlwidgets/lib; see https://jqueryui.com/about"))

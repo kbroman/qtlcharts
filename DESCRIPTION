@@ -13,7 +13,7 @@ Author: Karl W Broman [aut, cre], Michael Bostock [ctb, cph] (d3.js library
     library in htmlwidgets/lib; see https://github.com/jquery/jquery/blob/master/AUTHORS.txt),
     jQuery UI contributors [ctb] (jQuery UI library in htmlwidgets/lib;
     see https://jqueryui.com/about)
-Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
+Maintainer: Karl W Broman <broman@wisc.edu>
 Description: Web-based interactive charts (using D3.js) for the analysis of
     experimental crosses to identify genetic loci (quantitative trait
     loci, QTL) contributing to variation in quantitative traits.
@@ -42,7 +42,7 @@ Encoding: UTF-8
 ByteCompile: true
 RoxygenNote: 6.1.1
 Authors@R: c(
-    person("Karl W", "Broman", role=c("aut", "cre"), email="kbroman@biostat.wisc.edu"),
+    person("Karl W", "Broman", role=c("aut", "cre"), email="broman@wisc.edu"),
     person("Michael", "Bostock", role=c("ctb", "cph"),
            comment="d3.js library in htmlwidgets/lib, https://d3js.org"),
     person("Justin", "Palmer", role=c("ctb", "cph"),

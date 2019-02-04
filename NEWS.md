@@ -1,3 +1,10 @@
+## qtlcharts 0.11-6 (2019-02-04)
+
+- Fix bug in `idotplot()` so that it works with a single group.
+
+- Fix bug in `iplotMap()` so that the drop-down menu works in Firefox.
+
+
 ## qtlcharts 0.11-4 (2018-03-08)
 
 - Update to use CoffeeScript v 2.2.2. Using

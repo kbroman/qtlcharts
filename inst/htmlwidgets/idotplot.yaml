@@ -23,6 +23,6 @@ dependencies:
     style: d3panels.min.css
   - name: qtlcharts_idotplot
     src: htmlwidgets/lib/qtlcharts
-    version: 0.11.2
+    version: 0.11.6
     script:
       - idotplot.js

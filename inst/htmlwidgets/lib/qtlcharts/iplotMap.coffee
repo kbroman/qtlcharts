@@ -83,7 +83,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
 
     # grab selected marker from the search box
     selectedMarker = ""
-    $("div#markerinput_#{widgetdivid}").submit () ->
+    $("div#markerinput_#{widgetdivid}").submit (event) ->
         newSelection = document.getElementById("marker_#{widgetdivid}").value
         event.preventDefault()
         unless selectedMarker == ""
@@ -117,7 +117,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
         ,
         select: (event, ui) ->
             $("input#marker_#{widgetdivid}").val(ui.item.label)
-            $("input#submit_#{widgetdivid}").submit()})
+            $("input#submit_#{widgetdivid}").submit(event)})
 
 
     # grayed out "Marker name"

@@ -7,7 +7,7 @@ description: R/qtlcharts is an R package to create interactive charts for quanti
 
 R/qtlcharts is an [R](https://www.r-project.org) package to create
 interactive charts for QTL data, for use
-with [R/qtl](https://rqtl.org).
+with [R/qtl](http://rqtl.org).
 
 A QTL is a _quantitative trait locus_: a genetic locus that
 contributes to variation in a quantitative trait. The

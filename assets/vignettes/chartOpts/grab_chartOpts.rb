@@ -111,9 +111,13 @@ def write_chartOpts (ofile, chartOpts, mvcomments)
 
     # sort the coffeescript files
     keys.sort! { |a,b|
-        if mvkeys.include?(a) and mvkeys.include?(b)
+        if a==b and mvkeys.include?(a) and mvkeys.include?(b)
         then mvkeys.find_index(a) <=> mvkeys.find_index(b)
-        else keys.find_index(a) <=> keys.find_index(b) end }
+        else a <=> b; end }
+
+    puts "chartOpts:"
+    puts keys
+    puts "---------------"
 
     keys.each do |filestem|
         func = get_func_name(filestem)
@@ -140,8 +144,10 @@ ofile = "assets/vignettes/chartOpts.Rmd"
 mvfile = "assets/vignettes/chartOpts/multiversions.csv"
 
 # find coffeescript files
-coffee_files = find_coffeescript_files(chart_dir).sort()
+coffee_files = find_coffeescript_files(chart_dir)
+puts "coffee_files:"
 puts coffee_files
+puts "---------------"
 
 # multi-version functions: get comment information
 mvcomments = load_multiversions(mvfile)

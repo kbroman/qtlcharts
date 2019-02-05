@@ -5,7 +5,7 @@
 #' \href{http://kbroman.org/qtlcharts}{R/qtlcharts} is to provide
 #' interactive data visualizations for QTL analyses, and to make these
 #' visualizations available from R. It is a companion to the
-#' \href{http://www.rqtl.org}{R/qtl} package.
+#' \href{http://rqtl.org}{R/qtl} package.
 #'
 #' Vignettes online at the \href{http://kbroman.org/qtlcharts}{R/qtlcharts website}:
 #'

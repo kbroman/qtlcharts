@@ -7,7 +7,7 @@
 
 [R/qtlcharts](https://kbroman.org/qtlcharts) is an [R](https://www.r-project.org) package to create
 interactive charts for QTL data, for use
-with [R/qtl](https://rqtl.org). \[[website](https://kbroman.org/qtlcharts)\]
+with [R/qtl](http://rqtl.org). \[[website](https://kbroman.org/qtlcharts)\]
 
 It is built with [D3](https://d3js.org), using a set of reusable
 panels (also available separately, as [d3panels](https://kbroman.org/d3panels)).
@@ -24,7 +24,7 @@ install.packages("qtlcharts")
 
 Alternatively, install it from its
 [GitHub repository](https://github.com/kbroman/qtlcharts). You first need to
-install the [R/qtl](https://rqtl.org),
+install the [R/qtl](http://rqtl.org),
 [htmlwidgets](http://www.htmlwidgets.org),
 and [devtools](https://github.com/hadley/devtools) packages.
 

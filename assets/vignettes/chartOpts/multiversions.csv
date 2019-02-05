@@ -1,6 +1,6 @@
 iplotScanone_noeff,no effects
-iplotScanone_ci,`pxgtype="ci"`
-iplotScanone_pxg,`pxgtype="raw"`
+iplotScanone_ci,`pxgtype='ci'`
+iplotScanone_pxg,`pxgtype='raw'`
 iplotMScanone_noeff,no effects
 iplotMScanone_eff,with effects
 iplotCorr,with scatterplot

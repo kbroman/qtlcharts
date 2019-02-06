@@ -1,6 +1,7 @@
 ### R/qtlcharts: Interactive graphics for QTL experiments
 
 [![Build Status](https://travis-ci.org/kbroman/qtlcharts.svg?branch=master)](https://travis-ci.org/kbroman/qtlcharts)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qtlcharts)](https://cran.r-project.org/package=qtlcharts)
 
 [Karl W Broman](https://kbroman.org)
 
@@ -15,10 +16,16 @@ For example charts, see the [R/qtlcharts website](https://kbroman.org/qtlcharts)
 
 #### Installation
 
-Install R/qtlcharts from its
+Install R/qtlcharts from CRAN using
+
+```r
+install.packages("qtlcharts")
+```
+
+Alternatively, install it from its
 [GitHub repository](https://github.com/kbroman/qtlcharts). You first need to
 install the [R/qtl](http://rqtl.org),
-[htmlwidgets](http://htmlwidgets.org),
+[htmlwidgets](http://www.htmlwidgets.org),
 and [devtools](https://github.com/hadley/devtools) packages.
 
 ```r
@@ -26,12 +33,11 @@ install.packages(c("qtl", "htmlwidgets", "devtools"))
 ```
 
 Then install R/qtlcharts using the `install_github` function in the
-[devtools](https://github.com/hadley/devtools) package. (With
-`build_vignettes=TRUE`, the vignettes will be built and installed.)
+[devtools](https://github.com/hadley/devtools) package.
 
 ```r
 library(devtools)
-install_github("kbroman/qtlcharts", build_vignettes=TRUE)
+install_github("kbroman/qtlcharts")
 ```
 
 #### Example use
@@ -76,9 +82,12 @@ iboxplot(expr)
 
 #### Licenses
 
-Licensed under the [MIT license](LICENSE). ([More information here](https://en.wikipedia.org/wiki/MIT_License).)
+The R/qtlcharts package as a whole is distributed under
+[GPL-3 (GNU General Public License version 3)](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
-R/qtlcharts incorporates
+R/qtlcharts incorporates the following other open source software
+components, which have their own license agreements.
+
 - [D3.js](https://d3js.org) \[[license](inst/htmlwidgets/lib/d3/LICENSE)\]
 - [d3.tip](https://github.com/Caged/d3-tip) \[[license](inst/htmlwidgets/lib/d3-tip/LICENSE)\]
 - [ColorBrewer](http://colorbrewer2.org) \[[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)\]

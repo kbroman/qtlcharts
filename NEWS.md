@@ -1,3 +1,8 @@
+## qtlcharts 0.12-1 (2019-02-13)
+
+- Fill in some missing text in the help info for `iplotMScanone()`.
+
+
 ## qtlcharts 0.11-6 (2019-02-04)
 
 - Fix bug in `idotplot()` so that it works with a single group.

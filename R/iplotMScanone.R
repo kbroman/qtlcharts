@@ -5,7 +5,7 @@
 #'
 #' Creates an interactive graph of a set of single-QTL genome scans, as
 #' calculated by \code{\link[qtl]{scanone}}. If \code{cross} or
-#' \code{effects} are provide, LOD curves will be linked to a panel
+#' \code{effects} are provided, LOD curves will be linked to a panel
 #' with estimated QTL effects.
 #'
 #' @param scanoneOutput Object of class \code{"scanone"}, as output
@@ -20,7 +20,8 @@
 #'   age or dose).  These need to be ordered and equally-spaced. If
 #'   omitted, the names of the columns in \code{scanoneOutput} are used
 #'   and treated as qualitative.
-#' @param effects (Optional)
+#' @param effects (Optional) Estimated QTL effects, as obtained with
+#'   \code{\link{estQTLeffects}}.
 #' @param chr (Optional) Optional vector indicating the chromosomes
 #'   for which LOD scores should be calculated. This should be a vector
 #'   of character strings referring to chromosomes by name; numeric

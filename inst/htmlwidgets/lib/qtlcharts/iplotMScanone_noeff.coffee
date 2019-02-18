@@ -6,6 +6,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     # chartOpts start
     height = chartOpts?.height ? 700                               # height of chart in pixels
     width = chartOpts?.width ? 1000                                # width of chart in pixels
+    title = chartOpts?.title ? ""                                  # title for chart
     wleft = chartOpts?.wleft ? width*0.65                          # width of left panels in pixels
     htop = chartOpts?.htop ? height/2                              # height of top panels in pixels
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:0} # margins in pixels (left, top, right, bottom, inner)
@@ -90,6 +91,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
         chrlinecolor:chrlinecolor
         chrlinewidth:chrlinewidth
         colors:colors
+        title: title
         zlim:zlim
         zthresh:zthresh
         ylab:ylab

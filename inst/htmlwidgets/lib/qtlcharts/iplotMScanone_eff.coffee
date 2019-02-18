@@ -11,6 +11,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
     margin = chartOpts?.margin ? {left:60, top:40, right:40, bottom: 40, inner:5} # margins in pixels (left, top, right, bottom, inner)
     axispos = chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5}     # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
     titlepos = chartOpts?.titlepos ? 20                            # position of chart title in pixels
+    title = chartOpts?.title ? ""                                  # title for chart
     chrGap = chartOpts?.chrGap ? 6                                 # gap between chromosomes in pixels
     rectcolor = chartOpts?.rectcolor ? "#e6e6e6"                   # color of background rectangle
     altrectcolor = chartOpts?.altrectcolor ? "#c8c8c8"             # color of alternate background rectangle
@@ -94,6 +95,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
         chrlinecolor:chrlinecolor
         chrlinewidth:chrlinewidth
         colors:colors
+        title: title
         zlim:zlim
         zthresh:zthresh
         ylab:ylab

@@ -1,4 +1,4 @@
-## qtlcharts 0.12-1 (2019-02-13)
+## qtlcharts 0.12-2 (2019-02-18)
 
 - Fill in some missing text in the help info for `iplotMScanone()`.
 

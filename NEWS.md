@@ -1,5 +1,7 @@
 ## qtlcharts 0.12-2 (2019-02-18)
 
+- Allow `title` as chart option in `iplotMScanone()`, `iplotScanone()`.
+
 - Fill in some missing text in the help info for `iplotMScanone()`.
 
 

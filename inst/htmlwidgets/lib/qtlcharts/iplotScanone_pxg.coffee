@@ -24,7 +24,7 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     lod_pointcolor = chartOpts?.lod_pointcolor ? "#E9CFEC"              # color for points at markers in LOD curve panel
     lod_pointsize = chartOpts?.lod_pointsize ? 0                        # size of points at markers (default = 0 corresponding to no visible points at markers)
     lod_pointstroke = chartOpts?.lod_pointstroke ? "black"              # color of outer circle for points at markers in LOD curve panel
-    lod_title = chartOpts?.lod_title ? ""                               # title of LOD curve panel
+    lod_title = chartOpts?.lod_title ? chartOpts?.title ? ""            # title of LOD curve panel
     lod_xlab = chartOpts?.lod_xlab ? null                               # x-axis label for LOD curve panel
     lod_ylab = chartOpts?.lod_ylab ? "LOD score"                        # y-axis label for LOD curve panel
     lod_rotate_ylab = chartOpts?.lod_rotate_ylab ? null                 # indicates whether to rotate the y-axis label 90 degrees, in LOD curve panel

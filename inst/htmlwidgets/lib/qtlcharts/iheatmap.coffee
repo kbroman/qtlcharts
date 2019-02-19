@@ -66,6 +66,7 @@ iheatmap = (widgetdiv, data, chartOpts) ->
         margin:margin
         axispos:axispos
         titlepos:titlepos
+        title:title
         rectcolor:rectcolor
         xlim:xlim
         ylim:ylim

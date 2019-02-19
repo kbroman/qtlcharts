@@ -3,6 +3,9 @@
 - Allow `title` as chart option in `iplotMScanone()`,
   `iplotScanone()`, `iheatmap()`.
 
+- Add `scat_title` chart option to `ipleiotropy()`, for a title on the
+  scatterplot panel.
+
 - Fill in some missing text in the help info for `iplotMScanone()`.
 
 

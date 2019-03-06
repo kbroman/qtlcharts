@@ -7,8 +7,12 @@ citEntry(entry="article",
          year = 2015,
          volume = 199,
          pages = "359-361",
+         doi = "10.1534/genetics.114.172742",
+         url = "https://doi.org/10.1534/genetics.114.172742",
+         eprint = "http://www.genetics.org/content/genetics/199/2/359.full.pdf",
 
          textVersion =
          paste("Broman KW (2015) R/qtlcharts: interactive graphics for",
-               "quantitative trait locus mapping. Genetics 199:359-361")
+               "quantitative trait locus mapping. Genetics 199:359-361",
+               "doi:10.1534/genetics.114.172742")
          )

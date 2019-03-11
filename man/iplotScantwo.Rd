@@ -8,10 +8,10 @@ iplotScantwo(scantwoOutput, cross = NULL, lodcolumn = 1,
   pheno.col = 1, chr = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{
-\item{scantwoOutput}{Output of \code{\link[qtl]{scantwo}}}
+\item{scantwoOutput}{Output of [qtl::scantwo()]}
 
-\item{cross}{(Optional) Object of class \code{"cross"}, see
-\code{\link[qtl]{read.cross}}.}
+\item{cross}{(Optional) Object of class `"cross"`, see
+[qtl::read.cross()].}
 
 \item{lodcolumn}{Numeric value indicating LOD score column to plot.}
 
@@ -31,14 +31,14 @@ element must be named using the corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class \code{htmlwidget} that will
+An object of class `htmlwidget` that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
 }
 \description{
 Creates an interactive plot of the results of
-\code{\link[qtl]{scantwo}}, for a two-dimensional, two-QTL genome
+[qtl::scantwo()], for a two-dimensional, two-QTL genome
 scan.
 }
 \details{
@@ -47,11 +47,11 @@ phenotype x genotype plot, in the right-hand panels, are derived
 following a single imputation to fill in missing data, and so are a
 bit crude.
 
-Note that the usual \code{height} and \code{width} options in
-\code{chartOpts} are ignored here. Instead, you may provide
-\code{pixelPerCell} (number of pixels per cell in the heat map),
-\code{chrGap} (gaps between chr in heat map), \code{wright} (width
-in pixels of right panels), and \code{hbot} (height in pixels of
+Note that the usual `height` and `width` options in
+`chartOpts` are ignored here. Instead, you may provide
+`pixelPerCell` (number of pixels per cell in the heat map),
+`chrGap` (gaps between chr in heat map), `wright` (width
+in pixels of right panels), and `hbot` (height in pixels of
 each of the lower panels)
 }
 \examples{
@@ -65,6 +65,6 @@ iplotScantwo(out, fake.f2)}
 
 }
 \seealso{
-\code{\link{iplotScanone}}
+[iplotScanone()]
 }
 \keyword{hplot}

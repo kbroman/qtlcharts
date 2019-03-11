@@ -11,16 +11,16 @@ scat2scat(scat1data, scat2data, group = NULL, chartOpts = NULL,
 \item{scat1data}{Matrix with two columns; rownames are used as
 identifiers. Can have an optional third column with categories for
 coloring points in the first scatterplot (to be used if
-\code{group} is not provided).}
+`group` is not provided).}
 
 \item{scat2data}{List of matrices each with at least two columns,
 to be shown in the second scatterplot. The components of the list
-correspond to the rows in \code{scat1dat}. An option third column
+correspond to the rows in `scat1dat`. An option third column
 can contain categories. Row names identify individual points.}
 
 \item{group}{Categories for coloring points in the first
 scatterplot; length should be the number of rows in
-\code{scat1data}.}
+`scat1data`.}
 
 \item{chartOpts}{A list of options for configuring the chart.  Each
 element must be named using the corresponding option.}
@@ -29,7 +29,7 @@ element must be named using the corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class \code{htmlwidget} that will
+An object of class `htmlwidget` that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
@@ -55,6 +55,6 @@ scat2scat(scat1, scat2)
 
 }
 \seealso{
-\code{\link{iplotCorr}}
+[iplotCorr()]
 }
 \keyword{hplot}

@@ -8,24 +8,24 @@
 #'
 #' @param x Vector of numeric values for the x-axis
 #' @param y Vector of numeric values for the y-axis
-#' @param z Numeric matrix of dim \code{length(x)} x \code{length(y)}
+#' @param z Numeric matrix of dim `length(x)` x `length(y)`
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
 #' @param digits Round data to this number of significant digits
 #'     before passing to the chart function. (Use NULL to not round.)
 #'
-#' @return An object of class \code{htmlwidget} that will
+#' @return An object of class `htmlwidget` that will
 #' intelligently print itself into HTML in a variety of contexts
 #' including the R console, within R Markdown documents, and within
 #' Shiny output bindings.
 #'
-#' @details By default, the z-axis limits are from \code{-max(abs(z))}
-#' to \code{max(abs(z))}, and negative cells are colored blue to white
+#' @details By default, the z-axis limits are from `-max(abs(z))`
+#' to `max(abs(z))`, and negative cells are colored blue to white
 #' which positive cells are colored white to red.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotCorr}}
+#' @seealso [iplotCorr()]
 #'
 #  Example function from Dmitry Pelinovsky
 #  http://dmpeli.mcmaster.ca/Matlab/Math1J03/LectureNotes/Lecture2_5.htm

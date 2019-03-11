@@ -14,18 +14,18 @@ iplotCorr(mat, group = NULL, rows = NULL, cols = NULL,
 \item{group}{Optional vector of groups of individuals (e.g., a genotype)}
 
 \item{rows}{Selected rows of the correlation matrix to include in
-the image. Ignored if \code{corr} is provided.}
+the image. Ignored if `corr` is provided.}
 
 \item{cols}{Selected columns of the correlation matrix to include
-in the image. Ignored if \code{corr} is provided.}
+in the image. Ignored if `corr` is provided.}
 
 \item{reorder}{If TRUE, reorder the variables by
-clustering. Ignored if \code{corr} is provided as a subset of the
+clustering. Ignored if `corr` is provided as a subset of the
 overall correlation matrix}
 
 \item{corr}{Correlation matrix (optional).}
 
-\item{scatterplots}{If \code{FALSE}, don't have the heat map be
+\item{scatterplots}{If `FALSE`, don't have the heat map be
 linked to scatterplots.}
 
 \item{chartOpts}{A list of options for configuring the chart (see
@@ -36,7 +36,7 @@ corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class \code{htmlwidget} that will
+An object of class `htmlwidget` that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
@@ -46,14 +46,14 @@ Creates an interactive graph with an image of a
 correlation matrix linked to underlying scatterplots.
 }
 \details{
-\code{corr} may be provided as a subset of the overall
-correlation matrix for the columns of \code{mat}. In this case, the
-\code{reorder}, \code{rows} and \code{cols} arguments are ignored. The row and
-column names of \code{corr} must match the names of some subset of
-columns of \code{mat}.
+`corr` may be provided as a subset of the overall
+correlation matrix for the columns of `mat`. In this case, the
+`reorder`, `rows` and `cols` arguments are ignored. The row and
+column names of `corr` must match the names of some subset of
+columns of `mat`.
 
-Individual IDs are taken from \code{rownames(mat)}; they must match
-\code{names(group)}.
+Individual IDs are taken from `rownames(mat)`; they must match
+`names(group)`.
 }
 \examples{
 data(geneExpr)
@@ -72,6 +72,6 @@ iplotCorr(geneExpr$expr[,o], geneExpr$genotype, corr=corr[o,o],
                          scattitle="Scatterplot"))}
 }
 \seealso{
-\code{\link{iheatmap}}, \code{\link{scat2scat}}, \code{\link{iplotCurves}}
+[iheatmap()], [scat2scat()], [iplotCurves()]
 }
 \keyword{hplot}

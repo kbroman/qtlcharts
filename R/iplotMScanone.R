@@ -4,24 +4,24 @@
 #' Interactive LOD curve
 #'
 #' Creates an interactive graph of a set of single-QTL genome scans, as
-#' calculated by \code{\link[qtl]{scanone}}. If \code{cross} or
-#' \code{effects} are provided, LOD curves will be linked to a panel
+#' calculated by [qtl::scanone()]. If `cross` or
+#' `effects` are provided, LOD curves will be linked to a panel
 #' with estimated QTL effects.
 #'
-#' @param scanoneOutput Object of class \code{"scanone"}, as output
-#'   from \code{\link[qtl]{scanone}}.
-#' @param cross (Optional) Object of class \code{"cross"}, see
-#'   \code{\link[qtl]{read.cross}}.
+#' @param scanoneOutput Object of class `"scanone"`, as output
+#'   from [qtl::scanone()].
+#' @param cross (Optional) Object of class `"cross"`, see
+#'   [qtl::read.cross()].
 #' @param lodcolumn Numeric value indicating LOD score column to plot.
 #' @param pheno.col (Optional) Phenotype column in cross object.
 #' @param times (Optional) Vector (length equal to the number of LOD
 #'   score columns) with quantitative values to which the different LOD
 #'   score columns correspond (times of measurements, or something like
 #'   age or dose).  These need to be ordered and equally-spaced. If
-#'   omitted, the names of the columns in \code{scanoneOutput} are used
+#'   omitted, the names of the columns in `scanoneOutput` are used
 #'   and treated as qualitative.
 #' @param effects (Optional) Estimated QTL effects, as obtained with
-#'   \code{\link{estQTLeffects}}.
+#'   [estQTLeffects()].
 #' @param chr (Optional) Optional vector indicating the chromosomes
 #'   for which LOD scores should be calculated. This should be a vector
 #'   of character strings referring to chromosomes by name; numeric
@@ -34,16 +34,16 @@
 #' @param digits Round data to this number of significant digits
 #'     before passing to the chart function. (Use NULL to not round.)
 #'
-#' @return An object of class \code{htmlwidget} that will
+#' @return An object of class `htmlwidget` that will
 #' intelligently print itself into HTML in a variety of contexts
 #' including the R console, within R Markdown documents, and within
 #' Shiny output bindings.
 #'
-#' @details If \code{cross} is provided, Haley-Knott regression is
+#' @details If `cross` is provided, Haley-Knott regression is
 #' used to estimate QTL effects at each pseudomarker.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotScanone}}
+#' @seealso [iplotScanone()]
 #'
 #' @examples
 #' data(grav)

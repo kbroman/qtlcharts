@@ -10,20 +10,20 @@
 #' @param qu Quantiles to plot (All with 0 < qu < 0.5)
 #' @param orderByMedian If TRUE, reorder individuals by their median
 #' @param breaks Number of bins in the histograms, or a vector of
-#'     locations of the breakpoints between bins (as in \code{\link[graphics]{hist}})
+#'     locations of the breakpoints between bins (as in [graphics::hist()])
 #' @param chartOpts A list of options for configuring the chart (see
 #'     the coffeescript code). Each element must be named using the
 #'     corresponding option.
 #' @param digits Round data to this number of significant digits
 #'     before passing to the chart function. (Use NULL to not round.)
 #'
-#' @return An object of class \code{htmlwidget} that will
+#' @return An object of class `htmlwidget` that will
 #' intelligently print itself into HTML in a variety of contexts
 #' including the R console, within R Markdown documents, and within
 #' Shiny output bindings.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotCorr}}, \code{\link{scat2scat}}
+#' @seealso [iplotCorr()], [scat2scat()]
 #'
 #' @examples
 #' n.ind <- 500

@@ -9,14 +9,14 @@
 #' @param mat Data matrix (individuals x variables)
 #' @param group Optional vector of groups of individuals (e.g., a genotype)
 #' @param rows Selected rows of the correlation matrix to include in
-#'   the image. Ignored if \code{corr} is provided.
+#'   the image. Ignored if `corr` is provided.
 #' @param cols Selected columns of the correlation matrix to include
-#'   in the image. Ignored if \code{corr} is provided.
+#'   in the image. Ignored if `corr` is provided.
 #' @param reorder If TRUE, reorder the variables by
-#'   clustering. Ignored if \code{corr} is provided as a subset of the
+#'   clustering. Ignored if `corr` is provided as a subset of the
 #'   overall correlation matrix
 #' @param corr Correlation matrix (optional).
-#' @param scatterplots If \code{FALSE}, don't have the heat map be
+#' @param scatterplots If `FALSE`, don't have the heat map be
 #'   linked to scatterplots.
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
@@ -24,22 +24,22 @@
 #' @param digits Round data to this number of significant digits
 #'     before passing to the chart function. (Use NULL to not round.)
 #'
-#' @return An object of class \code{htmlwidget} that will
+#' @return An object of class `htmlwidget` that will
 #' intelligently print itself into HTML in a variety of contexts
 #' including the R console, within R Markdown documents, and within
 #' Shiny output bindings.
 #'
-#' @details \code{corr} may be provided as a subset of the overall
-#' correlation matrix for the columns of \code{mat}. In this case, the
-#' \code{reorder}, \code{rows} and \code{cols} arguments are ignored. The row and
-#' column names of \code{corr} must match the names of some subset of
-#' columns of \code{mat}.
+#' @details `corr` may be provided as a subset of the overall
+#' correlation matrix for the columns of `mat`. In this case, the
+#' `reorder`, `rows` and `cols` arguments are ignored. The row and
+#' column names of `corr` must match the names of some subset of
+#' columns of `mat`.
 #'
-#' Individual IDs are taken from \code{rownames(mat)}; they must match
-#' \code{names(group)}.
+#' Individual IDs are taken from `rownames(mat)`; they must match
+#' `names(group)`.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iheatmap}}, \code{\link{scat2scat}}, \code{\link{iplotCurves}}
+#' @seealso [iheatmap()], [scat2scat()], [iplotCurves()]
 #'
 #' @examples
 #' data(geneExpr)

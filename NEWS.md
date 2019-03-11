@@ -1,4 +1,4 @@
-## qtlcharts 0.12-2 (2019-02-19)
+## qtlcharts 0.12-3 (2019-03-11)
 
 - Allow `title` as chart option in `iplotMScanone()`,
   `iplotScanone()`, `iheatmap()`.
@@ -7,6 +7,8 @@
   scatterplot panel.
 
 - Fill in some missing text in the help info for `iplotMScanone()`.
+
+- Convert documentation to markdown.
 
 
 ## qtlcharts 0.11-6 (2019-02-04)

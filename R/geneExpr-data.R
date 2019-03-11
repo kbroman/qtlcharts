@@ -8,8 +8,8 @@
 #'
 #' @usage data(geneExpr)
 #'
-#' @format A list containing a matrix \code{expr} with the gene
-#' expression data plus a vector \code{genotype} with the genotypes.
+#' @format A list containing a matrix `expr` with the gene
+#' expression data plus a vector `genotype` with the genotypes.
 #'
 #' @author Karl W Broman, 2013-05-16
 #'

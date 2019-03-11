@@ -7,8 +7,8 @@
 estQTLeffects(cross, pheno.col = 1, what = c("means", "effects"))
 }
 \arguments{
-\item{cross}{(Optional) Object of class \code{"cross"}, see
-\code{\link[qtl]{read.cross}}.}
+\item{cross}{(Optional) Object of class `"cross"`, see
+[qtl::read.cross()].}
 
 \item{pheno.col}{Phenotype columns in cross object.}
 
@@ -22,11 +22,11 @@ in the genome and is a matrix with phenotypes x effects
 }
 \description{
 Calculates the effects of QTL at each position across the genome
-using Haley-Knott regression, much like \code{\link[qtl]{effectscan}},
+using Haley-Knott regression, much like [qtl::effectscan()],
 but considering multiple phenotypes and not plotting the results
 }
 \details{
-One should first run \code{\link[qtl]{calc.genoprob}};
+One should first run [qtl::calc.genoprob()];
 if not, it is run with the default arguments.
 
 The estimated effects will be poorly estimated in the case of
@@ -41,7 +41,7 @@ out <- estQTLeffects(grav, phe=seq(1, nphe(grav), by=5))
 
 }
 \seealso{
-\code{\link{iplotMScanone}}, \code{\link[qtl]{effectscan}}
-\code{\link{cbindQTLeffects}}
+[iplotMScanone()], [qtl::effectscan()]
+[cbindQTLeffects()]
 }
 \keyword{regression}

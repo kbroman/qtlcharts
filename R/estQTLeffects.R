@@ -4,11 +4,11 @@
 #' Calculate QTL effects at each position across the genome
 #'
 #' Calculates the effects of QTL at each position across the genome
-#' using Haley-Knott regression, much like \code{\link[qtl]{effectscan}},
+#' using Haley-Knott regression, much like [qtl::effectscan()],
 #' but considering multiple phenotypes and not plotting the results
 #'
-#' @param cross (Optional) Object of class \code{"cross"}, see
-#'   \code{\link[qtl]{read.cross}}.
+#' @param cross (Optional) Object of class `"cross"`, see
+#'   [qtl::read.cross()].
 #' @param pheno.col Phenotype columns in cross object.
 #' @param what Indicates whether to calculate phenotype averages for
 #' each genotype group or to turn these into additive and dominance
@@ -17,7 +17,7 @@
 #' @return list of matrices; each component corresponds to a position
 #' in the genome and is a matrix with phenotypes x effects
 #'
-#' @details One should first run \code{\link[qtl]{calc.genoprob}};
+#' @details One should first run [qtl::calc.genoprob()];
 #' if not, it is run with the default arguments.
 #'
 #' The estimated effects will be poorly estimated in the case of
@@ -25,8 +25,8 @@
 #' this case.
 #'
 #' @keywords regression
-#' @seealso \code{\link{iplotMScanone}}, \code{\link[qtl]{effectscan}}
-#' \code{\link{cbindQTLeffects}}
+#' @seealso [iplotMScanone()], [qtl::effectscan()]
+#' [cbindQTLeffects()]
 #'
 #' @examples
 #' data(grav)
@@ -90,14 +90,14 @@ function(cross, pheno.col=1, what=c("means", "effects"))
 #' Combine multiple runs of estQTLeffects by applying cbind to each
 #' component
 #'
-#' @param ... Results of \code{\link{estQTLeffects}}
+#' @param ... Results of [estQTLeffects()]
 #' @param labels Vector of labels to use in the combination.
 #'
 #' @return list of matrices; each component corresponds to a position
 #' in the genome and is a matrix with phenotypes x effects
 #'
 #' @keywords utilities
-#' @seealso \code{\link{estQTLeffects}}
+#' @seealso [estQTLeffects()]
 #'
 #' @examples
 #' library(qtl)

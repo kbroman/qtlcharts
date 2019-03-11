@@ -5,10 +5,10 @@
 #'
 #' Creates an interactive graph of a genetic marker map.
 #'
-#' @param map Object of class \code{"map"}, a list with each component
+#' @param map Object of class `"map"`, a list with each component
 #'   being a vector of marker positions. You can also provide an object of
-#'   class \code{"cross"}, in which case the map is extracted with
-#'   \code{\link[qtl]{pull.map}}.
+#'   class `"cross"`, in which case the map is extracted with
+#'   [qtl::pull.map()].
 #' @param chr (Optional) Vector indicating the chromosomes to plot.
 #' @param shift If TRUE, shift each chromsome so that the initial marker
 #'   is at position 0.
@@ -17,13 +17,13 @@
 #' @param digits Round data to this number of significant digits
 #'     before passing to the chart function. (Use NULL to not round.)
 #'
-#' @return An object of class \code{htmlwidget} that will
+#' @return An object of class `htmlwidget` that will
 #' intelligently print itself into HTML in a variety of contexts
 #' including the R console, within R Markdown documents, and within
 #' Shiny output bindings.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotScanone}}, \code{\link{iplotPXG}}
+#' @seealso [iplotScanone()], [iplotPXG()]
 #'
 #' @examples
 #' library(qtl)

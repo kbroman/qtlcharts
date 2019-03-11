@@ -14,13 +14,13 @@
 #' @param digits Round data to this number of significant digits
 #'     before passing to the chart function. (Use NULL to not round.)
 #'
-#' @return An object of class \code{htmlwidget} that will
+#' @return An object of class `htmlwidget` that will
 #' intelligently print itself into HTML in a variety of contexts
 #' including the R console, within R Markdown documents, and within
 #' Shiny output bindings.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplot}}, \code{\link{iplotPXG}}, \code{\link{idotplot}}
+#' @seealso [iplot()], [iplotPXG()], [idotplot()]
 #'
 #' @examples
 #' n <- 100

@@ -7,7 +7,7 @@
 cbindQTLeffects(..., labels)
 }
 \arguments{
-\item{...}{Results of \code{\link{estQTLeffects}}}
+\item{...}{Results of [estQTLeffects()]}
 
 \item{labels}{Vector of labels to use in the combination.}
 }
@@ -30,6 +30,6 @@ eff <- cbindQTLeffects(eff.fem, eff.mal, labels=c("female", "male"))
 
 }
 \seealso{
-\code{\link{estQTLeffects}}
+[estQTLeffects()]
 }
 \keyword{utilities}

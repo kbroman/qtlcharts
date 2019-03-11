@@ -7,13 +7,13 @@
 iplotRF(cross, chr = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{
-\item{cross}{Object of class \code{"cross"}, see
-\code{\link[qtl]{read.cross}}.}
+\item{cross}{Object of class `"cross"`, see
+[qtl::read.cross()].}
 
 \item{chr}{Optional vector indicating chromosomes to include. This
 should be a vector of character strings referring to chromosomes by
 name; numeric values are converted to strings.  Refer to
-chromosomes with a preceding \code{-} to have all chromosomes but
+chromosomes with a preceding `-` to have all chromosomes but
 those considered.  A logical (TRUE/FALSE) vector may also be used.}
 
 \item{chartOpts}{A list of options for configuring the chart.  Each
@@ -23,7 +23,7 @@ element must be named using the corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class \code{htmlwidget} that will
+An object of class `htmlwidget` that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
@@ -32,13 +32,13 @@ Shiny output bindings.
 Creates an interactive graph of estimated recombination fractions and LOD scores for all pairs of markers.
 }
 \details{
-The usual \code{height} and \code{width} options in
-\code{chartOpts} are ignored in this plot. Instead, you may provide
-\code{pixelPerCell} (number of pixels per cell in the heat map),
-\code{chrGap} (gap in pixels between chromosomes in the heat map),
-\code{cellHeight} (height in pixels of each cell in the
-cross-tabulation), \code{cellWidth} (width in pixels of each cell
-in the cross-tabulation), and \code{hbot} (height in pixels of the
+The usual `height` and `width` options in
+`chartOpts` are ignored in this plot. Instead, you may provide
+`pixelPerCell` (number of pixels per cell in the heat map),
+`chrGap` (gap in pixels between chromosomes in the heat map),
+`cellHeight` (height in pixels of each cell in the
+cross-tabulation), `cellWidth` (width in pixels of each cell
+in the cross-tabulation), and `hbot` (height in pixels of the
 lower panels showing cross-sections of the heat map)
 }
 \examples{
@@ -51,6 +51,6 @@ iplotRF(fake.f2)}
 
 }
 \seealso{
-\code{\link[qtl]{est.rf}}, \code{\link[qtl]{plotRF}}
+[qtl::est.rf()], [qtl::plotRF()]
 }
 \keyword{hplot}

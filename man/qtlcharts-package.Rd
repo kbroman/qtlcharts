@@ -6,7 +6,7 @@
 \alias{qtlcharts}
 \title{R/qtlcharts: Interactive charts for QTL data}
 \description{
-A QTL is a \emph{quantitative trait locus}: a genetic locus that
+A QTL is a *quantitative trait locus*: a genetic locus that
 contributes to variation in a quantitative trait. The goal of
 \href{http://kbroman.org/qtlcharts}{R/qtlcharts} is to provide
 interactive data visualizations for QTL analyses, and to make these

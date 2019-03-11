@@ -9,11 +9,11 @@ iplotScanone(scanoneOutput, cross = NULL, lodcolumn = 1,
   fillgenoArgs = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{
-\item{scanoneOutput}{Object of class \code{"scanone"}, as output
-from \code{\link[qtl]{scanone}}.}
+\item{scanoneOutput}{Object of class `"scanone"`, as output
+from [qtl::scanone()].}
 
-\item{cross}{(Optional) Object of class \code{"cross"}, see
-\code{\link[qtl]{read.cross}}.}
+\item{cross}{(Optional) Object of class `"cross"`, see
+[qtl::read.cross()].}
 
 \item{lodcolumn}{Numeric value indicating LOD score column to plot.}
 
@@ -27,11 +27,11 @@ preceding - to have all chromosomes but those considered. A logical
 (TRUE/FALSE) vector may also be used.}
 
 \item{pxgtype}{If phenotype x genotype plot is to be shown, should
-it be with means \eqn{\pm}{+/-} 2 SE (\code{"ci"}), or raw
-phenotypes (\code{"raw"})?}
+it be with means \eqn{\pm}{+/-} 2 SE (`"ci"`), or raw
+phenotypes (`"raw"`)?}
 
 \item{fillgenoArgs}{List of named arguments to pass to
-\code{\link[qtl]{fill.geno}}, if needed.}
+[qtl::fill.geno()], if needed.}
 
 \item{chartOpts}{A list of options for configuring the chart (see
 the coffeescript code). Each element must be named using the
@@ -41,28 +41,28 @@ corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class \code{htmlwidget} that will
+An object of class `htmlwidget` that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
 }
 \description{
 Creates an interactive graph of a single-QTL genome scan, as
-calculated by \code{\link[qtl]{scanone}}. If \code{cross} is
+calculated by [qtl::scanone()]. If `cross` is
 provided, the LOD curves are linked to a phenotype x genotype plot
 for a marker: Click on a marker on the LOD curve and see the
 corresponding phenotype x genotype plot.
 }
 \details{
-If \code{cross} is provided, \code{\link[qtl]{fill.geno}}
+If `cross` is provided, [qtl::fill.geno()]
 is used to impute missing genotypes. In this case, arguments to
-\code{\link[qtl]{fill.geno}} are passed as a list, for example
-\code{fillgenoArgs=list(method="argmax", error.prob=0.002,
-map.function="c-f")}.
+[qtl::fill.geno()] are passed as a list, for example
+`fillgenoArgs=list(method="argmax", error.prob=0.002,
+map.function="c-f")`.
 
-With \code{pxgtype="raw"}, individual IDs (viewable when hovering
+With `pxgtype="raw"`, individual IDs (viewable when hovering
 over a point in the phenotype-by-genotype plot) are taken from the
-input \code{cross} object, using the \code{\link[qtl]{getid}}
+input `cross` object, using the [qtl::getid()]
 function in R/qtl.
 }
 \examples{
@@ -85,6 +85,6 @@ iplotScanone(out, hyper, chr=c(1, 4, 6, 7, 15),
 
 }
 \seealso{
-\code{\link{iplotMScanone}}, \code{\link{iplotPXG}}, \code{\link{iplotMap}}
+[iplotMScanone()], [iplotPXG()], [iplotMap()]
 }
 \keyword{hplot}

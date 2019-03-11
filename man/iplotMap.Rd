@@ -8,10 +8,10 @@ iplotMap(map, chr = NULL, shift = FALSE, chartOpts = NULL,
   digits = 5)
 }
 \arguments{
-\item{map}{Object of class \code{"map"}, a list with each component
+\item{map}{Object of class `"map"`, a list with each component
 being a vector of marker positions. You can also provide an object of
-class \code{"cross"}, in which case the map is extracted with
-\code{\link[qtl]{pull.map}}.}
+class `"cross"`, in which case the map is extracted with
+[qtl::pull.map()].}
 
 \item{chr}{(Optional) Vector indicating the chromosomes to plot.}
 
@@ -25,7 +25,7 @@ element must be named using the corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class \code{htmlwidget} that will
+An object of class `htmlwidget` that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
@@ -42,6 +42,6 @@ iplotMap(map, shift=TRUE)}
 
 }
 \seealso{
-\code{\link{iplotScanone}}, \code{\link{iplotPXG}}
+[iplotScanone()], [iplotPXG()]
 }
 \keyword{hplot}

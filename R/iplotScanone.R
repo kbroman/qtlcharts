@@ -4,15 +4,15 @@
 #' Interactive LOD curve
 #'
 #' Creates an interactive graph of a single-QTL genome scan, as
-#' calculated by \code{\link[qtl]{scanone}}. If \code{cross} is
+#' calculated by [qtl::scanone()]. If `cross` is
 #' provided, the LOD curves are linked to a phenotype x genotype plot
 #' for a marker: Click on a marker on the LOD curve and see the
 #' corresponding phenotype x genotype plot.
 #'
-#' @param scanoneOutput Object of class \code{"scanone"}, as output
-#'   from \code{\link[qtl]{scanone}}.
-#' @param cross (Optional) Object of class \code{"cross"}, see
-#'   \code{\link[qtl]{read.cross}}.
+#' @param scanoneOutput Object of class `"scanone"`, as output
+#'   from [qtl::scanone()].
+#' @param cross (Optional) Object of class `"cross"`, see
+#'   [qtl::read.cross()].
 #' @param lodcolumn Numeric value indicating LOD score column to plot.
 #' @param pheno.col (Optional) Phenotype column in cross object.
 #' @param chr (Optional) Vector indicating the chromosomes
@@ -22,34 +22,34 @@
 #'   preceding - to have all chromosomes but those considered. A logical
 #'   (TRUE/FALSE) vector may also be used.
 #' @param pxgtype If phenotype x genotype plot is to be shown, should
-#'   it be with means \eqn{\pm}{+/-} 2 SE (\code{"ci"}), or raw
-#'   phenotypes (\code{"raw"})?
+#'   it be with means \eqn{\pm}{+/-} 2 SE (`"ci"`), or raw
+#'   phenotypes (`"raw"`)?
 #' @param fillgenoArgs List of named arguments to pass to
-#'   \code{\link[qtl]{fill.geno}}, if needed.
+#'   [qtl::fill.geno()], if needed.
 #' @param chartOpts A list of options for configuring the chart (see
 #'   the coffeescript code). Each element must be named using the
 #'   corresponding option.
 #' @param digits Round data to this number of significant digits
 #'     before passing to the chart function. (Use NULL to not round.)
 #'
-#' @return An object of class \code{htmlwidget} that will
+#' @return An object of class `htmlwidget` that will
 #' intelligently print itself into HTML in a variety of contexts
 #' including the R console, within R Markdown documents, and within
 #' Shiny output bindings.
 #'
-#' @details If \code{cross} is provided, \code{\link[qtl]{fill.geno}}
+#' @details If `cross` is provided, [qtl::fill.geno()]
 #' is used to impute missing genotypes. In this case, arguments to
-#' \code{\link[qtl]{fill.geno}} are passed as a list, for example
-#' \code{fillgenoArgs=list(method="argmax", error.prob=0.002,
-#' map.function="c-f")}.
+#' [qtl::fill.geno()] are passed as a list, for example
+#' `fillgenoArgs=list(method="argmax", error.prob=0.002,
+#' map.function="c-f")`.
 #'
-#' With \code{pxgtype="raw"}, individual IDs (viewable when hovering
+#' With `pxgtype="raw"`, individual IDs (viewable when hovering
 #' over a point in the phenotype-by-genotype plot) are taken from the
-#' input \code{cross} object, using the \code{\link[qtl]{getid}}
+#' input `cross` object, using the [qtl::getid()]
 #' function in R/qtl.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotMScanone}}, \code{\link{iplotPXG}}, \code{\link{iplotMap}}
+#' @seealso [iplotMScanone()], [iplotPXG()], [iplotMap()]
 #'
 #' @examples
 #' library(qtl)

@@ -17,11 +17,11 @@
 #' @examples
 #' setScreenSize("large")
 #'
-#' @details Used to set a global option, \code{qtlchartsScreenSize}, that
+#' @details Used to set a global option, `qtlchartsScreenSize`, that
 #' contains the maximum height and maximum width for a chart in the
 #' browser.
 #'
-#' \code{"small"}, \code{"normal"}, and \code{"large"} correspond to 600x900, 700x1000, and
+#' `"small"`, `"normal"`, and `"large"` correspond to 600x900, 700x1000, and
 #' 1200x1600, for height x width, respectively.
 #'
 #' @export

@@ -7,7 +7,7 @@
 iheatmap(z, x = NULL, y = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{
-\item{z}{Numeric matrix of dim \code{length(x)} x \code{length(y)}}
+\item{z}{Numeric matrix of dim `length(x)` x `length(y)`}
 
 \item{x}{Vector of numeric values for the x-axis}
 
@@ -21,7 +21,7 @@ corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class \code{htmlwidget} that will
+An object of class `htmlwidget` that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
@@ -31,8 +31,8 @@ Creates an interactive heatmap, with each cell linked to
 plots of horizontal and vertical slices
 }
 \details{
-By default, the z-axis limits are from \code{-max(abs(z))}
-to \code{max(abs(z))}, and negative cells are colored blue to white
+By default, the z-axis limits are from `-max(abs(z))`
+to `max(abs(z))`, and negative cells are colored blue to white
 which positive cells are colored white to red.
 }
 \examples{
@@ -47,6 +47,6 @@ iheatmap(z, x, y)}
 
 }
 \seealso{
-\code{\link{iplotCorr}}
+[iplotCorr()]
 }
 \keyword{hplot}

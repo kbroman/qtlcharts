@@ -9,10 +9,10 @@
 #' which are then indicated on the LOD curves and the corresponding
 #' genotypes used to color the points in the scatterplot.
 #'
-#' @param cross (Optional) Object of class \code{"cross"}, see
-#'     \code{\link[qtl]{read.cross}}.
-#' @param scanoneOutput (Optional) object of class \code{"scanone"},
-#'     as output from \code{\link[qtl]{scanone}}.
+#' @param cross (Optional) Object of class `"cross"`, see
+#'     [qtl::read.cross()].
+#' @param scanoneOutput (Optional) object of class `"scanone"`,
+#'     as output from [qtl::scanone()].
 #' @param pheno.col Vector indicating two phenotype column in cross
 #'     object; either numeric or character strings (the latter being
 #'     the phenotype column names).
@@ -23,32 +23,32 @@
 #'     that indicates what portion of the chromosome should be
 #'     included.
 #' @param fillgenoArgs List of named arguments to pass to
-#'     \code{\link[qtl]{fill.geno}}, if needed.
+#'     [qtl::fill.geno()], if needed.
 #' @param chartOpts A list of options for configuring the chart (see
 #'     the coffeescript code). Each element must be named using the
 #'     corresponding option.
 #' @param digits Round data to this number of significant digits
 #'     before passing to the chart function. (Use NULL to not round.)
 #'
-#' @return An object of class \code{htmlwidget} that will
+#' @return An object of class `htmlwidget` that will
 #' intelligently print itself into HTML in a variety of contexts
 #' including the R console, within R Markdown documents, and within
 #' Shiny output bindings.
 #'
-#' @details \code{\link[qtl]{fill.geno}}
+#' @details [qtl::fill.geno()]
 #' is used to impute missing genotypes. In this case, arguments to
-#' \code{\link[qtl]{fill.geno}} are passed as a list, for example
-#' \code{fillgenoArgs=list(method="argmax", error.prob=0.002,
-#' map.function="c-f")}.
+#' [qtl::fill.geno()] are passed as a list, for example
+#' `fillgenoArgs=list(method="argmax", error.prob=0.002,
+#' map.function="c-f")`.
 #'
 #' Individual IDs (viewable when hovering over a point in the
 #' scatterplot of the two phenotypes) are taken from the input
-#' \code{cross} object, using the \code{\link[qtl]{getid}} function in
+#' `cross` object, using the [qtl::getid()] function in
 #' R/qtl.
 #'
 #' @keywords hplot
-#' @seealso \code{\link{iplotScanone}}, \code{\link{iplotMScanone}},
-#'     \code{\link{iplotPXG}}
+#' @seealso [iplotScanone()], [iplotMScanone()],
+#'     [iplotPXG()]
 #'
 #' @examples
 #' library(qtl)

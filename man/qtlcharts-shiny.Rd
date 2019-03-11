@@ -94,15 +94,15 @@ scat2scat_render(expr, env = parent.frame(), quoted = FALSE)
 \arguments{
 \item{outputId}{output variable to read from}
 
-\item{width, height}{Must be a valid CSS unit (like \code{"100\%"},
-\code{"400px"}, \code{"auto"}) or a number, which will be coerced to a
-string and have \code{"px"} appended.}
+\item{width, height}{Must be a valid CSS unit (like `"100\%"`,
+`"400px"`, `"auto"`) or a number, which will be coerced to a
+string and have `"px"` appended.}
 
 \item{expr}{An expression that generates a networkD3 graph}
 
-\item{env}{The environment in which to evaluate \code{expr}.}
+\item{env}{The environment in which to evaluate `expr`.}
 
-\item{quoted}{Is \code{expr} a quoted expression (with \code{quote()})? This
+\item{quoted}{Is `expr` a quoted expression (with `quote()`)? This
 is useful if you want to save an expression in a variable.}
 }
 \description{

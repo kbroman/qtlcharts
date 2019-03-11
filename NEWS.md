@@ -87,7 +87,7 @@
 ## qtlcharts 0.7-8 (2016-06-28)
 
 - Rewrite underlying javascript to use new version of
-  [d3panels](http://kbroman.org/d3panels).
+  [d3panels](https://kbroman.org/d3panels).
 
 - Add a new chart, `scat2scat`. The idea is to summarize each of a
   long series of scatterplots with a pair of numbers. Then a
@@ -112,7 +112,7 @@
 
 - Removed the vignettes from the package (for complicated reasons);
   they're available at the
-  [R/qtlcharts website](http://kbroman.org/qtlcharts).
+  [R/qtlcharts website](https://kbroman.org/qtlcharts).
 
 
 ## qtlcharts 0.6-6 (2016-04-21)
@@ -131,7 +131,7 @@
 ## qtlcharts 0.5-23 (2015-11-07)
 
 - Changed license and author list in order to post the package on
-  CRAN, http://cran.r-project.org
+  CRAN, https://cran.r-project.org
 
 - `idotplot` and `iplot` now use the names of the input data as
   individual IDs if `indID` is missing or `NULL`.
@@ -162,7 +162,7 @@
 
 ## qtlcharts 0.5-10 (2015-05-28)
 
-- Included [bower](http://bower.io) information, about the javascript
+- Included [bower](https://bower.io) information, about the javascript
   libraries, within the source package.
 
 
@@ -187,7 +187,7 @@
   different categories.  (It's just like `iplotPXG`, but with data
   values not connected to a cross object.)
 
-- Reorganized the [d3panels](http://kbroman.org/d3panels) code: just
+- Reorganized the [d3panels](https://kbroman.org/d3panels) code: just
   using `d3panels.min.js` and `d3panels.min.css` rather than linking
   to js code for individual panels.
 
@@ -197,7 +197,7 @@
 - Refactored the entire package to use
   [htmlwidgets](http://www.htmlwidgets.org).
   A big advantage is that the charts now work nicely within
-  [RStudio](http://www.rstudio.com/products/RStudio/).
+  [RStudio](https://www.rstudio.com/products/RStudio/).
 
 - To save a plot to a file, you now need to assign the result of a plot
   function to an object and then use the
@@ -219,6 +219,6 @@
   `print_qtlcharts_resources()` or `results="asis"`.
 
 - Separated out the basic panel functions as a separate repository,
-  [d3panels](http://kbroman.org/d3panels), to make it easier for them
+  [d3panels](https://kbroman.org/d3panels), to make it easier for them
   to be used separately from
-  [R/qtlcharts](http://kbroman.org/qtlcharts).
+  [R/qtlcharts](https://kbroman.org/qtlcharts).

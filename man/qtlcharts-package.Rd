@@ -11,14 +11,14 @@ contributes to variation in a quantitative trait. The goal of
 [R/qtlcharts](https://kbroman.org/qtlcharts) is to provide
 interactive data visualizations for QTL analyses, and to make these
 visualizations available from R. It is a companion to the
-[R/qtl](http://rqtl.org package.
+[R/qtl](http://rqtl.org) package.
 }
 \details{
 Vignettes online at the [R/qtlcharts website](https://kbroman.org/qtlcharts):
 
-- [User guide](http://kbroman.org/qtlcharts/assets/vignettes/userGuide.html)
-- [Developer guide](http://kbroman.org/qtlcharts/assets/vignettes/develGuide.html)
-- [Use with R Markdown](http://kbroman.org/qtlcharts/assets/vignettes/Rmarkdown.html)
+- [User guide](https://kbroman.org/qtlcharts/assets/vignettes/userGuide.html)
+- [Developer guide](https://kbroman.org/qtlcharts/assets/vignettes/develGuide.html)
+- [Use with R Markdown](https://kbroman.org/qtlcharts/assets/vignettes/Rmarkdown.html)
   \[[Rmd source](https://github.com/kbroman/qtlcharts/blob/gh-pages/assets/vignettes/Rmarkdown.Rmd)\]
-- [List of chart customization options](http://kbroman.org/qtlcharts/assets/vignettes/chartOpts.html)
+- [List of chart customization options](https://kbroman.org/qtlcharts/assets/vignettes/chartOpts.html)
 }

@@ -2,17 +2,20 @@ Package: qtlcharts
 Version: 0.12-3
 Date: 2019-03-11
 Title: Interactive Graphics for QTL Experiments
-Author: Karl W Broman [aut, cre], Michael Bostock [ctb, cph] (d3.js library
-    in htmlwidgets/lib, https://d3js.org), Justin Palmer [ctb, cph] (d3.tip library
-    in htmlwidgets/lib, https://github.com/caged/d3-tip), Cynthia Brewer [cph]
-    (ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org), Mark Harrower
-    [cph] (ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org),
-    The Pennsylvania State University [cph] (ColorBrewer library in htmlwidgets/lib,
+Author: Karl W Broman [aut, cre] (<https://orcid.org/0000-0002-4914-6671>),
+    Michael Bostock [ctb, cph] (d3.js library in htmlwidgets/lib,
+    https://d3js.org), Justin Palmer [ctb, cph] (d3.tip library in
+    htmlwidgets/lib, https://github.com/caged/d3-tip), Cynthia Brewer
+    [cph] (ColorBrewer library in htmlwidgets/lib,
+    http://colorbrewer2.org), Mark Harrower [cph] (ColorBrewer library
+    in htmlwidgets/lib, http://colorbrewer2.org), The Pennsylvania
+    State University [cph] (ColorBrewer library in htmlwidgets/lib,
     http://colorbrewer2.org), jQuery Foundation [cph] (jQuery library
-    in htmlwidgets/lib, https://jquery.com), jQuery contributors [ctb] (jQuery
-    library in htmlwidgets/lib; see https://github.com/jquery/jquery/blob/master/AUTHORS.txt),
-    jQuery UI contributors [ctb] (jQuery UI library in htmlwidgets/lib;
-    see https://jqueryui.com/about)
+    in htmlwidgets/lib, https://jquery.com), jQuery contributors [ctb]
+    (jQuery library in htmlwidgets/lib; see
+    https://github.com/jquery/jquery/blob/master/AUTHORS.txt), jQuery
+    UI contributors [ctb] (jQuery UI library in htmlwidgets/lib; see
+    https://jqueryui.com/about)
 Maintainer: Karl W Broman <broman@wisc.edu>
 Description: Web-based interactive charts (using D3.js) for the analysis of
     experimental crosses to identify genetic loci (quantitative trait
@@ -43,7 +46,8 @@ ByteCompile: true
 RoxygenNote: 6.1.1
 Roxygen: list(wrap=FALSE)
 Authors@R: c(
-    person("Karl W", "Broman", role=c("aut", "cre"), email="broman@wisc.edu"),
+    person("Karl W", "Broman", role=c("aut", "cre"), email="broman@wisc.edu",
+           comment=c(ORCID = "0000-0002-4914-6671")),
     person("Michael", "Bostock", role=c("ctb", "cph"),
            comment="d3.js library in htmlwidgets/lib, https://d3js.org"),
     person("Justin", "Palmer", role=c("ctb", "cph"),

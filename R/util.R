@@ -171,3 +171,23 @@ function(group, preserveNA=FALSE)
 
     group
 }
+
+# determine cross type
+crosstype <-
+    function(cross)
+    {
+        type <- class(cross)
+        type <- type[type != "cross" & type != "list"]
+        if(length(type) > 1) {
+            warning("cross has multiple classes")
+        }
+        type[1]
+    }
+
+# determine chromosome type
+chrtype <-
+    function(object)
+    {
+        if(inherits(object, "X")) return("X")
+        "A"
+    }

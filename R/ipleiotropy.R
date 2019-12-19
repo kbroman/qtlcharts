@@ -88,7 +88,7 @@ function(cross, scanoneOutput=NULL, pheno.col=1:2, lodcolumn=1:2,
     if(any(is.na(pheno.col) | pheno.col < 1 | pheno.col > qtl::nphe(cross)))
        stop("pheno.col should be in {1, 2, ..., ", qtl::nphe(cross), "}")
 
-    if(class(cross)[2] != "cross")
+    if(!inherits(cross, "cross"))
         stop('"cross" should have class "cross".')
     # omit individuals with missing phenotype and subset to chromosome
     cross <- subset(cross, ind=rowSums(is.na(cross$pheno[,pheno.col]))==0, chr=chr)
@@ -104,7 +104,7 @@ function(cross, scanoneOutput=NULL, pheno.col=1:2, lodcolumn=1:2,
 
     if(!is.null(scanoneOutput)) {
         scanoneOutput <- subset(scanoneOutput, chr=chr)
-        if(!any(class(scanoneOutput) == "scanone"))
+        if(!inherits(scanoneOutput, "scanone"))
             stop('"scanoneOutput" should have class "scanone".')
 
         if(length(lodcolumn) > 2) {

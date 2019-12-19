@@ -81,7 +81,7 @@ iplotMScanone <-
 function(scanoneOutput, cross=NULL, lodcolumn=NULL, pheno.col=NULL, times=NULL,
          effects=NULL, chr=NULL, chartOpts=NULL, digits=5)
 {
-    if(!any(class(scanoneOutput) == "scanone"))
+    if(!inherits(scanoneOutput, "scanone"))
         stop('"scanoneOutput" should have class "scanone".')
 
     if(!is.null(chr)) {
@@ -120,11 +120,11 @@ function(scanoneOutput, cross=NULL, lodcolumn=NULL, pheno.col=NULL, times=NULL,
     else {
         if(is.null(effects)) {
             stopifnot(length(pheno.col) == length(lodcolumn))
-            stopifnot(class(cross)[2] == "cross")
+            stopifnot(inherits(cross, "cross"))
 
-            crosstype <- class(cross)[1]
+            cross_type <- crosstype(cross)
             handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid") # handled for add/dom effects
-            what <- ifelse(crosstype %in% handled_crosses, "effects", "means")
+            what <- ifelse(cross_type %in% handled_crosses, "effects", "means")
             effects <- estQTLeffects(cross, pheno.col, what=what)
         }
 

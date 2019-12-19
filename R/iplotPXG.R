@@ -52,7 +52,7 @@ iplotPXG <-
 function(cross, marker, pheno.col=1,
          chartOpts=NULL, fillgenoArgs=NULL, digits=5)
 {
-    if(class(cross)[2] != "cross")
+    if(!inherits(cross, "cross"))
         stop('"cross" should have class "cross".')
 
     if(length(marker) > 1) {

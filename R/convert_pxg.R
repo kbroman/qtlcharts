@@ -36,15 +36,15 @@ function(cross, pheno.col=1, fillgenoArgs=NULL)
 
     # chr types
     sexpgm <- qtl::getsex(cross)
-    chrtype <- vapply(cross$geno, class, "")
-    names(chrtype) <- qtl::chrnames(cross)
-    uchrtype <- unique(chrtype)
+    chr_type <- vapply(cross$geno, chrtype, "")
+    names(chr_type) <- qtl::chrnames(cross)
+    uchrtype <- unique(chr_type)
 
     # genotype names by chr types
     genonames <- vector("list", length(uchrtype))
     names(genonames) <- uchrtype
     for(i in uchrtype)
-        genonames[[i]] <- qtl::getgenonames(class(cross)[1], i, "standard", sexpgm, attributes(cross))
+        genonames[[i]] <- qtl::getgenonames(crosstype(cross), i, "standard", sexpgm, attributes(cross))
 
     id <- qtl::getid(cross)
     if(is.null(id)) id <- 1:qtl::nind(cross)
@@ -59,7 +59,7 @@ function(cross, pheno.col=1, fillgenoArgs=NULL)
          pheno=phe,
          chrByMarkers=as.list(chrByMarkers),
          indID=id,
-         chrtype=as.list(chrtype),
+         chrtype=as.list(chr_type),
          genonames=genonames)
 }
 
@@ -80,15 +80,15 @@ function(cross, fillgenoArgs=NULL, imputed_negative=TRUE)
 
     # on X chr, revise genotypes
     chr <- qtl::chrnames(cross)
-    chrtype <- vapply(cross$geno, class, "")
+    chr_type <- vapply(cross$geno, chrtype, "")
     sexpgm <- qtl::getsex(cross)
-    if(any(chrtype == "X")) {
-        for(i in chr[chrtype=="X"]) {
-            geno_X <- qtl::reviseXdata(class(cross)[1], "standard", sexpgm, geno=qtl::pull.geno(cross, chr=i),
+    if(any(chr_type == "X")) {
+        for(i in chr[chr_type=="X"]) {
+            geno_X <- qtl::reviseXdata(crosstype(cross), "standard", sexpgm, geno=qtl::pull.geno(cross, chr=i),
                                        cross.attr=attributes(cross))
             geno[,colnames(geno_X)] <- geno_X
 
-            geno_imp_X <- qtl::reviseXdata(class(cross)[1], "standard", sexpgm, geno=qtl::pull.geno(cross_filled, chr=i),
+            geno_imp_X <- qtl::reviseXdata(crosstype(cross), "standard", sexpgm, geno=qtl::pull.geno(cross_filled, chr=i),
                                            cross.attr=attributes(cross))
             geno_imp[,colnames(geno_imp_X)] <- geno_imp_X
         }

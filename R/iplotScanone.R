@@ -75,7 +75,7 @@ function(scanoneOutput, cross=NULL, lodcolumn=1, pheno.col=1, chr=NULL,
          pxgtype = c("ci", "raw"),
          fillgenoArgs=NULL, chartOpts=NULL, digits=5)
 {
-    if(!any(class(scanoneOutput) == "scanone"))
+    if(!inherits(scanoneOutput, "scanone"))
         stop('"scanoneOutput" should have class "scanone".')
 
     if(!is.null(chr)) {
@@ -105,7 +105,7 @@ function(scanoneOutput, cross=NULL, lodcolumn=1, pheno.col=1, chr=NULL,
             warning("pheno.col should have length 1; using first value")
         }
 
-        if(class(cross)[2] != "cross")
+        if(!inherits(cross, "cross"))
             stop('"cross" should have class "cross".')
 
         pxg_list <- convert_pxg(cross, pheno.col, fillgenoArgs=fillgenoArgs)

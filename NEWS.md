@@ -1,4 +1,4 @@
-## qtlcharts 0.12-3 (2019-03-11)
+## qtlcharts 0.12-4 (2019-12-19)
 
 - Allow `title` as chart option in `iplotMScanone()`,
   `iplotScanone()`, `iheatmap()`.
@@ -9,6 +9,9 @@
 - Fill in some missing text in the help info for `iplotMScanone()`.
 
 - Convert documentation to markdown.
+
+- Fix use of `class()`, replacing constructions like `"cross" %in% class(object)`
+  with `inherits(object, "cross")`.
 
 
 ## qtlcharts 0.11-6 (2019-02-04)

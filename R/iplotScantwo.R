@@ -57,7 +57,7 @@ iplotScantwo <-
 function(scantwoOutput, cross=NULL, lodcolumn=1, pheno.col=1, chr=NULL,
          chartOpts=NULL, digits=5)
 {
-    if(!any(class(scantwoOutput) == "scantwo"))
+    if(!inherits(scantwoOutput, "scantwo"))
         stop('"scantwoOutput" should have class "scantwo".')
 
     if(!is.null(chr)) {
@@ -260,13 +260,13 @@ cross4iplotScantwo <-
     }
 
     # X chr imputations: 1/2 -> AA/AB/BB/AY/BY
-    crosstype <- class(cross)[1]
-    chrtype <- sapply(cross$geno, class)
+    cross_type <- crosstype(cross)
+    chr_type <- sapply(cross$geno, chrtype)
     sexpgm <- qtl::getsex(cross)
     cross.attr <- attributes(cross)
-    if(crosstype %in% c("f2", "bc", "bcsft") && any(chrtype=="X")) {
-        for(i in which(chrtype=="X")) {
-            cross$geno[[i]]$draws <- qtl::reviseXdata(crosstype, "standard", sexpgm,
+    if(cross_type %in% c("f2", "bc", "bcsft") && any(chr_type=="X")) {
+        for(i in which(chr_type=="X")) {
+            cross$geno[[i]]$draws <- qtl::reviseXdata(cross_type, "standard", sexpgm,
                                                       draws=cross$geno[[i]]$draws,
                                                       cross.attr=cross.attr)
         }
@@ -286,18 +286,18 @@ cross4iplotScantwo <-
     genonames <- vector("list", length(cross$geno))
     names(genonames) <- names(cross$geno)
     for(i in seq(along=genonames))
-        genonames[[i]] <- qtl::getgenonames(crosstype, class(cross$geno[[i]]),
+        genonames[[i]] <- qtl::getgenonames(cross_type, class(cross$geno[[i]]),
                                             "standard", sexpgm, cross.attr)
 
     X_geno_by_sex <- NULL
-    chrtype <- vapply(cross$geno, class, "")
-    if(any(chrtype=="X")) {
+    chr_type <- vapply(cross$geno, chrtype, "")
+    if(any(chr_type=="X")) {
         f_sexpgm <- m_sexpgm <- sexpgm
         f_sexpgm$sex[f_sexpgm$sex==1] <- 0
         m_sexpgm$sex[m_sexpgm$sex==0] <- 1
         X_geno_by_sex <- list(
-            qtl::getgenonames(crosstype, class(cross$geno[[i]]), "standard", f_sexpgm, cross.attr),
-            qtl::getgenonames(crosstype, class(cross$geno[[i]]), "standard", m_sexpgm, cross.attr)
+            qtl::getgenonames(cross_type, class(cross$geno[[i]]), "standard", f_sexpgm, cross.attr),
+            qtl::getgenonames(cross_type, class(cross$geno[[i]]), "standard", m_sexpgm, cross.attr)
         )
     }
 
@@ -312,5 +312,5 @@ cross4iplotScantwo <-
     indID <- as.character(indID)
 
     list(geno=geno, chr=as.list(chr), genonames=genonames, X_geno_by_sex=X_geno_by_sex,
-         pheno=pheno, indID=indID, chrtype=as.list(chrtype))
+         pheno=pheno, indID=indID, chrtype=as.list(chr_type))
 }

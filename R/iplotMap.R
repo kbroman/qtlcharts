@@ -36,7 +36,7 @@
 iplotMap <-
 function(map, chr=NULL, shift=FALSE, chartOpts=NULL, digits=5)
 {
-    if("cross" %in% class(map)) map <- qtl::pull.map(map)
+    if(inherits(map, "cross")) map <- qtl::pull.map(map)
 
     if(!is.null(chr)) {
         map <- map[chr]

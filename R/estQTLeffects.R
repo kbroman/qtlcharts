@@ -38,15 +38,15 @@
 estQTLeffects <-
 function(cross, pheno.col=1, what=c("means", "effects"))
 {
-    if(!("cross" %in% class(cross)))
+    if(!inherits(cross, "cross"))
         stop("Input cross object should have class \"cross\".")
-    crosstype <- class(cross)[1]
-    chrtype <- vapply(cross$geno, class, "")
+    cross_type <- crosstype(cross)
+    chr_type <- vapply(cross$geno, chrtype, "")
 
     what <- match.arg(what)
     handled_crosses <- c("bc", "bcsft", "dh", "riself", "risib", "f2", "haploid")
-    if(what == "effects" && !(crosstype %in% handled_crosses)) {
-        warning("Can't calculate effects for cross type \"", crosstype, "\"; returning means.")
+    if(what == "effects" && !(cross_type %in% handled_crosses)) {
+        warning("Can't calculate effects for cross type \"", cross_type, "\"; returning means.")
         what <- "means"
     }
 
@@ -60,10 +60,10 @@ function(cross, pheno.col=1, what=c("means", "effects"))
     pr <- vector("list", qtl::nchr(cross))
     for(i in 1:qtl::nchr(cross)) {
         pr[[i]] <- cross$geno[[i]]$prob
-        if(chrtype[i] == "X")
+        if(chr_type[i] == "X")
             # if what="effects", use full X encoding (AA/ABf/ABr/BB/AY/BY)
             # if what="means", use standard (AA/AB/BB/AY/BY)
-            pr[[i]] <- qtl::reviseXdata(crosstype, ifelse(what=="effects", "full", "standard"),
+            pr[[i]] <- qtl::reviseXdata(cross_type, ifelse(what=="effects", "full", "standard"),
                                         qtl::getsex(cross), prob=pr[[i]], cross.attr=attributes(cross))
     }
 
@@ -77,7 +77,7 @@ function(cross, pheno.col=1, what=c("means", "effects"))
             dimnames(eff[[cur]]) <- list(colnames(phe), dimnames(pr[[i]])[[3]])
 
             if(what == "effects")
-                eff[[cur]] <- convert2effects(eff[[cur]], crosstype, chrtype[i])
+                eff[[cur]] <- convert2effects(eff[[cur]], cross_type, chr_type[i])
         }
     }
 

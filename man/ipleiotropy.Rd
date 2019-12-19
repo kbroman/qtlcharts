@@ -4,9 +4,17 @@
 \alias{ipleiotropy}
 \title{Tool to explore pleiotropy}
 \usage{
-ipleiotropy(cross, scanoneOutput = NULL, pheno.col = 1:2,
-  lodcolumn = 1:2, chr = NULL, interval = NULL,
-  fillgenoArgs = NULL, chartOpts = NULL, digits = 5)
+ipleiotropy(
+  cross,
+  scanoneOutput = NULL,
+  pheno.col = 1:2,
+  lodcolumn = 1:2,
+  chr = NULL,
+  interval = NULL,
+  fillgenoArgs = NULL,
+  chartOpts = NULL,
+  digits = 5
+)
 }
 \arguments{
 \item{cross}{(Optional) Object of class `"cross"`, see

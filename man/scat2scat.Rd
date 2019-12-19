@@ -4,8 +4,7 @@
 \alias{scat2scat}
 \title{Scatterplot driving another scatterplot}
 \usage{
-scat2scat(scat1data, scat2data, group = NULL, chartOpts = NULL,
-  digits = 5)
+scat2scat(scat1data, scat2data, group = NULL, chartOpts = NULL, digits = 5)
 }
 \arguments{
 \item{scat1data}{Matrix with two columns; rownames are used as

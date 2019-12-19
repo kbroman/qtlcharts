@@ -43,8 +43,7 @@ BugReports: https://github.com/kbroman/qtlcharts/issues
 LazyData: true
 Encoding: UTF-8
 ByteCompile: true
-RoxygenNote: 6.1.1
-Roxygen: list(wrap=FALSE)
+RoxygenNote: 7.0.2
 Authors@R: c(
     person("Karl W", "Broman", role=c("aut", "cre"), email="broman@wisc.edu",
            comment=c(ORCID = "0000-0002-4914-6671")),

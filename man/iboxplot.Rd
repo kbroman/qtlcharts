@@ -4,8 +4,14 @@
 \alias{iboxplot}
 \title{Modern boxplot linked to underlying histrograms}
 \usage{
-iboxplot(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian = TRUE,
-  breaks = 251, chartOpts = NULL, digits = 5)
+iboxplot(
+  dat,
+  qu = c(0.001, 0.01, 0.1, 0.25),
+  orderByMedian = TRUE,
+  breaks = 251,
+  chartOpts = NULL,
+  digits = 5
+)
 }
 \arguments{
 \item{dat}{Data matrix (individuals x variables)}

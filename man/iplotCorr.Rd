@@ -4,9 +4,17 @@
 \alias{iplotCorr}
 \title{Image of correlation matrix with linked scatterplot}
 \usage{
-iplotCorr(mat, group = NULL, rows = NULL, cols = NULL,
-  reorder = FALSE, corr = NULL, scatterplots = TRUE,
-  chartOpts = NULL, digits = 5)
+iplotCorr(
+  mat,
+  group = NULL,
+  rows = NULL,
+  cols = NULL,
+  reorder = FALSE,
+  corr = NULL,
+  scatterplots = TRUE,
+  chartOpts = NULL,
+  digits = 5
+)
 }
 \arguments{
 \item{mat}{Data matrix (individuals x variables)}

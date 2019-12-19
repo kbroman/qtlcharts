@@ -4,8 +4,14 @@
 \alias{iplotPXG}
 \title{Interactive phenotype x genotype plot}
 \usage{
-iplotPXG(cross, marker, pheno.col = 1, chartOpts = NULL,
-  fillgenoArgs = NULL, digits = 5)
+iplotPXG(
+  cross,
+  marker,
+  pheno.col = 1,
+  chartOpts = NULL,
+  fillgenoArgs = NULL,
+  digits = 5
+)
 }
 \arguments{
 \item{cross}{Object of class `"cross"`, see

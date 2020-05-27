@@ -4,8 +4,10 @@
 \name{geneExpr}
 \alias{geneExpr}
 \title{Anonymized gene expression data}
-\format{A list containing a matrix `expr` with the gene
-expression data plus a vector `genotype` with the genotypes.}
+\format{
+A list containing a matrix `expr` with the gene
+expression data plus a vector `genotype` with the genotypes.
+}
 \usage{
 data(geneExpr)
 }

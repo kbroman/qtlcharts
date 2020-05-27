@@ -4,7 +4,9 @@
 \name{grav}
 \alias{grav}
 \title{Arabidopsis QTL data on gravitropism}
-\format{An object of class `"cross"`; see [qtl::read.cross()].}
+\format{
+An object of class `"cross"`; see [qtl::read.cross()].
+}
 \source{
 Mouse Phenome Database, <https://phenome.jax.org/projects/Moore1b>
 }

@@ -43,6 +43,10 @@ function(p, indID=NULL, group=NULL, chartOpts=NULL, digits=5)
     stopifnot(length(indID) == n)
     indID <- as.character(indID)
 
+    if(!is.null(colnames(p))) { # if column names for probabilities, use as labels
+        chartOpts <- add2chartOpts(chartOpts, labels=colnames(p))
+    }
+
     if(is.null(group)) group <- rep(1, n)
     group_levels <- sort(unique(group))
     group <- group2numeric(group)

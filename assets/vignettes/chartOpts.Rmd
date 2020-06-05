@@ -192,6 +192,8 @@ stand-alone html files.)
 
 `scat_titlepos = 20` &mdash; position of title for scatterplot, in pixels
 
+`scat_title = ""` &mdash; title of scatterplot panel
+
 `slider_height = 80` &mdash; height of slider
 
 `slider_color = "#E6E6E6"` &mdash; color of slider bar
@@ -394,6 +396,8 @@ stand-alone html files.)
 
 `titlepos = 20` &mdash; position of chart title in pixels
 
+`title = ""` &mdash; title for chart
+
 `chrGap = 6` &mdash; gap between chromosomes in pixels
 
 `rectcolor = "#e6e6e6"` &mdash; color of background rectangle
@@ -447,6 +451,8 @@ stand-alone html files.)
 `height = 700` &mdash; height of chart in pixels
 
 `width = 1000` &mdash; width of chart in pixels
+
+`title = ""` &mdash; title for chart
 
 `wleft = width*0.65` &mdash; width of left panels in pixels
 
@@ -874,7 +880,13 @@ stand-alone html files.)
 
 `pointstroke = "black"` &mdash; color of points' outer circle
 
-`pointsize = 3` &mdash; color of points
+`pointsize = 3` &mdash; size of points in pixels
+
+`gridlines = 0` &mdash; number of grid lines
+
+`gridcolor = "white"` &mdash; color of grid lines
+
+`gridwidth = 1` &mdash; width of grid lines in pixels
 
 `tipclass = "tooltip"` &mdash; class name for tool tips
 

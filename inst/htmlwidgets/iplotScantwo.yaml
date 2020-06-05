@@ -17,12 +17,12 @@ dependencies:
       - index-min.js
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 1.4.9
+    version: 1.5.0
     script:
       - d3panels.min.js
     style: d3panels.min.css
   - name: qtlcharts_iplotScantwo
     src: htmlwidgets/lib/qtlcharts
-    version: 0.11.6
+    version: 0.12.6
     script:
       - iplotScantwo.js

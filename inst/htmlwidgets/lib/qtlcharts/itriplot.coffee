@@ -16,7 +16,10 @@ itriplot = (widgetdiv, data, chartOpts) ->
     boxwidth = chartOpts?.boxwidth ? 2                  # width of outer box in pixels
     pointcolor = chartOpts?.pointcolor ? null           # fill color of points
     pointstroke = chartOpts?.pointstroke ? "black"      # color of points' outer circle
-    pointsize = chartOpts?.pointsize ? 3                # color of points
+    pointsize = chartOpts?.pointsize ? 3                # size of points in pixels
+    gridlines = chartOpts?.gridlines ? 0                # number of grid lines
+    gridcolor = chartOpts?.gridcolor ? "white"          # color of grid lines
+    gridwidth = chartOpts?.gridwidth ? 1                # width of grid lines in pixels
     tipclass = chartOpts?.tipclass ? "tooltip"          # class name for tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
@@ -39,6 +42,9 @@ itriplot = (widgetdiv, data, chartOpts) ->
         pointcolor:pointcolor
         pointsize:pointsize
         pointstroke:pointstroke
+        gridlines:gridlines
+        gridcolor:gridcolor
+        gridwidth:gridwidth
         tipclass:widgetdivid})
 
     mychart(d3.select(widgetdiv).select("svg"), data)

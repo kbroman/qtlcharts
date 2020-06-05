@@ -1,7 +1,7 @@
-## qtlcharts 0.12-5 (2020-05-31)
+## qtlcharts 0.12-6 (2020-06-05)
 
 - `itriplot()` will take labels from the column names of the
-  probabilities, `p`.
+  probabilities, `p`.  Also has an option for grid lines.
 
 - Allow `title` as chart option in `iplotMScanone()`,
   `iplotScanone()`, `iheatmap()`.

@@ -380,6 +380,64 @@ stand-alone html files.)
 
 `scat2_ylab = "Y"` &mdash; y-axis label for second scatterplot
 
+### `iplotMScanone` (no effects)
+
+`height = 700` &mdash; height of chart in pixels
+
+`width = 1000` &mdash; width of chart in pixels
+
+`title = ""` &mdash; title for chart
+
+`wleft = width*0.65` &mdash; width of left panels in pixels
+
+`htop = height/2` &mdash; height of top panels in pixels
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=0)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`chrGap = 6` &mdash; gap between chromosomes in pixels
+
+`rectcolor = "#E6E6E6"` &mdash; color of lighter background rectangle
+
+`altrectcolor = "#C8C8C8"` &mdash; color of darker background rectangle
+
+`nullcolor = "#E6E6E6"` &mdash; color for pixels with null values
+
+`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
+
+`chrlinewidth = 2` &mdash; width of lines between chromosomes
+
+`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
+
+`zlim = NULL` &mdash; z-axis limits
+
+`zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
+
+`xlab = NULL` &mdash; x-axis label for LOD heatmap)
+
+`ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
+
+`zlab = "LOD score"` &mdash; z-axis label for LOD heatmap (really just used as y-axis label in the two slices)
+
+`linecolor = "darkslateblue"` &mdash; color of LOD curves
+
+`linewidth = 2` &mdash; width of LOD curves
+
+`pointsize = 0` &mdash; size of points in vertical slice (default = 0 corresponds plotting curves rather than points)
+
+`pointcolor = "slateblue"` &mdash; color of points in vertical slice
+
+`pointcolorhilit = "crimson"` &mdash; color of highlighted point in vertical slice
+
+`pointstroke = "black"` &mdash; color of outer circle for points in vertical slice
+
+`nxticks = 5` &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale
+
+`xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale
+
 ### `iplotMScanone` (with effects)
 
 `height = 700` &mdash; height of chart in pixels
@@ -445,64 +503,6 @@ stand-alone html files.)
 `xticks = NULL` &mdash; tick positions in x-axis for effect plot (right panel), if quantitative scale
 
 `lod_labels = NULL` &mdash; labels on the LOD score columns
-
-### `iplotMScanone` (no effects)
-
-`height = 700` &mdash; height of chart in pixels
-
-`width = 1000` &mdash; width of chart in pixels
-
-`title = ""` &mdash; title for chart
-
-`wleft = width*0.65` &mdash; width of left panels in pixels
-
-`htop = height/2` &mdash; height of top panels in pixels
-
-`margin = list(left=60, top=40, right=40, bottom=40, inner=0)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`chrGap = 6` &mdash; gap between chromosomes in pixels
-
-`rectcolor = "#E6E6E6"` &mdash; color of lighter background rectangle
-
-`altrectcolor = "#C8C8C8"` &mdash; color of darker background rectangle
-
-`nullcolor = "#E6E6E6"` &mdash; color for pixels with null values
-
-`chrlinecolor = ""` &mdash; color of lines between chromosomes (if "", leave off)
-
-`chrlinewidth = 2` &mdash; width of lines between chromosomes
-
-`colors = c("slateblue", "white", "crimson")` &mdash; heat map colors
-
-`zlim = NULL` &mdash; z-axis limits
-
-`zthresh = NULL` &mdash; lower z-axis threshold for display in heat map
-
-`xlab = NULL` &mdash; x-axis label for LOD heatmap)
-
-`ylab = ""` &mdash; y-axis label for LOD heatmap (also used as x-axis label on effect plot)
-
-`zlab = "LOD score"` &mdash; z-axis label for LOD heatmap (really just used as y-axis label in the two slices)
-
-`linecolor = "darkslateblue"` &mdash; color of LOD curves
-
-`linewidth = 2` &mdash; width of LOD curves
-
-`pointsize = 0` &mdash; size of points in vertical slice (default = 0 corresponds plotting curves rather than points)
-
-`pointcolor = "slateblue"` &mdash; color of points in vertical slice
-
-`pointcolorhilit = "crimson"` &mdash; color of highlighted point in vertical slice
-
-`pointstroke = "black"` &mdash; color of outer circle for points in vertical slice
-
-`nxticks = 5` &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale
-
-`xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale
 
 ### `iplotMap`
 
@@ -604,6 +604,48 @@ stand-alone html files.)
 
 `tipclass = "tooltip"` &mdash; class name for tool tips
 
+### `iplotScanone` (no effects)
+
+`height = 450` &mdash; height of image in pixels
+
+`width = 900` &mdash; width of image in pixels
+
+`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
+
+`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
+
+`titlepos = 20` &mdash; position of chart title in pixels
+
+`ylim = NULL` &mdash; y-axis limits
+
+`nyticks = 5` &mdash; number of ticks in y-axis
+
+`yticks = NULL` &mdash; vector of tick positions for y-axis
+
+`chrGap = 6` &mdash; gap between chromosomes in pixels
+
+`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
+
+`altrectcolor = "#C8C8C8"` &mdash; color of alternate background rectangle
+
+`linecolor = "darkslateblue"` &mdash; line color for LOD curves
+
+`linewidth = 2` &mdash; line width for LOD curves
+
+`pointcolor = "#E9CFEC"` &mdash; color for points at markers
+
+`pointsize = 0` &mdash; size of points at markers (default = 0 corresponding to no visible points at markers)
+
+`pointstroke = "black"` &mdash; color of outer circle for points at markers
+
+`title = ""` &mdash; title of chart
+
+`xlab = NULL` &mdash; x-axis label
+
+`ylab = "LOD score"` &mdash; y-axis label
+
+`rotate_ylab = NULL` &mdash; indicates whether to rotate the y-axis label 90 degrees
+
 ### `iplotScanone` (`pxgtype='ci'`)
 
 `height = 530` &mdash; height of image in pixels
@@ -669,48 +711,6 @@ stand-alone html files.)
 `eff_axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in effect plot panel
 
 `eff_titlepos = 20` &mdash; position of title for effect plot panel, in pixels
-
-### `iplotScanone` (no effects)
-
-`height = 450` &mdash; height of image in pixels
-
-`width = 900` &mdash; width of image in pixels
-
-`margin = list(left=60, top=40, right=40, bottom=40, inner=5)` &mdash; margins in pixels (left, top, right, bottom, inner)
-
-`axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)
-
-`titlepos = 20` &mdash; position of chart title in pixels
-
-`ylim = NULL` &mdash; y-axis limits
-
-`nyticks = 5` &mdash; number of ticks in y-axis
-
-`yticks = NULL` &mdash; vector of tick positions for y-axis
-
-`chrGap = 6` &mdash; gap between chromosomes in pixels
-
-`rectcolor = "#E6E6E6"` &mdash; color of background rectangle
-
-`altrectcolor = "#C8C8C8"` &mdash; color of alternate background rectangle
-
-`linecolor = "darkslateblue"` &mdash; line color for LOD curves
-
-`linewidth = 2` &mdash; line width for LOD curves
-
-`pointcolor = "#E9CFEC"` &mdash; color for points at markers
-
-`pointsize = 0` &mdash; size of points at markers (default = 0 corresponding to no visible points at markers)
-
-`pointstroke = "black"` &mdash; color of outer circle for points at markers
-
-`title = ""` &mdash; title of chart
-
-`xlab = NULL` &mdash; x-axis label
-
-`ylab = "LOD score"` &mdash; y-axis label
-
-`rotate_ylab = NULL` &mdash; indicates whether to rotate the y-axis label 90 degrees
 
 ### `iplotScanone` (`pxgtype='raw'`)
 

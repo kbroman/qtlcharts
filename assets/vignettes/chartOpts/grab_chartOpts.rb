@@ -111,7 +111,12 @@ def write_chartOpts (ofile, chartOpts, mvcomments)
 
     # sort the coffeescript files
     keys.sort! { |a,b|
-        if a==b and mvkeys.include?(a) and mvkeys.include?(b)
+        a =~ /^([^_]+)_*/
+        a_first = $1
+        b =~ /^([^_]+)_*/
+        b_first = $1
+
+        if a_first==b_first and mvkeys.include?(a) and mvkeys.include?(b)
         then mvkeys.find_index(a) <=> mvkeys.find_index(b)
         else a <=> b; end }
 

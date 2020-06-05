@@ -1712,6 +1712,37 @@ div.tocify {
 <p><code>scat2_xlab = &quot;X&quot;</code> — x-axis label for second scatterplot</p>
 <p><code>scat2_ylab = &quot;Y&quot;</code> — y-axis label for second scatterplot</p>
 </div>
+<div id="iplotmscanone-no-effects" class="section level3">
+<h3><code>iplotMScanone</code> (no effects)</h3>
+<p><code>height = 700</code> — height of chart in pixels</p>
+<p><code>width = 1000</code> — width of chart in pixels</p>
+<p><code>title = &quot;&quot;</code> — title for chart</p>
+<p><code>wleft = width*0.65</code> — width of left panels in pixels</p>
+<p><code>htop = height/2</code> — height of top panels in pixels</p>
+<p><code>margin = list(left=60, top=40, right=40, bottom=40, inner=0)</code> — margins in pixels (left, top, right, bottom, inner)</p>
+<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)</p>
+<p><code>titlepos = 20</code> — position of chart title in pixels</p>
+<p><code>chrGap = 6</code> — gap between chromosomes in pixels</p>
+<p><code>rectcolor = &quot;#E6E6E6&quot;</code> — color of lighter background rectangle</p>
+<p><code>altrectcolor = &quot;#C8C8C8&quot;</code> — color of darker background rectangle</p>
+<p><code>nullcolor = &quot;#E6E6E6&quot;</code> — color for pixels with null values</p>
+<p><code>chrlinecolor = &quot;&quot;</code> — color of lines between chromosomes (if &quot;&quot;, leave off)</p>
+<p><code>chrlinewidth = 2</code> — width of lines between chromosomes</p>
+<p><code>colors = c(&quot;slateblue&quot;, &quot;white&quot;, &quot;crimson&quot;)</code> — heat map colors</p>
+<p><code>zlim = NULL</code> — z-axis limits</p>
+<p><code>zthresh = NULL</code> — lower z-axis threshold for display in heat map</p>
+<p><code>xlab = NULL</code> — x-axis label for LOD heatmap)</p>
+<p><code>ylab = &quot;&quot;</code> — y-axis label for LOD heatmap (also used as x-axis label on effect plot)</p>
+<p><code>zlab = &quot;LOD score&quot;</code> — z-axis label for LOD heatmap (really just used as y-axis label in the two slices)</p>
+<p><code>linecolor = &quot;darkslateblue&quot;</code> — color of LOD curves</p>
+<p><code>linewidth = 2</code> — width of LOD curves</p>
+<p><code>pointsize = 0</code> — size of points in vertical slice (default = 0 corresponds plotting curves rather than points)</p>
+<p><code>pointcolor = &quot;slateblue&quot;</code> — color of points in vertical slice</p>
+<p><code>pointcolorhilit = &quot;crimson&quot;</code> — color of highlighted point in vertical slice</p>
+<p><code>pointstroke = &quot;black&quot;</code> — color of outer circle for points in vertical slice</p>
+<p><code>nxticks = 5</code> — no. ticks in x-axis on right-hand panel, if quantitative scale</p>
+<p><code>xticks = NULL</code> — tick positions in x-axis on right-hand panel, if quantitative scale</p>
+</div>
 <div id="iplotmscanone-with-effects" class="section level3">
 <h3><code>iplotMScanone</code> (with effects)</h3>
 <p><code>height = 700</code> — height of chart in pixels</p>
@@ -1746,37 +1777,6 @@ div.tocify {
 <p><code>nxticks = 5</code> — no. ticks in x-axis for effect plot (right panel), if quantitative scale</p>
 <p><code>xticks = NULL</code> — tick positions in x-axis for effect plot (right panel), if quantitative scale</p>
 <p><code>lod_labels = NULL</code> — labels on the LOD score columns</p>
-</div>
-<div id="iplotmscanone-no-effects" class="section level3">
-<h3><code>iplotMScanone</code> (no effects)</h3>
-<p><code>height = 700</code> — height of chart in pixels</p>
-<p><code>width = 1000</code> — width of chart in pixels</p>
-<p><code>title = &quot;&quot;</code> — title for chart</p>
-<p><code>wleft = width*0.65</code> — width of left panels in pixels</p>
-<p><code>htop = height/2</code> — height of top panels in pixels</p>
-<p><code>margin = list(left=60, top=40, right=40, bottom=40, inner=0)</code> — margins in pixels (left, top, right, bottom, inner)</p>
-<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)</p>
-<p><code>titlepos = 20</code> — position of chart title in pixels</p>
-<p><code>chrGap = 6</code> — gap between chromosomes in pixels</p>
-<p><code>rectcolor = &quot;#E6E6E6&quot;</code> — color of lighter background rectangle</p>
-<p><code>altrectcolor = &quot;#C8C8C8&quot;</code> — color of darker background rectangle</p>
-<p><code>nullcolor = &quot;#E6E6E6&quot;</code> — color for pixels with null values</p>
-<p><code>chrlinecolor = &quot;&quot;</code> — color of lines between chromosomes (if &quot;&quot;, leave off)</p>
-<p><code>chrlinewidth = 2</code> — width of lines between chromosomes</p>
-<p><code>colors = c(&quot;slateblue&quot;, &quot;white&quot;, &quot;crimson&quot;)</code> — heat map colors</p>
-<p><code>zlim = NULL</code> — z-axis limits</p>
-<p><code>zthresh = NULL</code> — lower z-axis threshold for display in heat map</p>
-<p><code>xlab = NULL</code> — x-axis label for LOD heatmap)</p>
-<p><code>ylab = &quot;&quot;</code> — y-axis label for LOD heatmap (also used as x-axis label on effect plot)</p>
-<p><code>zlab = &quot;LOD score&quot;</code> — z-axis label for LOD heatmap (really just used as y-axis label in the two slices)</p>
-<p><code>linecolor = &quot;darkslateblue&quot;</code> — color of LOD curves</p>
-<p><code>linewidth = 2</code> — width of LOD curves</p>
-<p><code>pointsize = 0</code> — size of points in vertical slice (default = 0 corresponds plotting curves rather than points)</p>
-<p><code>pointcolor = &quot;slateblue&quot;</code> — color of points in vertical slice</p>
-<p><code>pointcolorhilit = &quot;crimson&quot;</code> — color of highlighted point in vertical slice</p>
-<p><code>pointstroke = &quot;black&quot;</code> — color of outer circle for points in vertical slice</p>
-<p><code>nxticks = 5</code> — no. ticks in x-axis on right-hand panel, if quantitative scale</p>
-<p><code>xticks = NULL</code> — tick positions in x-axis on right-hand panel, if quantitative scale</p>
 </div>
 <div id="iplotmap" class="section level3">
 <h3><code>iplotMap</code></h3>
@@ -1832,6 +1832,29 @@ div.tocify {
 <p><code>yticks = NULL</code> — vector of tick positions on y-axis in LOD curve panels</p>
 <p><code>tipclass = &quot;tooltip&quot;</code> — class name for tool tips</p>
 </div>
+<div id="iplotscanone-no-effects" class="section level3">
+<h3><code>iplotScanone</code> (no effects)</h3>
+<p><code>height = 450</code> — height of image in pixels</p>
+<p><code>width = 900</code> — width of image in pixels</p>
+<p><code>margin = list(left=60, top=40, right=40, bottom=40, inner=5)</code> — margins in pixels (left, top, right, bottom, inner)</p>
+<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)</p>
+<p><code>titlepos = 20</code> — position of chart title in pixels</p>
+<p><code>ylim = NULL</code> — y-axis limits</p>
+<p><code>nyticks = 5</code> — number of ticks in y-axis</p>
+<p><code>yticks = NULL</code> — vector of tick positions for y-axis</p>
+<p><code>chrGap = 6</code> — gap between chromosomes in pixels</p>
+<p><code>rectcolor = &quot;#E6E6E6&quot;</code> — color of background rectangle</p>
+<p><code>altrectcolor = &quot;#C8C8C8&quot;</code> — color of alternate background rectangle</p>
+<p><code>linecolor = &quot;darkslateblue&quot;</code> — line color for LOD curves</p>
+<p><code>linewidth = 2</code> — line width for LOD curves</p>
+<p><code>pointcolor = &quot;#E9CFEC&quot;</code> — color for points at markers</p>
+<p><code>pointsize = 0</code> — size of points at markers (default = 0 corresponding to no visible points at markers)</p>
+<p><code>pointstroke = &quot;black&quot;</code> — color of outer circle for points at markers</p>
+<p><code>title = &quot;&quot;</code> — title of chart</p>
+<p><code>xlab = NULL</code> — x-axis label</p>
+<p><code>ylab = &quot;LOD score&quot;</code> — y-axis label</p>
+<p><code>rotate_ylab = NULL</code> — indicates whether to rotate the y-axis label 90 degrees</p>
+</div>
 <div id="iplotscanone-pxgtypeci" class="section level3">
 <h3><code>iplotScanone</code> (<code>pxgtype='ci'</code>)</h3>
 <p><code>height = 530</code> — height of image in pixels</p>
@@ -1866,29 +1889,6 @@ div.tocify {
 <p><code>eff_segwidth = NULL</code> — width of line segments in effect plot panel, in pixels</p>
 <p><code>eff_axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in effect plot panel</p>
 <p><code>eff_titlepos = 20</code> — position of title for effect plot panel, in pixels</p>
-</div>
-<div id="iplotscanone-no-effects" class="section level3">
-<h3><code>iplotScanone</code> (no effects)</h3>
-<p><code>height = 450</code> — height of image in pixels</p>
-<p><code>width = 900</code> — width of image in pixels</p>
-<p><code>margin = list(left=60, top=40, right=40, bottom=40, inner=5)</code> — margins in pixels (left, top, right, bottom, inner)</p>
-<p><code>axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)</code> — position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel)</p>
-<p><code>titlepos = 20</code> — position of chart title in pixels</p>
-<p><code>ylim = NULL</code> — y-axis limits</p>
-<p><code>nyticks = 5</code> — number of ticks in y-axis</p>
-<p><code>yticks = NULL</code> — vector of tick positions for y-axis</p>
-<p><code>chrGap = 6</code> — gap between chromosomes in pixels</p>
-<p><code>rectcolor = &quot;#E6E6E6&quot;</code> — color of background rectangle</p>
-<p><code>altrectcolor = &quot;#C8C8C8&quot;</code> — color of alternate background rectangle</p>
-<p><code>linecolor = &quot;darkslateblue&quot;</code> — line color for LOD curves</p>
-<p><code>linewidth = 2</code> — line width for LOD curves</p>
-<p><code>pointcolor = &quot;#E9CFEC&quot;</code> — color for points at markers</p>
-<p><code>pointsize = 0</code> — size of points at markers (default = 0 corresponding to no visible points at markers)</p>
-<p><code>pointstroke = &quot;black&quot;</code> — color of outer circle for points at markers</p>
-<p><code>title = &quot;&quot;</code> — title of chart</p>
-<p><code>xlab = NULL</code> — x-axis label</p>
-<p><code>ylab = &quot;LOD score&quot;</code> — y-axis label</p>
-<p><code>rotate_ylab = NULL</code> — indicates whether to rotate the y-axis label 90 degrees</p>
 </div>
 <div id="iplotscanone-pxgtyperaw" class="section level3">
 <h3><code>iplotScanone</code> (<code>pxgtype='raw'</code>)</h3>

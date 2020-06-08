@@ -57,14 +57,6 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
             corr.push({row:i, col:j, value:data.corr[i][j]})
 
 
-    corr_tip = d3.tip()
-                .attr('class', "d3-tip #{widgetdivid}")
-                .html((d) -> d3.format(".2f")(d.value))
-                .direction('e')
-                .offset([0,10])
-    corrplot.call(corr_tip)
-
-
     cells = corrplot.selectAll("empty")
                .data(corr)
                .enter().append("rect")
@@ -78,7 +70,6 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
                .attr("stroke-width", 2)
                .on("mouseover", (d) ->
                      d3.select(this).attr("stroke", "black")
-                     corr_tip.show(d)
                      corrplot.append("text").attr("class","corrlabel")
                              .attr("x", corXscale(d.col)+pixel_width/2)
                              .attr("y", panelheight+margin.bottom*0.2)
@@ -92,9 +83,12 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
                              .attr("dominant-baseline", "middle")
                              .attr("text-anchor", "end"))
                .on("mouseout", (d) ->
-                     corr_tip.hide(d)
                      d3.selectAll("text.corrlabel").remove()
                      d3.select(this).attr("stroke","none"))
+
+    corr_tip = d3panels.tooltip_create(d3.select(widgetdiv), cells,
+                                       {tipclass:widgetdivid},
+                                       (d) -> d3.format(".2f")(d.value))
 
     # boxes around panels
     corrplot.append("rect")

@@ -83,14 +83,6 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                .attr("stroke-width", 1)
                .attr("pointer-events", "none")
 
-    corr_tip = d3.tip()
-                .attr('class', "d3-tip #{widgetdivid}")
-                .html((d) -> d3.format(".2f")(d.value))
-                .direction('e')
-                .offset([0,10])
-    corrplot.call(corr_tip)
-
-
     cells = corrplot.selectAll("empty")
                .data(corr)
                .enter().append("rect")
@@ -104,7 +96,6 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                .attr("stroke-width", 2)
                .on("mouseover", (d) ->
                      d3.select(this).attr("stroke", "black")
-                     corr_tip.show(d)
                      corrplot.append("text").attr("class","corrlabel")
                              .attr("x", corXscale(d.col)+pixel_width/2)
                              .attr("y", panelheight+margin.bottom*0.2)
@@ -118,10 +109,13 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                              .attr("dominant-baseline", "middle")
                              .attr("text-anchor", "end"))
                .on("mouseout", (d) ->
-                     corr_tip.hide(d)
                      d3.selectAll("text.corrlabel").remove()
                      d3.select(this).attr("stroke","none"))
                .on("click",(d) -> drawScatter(d.col, d.row))
+
+    corr_tip = d3panels.tooltip_create(d3.select(widgetdiv), cells,
+                                       {tipclass:widgetdivid},
+                                       (d) -> d3.format(".2f")(d.value))
 
     # colors for scatterplot
     nGroup = d3.max(data.group)
@@ -139,13 +133,6 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
             else
                 colorScale = d3.schemeCategory20
             scatcolors = (colorScale[i] for i of d3.range(nGroup))
-
-    scat_tip = d3.tip()
-                .attr('class', "d3-tip #{widgetdivid}")
-                .html((d,i) -> data.indID[i])
-                .direction('e')
-                .offset([0,10])
-    scatterplot.call(scat_tip)
 
     drawScatter = (i,j) ->
         d3.selectAll("circle.points").remove()
@@ -223,7 +210,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                    .attr("stroke", "white")
                    .attr("stroke-width", 1)
         # the points
-        scatterplot.selectAll("empty")
+        points = scatterplot.selectAll("empty")
                    .data(d3.range(nind))
                    .enter()
                    .append("circle")
@@ -237,8 +224,10 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                    .attr("stroke", "black")
                    .attr("stroke-width", 1)
                    .attr("fill", (d) -> scatcolors[data.group[d]-1])
-                   .on("mouseover", scat_tip.show)
-                   .on("mouseout", scat_tip.hide)
+
+        scat_tip = d3panels.tooltip_create(d3.select(widgetdiv), points,
+                                       {tipclass: widgetdivid},
+                                       (d,i) -> data.indID[i])
 
     # boxes around panels
     corrplot.append("rect")

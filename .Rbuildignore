@@ -3,10 +3,7 @@
 \.Rhistory$
 \.Rprofile$
 ^Makefile$
-vignettes/chartOpt_vignette
 ^\.travis\.yml$
 ^js_deps
-^vignettes/make_vignette_index\.R$
 .babelrc
 node_modules
-package-lock.json

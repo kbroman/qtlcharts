@@ -74,7 +74,8 @@ $(LIB_DIR)/d3/%: $(BOWER_DIR)/d3/%
 # jquery
 jquery: $(LIB_DIR)/jquery/MIT-LICENSE.txt \
 		$(LIB_DIR)/jquery/dist/jquery.min.js \
-		$(LIB_DIR)/jquery/bower.json
+		$(LIB_DIR)/jquery/bower.json \
+		$(LIB_DIR)/jquery/README.md
 $(LIB_DIR)/jquery/%: $(BOWER_DIR)/jquery/%
 	cp $< $@
 
@@ -83,6 +84,7 @@ jqueryui: $(LIB_DIR)/jquery-ui/jquery-ui.min.js
 $(LIB_DIR)/jquery-ui/jquery-ui.min.js: $(BOWER_DIR)/jquery-ui/jquery-ui.min.js
 	cp $< $@
 	cp $(<D)/bower.json $(@D)/
+	cp $(<D)/README.md $(@D)/
 	cp $(<D)/themes/smoothness/*.* $(@D)/themes/smoothness/
 	cp $(<D)/themes/smoothness/images/*.* $(@D)/themes/smoothness/images/
 

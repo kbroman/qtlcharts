@@ -1,5 +1,7 @@
 ### [d3panels](https://kbroman.org/d3panels): D3-based graphic panels
 
+[![NPM badge](https://img.shields.io/npm/v/d3panels.svg)](https://npmjs.org/package/d3panels)
+
 [Karl W Broman](https://kbroman.org)
 
 This is a set of [D3](https://d3js.org)-based graphic panels, to
@@ -7,7 +9,8 @@ be combined into larger multi-panel charts.  They were developed for
 the [R/qtlcharts](https://kbroman.org/qtlcharts) package.
 
 Note that d3panels uses
-[D3 version 4](https://github.com/d3/d3/blob/master/API.md).
+[D3 version 5](https://github.com/d3/d3/blob/master/API.md).
+(It should also work with version 4.)
 
 There are other libraries with similar goals that are of more general
 use (e.g., [C3.js](https://c3js.org)); see
@@ -68,19 +71,10 @@ to `d3panels.min.js` and `d3panels.min.css`):
 <link rel=stylesheet type="text/css" href="https://rawgit.com/kbroman/d3panels/master/d3panels.css">
 ```
 
-You'll also want to link to [D3.js](https://d3js.org) and
-[d3-tip](https://github.com/Caged/d3-tip):
+You'll also want to link to [D3.js](https://d3js.org):
 
 ```html
-<script charset="utf-8" type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
-<script type="text/javascript" src="https://rawgit.com/Caged/d3-tip/master/index.js"></script>
-```
-
-For a couple of panels (`curvechart` and `scatterplot`) you may need
-to link to [colorbrewer.js](https://github.com/mbostock/d3/blob/master/lib/colorbrewer/colorbrewer.js):
-
-```html
-<script type="text/javascript" src="https://rawgit.com/mbostock/d3/master/lib/colorbrewer/colorbrewer.js"></script>
+<script charset="utf-8" type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
 ```
 
 
@@ -96,9 +90,7 @@ Then use npm to install [yarn](https://yarnpkg.com/en/), [coffeescript](https://
 npm install -g yarn coffeescript uglifycss uglify-js babel-core
 ```
 
-Then install the dependencies ([d3](https://d3js.org),
-[d3-tip](https://labratrevenge.com/d3-tip/), and
-[colorbrewer](https://github.com/jeanlauliac/colorbrewer):
+Then install the dependency ([d3](https://d3js.org):
 
 ```script
 yarn install
@@ -114,4 +106,4 @@ make
 #### License
 
 Licensed under the
-[MIT license](License.md). ([More information here](https://en.wikipedia.org/wiki/MIT_License).)
+[MIT license](LICENSE.md). ([More information here](https://en.wikipedia.org/wiki/MIT_License).)

@@ -6,7 +6,7 @@ dependencies:
       - d3.min.js
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 1.6.1
+    version: 1.6.2
     script:
       - d3panels.min.js
     style: d3panels.min.css

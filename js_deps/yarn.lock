@@ -14,8 +14,8 @@
   version "3.5.1"
   resolved "https://codeload.github.com/jquery/jquery-dist/tar.gz/4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
 
-d3panels@kbroman/d3panels#^1.6.1:
-  version "1.6.1"
-  resolved "https://codeload.github.com/kbroman/d3panels/tar.gz/1b45f671bc351050486ab115ebae41750d8a584b"
+d3panels@kbroman/d3panels#^1.6.2:
+  version "1.6.2"
+  resolved "https://codeload.github.com/kbroman/d3panels/tar.gz/472d328e9316d12183b786b314ee3b88f8c5cdea"
   dependencies:
     "@bower_components/d3" mbostock-bower/d3-bower#^5.16.0

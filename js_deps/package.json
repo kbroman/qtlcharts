@@ -8,7 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "@bower_components/d3": "mbostock-bower/d3-bower#^5.16.0",
-    "d3panels": "kbroman/d3panels#^1.6.1",
+    "d3panels": "kbroman/d3panels#^1.6.2",
     "@bower_components/jquery": "jquery/jquery-dist#^3.5.1",
     "@bower_components/jquery-ui": "components/jqueryui#^1.12.1"
   },

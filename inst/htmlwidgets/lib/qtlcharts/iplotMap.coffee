@@ -62,19 +62,8 @@ iplotMap = (widgetdiv, data, chartOpts) ->
     # code for marker search box for iplotMap
     ##############################
 
-    # create marker tip
-    martip = d3.tip()
-               .attr('class', "d3-tip #{widgetdivid}")
-               .html((d) ->
-                  pos = d3.format(".1f")(data.pos[data.marker.indexOf(d)])
-                  "#{d} (#{pos})")
-               .direction(() ->
-                   return 'n' if horizontal
-                   'e')
-               .offset(() ->
-                   return [-10,0] if horizontal
-                   [0,10])
-    svg.call(martip)
+    # marker tool tip
+    martip = mychart.martip()
 
     clean_marker_name = (markername) ->
         markername.replace(".", "\\.")
@@ -89,14 +78,25 @@ iplotMap = (widgetdiv, data, chartOpts) ->
         unless selectedMarker == ""
             div.select("line##{clean_marker_name(selectedMarker)}")
                .attr("stroke", linecolor)
-            martip.hide()
+            d3panels.tooltip_hide(martip)
 
         if newSelection != ""
             if data.marker.indexOf(newSelection) >= 0
                 selectedMarker = newSelection
                 line = div.select("line##{clean_marker_name(selectedMarker)}")
                           .attr("stroke", linecolorhilit)
-                martip.show(line.datum(), line.node())
+                # showmartip here
+                # activate marker tip here, location of line.node(), using data line.datum()
+                d = line.datum()
+                pos = d3.format(".1f")(data.pos[data.marker.indexOf(d)])
+
+                # get x,y position
+                xy_pos = d3panels.object_position(line)
+
+                d3panels.tooltip_text(martip, "#{d} (#{pos})")
+                d3panels.tooltip_move(martip, xy_pos.x, xy_pos.y)
+                d3panels.tooltip_show(martip)
+
                 div.select("a#currentmarker")
                    .text("")
                 return true
@@ -143,7 +143,6 @@ iplotMap = (widgetdiv, data, chartOpts) ->
             unless selectedMarker == d # de-highlight (if hovering over something other than the selected marker)
                 div.select("line##{clean_marker_name(selectedMarker)}")
                    .attr("stroke", linecolor)
-            martip.hide()
 
     if chartOpts.heading?
         d3.select("div#htmlwidget_container")

@@ -22,7 +22,7 @@ A set of [reusable graphics panels](https://kbroman.org/d3panels) form the basis
 for the larger visualizations.
 
 The package was recently updated for [D3](https://d3js.org)
-[version 4](https://github.com/d3/d3/blob/master/API.md). This new
+[version 5](https://github.com/d3/d3/blob/master/API.md). This new
 version is not yet on [CRAN](https://cran.r-project.org), but can be
 installed with [devtools](https://github.com/hadley/devtools), using
 `devtools::install_github("kbroman/qtlcharts")`.

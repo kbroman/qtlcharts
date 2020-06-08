@@ -21,7 +21,8 @@ HTMLWidgets.widget({
         # clear svg and remove tool tips
         svg.selectAll("*").remove()
         widgetid = d3.select(widgetdiv).attr('id')
-        d3.selectAll("div.d3-tip.#{widgetid}").remove()
+        d3.selectAll("div.d3panels-tooltip.#{widgetid}").remove()
+        d3.selectAll("div.d3panels-tooltip-tri.#{widgetid}").remove()
 
         chartOpts = x.chartOpts ? [ ]
         chartOpts.width = chartOpts?.width ? svg.attr("width")

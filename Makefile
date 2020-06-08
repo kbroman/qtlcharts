@@ -91,8 +91,8 @@ $(LIB_DIR)/jquery-ui/jquery-ui.min.js: $(BOWER_DIR)/jquery-ui/jquery-ui.min.js
 # d3panels
 d3panels: $(LIB_DIR)/d3panels/d3panels.min.js \
 		  $(LIB_DIR)/d3panels/d3panels.min.css \
-		  $(LIB_DIR)/d3panels/ReadMe.md \
-		  $(LIB_DIR)/d3panels/License.md \
+		  $(LIB_DIR)/d3panels/README.md \
+		  $(LIB_DIR)/d3panels/LICENSE.md \
 		  $(LIB_DIR)/d3panels/package.json \
 
 $(LIB_DIR)/d3panels/%: $(JSDEPS_DIR)/d3panels/%

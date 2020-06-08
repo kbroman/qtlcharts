@@ -1,8 +1,8 @@
 ## Bower to grab javascript libraries
 
 I use [yarn](https://yarnpkg.com) (a packaging system for javascript) to
-grab d3, colorbrewer, jquery, jquery-ui, d3-tip, and d3panels. The
-[`yarn/package.json`](https://github.com/kbroman/qtlcharts/tree/master/yarn/package.json)
+grab d3, jquery, jquery-ui, and d3panels. The
+[`js_deps/package.json`](https://github.com/kbroman/qtlcharts/tree/master/js_deps/package.json)
 file indicates the libraries (and minimal versions) to get.
 
 In the package

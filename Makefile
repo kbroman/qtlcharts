@@ -1,5 +1,5 @@
 all: jscharts jswidgets json doc libs longname
-.PHONY: all jscharts json doc clean libs d3, jquery, jqueryui, colorbrewer longname
+.PHONY: all jscharts json doc clean libs d3 jquery jqueryui longname
 
 PANEL_DIR = inst/htmlwidgets/lib/d3panels
 CHART_DIR = inst/htmlwidgets/lib/qtlcharts
@@ -60,47 +60,31 @@ $(WIDGET_DIR)/%.js: $(WIDGET_DIR)/%.coffee
 	cd $(^D);coffee $(COFFEE_ARGS) -b $(^F)
 
 #------------------------------------------------------------
-# d3, jquery, jquery-ui, colorbrewer, d3panels
-libs: d3 jquery jqueryui colorbrewer d3-tip d3panels
+# d3, jquery, jquery-ui, d3panels
+libs: d3 jquery jqueryui d3panels
 LIB_DIR = inst/htmlwidgets/lib
 JSDEPS_DIR = js_deps/node_modules
+BOWER_DIR = $(JSDEPS_DIR)/@bower_components
 
 # d3
 d3: $(LIB_DIR)/d3/d3.min.js $(LIB_DIR)/d3/LICENSE $(LIB_DIR)/d3/bower.json
-$(LIB_DIR)/d3/%: $(YARN_DIR)/d3/%
-	cp $< $@
-
-# colorbrewer
-colorbrewer: $(LIB_DIR)/colorbrewer/LICENSE \
-			 $(LIB_DIR)/colorbrewer/colorbrewer.js \
-			 $(LIB_DIR)/colorbrewer/colorbrewer.css \
-			 $(LIB_DIR)/colorbrewer/bower.json
-$(LIB_DIR)/colorbrewer/%: $(JSDEPS_DIR)/@bower_components/colorbrewer/%
+$(LIB_DIR)/d3/%: $(BOWER_DIR)/d3/%
 	cp $< $@
 
 # jquery
 jquery: $(LIB_DIR)/jquery/MIT-LICENSE.txt \
 		$(LIB_DIR)/jquery/dist/jquery.min.js \
 		$(LIB_DIR)/jquery/bower.json
-$(LIB_DIR)/jquery/%: $(JSDEPS_DIR)/@bower_components/jquery/%
+$(LIB_DIR)/jquery/%: $(BOWER_DIR)/jquery/%
 	cp $< $@
 
 # jquery-ui
 jqueryui: $(LIB_DIR)/jquery-ui/jquery-ui.min.js
-$(LIB_DIR)/jquery-ui/jquery-ui.min.js: $(JSDEPS_DIR)/@bower_components/jquery-ui/jquery-ui.min.js
+$(LIB_DIR)/jquery-ui/jquery-ui.min.js: $(BOWER_DIR)/jquery-ui/jquery-ui.min.js
 	cp $< $@
 	cp $(<D)/bower.json $(@D)/
 	cp $(<D)/themes/smoothness/*.* $(@D)/themes/smoothness/
 	cp $(<D)/themes/smoothness/images/*.* $(@D)/themes/smoothness/images/
-
-# d3-tip
-d3-tip: $(LIB_DIR)/d3-tip/bower.json \
-		$(LIB_DIR)/d3-tip/LICENSE \
-		$(LIB_DIR)/d3-tip/index-min.js
-$(LIB_DIR)/d3-tip/%: $(JSDEPS_DIR)/@bower_components/d3-tip/%
-	cp $< $@
-$(LIB_DIR)/d3-tip/index-min.js: $(JSDEPS_DIR)/@bower_components/d3-tip/index.js
-	uglifyjs $< -o $@
 
 # d3panels
 d3panels: $(LIB_DIR)/d3panels/d3panels.min.js \
@@ -108,8 +92,6 @@ d3panels: $(LIB_DIR)/d3panels/d3panels.min.js \
 		  $(LIB_DIR)/d3panels/ReadMe.md \
 		  $(LIB_DIR)/d3panels/License.md \
 		  $(LIB_DIR)/d3panels/package.json \
-		  $(JSDEPS_DIR)/d3panels/node_modules \
-		  $(JSDEPS_DIR)/d3panels/node_modules/@bower_components
 
 $(LIB_DIR)/d3panels/%: $(JSDEPS_DIR)/d3panels/%
 	cp $< $@

@@ -1,16 +1,10 @@
 Package: qtlcharts
-Version: 0.12-6
-Date: 2020-06-05
+Version: 0.12-7
+Date: 2020-06-08
 Title: Interactive Graphics for QTL Experiments
 Author: Karl W Broman [aut, cre] (<https://orcid.org/0000-0002-4914-6671>),
     Michael Bostock [ctb, cph] (d3.js library in htmlwidgets/lib,
-    https://d3js.org), Justin Palmer [ctb, cph] (d3.tip library in
-    htmlwidgets/lib, https://github.com/caged/d3-tip), Cynthia Brewer
-    [cph] (ColorBrewer library in htmlwidgets/lib,
-    http://colorbrewer2.org), Mark Harrower [cph] (ColorBrewer library
-    in htmlwidgets/lib, http://colorbrewer2.org), The Pennsylvania
-    State University [cph] (ColorBrewer library in htmlwidgets/lib,
-    http://colorbrewer2.org), jQuery Foundation [cph] (jQuery library
+    https://d3js.org), jQuery Foundation [cph] (jQuery library
     in htmlwidgets/lib, https://jquery.com), jQuery contributors [ctb]
     (jQuery library in htmlwidgets/lib; see
     https://github.com/jquery/jquery/blob/master/AUTHORS.txt), jQuery
@@ -49,14 +43,6 @@ Authors@R: c(
            comment=c(ORCID = "0000-0002-4914-6671")),
     person("Michael", "Bostock", role=c("ctb", "cph"),
            comment="d3.js library in htmlwidgets/lib, https://d3js.org"),
-    person("Justin", "Palmer", role=c("ctb", "cph"),
-           comment="d3.tip library in htmlwidgets/lib, https://github.com/caged/d3-tip"),
-    person("Cynthia", "Brewer", role="cph",
-           comment="ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org"),
-    person("Mark", "Harrower", role="cph",
-           comment="ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org"),
-    person("The Pennsylvania State University", role="cph",
-           comment="ColorBrewer library in htmlwidgets/lib, http://colorbrewer2.org"),
     person("jQuery Foundation", role="cph",
            comment="jQuery library in htmlwidgets/lib, https://jquery.com"),
     person("jQuery contributors", role = "ctb",

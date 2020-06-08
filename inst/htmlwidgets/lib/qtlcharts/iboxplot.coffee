@@ -190,13 +190,6 @@ iboxplot = (widgetdiv, data, chartOpts) ->
            .attr("pointer-events", "none")
            .attr("fill", "none")
 
-    indtip = d3.tip()
-               .attr('class', "d3-tip #{widgetdivid}")
-               .html((d) -> d)
-               .direction('e')
-               .offset([0,10])
-    svg.call(indtip)
-
     # vertical rectangles representing each array
     indRectGrp = svg.append("g").attr("id", "indRect")
 
@@ -214,17 +207,6 @@ iboxplot = (widgetdiv, data, chartOpts) ->
                        .attr("stroke", "none")
                        .attr("opacity", "0")
                        .attr("pointer-events", "none")
-
-    circles = svg.selectAll("empty")
-                 .data(indindex)
-                 .enter()
-                 .append("circle")
-                 .attr("cx", (d) -> xScale(d) - recWidth/2)
-                 .attr("cy", (d) -> yScale(data.quant[(nQuant-1)/2][d]))
-                 .attr("id", (d,i) -> "hiddenpoint#{i}")
-                 .attr("r", 1)
-                 .attr("opacity", 0)
-                 .attr("pointer-events", "none")
 
     # vertical rectangles representing each array
     longRectGrp = svg.append("g").attr("id", "longRect")
@@ -352,10 +334,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
                      d3.select("#histline")
                        .datum(data.counts[d])
                        .attr("d", histline)
-                     circle = d3.select("circle#hiddenpoint#{i}")
-                     indtip.show(data.ind[i], circle.node())
             .on "mouseout", (d) ->
-                     indtip.hide()
                      if !clickStatus[d]
                          d3.select("rect#rect#{data.ind[d]}").attr("opacity", "0")
 
@@ -377,6 +356,9 @@ iboxplot = (widgetdiv, data, chartOpts) ->
                                      .attr("stroke-width", "2")
                      else
                          d3.select("path#path#{data.ind[d]}").remove()
+
+    tooltip = d3panels.tooltip_create(d3.select(widgetdiv), indRectGrp.selectAll("rect"),
+                                      {tipclass:widgetdivid}, (d) -> d)
 
     # box around the outside
     lowsvg.append("rect")

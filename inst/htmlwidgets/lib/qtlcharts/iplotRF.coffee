@@ -212,8 +212,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                                           create_scan(rf_data.marker.indexOf(newmarker), 1-panelindex)
 
     # change the cell tip info
-    mylodheatmap.celltip()
-                .html((d) ->
+    d3panels.tooltip_text(mylodheatmap.celltip(), (d) ->
                         mari = rf_data.marker[d.xindex]
                         marj = rf_data.marker[d.yindex]
                         if +d.xindex > +d.yindex                # +'s ensure number not string

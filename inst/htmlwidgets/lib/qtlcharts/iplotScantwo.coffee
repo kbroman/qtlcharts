@@ -171,8 +171,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
 
     # function to add tool tips and handle clicking
     add_cell_tooltips = () ->
-        mylod2dheatmap.celltip()
-                      .html((d) ->
+        d3panels.tooltip_text(mylod2dheatmap.celltip(), (d) ->
                             mari = scantwo_data.marker[d.xindex]
                             marj = scantwo_data.marker[d.yindex]
                             if +d.xindex > +d.yindex                # +'s ensure number not string

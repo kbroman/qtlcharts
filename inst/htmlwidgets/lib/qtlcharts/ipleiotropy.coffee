@@ -212,9 +212,9 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
                 if g < 0 then "(#{glab})" else "#{glab}")
 
             if v[0] > v[1] # make sure the genotypes show in the right order
-                indtip.html((d,i) -> "#{pxg_data.indID[i]}: #{g2_lab[i]}&rarr;#{g1_lab[i]}")
+                d3panels.tooltip_text(indtip, (d,i) -> "#{pxg_data.indID[i]}: #{g2_lab[i]}&rarr;#{g1_lab[i]}")
             else
-                indtip.html((d,i) -> "#{pxg_data.indID[i]}: #{g1_lab[i]}&rarr;#{g2_lab[i]}")
+                d3panels.tooltip_text(indtip, (d,i) -> "#{pxg_data.indID[i]}: #{g1_lab[i]}&rarr;#{g2_lab[i]}")
 
             if lod_data.lod?
                 lod_points.attr("cx", (d,i) -> mylodchart.xscale()[lod_data.chr[0]](marker_pos[v[i]]))

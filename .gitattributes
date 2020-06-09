@@ -1,1 +1,5 @@
-*.js linguist-detectable=false
+*.js linguist-generated
+inst/htmlwidgets/lib/d3/* linguist-vendored
+inst/htmlwidgets/lib/jquery-ui/* linguist-vendored
+inst/htmlwidgets/lib/jquery/* linguist-vendored
+man/* linguist-generated

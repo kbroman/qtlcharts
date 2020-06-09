@@ -13,10 +13,7 @@ R/qtlcharts is written in
 [R](https://www.r-project.org) and
 [CoffeeScript](https://coffeescript.org), making use of the JavaScript
 libraries [D3](https://d3js.org),
-[d3-tip](https://github.com/caged/d3-tip),
-[jQuery](https://jquery.com), and [jQueryUI](https://jqueryui.com),
-as well as
-[ColorBrewer](http://colorbrewer2.org).
+[jQuery](https://jquery.com), and [jQueryUI](https://jqueryui.com).
 
 The aim of this guide is to explain the basic strategy of the package
 and the organization of the code, in the hope that others may wish to
@@ -46,9 +43,8 @@ directory anymore.)
 The JavaScript libraries are located in subdirectories of
 [`inst/htmlwidgets/lib`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib).
 This includes [D3](https://d3js.org),
-[d3-tip](https://github.com/caged/d3-tip),
-[jQuery](https://jquery.com), [jQueryUI](https://jqueryui.com), and
-[ColorBrewer](http://colorbrewer2.org), as well as a set of basic
+[jQuery](https://jquery.com), and [jQueryUI](https://jqueryui.com),
+as well as a set of basic
 graphic panels, [d3panels](https://kbroman.org/d3panels).
 
 The key functions that form the higher-level QTL visualizations are in
@@ -225,13 +221,13 @@ inspected individually by eye.
 
 ## Licenses
 
-Licensed under the
-[MIT license](LICENSE). ([More information here](https://en.wikipedia.org/wiki/MIT_License).)
+The R/qtlcharts package as a whole is distributed under
+[GPL-3 (GNU General Public License version 3)](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
-R/qtlcharts incorporates
+R/qtlcharts incorporates the following other open source software
+components, which have their own license agreements.
 
-- [D3.js](https://d3js.org) [[license](inst/htmlwidgets/lib/d3/LICENSE)]
-- [d3.tip](https://github.com/Caged/d3-tip) [[license](inst/htmlwidgets/lib/d3-tip/LICENSE)]
-- [ColorBrewer](http://colorbrewer2.org) [[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)]
-- [jQuery](https://jquery.com) [[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)]
-- [jQuery UI](https://jqueryui.com/) [[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)]
+- [D3.js](https://d3js.org) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3/LICENSE)\]
+- [jQuery](https://jquery.com) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)\]
+- [jQuery UI](https://jqueryui.com/) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
+- [d3panels](https://github.com/kbroman/d3panels) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3panels/LICENSE.md)\]

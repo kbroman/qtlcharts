@@ -72,7 +72,7 @@ $(LIB_DIR)/d3/%: $(BOWER_DIR)/d3/%
 	cp $< $@
 
 # jquery
-jquery: $(LIB_DIR)/jquery/MIT-LICENSE.txt \
+jquery: $(LIB_DIR)/jquery/LICENSE.txt \
 		$(LIB_DIR)/jquery/dist/jquery.min.js \
 		$(LIB_DIR)/jquery/bower.json \
 		$(LIB_DIR)/jquery/README.md

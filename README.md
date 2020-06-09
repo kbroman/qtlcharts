@@ -90,5 +90,5 @@ components, which have their own license agreements.
 
 - [D3.js](https://d3js.org) \[[license](inst/htmlwidgets/lib/d3/LICENSE)\]
 - [jQuery](https://jquery.com) \[[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)\]
-- [jQuery UI](https://jqueryui.com/) \[[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
+- [jQuery UI](https://jqueryui.com/) \[[license](https://github.com/jquery/jquery-ui/blob/master/LICENSE.txt)
 - [d3panels](https://kbroman.org/d3panels) \[[license](inst/htmlwidgets/lib/d3panels/LICENSE.md)\]

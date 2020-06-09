@@ -7,3 +7,4 @@
 ^js_deps
 .babelrc
 node_modules
+^\.gitattributes$

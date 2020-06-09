@@ -89,6 +89,6 @@ R/qtlcharts incorporates the following other open source software
 components, which have their own license agreements.
 
 - [D3.js](https://d3js.org) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3/LICENSE)\]
-- [jQuery](https://jquery.com) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)\]
+- [jQuery](https://jquery.com) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery/LICENSE.txt)\]
 - [jQuery UI](https://jqueryui.com/) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
 - [d3panels](https://github.com/kbroman/d3panels) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3panels/LICENSE.md)\]

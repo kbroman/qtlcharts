@@ -88,9 +88,7 @@ The R/qtlcharts package as a whole is distributed under
 R/qtlcharts incorporates the following other open source software
 components, which have their own license agreements.
 
-- [D3.js](https://d3js.org) \[[license](inst/htmlwidgets/lib/d3/LICENSE)\]
-- [d3.tip](https://github.com/Caged/d3-tip) \[[license](inst/htmlwidgets/lib/d3-tip/LICENSE)\]
-- [ColorBrewer](http://colorbrewer2.org) \[[license](inst/htmlwidgets/lib/colorbrewer/LICENSE)\]
-- [jQuery](https://jquery.com) \[[license](inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)\]
-- [jQuery UI](https://jqueryui.com/) \[[license](inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
-- [d3panels](https://github.com/kbroman/d3panels) \[[license](inst/htmlwidgets/lib/d3panels/License.md)\]
+- [D3.js](https://d3js.org) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3/LICENSE)\]
+- [jQuery](https://jquery.com) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery/MIT-LICENSE.txt)\]
+- [jQuery UI](https://jqueryui.com/) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
+- [d3panels](https://github.com/kbroman/d3panels) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3panels/LICENSE.md)\]

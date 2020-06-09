@@ -2,7 +2,7 @@
 # For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink: /:categories/:year/:month/:day/:title
 
-exclude: [".rvmrc", ".rbenv-version", "ReadMe.md", "Rakefile", "changelog.md", "Makefile", "License.md", "example/R", "Gemfile", "Gemfile.lock", "*.Rmd"]
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "Makefile", "LICENSE.md", "example/R", "Gemfile", "Gemfile.lock", "*.Rmd"]
 highlighter: rouge
 
 # Themes are encouraged to use these universal variables

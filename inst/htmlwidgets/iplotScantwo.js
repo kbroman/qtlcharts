@@ -15,8 +15,7 @@ HTMLWidgets.widget({
 
     svg.selectAll("*").remove();
     widgetid = d3.select(widgetdiv).attr('id');
-    d3.selectAll("div.d3panels-tooltip." + widgetid).remove();
-    d3.selectAll("div.d3panels-tooltip-tri." + widgetid).remove();
+    d3.selectAll("g.d3panels-tooltip." + widgetid).remove();
     chartOpts = (ref = x.chartOpts) != null ? ref : {};
     chartOpts.width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : svg.attr("width");
     chartOpts.height = (ref2 = chartOpts != null ? chartOpts.height : void 0) != null ? ref2 : +svg.attr("height") + 24; // 24 = form height

@@ -358,7 +358,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
                          d3.select("path#path#{data.ind[d]}").remove()
 
     tooltip = d3panels.tooltip_create(d3.select(widgetdiv), indRectGrp.selectAll("rect"),
-                                      {tipclass:widgetdivid}, (d) -> d)
+                                      {tipclass:widgetdivid}, (d) -> data.ind[d])
 
     # box around the outside
     lowsvg.append("rect")

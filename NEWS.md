@@ -1,19 +1,22 @@
-## qtlcharts 0.12-6 (2020-06-05)
+## qtlcharts 0.12-8 (2020-06-15)
 
-- `itriplot()` will take labels from the column names of the
-  probabilities, `p`.  Also has an option for grid lines.
+- Replaced use of [d3-tip](https://github.com/Caged/d3-tip) with
+  custom tool tips, and upgraded to [D3 version 5](https://d3js.org).
 
-- Allow `title` as chart option in `iplotMScanone()`,
+- `itriplot()` will now take labels from the column names of the
+  probabilities, `p`. Also has an option for grid lines.
+
+- Allowed `title` as chart option in `iplotMScanone()`,
   `iplotScanone()`, `iheatmap()`.
 
-- Add `scat_title` chart option to `ipleiotropy()`, for a title on the
+- Added `scat_title` chart option to `ipleiotropy()`, for a title on the
   scatterplot panel.
 
-- Fill in some missing text in the help info for `iplotMScanone()`.
+- Filled in some missing text in the help info for `iplotMScanone()`.
 
-- Convert documentation to markdown.
+- Converted documentation to markdown.
 
-- Fix use of `class()`, replacing constructions like `"cross" %in% class(object)`
+- Fixed use of `class()`, replacing constructions like `"cross" %in% class(object)`
   with `inherits(object, "cross")`.
 
 

@@ -279,7 +279,7 @@ iboxplot = function iboxplot(widgetdiv, data, chartOpts) {
   tooltip = d3panels.tooltip_create(d3.select(widgetdiv), indRectGrp.selectAll("rect"), {
     tipclass: widgetdivid
   }, function (d) {
-    return d;
+    return data.ind[d];
   }); // box around the outside
 
   lowsvg.append("rect").attr("x", margin.left).attr("y", margin.top).attr("height", halfheight - margin.bottom - margin.top).attr("width", width - margin.left - margin.right).attr("stroke", "black").attr("stroke-width", 2).attr("fill", "none");

@@ -8,7 +8,7 @@ output:
 
 There are a number of ways in which one may wish to customize the
 interactive graphs produced by
-[R/qtlcharts](https://kbroman.org/qtlcharts), such as different
+[R/qtlcharts](https://kbroman.org/qtlcharts/), such as different
 colors or axis labels. Our main approach to allow such customization
 is through a function argument, `chartOpts`.
 

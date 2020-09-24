@@ -6,7 +6,7 @@ output:
     toc_float: yes
 ---
 
-[R/qtlcharts](https://kbroman.org/qtlcharts) is an
+[R/qtlcharts](https://kbroman.org/qtlcharts/) is an
 [R](https://www.r-project.org) package to create interactive charts for
 QTL data, for use with [R/qtl](https://rqtl.org).
 R/qtlcharts is written in
@@ -29,7 +29,7 @@ contains the current development version, while the
 [`master` branch](https://github.com/kbroman/qtlcharts/tree/master)
 contains the stable version.
 
-R/qtlcharts uses [htmlwidgets](http://www.htmlwidgets.org) as the
+R/qtlcharts uses [htmlwidgets](https://www.htmlwidgets.org) as the
 basic driver for the construction of interactive graphs: It creates an
 html file with links to the necessary resources and opens it in a
 browser.
@@ -45,7 +45,7 @@ The JavaScript libraries are located in subdirectories of
 This includes [D3](https://d3js.org),
 [jQuery](https://jquery.com), and [jQueryUI](https://jqueryui.com),
 as well as a set of basic
-graphic panels, [d3panels](https://kbroman.org/d3panels).
+graphic panels, [d3panels](https://kbroman.org/d3panels/).
 
 The key functions that form the higher-level QTL visualizations are in
 [`inst/htmlwidgets/lib/qtlcharts`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/qtlcharts). Each
@@ -102,7 +102,7 @@ corresponding function in
 [`inst/htmlwidgets/lib/qtlcharts`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/qtlcharts).
 
 Those qtlcharts functions then call various
-[d3panels](https://kbroman.org/d3panels) functions (which create the
+[d3panels](https://kbroman.org/d3panels/) functions (which create the
 individual panels) and sets up the interactions among the panels (for
 example, that clicking on a point in one panel causes a change to
 another panel).
@@ -192,7 +192,7 @@ in the R code are converted to the R manual page format with the
 
 For further information on Roxygen2, see
 [Object documentation](http://r-pkgs.had.co.nz/man.html)
-in [Hadley Wickham](http://had.co.nz/)'s [R packages](http://r-pkgs.had.co.nz/) book,
+in [Hadley Wickham](https://hadley.nz)'s [R packages](https://r-pkgs.org) book,
 or the [Roxygen2 vignettes](https://cran.r-project.org/package=roxygen2), such as
 [Getting started with Roxygen2](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
 and
@@ -202,12 +202,12 @@ and
 
 It is tricky to test graphics, and particularly interactive
 graphics. The basic panel functions in
-[d3panels](https://kbroman.org/d3panels) are tested separately; see
+[d3panels](https://kbroman.org/d3panels/) are tested separately; see
 [its GitHub repository](https://github.com/kbroman/d3panels).
 
 Tests of some of the R utility functions are in
 [`tests/testthat`](https://github.com/kbroman/qtlcharts/tree/master/tests/testthat). We're
-using the R package [testthat](https://github.com/hadley/testthat).
+using the R package [testthat](https://github.com/r-lib/testthat).
 
 We also generate a couple of tests for each of the higher-level chart
 functions: in the usual simple way (see

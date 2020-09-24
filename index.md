@@ -10,7 +10,7 @@ description: R/qtlcharts is an R package to create interactive charts for quanti
 
 R/qtlcharts is an [R](https://www.r-project.org) package to create
 interactive charts for QTL data, for use
-with [R/qtl](http://rqtl.org).
+with [R/qtl](https://rqtl.org).
 
 A QTL is a _quantitative trait locus_: a genetic locus that
 contributes to variation in a quantitative trait. The
@@ -21,24 +21,24 @@ The interactive visualizations are built with the JavaScript library
 [D3](https://d3js.org), and are viewed in a web browser. We are
 targeting Chrome and Safari and, as much as possible, Firefox.
 
-A set of [reusable graphics panels](https://kbroman.org/d3panels) form the basis
+A set of [reusable graphics panels](https://kbroman.org/d3panels/) form the basis
 for the larger visualizations.
 
 The package was recently updated for [D3](https://d3js.org)
 [version 5](https://github.com/d3/d3/blob/master/API.md). This new
 version is not yet on [CRAN](https://cran.r-project.org), but can be
-installed with [devtools](https://github.com/hadley/devtools), using
+installed with [devtools](https://github.com/r-lib/devtools), using
 `devtools::install_github("kbroman/qtlcharts")`.
 
 To cite R/qtlcharts in publications, please use
-[Broman KW (2015) R/qtlcharts: interactive graphics for quantitative trait locus mapping. Genetics 199:359-361](https://www.ncbi.nlm.nih.gov/pubmed/25527287).
+[Broman KW (2015) R/qtlcharts: interactive graphics for quantitative trait locus mapping. Genetics 199:359-361](https://pubmed.ncbi.nlm.nih.gov/25527287/).
 
 ---
 
 - [Installation](pages/installation.html)
 - [User guide](assets/vignettes/userGuide.html)
 - [Developer guide](assets/vignettes/develGuide.html)
-- [d3panels](https://kbroman.org/d3panels): reusable graphic panels
+- [d3panels](https://kbroman.org/d3panels/): reusable graphic panels
 - [Use with R Markdown](assets/vignettes/Rmarkdown.html) [[Rmd source](https://github.com/kbroman/qtlcharts/blob/master/vignettes/Rmarkdown.Rmd)]
 - [List of chart customization options](assets/vignettes/chartOpts.html)
 

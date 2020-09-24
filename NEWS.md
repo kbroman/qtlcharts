@@ -1,4 +1,4 @@
-## qtlcharts 0.12-9 (2020-09-24)
+## qtlcharts 0.12-10 (2020-09-24)
 
 - Replaced use of [d3-tip](https://github.com/Caged/d3-tip) with
   custom tool tips, and upgraded to [D3 version 5](https://d3js.org).

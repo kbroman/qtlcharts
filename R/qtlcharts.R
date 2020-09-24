@@ -2,12 +2,12 @@
 #'
 #' A QTL is a *quantitative trait locus*: a genetic locus that
 #' contributes to variation in a quantitative trait. The goal of
-#' [R/qtlcharts](https://kbroman.org/qtlcharts) is to provide
+#' [R/qtlcharts](https://kbroman.org/qtlcharts/) is to provide
 #' interactive data visualizations for QTL analyses, and to make these
 #' visualizations available from R. It is a companion to the
-#' [R/qtl](http://rqtl.org) package.
+#' [R/qtl](https://rqtl.org) package.
 #'
-#' Vignettes online at the [R/qtlcharts website](https://kbroman.org/qtlcharts):
+#' Vignettes online at the [R/qtlcharts website](https://kbroman.org/qtlcharts/):
 #'
 #' - [User guide](https://kbroman.org/qtlcharts/assets/vignettes/userGuide.html)
 #' - [Developer guide](https://kbroman.org/qtlcharts/assets/vignettes/develGuide.html)

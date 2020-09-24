@@ -4,7 +4,7 @@ output: html_document
 ---
 
 This document serves to test the
-[R/qtlcharts](https://kbroman.org/qtlcharts) function `idotplot`.
+[R/qtlcharts](https://kbroman.org/qtlcharts/) function `idotplot`.
 
 ```{r load_pkg, message=FALSE}
 set.seed(69891250)

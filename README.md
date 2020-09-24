@@ -5,14 +5,14 @@
 
 [Karl W Broman](https://kbroman.org)
 
-[R/qtlcharts](https://kbroman.org/qtlcharts) is an [R](https://www.r-project.org) package to create
+[R/qtlcharts](https://kbroman.org/qtlcharts/) is an [R](https://www.r-project.org) package to create
 interactive charts for QTL data, for use
-with [R/qtl](http://rqtl.org). \[[website](https://kbroman.org/qtlcharts)\]
+with [R/qtl](https://rqtl.org). \[[website](https://kbroman.org/qtlcharts/)\]
 
 It is built with [D3](https://d3js.org), using a set of reusable
-panels (also available separately, as [d3panels](https://kbroman.org/d3panels)).
+panels (also available separately, as [d3panels](https://kbroman.org/d3panels/)).
 
-For example charts, see the [R/qtlcharts website](https://kbroman.org/qtlcharts).
+For example charts, see the [R/qtlcharts website](https://kbroman.org/qtlcharts/).
 
 #### Installation
 
@@ -24,16 +24,16 @@ install.packages("qtlcharts")
 
 Alternatively, install it from its
 [GitHub repository](https://github.com/kbroman/qtlcharts). You first need to
-install the [R/qtl](http://rqtl.org),
-[htmlwidgets](http://www.htmlwidgets.org),
-and [devtools](https://github.com/hadley/devtools) packages.
+install the [R/qtl](https://rqtl.org),
+[htmlwidgets](https://www.htmlwidgets.org),
+and [devtools](https://github.com/r-lib/devtools) packages.
 
 ```r
 install.packages(c("qtl", "htmlwidgets", "devtools"))
 ```
 
 Then install R/qtlcharts using the `install_github` function in the
-[devtools](https://github.com/hadley/devtools) package.
+[devtools](https://github.com/r-lib/devtools) package.
 
 ```r
 library(devtools)
@@ -88,7 +88,7 @@ The R/qtlcharts package as a whole is distributed under
 R/qtlcharts incorporates the following other open source software
 components, which have their own license agreements.
 
-- [D3.js](https://d3js.org) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3/LICENSE)\]
-- [jQuery](https://jquery.com) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery/LICENSE.txt)\]
-- [jQuery UI](https://jqueryui.com/) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
-- [d3panels](https://github.com/kbroman/d3panels) \[[license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3panels/LICENSE.md)\]
+- [D3.js](https://d3js.org) \[[license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/d3/LICENSE)\]
+- [jQuery](https://jquery.com) \[[license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/jquery/LICENSE.txt)\]
+- [jQuery UI](https://jqueryui.com/) \[[license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
+- [d3panels](https://kbroman.org/d3panels/) \[[license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/d3panels/LICENSE.md)\]

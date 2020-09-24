@@ -4,7 +4,7 @@ output: html_document
 ---
 
 This document serves to test the
-[R/qtlcharts](https://kbroman.org/qtlcharts) function `iplotMScanone`.
+[R/qtlcharts](https://kbroman.org/qtlcharts/) function `iplotMScanone`.
 
 ```{r load_data, message=FALSE}
 knitr::opts_chunk$set(fig.width=9, fig.height=6)

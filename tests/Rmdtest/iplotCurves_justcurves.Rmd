@@ -4,7 +4,7 @@ output: html_document
 ---
 
 This document serves to test the
-[R/qtlcharts](https://kbroman.org/qtlcharts) function `iplotCurves`.
+[R/qtlcharts](https://kbroman.org/qtlcharts/) function `iplotCurves`.
 This one has a plot with just curves.
 
 ```{r load_data, message=FALSE}

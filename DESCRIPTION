@@ -1,6 +1,6 @@
 Package: qtlcharts
-Version: 0.12-8
-Date: 2020-06-15
+Version: 0.12-9
+Date: 2020-09-24
 Title: Interactive Graphics for QTL Experiments
 Author: Karl W Broman [aut, cre] (<https://orcid.org/0000-0002-4914-6671>),
     Michael Bostock [ctb, cph] (d3.js library in htmlwidgets/lib,
@@ -9,7 +9,7 @@ Author: Karl W Broman [aut, cre] (<https://orcid.org/0000-0002-4914-6671>),
     (jQuery library in htmlwidgets/lib; see
     https://github.com/jquery/jquery/blob/master/AUTHORS.txt), jQuery
     UI contributors [ctb] (jQuery UI library in htmlwidgets/lib; see
-    https://jqueryui.com/about)
+    https://jqueryui.com/about/)
 Maintainer: Karl W Broman <broman@wisc.edu>
 Description: Web-based interactive charts (using D3.js) for the analysis of
     experimental crosses to identify genetic loci (quantitative trait
@@ -32,12 +32,12 @@ Suggests:
     rmarkdown,
     testthat
 License: GPL-3 | file LICENSE
-URL: https://kbroman.org/qtlcharts, https://github.com/kbroman/qtlcharts
+URL: https://kbroman.org/qtlcharts/, https://github.com/kbroman/qtlcharts
 BugReports: https://github.com/kbroman/qtlcharts/issues
 LazyData: true
 Encoding: UTF-8
 ByteCompile: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Authors@R: c(
     person("Karl W", "Broman", role=c("aut", "cre"), email="broman@wisc.edu",
            comment=c(ORCID = "0000-0002-4914-6671")),
@@ -48,4 +48,4 @@ Authors@R: c(
     person("jQuery contributors", role = "ctb",
            comment = "jQuery library in htmlwidgets/lib; see https://github.com/jquery/jquery/blob/master/AUTHORS.txt"),
     person("jQuery UI contributors", role = "ctb",
-           comment = "jQuery UI library in htmlwidgets/lib; see https://jqueryui.com/about"))
+           comment = "jQuery UI library in htmlwidgets/lib; see https://jqueryui.com/about/"))

@@ -7,7 +7,7 @@
 
 [R/qtlcharts](https://kbroman.org/qtlcharts/) is an [R](https://www.r-project.org) package to create
 interactive charts for QTL data, for use
-with [R/qtl](https://rqtl.org). \[[website](https://kbroman.org/qtlcharts/)\]
+with [R/qtl](https://rqtl.org).
 
 It is built with [D3](https://d3js.org), using a set of reusable
 panels (also available separately, as [d3panels](https://kbroman.org/d3panels/)).
@@ -88,7 +88,7 @@ The R/qtlcharts package as a whole is distributed under
 R/qtlcharts incorporates the following other open source software
 components, which have their own license agreements.
 
-- [D3.js](https://d3js.org) \[[license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/d3/LICENSE)\]
-- [jQuery](https://jquery.com) \[[license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/jquery/LICENSE.txt)\]
-- [jQuery UI](https://jqueryui.com/) \[[license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt)\]
-- [d3panels](https://kbroman.org/d3panels/) \[[license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/d3panels/LICENSE.md)\]
+- [D3.js](https://d3js.org) ([license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/d3/LICENSE))
+- [jQuery](https://jquery.com) ([license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/jquery/LICENSE.txt))
+- [jQuery UI](https://jqueryui.com/) ([license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt))
+- [d3panels](https://kbroman.org/d3panels/) ([license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/d3panels/LICENSE.md))

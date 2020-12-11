@@ -1,6 +1,6 @@
 ### R/qtlcharts: Interactive graphics for QTL experiments
 
-[![Build Status](https://travis-ci.org/kbroman/qtlcharts.svg?branch=master)](https://travis-ci.org/kbroman/qtlcharts)
+[![R-CMD-check](https://github.com/kbroman/qtlcharts/workflows/R-CMD-check/badge.svg)](https://github.com/kbroman/qtlcharts/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qtlcharts)](https://cran.r-project.org/package=qtlcharts)
 
 [Karl W Broman](https://kbroman.org)
@@ -88,7 +88,7 @@ The R/qtlcharts package as a whole is distributed under
 R/qtlcharts incorporates the following other open source software
 components, which have their own license agreements.
 
-- [D3.js](https://d3js.org) ([license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/d3/LICENSE))
-- [jQuery](https://jquery.com) ([license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/jquery/LICENSE.txt))
-- [jQuery UI](https://jqueryui.com/) ([license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt))
-- [d3panels](https://kbroman.org/d3panels/) ([license](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/d3panels/LICENSE.md))
+- [D3.js](https://d3js.org) ([license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3/LICENSE))
+- [jQuery](https://jquery.com) ([license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery/LICENSE.txt))
+- [jQuery UI](https://jqueryui.com/) ([license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt))
+- [d3panels](https://kbroman.org/d3panels/) ([license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3panels/LICENSE.md))

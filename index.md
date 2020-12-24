@@ -18,14 +18,11 @@ goal of R/qtlcharts is to provide interactive data visualizations for QTL
 analyses, and to make these visualizations available from [R](https://www.r-project.org).
 
 The interactive visualizations are built with the JavaScript library
-[D3](https://d3js.org), and are viewed in a web browser. We are
-targeting Chrome and Safari and, as much as possible, Firefox.
+[D3](https://d3js.org) (version 5) and are viewed in a web
+browser or with [RStudio](https://rstudio.com/).
 
 A set of [reusable graphics panels](https://kbroman.org/d3panels/) form the basis
 for the larger visualizations.
-
-The package was recently updated for [D3](https://d3js.org)
-version 5.
 
 To cite R/qtlcharts in publications, please use
 [Broman KW (2015) R/qtlcharts: interactive graphics for quantitative trait locus mapping. Genetics 199:359-361](https://pubmed.ncbi.nlm.nih.gov/25527287/).

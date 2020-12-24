@@ -15,15 +15,20 @@ Install R/qtlcharts from CRAN using
     install.packages("qtlcharts")
 
 Alternatively, install it from its
-[GitHub repository](https://github.com/kbroman/qtlcharts). You first need to
-install the [R/qtl](https://rqtl.org),
-[htmlwidgets](https://www.htmlwidgets.org/),
-and [devtools](https://github.com/r-lib/devtools) packages.
+[GitHub repository](https://github.com/kbroman/qtlcharts). First
+install the [remotes](https://github.com/r-lib/remotes) package.
 
-    install.packages(c("qtl", "htmlwidgets", "devtools"))
+```r
+install.packages("remotes")
+```
 
-Then install R/qtlcharts using the `install_github` function in the
-[devtools](https://github.com/r-lib/devtools) package.
+Then install R/qtlcharts using the `install_github` function in
+[remotes](https://github.com/r-lib/remotes).
 
-    library(devtools)
-    install_github("kbroman/qtlcharts")
+```r
+library(remotes)
+install_github("kbroman/qtlcharts")
+```
+
+The packages [R/qtl](https://rqtl.org) and
+[htmlwidgets](https://www.htmlwidgets.org) will also be installed.

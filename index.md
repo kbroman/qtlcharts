@@ -5,7 +5,7 @@ tagline: Interactive charts for QTL data
 description: R/qtlcharts is an R package to create interactive charts for quantitative trait locus (QTL) mapping data, for use with R/qtl.
 ---
 
-[![Build Status](https://travis-ci.org/kbroman/qtlcharts.svg?branch=master)](https://travis-ci.org/kbroman/qtlcharts)
+[![R-CMD-check](https://github.com/kbroman/qtlcharts/workflows/R-CMD-check/badge.svg)](https://github.com/kbroman/qtlcharts/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qtlcharts)](https://cran.r-project.org/package=qtlcharts)
 
 R/qtlcharts is an [R](https://www.r-project.org) package to create
@@ -25,10 +25,7 @@ A set of [reusable graphics panels](https://kbroman.org/d3panels/) form the basi
 for the larger visualizations.
 
 The package was recently updated for [D3](https://d3js.org)
-[version 5](https://github.com/d3/d3/blob/master/API.md). This new
-version is not yet on [CRAN](https://cran.r-project.org), but can be
-installed with [devtools](https://github.com/r-lib/devtools), using
-`devtools::install_github("kbroman/qtlcharts")`.
+version 5.
 
 To cite R/qtlcharts in publications, please use
 [Broman KW (2015) R/qtlcharts: interactive graphics for quantitative trait locus mapping. Genetics 199:359-361](https://pubmed.ncbi.nlm.nih.gov/25527287/).

@@ -1,3 +1,9 @@
+## qtlcharts 0.13-1 (2021-07-12)
+
+- Allow `iplot()` to not take `y` argument (in which case we move `x`
+  to `y` and take `x` to be indices). ([Issue #73](https://github.com/kbroman/qtlcharts/issues/73))
+
+
 ## qtlcharts 0.12-10 (2020-09-24)
 
 - Replaced use of [d3-tip](https://github.com/Caged/d3-tip) with

@@ -32,8 +32,13 @@
 #'
 #' @export
 iplot <-
-function(x, y, group=NULL, indID=NULL, chartOpts=NULL, digits=5)
+function(x, y=NULL, group=NULL, indID=NULL, chartOpts=NULL, digits=5)
 {
+    if(is.null(y)) {
+        y <- x
+        x <- seq_along(y)
+        chartOpts <- add2chartOpts(chartOpts, xlab="Index")
+    }
     if(length(x) != length(y))
         stop("length(x) != length(y)")
     if(is.null(group))

@@ -4,7 +4,14 @@
 \alias{iplotMap}
 \title{Interactive genetic map plot}
 \usage{
-iplotMap(map, chr = NULL, shift = FALSE, chartOpts = NULL, digits = 5)
+iplotMap(
+  map,
+  chr = NULL,
+  shift = FALSE,
+  horizontal = FALSE,
+  chartOpts = NULL,
+  digits = 5
+)
 }
 \arguments{
 \item{map}{Object of class `"map"`, a list with each component
@@ -16,6 +23,8 @@ class `"cross"`, in which case the map is extracted with
 
 \item{shift}{If TRUE, shift each chromsome so that the initial marker
 is at position 0.}
+
+\item{horizontal}{If TRUE, have chromosomes arranged horizontally}
 
 \item{chartOpts}{A list of options for configuring the chart.  Each
 element must be named using the corresponding option.}

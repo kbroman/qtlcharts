@@ -12,6 +12,7 @@
 #' @param chr (Optional) Vector indicating the chromosomes to plot.
 #' @param shift If TRUE, shift each chromsome so that the initial marker
 #'   is at position 0.
+#' @param horizontal If TRUE, have chromosomes arranged horizontally
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option.
 #' @param digits Round data to this number of significant digits
@@ -34,7 +35,7 @@
 #'
 #' @export
 iplotMap <-
-function(map, chr=NULL, shift=FALSE, chartOpts=NULL, digits=5)
+function(map, chr=NULL, shift=FALSE, horizontal=FALSE, chartOpts=NULL, digits=5)
 {
     if(inherits(map, "cross")) map <- qtl::pull.map(map)
 
@@ -45,7 +46,7 @@ function(map, chr=NULL, shift=FALSE, chartOpts=NULL, digits=5)
     }
 
     map_list <- convert_map(map)
-    chartOpts <- add2chartOpts(chartOpts, shiftStart=shift)
+    chartOpts <- add2chartOpts(chartOpts, shiftStart=shift, horizontal=horizontal)
     x <- list(data=map_list, chartOpts=chartOpts)
     if(!is.null(digits))
         attr(x, "TOJSON_ARGS") <- list(digits=digits)

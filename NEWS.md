@@ -1,11 +1,13 @@
-## qtlcharts 0.13-2 (2021-07-13)
+## qtlcharts 0.13-3 (2021-07-20)
 
 - Allow `iplot()` to not take `y` argument (in which case we move `x`
-  to `y` and take `x` to be indices). ([Issue #73](https://github.com/kbroman/qtlcharts/issues/73))
+  to `y` and take `x` to be indices). (Issue #73)
 
 - Add `horizontal` argument to `iplotMap()` to lay out the chromosomes
   horizontally. This was already available as a chartOpts option, but
   this makes it easier. (Issue #67)
+
+- Fix error in `itriplot()` for case of a single point (Issue #76)
 
 
 ## qtlcharts 0.12-10 (2020-09-24)

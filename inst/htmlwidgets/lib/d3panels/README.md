@@ -90,7 +90,7 @@ Then use npm to install [yarn](https://yarnpkg.com/en/), [coffeescript](https://
 npm install -g yarn coffeescript uglifycss uglify-js babel-core
 ```
 
-Then install the dependency ([d3](https://d3js.org):
+Then install the dependency, [d3](https://d3js.org):
 
 ```script
 yarn install

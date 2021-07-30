@@ -9,7 +9,7 @@ citEntry(entry="article",
          pages = "359-361",
          doi = "10.1534/genetics.114.172742",
          url = "https://doi.org/10.1534/genetics.114.172742",
-         eprint = "http://www.genetics.org/content/genetics/199/2/359.full.pdf",
+         eprint = "https://academic.oup.com/genetics/article-pdf/199/2/359/37801010/genetics0359.pdf",
 
          textVersion =
          paste("Broman KW (2015) R/qtlcharts: interactive graphics for",

@@ -12,7 +12,7 @@ dependencies:
     style: d3panels.min.css
   - name: qtlcharts_iplotMScanone
     src: htmlwidgets/lib/qtlcharts
-    version: 0.13.4
+    version: 0.14
     script:
       - iplotMScanone_eff.js
       - iplotMScanone_noeff.js

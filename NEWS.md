@@ -1,4 +1,4 @@
-## qtlcharts 0.13-4 (2021-08-05)
+## qtlcharts 0.14 (2021-08-05)
 
 - Upgrade D3 to 7.0.0 (and d3panels to 1.8.0)
 

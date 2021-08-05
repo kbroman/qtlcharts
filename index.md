@@ -18,7 +18,7 @@ goal of R/qtlcharts is to provide interactive data visualizations for QTL
 analyses, and to make these visualizations available from [R](https://www.r-project.org).
 
 The interactive visualizations are built with the JavaScript library
-[D3](https://d3js.org) (version 5) and are viewed in a web
+[D3](https://d3js.org) (version 7) and are viewed in a web
 browser or with [RStudio](https://rstudio.com/).
 
 A set of [reusable graphics panels](https://kbroman.org/d3panels/) form the basis

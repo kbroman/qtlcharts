@@ -1,13 +1,13 @@
 {
   "name": "d3panels",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": "D3-based graphics panels",
   "author": "Karl Broman <kbroman@gmail.com> (https://kbroman.org)",
   "repository": "github:kbroman/d3panels",
   "homepage": "https://kbroman.org/d3panels",
   "license": "MIT",
   "dependencies": {
-    "@bower_components/d3": "mbostock-bower/d3-bower#^5.16.0"
+    "d3": "^7.0.0"
   },
   "files": [
     "ReadMe.md",

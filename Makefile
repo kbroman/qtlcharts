@@ -67,8 +67,10 @@ JSDEPS_DIR = js_deps/node_modules
 BOWER_DIR = $(JSDEPS_DIR)/@bower_components
 
 # d3
-d3: $(LIB_DIR)/d3/d3.min.js $(LIB_DIR)/d3/LICENSE $(LIB_DIR)/d3/bower.json
-$(LIB_DIR)/d3/%: $(BOWER_DIR)/d3/%
+d3: $(LIB_DIR)/d3/d3.min.js $(LIB_DIR)/d3/LICENSE $(LIB_DIR)/d3/package.json
+$(LIB_DIR)/d3/%: $(JSDEPS_DIR)/d3/%
+	cp $< $@
+$(LIB_DIR)/d3/d3.min.js: $(JSDEPS_DIR)/d3/dist/d3.min.js
 	cp $< $@
 
 # jquery

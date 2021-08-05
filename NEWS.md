@@ -1,4 +1,6 @@
-## qtlcharts 0.13-3 (2021-07-20)
+## qtlcharts 0.13-4 (2021-08-05)
+
+- Upgrade D3 to 7.0.0 (and d3panels to 1.8.0)
 
 - Allow `iplot()` to not take `y` argument (in which case we move `x`
   to `y` and take `x` to be indices). (Issue #73)

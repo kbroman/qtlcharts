@@ -71,8 +71,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
     corr = []
     for i of data.corr
         for j of data.corr[i]
-            corr.push({row:i, col:j, value:data.corr[i][j]})
-
+            corr.push({row:+i, col:+j, value:data.corr[i][j]})
 
     # gray background on scatterplot
     scatterplot.append("rect")
@@ -112,6 +111,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                      d3.selectAll("text.corrlabel").remove()
                      d3.select(this).attr("stroke","none"))
                .on("click",(event,d) -> drawScatter(d.col, d.row))
+
 
     corr_tip = d3panels.tooltip_create(d3.select(widgetdiv), cells,
                                        {tipclass:widgetdivid},

@@ -54,7 +54,7 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
     corr = []
     for i of data.corr
         for j of data.corr[i]
-            corr.push({row:i, col:j, value:data.corr[i][j]})
+            corr.push({row:+i, col:+j, value:data.corr[i][j]})
 
 
     cells = corrplot.selectAll("empty")

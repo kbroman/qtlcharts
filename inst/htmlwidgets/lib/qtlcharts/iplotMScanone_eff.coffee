@@ -216,8 +216,8 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                                     .style("dominant-baseline", "middle")
                                     .style("text-anchor", "start")
 
-    mylodheatmap.cells()
-                .on "mouseover", (d) ->
+       mylodheatmap.cells()
+                .on "mouseover", (event, d) ->
                          plotHorSlice(d.lodindex)
                          g_horpanel.select("g.title text").text("#{lod_data.lodname[d.lodindex]}")
                          plotVerSlice(lod_data.posIndexByChr[d.chr][d.posindex])
@@ -226,7 +226,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                          unless times?
                              verpanel_axis_text.text("#{lod_data.lodname[d.lodindex]}")
                                                .attr("x", verpanel_xscale(d.lodindex))
-                .on "mouseout", (d) ->
+                .on "mouseout", () ->
                          horslice.remove() if horslice?
                          g_horpanel.select("g.title text").text("")
                          verslice.forEach((p) -> p.remove()) if verslice.length > 0

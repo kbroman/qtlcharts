@@ -82,12 +82,13 @@ scat2scat = (widgetdiv, scat1data, scat2data, chartOpts) ->
     leftchart(g_left, scat1data)
 
     # increase size of point on mouseover
-    leftchart.points()
-           .on "mouseover", (d) ->
+    objects = leftchart.points()
+           .on "mouseover", () ->
                     d3.select(this).attr("r", pointsize1*2)
-           .on "mouseout", (d) ->
+           .on "mouseout", () ->
                     d3.select(this).attr("r", pointsize1)
-           .on "click", (d,i) ->
+           .on "click", (event, d) ->
+                    i = objects.nodes().indexOf(this)
                     rightchart.remove() if rightchart?
                     make_right_chart(i)
 

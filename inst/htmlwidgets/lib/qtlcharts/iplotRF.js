@@ -10,81 +10,53 @@ var iplotRF;
 iplotRF = function iplotRF(widgetdiv, rf_data, geno, chartOpts) {
   var _d3panels$lod2dheatma;
 
-  var altrectcolor, axispos, boxcolor, boxwidth, cellPad, chartdivid, chrGap, chrlinecolor, chrlinewidth, col, colors, create_crosstab, _create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, fontsize, g_heatmap, hbot, heatmap_height, heatmap_width, height, hilitCellcolor, hilitcolor, htop, j, k, l, lodlim, m, margin, mycrosstab, mylodchart, mylodheatmap, nullcolor, nyticks, oneAtTop, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, row, svg, tipclass, titlepos, totmar, wbot, widgetdivid, width, yticks, zlim, zthresh; // chartOpts start
-
-
+  var altrectcolor, axispos, boxcolor, boxwidth, cellPad, chartdivid, chrGap, chrlinecolor, chrlinewidth, col, colors, create_crosstab, _create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, fontsize, g_heatmap, hbot, heatmap_height, heatmap_width, height, hilitCellcolor, hilitcolor, htop, j, k, l, lodlim, m, margin, mycrosstab, mylodchart, mylodheatmap, nullcolor, nyticks, oneAtTop, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, row, svg, tipclass, titlepos, totmar, wbot, widgetdivid, width, yticks, zlim, zthresh;
+  // chartOpts start
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 800; // total height of chart in pixels
-
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000; // total width of chart in pixels
-
   hbot = (ref2 = chartOpts != null ? chartOpts.hbot : void 0) != null ? ref2 : 300; // height (in pixels) of each of the lower panels with LOD scores
-
   margin = (ref3 = chartOpts != null ? chartOpts.margin : void 0) != null ? ref3 : {
     left: 60,
     top: 40,
     right: 40,
     bottom: 60 // margins in pixels (left, top, right, bottom)
-
   };
   axispos = (ref4 = chartOpts != null ? chartOpts.axispos : void 0) != null ? ref4 : {
     xtitle: 25,
     ytitle: 30,
     xlabel: 5,
     ylabel: 5 // axis positions in heatmap
-
   };
   titlepos = (ref5 = chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref5 : 20; // position of chart title in pixels
-
   chrGap = (ref6 = chartOpts != null ? chartOpts.chrGap : void 0) != null ? ref6 : 2; // gaps between chr in heat map
-
   chrlinecolor = (ref7 = chartOpts != null ? chartOpts.chrlinecolor : void 0) != null ? ref7 : ""; // color of lines between chromosomes (if "", leave off)
-
   chrlinewidth = (ref8 = chartOpts != null ? chartOpts.chrlinewidth : void 0) != null ? ref8 : 2; // width of lines between chromosomes
-
   oneAtTop = (ref9 = chartOpts != null ? chartOpts.oneAtTop : void 0) != null ? ref9 : false; // if true, put chromosome 1 at the top rather than bottom
-
   colors = (ref10 = chartOpts != null ? chartOpts.colors : void 0) != null ? ref10 : ["crimson", "white", "slateblue" // vector of three colors for the color scale (negative - zero - positive)
   ];
   nullcolor = (ref11 = chartOpts != null ? chartOpts.nullcolor : void 0) != null ? ref11 : "#e6e6e6"; // color for empty cells
-
   zlim = (ref12 = chartOpts != null ? chartOpts.zlim : void 0) != null ? ref12 : null; // z-axis limits (if null take from data, symmetric about 0)
-
   zthresh = (ref13 = chartOpts != null ? chartOpts.zthresh : void 0) != null ? ref13 : null; // z threshold; if |z| < zthresh, not shown
-
   hilitCellcolor = (ref14 = chartOpts != null ? chartOpts.hilitCellcolor : void 0) != null ? ref14 : "black"; // color of box around highlighted cell
-
   cellPad = (ref15 = chartOpts != null ? chartOpts.cellPad : void 0) != null ? ref15 : null; // padding of cells (if null, we take cell width * 0.1)
-
   fontsize = (ref16 = chartOpts != null ? chartOpts.fontsize : void 0) != null ? ref16 : null; // font size in crosstab
-
   rectcolor = (ref17 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref17 : "#e6e6e6"; // background rectangle color (and color of cells in crosstab)
-
   altrectcolor = (ref18 = chartOpts != null ? chartOpts.altrectcolor : void 0) != null ? ref18 : "#c8c8c8"; // alternate rectangle color in lower panels with LOD and rf
-
   hilitcolor = (ref19 = chartOpts != null ? chartOpts.hilitcolor : void 0) != null ? ref19 : "#e9cfec"; // color of rectangle in heatmap when highlighted
-
   boxcolor = (ref20 = chartOpts != null ? chartOpts.boxcolor : void 0) != null ? ref20 : "black"; // color of outer box of panels
-
   boxwidth = (ref21 = chartOpts != null ? chartOpts.boxwidth : void 0) != null ? ref21 : 2; // width of outer box in pixels
-
   pointsize = (ref22 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref22 : 2; // point size in lower panels with LOD and rf
-
   pointcolor = (ref23 = chartOpts != null ? chartOpts.pointcolor : void 0) != null ? ref23 : "slateblue"; // point color in lower panels with LOD and rf
-
   pointstroke = (ref24 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref24 : "black"; // stroke color for points in lower panels with LOD and rf
-
   lodlim = (ref25 = chartOpts != null ? chartOpts.lodlim : void 0) != null ? ref25 : [0, 12 // range of LOD values to display; omit below 1st, truncate above 2nd
   ];
   nyticks = (ref26 = chartOpts != null ? chartOpts.nyticks : void 0) != null ? ref26 : 5; // no. ticks on y-axis in LOD curve panels
-
   yticks = (ref27 = chartOpts != null ? chartOpts.yticks : void 0) != null ? ref27 : null; // vector of tick positions on y-axis in LOD curve panels
-
   tipclass = (ref28 = chartOpts != null ? chartOpts.tipclass : void 0) != null ? ref28 : "tooltip"; // class name for tool tips
   // chartOpts end
-
   chartdivid = (ref29 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref29 : 'chart';
-  widgetdivid = d3.select(widgetdiv).attr('id'); // make sure list args have all necessary bits
-
+  widgetdivid = d3.select(widgetdiv).attr('id');
+  // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
     left: 60,
     top: 40,
@@ -96,86 +68,74 @@ iplotRF = function iplotRF(widgetdiv, rf_data, geno, chartOpts) {
     ytitle: 30,
     xlabel: 5,
     ylabel: 5
-  }); // force things to be vectors
-
+  });
+  // force things to be vectors
   rf_data.chrname = d3panels.forceAsArray(rf_data.chrname);
-  rf_data.nmar = d3panels.forceAsArray(rf_data.nmar); // size of heatmap region
-
+  rf_data.nmar = d3panels.forceAsArray(rf_data.nmar);
+  // size of heatmap region
   totmar = d3panels.sumArray(rf_data.nmar);
   heatmap_width = height - hbot;
   heatmap_height = height - hbot;
-
   if (heatmap_width > width / 2) {
     // make sure heatmap width is less than half
     heatmap_width = width / 2;
     heatmap_height = width / 2;
-  } // size of crosstab region
-
-
+  }
+  // size of crosstab region
   crosstab_width = width - heatmap_width;
-
   if (crosstab_width > heatmap_width) {
     crosstab_width = heatmap_width;
   }
-
   crosstab_height = heatmap_height * 0.7;
   crosstab_xpos = heatmap_width;
   crosstab_ypos = (heatmap_height - crosstab_height) / 2;
-
   if (crosstab_ypos < 0) {
     crosstab_ypos = 0;
-  } // width of bottom panels
-
-
-  wbot = heatmap_width; // height of top panels
-
+  }
+  // width of bottom panels
+  wbot = heatmap_width;
+  // height of top panels
   htop = d3.max([heatmap_height, crosstab_height]);
-  svg = d3.select(widgetdiv).select("svg"); // ensure lodlim has 0 <= lo < hi
-
+  svg = d3.select(widgetdiv).select("svg");
+  // ensure lodlim has 0 <= lo < hi
   if (d3.min(lodlim) < 0) {
     displayError("lodlim values must be non-negative; ignored", "error_" + chartdivid);
     lodlim = [2, 12];
   }
-
   if (lodlim[0] >= lodlim[1]) {
     displayError("lodlim[0] must be < lodlim[1]; ignored", "error_" + chartdivid);
     lodlim = [2, 12];
-  } // make copy of rf/lod
-
-
+  }
+  // make copy of rf/lod
   rf_data.lod = rf_data.rf.map(function (d) {
     return d.map(function (dd) {
       return dd;
     });
-  }); // make symmetric
-
+  });
+  // make symmetric
   for (row = j = 0, ref30 = rf_data.lod.length; 0 <= ref30 ? j < ref30 : j > ref30; row = 0 <= ref30 ? ++j : --j) {
     for (col = k = 0, ref31 = rf_data.lod.length; 0 <= ref31 ? k < ref31 : k > ref31; col = 0 <= ref31 ? ++k : --k) {
       if (row > col) {
         rf_data.lod[row][col] = rf_data.lod[col][row];
       }
     }
-  } // truncate values; max value on diagonal
-
-
+  }
+  // truncate values; max value on diagonal
   for (row = l = 0, ref32 = rf_data.lod.length; 0 <= ref32 ? l < ref32 : l > ref32; row = 0 <= ref32 ? ++l : --l) {
     for (col = m = 0, ref33 = rf_data.lod.length; 0 <= ref33 ? m < ref33 : m > ref33; col = 0 <= ref33 ? ++m : --m) {
       if (row === col || rf_data.lod[row][col] != null && rf_data.lod[row][col] > lodlim[1]) {
         rf_data.lod[row][col] = lodlim[1];
-      } // negative values for rf > 0.5
-
-
+      }
+      // negative values for rf > 0.5
       if (row > col && rf_data.rf[row][col] > 0.5) {
         rf_data.lod[row][col] = -rf_data.lod[row][col];
       }
-
       if (col > row && rf_data.rf[col][row] > 0.5) {
         rf_data.lod[row][col] = -rf_data.lod[row][col];
       }
     }
-  } // create the heatmap
-
-
+  }
+  // create the heatmap
   mylodheatmap = d3panels.lod2dheatmap((_d3panels$lod2dheatma = {
     width: heatmap_width,
     height: heatmap_height,
@@ -187,8 +147,8 @@ iplotRF = function iplotRF(widgetdiv, rf_data, geno, chartOpts) {
   g_heatmap = svg.append("g").attr("id", "chrheatmap");
   mylodheatmap(g_heatmap, rf_data);
   mycrosstab = null;
-  mylodchart = [null, null]; // function to create the crosstab panel
-
+  mylodchart = [null, null];
+  // function to create the crosstab panel
   create_crosstab = function create_crosstab(marker1, marker2) {
     var data, g_crosstab;
     data = {
@@ -199,11 +159,9 @@ iplotRF = function iplotRF(widgetdiv, rf_data, geno, chartOpts) {
       xlabel: marker1,
       ylabel: marker2
     };
-
     if (mycrosstab != null) {
       mycrosstab.remove();
     }
-
     mycrosstab = d3panels.crosstab({
       width: crosstab_width,
       height: crosstab_height,
@@ -216,9 +174,8 @@ iplotRF = function iplotRF(widgetdiv, rf_data, geno, chartOpts) {
     });
     g_crosstab = svg.append("g").attr("id", "crosstab").attr("transform", "translate(" + crosstab_xpos + ", " + crosstab_ypos + ")");
     return mycrosstab(g_crosstab, data);
-  }; // function to create a lod chart
-
-
+  };
+  // function to create a lod chart
   _create_scan = function create_scan(markerindex, panelindex) {
     // panelindex = 0 or 1 for left or right panels
     var data, g_scans, i, n, ref34;
@@ -229,16 +186,14 @@ iplotRF = function iplotRF(widgetdiv, rf_data, geno, chartOpts) {
       lod: function () {
         var results;
         results = [];
-
         for (i in rf_data.pos) {
           results.push(i);
         }
-
         return results;
       }(),
       marker: rf_data.marker
-    }; // grab lod scores for this marker
-
+    };
+    // grab lod scores for this marker
     for (row = n = 0, ref34 = rf_data.rf.length; 0 <= ref34 ? n < ref34 : n > ref34; row = 0 <= ref34 ? ++n : --n) {
       if (row > markerindex) {
         data.lod[row] = rf_data.rf[markerindex][row];
@@ -246,13 +201,10 @@ iplotRF = function iplotRF(widgetdiv, rf_data, geno, chartOpts) {
         data.lod[row] = rf_data.rf[row][markerindex];
       }
     }
-
     data.lod[markerindex] = null; // point at marker: set to maximum LOD
-
     if (mylodchart[panelindex] != null) {
       mylodchart[panelindex].remove();
     }
-
     mylodchart[panelindex] = d3panels.lodchart({
       height: hbot,
       width: wbot,
@@ -277,28 +229,24 @@ iplotRF = function iplotRF(widgetdiv, rf_data, geno, chartOpts) {
       tipclass: widgetdivid
     });
     g_scans = svg.append("g").attr("id", "lod_rf_" + (panelindex + 1)).attr("transform", "translate(" + wbot * panelindex + ", " + htop + ")");
-    mylodchart[panelindex](g_scans, data); // when clicking a point, change the other panel
-
-    return mylodchart[panelindex].markerSelect().on("click", function (d) {
+    mylodchart[panelindex](g_scans, data);
+    // when clicking a point, change the other panel
+    return mylodchart[panelindex].markerSelect().on("click", function (event, d) {
       var newmarker;
       newmarker = d.name;
-
       if (panelindex === 0) {
         create_crosstab(rf_data.marker[markerindex], newmarker);
       } else {
         create_crosstab(newmarker, rf_data.marker[markerindex]);
       }
-
       return _create_scan(rf_data.marker.indexOf(newmarker), 1 - panelindex);
     });
-  }; // change the cell tip info
-
-
+  };
+  // change the cell tip info
   d3panels.tooltip_text(mylodheatmap.celltip(), function (d) {
     var lod, mari, marj, rf;
     mari = rf_data.marker[d.xindex];
     marj = rf_data.marker[d.yindex];
-
     if (+d.xindex > +d.yindex) {
       // +'s ensure number not string
       rf = rf_data.rf[d.xindex][d.yindex];
@@ -309,36 +257,28 @@ iplotRF = function iplotRF(widgetdiv, rf_data, geno, chartOpts) {
     } else {
       return mari;
     }
-
     rf = rf >= 0.1 ? d3.format(".2f")(rf) : d3.format(".3f")(rf);
     return "(" + mari + " " + marj + "), LOD = " + d3.format(".1f")(lod) + ", rf = " + rf;
-  }); // when clicking cell, add crosstab and lod charts
-
-  mylodheatmap.cells().on("click", function (d) {
+  });
+  // when clicking cell, add crosstab and lod charts
+  mylodheatmap.cells().on("click", function (event, d) {
     _create_scan(d.xindex, 0);
-
     if (d.xindex !== d.yindex) {
       _create_scan(d.yindex, 1); // if same marker, just show the one panel
-
     } else {
       if (mylodchart[1] != null) {
         mylodchart[1].remove();
       }
-
       mylodchart[1] = null;
     }
-
     return create_crosstab(rf_data.marker[d.yindex], rf_data.marker[d.xindex]);
   });
-
   if (chartOpts.heading != null) {
     d3.select("div#htmlwidget_container").insert("h2", ":first-child").html(chartOpts.heading).style("font-family", "sans-serif");
   }
-
   if (chartOpts.caption != null) {
     d3.select("body").append("p").attr("class", "caption").html(chartOpts.caption);
   }
-
   if (chartOpts.footer != null) {
     return d3.select("body").append("div").html(chartOpts.footer).style("font-family", "sans-serif");
   }

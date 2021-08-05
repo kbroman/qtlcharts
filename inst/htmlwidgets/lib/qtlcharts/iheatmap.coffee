@@ -142,12 +142,12 @@ iheatmap = (widgetdiv, data, chartOpts) ->
     formatY = d3panels.formatAxis(data.y)
 
     cells = myheatmap.cells()
-                     .on "mouseover", (d,i) ->
+                     .on "mouseover", (event,d) ->
                              g_verslice.select("g.title text").text("X = #{formatX(d.x)}")
                              g_horslice.select("g.title text").text("Y = #{formatY(d.y)}")
                              plotVer(d.xindex)
                              plotHor(d.yindex)
-                     .on "mouseout", (d,i) ->
+                     .on "mouseout", () ->
                              g_verslice.select("g.title text").text("")
                              g_horslice.select("g.title text").text("")
 

@@ -171,8 +171,9 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         cur_chr = chr
 
     # animate points at markers on click
-    mylodchart.markerSelect()
-              .on "click", (d,i) ->
+    objects = mylodchart.markerSelect()
+              .on "click", (event, d) ->
+                    i = objects.nodes().indexOf(this)
                     plotPXG(markers[i], i)
 
     if chartOpts.heading?

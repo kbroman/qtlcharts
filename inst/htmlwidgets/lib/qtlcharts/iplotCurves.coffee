@@ -192,11 +192,13 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
     linecolor = d3panels.expand2vector(linecolor, ngroup)
     linecolorhilit = d3panels.expand2vector(linecolorhilit, ngroup)
 
-    curves.on "mouseover", (d,i) ->
+    curves.on "mouseover", (event, d) ->
+                             i = curves.nodes().indexOf(this)
                              d3.select(this).attr("stroke", linecolorhilit[group[i]]).raise()
                              d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit) if nscatter > 0
                              d3.selectAll("circle.pt#{i}").attr("fill", pointcolorhilit[group[i]]) if nscatter > 0
-          .on "mouseout", (d,i) ->
+          .on "mouseout", (event, d) ->
+                             i = curves.nodes().indexOf(this)
                              d3.select(this).attr("stroke", linecolor[group[i]]).lower()
                              d3.selectAll("circle.pt#{i}").attr("r", pointsize) if nscatter > 0
                              d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]]) if nscatter > 0
@@ -204,11 +206,13 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
 
     if nscatter > 0
         allpoints.forEach (points) ->
-            points.on "mouseover", (d,i) ->
+            points.on "mouseover", (event, d) ->
+                                       i = points.nodes().indexOf(this)
                                        d3.selectAll("circle.pt#{i}").attr("r", pointsizehilit)
                                        d3.selectAll("circle.pt#{i}").attr("fill", pointcolorhilit[group[i]])
                                        d3.select("path.path#{i}").attr("stroke", linecolorhilit[group[i]]).raise()
-                  .on "mouseout", (d,i) ->
+                  .on "mouseout", (event, d) ->
+                                       i = points.nodes().indexOf(this)
                                        d3.selectAll("circle.pt#{i}").attr("r", pointsize)
                                        d3.selectAll("circle.pt#{i}").attr("fill", pointcolor[group[i]])
                                        d3.select("path.path#{i}").attr("stroke", linecolor[group[i]]).lower()

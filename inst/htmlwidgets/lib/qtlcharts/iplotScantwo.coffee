@@ -187,7 +187,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                             )
 
         mylod2dheatmap.cells()
-                      .on "click", (d) ->
+                      .on "click", (event, d) ->
                                  mari = scantwo_data.marker[d.xindex]
                                  marj = scantwo_data.marker[d.yindex]
                                  return null if d.xindex == d.yindex # skip the diagonal case

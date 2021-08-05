@@ -328,17 +328,17 @@ iboxplot = (widgetdiv, data, chartOpts) ->
     for d in indindex
         clickStatus.push(0)
 
-    longRect.on "mouseover", (d,i) ->
+    longRect.on "mouseover", (event,d) ->
                      d3.select("rect#rect#{data.ind[d]}")
                        .attr("opacity", "1")
                      d3.select("#histline")
                        .datum(data.counts[d])
                        .attr("d", histline)
-            .on "mouseout", (d) ->
+            .on "mouseout", (event,d) ->
                      if !clickStatus[d]
                          d3.select("rect#rect#{data.ind[d]}").attr("opacity", "0")
 
-            .on "click", (d) ->
+            .on "click", (event,d) ->
                      clickStatus[d] = 1 - clickStatus[d]
                      d3.select("rect#rect#{data.ind[d]}").attr("opacity", clickStatus[d])
                      if clickStatus[d]

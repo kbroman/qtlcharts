@@ -203,7 +203,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
         mylodchart[panelindex](g_scans, data)
 
         # when clicking a point, change the other panel
-        mylodchart[panelindex].markerSelect().on "click", (d) ->
+        mylodchart[panelindex].markerSelect().on "click", (event, d) ->
                                           newmarker = d.name
                                           if panelindex == 0
                                               create_crosstab(rf_data.marker[markerindex], newmarker)
@@ -227,7 +227,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
                         "(#{mari} #{marj}), LOD = #{d3.format(".1f")(lod)}, rf = #{rf}")
 
     # when clicking cell, add crosstab and lod charts
-    mylodheatmap.cells().on "click", (d) ->
+    mylodheatmap.cells().on "click", (event, d) ->
                      create_scan(d.xindex, 0)
                      if d.xindex != d.yindex
                          create_scan(d.yindex, 1)

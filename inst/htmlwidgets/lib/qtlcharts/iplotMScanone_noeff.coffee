@@ -196,7 +196,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
                 y:[(lod_data.lod[posindex][i] for i of lod_data.lod[posindex])]})
 
     mylodheatmap.cells()
-                .on "mouseover", (d) ->
+                .on "mouseover", (event, d) ->
                          plotHorSlice(d.lodindex)
                          g_horpanel.select("g.title text").text("#{lod_data.lodname[d.lodindex]}")
                          plotVerSlice(lod_data.posIndexByChr[d.chr][d.posindex])
@@ -210,7 +210,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
                                      .attr("fill", (z,i) ->
                                          return pointcolorhilit if i==d.lodindex
                                          pointcolor)
-                .on "mouseout", (d) ->
+                .on "mouseout", () ->
                          horslice.remove() if horslice?
                          verslice.remove() if verslice?
                          g_horpanel.select("g.title text").text("")

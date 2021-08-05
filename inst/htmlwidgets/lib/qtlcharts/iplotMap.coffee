@@ -138,7 +138,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
 
     # on hover, remove tool tip from marker search
     markerSelect = mychart.markerSelect()
-    markerSelect.on "mouseover", (d) ->
+    markerSelect.on "mouseover", (event, d) ->
         unless selectedMarker == ""
             unless selectedMarker == d # de-highlight (if hovering over something other than the selected marker)
                 div.select("line##{clean_marker_name(selectedMarker)}")

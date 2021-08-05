@@ -144,8 +144,9 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         mycichart(ci_g, {'mean':means, 'low':low, 'high':high})
 
     # animate points at markers on click
-    mylodchart.markerSelect()
-              .on "click", (d,i) ->
+    objects = mylodchart.markerSelect()
+              .on "click", (event, d) ->
+                    i = objets.nodes().indexOf(this)
                     plotCI(markers[i], i)
 
     if chartOpts.heading?

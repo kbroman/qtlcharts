@@ -51,9 +51,9 @@ itriplot = (widgetdiv, data, chartOpts) ->
 
     # increase size of point on mouseover
     mychart.points()
-           .on "mouseover", (d) ->
+           .on "mouseover", () ->
                     d3.select(this).attr("r", pointsize*2)
-           .on "mouseout", (d) ->
+           .on "mouseout", () ->
                     d3.select(this).attr("r", pointsize)
 
     if chartOpts.heading?

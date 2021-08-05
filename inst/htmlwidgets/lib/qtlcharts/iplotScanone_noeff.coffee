@@ -59,7 +59,7 @@ iplotScanone_noeff = (widgetdiv, data, chartOpts) ->
 
     # animate points at markers on click
     mylodchart.markerSelect()
-              .on "click", (d) ->
+              .on "click", () ->
                     r = d3.select(this).attr("r")
                     d3.select(this)
                       .transition().duration(500).attr("r", r*3)

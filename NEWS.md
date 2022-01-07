@@ -1,6 +1,6 @@
 ## qtlcharts 0.16 (2022-01-07)
 
-- Update d3panels to 1.8.2, with improvement to `formatAxis()`.
+- Update d3panels to 1.8.4, with improvement to `formatAxis()`.
   This should fix Issue #77.
 
 - Fix `qtlchartsversion()` to handle case like "0.14"

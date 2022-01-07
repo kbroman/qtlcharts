@@ -1,5 +1,8 @@
-all: chartexamples vignettes
+all: chartexamples vignettes README.md
 .PHONY: chartexamples vignettes
+
+README.md: ../qtlcharts/README.md
+	cp $< $@
 
 # Examples
 CHARTEX = example

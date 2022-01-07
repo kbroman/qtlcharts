@@ -1,6 +1,6 @@
 {
   "name": "qtlcharts",
-  "version": "0.13.4",
+  "version": "0.16",
   "description": "Interactive Graphics for QTL Experiments",
   "author": "Karl Broman <kbroman@biostat.wisc.edu> (http://kbroman.org)",
   "repository": "github:kbroman/qtlcharts",
@@ -9,8 +9,8 @@
   "dependencies": {
     "@bower_components/jquery": "jquery/jquery-dist#^3.6.0",
     "@bower_components/jquery-ui": "components/jqueryui#^1.12.1",
-    "d3": "^7.0.0",
-    "d3panels": "kbroman/d3panels#^1.8.0"
+    "d3": "^7.3.0",
+    "d3panels": "kbroman/d3panels#^1.8.4"
   },
   "engines": {
     "yarn": ">= 1.0.0"

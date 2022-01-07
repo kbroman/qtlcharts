@@ -1,13 +1,13 @@
 {
   "name": "d3panels",
-  "version": "1.8.0",
+  "version": "1.8.4",
   "description": "D3-based graphics panels",
   "author": "Karl Broman <kbroman@gmail.com> (https://kbroman.org)",
   "repository": "github:kbroman/d3panels",
   "homepage": "https://kbroman.org/d3panels",
   "license": "MIT",
   "dependencies": {
-    "d3": "^7.0.0"
+    "d3": "^7.3.0"
   },
   "files": [
     "ReadMe.md",

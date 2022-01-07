@@ -1,7 +1,7 @@
 dependencies:
   - name: d3
     src: htmlwidgets/lib/d3
-    version: 7.0.0
+    version: 7.3.0
     script:
       - d3.min.js
   - name: jquery
@@ -17,12 +17,12 @@ dependencies:
     style: themes/smoothness/jquery-ui.min.css
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 1.8.0
+    version: 1.8.4
     script:
       - d3panels.min.js
     style: d3panels.min.css
   - name: qtlcharts_iplotMap
     src: htmlwidgets/lib/qtlcharts
-    version: 0.14
+    version: 0.16
     script:
       - iplotMap.js

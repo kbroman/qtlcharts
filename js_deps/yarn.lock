@@ -223,10 +223,10 @@ d3-zoom@3:
     d3-selection "2 - 3"
     d3-transition "2 - 3"
 
-d3@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/d3/-/d3-7.0.0.tgz#fe6036b38ba2026ff34223e208fd294db1b997da"
-  integrity sha512-t+jEKGO2jQiSBLJYYq6RFc500tsCeXBB4x41oQaSnZD3Som95nQrlw9XJGrFTMUOQOkwSMauWy9+8Tz1qm9UZw==
+d3@^7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/d3/-/d3-7.3.0.tgz#f3d5a22c1f658952a6491cf50132f5267ed7a40a"
+  integrity sha512-MDRLJCMK232OJQRqGljQ/gCxtB8k3/sLKFjftMjzPB3nKVUODpdW9Rb3vcq7U8Ka5YKoZkAmp++Ur6I+6iNWIw==
   dependencies:
     d3-array "3"
     d3-axis "3"
@@ -259,11 +259,11 @@ d3@^7.0.0:
     d3-transition "3"
     d3-zoom "3"
 
-d3panels@kbroman/d3panels#^1.8.0:
-  version "1.8.0"
-  resolved "https://codeload.github.com/kbroman/d3panels/tar.gz/0da7de52afef354e47685a26ac692a271edb79af"
+d3panels@kbroman/d3panels#^1.8.4:
+  version "1.8.4"
+  resolved "https://codeload.github.com/kbroman/d3panels/tar.gz/6a7d23f4c485ef195bf1cd892cc0ef0404a0a8a7"
   dependencies:
-    d3 "^7.0.0"
+    d3 "^7.3.0"
 
 delaunator@5:
   version "5.0.0"

@@ -9,7 +9,7 @@ be combined into larger multi-panel charts.  They were developed for
 the [R/qtlcharts](https://kbroman.org/qtlcharts) package.
 
 Note that d3panels uses
-[D3 version 7](https://github.com/d3/d3/blob/master/API.md).
+[D3 version 7](https://github.com/d3/d3/blob/main/API.md).
 (It should also work with version 6.)
 
 There are other libraries with similar goals that are of more general
@@ -22,7 +22,7 @@ For snapshots and live tests, see <https://kbroman.org/d3panels>.
 
 #### Documentation
 
-For documentation, see <https://github.com/kbroman/d3panels/tree/master/doc>.
+For documentation, see <https://github.com/kbroman/d3panels/tree/main/doc>.
 
 #### Usage
 
@@ -67,8 +67,8 @@ You'll need to link to the `d3panels.js` and `d3panels.css` files (or
 to `d3panels.min.js` and `d3panels.min.css`):
 
 ```html
-<script type="text/javascript" src="https://rawgit.com/kbroman/d3panels/master/d3panels.js"></script>
-<link rel=stylesheet type="text/css" href="https://rawgit.com/kbroman/d3panels/master/d3panels.css">
+<script type="text/javascript" src="https://rawgit.com/kbroman/d3panels/main/d3panels.js"></script>
+<link rel=stylesheet type="text/css" href="https://rawgit.com/kbroman/d3panels/main/d3panels.css">
 ```
 
 You'll also want to link to [D3.js](https://d3js.org):
@@ -84,7 +84,7 @@ To build the javascript (and CSS) files from the coffeescript source,
 you first need to install [npm](https://www.npmjs.com/get-npm).
 
 Then use npm to install [yarn](https://yarnpkg.com/en/), [coffeescript](https://coffeescript.org), [uglify-js](https://github.com/mishoo/UglifyJS2)
-[uglifycss](https://github.com/fmarcia/UglifyCSS), and [babel-core](https://github.com/babel/babel/tree/master/packages/babel-core)
+[uglifycss](https://github.com/fmarcia/UglifyCSS), and [babel-core](https://github.com/babel/babel/tree/main/packages/babel-core)
 
 ```script
 npm install -g yarn coffeescript uglifycss uglify-js babel-core

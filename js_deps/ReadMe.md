@@ -2,11 +2,11 @@
 
 I use [yarn](https://yarnpkg.com) (a packaging system for javascript) to
 grab d3, jquery, jquery-ui, and d3panels. The
-[`js_deps/package.json`](https://github.com/kbroman/qtlcharts/tree/master/js_deps/package.json)
+[`js_deps/package.json`](https://github.com/kbroman/qtlcharts/tree/main/js_deps/package.json)
 file indicates the libraries (and minimal versions) to get.
 
 In the package
-[Makefile](https://github.com/kbroman/qtlcharts/tree/master/Makefile),
+[Makefile](https://github.com/kbroman/qtlcharts/tree/main/Makefile),
 I pull out just the individual files I want, rather than include
 everything that bower pulls down as part of the package.
 

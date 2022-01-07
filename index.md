@@ -33,7 +33,7 @@ To cite R/qtlcharts in publications, please use
 - [User guide](assets/vignettes/userGuide.html)
 - [Developer guide](assets/vignettes/develGuide.html)
 - [d3panels](https://kbroman.org/d3panels/): reusable graphic panels
-- [Use with R Markdown](assets/vignettes/Rmarkdown.html) [[Rmd source](https://github.com/kbroman/qtlcharts/blob/master/vignettes/Rmarkdown.Rmd)]
+- [Use with R Markdown](assets/vignettes/Rmarkdown.html) [[Rmd source](https://github.com/kbroman/qtlcharts/blob/main/vignettes/Rmarkdown.Rmd)]
 - [List of chart customization options](assets/vignettes/chartOpts.html)
 
 ---
@@ -118,5 +118,5 @@ Click on a chart for the corresponding interactive version.
 
 Sources on [github](https://github.com):
 
-- The [source for the package](https://github.com/kbroman/qtlcharts/tree/master)
+- The [source for the package](https://github.com/kbroman/qtlcharts/tree/main)
 - The [source for the website](https://github.com/kbroman/qtlcharts/tree/gh-pages)

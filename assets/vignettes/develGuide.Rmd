@@ -26,7 +26,7 @@ The source for the package is at
 [GitHub](https://github.com/kbroman/qtlcharts).
 The [`devel` branch](https://github.com/kbroman/qtlcharts/tree/devel)
 contains the current development version, while the
-[`master` branch](https://github.com/kbroman/qtlcharts/tree/master)
+[`main` branch](https://github.com/kbroman/qtlcharts/tree/main)
 contains the stable version.
 
 R/qtlcharts uses [htmlwidgets](https://www.htmlwidgets.org) as the
@@ -35,22 +35,22 @@ html file with links to the necessary resources and opens it in a
 browser.
 
 JavaScript and CoffeeScript code are within the
-[`inst/htmlwidgets`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets)
+[`inst/htmlwidgets`](https://github.com/kbroman/qtlcharts/tree/main/inst/htmlwidgets)
 subdirectory. (When the package is _installed_, the contents of the
 `inst` directory are moved up one level, and there is no `inst`
 directory anymore.)
 
 The JavaScript libraries are located in subdirectories of
-[`inst/htmlwidgets/lib`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib).
+[`inst/htmlwidgets/lib`](https://github.com/kbroman/qtlcharts/tree/main/inst/htmlwidgets/lib).
 This includes [D3](https://d3js.org),
 [jQuery](https://jquery.com), and [jQueryUI](https://jqueryui.com),
 as well as a set of basic
 graphic panels, [d3panels](https://kbroman.org/d3panels/).
 
 The key functions that form the higher-level QTL visualizations are in
-[`inst/htmlwidgets/lib/qtlcharts`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/qtlcharts). Each
+[`inst/htmlwidgets/lib/qtlcharts`](https://github.com/kbroman/qtlcharts/tree/main/inst/htmlwidgets/lib/qtlcharts). Each
 has an additional file within the
-[`inst/htmlwidgets`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets)
+[`inst/htmlwidgets`](https://github.com/kbroman/qtlcharts/tree/main/inst/htmlwidgets)
 directory with the code that [htmlwidgets](http://www.htmlwidgets.org)
 needs, as well as a [YAML](http://yaml.org) file that describes the
 set of resources needed for that chart.
@@ -91,7 +91,7 @@ The JavaScript version of this is cumbersome and ugly.
 For each chart there is an R function that reorganizes the data and
 call the [htmlwidgets](http://www.htmlwidgets.org) function
 `createWidget()`. This is connected to the file in
-[`inst/htmlwidgets`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets)
+[`inst/htmlwidgets`](https://github.com/kbroman/qtlcharts/tree/main/inst/htmlwidgets)
 that includes a call to the JavaScript function
 `HTMLWidgets.widget()`, which defines the initialization, rendering,
 and resizing of the interactive chart.
@@ -99,7 +99,7 @@ and resizing of the interactive chart.
 The code within `HTMLWidgets.widget()` will be relatively simple: set
 up the SVG to contain the plot, handle sizing, and then call the
 corresponding function in
-[`inst/htmlwidgets/lib/qtlcharts`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/qtlcharts).
+[`inst/htmlwidgets/lib/qtlcharts`](https://github.com/kbroman/qtlcharts/tree/main/inst/htmlwidgets/lib/qtlcharts).
 
 Those qtlcharts functions then call various
 [d3panels](https://kbroman.org/d3panels/) functions (which create the
@@ -121,7 +121,7 @@ specific named components. If a specific option (e.g., `height` or
 The allowable options are maintained in one place: the CoffeeScript
 code in which they are used. These need to be listed at the top of the
 file in a format like the following (taken from
-[`iplotCorr.coffee`](https://github.com/kbroman/qtlcharts/tree/master/inst/htmlwidgets/lib/qtlcharts/iplotCorr.coffee)).
+[`iplotCorr.coffee`](https://github.com/kbroman/qtlcharts/tree/main/inst/htmlwidgets/lib/qtlcharts/iplotCorr.coffee)).
 
     # chartOpts start
     height = chartOpts?.height ? 450 # height of each panel in pixels
@@ -139,14 +139,14 @@ The name of the option used within the file (on the left) should match
 that used within the R code (e.g., `height` and `chartOpts.height`),
 and each line should end with a comment describing the option.
 This is so that a ruby script
-([`grab_chartOpts.rb`](https://github.com/kbroman/qtlcharts/blob/master/vignettes/chartOpts/grab_chartOpts.rb))
+([`grab_chartOpts.rb`](https://github.com/kbroman/qtlcharts/blob/main/vignettes/chartOpts/grab_chartOpts.rb))
 can parse all of these options and create the
 [chartOpts vignette](https://kbroman.org/qtlcharts/assets/vignettes/chartOpts.html),
 which provides a list of all possible options.
 
 Some charts have multiple versions (e.g., `iplotScanone` with no
 effects, with confidence intervals, or with raw phenotype &times;
-genotype).  The file [`multiversions.csv`](https://github.com/kbroman/qtlcharts/blob/master/vignettes/chartOpts/multiversions.csv)
+genotype).  The file [`multiversions.csv`](https://github.com/kbroman/qtlcharts/blob/main/vignettes/chartOpts/multiversions.csv)
 lists the chart name and a bit of Markdown code to describe the
 version. Also, the order of the charts in the
 [chartOpts vignette](https://kbroman.org/qtlcharts/assets/vignettes/chartOpts.html)
@@ -188,7 +188,7 @@ R help files are created using
 [Roxygen2](https://github.com/klutometis/roxygen): structured comments
 in the R code are converted to the R manual page format with the
 `devtools::document` function (see the
-[`Makefile`](https://github.com/kbroman/qtlcharts/tree/master/Makefile)).
+[`Makefile`](https://github.com/kbroman/qtlcharts/tree/main/Makefile)).
 
 For further information on Roxygen2, see
 [Object documentation](http://r-pkgs.had.co.nz/man.html)
@@ -206,15 +206,15 @@ graphics. The basic panel functions in
 [its GitHub repository](https://github.com/kbroman/d3panels).
 
 Tests of some of the R utility functions are in
-[`tests/testthat`](https://github.com/kbroman/qtlcharts/tree/master/tests/testthat). We're
+[`tests/testthat`](https://github.com/kbroman/qtlcharts/tree/main/tests/testthat). We're
 using the R package [testthat](https://github.com/r-lib/testthat).
 
 We also generate a couple of tests for each of the higher-level chart
 functions: in the usual simple way (see
-[`tests/htmltest`](https://github.com/kbroman/qtlcharts/tree/master/tests/htmltest)),
+[`tests/htmltest`](https://github.com/kbroman/qtlcharts/tree/main/tests/htmltest)),
 and within the context of an
 [R Markdown](https://rmarkdown.rstudio.com) document (see
-[`tests/Rmdtest`](https://github.com/kbroman/qtlcharts/tree/master/tests/Rmdtest)).
+[`tests/Rmdtest`](https://github.com/kbroman/qtlcharts/tree/main/tests/Rmdtest)).
 These are executed with `R CMD CHECK`, but the results next to be
 inspected individually by eye.
 
@@ -227,7 +227,7 @@ The R/qtlcharts package as a whole is distributed under
 R/qtlcharts incorporates the following other open source software
 components, which have their own license agreements.
 
-- [D3.js](https://d3js.org) ([license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3/LICENSE))
-- [jQuery](https://jquery.com) ([license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery/LICENSE.txt))
-- [jQuery UI](https://jqueryui.com/) ([license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt))
-- [d3panels](https://github.com/kbroman/d3panels) ([license](https://github.com/kbroman/qtlcharts/blob/master/inst/htmlwidgets/lib/d3panels/LICENSE.md))
+- [D3.js](https://d3js.org) ([license](https://github.com/kbroman/qtlcharts/blob/main/inst/htmlwidgets/lib/d3/LICENSE))
+- [jQuery](https://jquery.com) ([license](https://github.com/kbroman/qtlcharts/blob/main/inst/htmlwidgets/lib/jquery/LICENSE.txt))
+- [jQuery UI](https://jqueryui.com/) ([license](https://github.com/kbroman/qtlcharts/blob/main/inst/htmlwidgets/lib/jquery-ui/LICENSE.txt))
+- [d3panels](https://github.com/kbroman/d3panels) ([license](https://github.com/kbroman/qtlcharts/blob/main/inst/htmlwidgets/lib/d3panels/LICENSE.md))

@@ -1,3 +1,8 @@
+## qtlcharts 0.17-1 (2023-02-27)
+
+- In CITATION file, change `citEntry()` to `bibentry()`.
+
+
 ## qtlcharts 0.16 (2022-01-07)
 
 - Update d3panels to 1.8.4, with improvement to `formatAxis()`.

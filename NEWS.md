@@ -207,7 +207,7 @@
 - Got the package working with
   [jsonlite](https://github.com/jeroen/jsonlite), as
   [htmlwidgets](https://www.htmlwidgets.org) has now switched from
-  [RJSONIO](http://www.omegahat.net/RJSONIO/) to jsonlite, for
+  [RJSONIO](https://www.omegahat.net/RJSONIO/) to jsonlite, for
   converting R objects to [JSON](https://www.json.org/json-en.html).
 
 
@@ -233,7 +233,7 @@
 - Refactored the entire package to use
   [htmlwidgets](https://www.htmlwidgets.org).
   A big advantage is that the charts now work nicely within
-  [RStudio](https://www.rstudio.com/products/RStudio/).
+  [RStudio](https://posit.co/products/open-source/rstudio/)
 
 - To save a plot to a file, you now need to assign the result of a plot
   function to an object and then use the

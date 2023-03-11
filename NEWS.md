@@ -1,6 +1,8 @@
-## qtlcharts 0.17-1 (2023-02-27)
+## qtlcharts 0.17-2 (2023-03-11)
 
 - In CITATION file, change `citEntry()` to `bibentry()`.
+
+- Upgrade d3 to 7.8.2
 
 
 ## qtlcharts 0.16 (2022-01-07)

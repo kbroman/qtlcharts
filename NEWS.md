@@ -4,6 +4,8 @@
 
 - Upgrade d3 to 7.8.2
 
+- Upgrade jquery to 3.6.4
+
 
 ## qtlcharts 0.16 (2022-01-07)
 

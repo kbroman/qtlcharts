@@ -1,7 +1,8 @@
 ### R/qtlcharts: Interactive graphics for QTL experiments
 
-[![R-CMD-check](https://github.com/kbroman/qtlcharts/workflows/R-CMD-check/badge.svg)](https://github.com/kbroman/qtlcharts/actions)
+[![R-CMD-check](https://github.com/kbroman/qtlcharts/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbroman/qtlcharts/actions/workflows/R-CMD-check.yaml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qtlcharts)](https://cran.r-project.org/package=qtlcharts)
+[![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4049918.svg)](https://doi.org/10.5281/zenodo.4049918)
 
 [Karl W Broman](https://kbroman.org)
 

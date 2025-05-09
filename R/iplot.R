@@ -6,7 +6,7 @@
 #' Creates an interactive scatterplot.
 #'
 #' @param x Numeric vector of x values
-#' @param y Numeric vector of y values
+#' @param y Numeric vector of y values (If NULL, we take the `x` values as `y`, and use `1:length(x)` for `x`.)
 #' @param group Optional vector of categories for coloring the points
 #' @param indID Optional vector of character strings, shown with tool tips
 #' @param chartOpts A list of options for configuring the chart.  Each

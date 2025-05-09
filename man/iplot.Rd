@@ -9,7 +9,7 @@ iplot(x, y = NULL, group = NULL, indID = NULL, chartOpts = NULL, digits = 5)
 \arguments{
 \item{x}{Numeric vector of x values}
 
-\item{y}{Numeric vector of y values}
+\item{y}{Numeric vector of y values (If NULL, we take the `x` values as `y`, and use `1:length(x)` for `x`.)}
 
 \item{group}{Optional vector of categories for coloring the points}
 

@@ -2,7 +2,7 @@ citHeader("To cite R/qtlcharts in publications, use:")
 
 bibentry(bibtype="article",
          title = "R/qtlcharts: interactive graphics for quantitative trait locus mapping",
-         author = c(person("Karl W.", "Broman")),
+         author = person("Karl W.", "Broman"),
          journal = "Genetics",
          year = 2015,
          volume = 199,

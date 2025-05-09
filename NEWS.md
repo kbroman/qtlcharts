@@ -1,4 +1,4 @@
-## qtlcharts 0.17-2 (2023-03-11)
+## qtlcharts 0.17-3 (2025-05-09)
 
 - In CITATION file, change `citEntry()` to `bibentry()`.
 

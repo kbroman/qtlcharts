@@ -17,7 +17,7 @@
 #'
 #' @name qtlcharts-package
 #' @aliases qtlcharts
-#' @docType package
+#' _PACKAGE
 NULL
 
 

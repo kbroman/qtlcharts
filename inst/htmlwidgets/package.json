@@ -1,6 +1,6 @@
 {
   "name": "qtlcharts",
-  "version": "0.14",
+  "version": "0.18",
   "description": "Interactive Graphics for QTL Experiments",
   "author": "Karl Broman <broman@wisc.edu> (https://kbroman.org)",
   "repository": "github:kbroman/qtlcharts",

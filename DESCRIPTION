@@ -1,6 +1,6 @@
 Package: qtlcharts
-Version: 0.17-3
-Date: 2025-05-09
+Version: 0.18
+Date: 2025-05-10
 Title: Interactive Graphics for QTL Experiments
 Author: Karl W Broman [aut, cre] (<https://orcid.org/0000-0002-4914-6671>),
     Michael Bostock [ctb, cph] (d3.js library in htmlwidgets/lib,
@@ -37,7 +37,7 @@ BugReports: https://github.com/kbroman/qtlcharts/issues
 LazyData: true
 Encoding: UTF-8
 ByteCompile: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Authors@R: c(
     person("Karl W", "Broman", role=c("aut", "cre"), email="broman@wisc.edu",
            comment=c(ORCID = "0000-0002-4914-6671")),

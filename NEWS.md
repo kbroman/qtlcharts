@@ -1,10 +1,10 @@
-## qtlcharts 0.17-3 (2025-05-09)
+## qtlcharts 0.18 (2025-05-10)
 
 - In CITATION file, change `citEntry()` to `bibentry()`.
 
-- Upgrade d3 to 7.8.2
+- Upgrade d3 to 7.9.0 (and d3panels to 1.8.5)
 
-- Upgrade jquery to 3.6.4
+- Upgrade jquery to 3.7.1
 
 
 ## qtlcharts 0.16 (2022-01-07)

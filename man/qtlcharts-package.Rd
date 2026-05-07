@@ -2,8 +2,8 @@
 % Please edit documentation in R/qtlcharts.R
 \docType{package}
 \name{qtlcharts-package}
-\alias{qtlcharts}
 \alias{qtlcharts-package}
+\alias{qtlcharts}
 \title{R/qtlcharts: Interactive charts for QTL data}
 \description{
 A QTL is a *quantitative trait locus*: a genetic locus that

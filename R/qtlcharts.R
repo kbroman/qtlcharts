@@ -16,9 +16,7 @@
 #' - [List of chart customization options](https://kbroman.org/qtlcharts/assets/vignettes/chartOpts.html)
 #'
 #' @name qtlcharts-package
-#' @aliases qtlcharts
-#' _PACKAGE
-NULL
+"_PACKAGE"
 
 
 #' Shiny bindings for R/qtlcharts widgets

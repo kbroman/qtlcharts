@@ -1,6 +1,7 @@
-## qtlcharts 0.19-1 (2025-05-22)
+## qtlcharts 0.20 (2025-05-22)
 
 - Update d3panels to 1.8.6 (fix of d3panels.formatAxis, for Issue #78)
+
 
 ## qtlcharts 0.18 (2025-05-10)
 

@@ -1,3 +1,7 @@
+## qtlcharts 0.19-1 (2025-05-22)
+
+- Update d3panels to 1.8.6 (fix of d3panels.formatAxis, for Issue #78)
+
 ## qtlcharts 0.18 (2025-05-10)
 
 - In CITATION file, change `citEntry()` to `bibentry()`.
@@ -237,7 +241,7 @@
 - Refactored the entire package to use
   [htmlwidgets](https://www.htmlwidgets.org).
   A big advantage is that the charts now work nicely within
-  [RStudio](https://posit.co/products/open-source/rstudio/)
+  [RStudio](https://posit.co/products/open-source/rstudio)
 
 - To save a plot to a file, you now need to assign the result of a plot
   function to an object and then use the

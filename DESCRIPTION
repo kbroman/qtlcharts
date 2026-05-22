@@ -37,7 +37,6 @@ BugReports: https://github.com/kbroman/qtlcharts/issues
 LazyData: true
 Encoding: UTF-8
 ByteCompile: true
-RoxygenNote: 7.3.2
 Authors@R: c(
     person("Karl W", "Broman", role=c("aut", "cre"), email="broman@wisc.edu",
            comment=c(ORCID = "0000-0002-4914-6671")),
@@ -49,3 +48,4 @@ Authors@R: c(
            comment = "jQuery library in htmlwidgets/lib; see https://github.com/jquery/jquery/blob/master/AUTHORS.txt"),
     person("jQuery UI contributors", role = "ctb",
            comment = "jQuery UI library in htmlwidgets/lib; see https://jqueryui.com/about/"))
+Config/roxygen2/version: 8.0.0

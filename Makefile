@@ -110,7 +110,9 @@ $(JSDEPS_DIR)/d3panels/node_modules: #$(JSDEPS_DIR)/d3panels/@bower_components
 
 # remove all data files and javascript files
 clean:
-	rm $(PANEL_DIR)/*.js $(CHART_DIR)/*.js
+	rm $(PANEL_DIR)/*.js $(CHART_DIR)/*.js $(WIDGET_DIR)/*.js
+	rm -r $(JSDEPS_DIR)
+	rm js_deps/bower_components js_deps/yarn.lock
 
 #------------------------------------------------------------
 

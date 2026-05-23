@@ -73,6 +73,10 @@ $(LIB_DIR)/d3/%: $(JSDEPS_DIR)/d3/%
 $(LIB_DIR)/d3/d3.min.js: $(JSDEPS_DIR)/d3/dist/d3.min.js
 	cp $< $@
 
+# to force "yarn install" when needed
+$(JSDEPS_DIR)/d3/dist/d3.min.js: js_deps/yarn.lock js_deps/package.json
+
+
 # jquery
 jquery: $(LIB_DIR)/jquery/LICENSE.txt \
 		$(LIB_DIR)/jquery/dist/jquery.min.js \
@@ -100,6 +104,12 @@ d3panels: $(LIB_DIR)/d3panels/d3panels.min.js \
 
 $(LIB_DIR)/d3panels/%: $(JSDEPS_DIR)/d3panels/%
 	cp $< $@
+
+# to force "yarn install" when needed
+$(JSDEPS_DIR)/d3panels/d3panels.min.js: js_deps/package.json js_deps/yarn.lock
+
+js_deps/yarn.lock: js_deps/package.json
+	cd js_deps;yarn install
 
 # these next to are to deal with a problem in "R CMD build"
 # ...because yarn is creating a symlink node_modules/d3panels/@bower_components

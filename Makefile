@@ -5,7 +5,7 @@ PANEL_DIR = inst/htmlwidgets/lib/d3panels
 CHART_DIR = inst/htmlwidgets/lib/qtlcharts
 WIDGET_DIR = inst/htmlwidgets
 
-COFFEE_ARGS = -ct # use -cm for debugging; -c otherwise
+COFFEE_ARGS = -c # use -cm for debugging; -c otherwise; -ct to use babel to compile to ESS5
 
 # build package documentation
 doc:

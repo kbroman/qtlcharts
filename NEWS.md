@@ -1,6 +1,10 @@
-## qtlcharts 0.21-1 (2025-05-22)
+## qtlcharts 0.21-2 (2025-05-23)
 
 - Update d3panels to 1.8.8 (subtle fix in cichart)
+
+- No longer using babel to transpile the javascript that coffeescript
+  produces (using `coffee -c` rather than `coffee -ct`) because babel
+  is giving errors. Recompiled coffeescript with 2.7.0
 
 
 ## qtlcharts 0.20 (2025-05-22)

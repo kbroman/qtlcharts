@@ -259,9 +259,9 @@ d3@^7.9.0:
     d3-transition "3"
     d3-zoom "3"
 
-d3panels@kbroman/d3panels#^1.8.7:
-  version "1.8.7"
-  resolved "https://codeload.github.com/kbroman/d3panels/tar.gz/284c90d828c524c3bbbb65e3579756377282421d"
+d3panels@kbroman/d3panels#^1.8.8:
+  version "1.8.8"
+  resolved "https://codeload.github.com/kbroman/d3panels/tar.gz/77d2b5807ba7595f13753097b7250540dd30fff1"
   dependencies:
     d3 "^7.9.0"
 

@@ -6,13 +6,13 @@ dependencies:
       - d3.min.js
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 1.8.7
+    version: 1.8.8
     script:
       - d3panels.min.js
     style: d3panels.min.css
   - name: qtlcharts_iplotScanone
     src: htmlwidgets/lib/qtlcharts
-    version: 0.20
+    version: 0.21-1
     script:
       - iplotScanone_noeff.js
       - iplotScanone_ci.js

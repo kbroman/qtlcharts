@@ -24,7 +24,15 @@ Install R/qtlcharts from CRAN using
 install.packages("qtlcharts")
 ```
 
-Alternatively, install it from its
+Alternatively, install it from [R
+universe](https://kbroman.r-universe.dev):
+
+```r
+install.packages("qtlcharts", repos=c("https://kbroman.r-universe.dev",
+                                      "https://cloud.r-project.org"))
+```
+
+Or install it from its
 [GitHub repository](https://github.com/kbroman/qtlcharts). First
 install the [remotes](https://github.com/r-lib/remotes) package.
 

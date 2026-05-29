@@ -74,7 +74,7 @@
 #' \donttest{
 #' # plot with QTL effects included (and with quantitative y-axis)
 #' iplotMScanone(out, effects=eff, times=times,
-#'               chartOpts=list(eff_ylab="QTL effect", eff_xlab="Time (hrs)"))}
+#'               chartOpts=list(ylab="Time (hrs)", eff_ylab="QTL effect"))}
 #'
 #' @export
 iplotMScanone <-

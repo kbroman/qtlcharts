@@ -1,4 +1,4 @@
-## qtlcharts 0.21-2 (2025-05-23)
+## qtlcharts 0.21-3 (2025-05-29)
 
 - Update d3panels to 1.8.8 (subtle fix in cichart)
 

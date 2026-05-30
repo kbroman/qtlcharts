@@ -1,10 +1,13 @@
-## qtlcharts 0.21-3 (2025-05-29)
+## qtlcharts 0.21-4 (2025-05-29)
 
 - Update d3panels to 1.8.8 (subtle fix in cichart)
 
 - No longer using babel to transpile the javascript that coffeescript
   produces (using `coffee -c` rather than `coffee -ct`) because babel
   is giving errors. Recompiled coffeescript with 2.7.0
+
+- Fixed a mistake in `iboxplot_output` and `iboxplot_render` (for
+  using `iboxplot` with Shiny)
 
 
 ## qtlcharts 0.20 (2025-05-22)

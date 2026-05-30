@@ -4,7 +4,7 @@
 
 - No longer using babel to transpile the javascript that coffeescript
   produces (using `coffee -c` rather than `coffee -ct`) because babel
-  is giving errors. Recompiled coffeescript with 2.7.0
+  is giving errors. Recompiled with coffeescript 2.7.0
 
 - Fixed a mistake in `iboxplot_output` and `iboxplot_render` (for
   using `iboxplot` with Shiny)

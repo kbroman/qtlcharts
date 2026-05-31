@@ -1,6 +1,7 @@
 ## qtlcharts 0.21-5 (2025-05-31)
 
-- Update d3panels to 1.8.8 (subtle fix in cichart)
+- Update d3panels to 1.8.9 (subtle fix in cichart; placement of
+  tooltip in iplotMap) (Issue #79)
 
 - No longer using babel to transpile the javascript that coffeescript
   produces (using `coffee -c` rather than `coffee -ct`) because babel

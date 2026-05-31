@@ -9,8 +9,8 @@
 - Fixed a mistake in `iboxplot_output` and `iboxplot_render` (for
   using `iboxplot` with Shiny)
 
-- Fixed a bug where tooltips were misplaced, for `iplotCorr()` within
-  a Shiny app. (Issue #80)
+- Fixed a bug where tooltips were misplaced, for `iplotCorr()` or
+  `iboxplot()` within a Shiny app. (Issue #80)
 
 
 ## qtlcharts 0.20 (2025-05-22)

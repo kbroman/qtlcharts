@@ -357,7 +357,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
                      else
                          d3.select("path#path#{data.ind[d]}").remove()
 
-    tooltip = d3panels.tooltip_create(d3.select(widgetdiv), indRectGrp.selectAll("rect"),
+    tooltip = d3panels.tooltip_create(d3.select("body"), indRectGrp.selectAll("rect"),
                                       {tipclass:widgetdivid}, (d) -> data.ind[d])
 
     # box around the outside

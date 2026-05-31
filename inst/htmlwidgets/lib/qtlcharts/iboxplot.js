@@ -249,7 +249,7 @@ iboxplot = function(widgetdiv, data, chartOpts) {
       return d3.select(`path#path${data.ind[d]}`).remove();
     }
   });
-  tooltip = d3panels.tooltip_create(d3.select(widgetdiv), indRectGrp.selectAll("rect"), {
+  tooltip = d3panels.tooltip_create(d3.select("body"), indRectGrp.selectAll("rect"), {
     tipclass: widgetdivid
   }, function(d) {
     return data.ind[d];

@@ -61,6 +61,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
 }
 
 
+#' @name qtlcharts-shiny
 #' @rdname qtlcharts-shiny
 #' @export
 iboxplot_output <- function(outputId, width="100%", height="900") {

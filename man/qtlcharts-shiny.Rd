@@ -3,7 +3,8 @@
 %   R/ipleiotropy.R, R/iplot.R, R/iplotCorr.R, R/iplotCurves.R,
 %   R/iplotMScanone.R, R/iplotMap.R, R/iplotRF.R, R/iplotScanone.R,
 %   R/iplotScantwo.R, R/itriplot.R, R/qtlcharts.R, R/scat2scat.R
-\name{iboxplot_output}
+\name{qtlcharts-shiny}
+\alias{qtlcharts-shiny}
 \alias{iboxplot_output}
 \alias{iboxplot_render}
 \alias{idotplot_output}
@@ -30,7 +31,6 @@
 \alias{iplotScantwo_render}
 \alias{itriplot_output}
 \alias{itriplot_render}
-\alias{qtlcharts-shiny}
 \alias{scat2scat_output}
 \alias{scat2scat_render}
 \title{Shiny bindings for R/qtlcharts widgets}
@@ -98,7 +98,7 @@ scat2scat_render(expr, env = parent.frame(), quoted = FALSE)
 \code{"400px"}, \code{"auto"}) or a number, which will be coerced to a
 string and have \code{"px"} appended.}
 
-\item{expr}{An expression that generates a networkD3 graph}
+\item{expr}{An expression that generates the graph.}
 
 \item{env}{The environment in which to evaluate \code{expr}.}
 
@@ -107,5 +107,6 @@ is useful if you want to save an expression in a variable.}
 }
 \description{
 Output and render functions for using R/qtlcharts widgets within Shiny
-applications and interactive Rmd documents.
+applications and interactive Rmd documents. For examples, see
+\url{https://github.com/kbroman/shiny_qtlcharts}.
 }

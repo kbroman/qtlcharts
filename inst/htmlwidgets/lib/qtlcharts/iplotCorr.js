@@ -106,7 +106,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   }).on("click", function(event, d) {
     return drawScatter(d.col, d.row);
   });
-  corr_tip = d3panels.tooltip_create(d3.select(widgetdiv), cells, {
+  corr_tip = d3panels.tooltip_create(d3.select("body"), cells, {
     tipclass: widgetdivid
   }, function(d) {
     return d3.format(".2f")(d.value);
@@ -187,7 +187,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
     }).attr("stroke", "black").attr("stroke-width", 1).attr("fill", function(d) {
       return scatcolors[data.group[d] - 1];
     });
-    return scat_tip = d3panels.tooltip_create(d3.select(widgetdiv), points, {
+    return scat_tip = d3panels.tooltip_create(d3.select("body"), points, {
       tipclass: widgetdivid
     }, function(d, i) {
       return data.indID[i];

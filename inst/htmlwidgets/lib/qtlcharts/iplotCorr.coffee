@@ -113,7 +113,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                .on("click",(event,d) -> drawScatter(d.col, d.row))
 
 
-    corr_tip = d3panels.tooltip_create(d3.select(widgetdiv), cells,
+    corr_tip = d3panels.tooltip_create(d3.select("body"), cells,
                                        {tipclass:widgetdivid},
                                        (d) -> d3.format(".2f")(d.value))
 
@@ -225,7 +225,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                    .attr("stroke-width", 1)
                    .attr("fill", (d) -> scatcolors[data.group[d]-1])
 
-        scat_tip = d3panels.tooltip_create(d3.select(widgetdiv), points,
+        scat_tip = d3panels.tooltip_create(d3.select("body"), points,
                                        {tipclass: widgetdivid},
                                        (d,i) -> data.indID[i])
 

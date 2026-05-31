@@ -86,7 +86,7 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
                      d3.selectAll("text.corrlabel").remove()
                      d3.select(this).attr("stroke","none"))
 
-    corr_tip = d3panels.tooltip_create(d3.select(widgetdiv), cells,
+    corr_tip = d3panels.tooltip_create(d3.select("body"), cells,
                                        {tipclass:widgetdivid},
                                        (d) -> d3.format(".2f")(d.value))
 

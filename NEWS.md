@@ -1,4 +1,4 @@
-## qtlcharts 0.21-4 (2025-05-29)
+## qtlcharts 0.21-5 (2025-05-31)
 
 - Update d3panels to 1.8.8 (subtle fix in cichart)
 
@@ -8,6 +8,9 @@
 
 - Fixed a mistake in `iboxplot_output` and `iboxplot_render` (for
   using `iboxplot` with Shiny)
+
+- Fixed a bug where tooltips were misplaced, for `iplotCorr()` within
+  a Shiny app. (Issue #80)
 
 
 ## qtlcharts 0.20 (2025-05-22)

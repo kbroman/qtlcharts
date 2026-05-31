@@ -14,8 +14,8 @@ iplotPXG(
 )
 }
 \arguments{
-\item{cross}{Object of class `"cross"`, see
-[qtl::read.cross()].}
+\item{cross}{Object of class \code{"cross"}, see
+\code{\link[qtl:read.cross]{qtl::read.cross()}}.}
 
 \item{marker}{Character string with marker name.}
 
@@ -25,13 +25,13 @@ iplotPXG(
 element must be named using the corresponding option.}
 
 \item{fillgenoArgs}{List of named arguments to pass to
-[qtl::fill.geno()], if needed.}
+\code{\link[qtl:fill.geno]{qtl::fill.geno()}}, if needed.}
 
 \item{digits}{Round data to this number of significant digits
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class `htmlwidget` that will
+An object of class \code{htmlwidget} that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
@@ -40,13 +40,12 @@ Shiny output bindings.
 Creates an interactive graph of phenotypes vs genotypes at a marker.
 }
 \details{
-The function [qtl::fill.geno()] is used to
+The function \code{\link[qtl:fill.geno]{qtl::fill.geno()}} is used to
 impute missing genotypes, with arguments passed as a list, for
-example `fillgenoArgs=list(method="argmax", error.prob=0.002,
-map.function="c-f")`.
+example \code{fillgenoArgs=list(method="argmax", error.prob=0.002, map.function="c-f")}.
 
 Individual IDs (viewable when hovering over a point) are taken from
-the input `cross` object, using the [qtl::getid()]
+the input \code{cross} object, using the \code{\link[qtl:getid]{qtl::getid()}}
 function in R/qtl.
 
 By default, points are colored blue and pink according to whether
@@ -64,7 +63,7 @@ iplotPXG(hyper, marker, chartOpts=list(pointcolor=c("black", "gray")))}
 
 }
 \seealso{
-[idotplot()], [iplot()], [iplotScanone()],
-[iplotMap()]
+\code{\link[=idotplot]{idotplot()}}, \code{\link[=iplot]{iplot()}}, \code{\link[=iplotScanone]{iplotScanone()}},
+\code{\link[=iplotMap]{iplotMap()}}
 }
 \keyword{hplot}

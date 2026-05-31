@@ -16,6 +16,10 @@
 - Fixed a bug where new tooltips were created everytime you click the
   correlation matrix in `iplotCorr()`. (Issue #81)
 
+- Fixed help documents, which weren't being converted properly as I'd
+  left off `Roxygen: list(markdown=TRUE)` from the DESCRIPTION file.
+  (Issue #82)
+
 
 ## qtlcharts 0.20 (2025-05-22)
 

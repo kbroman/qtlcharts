@@ -49,3 +49,4 @@ Authors@R: c(
     person("jQuery UI contributors", role = "ctb",
            comment = "jQuery UI library in htmlwidgets/lib; see https://jqueryui.com/about/"))
 Config/roxygen2/version: 8.0.0
+Roxygen: list(markdown=TRUE)

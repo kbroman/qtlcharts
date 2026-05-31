@@ -36,7 +36,7 @@ corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class `htmlwidget` that will
+An object of class \code{htmlwidget} that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
@@ -69,6 +69,6 @@ iplotCurves(y, times, y[,c(1,5)], y[,c(5,16)],
 
 }
 \seealso{
-[iplotCorr()], [iplot()], [scat2scat()]
+\code{\link[=iplotCorr]{iplotCorr()}}, \code{\link[=iplot]{iplot()}}, \code{\link[=scat2scat]{scat2scat()}}
 }
 \keyword{hplot}

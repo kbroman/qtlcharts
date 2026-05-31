@@ -21,7 +21,7 @@ iboxplot(
 \item{orderByMedian}{If TRUE, reorder individuals by their median}
 
 \item{breaks}{Number of bins in the histograms, or a vector of
-locations of the breakpoints between bins (as in [graphics::hist()])}
+locations of the breakpoints between bins (as in \code{\link[graphics:hist]{graphics::hist()}})}
 
 \item{chartOpts}{A list of options for configuring the chart (see
 the coffeescript code). Each element must be named using the
@@ -31,7 +31,7 @@ corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class `htmlwidget` that will
+An object of class \code{htmlwidget} that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
@@ -51,6 +51,6 @@ iboxplot(expr, chartOpts=list(xlab="Mice", ylab="Gene expression"))}
 
 }
 \seealso{
-[iplotCorr()], [scat2scat()]
+\code{\link[=iplotCorr]{iplotCorr()}}, \code{\link[=scat2scat]{scat2scat()}}
 }
 \keyword{hplot}

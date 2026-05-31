@@ -5,10 +5,10 @@
 \alias{grav}
 \title{Arabidopsis QTL data on gravitropism}
 \format{
-An object of class `"cross"`; see [qtl::read.cross()].
+An object of class \code{"cross"}; see \code{\link[qtl:read.cross]{qtl::read.cross()}}.
 }
 \source{
-Mouse Phenome Database, <https://phenome.jax.org/projects/Moore1b>
+Mouse Phenome Database, \url{https://phenome.jax.org/projects/Moore1b}
 }
 \usage{
 data(grav)
@@ -34,6 +34,6 @@ Moore CR, Johnson LS, Kwak I-Y, Livny M, Broman KW,
 Spalding EP (2013) High-throughput computer vision introduces the
 time axis to a quantitative trait map of a plant growth
 response. Genetics 195:1077-1086
-([PubMed](https://pubmed.ncbi.nlm.nih.gov/23979570/))
+(\href{https://pubmed.ncbi.nlm.nih.gov/23979570/}{PubMed})
 }
 \keyword{datasets}

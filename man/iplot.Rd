@@ -9,7 +9,7 @@ iplot(x, y = NULL, group = NULL, indID = NULL, chartOpts = NULL, digits = 5)
 \arguments{
 \item{x}{Numeric vector of x values}
 
-\item{y}{Numeric vector of y values (If NULL, we take the `x` values as `y`, and use `1:length(x)` for `x`.)}
+\item{y}{Numeric vector of y values (If NULL, we take the \code{x} values as \code{y}, and use \code{1:length(x)} for \code{x}.)}
 
 \item{group}{Optional vector of categories for coloring the points}
 
@@ -22,7 +22,7 @@ element must be named using the corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class `htmlwidget` that will
+An object of class \code{htmlwidget} that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
@@ -39,7 +39,7 @@ iplot(x, y, grp)}
 
 }
 \seealso{
-[iplotCorr()], [iplotCurves()], [itriplot()],
-[idotplot()], [iplotPXG()]
+\code{\link[=iplotCorr]{iplotCorr()}}, \code{\link[=iplotCurves]{iplotCurves()}}, \code{\link[=itriplot]{itriplot()}},
+\code{\link[=idotplot]{idotplot()}}, \code{\link[=iplotPXG]{iplotPXG()}}
 }
 \keyword{hplot}

@@ -22,7 +22,7 @@ element must be named using the corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class `htmlwidget` that will
+An object of class \code{htmlwidget} that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
@@ -39,6 +39,6 @@ idotplot(g, y)}
 
 }
 \seealso{
-[iplot()], [iplotPXG()]
+\code{\link[=iplot]{iplot()}}, \code{\link[=iplotPXG]{iplotPXG()}}
 }
 \keyword{hplot}

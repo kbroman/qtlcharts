@@ -17,11 +17,11 @@ iplotMScanone(
 )
 }
 \arguments{
-\item{scanoneOutput}{Object of class `"scanone"`, as output
-from [qtl::scanone()].}
+\item{scanoneOutput}{Object of class \code{"scanone"}, as output
+from \code{\link[qtl:scanone]{qtl::scanone()}}.}
 
-\item{cross}{(Optional) Object of class `"cross"`, see
-[qtl::read.cross()].}
+\item{cross}{(Optional) Object of class \code{"cross"}, see
+\code{\link[qtl:read.cross]{qtl::read.cross()}}.}
 
 \item{lodcolumn}{Numeric value indicating LOD score column to plot.}
 
@@ -31,11 +31,11 @@ from [qtl::scanone()].}
 score columns) with quantitative values to which the different LOD
 score columns correspond (times of measurements, or something like
 age or dose).  These need to be ordered and equally-spaced. If
-omitted, the names of the columns in `scanoneOutput` are used
+omitted, the names of the columns in \code{scanoneOutput} are used
 and treated as qualitative.}
 
 \item{effects}{(Optional) Estimated QTL effects, as obtained with
-[estQTLeffects()].}
+\code{\link[=estQTLeffects]{estQTLeffects()}}.}
 
 \item{chr}{(Optional) Optional vector indicating the chromosomes
 for which LOD scores should be calculated. This should be a vector
@@ -52,19 +52,19 @@ corresponding option.}
 before passing to the chart function. (Use NULL to not round.)}
 }
 \value{
-An object of class `htmlwidget` that will
+An object of class \code{htmlwidget} that will
 intelligently print itself into HTML in a variety of contexts
 including the R console, within R Markdown documents, and within
 Shiny output bindings.
 }
 \description{
 Creates an interactive graph of a set of single-QTL genome scans, as
-calculated by [qtl::scanone()]. If `cross` or
-`effects` are provided, LOD curves will be linked to a panel
+calculated by \code{\link[qtl:scanone]{qtl::scanone()}}. If \code{cross} or
+\code{effects} are provided, LOD curves will be linked to a panel
 with estimated QTL effects.
 }
 \details{
-If `cross` is provided, Haley-Knott regression is
+If \code{cross} is provided, Haley-Knott regression is
 used to estimate QTL effects at each pseudomarker.
 }
 \examples{
@@ -100,6 +100,6 @@ iplotMScanone(out, effects=eff, times=times,
 
 }
 \seealso{
-[iplotScanone()]
+\code{\link[=iplotScanone]{iplotScanone()}}
 }
 \keyword{hplot}

@@ -6,7 +6,7 @@
 var iplotCorr;
 
 iplotCorr = function(widgetdiv, data, chartOpts) {
-  var cells, chartdivid, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, min_paneldim, nGroup, ncorrX, ncorrY, nind, nvar, panelheight, panelwidth, pixel_height, pixel_width, pointsize, rectcolor, ref, ref1, ref10, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, scatcolors, scatterplot, scattitle, svg, widgetdivid, width, zlim;
+  var cells, chartdivid, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, min_paneldim, nGroup, ncorrX, ncorrY, nind, nvar, panelheight, panelwidth, pixel_height, pixel_width, pointsize, rectcolor, ref, ref1, ref10, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, scat_tip, scatcolors, scatterplot, scattitle, svg, widgetdivid, width, zlim;
   // data is an object with 7 components
   //   data.indID  vector of character strings, of length n, with IDs for individuals
   //   data.var    vector of character strings, of length p, with variable names
@@ -137,11 +137,15 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
       })();
     }
   }
+  scat_tip = null;
   drawScatter = function(i, j) {
-    var points, scat_tip, xScale, xticks, yScale, yticks;
+    var points, xScale, xticks, yScale, yticks;
     d3.selectAll("circle.points").remove();
     d3.selectAll("text.axes").remove();
     d3.selectAll("line.axes").remove();
+    if (scat_tip != null) {
+      d3panels.tooltip_destroy(scat_tip);
+    }
     xScale = d3.scaleLinear().domain(d3.extent(data.dat[data.cols[i]])).range([margin.inner, panelwidth - margin.inner]);
     yScale = d3.scaleLinear().domain(d3.extent(data.dat[data.rows[j]])).range([panelheight - margin.inner, margin.inner]);
     // axis labels

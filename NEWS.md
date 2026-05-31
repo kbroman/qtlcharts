@@ -12,6 +12,9 @@
 - Fixed a bug where tooltips were misplaced, for `iplotCorr()` or
   `iboxplot()` within a Shiny app. (Issue #80)
 
+- Fixed a bug where new tooltips were created everytime you click the
+  correlation matrix in `iplotCorr()`. (Issue #81)
+
 
 ## qtlcharts 0.20 (2025-05-22)
 

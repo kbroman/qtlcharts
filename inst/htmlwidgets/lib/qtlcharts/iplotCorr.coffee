@@ -134,10 +134,15 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                 colorScale = d3.schemeCategory20
             scatcolors = (colorScale[i] for i of d3.range(nGroup))
 
+    scat_tip = null
+
     drawScatter = (i,j) ->
         d3.selectAll("circle.points").remove()
         d3.selectAll("text.axes").remove()
         d3.selectAll("line.axes").remove()
+
+        if scat_tip? then d3panels.tooltip_destroy(scat_tip)
+
         xScale = d3.scaleLinear()
                          .domain(d3.extent(data.dat[data.cols[i]]))
                          .range([margin.inner, panelwidth-margin.inner])

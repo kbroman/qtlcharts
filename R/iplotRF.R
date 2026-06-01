@@ -22,6 +22,10 @@
 #' including the R console, within R Markdown documents, and within
 #' Shiny output bindings.
 #'
+#' @details
+#'     The heatmap in the plot just depicts the LOD scores for
+#'     testing rf=0.5.
+#'
 #' @keywords hplot
 #' @seealso [qtl::est.rf()], [qtl::plotRF()]
 #'

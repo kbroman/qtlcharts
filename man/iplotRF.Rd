@@ -31,6 +31,11 @@ Shiny output bindings.
 \description{
 Creates an interactive graph of estimated recombination fractions and LOD scores for all pairs of markers.
 }
+\details{
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The heatmap in the plot just depicts the LOD scores for
+testing rf=0.5.
+}\if{html}{\out{</div>}}
+}
 \examples{
 library(qtl)
 data(fake.f2)

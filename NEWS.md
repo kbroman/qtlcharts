@@ -34,6 +34,9 @@
   [examples of R/qtlcharts within a Jupyter
   notebook](https://github.com/kbroman/jupyter_qtlcharts).
 
+- Revised `iplotMap()` so that the marker search box works within
+  Jupyter notebooks. (Issue #85)
+
 
 ## qtlcharts 0.20 (2025-05-22)
 

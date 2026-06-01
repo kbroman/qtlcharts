@@ -122,6 +122,36 @@ iplotMap = function(widgetdiv, data, chartOpts) {
     }
     return false;
   });
+  // alternate version for selecting marker, seems needed within Jupyter notebook
+  selectedMarker = "";
+  d3.select(`input#submit_${widgetdivid}`).on("click", function() {
+    var d, line, newSelection, pos, xy_pos;
+    newSelection = document.getElementById(`marker_${widgetdivid}`).value;
+    if (selectedMarker !== "") {
+      div.select(`line#${clean_marker_name(selectedMarker)}`).attr("stroke", linecolor);
+      d3panels.tooltip_hide(martip);
+    }
+    if (newSelection !== "") {
+      if (data.marker.indexOf(newSelection) >= 0) {
+        selectedMarker = newSelection;
+        line = div.select(`line#${clean_marker_name(selectedMarker)}`).attr("stroke", linecolorhilit);
+        // showmartip here
+        // activate marker tip here, location of line.node(), using data line.datum()
+        d = line.datum();
+        pos = d3.format(".1f")(data.pos[data.marker.indexOf(d)]);
+        // get x,y position
+        xy_pos = d3panels.object_position(line);
+        d3panels.tooltip_text(martip, `${d} (${pos})`);
+        d3panels.tooltip_move(martip, xy_pos.x, xy_pos.y);
+        d3panels.tooltip_show(martip);
+        div.select("a#currentmarker").text("");
+        return true;
+      } else {
+        div.select("a#currentmarker").text(`Marker \"${newSelection}\" not found`);
+      }
+    }
+    return false;
+  });
   // autocomplete
   $(`input#marker_${widgetdivid}`).autocomplete({
     autoFocus: true,

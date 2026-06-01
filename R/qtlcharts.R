@@ -15,6 +15,7 @@
 #'   \[[Rmd source](https://github.com/kbroman/qtlcharts/blob/gh-pages/assets/vignettes/Rmarkdown.Rmd)\]
 #' - [List of chart customization options](https://kbroman.org/qtlcharts/assets/vignettes/chartOpts.html)
 #' - [Examples of use with Shiny](https://github.com/kbroman/shiny_qtlcharts)
+#' - [Examples of use with Jupyter notebooks](https://github.com/kbroman/jupyter_qtlcharts)
 #'
 #' @name qtlcharts-package
 #' @aliases qtlcharts

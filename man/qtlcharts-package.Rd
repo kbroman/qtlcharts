@@ -22,6 +22,7 @@ Vignettes online at the \href{https://kbroman.org/qtlcharts/}{R/qtlcharts websit
 [\href{https://github.com/kbroman/qtlcharts/blob/gh-pages/assets/vignettes/Rmarkdown.Rmd}{Rmd source}]
 \item \href{https://kbroman.org/qtlcharts/assets/vignettes/chartOpts.html}{List of chart customization options}
 \item \href{https://github.com/kbroman/shiny_qtlcharts}{Examples of use with Shiny}
+\item \href{https://github.com/kbroman/jupyter_qtlcharts}{Examples of use with Jupyter notebooks}
 }
 }
 \seealso{

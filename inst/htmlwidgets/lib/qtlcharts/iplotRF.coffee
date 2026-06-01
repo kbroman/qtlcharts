@@ -103,7 +103,6 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
         width:heatmap_width
         height:heatmap_height
         margin:margin
-        chrGap:chrGap
         axispos:axispos
         titlepos:titlepos
         chrGap:chrGap

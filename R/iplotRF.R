@@ -25,15 +25,6 @@
 #' @keywords hplot
 #' @seealso [qtl::est.rf()], [qtl::plotRF()]
 #'
-#' @details The usual `height` and `width` options in
-#' `chartOpts` are ignored in this plot. Instead, you may provide
-#' `pixelPerCell` (number of pixels per cell in the heat map),
-#' `chrGap` (gap in pixels between chromosomes in the heat map),
-#' `cellHeight` (height in pixels of each cell in the
-#' cross-tabulation), `cellWidth` (width in pixels of each cell
-#' in the cross-tabulation), and `hbot` (height in pixels of the
-#' lower panels showing cross-sections of the heat map)
-#'
 #' @examples
 #' library(qtl)
 #' data(fake.f2)

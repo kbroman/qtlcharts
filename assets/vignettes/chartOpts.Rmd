@@ -854,6 +854,8 @@ stand-alone html files.)
 
 `yticks_pxg = NULL` &mdash; vector of tick positions on y-axis in dot chart of phenotype x genotype
 
+`yNA = list(handle=false,force=false,width=15,gap=10)` &mdash; treatment of missing phenotype values in right panels
+
 ### `itriplot`
 
 `width = 600` &mdash; overall width of chart in pixels

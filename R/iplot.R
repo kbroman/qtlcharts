@@ -53,6 +53,8 @@ function(x, y=NULL, group=NULL, indID=NULL, chartOpts=NULL, digits=5)
     group <- group2numeric(group) # convert to numeric
     names(x) <- names(y) <- NULL # strip names
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     x <- list(data = data.frame(x=x, y=y, group=group, indID=indID),
               chartOpts=chartOpts)
     if(!is.null(digits))

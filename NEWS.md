@@ -1,4 +1,4 @@
-## qtlcharts 0.21-5 (2025-05-31)
+## qtlcharts 0.21-6 (2025-06-01)
 
 - Update d3panels to 1.8.9 (subtle fix in cichart; placement of
   tooltip in iplotMap) (Issue #79)
@@ -19,6 +19,8 @@
 - Fixed help documents, which weren't being converted properly as I'd
   left off `Roxygen: list(markdown=TRUE)` from the DESCRIPTION file.
   (Issue #82)
+
+- Strip off names from non-list components of chartOpts. (Issue #69)
 
 
 ## qtlcharts 0.20 (2025-05-22)

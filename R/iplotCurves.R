@@ -91,6 +91,8 @@ function(curveMatrix, times=NULL, scatter1=NULL, scatter2=NULL, group=NULL,
     defaultAspect <- 1.25 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     x <- list(data=data_list, chartOpts=chartOpts)
     if(!is.null(digits))
         attr(x, "TOJSON_ARGS") <- list(digits=digits)

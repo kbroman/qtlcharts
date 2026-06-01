@@ -55,6 +55,8 @@ function(p, indID=NULL, group=NULL, chartOpts=NULL, digits=5)
     names(group) <- NULL
     names(indID) <- NULL
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     x <- list(data=list(p=p, indID=indID, group=group),
               chartOpts=chartOpts)
     if(!is.null(digits))

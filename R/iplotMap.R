@@ -47,6 +47,8 @@ function(map, chr=NULL, shift=FALSE, horizontal=FALSE, chartOpts=NULL, digits=5)
 
     map_list <- convert_map(map)
     chartOpts <- add2chartOpts(chartOpts, shiftStart=shift, horizontal=horizontal)
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     x <- list(data=map_list, chartOpts=chartOpts)
     if(!is.null(digits))
         attr(x, "TOJSON_ARGS") <- list(digits=digits)

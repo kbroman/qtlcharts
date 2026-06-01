@@ -45,6 +45,8 @@ function(cross, chr=NULL, chartOpts=NULL, digits=5)
     defaultAspect <- 1 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     x <- list(rfdata=rf, genodata=geno, chartOpts=chartOpts)
     if(!is.null(digits))
         attr(x, "TOJSON_ARGS") <- list(digits=digits)

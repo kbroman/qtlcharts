@@ -142,6 +142,8 @@ function(scanoneOutput, cross=NULL, lodcolumn=NULL, pheno.col=NULL, times=NULL,
     defaultAspect <- 1.5 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     x <- list(lod_data=scanone_list, eff_data=effects_list,
               times=times, show_effects=show_effects,
               chartOpts=chartOpts)

@@ -72,6 +72,8 @@ function(cross, marker, pheno.col=1,
     pxg_data$geno <- as.numeric(pxg_data$geno)
     group <- pxg_data$geno < 0 + 1
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     idotplot(abs(pxg_data$geno), pxg_data$pheno, pxg_data$indID, group,
              chartOpts=chartOpts, digits=digits)
 }

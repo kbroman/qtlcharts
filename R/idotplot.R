@@ -53,6 +53,7 @@ function(x, y, indID=NULL, group=NULL, chartOpts=NULL, digits=5)
 
     chartOpts <- add2chartOpts(chartOpts, ylab="y", title="", xlab="group",
                                xcategories=seq(along=x_levels), xcatlabels=x_levels)
+    chartOpts <- stripNames_chartOpts(chartOpts)
 
     x <- list(data=list(x=x, y=y, indID=indID, group=group), chartOpts=chartOpts)
     if(!is.null(digits))

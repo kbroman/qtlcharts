@@ -44,6 +44,7 @@ function(dat, qu = c(0.001, 0.01, 0.1, 0.25), orderByMedian=TRUE, breaks=251,
     defaultAspect <- 1.25 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
     x <- list(data=data_list, chartOpts=chartOpts)
     if(!is.null(digits))
         attr(x, "TOJSON_ARGS") <- list(digits=digits)

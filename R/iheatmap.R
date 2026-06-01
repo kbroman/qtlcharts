@@ -53,6 +53,8 @@ function(z, x=NULL, y=NULL, chartOpts=NULL, digits=5)
     defaultAspect <- 1 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     dat <- list(data=list(x=x, y=y, z=z), chartOpts=chartOpts)
     if(!is.null(digits))
         attr(dat, "TOJSON_ARGS") <- list(digits=digits)

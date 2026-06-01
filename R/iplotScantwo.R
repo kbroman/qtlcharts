@@ -97,6 +97,8 @@ function(scantwoOutput, cross=NULL, lodcolumn=1, pheno.col=1, chr=NULL,
     defaultAspect <- 1 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     x <- list(scantwo_data=scantwo_list,
               phenogeno_data=phenogeno_list,
               chartOpts=chartOpts)

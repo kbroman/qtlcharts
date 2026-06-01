@@ -1,6 +1,6 @@
 Package: qtlcharts
-Version: 0.21-5
-Date: 2026-05-31
+Version: 0.21-6
+Date: 2026-06-01
 Title: Interactive Graphics for QTL Experiments
 Author: Karl W Broman [aut, cre] (<https://orcid.org/0000-0002-4914-6671>),
     Michael Bostock [ctb, cph] (d3.js library in htmlwidgets/lib,

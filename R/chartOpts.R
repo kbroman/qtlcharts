@@ -12,3 +12,19 @@ function(chartOpts, ...)
     }
     chartOpts
 }
+
+# clean off names from chartOpts
+# (of non-list components)
+stripNames_chartOpts <-
+function(chartOpts)
+{
+    if(!is.null(chartOpts)) {
+        for(arg in names(chartOpts)) {
+            if(!is.list(chartOpts[[arg]])) {
+                names(chartOpts[[arg]]) <- NULL
+            }
+        }
+    }
+
+    chartOpts
+}

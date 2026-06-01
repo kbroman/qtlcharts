@@ -100,6 +100,8 @@ function(mat, group=NULL, rows=NULL, cols=NULL, reorder=FALSE, corr=NULL,
     defaultAspect <- 2 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     x <- list(data=data_list, chartOpts=chartOpts)
     if(!is.null(digits))
         attr(x, "TOJSON_ARGS") <- list(digits=digits)

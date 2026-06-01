@@ -114,6 +114,8 @@ function(scanoneOutput, cross=NULL, lodcolumn=1, pheno.col=1, chr=NULL,
     defaultAspect <- 2 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     x <- list(scanone_data=scanone_list, pxg_data=pxg_list, pxg_type=pxgtype,
               chartOpts=chartOpts)
     if(!is.null(digits))

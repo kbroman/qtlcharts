@@ -97,6 +97,8 @@ function(scat1data, scat2data, group=NULL, chartOpts=NULL, digits=5)
     defaultAspect <- 2 # width/height
     browsersize <- getPlotSize(defaultAspect)
 
+    chartOpts <- stripNames_chartOpts(chartOpts)
+
     x <- list(scat1data=scat1data, scat2data=scat2data, chartOpts=chartOpts)
     if(!is.null(digits))
         attr(x, "TOJSON_ARGS") <- list(digits=digits)

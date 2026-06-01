@@ -156,6 +156,7 @@ function(cross, scanoneOutput=NULL, pheno.col=1:2, lodcolumn=1:2,
 
     # add phenotype names to chartOpts
     chartOpts <- add2chartOpts(chartOpts, phe_labels=pxg_list$phenames)
+    chartOpts <- stripNames_chartOpts(chartOpts)
 
     x <- list(scanone_data=scanone_list, pxg_data=pxg_list,
               chartOpts=chartOpts)

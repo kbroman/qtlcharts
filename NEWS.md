@@ -22,8 +22,12 @@
 
 - Strip off names from non-list components of chartOpts. (Issue #69)
 
-- In `iplotScantwo()`, remove form at the top when re-building widget;
-  showed up in use with Shiny (Issue #84)
+- In `iplotScantwo()`, remove the form at the top when re-building
+  widget; showed up in use with Shiny (Issue #84)
+
+- In `iplotScantwo()`, allow control of treatment of missing values in
+  the phenotype x genotype plot on the right, though the default is
+  now to omite missing values. (Issue #50)
 
 
 ## qtlcharts 0.20 (2025-05-22)

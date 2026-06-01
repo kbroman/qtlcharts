@@ -4,7 +4,7 @@
 var add_symmetric_lod, iplotScantwo, lod_for_heatmap;
 
 iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
-  var add_cell_tooltips, altrectcolor, axispos, boxcolor, boxwidth, chrGap, chrlinecolor, chrlinewidth, cicolors, color, cur_chr1, cur_chr2, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, linecolor, linewidth, margin, mycichart, mydotchart, mylod2dheatmap, mylodchart, n, ncat, nullcolor, nyticks_ci, nyticks_lod, nyticks_pxg, oneAtTop, options, plot_effects, plot_scan, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, segstrokewidth, segwidth, submit, svg, titlepos, w, wbot, widgetdivid, width, wright, x, xlab_lod, ylab_eff, ylab_lod, yticks_ci, yticks_lod, yticks_pxg, zthresh;
+  var add_cell_tooltips, altrectcolor, axispos, boxcolor, boxwidth, chrGap, chrlinecolor, chrlinewidth, cicolors, color, cur_chr1, cur_chr2, div, eff_hpos, eff_vpos, form, g_eff, g_heatmap, g_scans, gn, hbot, heatmap_height, heatmap_width, height, hright, i, left, leftsel, leftvalue, linecolor, linewidth, margin, mycichart, mydotchart, mylod2dheatmap, mylodchart, n, ncat, nullcolor, nyticks_ci, nyticks_lod, nyticks_pxg, oneAtTop, options, plot_effects, plot_scan, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref4, ref5, ref6, ref7, ref8, ref9, right, rightsel, rightvalue, scans_hpos, scans_vpos, segstrokewidth, segwidth, submit, svg, titlepos, w, wbot, widgetdivid, width, wright, x, xlab_lod, yNA, ylab_eff, ylab_lod, yticks_ci, yticks_lod, yticks_pxg, zthresh;
   // chartOpts start
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 1200; // total height of chart in pixels
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1100; // total width of chart in pixels
@@ -51,6 +51,12 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   yticks_ci = (ref31 = chartOpts != null ? chartOpts.yticks_ci : void 0) != null ? ref31 : null; // vector of tick positions on y-axis in CI panel
   nyticks_pxg = (ref32 = chartOpts != null ? chartOpts.nyticks_pxg : void 0) != null ? ref32 : 5; // no. ticks on y-axis in dot chart of phenotype x genotype
   yticks_pxg = (ref33 = chartOpts != null ? chartOpts.yticks_pxg : void 0) != null ? ref33 : null; // vector of tick positions on y-axis in dot chart of phenotype x genotype
+  yNA = (ref34 = chartOpts != null ? chartOpts.yNA : void 0) != null ? ref34 : {
+    handle: false,
+    force: false,
+    width: 15,
+    gap: 10 // treatment of missing phenotype values in right panels
+  };
   // chartOpts end
 
   // make sure list args have all necessary bits
@@ -104,10 +110,10 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       if (n < ncat) { // not enough, display error
         d3panels.displayError(`length(cicolors) (${n}) < maximum no. genotypes (${ncat})`);
         cicolors = (function() {
-          var l, ref34, results;
+          var l, ref35, results;
 // not provided; select them
           results = [];
-          for (i = l = 0, ref34 = ncat; (0 <= ref34 ? l < ref34 : l > ref34); i = 0 <= ref34 ? ++l : --l) {
+          for (i = l = 0, ref35 = ncat; (0 <= ref35 ? l < ref35 : l > ref35); i = 0 <= ref35 ? ++l : --l) {
             results.push(cicolors[i % n]);
           }
           return results;
@@ -234,11 +240,11 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       chr: scantwo_data.chr,
       pos: scantwo_data.pos,
       lod: (function() {
-        var l, len, ref34, results;
-        ref34 = scantwo_data[lod][markerindex];
+        var l, len, ref35, results;
+        ref35 = scantwo_data[lod][markerindex];
         results = [];
-        for (l = 0, len = ref34.length; l < len; l++) {
-          x = ref34[l];
+        for (l = 0, len = ref35.length; l < len; l++) {
+          x = ref35[l];
           results.push(x);
         }
         return results;
@@ -282,7 +288,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
   };
   g_eff = [null, null];
   plot_effects = function(markerindex1, markerindex2) {
-    var chr1, chr2, chrtype1, chrtype2, ci_data, cicolors_expanded, cis, dpos, effcharts, fgnames, force, g, g1, g2, gn1, gn2, gnames1, gnames2, j, k, l, m, mar1, mar2, mgnames, ng1, ng2, ngf, ngm, o, p, point_jitter, points, pos1, pxg_data, q, r, ref34, ref35, ref36, ref37, ref38, ref39, ref40, ref41, ref42, results, s, scaledPoints, t, tmp, v, xscale;
+    var chr1, chr2, chrtype1, chrtype2, ci_data, cicolors_expanded, cis, dpos, effcharts, fgnames, force, g, g1, g2, gn1, gn2, gnames1, gnames2, j, k, l, m, mar1, mar2, mgnames, ng1, ng2, ngf, ngm, o, p, point_jitter, points, pos1, pxg_data, q, r, ref35, ref36, ref37, ref38, ref39, ref40, ref41, ref42, ref43, results, s, scaledPoints, t, tmp, v, xscale;
     mar1 = scantwo_data.marker[markerindex1];
     mar2 = scantwo_data.marker[markerindex2];
     g1 = pheno_and_geno.geno[mar1];
@@ -306,7 +312,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
       ngm = mgnames.length;
       tmp = (function() {
         var results = [];
-        for (var l = 0, ref34 = ngf + ngm; 0 <= ref34 ? l < ref34 : l > ref34; 0 <= ref34 ? l++ : l--){ results.push(l); }
+        for (var l = 0, ref35 = ngf + ngm; 0 <= ref35 ? l < ref35 : l > ref35; 0 <= ref35 ? l++ : l--){ results.push(l); }
         return results;
       }).apply(this);
       m = (function() {
@@ -325,8 +331,8 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
         return results;
       })();
       k = 0;
-      for (i = l = 0, ref35 = ngf; (0 <= ref35 ? l < ref35 : l > ref35); i = 0 <= ref35 ? ++l : --l) {
-        for (j = o = 0, ref36 = ngf; (0 <= ref36 ? o < ref36 : o > ref36); j = 0 <= ref36 ? ++o : --o) {
+      for (i = l = 0, ref36 = ngf; (0 <= ref36 ? l < ref36 : l > ref36); i = 0 <= ref36 ? ++l : --l) {
+        for (j = o = 0, ref37 = ngf; (0 <= ref37 ? o < ref37 : o > ref37); j = 0 <= ref37 ? ++o : --o) {
           gn1.push(fgnames[j]);
           gn2.push(fgnames[i]);
           cicolors_expanded.push(cicolors[i]);
@@ -334,8 +340,8 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
           k++;
         }
       }
-      for (i = q = 0, ref37 = ngm; (0 <= ref37 ? q < ref37 : q > ref37); i = 0 <= ref37 ? ++q : --q) {
-        for (j = r = 0, ref38 = ngm; (0 <= ref38 ? r < ref38 : r > ref38); j = 0 <= ref38 ? ++r : --r) {
+      for (i = q = 0, ref38 = ngm; (0 <= ref38 ? q < ref38 : q > ref38); i = 0 <= ref38 ? ++q : --q) {
+        for (j = r = 0, ref39 = ngm; (0 <= ref39 ? r < ref39 : r > ref39); j = 0 <= ref39 ? ++r : --r) {
           gn1.push(mgnames[j]);
           gn2.push(mgnames[i]);
           cicolors_expanded.push(cicolors[i]);
@@ -364,8 +370,8 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
         }
         return results;
       })();
-      for (i = s = 0, ref39 = ng2; (0 <= ref39 ? s < ref39 : s > ref39); i = 0 <= ref39 ? ++s : --s) {
-        for (j = t = 0, ref40 = ng1; (0 <= ref40 ? t < ref40 : t > ref40); j = 0 <= ref40 ? ++t : --t) {
+      for (i = s = 0, ref40 = ng2; (0 <= ref40 ? s < ref40 : s > ref40); i = 0 <= ref40 ? ++s : --s) {
+        for (j = t = 0, ref41 = ng1; (0 <= ref41 ? t < ref41 : t > ref41); j = 0 <= ref41 ? ++t : --t) {
           gn1.push(gnames1[j]);
           gn2.push(gnames2[i]);
           cicolors_expanded.push(cicolors[i]);
@@ -397,12 +403,13 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
         pointstroke: pointstroke,
         xcategories: (function() {
           var results = [];
-          for (var v = 1, ref41 = gn1.length; 1 <= ref41 ? v <= ref41 : v >= ref41; 1 <= ref41 ? v++ : v--){ results.push(v); }
+          for (var v = 1, ref42 = gn1.length; 1 <= ref42 ? v <= ref42 : v >= ref42; 1 <= ref42 ? v++ : v--){ results.push(v); }
           return results;
         }).apply(this),
         xcatlabels: gn1,
         xlab: "",
         ylab: ylab_eff,
+        yNA: yNA,
         nyticks: nyticks_pxg,
         yticks: yticks_pxg,
         dataByInd: false,
@@ -469,32 +476,32 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     cis = d3panels.ci_by_group(g, pheno_and_geno.pheno, 2);
     ci_data = {
       mean: (function() {
-        var ref42, ref43, ref44, results, v;
+        var ref43, ref44, ref45, results, v;
         results = [];
-        for (x = v = 1, ref42 = gn1.length; (1 <= ref42 ? v <= ref42 : v >= ref42); x = 1 <= ref42 ? ++v : --v) {
-          results.push((ref43 = (ref44 = cis[x]) != null ? ref44.mean : void 0) != null ? ref43 : null);
+        for (x = v = 1, ref43 = gn1.length; (1 <= ref43 ? v <= ref43 : v >= ref43); x = 1 <= ref43 ? ++v : --v) {
+          results.push((ref44 = (ref45 = cis[x]) != null ? ref45.mean : void 0) != null ? ref44 : null);
         }
         return results;
       })(),
       low: (function() {
-        var ref42, ref43, ref44, results, v;
+        var ref43, ref44, ref45, results, v;
         results = [];
-        for (x = v = 1, ref42 = gn1.length; (1 <= ref42 ? v <= ref42 : v >= ref42); x = 1 <= ref42 ? ++v : --v) {
-          results.push((ref43 = (ref44 = cis[x]) != null ? ref44.low : void 0) != null ? ref43 : null);
+        for (x = v = 1, ref43 = gn1.length; (1 <= ref43 ? v <= ref43 : v >= ref43); x = 1 <= ref43 ? ++v : --v) {
+          results.push((ref44 = (ref45 = cis[x]) != null ? ref45.low : void 0) != null ? ref44 : null);
         }
         return results;
       })(),
       high: (function() {
-        var ref42, ref43, ref44, results, v;
+        var ref43, ref44, ref45, results, v;
         results = [];
-        for (x = v = 1, ref42 = gn1.length; (1 <= ref42 ? v <= ref42 : v >= ref42); x = 1 <= ref42 ? ++v : --v) {
-          results.push((ref43 = (ref44 = cis[x]) != null ? ref44.high : void 0) != null ? ref43 : null);
+        for (x = v = 1, ref43 = gn1.length; (1 <= ref43 ? v <= ref43 : v >= ref43); x = 1 <= ref43 ? ++v : --v) {
+          results.push((ref44 = (ref45 = cis[x]) != null ? ref45.high : void 0) != null ? ref44 : null);
         }
         return results;
       })(),
       categories: (function() {
         var results = [];
-        for (var v = 1, ref42 = gn1.length; 1 <= ref42 ? v <= ref42 : v >= ref42; 1 <= ref42 ? v++ : v--){ results.push(v); }
+        for (var v = 1, ref43 = gn1.length; 1 <= ref43 ? v <= ref43 : v >= ref43; 1 <= ref43 ? v++ : v--){ results.push(v); }
         return results;
       }).apply(this)
     };

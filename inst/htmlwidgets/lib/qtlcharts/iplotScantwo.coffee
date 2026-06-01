@@ -38,6 +38,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     yticks_ci = chartOpts?.yticks_ci ? null            # vector of tick positions on y-axis in CI panel
     nyticks_pxg = chartOpts?.nyticks_pxg ? 5           # no. ticks on y-axis in dot chart of phenotype x genotype
     yticks_pxg = chartOpts?.yticks_pxg ? null          # vector of tick positions on y-axis in dot chart of phenotype x genotype
+    yNA = chartOpts?.yNA ? {handle:false,force:false,width:15,gap:10}  # treatment of missing phenotype values in right panels
     # chartOpts end
 
     # make sure list args have all necessary bits
@@ -337,6 +338,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                 xcatlabels:gn1
                 xlab:""
                 ylab:ylab_eff
+                yNA: yNA
                 nyticks:nyticks_pxg
                 yticks:yticks_pxg
                 dataByInd:false

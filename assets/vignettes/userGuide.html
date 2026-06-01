@@ -1690,6 +1690,42 @@ colors.</p>
       chartOpts=list(xlab=&quot;x variable&quot;, ylab=&quot;y variable&quot;,
                      pointcolor=c(&quot;slateblue&quot;, &quot;#999999&quot;, &quot;violetred&quot;)))</code></pre>
 </div>
+<div id="idotplot" class="section level3">
+<h3><code>idotplot</code></h3>
+<p><code>idotplot</code> is similar to <code>iplot</code>, but plots a
+quantitative outcome vs some categorical variable.</p>
+<pre class="r"><code>idotplot(grp, y)</code></pre>
+<p>The default is to put the categorical variable on the x-axis and the
+quantitative variable on the y-axis. If you want to switch the
+orientation (with the quantitative variable on the x-axis), use the
+chart option <code>horizontal=TRUE</code>.</p>
+<pre class="r"><code>idotplot(grp, y, chartOpts=list(horizontal=TRUE))</code></pre>
+<p>There can also be a grouping variable affecting the color of points,
+for example females in purple and males in purple.</p>
+<pre class="r"><code>sex &lt;- factor(sample(c(&quot;female&quot;, &quot;male&quot;), n, replace=TRUE),
+              levels=c(&quot;female&quot;, &quot;male&quot;))
+idotplot(grp, y, group=sex,
+         chartOpts=list(pointcolor=c(&quot;lightgreen&quot;, &quot;purple&quot;)))</code></pre>
+<p><code>indID</code> is for a vector of individual identifiers,
+displayed in a tool tip when you hover over a point. The package <a href="https://glue.tidyverse.org">glue</a> is particularly useful for
+getting data into strings.</p>
+<pre class="r"><code>library(glue)
+idotplot(grp, y, group=sex, indID=glue(&quot;{seq_along(y)} ({sex})&quot;),
+         chartOpts=list(pointcolor=c(&quot;lightgreen&quot;, &quot;purple&quot;)))</code></pre>
+</div>
+<div id="iplotpxg" class="section level3">
+<h3><code>iplotPXG</code></h3>
+<p><code>iplotPXG</code> is a special case of <code>idotplot</code>, for
+plotting phenotype values vs genotype at a single marker. It takes a
+cross object, marker name, and phenotype column, and then calls
+<code>idotplot</code>. It uses, as grouping variable, whether genotypes
+were imputed; imputed genotypes are colored orange.</p>
+<pre class="r"><code>data(hyper)
+iplotPXG(hyper, &quot;D4Mit164&quot;)</code></pre>
+<p>As with <code>idotplot</code>, you can use the chart option
+<code>horizontal=TRUE</code> to put genotype on the y-axis.</p>
+<pre class="r"><code>iplotPXG(hyper, &quot;D4Mit164&quot;, chartOpts=list(horizontal=TRUE))</code></pre>
+</div>
 <div id="iplotmap" class="section level3">
 <h3><code>iplotMap</code></h3>
 <p><code>iplotMap</code> creates an interactive genetic map. Hover over

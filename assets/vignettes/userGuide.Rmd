@@ -339,6 +339,67 @@ iplot(x, y, grp, id,
                      pointcolor=c("slateblue", "#999999", "violetred")))
 ```
 
+### `idotplot`
+
+`idotplot` is similar to `iplot`, but plots a quantitative outcome vs
+some categorical variable.
+
+```{r idotplot_example, eval=FALSE}
+idotplot(grp, y)
+```
+
+The default is to put the categorical variable on the x-axis and the
+quantitative variable on the y-axis. If you want to switch the
+orientation (with the quantitative variable on the x-axis), use the
+chart option `horizontal=TRUE`.
+
+```{r idotplot_example_horiz, eval=FALSE}
+idotplot(grp, y, chartOpts=list(horizontal=TRUE))
+```
+
+There can also be a grouping variable affecting the color of points,
+for example females in purple and males in purple.
+
+```{r idotplot_example_grouping, eval=FALSE}
+sex <- factor(sample(c("female", "male"), n, replace=TRUE),
+              levels=c("female", "male"))
+idotplot(grp, y, group=sex,
+         chartOpts=list(pointcolor=c("lightgreen", "purple")))
+```
+
+`indID` is for a vector of individual identifiers, displayed in a tool
+tip when you hover over a point. The package
+[glue](https://glue.tidyverse.org) is particularly useful for getting
+data into strings.
+
+```{r idotplot_example_indID, eval=FALSE}
+library(glue)
+idotplot(grp, y, group=sex, indID=glue("{seq_along(y)} ({sex})"),
+         chartOpts=list(pointcolor=c("lightgreen", "purple")))
+```
+
+
+### `iplotPXG`
+
+`iplotPXG` is a special case of `idotplot`, for plotting phenotype
+values vs genotype at a single marker. It takes a cross object, marker
+name, and phenotype column, and then calls `idotplot`.
+It uses, as grouping variable, whether genotypes were imputed; imputed
+genotypes are colored orange.
+
+```{r iplotPXG_example, eval=FALSE}
+data(hyper)
+iplotPXG(hyper, "D4Mit164")
+```
+
+As with `idotplot`, you can use the chart option `horizontal=TRUE` to
+put genotype on the y-axis.
+
+```{r iplotPXG_example_horiz, eval=FALSE}
+iplotPXG(hyper, "D4Mit164", chartOpts=list(horizontal=TRUE))
+```
+
+
 ### `iplotMap`
 
 `iplotMap` creates an interactive genetic map. Hover over a

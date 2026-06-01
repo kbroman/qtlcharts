@@ -29,6 +29,11 @@
   the phenotype x genotype plot on the right, though the default is
   now to omite missing values. (Issue #50)
 
+- Added more [examples of R/qtlcharts with
+  Shiny](https://github.com/kbroman/shiny_qtlcharts). Also added
+  [examples of R/qtlcharts within a Jupyter
+  notebook](https://github.com/kbroman/jupyter_qtlcharts).
+
 
 ## qtlcharts 0.20 (2025-05-22)
 

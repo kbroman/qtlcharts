@@ -22,6 +22,9 @@
 
 - Strip off names from non-list components of chartOpts. (Issue #69)
 
+- In `iplotScantwo()`, remove form at the top when re-building widget;
+  showed up in use with Shiny (Issue #84)
+
 
 ## qtlcharts 0.20 (2025-05-22)
 

@@ -19,6 +19,7 @@ HTMLWidgets.widget({
         svg.selectAll("*").remove()
         widgetid = d3.select(widgetdiv).attr('id')
         d3.selectAll("g.d3panels-tooltip.#{widgetid}").remove()
+        d3.select(widgetdiv).select("div#form").remove()
 
         chartOpts = x.chartOpts ? {}
         chartOpts.width = chartOpts?.width ? svg.attr("width")

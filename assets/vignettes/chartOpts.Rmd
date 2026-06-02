@@ -38,6 +38,8 @@ stand-alone html files.)
 
 `histcolors = c("#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black")` &mdash; vector of colors for selected histograms
 
+`tipdirection = NULL` &mdash; direction of tool tips
+
 ### `idotplot`
 
 `height = 550` &mdash; height of chart in pixels
@@ -79,6 +81,8 @@ stand-alone html files.)
 `xcatlabels = NULL` &mdash; labels for group categories
 
 `horizontal = false` &mdash; If true, have genotypes on vertical axis and phenotype on horizontal axis
+
+`tipdirection = NULL` &mdash; direction of tool tips
 
 ### `iheatmap`
 
@@ -135,6 +139,8 @@ stand-alone html files.)
 `colors = c("slateblue", "white", "crimson")` &mdash; heat map colors (same length as `zlim`)
 
 `flip_vert_slice = false` &mdash; if true, flip the y- and z- axes in the vertical slice
+
+`tipdirection = NULL` &mdash; direction of tool tips
 
 ### `ipleiotropy`
 
@@ -202,6 +208,8 @@ stand-alone html files.)
 
 `ticks_at_markers = true` &mdash; if true, put tick marks at the marker positions (above the slider)
 
+`tipdirection = NULL` &mdash; direction of tool tips
+
 ### `iplot`
 
 `height = 500` &mdash; height of chart in pixels
@@ -246,6 +254,8 @@ stand-alone html files.)
 
 `yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
 
+`tipdirection = NULL` &mdash; direction of tool tips
+
 ### `iplotCorr` (with scatterplot)
 
 `height = 560` &mdash; height of each panel in pixels
@@ -283,6 +293,8 @@ stand-alone html files.)
 `rectcolor = "#E6E6E6"` &mdash; color of background rectangle
 
 `cortitle = ""` &mdash; title for heatmap panel
+
+`tipdirection = NULL` &mdash; direction of tool tips
 
 ### `iplotCurves`
 
@@ -380,6 +392,8 @@ stand-alone html files.)
 
 `scat2_ylab = "Y"` &mdash; y-axis label for second scatterplot
 
+`tipdirection = NULL` &mdash; direction of tool tips
+
 ### `iplotMScanone` (no effects)
 
 `height = 700` &mdash; height of chart in pixels
@@ -437,6 +451,8 @@ stand-alone html files.)
 `nxticks = 5` &mdash; no. ticks in x-axis on right-hand panel, if quantitative scale
 
 `xticks = NULL` &mdash; tick positions in x-axis on right-hand panel, if quantitative scale
+
+`tipdirection = NULL` &mdash; direction of tool tips
 
 ### `iplotMScanone` (with effects)
 
@@ -504,6 +520,8 @@ stand-alone html files.)
 
 `lod_labels = NULL` &mdash; labels on the LOD score columns
 
+`tipdirection = NULL` &mdash; direction of tool tips
+
 ### `iplotMap`
 
 `width = 1000` &mdash; width of chart in pixels
@@ -543,6 +561,8 @@ stand-alone html files.)
 `shiftStart = false` &mdash; if true, shift the start of chromosomes to 0
 
 `horizontal = false` &mdash; if true, have chromosomes on vertical axis and positions horizontally
+
+`tipdirection = NULL` &mdash; direction of tool tips
 
 ### `iplotRF`
 
@@ -602,6 +622,8 @@ stand-alone html files.)
 
 `yticks = NULL` &mdash; vector of tick positions on y-axis in LOD curve panels
 
+`tipdirection = NULL` &mdash; direction of tool tips
+
 `tipclass = "tooltip"` &mdash; class name for tool tips
 
 ### `iplotScanone` (no effects)
@@ -645,6 +667,8 @@ stand-alone html files.)
 `ylab = "LOD score"` &mdash; y-axis label
 
 `rotate_ylab = NULL` &mdash; indicates whether to rotate the y-axis label 90 degrees
+
+`tipdirection = NULL` &mdash; direction of tool tips
 
 ### `iplotScanone` (`pxgtype='ci'`)
 
@@ -711,6 +735,8 @@ stand-alone html files.)
 `eff_axispos = list(xtitle=25, ytitle=30, xlabel=5, ylabel=5)` &mdash; position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in effect plot panel
 
 `eff_titlepos = 20` &mdash; position of title for effect plot panel, in pixels
+
+`tipdirection = NULL` &mdash; direction of tool tips
 
 ### `iplotScanone` (`pxgtype='raw'`)
 
@@ -784,6 +810,8 @@ stand-alone html files.)
 
 `eff_yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
 
+`tipdirection = NULL` &mdash; direction of tool tips
+
 ### `iplotScantwo`
 
 `height = 1200` &mdash; total height of chart in pixels
@@ -856,6 +884,8 @@ stand-alone html files.)
 
 `yNA = list(handle=false,force=false,width=15,gap=10)` &mdash; treatment of missing phenotype values in right panels
 
+`tipdirection = NULL` &mdash; direction of tool tips
+
 ### `itimeplot`
 
 `height = 500` &mdash; height of chart in pixels
@@ -898,6 +928,8 @@ stand-alone html files.)
 
 `yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
 
+`tipdirection = NULL` &mdash; direction of tool tips
+
 ### `itriplot`
 
 `width = 600` &mdash; overall width of chart in pixels
@@ -933,6 +965,8 @@ stand-alone html files.)
 `gridwidth = 1` &mdash; width of grid lines in pixels
 
 `tipclass = "tooltip"` &mdash; class name for tool tips
+
+`tipdirection = NULL` &mdash; direction of tool tips
 
 ### `scat2scat`
 
@@ -1001,4 +1035,6 @@ stand-alone html files.)
 `xNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
 
 `yNA = list(handle=true, force=false, width=15, gap=10)` &mdash; treatment of missing values (handle=T/F, force=T/F, width, gap)
+
+`tipdirection = NULL` &mdash; direction of tool tips
 

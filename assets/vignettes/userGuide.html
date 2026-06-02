@@ -2149,6 +2149,25 @@ is a vector of individual identifiers for tool tip labels, and the
 points.</p>
 <pre class="r"><code>itriplot(p, indID=ind, group=g)</code></pre>
 </div>
+<div id="itimeplot" class="section level3">
+<h3><code>itimeplot</code></h3>
+<p><code>itimeplot</code> produces a scatterplot where the x-axis is
+date/time.</p>
+<p>To illustrate the plot, we’ll first simulate some data.</p>
+<pre class="r"><code>n_pts &lt;- 100
+x &lt;-  seq(as.POSIXct(&quot;1969-05-01&quot;), as.POSIXct(&quot;1969-05-04&quot;), length=n_pts)
+grp &lt;- sample(1:3, n_pts, replace=TRUE)
+y &lt;- rnorm(n_pts, grp) + rnorm(n_pts)</code></pre>
+<p>We then create the plot as follows. The <code>indID</code> argument
+is a vector of individual identifiers for tool tip labels, and the
+<code>group</code> argument is a vector of categories for coloring the
+points.</p>
+<pre class="r"><code>itimeplot(x, y, grp)</code></pre>
+<p>If the times on the x-axis span &lt;48 hours, the x-axis labels will
+be times rather than dates.</p>
+<pre class="r"><code>x &lt;-  seq(as.POSIXct(&quot;1969-05-01&quot;), as.POSIXct(&quot;1969-05-02&quot;), length=n_pts)
+itimeplot(x, y, grp, chartOpts=list(xlab=&quot;Time&quot;))</code></pre>
+</div>
 </div>
 
 

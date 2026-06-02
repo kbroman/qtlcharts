@@ -12,6 +12,6 @@ dependencies:
     style: d3panels.min.css
   - name: qtlcharts_iplotScantwo
     src: htmlwidgets/lib/qtlcharts
-    version: 0.21-6
+    version: 0.21-7
     script:
       - iplotScantwo.js

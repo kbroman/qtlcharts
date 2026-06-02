@@ -1,4 +1,4 @@
-## qtlcharts 0.21-6 (2025-06-01)
+## qtlcharts 0.21-7 (2025-06-02)
 
 ### New features
 

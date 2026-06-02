@@ -1,0 +1,27 @@
+---
+title: itimeplot within R Markdown
+output: html_document
+---
+
+This document serves to test the
+[R/qtlcharts](https://kbroman.org/qtlcharts/) function `itimeplot`.
+
+```{r load_data, message=FALSE}
+set.seed(69891250)
+library(qtl)
+library(qtlcharts)
+```
+
+```{r itimeplot_dates}
+n_pts <- 100
+x <-  seq(as.POSIXct("1969-05-01"), as.POSIXct("1969-05-04"), length=n_pts)
+grp <- sample(1:3, n_pts, replace=TRUE)
+y <- rnorm(n_pts, grp) + rnorm(n_pts)
+itimeplot(x, y, grp)
+```
+
+
+```{r itimeplot_times}
+x <-  seq(as.POSIXct("1969-05-01"), as.POSIXct("1969-05-02"), length=n_pts)
+itimeplot(x, y, grp, chartOpts=list(xlab="Time"))
+```

@@ -110,6 +110,15 @@ Click on a chart for the corresponding interactive version.
 </tr>
 <tr>
   <td class="left">
+    <a href="example/itimeplot.html">
+        <img src="assets/pics/itimeplot.png" alt="itimeplot example" title="itimeplot example"/>
+    </a>
+  </td>
+  <td class="right">
+  </td>
+</tr>
+<tr>
+  <td class="left">
     <a href="example/iplotScantwo.html">
         <img src="assets/pics/iplotScantwo.png" alt="iplotScantwo example" title="iplotScantwo example"/>
     </a>

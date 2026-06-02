@@ -1,7 +1,20 @@
 ## qtlcharts 0.21-6 (2025-06-01)
 
-- Update d3panels to 1.8.9 (subtle fix in cichart; placement of
-  tooltip in iplotMap) (Issue #79)
+### New features
+
+- Added `itimeplot()` which is like `iplot()` but where the x-axis is
+  date/time.
+
+- Added more [examples of R/qtlcharts with
+  Shiny](https://github.com/kbroman/shiny_qtlcharts). Also added
+  [examples of R/qtlcharts within a Jupyter
+  notebook](https://github.com/kbroman/jupyter_qtlcharts).
+
+### Bug fixes
+
+- Updated d3panels to 1.8.9 (subtle fix in cichart; placement of
+  tooltip in iplotMap) (Issue #79), and then to 1.9.0 (for
+  `itimeplot`)
 
 - No longer using babel to transpile the javascript that coffeescript
   produces (using `coffee -c` rather than `coffee -ct`) because babel
@@ -28,11 +41,6 @@
 - In `iplotScantwo()`, allow control of treatment of missing values in
   the phenotype x genotype plot on the right; the default is
   now to omit missing values. (Issue #50)
-
-- Added more [examples of R/qtlcharts with
-  Shiny](https://github.com/kbroman/shiny_qtlcharts). Also added
-  [examples of R/qtlcharts within a Jupyter
-  notebook](https://github.com/kbroman/jupyter_qtlcharts).
 
 - Revised `iplotMap()` so that the marker search box works within
   Jupyter notebooks. (Issue #85)

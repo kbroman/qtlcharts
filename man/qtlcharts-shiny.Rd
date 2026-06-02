@@ -2,7 +2,7 @@
 % Please edit documentation in R/iboxplot.R, R/idotplot.R, R/iheatmap.R,
 %   R/ipleiotropy.R, R/iplot.R, R/iplotCorr.R, R/iplotCurves.R,
 %   R/iplotMScanone.R, R/iplotMap.R, R/iplotRF.R, R/iplotScanone.R,
-%   R/iplotScantwo.R, R/itriplot.R, R/qtlcharts.R, R/scat2scat.R
+%   R/iplotScantwo.R, R/itimeplot.R, R/itriplot.R, R/qtlcharts.R, R/scat2scat.R
 \name{qtlcharts-shiny}
 \alias{qtlcharts-shiny}
 \alias{iboxplot_output}
@@ -29,6 +29,8 @@
 \alias{iplotScanone_render}
 \alias{iplotScantwo_output}
 \alias{iplotScantwo_render}
+\alias{itimeplot_output}
+\alias{itimeplot_render}
 \alias{itriplot_output}
 \alias{itriplot_render}
 \alias{scat2scat_output}
@@ -82,6 +84,10 @@ iplotScanone_render(expr, env = parent.frame(), quoted = FALSE)
 iplotScantwo_output(outputId, width = "100\%", height = "1000")
 
 iplotScantwo_render(expr, env = parent.frame(), quoted = FALSE)
+
+itimeplot_output(outputId, width = "100\%", height = "580")
+
+itimeplot_render(expr, env = parent.frame(), quoted = FALSE)
 
 itriplot_output(outputId, width = "100\%", height = "530")
 

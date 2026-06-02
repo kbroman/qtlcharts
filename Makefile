@@ -29,6 +29,7 @@ JSCHARTS = $(CHART_DIR)/iplotScanone_noeff.js \
 		   $(CHART_DIR)/iplotMScanone_eff.js \
 		   $(CHART_DIR)/iheatmap.js \
 		   $(CHART_DIR)/iplot.js \
+		   $(CHART_DIR)/itimeplot.js \
 		   $(CHART_DIR)/iplotScantwo.js \
 		   $(CHART_DIR)/scat2scat.js \
 		   $(CHART_DIR)/itriplot.js
@@ -41,6 +42,7 @@ $(CHART_DIR)/%.js: $(CHART_DIR)/%.coffee
 
 # javascript for the widgets called from R
 JSWIDGETS = $(WIDGET_DIR)/iplot.js \
+			$(WIDGET_DIR)/itimeplot.js \
 			$(WIDGET_DIR)/idotplot.js \
 			$(WIDGET_DIR)/iplotMap.js \
 			$(WIDGET_DIR)/iheatmap.js \

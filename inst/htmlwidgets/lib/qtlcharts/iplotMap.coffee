@@ -23,6 +23,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
     ylab = chartOpts?.ylab ? "Position (cM)"                      # y-axis label
     shiftStart = chartOpts?.shiftStart ? false                    # if true, shift the start of chromosomes to 0
     horizontal = chartOpts?.horizontal ? false                    # if true, have chromosomes on vertical axis and positions horizontally
+    tipdirection = chartOpts?.tipdirection ? null                 # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -51,6 +52,7 @@ iplotMap = (widgetdiv, data, chartOpts) ->
                   ylab:ylab
                   horizontal:horizontal
                   shiftStart:shiftStart
+                  tipdirection:tipdirection
                   tipclass:widgetdivid})
 
     # select htmlwidget div and grab its ID

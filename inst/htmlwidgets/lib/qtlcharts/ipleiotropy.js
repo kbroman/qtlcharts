@@ -4,7 +4,7 @@
 var ipleiotropy;
 
 ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
-  var button_color, callback, chartdivid, dark, g_lod, g_scat, g_slider, geno1, geno2, group, height, homozygotes, i, indtip, initial_value, k, light, linecolor, linewidth, lod2_data, lod_at_marker, lod_axispos, lod_nyticks, lod_points, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, m1_current, m2_current, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, n_color, n_geno, n_geno_sq, point_data, pointcolor, points, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref37, ref4, ref5, ref6, ref7, ref8, ref9, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_title, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, ticks_at_markers, widgetdivid, width, wleft, wright, x;
+  var button_color, callback, chartdivid, dark, g_lod, g_scat, g_slider, geno1, geno2, group, height, homozygotes, i, indtip, initial_value, k, light, linecolor, linewidth, lod2_data, lod_at_marker, lod_axispos, lod_nyticks, lod_points, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, m1_current, m2_current, margin, marker_pos, markers, my_second_curve, mylodchart, myscatter, myslider, n_color, n_geno, n_geno_sq, point_data, pointcolor, points, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref37, ref38, ref4, ref5, ref6, ref7, ref8, ref9, scat_axispos, scat_nyticks, scat_rotate_ylab, scat_title, scat_titlepos, scat_xlab, scat_ylab, scat_ylim, scat_yticks, slider_color, slider_height, svg, ticks_at_markers, tipdirection, widgetdivid, width, wleft, wright, x;
   markers = (function() {
     var results;
     results = [];
@@ -65,8 +65,9 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   slider_color = (ref33 = chartOpts != null ? chartOpts.slider_color : void 0) != null ? ref33 : "#E6E6E6"; // color of slider bar
   button_color = (ref34 = chartOpts != null ? chartOpts.button_color : void 0) != null ? ref34 : "#E6E6E6"; // color of rectangular part of buttons
   ticks_at_markers = (ref35 = chartOpts != null ? chartOpts.ticks_at_markers : void 0) != null ? ref35 : true; // if true, put tick marks at the marker positions (above the slider)
+  tipdirection = (ref36 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref36 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref36 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref36 : 'chart';
+  chartdivid = (ref37 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref37 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -139,6 +140,7 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       xlab: lod_xlab,
       ylab: lod_ylab,
       rotate_ylab: lod_rotate_ylab,
+      tipdirection: tipdirection,
       tipclass: widgetdivid
     });
     g_lod = svg.append("g").attr("id", "lodchart");
@@ -149,6 +151,7 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       pointcolor: null,
       pointsize: null,
       pointstroke: null,
+      tipdirection: tipdirection,
       tipclass: widgetdivid
     });
     lod2_data = {
@@ -206,6 +209,7 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       force: false
     },
     rectcolor: rectcolor,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   point_data = {
@@ -247,7 +251,7 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   }).apply(this).map(function(i) {
     return i * n_geno + i;
   });
-  for (i = k = 0, ref37 = n_geno_sq; (0 <= ref37 ? k < ref37 : k > ref37); i = 0 <= ref37 ? ++k : --k) {
+  for (i = k = 0, ref38 = n_geno_sq; (0 <= ref38 ? k < ref38 : k > ref38); i = 0 <= ref38 ? ++k : --k) {
     if (homozygotes.indexOf(i) > -1) {
       pointcolor.push(dark.pop());
     } else {

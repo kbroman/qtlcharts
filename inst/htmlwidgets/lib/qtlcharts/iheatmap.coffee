@@ -31,6 +31,7 @@ iheatmap = (widgetdiv, data, chartOpts) ->
     zlim = chartOpts?.zlim ? [-d3panels.matrixMaxAbs(data.z), 0, d3panels.matrixMaxAbs(data.z)] # z-axis limits
     colors = chartOpts?.colors ? ["slateblue", "white", "crimson"] # heat map colors (same length as `zlim`)
     flip_vert_slice = chartOpts?.flip_vert_slice ? false            # if true, flip the y- and z- axes in the vertical slice
+    tipdirection = chartOpts?.tipdirection ? null    # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -80,6 +81,7 @@ iheatmap = (widgetdiv, data, chartOpts) ->
         zthresh:zthresh
         colors:colors
         nullcolor:nullcolor
+        tipdirection:tipdirection
         tipclass:widgetdivid})
 
     horslice = d3panels.panelframe({

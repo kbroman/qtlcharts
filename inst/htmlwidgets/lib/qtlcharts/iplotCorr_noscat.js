@@ -2,7 +2,7 @@
 var iplotCorr_noscat;
 
 iplotCorr_noscat = function(widgetdiv, data, chartOpts) {
-  var cells, chartdivid, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, height, i, j, margin, min_paneldim, ncorrX, ncorrY, nind, nvar, panelheight, panelwidth, pixel_height, pixel_width, rectcolor, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, svg, widgetdivid, width, zlim;
+  var cells, chartdivid, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, height, i, j, margin, min_paneldim, ncorrX, ncorrY, nind, nvar, panelheight, panelwidth, pixel_height, pixel_width, rectcolor, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8, svg, tipdirection, widgetdivid, width, zlim;
   // data is an object with 7 components
   //   data.indID  vector of character strings, of length n, with IDs for individuals
   //   data.var    vector of character strings, of length p, with variable names
@@ -34,8 +34,9 @@ iplotCorr_noscat = function(widgetdiv, data, chartOpts) {
   ];
   rectcolor = (ref5 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref5 : "#E6E6E6"; // color of background rectangle
   cortitle = (ref6 = chartOpts != null ? chartOpts.cortitle : void 0) != null ? ref6 : ""; // title for heatmap panel
+  tipdirection = (ref7 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref7 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref7 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref7 : 'chart';
+  chartdivid = (ref8 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref8 : 'chart';
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
     left: 70,
@@ -90,7 +91,8 @@ iplotCorr_noscat = function(widgetdiv, data, chartOpts) {
     return d3.select(this).attr("stroke", "none");
   });
   corr_tip = d3panels.tooltip_create(d3.select("body"), cells, {
-    tipclass: widgetdivid
+    tipclass: widgetdivid,
+    direction: tipdirection
   }, function(d) {
     return d3.format(".2f")(d.value);
   });

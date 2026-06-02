@@ -4,7 +4,7 @@
 var iheatmap;
 
 iheatmap = function(widgetdiv, data, chartOpts) {
-  var axispos, cells, chartdivid, colors, flip_vert_slice, formatX, formatY, g_heatmap, g_horslice, g_verslice, hbot, height, horcurve, horslice, htop, linecolor, linewidth, margin, myheatmap, nullcolor, nxticks, nyticks, nzticks, plotHor, plotVer, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref3, ref4, ref5, ref6, ref7, ref8, ref9, svg, title, titlepos, ver_opts, vercurve, verslice, widgetdivid, width, wleft, wright, xdif, xlab, xlim, xticks, ydif, ylab, ylim, yticks, z_transpose, zlab, zlim, zthresh, zticks;
+  var axispos, cells, chartdivid, colors, flip_vert_slice, formatX, formatY, g_heatmap, g_horslice, g_verslice, hbot, height, horcurve, horslice, htop, linecolor, linewidth, margin, myheatmap, nullcolor, nxticks, nyticks, nzticks, plotHor, plotVer, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref3, ref4, ref5, ref6, ref7, ref8, ref9, svg, tipdirection, title, titlepos, ver_opts, vercurve, verslice, widgetdivid, width, wleft, wright, xdif, xlab, xlim, xticks, ydif, ylab, ylim, yticks, z_transpose, zlab, zlim, zthresh, zticks;
   // chartOpts start
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 800; // total height of chart
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 800; // total width of chart
@@ -52,8 +52,9 @@ iheatmap = function(widgetdiv, data, chartOpts) {
     "crimson" // heat map colors (same length as `zlim`)
   ];
   flip_vert_slice = (ref26 = chartOpts != null ? chartOpts.flip_vert_slice : void 0) != null ? ref26 : false; // if true, flip the y- and z- axes in the vertical slice
+  tipdirection = (ref27 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref27 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref27 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref27 : 'chart';
+  chartdivid = (ref28 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref28 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -108,6 +109,7 @@ iheatmap = function(widgetdiv, data, chartOpts) {
     zthresh: zthresh,
     colors: colors,
     nullcolor: nullcolor,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   horslice = d3panels.panelframe({

@@ -4,7 +4,7 @@
 var scat2scat;
 
 scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
-  var axispos, chartdivid, g_left, g_right, height, leftchart, make_right_chart, margin, nxticks1, nxticks2, nyticks1, nyticks2, objects, pointcolor1, pointcolor2, pointsize1, pointsize2, pointstroke1, pointstroke2, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref4, ref5, ref6, ref7, ref8, ref9, rightchart, rotate_ylab1, rotate_ylab2, svg, title1, titlepos, widgetdivid, width, xNA, xlab1, xlab2, xlim1, xlim2, xticks1, xticks2, yNA, ylab1, ylab2, ylim1, ylim2, yticks1, yticks2;
+  var axispos, chartdivid, g_left, g_right, height, leftchart, make_right_chart, margin, nxticks1, nxticks2, nyticks1, nyticks2, objects, pointcolor1, pointcolor2, pointsize1, pointsize2, pointstroke1, pointstroke2, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref4, ref5, ref6, ref7, ref8, ref9, rightchart, rotate_ylab1, rotate_ylab2, svg, tipdirection, title1, titlepos, widgetdivid, width, xNA, xlab1, xlab2, xlim1, xlim2, xticks1, xticks2, yNA, ylab1, ylab2, ylim1, ylim2, yticks1, yticks2;
   // chartOpts start
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 500; // height of chart in pixels
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 800; // width of chart in pixels
@@ -60,8 +60,9 @@ scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
     width: 15,
     gap: 10 // treatment of missing values (handle=T/F, force=T/F, width, gap)
   };
+  tipdirection = (ref34 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref34 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref34 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref34 : 'chart';
+  chartdivid = (ref35 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref35 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -128,6 +129,7 @@ scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
       width: yNA.width,
       gap: yNA.gap
     },
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   svg = d3.select(widgetdiv).select("svg");
@@ -185,6 +187,7 @@ scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
         width: yNA.width,
         gap: yNA.gap
       },
+      tipdirection: tipdirection,
       tipclass: widgetdivid
     });
     return rightchart(g_right, scat2data[index]);

@@ -4,7 +4,7 @@
 var iplotScanone_noeff;
 
 iplotScanone_noeff = function(widgetdiv, data, chartOpts) {
-  var altrectcolor, axispos, chartdivid, chrGap, height, linecolor, linewidth, margin, mylodchart, nyticks, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref4, ref5, ref6, ref7, ref8, ref9, rotate_ylab, title, titlepos, widgetdivid, width, xlab, ylab, ylim, yticks;
+  var altrectcolor, axispos, chartdivid, chrGap, height, linecolor, linewidth, margin, mylodchart, nyticks, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, rotate_ylab, tipdirection, title, titlepos, widgetdivid, width, xlab, ylab, ylim, yticks;
   // chartOpts start
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 450; // height of image in pixels
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 900; // width of image in pixels
@@ -37,8 +37,9 @@ iplotScanone_noeff = function(widgetdiv, data, chartOpts) {
   xlab = (ref26 = (ref27 = chartOpts != null ? chartOpts.xlab : void 0) != null ? ref27 : chartOpts != null ? chartOpts.lod_xlab : void 0) != null ? ref26 : null; // x-axis label
   ylab = (ref28 = (ref29 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref29 : chartOpts != null ? chartOpts.lod_ylab : void 0) != null ? ref28 : "LOD score"; // y-axis label
   rotate_ylab = (ref30 = (ref31 = chartOpts != null ? chartOpts.rotate_ylab : void 0) != null ? ref31 : chartOpts != null ? chartOpts.lod_rotate_ylab : void 0) != null ? ref30 : null; // indicates whether to rotate the y-axis label 90 degrees
+  tipdirection = (ref32 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref32 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref32 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref32 : 'chart';
+  chartdivid = (ref33 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref33 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -75,6 +76,7 @@ iplotScanone_noeff = function(widgetdiv, data, chartOpts) {
     xlab: xlab,
     ylab: ylab,
     rotate_ylab: rotate_ylab,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   mylodchart(d3.select(widgetdiv).select("svg"), data);

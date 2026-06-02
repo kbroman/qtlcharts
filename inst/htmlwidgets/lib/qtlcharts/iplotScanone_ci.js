@@ -4,7 +4,7 @@
 var iplotScanone_ci;
 
 iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
-  var altrectcolor, chartdivid, chrGap, eff_axispos, eff_linecolor, eff_linewidth, eff_nyticks, eff_rotate_ylab, eff_segwidth, eff_titlepos, eff_xlab, eff_ylab, eff_ylim, eff_yticks, g_lod, height, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_pointcolor, lod_pointsize, lod_pointstroke, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, markers, mycichart, mylodchart, objects, plotCI, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref37, ref4, ref5, ref6, ref7, ref8, ref9, svg, widgetdivid, width, wleft, wright, x;
+  var altrectcolor, chartdivid, chrGap, eff_axispos, eff_linecolor, eff_linewidth, eff_nyticks, eff_rotate_ylab, eff_segwidth, eff_titlepos, eff_xlab, eff_ylab, eff_ylim, eff_yticks, g_lod, height, lod_axispos, lod_linecolor, lod_linewidth, lod_nyticks, lod_pointcolor, lod_pointsize, lod_pointstroke, lod_rotate_ylab, lod_title, lod_titlepos, lod_xlab, lod_ylab, lod_ylim, lod_yticks, margin, markers, mycichart, mylodchart, objects, plotCI, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref37, ref38, ref4, ref5, ref6, ref7, ref8, ref9, svg, tipdirection, widgetdivid, width, wleft, wright, x;
   markers = (function() {
     var results;
     results = [];
@@ -62,8 +62,9 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     ylabel: 5 // position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in effect plot panel
   };
   eff_titlepos = (ref35 = (ref36 = chartOpts != null ? chartOpts.eff_titlepos : void 0) != null ? ref36 : chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref35 : 20; // position of title for effect plot panel, in pixels
+  tipdirection = (ref37 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref37 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref37 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref37 : 'chart';
+  chartdivid = (ref38 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref38 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -107,6 +108,7 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     xlab: lod_xlab,
     ylab: lod_ylab,
     rotate_ylab: lod_rotate_ylab,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   svg = d3.select(widgetdiv).select("svg");
@@ -114,7 +116,7 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   mylodchart(g_lod, lod_data);
   mycichart = null;
   plotCI = function(markername, markerindex) {
-    var ave, chr, chrtype, ci_g, g, gabs, genonames, high, i, j, k, low, means, p, phesub, range, ref38, se, variance;
+    var ave, chr, chrtype, ci_g, g, gabs, genonames, high, i, j, k, low, means, p, phesub, range, ref39, se, variance;
     if (mycichart != null) {
       mycichart.remove();
     }
@@ -135,13 +137,13 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     se = [];
     low = [];
     high = [];
-    for (j = k = 1, ref38 = genonames.length; (1 <= ref38 ? k <= ref38 : k >= ref38); j = 1 <= ref38 ? ++k : --k) {
+    for (j = k = 1, ref39 = genonames.length; (1 <= ref39 ? k <= ref39 : k >= ref39); j = 1 <= ref39 ? ++k : --k) {
       phesub = (function() {
-        var l, len, ref39, results;
-        ref39 = pxg_data.pheno;
+        var l, len, ref40, results;
+        ref40 = pxg_data.pheno;
         results = [];
-        for (i = l = 0, len = ref39.length; l < len; i = ++l) {
-          p = ref39[i];
+        for (i = l = 0, len = ref40.length; l < len; i = ++l) {
+          p = ref40[i];
           if (gabs[i] === j && (p != null)) {
             results.push(p);
           }
@@ -193,6 +195,7 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
       segstrokewidth: eff_linewidth,
       segwidth: eff_segwidth,
       rectcolor: rectcolor,
+      tipdirection: tipdirection,
       tipclass: widgetdivid,
       xcatlabels: genonames
     });

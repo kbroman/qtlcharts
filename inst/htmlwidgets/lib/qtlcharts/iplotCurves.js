@@ -4,7 +4,7 @@
 var iplotCurves;
 
 iplotCurves = function(widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) {
-  var allpoints, axispos, chartdivid, curves, curves_nxticks, curves_nyticks, curves_title, curves_xlab, curves_xlim, curves_xticks, curves_ylab, curves_ylim, curves_yticks, g, g_curves, g_scat1, g_scat2, group, hbot, height, htop, i, linecolor, linecolorhilit, linewidth, linewidthhilit, margin, mycurvechart, myscatterplot1, myscatterplot2, ngroup, nind, nscatter, pointcolor, pointcolorhilit, points1, points2, pointsize, pointsizehilit, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref37, ref38, ref39, ref4, ref40, ref41, ref42, ref43, ref44, ref45, ref46, ref47, ref48, ref49, ref5, ref50, ref51, ref52, ref53, ref54, ref6, ref7, ref8, ref9, scan1_yNA, scan2_yNA, scat1_nxticks, scat1_nyticks, scat1_title, scat1_xNA, scat1_xlab, scat1_xlim, scat1_xticks, scat1_yNA, scat1_ylab, scat1_ylim, scat1_yticks, scat2_nxticks, scat2_nyticks, scat2_title, scat2_xNA, scat2_xlab, scat2_xlim, scat2_xticks, scat2_yNA, scat2_ylab, scat2_ylim, scat2_yticks, svg, titlepos, wbot, widgetdivid, width, wtop;
+  var allpoints, axispos, chartdivid, curves, curves_nxticks, curves_nyticks, curves_title, curves_xlab, curves_xlim, curves_xticks, curves_ylab, curves_ylim, curves_yticks, g, g_curves, g_scat1, g_scat2, group, hbot, height, htop, i, linecolor, linecolorhilit, linewidth, linewidthhilit, margin, mycurvechart, myscatterplot1, myscatterplot2, ngroup, nind, nscatter, pointcolor, pointcolorhilit, points1, points2, pointsize, pointsizehilit, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref36, ref37, ref38, ref39, ref4, ref40, ref41, ref42, ref43, ref44, ref45, ref46, ref47, ref48, ref49, ref5, ref50, ref51, ref52, ref53, ref54, ref55, ref6, ref7, ref8, ref9, scan1_yNA, scan2_yNA, scat1_nxticks, scat1_nyticks, scat1_title, scat1_xNA, scat1_xlab, scat1_xlim, scat1_xticks, scat1_yNA, scat1_ylab, scat1_ylim, scat1_yticks, scat2_nxticks, scat2_nyticks, scat2_title, scat2_xNA, scat2_xlab, scat2_xlim, scat2_xticks, scat2_yNA, scat2_ylab, scat2_ylim, scat2_yticks, svg, tipdirection, titlepos, wbot, widgetdivid, width, wtop;
   // chartOpts start
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 1000; // total height of chart in pixels
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000; // total width of chart in pixels
@@ -84,8 +84,9 @@ iplotCurves = function(widgetdiv, curve_data, scatter1_data, scatter2_data, char
   scat2_title = (ref50 = chartOpts != null ? chartOpts.scat2_title : void 0) != null ? ref50 : ""; // title for second scatterplot
   scat2_xlab = (ref51 = chartOpts != null ? chartOpts.scat2_xlab : void 0) != null ? ref51 : "X"; // x-axis label for second scatterplot
   scat2_ylab = (ref52 = chartOpts != null ? chartOpts.scat2_ylab : void 0) != null ? ref52 : "Y"; // y-axis label for second scatterplot
+  tipdirection = (ref53 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref53 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref53 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref53 : 'chart';
+  chartdivid = (ref54 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref54 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -138,12 +139,12 @@ iplotCurves = function(widgetdiv, curve_data, scatter1_data, scatter2_data, char
   svg = d3.select(widgetdiv).select("svg");
   // groups of colors
   nind = curve_data.y.length;
-  group = (ref54 = curve_data != null ? curve_data.group : void 0) != null ? ref54 : (function() {
-    var j, len, ref55, results;
-    ref55 = curve_data.data;
+  group = (ref55 = curve_data != null ? curve_data.group : void 0) != null ? ref55 : (function() {
+    var j, len, ref56, results;
+    ref56 = curve_data.data;
     results = [];
-    for (j = 0, len = ref55.length; j < len; j++) {
-      i = ref55[j];
+    for (j = 0, len = ref56.length; j < len; j++) {
+      i = ref56[j];
       results.push(1);
     }
     return results;
@@ -186,6 +187,7 @@ iplotCurves = function(widgetdiv, curve_data, scatter1_data, scatter2_data, char
     title: curves_title,
     xlab: curves_xlab,
     ylab: curves_ylab,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   if (nscatter > 0) {
@@ -210,6 +212,7 @@ iplotCurves = function(widgetdiv, curve_data, scatter1_data, scatter2_data, char
       title: scat1_title,
       xlab: scat1_xlab,
       ylab: scat1_ylab,
+      tipdirection: tipdirection,
       tipclass: widgetdivid
     });
   }
@@ -235,6 +238,7 @@ iplotCurves = function(widgetdiv, curve_data, scatter1_data, scatter2_data, char
       title: scat2_title,
       xlab: scat2_xlab,
       ylab: scat2_ylab,
+      tipdirection: tipdirection,
       tipclass: widgetdivid
     });
   }

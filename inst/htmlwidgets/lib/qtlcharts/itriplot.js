@@ -4,7 +4,7 @@
 var itriplot;
 
 itriplot = function(widgetdiv, data, chartOpts) {
-  var boxcolor, boxwidth, chartdivid, gridcolor, gridlines, gridwidth, height, labelpos, labels, margin, mychart, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, tipclass, title, titlepos, widgetdivid, width;
+  var boxcolor, boxwidth, chartdivid, gridcolor, gridlines, gridwidth, height, labelpos, labels, margin, mychart, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, tipclass, tipdirection, title, titlepos, widgetdivid, width;
   // chartOpts start
   width = (ref = chartOpts != null ? chartOpts.width : void 0) != null ? ref : 600; // overall width of chart in pixels
   height = (ref1 = chartOpts != null ? chartOpts.height : void 0) != null ? ref1 : 520; // overall height of chart in pixels
@@ -32,8 +32,9 @@ itriplot = function(widgetdiv, data, chartOpts) {
   gridcolor = (ref14 = chartOpts != null ? chartOpts.gridcolor : void 0) != null ? ref14 : "white"; // color of grid lines
   gridwidth = (ref15 = chartOpts != null ? chartOpts.gridwidth : void 0) != null ? ref15 : 1; // width of grid lines in pixels
   tipclass = (ref16 = chartOpts != null ? chartOpts.tipclass : void 0) != null ? ref16 : "tooltip"; // class name for tool tips
+  tipdirection = (ref17 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref17 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref17 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref17 : 'chart';
+  chartdivid = (ref18 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref18 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -59,6 +60,7 @@ itriplot = function(widgetdiv, data, chartOpts) {
     gridlines: gridlines,
     gridcolor: gridcolor,
     gridwidth: gridwidth,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   mychart(d3.select(widgetdiv).select("svg"), data);

@@ -1,4 +1,4 @@
-## qtlcharts 0.21-7 (2025-06-02)
+ ## qtlcharts 0.21-8 (2025-06-02)
 
 ### New features
 
@@ -9,6 +9,8 @@
   Shiny](https://github.com/kbroman/shiny_qtlcharts). Also added
   [examples of R/qtlcharts within a Jupyter
   notebook](https://github.com/kbroman/jupyter_qtlcharts).
+
+- Added ability to control tool tip direction by a chart option.
 
 ### Bug fixes
 

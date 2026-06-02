@@ -32,6 +32,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
     lodlim = chartOpts?.lodlim ? [0, 12]               # range of LOD values to display; omit below 1st, truncate above 2nd
     nyticks = chartOpts?.nyticks ? 5                   # no. ticks on y-axis in LOD curve panels
     yticks = chartOpts?.yticks ? null                  # vector of tick positions on y-axis in LOD curve panels
+    tipdirection = chartOpts?.tipdirection ? null      # direction of tool tips
     tipclass = chartOpts?.tipclass ? "tooltip"         # class name for tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
@@ -118,6 +119,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
         zthresh:lodlim[0]
         oneAtTop:oneAtTop
         equalCells:true
+        tipdirection: tipdirection
         tipclass:widgetdivid})
 
     g_heatmap = svg.append("g")
@@ -194,6 +196,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
             pointcolor:pointcolor
             pointstroke:pointstroke
             title:data.marker[markerindex]
+            tipdirection: tipdirection
             tipclass:widgetdivid})
 
         g_scans = svg.append("g")

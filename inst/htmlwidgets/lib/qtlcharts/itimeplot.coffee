@@ -24,6 +24,7 @@ itimeplot = (widgetdiv, data, chartOpts) ->
     pointstroke = chartOpts?.pointstroke ? "black" # color of outer circle for points
     rotate_ylab = chartOpts?.rotate_ylab ? null    # whether to rotate the y-axis label
     yNA = chartOpts?.yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values (handle=T/F, force=T/F, width, gap)
+    tipdirection = chartOpts?.tipdirection ? null  # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -55,6 +56,7 @@ itimeplot = (widgetdiv, data, chartOpts) ->
         rotate_ylab:rotate_ylab
         yNA:{handle:yNA.handle, force:yNA.force}
         yNA_size:{width:yNA.width, gap:yNA.gap}
+        tipdirection: tipdirection
         tipclass:widgetdivid})
 
     mychart(d3.select(widgetdiv).select("svg"), data)

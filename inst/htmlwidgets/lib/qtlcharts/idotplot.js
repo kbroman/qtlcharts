@@ -4,7 +4,7 @@
 var idotplot;
 
 idotplot = function(widgetdiv, data, chartOpts) {
-  var axispos, chartdivid, height, horizontal, jitter, margin, mychart, nyticks, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref3, ref4, ref5, ref6, ref7, ref8, ref9, title, titlepos, widgetdivid, width, xcategories, xcatlabels, xlab, yNA, ylab, ylim, yticks;
+  var axispos, chartdivid, height, horizontal, jitter, margin, mychart, nyticks, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref3, ref4, ref5, ref6, ref7, ref8, ref9, tipdirection, title, titlepos, widgetdivid, width, xcategories, xcatlabels, xlab, yNA, ylab, ylim, yticks;
   // chartOpts start
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 550; // height of chart in pixels
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 400; // width of chart in pixels
@@ -42,8 +42,9 @@ idotplot = function(widgetdiv, data, chartOpts) {
   xcategories = (ref17 = chartOpts != null ? chartOpts.xcategories : void 0) != null ? ref17 : null; // group categories
   xcatlabels = (ref18 = chartOpts != null ? chartOpts.xcatlabels : void 0) != null ? ref18 : null; // labels for group categories
   horizontal = (ref19 = chartOpts != null ? chartOpts.horizontal : void 0) != null ? ref19 : false; // If true, have genotypes on vertical axis and phenotype on horizontal axis
+  tipdirection = (ref20 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref20 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref20 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref20 : 'chart';
+  chartdivid = (ref21 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref21 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -97,6 +98,7 @@ idotplot = function(widgetdiv, data, chartOpts) {
     pointstroke: pointstroke,
     pointsize: pointsize,
     horizontal: horizontal,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   mychart(d3.select(widgetdiv).select("svg"), data);

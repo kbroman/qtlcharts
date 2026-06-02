@@ -4,7 +4,7 @@
 var itimeplot;
 
 itimeplot = function(widgetdiv, data, chartOpts) {
-  var axispos, chartdivid, height, margin, mychart, nxticks, nyticks, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref3, ref4, ref5, ref6, ref7, ref8, ref9, rotate_ylab, title, titlepos, widgetdivid, width, xlab, xlim, xticks, yNA, ylab, ylim, yticks;
+  var axispos, chartdivid, height, margin, mychart, nxticks, nyticks, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref3, ref4, ref5, ref6, ref7, ref8, ref9, rotate_ylab, tipdirection, title, titlepos, widgetdivid, width, xlab, xlim, xticks, yNA, ylab, ylim, yticks;
   // chartOpts start
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 500; // height of chart in pixels
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 800; // width of chart in pixels
@@ -42,8 +42,9 @@ itimeplot = function(widgetdiv, data, chartOpts) {
     width: 15,
     gap: 10 // treatment of missing values (handle=T/F, force=T/F, width, gap)
   };
+  tipdirection = (ref20 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref20 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref20 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref20 : 'chart';
+  chartdivid = (ref21 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref21 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -93,6 +94,7 @@ itimeplot = function(widgetdiv, data, chartOpts) {
       width: yNA.width,
       gap: yNA.gap
     },
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   mychart(d3.select(widgetdiv).select("svg"), data);

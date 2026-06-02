@@ -10,7 +10,7 @@
 var iboxplot;
 
 iboxplot = function(widgetdiv, data, chartOpts) {
-  var Baxis, BaxisData, Laxis, LaxisData, botylim, br2, chartdivid, clickStatus, color, curves, d, fix4hist, grp4BkgdHist, halfheight, height, hi, hist, histcolors, histline, i, indRect, indRectGrp, indindex, j, k, l, len, len1, len2, len3, lo, longRect, longRectGrp, lowBaxis, lowBaxisData, lowsvg, lowxScale, lowyScale, m, margin, midQuant, n, nQuant, o, p, qucolors, quline, r, randomInd, recWidth, rectcolor, ref, ref1, ref10, ref11, ref12, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, rightAxis, svg, tmp, tooltip, topylim, widgetdivid, width, xScale, xlab, yScale, ylab;
+  var Baxis, BaxisData, Laxis, LaxisData, botylim, br2, chartdivid, clickStatus, color, curves, d, fix4hist, grp4BkgdHist, halfheight, height, hi, hist, histcolors, histline, i, indRect, indRectGrp, indindex, j, k, l, len, len1, len2, len3, lo, longRect, longRectGrp, lowBaxis, lowBaxisData, lowsvg, lowxScale, lowyScale, m, margin, midQuant, n, nQuant, o, p, qucolors, quline, r, randomInd, recWidth, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, rightAxis, svg, tipdirection, tmp, tooltip, topylim, widgetdivid, width, xScale, xlab, yScale, ylab;
   // chartOpts start
   width = (ref = chartOpts != null ? chartOpts.width : void 0) != null ? ref : 1000; // width of image in pixels
   height = (ref1 = chartOpts != null ? chartOpts.height : void 0) != null ? ref1 : 900; // total height of image in pixels
@@ -31,8 +31,9 @@ iboxplot = function(widgetdiv, data, chartOpts) {
     "MediumVioletRed",
     "black" // vector of colors for selected histograms
   ];
+  tipdirection = (ref8 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref8 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref8 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref8 : 'chart';
+  chartdivid = (ref9 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref9 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -69,9 +70,9 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   indindex = d3.range(data.ind.length);
   // adjust counts object to make proper histogram
   br2 = [];
-  ref9 = data.breaks;
-  for (k = 0, len = ref9.length; k < len; k++) {
-    i = ref9[k];
+  ref10 = data.breaks;
+  for (k = 0, len = ref10.length; k < len; k++) {
+    i = ref10[k];
     br2.push(i);
     br2.push(i);
   }
@@ -146,9 +147,9 @@ iboxplot = function(widgetdiv, data, chartOpts) {
   if (qucolors == null) {
     tmp = d3.schemeCategory10;
     qucolors = ["black"];
-    ref10 = d3.range((nQuant - 1) / 2);
-    for (l = 0, len1 = ref10.length; l < len1; l++) {
-      j = ref10[l];
+    ref11 = d3.range((nQuant - 1) / 2);
+    for (l = 0, len1 = ref11.length; l < len1; l++) {
+      j = ref11[l];
       qucolors.push(tmp[j]);
     }
   }
@@ -156,14 +157,14 @@ iboxplot = function(widgetdiv, data, chartOpts) {
     qucolors = qucolors.slice(0, (nQuant - 1) / 2 + 1);
   }
   qucolors = qucolors.reverse();
-  ref11 = qucolors.slice(0, -1).reverse();
-  for (n = 0, len2 = ref11.length; n < len2; n++) {
-    color = ref11[n];
+  ref12 = qucolors.slice(0, -1).reverse();
+  for (n = 0, len2 = ref12.length; n < len2; n++) {
+    color = ref12[n];
     qucolors.push(color);
   }
   // curves for quantiles
   curves = svg.append("g").attr("id", "curves");
-  for (j = o = 0, ref12 = nQuant; (0 <= ref12 ? o < ref12 : o > ref12); j = 0 <= ref12 ? ++o : --o) {
+  for (j = o = 0, ref13 = nQuant; (0 <= ref13 ? o < ref13 : o > ref13); j = 0 <= ref13 ? ++o : --o) {
     curves.append("path").datum(indindex).attr("d", quline(j)).attr("class", "line").attr("stroke", qucolors[j]).attr("pointer-events", "none").attr("fill", "none");
   }
   // vertical rectangles representing each array
@@ -250,7 +251,8 @@ iboxplot = function(widgetdiv, data, chartOpts) {
     }
   });
   tooltip = d3panels.tooltip_create(d3.select("body"), indRectGrp.selectAll("rect"), {
-    tipclass: widgetdivid
+    tipclass: widgetdivid,
+    direction: tipdirection
   }, function(d) {
     return data.ind[d];
   });

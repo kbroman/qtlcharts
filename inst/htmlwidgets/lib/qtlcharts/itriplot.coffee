@@ -21,6 +21,7 @@ itriplot = (widgetdiv, data, chartOpts) ->
     gridcolor = chartOpts?.gridcolor ? "white"          # color of grid lines
     gridwidth = chartOpts?.gridwidth ? 1                # width of grid lines in pixels
     tipclass = chartOpts?.tipclass ? "tooltip"          # class name for tool tips
+    tipdirection = chartOpts?.tipdirection ? null       # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -45,6 +46,7 @@ itriplot = (widgetdiv, data, chartOpts) ->
         gridlines:gridlines
         gridcolor:gridcolor
         gridwidth:gridwidth
+        tipdirection: tipdirection
         tipclass:widgetdivid})
 
     mychart(d3.select(widgetdiv).select("svg"), data)

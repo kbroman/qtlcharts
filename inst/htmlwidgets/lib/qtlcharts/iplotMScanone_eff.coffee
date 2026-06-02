@@ -36,6 +36,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
     nxticks = chartOpts?.nxticks ? 5          # no. ticks in x-axis for effect plot (right panel), if quantitative scale
     xticks = chartOpts?.xticks ? null         # tick positions in x-axis for effect plot (right panel), if quantitative scale
     lod_labels = chartOpts?.lod_labels ? null                      # labels on the LOD score columns
+    tipdirection = chartOpts?.tipdirection ? null                  # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -102,6 +103,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
         yticks:xticks
         nyticks:nxticks
         nullcolor:nullcolor
+        tipdirection: tipdirection
         tipclass:widgetdivid})
 
     # add the heatmap
@@ -125,6 +127,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
         xlab:xlab
         ylab:zlab
         ylim:[0, zlim[2]*1.05]
+        tipdirection: tipdirection
         tipclass:widgetdivid})
 
     # create empty panel
@@ -171,6 +174,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
         ylim:eff_ylim
         nxticks:nxticks
         xticks:xticks
+        tipdirection: tipdirection
         tipclass:widgetdivid})
 
     g_verpanel = svg.append("g")

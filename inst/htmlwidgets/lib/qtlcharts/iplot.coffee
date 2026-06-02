@@ -25,6 +25,7 @@ iplot = (widgetdiv, data, chartOpts) ->
     rotate_ylab = chartOpts?.rotate_ylab ? null    # whether to rotate the y-axis label
     xNA = chartOpts?.xNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values (handle=T/F, force=T/F, width, gap)
     yNA = chartOpts?.yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values (handle=T/F, force=T/F, width, gap)
+    tipdirection = chartOpts?.tipdirection ? null    # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -59,6 +60,7 @@ iplot = (widgetdiv, data, chartOpts) ->
         xNA_size:{width:xNA.width, gap:xNA.gap}
         yNA:{handle:yNA.handle, force:yNA.force}
         yNA_size:{width:yNA.width, gap:yNA.gap}
+        tipdirection:tipdirection
         tipclass:widgetdivid})
 
     mychart(d3.select(widgetdiv).select("svg"), data)

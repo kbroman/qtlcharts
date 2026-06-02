@@ -18,6 +18,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
     qucolors = chartOpts?.qucolors ? null        # vector of colors for the quantile curves
     histcolors = chartOpts?.histcolors ? ["#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black"] # vector of colors for selected histograms
+    tipdirection = chartOpts?.tipdirection ? null # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -358,7 +359,8 @@ iboxplot = (widgetdiv, data, chartOpts) ->
                          d3.select("path#path#{data.ind[d]}").remove()
 
     tooltip = d3panels.tooltip_create(d3.select("body"), indRectGrp.selectAll("rect"),
-                                      {tipclass:widgetdivid}, (d) -> data.ind[d])
+                                      {tipclass:widgetdivid, direction:tipdirection},
+                                      (d) -> data.ind[d])
 
     # box around the outside
     lowsvg.append("rect")

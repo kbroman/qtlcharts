@@ -54,6 +54,7 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
     scat2_title = chartOpts?.scat2_title ? ""                    # title for second scatterplot
     scat2_xlab = chartOpts?.scat2_xlab ? "X"                     # x-axis label for second scatterplot
     scat2_ylab = chartOpts?.scat2_ylab ? "Y"                     # y-axis label for second scatterplot
+    tipdirection = chartOpts?.tipdirection ? null                # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -113,6 +114,7 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
         title:curves_title
         xlab:curves_xlab
         ylab:curves_ylab
+        tipdirection:tipdirection
         tipclass:widgetdivid})
 
     if nscatter > 0
@@ -137,6 +139,7 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
              title:scat1_title
              xlab:scat1_xlab
              ylab:scat1_ylab
+             tipdirection:tipdirection
              tipclass:widgetdivid})
 
     if nscatter == 2
@@ -161,6 +164,7 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
               title:scat2_title
               xlab:scat2_xlab
               ylab:scat2_ylab
+              tipdirection:tipdirection
               tipclass:widgetdivid})
 
     ## now make the actual charts

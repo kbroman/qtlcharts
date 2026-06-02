@@ -38,6 +38,7 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     slider_color  = chartOpts?.slider_color ? "#E6E6E6"                 # color of slider bar
     button_color  = chartOpts?.button_color ? "#E6E6E6"                 # color of rectangular part of buttons
     ticks_at_markers = chartOpts?.ticks_at_markers ? true               # if true, put tick marks at the marker positions (above the slider)
+    tipdirection = chartOpts?.tipdirection ? null    # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -83,6 +84,7 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
             xlab:lod_xlab
             ylab:lod_ylab
             rotate_ylab:lod_rotate_ylab
+            tipdirection:tipdirection
             tipclass:widgetdivid})
 
         g_lod = svg.append("g")
@@ -95,6 +97,7 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
             pointcolor:null
             pointsize:null
             pointstroke:null
+            tipdirection:tipdirection
             tipclass:widgetdivid})
 
 
@@ -148,6 +151,7 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         xNA:{handle:false,force:false}
         yNA:{handle:false,force:false}
         rectcolor:rectcolor
+        tipdirection:tipdirection
         tipclass:widgetdivid})
 
     point_data = {x:pxg_data.pheno1, y:pxg_data.pheno2, indID:pxg_data.indID}

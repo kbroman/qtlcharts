@@ -4,7 +4,7 @@
 var iplotRF;
 
 iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
-  var altrectcolor, axispos, boxcolor, boxwidth, cellPad, chartdivid, chrGap, chrlinecolor, chrlinewidth, col, colors, create_crosstab, create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, fontsize, g_heatmap, hbot, heatmap_height, heatmap_width, height, hilitCellcolor, hilitcolor, htop, j, k, l, lodlim, m, margin, mycrosstab, mylodchart, mylodheatmap, nullcolor, nyticks, oneAtTop, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref4, ref5, ref6, ref7, ref8, ref9, row, svg, tipclass, titlepos, totmar, wbot, widgetdivid, width, yticks, zlim, zthresh;
+  var altrectcolor, axispos, boxcolor, boxwidth, cellPad, chartdivid, chrGap, chrlinecolor, chrlinewidth, col, colors, create_crosstab, create_scan, crosstab_height, crosstab_width, crosstab_xpos, crosstab_ypos, fontsize, g_heatmap, hbot, heatmap_height, heatmap_width, height, hilitCellcolor, hilitcolor, htop, j, k, l, lodlim, m, margin, mycrosstab, mylodchart, mylodheatmap, nullcolor, nyticks, oneAtTop, pointcolor, pointsize, pointstroke, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref4, ref5, ref6, ref7, ref8, ref9, row, svg, tipclass, tipdirection, titlepos, totmar, wbot, widgetdivid, width, yticks, zlim, zthresh;
   // chartOpts start
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 800; // total height of chart in pixels
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000; // total width of chart in pixels
@@ -51,9 +51,10 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
   ];
   nyticks = (ref26 = chartOpts != null ? chartOpts.nyticks : void 0) != null ? ref26 : 5; // no. ticks on y-axis in LOD curve panels
   yticks = (ref27 = chartOpts != null ? chartOpts.yticks : void 0) != null ? ref27 : null; // vector of tick positions on y-axis in LOD curve panels
-  tipclass = (ref28 = chartOpts != null ? chartOpts.tipclass : void 0) != null ? ref28 : "tooltip"; // class name for tool tips
+  tipdirection = (ref28 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref28 : null; // direction of tool tips
+  tipclass = (ref29 = chartOpts != null ? chartOpts.tipclass : void 0) != null ? ref29 : "tooltip"; // class name for tool tips
   // chartOpts end
-  chartdivid = (ref29 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref29 : 'chart';
+  chartdivid = (ref30 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref30 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -111,16 +112,16 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
     });
   });
 // make symmetric
-  for (row = j = 0, ref30 = rf_data.lod.length; (0 <= ref30 ? j < ref30 : j > ref30); row = 0 <= ref30 ? ++j : --j) {
-    for (col = k = 0, ref31 = rf_data.lod.length; (0 <= ref31 ? k < ref31 : k > ref31); col = 0 <= ref31 ? ++k : --k) {
+  for (row = j = 0, ref31 = rf_data.lod.length; (0 <= ref31 ? j < ref31 : j > ref31); row = 0 <= ref31 ? ++j : --j) {
+    for (col = k = 0, ref32 = rf_data.lod.length; (0 <= ref32 ? k < ref32 : k > ref32); col = 0 <= ref32 ? ++k : --k) {
       if (row > col) {
         rf_data.lod[row][col] = rf_data.lod[col][row];
       }
     }
   }
 // truncate values; max value on diagonal
-  for (row = l = 0, ref32 = rf_data.lod.length; (0 <= ref32 ? l < ref32 : l > ref32); row = 0 <= ref32 ? ++l : --l) {
-    for (col = m = 0, ref33 = rf_data.lod.length; (0 <= ref33 ? m < ref33 : m > ref33); col = 0 <= ref33 ? ++m : --m) {
+  for (row = l = 0, ref33 = rf_data.lod.length; (0 <= ref33 ? l < ref33 : l > ref33); row = 0 <= ref33 ? ++l : --l) {
+    for (col = m = 0, ref34 = rf_data.lod.length; (0 <= ref34 ? m < ref34 : m > ref34); col = 0 <= ref34 ? ++m : --m) {
       if (row === col || ((rf_data.lod[row][col] != null) && rf_data.lod[row][col] > lodlim[1])) {
         rf_data.lod[row][col] = lodlim[1];
       }
@@ -153,6 +154,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
     zthresh: lodlim[0],
     oneAtTop: oneAtTop,
     equalCells: true,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   g_heatmap = svg.append("g").attr("id", "chrheatmap");
@@ -188,7 +190,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
   };
   // function to create a lod chart
   create_scan = function(markerindex, panelindex) { // panelindex = 0 or 1 for left or right panels
-    var data, g_scans, i, n, ref34;
+    var data, g_scans, i, n, ref35;
     data = {
       chrname: rf_data.chrname,
       chr: rf_data.chr,
@@ -204,7 +206,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
       marker: rf_data.marker
     };
 // grab lod scores for this marker
-    for (row = n = 0, ref34 = rf_data.rf.length; (0 <= ref34 ? n < ref34 : n > ref34); row = 0 <= ref34 ? ++n : --n) {
+    for (row = n = 0, ref35 = rf_data.rf.length; (0 <= ref35 ? n < ref35 : n > ref35); row = 0 <= ref35 ? ++n : --n) {
       if (row > markerindex) {
         data.lod[row] = rf_data.rf[markerindex][row];
       } else if (row < markerindex) {
@@ -236,6 +238,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
       pointcolor: pointcolor,
       pointstroke: pointstroke,
       title: data.marker[markerindex],
+      tipdirection: tipdirection,
       tipclass: widgetdivid
     });
     g_scans = svg.append("g").attr("id", `lod_rf_${panelindex + 1}`).attr("transform", `translate(${wbot * panelindex}, ${htop})`);

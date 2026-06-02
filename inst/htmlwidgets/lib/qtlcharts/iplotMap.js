@@ -4,7 +4,7 @@
 var add_search_box, iplotMap;
 
 iplotMap = function(widgetdiv, data, chartOpts) {
-  var axispos, chartdivid, clean_marker_name, div, height, horizontal, linecolor, linecolorhilit, linewidth, margin, markerSelect, martip, mychart, nyticks, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, selectedMarker, shiftStart, svg, tickwidth, title, titlepos, widgetdivid, width, xlab, xlineOpts, ylab, ylim, yticks;
+  var axispos, chartdivid, clean_marker_name, div, height, horizontal, linecolor, linecolorhilit, linewidth, margin, markerSelect, martip, mychart, nyticks, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref3, ref4, ref5, ref6, ref7, ref8, ref9, selectedMarker, shiftStart, svg, tickwidth, tipdirection, title, titlepos, widgetdivid, width, xlab, xlineOpts, ylab, ylim, yticks;
   // chartOpts start
   width = (ref = chartOpts != null ? chartOpts.width : void 0) != null ? ref : 1000; // width of chart in pixels
   height = (ref1 = chartOpts != null ? chartOpts.height : void 0) != null ? ref1 : 600; // height of chart in pixels
@@ -39,8 +39,9 @@ iplotMap = function(widgetdiv, data, chartOpts) {
   ylab = (ref16 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref16 : "Position (cM)"; // y-axis label
   shiftStart = (ref17 = chartOpts != null ? chartOpts.shiftStart : void 0) != null ? ref17 : false; // if true, shift the start of chromosomes to 0
   horizontal = (ref18 = chartOpts != null ? chartOpts.horizontal : void 0) != null ? ref18 : false; // if true, have chromosomes on vertical axis and positions horizontally
+  tipdirection = (ref19 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref19 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref19 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref19 : 'chart';
+  chartdivid = (ref20 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref20 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -76,6 +77,7 @@ iplotMap = function(widgetdiv, data, chartOpts) {
     ylab: ylab,
     horizontal: horizontal,
     shiftStart: shiftStart,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   // select htmlwidget div and grab its ID

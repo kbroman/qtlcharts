@@ -38,6 +38,7 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     eff_segwidth = chartOpts?.eff_segwidth ? null              # width of line segments in effect plot panel, in pixels
     eff_axispos = chartOpts?.eff_axispos ? chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in effect plot panel
     eff_titlepos = chartOpts?.eff_titlepos ? chartOpts?.titlepos ? 20 # position of title for effect plot panel, in pixels
+    tipdirection = chartOpts?.tipdirection ? null              # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')
@@ -70,6 +71,7 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
         xlab:lod_xlab
         ylab:lod_ylab
         rotate_ylab:lod_rotate_ylab
+        tipdirection: tipdirection
         tipclass:widgetdivid})
 
     svg = d3.select(widgetdiv).select("svg")
@@ -135,6 +137,7 @@ iplotScanone_ci = (widgetdiv, lod_data, pxg_data, chartOpts) ->
             segstrokewidth:eff_linewidth
             segwidth:eff_segwidth
             rectcolor:rectcolor
+            tipdirection: tipdirection
             tipclass:widgetdivid
             xcatlabels:genonames})
 

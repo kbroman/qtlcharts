@@ -39,6 +39,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
     nyticks_pxg = chartOpts?.nyticks_pxg ? 5           # no. ticks on y-axis in dot chart of phenotype x genotype
     yticks_pxg = chartOpts?.yticks_pxg ? null          # vector of tick positions on y-axis in dot chart of phenotype x genotype
     yNA = chartOpts?.yNA ? {handle:false,force:false,width:15,gap:10}  # treatment of missing phenotype values in right panels
+    tipdirection = chartOpts?.tipdirection ? null      # direction of tool tips
     # chartOpts end
 
     # make sure list args have all necessary bits
@@ -164,6 +165,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
         zlim:[0, scantwo_data.max.full]
         zthresh:zthresh
         oneAtTop:oneAtTop
+        tipdirection: tipdirection
         tipclass:widgetdivid})
 
     g_heatmap = svg.append("g")
@@ -249,6 +251,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
             ylab:ylab_lod
             title:"#{data.marker[markerindex]} : #{lod}"
             titlepos:titlepos
+            tipdirection: tipdirection
             tipclass:widgetdivid})
 
         unless g_scans[panelrow][panelcol]? # only create it once
@@ -344,6 +347,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
                 dataByInd:false
                 title:"#{mar1} : #{mar2}"
                 titlepos:titlepos
+                tipdirection: tipdirection
                 tipclass:widgetdivid})
 
             unless g_eff[1]? # only create it once
@@ -425,6 +429,7 @@ iplotScantwo = (widgetdiv, scantwo_data, pheno_and_geno, chartOpts) ->
             xcatlabels:gn1
             title:"#{mar1} : #{mar2}"
             titlepos:titlepos
+            tipdirection: tipdirection
             tipclass:widgetdivid})
 
         unless g_eff[0]? # only create it once

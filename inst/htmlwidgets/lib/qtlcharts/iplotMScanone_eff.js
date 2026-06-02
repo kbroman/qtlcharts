@@ -4,7 +4,7 @@
 var iplotMScanone_eff;
 
 iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
-  var altrectcolor, axispos, c, chartdivid, chrGap, chrlinecolor, chrlinewidth, colors, eff_linecolor, eff_linewidth, eff_nlines, eff_pointcolor, eff_pointsize, eff_pointstroke, eff_ylab, eff_ylim, effect_text, g_heatmap, g_horpanel, g_verpanel, hbot, height, horpanel, horslice, htop, i, j, k, len, len1, linecolor, linewidth, lod_labels, margin, mylodheatmap, nullcolor, nxticks, plotHorSlice, plotVerSlice, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref4, ref5, ref6, ref7, ref8, ref9, svg, these_pos, title, titlepos, verpanel, verpanel_axis_text, verpanel_xscale, verslice, widgetdivid, width, wleft, wright, x, xlab, xlim, xticks, ylab, zlab, zlim, zmax, zthresh;
+  var altrectcolor, axispos, c, chartdivid, chrGap, chrlinecolor, chrlinewidth, colors, eff_linecolor, eff_linewidth, eff_nlines, eff_pointcolor, eff_pointsize, eff_pointstroke, eff_ylab, eff_ylim, effect_text, g_heatmap, g_horpanel, g_verpanel, hbot, height, horpanel, horslice, htop, i, j, k, len, len1, linecolor, linewidth, lod_labels, margin, mylodheatmap, nullcolor, nxticks, plotHorSlice, plotVerSlice, rectcolor, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref20, ref21, ref22, ref23, ref24, ref25, ref26, ref27, ref28, ref29, ref3, ref30, ref31, ref32, ref33, ref34, ref35, ref4, ref5, ref6, ref7, ref8, ref9, svg, these_pos, tipdirection, title, titlepos, verpanel, verpanel_axis_text, verpanel_xscale, verslice, widgetdivid, width, wleft, wright, x, xlab, xlim, xticks, ylab, zlab, zlim, zmax, zthresh;
   // chartOpts start
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 700; // height of chart in pixels
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1000; // width of chart in pixels
@@ -53,8 +53,9 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
   nxticks = (ref29 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref29 : 5; // no. ticks in x-axis for effect plot (right panel), if quantitative scale
   xticks = (ref30 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref30 : null; // tick positions in x-axis for effect plot (right panel), if quantitative scale
   lod_labels = (ref31 = chartOpts != null ? chartOpts.lod_labels : void 0) != null ? ref31 : null; // labels on the LOD score columns
+  tipdirection = (ref32 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref32 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref32 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref32 : 'chart';
+  chartdivid = (ref33 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref33 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
@@ -100,9 +101,9 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
   }
   if (lod_data.chrstart == null) {
     lod_data.chrstart = [];
-    ref33 = lod_data.chrname;
-    for (j = 0, len = ref33.length; j < len; j++) {
-      c = ref33[j];
+    ref34 = lod_data.chrname;
+    for (j = 0, len = ref34.length; j < len; j++) {
+      c = ref34[j];
       these_pos = (function() {
         var results;
         results = [];
@@ -118,9 +119,9 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
   }
   if (lod_data.chrend == null) {
     lod_data.chrend = [];
-    ref34 = lod_data.chrname;
-    for (k = 0, len1 = ref34.length; k < len1; k++) {
-      c = ref34[k];
+    ref35 = lod_data.chrname;
+    for (k = 0, len1 = ref35.length; k < len1; k++) {
+      c = ref35[k];
       these_pos = (function() {
         var results;
         results = [];
@@ -166,6 +167,7 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
     yticks: xticks,
     nyticks: nxticks,
     nullcolor: nullcolor,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   // add the heatmap
@@ -187,6 +189,7 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
     xlab: xlab,
     ylab: zlab,
     ylim: [0, zlim[2] * 1.05],
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   // create empty panel
@@ -245,6 +248,7 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
     ylim: eff_ylim,
     nxticks: nxticks,
     xticks: xticks,
+    tipdirection: tipdirection,
     tipclass: widgetdivid
   });
   g_verpanel = svg.append("g").attr("transform", `translate(${wleft},0)`).attr("id", "curvechart");

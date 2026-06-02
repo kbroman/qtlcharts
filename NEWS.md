@@ -26,8 +26,8 @@
   widget; showed up in use with Shiny (Issue #84)
 
 - In `iplotScantwo()`, allow control of treatment of missing values in
-  the phenotype x genotype plot on the right, though the default is
-  now to omite missing values. (Issue #50)
+  the phenotype x genotype plot on the right; the default is
+  now to omit missing values. (Issue #50)
 
 - Added more [examples of R/qtlcharts with
   Shiny](https://github.com/kbroman/shiny_qtlcharts). Also added

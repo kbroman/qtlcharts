@@ -9,6 +9,7 @@
 #' @param y Numeric vector (e.g., a phenotype)
 #' @param indID Optional vector of character strings, shown with tool tips
 #' @param group Optional vector of categories for coloring points
+#' @param horizontal If TRUE, switch role of x- and y-axes and have quantitative variable on x-axis.
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option.
 #' @param digits Round data to this number of significant digits
@@ -27,11 +28,12 @@
 #' g <- sample(LETTERS[1:3], n, replace=TRUE)
 #' y <- rnorm(n, match(g, LETTERS[1:3])*10, 5)
 #' \donttest{
-#' idotplot(g, y)}
+#' idotplot(g, y)
+#' idotplot(g, y, horizontal=TRUE)}
 #'
 #' @export
 idotplot <-
-function(x, y, indID=NULL, group=NULL, chartOpts=NULL, digits=5)
+function(x, y, indID=NULL, group=NULL, horizontal=FALSE, chartOpts=NULL, digits=5)
 {
     stopifnot(length(x) == length(y))
     if(is.null(group)) group <- rep(1, length(x))
@@ -52,7 +54,8 @@ function(x, y, indID=NULL, group=NULL, chartOpts=NULL, digits=5)
     names(group) <- NULL
 
     chartOpts <- add2chartOpts(chartOpts, ylab="y", title="", xlab="group",
-                               xcategories=seq(along=x_levels), xcatlabels=x_levels)
+                               xcategories=seq(along=x_levels), xcatlabels=x_levels,
+                               horizontal=horizontal)
     chartOpts <- stripNames_chartOpts(chartOpts)
 
     x <- list(data=list(x=x, y=y, indID=indID, group=group), chartOpts=chartOpts)

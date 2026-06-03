@@ -9,6 +9,7 @@
 #'   [qtl::read.cross()].
 #' @param marker Character string with marker name.
 #' @param pheno.col Phenotype column in cross object.
+#' @param horizontal If TRUE, switch role of x- and y-axes and put genotype on y-axis.
 #' @param chartOpts A list of options for configuring the chart.  Each
 #'   element must be named using the corresponding option.
 #' @param fillgenoArgs List of named arguments to pass to
@@ -49,7 +50,7 @@
 #'
 #' @export
 iplotPXG <-
-function(cross, marker, pheno.col=1,
+function(cross, marker, pheno.col=1, horizontal=FALSE,
          chartOpts=NULL, fillgenoArgs=NULL, digits=5)
 {
     if(!inherits(cross, "cross"))
@@ -68,12 +69,11 @@ function(cross, marker, pheno.col=1,
                                title=marker, xcategories=seq(along=pxg_data$genonames[[1]]),
                                xcatlabels=pxg_data$genonames[[1]],
                                pointcolor=c("slateblue", "#ff851b")) # second color is orange
+    chartOpts <- stripNames_chartOpts(chartOpts)
 
     pxg_data$geno <- as.numeric(pxg_data$geno)
     group <- pxg_data$geno < 0 + 1
 
-    chartOpts <- stripNames_chartOpts(chartOpts)
-
     idotplot(abs(pxg_data$geno), pxg_data$pheno, pxg_data$indID, group,
-             chartOpts=chartOpts, digits=digits)
+             horizontal=horizontal, chartOpts=chartOpts, digits=digits)
 }

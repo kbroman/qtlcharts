@@ -4,7 +4,15 @@
 \alias{idotplot}
 \title{Interactive phenotype x genotype plot}
 \usage{
-idotplot(x, y, indID = NULL, group = NULL, chartOpts = NULL, digits = 5)
+idotplot(
+  x,
+  y,
+  indID = NULL,
+  group = NULL,
+  horizontal = FALSE,
+  chartOpts = NULL,
+  digits = 5
+)
 }
 \arguments{
 \item{x}{Vector of groups of individuals (e.g., a genotype)}
@@ -14,6 +22,8 @@ idotplot(x, y, indID = NULL, group = NULL, chartOpts = NULL, digits = 5)
 \item{indID}{Optional vector of character strings, shown with tool tips}
 
 \item{group}{Optional vector of categories for coloring points}
+
+\item{horizontal}{If TRUE, switch role of x- and y-axes and have quantitative variable on x-axis.}
 
 \item{chartOpts}{A list of options for configuring the chart.  Each
 element must be named using the corresponding option.}
@@ -35,7 +45,8 @@ n <- 100
 g <- sample(LETTERS[1:3], n, replace=TRUE)
 y <- rnorm(n, match(g, LETTERS[1:3])*10, 5)
 \donttest{
-idotplot(g, y)}
+idotplot(g, y)
+idotplot(g, y, horizontal=TRUE)}
 
 }
 \seealso{

@@ -8,6 +8,7 @@ iplotPXG(
   cross,
   marker,
   pheno.col = 1,
+  horizontal = FALSE,
   chartOpts = NULL,
   fillgenoArgs = NULL,
   digits = 5
@@ -20,6 +21,8 @@ iplotPXG(
 \item{marker}{Character string with marker name.}
 
 \item{pheno.col}{Phenotype column in cross object.}
+
+\item{horizontal}{If TRUE, switch role of x- and y-axes and put genotype on y-axis.}
 
 \item{chartOpts}{A list of options for configuring the chart.  Each
 element must be named using the corresponding option.}

@@ -6,12 +6,12 @@ dependencies:
       - d3.min.js
   - name: d3panels
     src: htmlwidgets/lib/d3panels
-    version: 1.9.4
+    version: 1.9.5
     script:
       - d3panels.min.js
     style: d3panels.min.css
   - name: qtlcharts_itimeplot
     src: htmlwidgets/lib/qtlcharts
-    version: 0.21-9
+    version: 0.21-10
     script:
       - itimeplot.js

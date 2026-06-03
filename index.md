@@ -114,6 +114,13 @@ Click on a chart for the corresponding interactive version.
         <img src="assets/pics/itimeplot.png" alt="itimeplot example" title="itimeplot example"/>
     </a>
   </td>
+</tr>
+<tr>
+  <td class="left">
+    <a href="example/itriplot.html">
+        <img src="assets/pics/itriplot.png" alt="itriplot example" title="itriplot example"/>
+    </a>
+  </td>
   <td class="right">
     <a href="example/idotplot.html">
         <img src="assets/pics/idotplot.png" alt="idotplot example" title="idotplot example"/>

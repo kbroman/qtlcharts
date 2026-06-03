@@ -109,7 +109,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   });
   corr_tip = d3panels.tooltip_create(d3.select("body"), cells, {
     tipclass: widgetdivid,
-    tipdirection: tipdirection
+    direction: tipdirection
   }, function(d) {
     return d3.format(".2f")(d.value);
   });
@@ -195,7 +195,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
     });
     return scat_tip = d3panels.tooltip_create(d3.select("body"), points, {
       tipclass: widgetdivid,
-      tipdirection: tipdirection
+      direction: tipdirection
     }, function(d, i) {
       return data.indID[i];
     });

@@ -13,13 +13,17 @@ CHARTEXAMPLES = $(CHARTEX)/iboxplot.html $(CHARTEX)/iplotCorr.html \
 				$(CHARTEX)/iheatmap.html $(CHARTEX)/iplotRF.html \
 				$(CHARTEX)/iplotScantwo.html $(CHARTEX)/ipleiotropy.html \
 				$(CHARTEX)/itimeplot.html $(CHARTEX)/idotplot.html \
-				$(CHARTEX)/scat2scat.html $(CHARTEX)/itriplot.html
+				$(CHARTEX)/scat2scat.html $(CHARTEX)/itriplot.html \
+				$(CHARTEX)/iplot.html
 chartexamples: $(CHARTEXAMPLES)
 
 $(CHARTEX)/iboxplot.html: $(CHARTEX)/R/iboxplot_example.R $(CHARTEX)/R/iboxplot_data.RData
 	cd $(<D); R CMD BATCH --no-save $(<F)
 
 $(CHARTEX)/itimeplot.html: $(CHARTEX)/R/itimeplot_example.R $(CHARTEX)/R/itimeplot_data.rds
+	cd $(<D); R CMD BATCH --no-save $(<F)
+
+$(CHARTEX)/iplot.html: $(CHARTEX)/R/iplot_example.R $(CHARTEX)/R/itimeplot_data.rds
 	cd $(<D); R CMD BATCH --no-save $(<F)
 
 $(CHARTEX)/%.html: $(CHARTEX)/R/%_example.R

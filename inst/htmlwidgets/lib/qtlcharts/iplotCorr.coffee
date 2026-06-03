@@ -29,6 +29,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
     scattitle = chartOpts?.scattitle ? ""        # title for scatterplot panel
     scatcolors = chartOpts?.scatcolors ? null    # vector of point colors for scatterplot
     pointsize = chartOpts?.pointsize ? 3         # size of points in scatterplot
+    tipdirection = chartOpts?.tipdirection ? null # direction of tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 
@@ -114,7 +115,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
 
 
     corr_tip = d3panels.tooltip_create(d3.select("body"), cells,
-                                       {tipclass:widgetdivid},
+                                       {tipclass:widgetdivid, tipdirection:tipdirection},
                                        (d) -> d3.format(".2f")(d.value))
 
     # colors for scatterplot
@@ -231,7 +232,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
                    .attr("fill", (d) -> scatcolors[data.group[d]-1])
 
         scat_tip = d3panels.tooltip_create(d3.select("body"), points,
-                                       {tipclass: widgetdivid},
+                                       {tipclass: widgetdivid,tipdirection:tipdirection},
                                        (d,i) -> data.indID[i])
 
     # boxes around panels

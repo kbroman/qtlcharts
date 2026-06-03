@@ -6,7 +6,7 @@
 var iplotCorr;
 
 iplotCorr = function(widgetdiv, data, chartOpts) {
-  var cells, chartdivid, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, min_paneldim, nGroup, ncorrX, ncorrY, nind, nvar, panelheight, panelwidth, pixel_height, pixel_width, pointsize, rectcolor, ref, ref1, ref10, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, scat_tip, scatcolors, scatterplot, scattitle, svg, widgetdivid, width, zlim;
+  var cells, chartdivid, colorScale, corXscale, corYscale, corZscale, corcolors, corr, corr_tip, corrplot, cortitle, drawScatter, height, i, j, margin, min_paneldim, nGroup, ncorrX, ncorrY, nind, nvar, panelheight, panelwidth, pixel_height, pixel_width, pointsize, rectcolor, ref, ref1, ref10, ref11, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9, scat_tip, scatcolors, scatterplot, scattitle, svg, tipdirection, widgetdivid, width, zlim;
   // data is an object with 7 components
   //   data.indID  vector of character strings, of length n, with IDs for individuals
   //   data.var    vector of character strings, of length p, with variable names
@@ -45,8 +45,9 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   scattitle = (ref7 = chartOpts != null ? chartOpts.scattitle : void 0) != null ? ref7 : ""; // title for scatterplot panel
   scatcolors = (ref8 = chartOpts != null ? chartOpts.scatcolors : void 0) != null ? ref8 : null; // vector of point colors for scatterplot
   pointsize = (ref9 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref9 : 3; // size of points in scatterplot
+  tipdirection = (ref10 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref10 : null; // direction of tool tips
   // chartOpts end
-  chartdivid = (ref10 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref10 : 'chart';
+  chartdivid = (ref11 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref11 : 'chart';
   // make sure list args have all necessary bits
   margin = d3panels.check_listarg_v_default(margin, {
     left: 70,
@@ -107,7 +108,8 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
     return drawScatter(d.col, d.row);
   });
   corr_tip = d3panels.tooltip_create(d3.select("body"), cells, {
-    tipclass: widgetdivid
+    tipclass: widgetdivid,
+    tipdirection: tipdirection
   }, function(d) {
     return d3.format(".2f")(d.value);
   });
@@ -192,7 +194,8 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
       return scatcolors[data.group[d] - 1];
     });
     return scat_tip = d3panels.tooltip_create(d3.select("body"), points, {
-      tipclass: widgetdivid
+      tipclass: widgetdivid,
+      tipdirection: tipdirection
     }, function(d, i) {
       return data.indID[i];
     });

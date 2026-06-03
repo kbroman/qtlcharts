@@ -115,6 +115,9 @@ Click on a chart for the corresponding interactive version.
     </a>
   </td>
   <td class="right">
+    <a href="example/idotplot.html">
+        <img src="assets/pics/idotplot.png" alt="idotplot example" title="idotplot example"/>
+    </a>
   </td>
 </tr>
 <tr>

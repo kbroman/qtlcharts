@@ -12,7 +12,7 @@ CHARTEXAMPLES = $(CHARTEX)/iboxplot.html $(CHARTEX)/iplotCorr.html \
 				$(CHARTEX)/iplotMap.html $(CHARTEX)/iplotScanone.html \
 				$(CHARTEX)/iheatmap.html $(CHARTEX)/iplotRF.html \
 				$(CHARTEX)/iplotScantwo.html $(CHARTEX)/ipleiotropy.html \
-				$(CHARTEX)/itimeplot.html \
+				$(CHARTEX)/itimeplot.html $(CHARTEX)/idotplot.html \
 				$(CHARTEX)/scat2scat.html
 chartexamples: $(CHARTEXAMPLES)
 

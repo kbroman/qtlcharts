@@ -42,7 +42,7 @@ iplotScanone_pxg = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     eff_axispos = chartOpts?.eff_axispos ? chartOpts?.axispos ? {xtitle:25, ytitle:30, xlabel:5, ylabel:5} # position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in LOD curve panel
     eff_titlepos = chartOpts?.eff_titlepos ? chartOpts?.titlepos ? 20   # position of title for phe-by-gen panel, in pixels
     eff_yNA = chartOpts?.eff_yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
-    tipdirection = chartOpts?.tipdirection ? null                       # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null                       # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

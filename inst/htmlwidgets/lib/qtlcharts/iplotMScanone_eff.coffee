@@ -36,7 +36,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
     nxticks = chartOpts?.nxticks ? 5          # no. ticks in x-axis for effect plot (right panel), if quantitative scale
     xticks = chartOpts?.xticks ? null         # tick positions in x-axis for effect plot (right panel), if quantitative scale
     lod_labels = chartOpts?.lod_labels ? null                      # labels on the LOD score columns
-    tipdirection = chartOpts?.tipdirection ? null                  # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null                  # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

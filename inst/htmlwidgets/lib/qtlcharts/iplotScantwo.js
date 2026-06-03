@@ -57,7 +57,7 @@ iplotScantwo = function(widgetdiv, scantwo_data, pheno_and_geno, chartOpts) {
     width: 15,
     gap: 10 // treatment of missing phenotype values in right panels
   };
-  tipdirection = (ref35 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref35 : null; // direction of tool tips
+  tipdirection = (ref35 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref35 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
 
   // make sure list args have all necessary bits

@@ -60,7 +60,7 @@ scat2scat = function(widgetdiv, scat1data, scat2data, chartOpts) {
     width: 15,
     gap: 10 // treatment of missing values (handle=T/F, force=T/F, width, gap)
   };
-  tipdirection = (ref34 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref34 : null; // direction of tool tips
+  tipdirection = (ref34 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref34 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref35 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref35 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

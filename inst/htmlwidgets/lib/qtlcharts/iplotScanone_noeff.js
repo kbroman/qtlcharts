@@ -37,7 +37,7 @@ iplotScanone_noeff = function(widgetdiv, data, chartOpts) {
   xlab = (ref26 = (ref27 = chartOpts != null ? chartOpts.xlab : void 0) != null ? ref27 : chartOpts != null ? chartOpts.lod_xlab : void 0) != null ? ref26 : null; // x-axis label
   ylab = (ref28 = (ref29 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref29 : chartOpts != null ? chartOpts.lod_ylab : void 0) != null ? ref28 : "LOD score"; // y-axis label
   rotate_ylab = (ref30 = (ref31 = chartOpts != null ? chartOpts.rotate_ylab : void 0) != null ? ref31 : chartOpts != null ? chartOpts.lod_rotate_ylab : void 0) != null ? ref30 : null; // indicates whether to rotate the y-axis label 90 degrees
-  tipdirection = (ref32 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref32 : null; // direction of tool tips
+  tipdirection = (ref32 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref32 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref33 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref33 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

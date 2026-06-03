@@ -32,7 +32,7 @@ iplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
     pointstroke = chartOpts?.pointstroke ? "black"                 # color of outer circle for points in vertical slice
     nxticks = chartOpts?.nxticks ? 5     # no. ticks in x-axis on right-hand panel, if quantitative scale
     xticks = chartOpts?.xticks ? null    # tick positions in x-axis on right-hand panel, if quantitative scale
-    tipdirection = chartOpts?.tipdirection ? null                  # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null                  # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

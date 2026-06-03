@@ -24,7 +24,7 @@ idotplot = (widgetdiv, data, chartOpts) ->
     xcategories = chartOpts?.xcategories ? null      # group categories
     xcatlabels = chartOpts?.xcatlabels ? null        # labels for group categories
     horizontal = chartOpts?.horizontal ? false       # If true, have genotypes on vertical axis and phenotype on horizontal axis
-    tipdirection = chartOpts?.tipdirection ? null    # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null    # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

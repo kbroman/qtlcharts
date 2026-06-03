@@ -32,7 +32,7 @@ iplotRF = (widgetdiv, rf_data, geno, chartOpts) ->
     lodlim = chartOpts?.lodlim ? [0, 12]               # range of LOD values to display; omit below 1st, truncate above 2nd
     nyticks = chartOpts?.nyticks ? 5                   # no. ticks on y-axis in LOD curve panels
     yticks = chartOpts?.yticks ? null                  # vector of tick positions on y-axis in LOD curve panels
-    tipdirection = chartOpts?.tipdirection ? null      # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null      # direction of tool tips (east/west/north/south)
     tipclass = chartOpts?.tipclass ? "tooltip"         # class name for tool tips
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'

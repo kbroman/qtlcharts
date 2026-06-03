@@ -51,7 +51,7 @@ iplotRF = function(widgetdiv, rf_data, geno, chartOpts) {
   ];
   nyticks = (ref26 = chartOpts != null ? chartOpts.nyticks : void 0) != null ? ref26 : 5; // no. ticks on y-axis in LOD curve panels
   yticks = (ref27 = chartOpts != null ? chartOpts.yticks : void 0) != null ? ref27 : null; // vector of tick positions on y-axis in LOD curve panels
-  tipdirection = (ref28 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref28 : null; // direction of tool tips
+  tipdirection = (ref28 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref28 : null; // direction of tool tips (east/west/north/south)
   tipclass = (ref29 = chartOpts != null ? chartOpts.tipclass : void 0) != null ? ref29 : "tooltip"; // class name for tool tips
   // chartOpts end
   chartdivid = (ref30 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref30 : 'chart';

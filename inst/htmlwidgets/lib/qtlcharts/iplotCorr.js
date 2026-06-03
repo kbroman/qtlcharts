@@ -45,7 +45,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   scattitle = (ref7 = chartOpts != null ? chartOpts.scattitle : void 0) != null ? ref7 : ""; // title for scatterplot panel
   scatcolors = (ref8 = chartOpts != null ? chartOpts.scatcolors : void 0) != null ? ref8 : null; // vector of point colors for scatterplot
   pointsize = (ref9 = chartOpts != null ? chartOpts.pointsize : void 0) != null ? ref9 : 3; // size of points in scatterplot
-  tipdirection = (ref10 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref10 : null; // direction of tool tips
+  tipdirection = (ref10 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref10 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref11 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref11 : 'chart';
   // make sure list args have all necessary bits

@@ -39,7 +39,7 @@ iplotMap = function(widgetdiv, data, chartOpts) {
   ylab = (ref16 = chartOpts != null ? chartOpts.ylab : void 0) != null ? ref16 : "Position (cM)"; // y-axis label
   shiftStart = (ref17 = chartOpts != null ? chartOpts.shiftStart : void 0) != null ? ref17 : false; // if true, shift the start of chromosomes to 0
   horizontal = (ref18 = chartOpts != null ? chartOpts.horizontal : void 0) != null ? ref18 : false; // if true, have chromosomes on vertical axis and positions horizontally
-  tipdirection = (ref19 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref19 : null; // direction of tool tips
+  tipdirection = (ref19 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref19 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref20 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref20 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

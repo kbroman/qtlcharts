@@ -38,7 +38,7 @@ ipleiotropy = (widgetdiv, lod_data, pxg_data, chartOpts) ->
     slider_color  = chartOpts?.slider_color ? "#E6E6E6"                 # color of slider bar
     button_color  = chartOpts?.button_color ? "#E6E6E6"                 # color of rectangular part of buttons
     ticks_at_markers = chartOpts?.ticks_at_markers ? true               # if true, put tick marks at the marker positions (above the slider)
-    tipdirection = chartOpts?.tipdirection ? null    # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null                       # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

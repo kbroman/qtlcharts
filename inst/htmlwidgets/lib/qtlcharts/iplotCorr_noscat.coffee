@@ -17,7 +17,7 @@ iplotCorr_noscat = (widgetdiv, data, chartOpts) ->
     zlim = chartOpts?.zlim ? [-1, 0, 1]          # z-axis limits
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
     cortitle = chartOpts?.cortitle ? ""          # title for heatmap panel
-    tipdirection = chartOpts?.tipdirection ? null    # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null    # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 

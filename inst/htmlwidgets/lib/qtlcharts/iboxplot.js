@@ -31,7 +31,7 @@ iboxplot = function(widgetdiv, data, chartOpts) {
     "MediumVioletRed",
     "black" // vector of colors for selected histograms
   ];
-  tipdirection = (ref8 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref8 : null; // direction of tool tips
+  tipdirection = (ref8 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref8 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref9 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref9 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

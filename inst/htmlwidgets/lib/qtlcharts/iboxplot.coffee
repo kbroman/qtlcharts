@@ -18,7 +18,7 @@ iboxplot = (widgetdiv, data, chartOpts) ->
     rectcolor = chartOpts?.rectcolor ? "#E6E6E6" # color of background rectangle
     qucolors = chartOpts?.qucolors ? null        # vector of colors for the quantile curves
     histcolors = chartOpts?.histcolors ? ["#0074D9", "#FF4136", "#3D9970", "MediumVioletRed", "black"] # vector of colors for selected histograms
-    tipdirection = chartOpts?.tipdirection ? null # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

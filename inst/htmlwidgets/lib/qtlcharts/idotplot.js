@@ -42,7 +42,7 @@ idotplot = function(widgetdiv, data, chartOpts) {
   xcategories = (ref17 = chartOpts != null ? chartOpts.xcategories : void 0) != null ? ref17 : null; // group categories
   xcatlabels = (ref18 = chartOpts != null ? chartOpts.xcatlabels : void 0) != null ? ref18 : null; // labels for group categories
   horizontal = (ref19 = chartOpts != null ? chartOpts.horizontal : void 0) != null ? ref19 : false; // If true, have genotypes on vertical axis and phenotype on horizontal axis
-  tipdirection = (ref20 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref20 : null; // direction of tool tips
+  tipdirection = (ref20 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref20 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref21 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref21 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

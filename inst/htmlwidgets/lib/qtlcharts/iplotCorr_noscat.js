@@ -34,7 +34,7 @@ iplotCorr_noscat = function(widgetdiv, data, chartOpts) {
   ];
   rectcolor = (ref5 = chartOpts != null ? chartOpts.rectcolor : void 0) != null ? ref5 : "#E6E6E6"; // color of background rectangle
   cortitle = (ref6 = chartOpts != null ? chartOpts.cortitle : void 0) != null ? ref6 : ""; // title for heatmap panel
-  tipdirection = (ref7 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref7 : null; // direction of tool tips
+  tipdirection = (ref7 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref7 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref8 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref8 : 'chart';
   // make sure list args have all necessary bits

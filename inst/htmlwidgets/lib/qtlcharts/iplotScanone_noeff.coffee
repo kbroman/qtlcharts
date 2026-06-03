@@ -24,7 +24,7 @@ iplotScanone_noeff = (widgetdiv, data, chartOpts) ->
     xlab = chartOpts?.xlab ? chartOpts?.lod_xlab ? null         # x-axis label
     ylab = chartOpts?.ylab ? chartOpts?.lod_ylab ? "LOD score"  # y-axis label
     rotate_ylab = chartOpts?.rotate_ylab ? chartOpts?.lod_rotate_ylab ? null      # indicates whether to rotate the y-axis label 90 degrees
-    tipdirection = chartOpts?.tipdirection ? null               # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null               # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

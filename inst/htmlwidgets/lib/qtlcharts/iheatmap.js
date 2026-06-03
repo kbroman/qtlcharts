@@ -52,7 +52,7 @@ iheatmap = function(widgetdiv, data, chartOpts) {
     "crimson" // heat map colors (same length as `zlim`)
   ];
   flip_vert_slice = (ref26 = chartOpts != null ? chartOpts.flip_vert_slice : void 0) != null ? ref26 : false; // if true, flip the y- and z- axes in the vertical slice
-  tipdirection = (ref27 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref27 : null; // direction of tool tips
+  tipdirection = (ref27 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref27 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref28 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref28 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

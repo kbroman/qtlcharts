@@ -65,7 +65,7 @@ ipleiotropy = function(widgetdiv, lod_data, pxg_data, chartOpts) {
   slider_color = (ref33 = chartOpts != null ? chartOpts.slider_color : void 0) != null ? ref33 : "#E6E6E6"; // color of slider bar
   button_color = (ref34 = chartOpts != null ? chartOpts.button_color : void 0) != null ? ref34 : "#E6E6E6"; // color of rectangular part of buttons
   ticks_at_markers = (ref35 = chartOpts != null ? chartOpts.ticks_at_markers : void 0) != null ? ref35 : true; // if true, put tick marks at the marker positions (above the slider)
-  tipdirection = (ref36 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref36 : null; // direction of tool tips
+  tipdirection = (ref36 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref36 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref37 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref37 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

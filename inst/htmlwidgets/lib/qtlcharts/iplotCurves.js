@@ -84,7 +84,7 @@ iplotCurves = function(widgetdiv, curve_data, scatter1_data, scatter2_data, char
   scat2_title = (ref50 = chartOpts != null ? chartOpts.scat2_title : void 0) != null ? ref50 : ""; // title for second scatterplot
   scat2_xlab = (ref51 = chartOpts != null ? chartOpts.scat2_xlab : void 0) != null ? ref51 : "X"; // x-axis label for second scatterplot
   scat2_ylab = (ref52 = chartOpts != null ? chartOpts.scat2_ylab : void 0) != null ? ref52 : "Y"; // y-axis label for second scatterplot
-  tipdirection = (ref53 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref53 : null; // direction of tool tips
+  tipdirection = (ref53 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref53 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref54 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref54 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

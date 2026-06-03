@@ -32,7 +32,7 @@ itriplot = function(widgetdiv, data, chartOpts) {
   gridcolor = (ref14 = chartOpts != null ? chartOpts.gridcolor : void 0) != null ? ref14 : "white"; // color of grid lines
   gridwidth = (ref15 = chartOpts != null ? chartOpts.gridwidth : void 0) != null ? ref15 : 1; // width of grid lines in pixels
   tipclass = (ref16 = chartOpts != null ? chartOpts.tipclass : void 0) != null ? ref16 : "tooltip"; // class name for tool tips
-  tipdirection = (ref17 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref17 : null; // direction of tool tips
+  tipdirection = (ref17 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref17 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref18 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref18 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

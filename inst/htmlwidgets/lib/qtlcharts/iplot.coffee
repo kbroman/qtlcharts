@@ -25,7 +25,7 @@ iplot = (widgetdiv, data, chartOpts) ->
     rotate_ylab = chartOpts?.rotate_ylab ? null    # whether to rotate the y-axis label
     xNA = chartOpts?.xNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values (handle=T/F, force=T/F, width, gap)
     yNA = chartOpts?.yNA ? {handle:true, force:false, width:15, gap:10} # treatment of missing values (handle=T/F, force=T/F, width, gap)
-    tipdirection = chartOpts?.tipdirection ? null    # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null  # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

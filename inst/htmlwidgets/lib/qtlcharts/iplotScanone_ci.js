@@ -62,7 +62,7 @@ iplotScanone_ci = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     ylabel: 5 // position of axis labels in pixels (xtitle, ytitle, xlabel, ylabel) in effect plot panel
   };
   eff_titlepos = (ref35 = (ref36 = chartOpts != null ? chartOpts.eff_titlepos : void 0) != null ? ref36 : chartOpts != null ? chartOpts.titlepos : void 0) != null ? ref35 : 20; // position of title for effect plot panel, in pixels
-  tipdirection = (ref37 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref37 : null; // direction of tool tips
+  tipdirection = (ref37 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref37 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref38 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref38 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

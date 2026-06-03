@@ -71,7 +71,7 @@ iplotScanone_pxg = function(widgetdiv, lod_data, pxg_data, chartOpts) {
     width: 15,
     gap: 10 // treatment of missing values in phe-by-gen panel (handle=T/F, force=T/F, width, gap)
   };
-  tipdirection = (ref45 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref45 : null; // direction of tool tips
+  tipdirection = (ref45 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref45 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref46 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref46 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

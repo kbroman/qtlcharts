@@ -53,7 +53,7 @@ iplotMScanone_eff = function(widgetdiv, lod_data, eff_data, times, chartOpts) {
   nxticks = (ref29 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref29 : 5; // no. ticks in x-axis for effect plot (right panel), if quantitative scale
   xticks = (ref30 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref30 : null; // tick positions in x-axis for effect plot (right panel), if quantitative scale
   lod_labels = (ref31 = chartOpts != null ? chartOpts.lod_labels : void 0) != null ? ref31 : null; // labels on the LOD score columns
-  tipdirection = (ref32 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref32 : null; // direction of tool tips
+  tipdirection = (ref32 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref32 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref33 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref33 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

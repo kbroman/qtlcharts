@@ -54,7 +54,7 @@ iplotCurves = (widgetdiv, curve_data, scatter1_data, scatter2_data, chartOpts) -
     scat2_title = chartOpts?.scat2_title ? ""                    # title for second scatterplot
     scat2_xlab = chartOpts?.scat2_xlab ? "X"                     # x-axis label for second scatterplot
     scat2_ylab = chartOpts?.scat2_ylab ? "Y"                     # y-axis label for second scatterplot
-    tipdirection = chartOpts?.tipdirection ? null                # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null                # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
     widgetdivid = d3.select(widgetdiv).attr('id')

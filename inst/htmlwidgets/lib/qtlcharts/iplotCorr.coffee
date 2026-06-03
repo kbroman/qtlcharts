@@ -29,7 +29,7 @@ iplotCorr = (widgetdiv, data, chartOpts) ->
     scattitle = chartOpts?.scattitle ? ""        # title for scatterplot panel
     scatcolors = chartOpts?.scatcolors ? null    # vector of point colors for scatterplot
     pointsize = chartOpts?.pointsize ? 3         # size of points in scatterplot
-    tipdirection = chartOpts?.tipdirection ? null # direction of tool tips
+    tipdirection = chartOpts?.tipdirection ? null # direction of tool tips (east/west/north/south)
     # chartOpts end
     chartdivid = chartOpts?.chartdivid ? 'chart'
 

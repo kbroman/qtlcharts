@@ -49,7 +49,7 @@ iplotMScanone_noeff = function(widgetdiv, lod_data, times, chartOpts) {
   pointstroke = (ref25 = chartOpts != null ? chartOpts.pointstroke : void 0) != null ? ref25 : "black"; // color of outer circle for points in vertical slice
   nxticks = (ref26 = chartOpts != null ? chartOpts.nxticks : void 0) != null ? ref26 : 5; // no. ticks in x-axis on right-hand panel, if quantitative scale
   xticks = (ref27 = chartOpts != null ? chartOpts.xticks : void 0) != null ? ref27 : null; // tick positions in x-axis on right-hand panel, if quantitative scale
-  tipdirection = (ref28 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref28 : null; // direction of tool tips
+  tipdirection = (ref28 = chartOpts != null ? chartOpts.tipdirection : void 0) != null ? ref28 : null; // direction of tool tips (east/west/north/south)
   // chartOpts end
   chartdivid = (ref29 = chartOpts != null ? chartOpts.chartdivid : void 0) != null ? ref29 : 'chart';
   widgetdivid = d3.select(widgetdiv).attr('id');

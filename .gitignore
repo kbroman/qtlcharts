@@ -5,4 +5,3 @@ notes.txt
 js_deps/bower_components
 js_deps/node_modules
 inst/htmlwidgets/node_modules
-^figures/$

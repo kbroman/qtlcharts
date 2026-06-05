@@ -29,7 +29,10 @@ A set of [reusable graphics panels](https://kbroman.org/d3panels/) form the basi
 for the larger visualizations.
 
 To cite R/qtlcharts in publications, please use
-[Broman KW (2015) R/qtlcharts: interactive graphics for quantitative trait locus mapping. Genetics 199:359-361](https://doi.org/10.1534/genetics.114.172742).
+
+> Broman KW (2015) R/qtlcharts: interactive graphics for quantitative
+> trait locus mapping. Genetics 199:359-361.
+> [`doi:10.1534/genetics/114.172742`](https://doi.org/10.1534/genetics.114.172742)
 
 ---
 

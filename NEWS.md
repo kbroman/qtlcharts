@@ -1,4 +1,4 @@
- ## qtlcharts 0.21-10 (2025-06-03)
+ ## qtlcharts 0.21-11 (2025-06-05)
 
 ### New features
 
@@ -11,6 +11,10 @@
   notebook](https://github.com/kbroman/jupyter_qtlcharts).
 
 - Added ability to control tool tip direction by a chart option.
+
+### Minor changes
+
+- Added a package logo.
 
 ### Bug fixes
 

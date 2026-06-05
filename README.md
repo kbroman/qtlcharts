@@ -91,6 +91,15 @@ dimnames(expr) <- list(paste0("ind", 1:n.ind),
 iboxplot(expr)
 ```
 
+#### Citation
+
+To cite R/qtlcharts in publications, please use
+
+> Broman KW (2015) R/qtlcharts: interactive graphics for quantitative
+> trait locus mapping. Genetics 199:359-361.
+> [`doi:10.1534/genetics/114.172742`](https://doi.org/10.1534/genetics.114.172742)
+
+
 #### Licenses
 
 The R/qtlcharts package as a whole is distributed under

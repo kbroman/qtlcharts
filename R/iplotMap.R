@@ -39,11 +39,26 @@ function(map, chr=NULL, shift=FALSE, horizontal=FALSE, chartOpts=NULL, digits=5)
 {
     if(inherits(map, "cross")) map <- qtl::pull.map(map)
 
+    # make sure there are names
+    if(is.null(names(map))) {
+        names(map) <- seq_along(map)
+        warning("map lacks chromosome names")
+    }
+    added_names <- FALSE
+    for(i in seq_along(map)) {
+        if(is.null(names(map[[i]]))) {
+            names(map[[i]]) <- paste0("c", i, "_", seq_along(map[[i]]))
+            added_names <- TRUE
+        }
+    }
+    if(added_names) warning("Some chromosomes lacked marker names")
+
     if(!is.null(chr)) {
         map <- map[chr]
         if(length(map) == 0)
             stop("No chromosomes selected")
     }
+
 
     map_list <- convert_map(map)
     chartOpts <- add2chartOpts(chartOpts, shiftStart=shift, horizontal=horizontal)

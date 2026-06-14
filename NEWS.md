@@ -53,6 +53,9 @@
 
 - `iplotCorr()` didn't work if the input matrix lacked column names
 
+- Handle the case that there are no chromosome or marker names in
+  `iplotMap()` (and give a warning).
+
 
 ## qtlcharts 0.20 (2025-05-22)
 

@@ -66,19 +66,28 @@ function(mat, group=NULL, rows=NULL, cols=NULL, reorder=FALSE, corr=NULL,
     stopifnot(length(group) == nrow(mat))
     group <- group2numeric(group)
 
+    if(is.null(colnames(mat))) colnames(mat) <- paste0("V", 1:ncol(mat))
+
     if(!is.null(corr)) {
         if(!is.null(rows) || !is.null(cols)) warning("rows and cols ignored when corr provided.")
         if(!missing(reorder)) warning("reorder ignored when corr provided")
         reorder <- FALSE
 
         cnmat <- colnames(mat)
+        if(is.null(rownames(corr)) && is.null(colnames(corr)) &&
+           nrow(corr)==ncol(mat) && ncol(corr)==ncol(mat)) { # no dimnames, but same size
+            dimnames(corr) <- list(cnmat, cnmat)
+        }
+
+        if(is.null(rownames(corr)) || is.null(colnames(corr)))
+            stop("row and column names for corr can't be NULL")
         if(ncol(mat) != nrow(corr) || ncol(mat) != nrow(corr)) { # correlation matrix is a subset
             rows <- selectMatrixColumns(mat, rownames(corr))
             cols <- selectMatrixColumns(mat, colnames(corr))
         }
         else {
-            if((!is.null(rownames(corr)) && any(rownames(corr) != cnmat)) ||
-               (!is.null(colnames(corr)) && any(colnames(corr) != cnmat)))
+            if((!is.null(rownames(corr)) && !all(rownames(corr) %in% cnmat)) ||
+               (!is.null(colnames(corr)) && !all(colnames(corr) %in% cnmat)))
                 warning("Possible misalignment of mat and corr")
             rows <- cols <- 1:ncol(mat)
         }

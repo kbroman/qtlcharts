@@ -1,4 +1,4 @@
- ## qtlcharts 0.21-11 (2025-06-05)
+ ## qtlcharts 0.21-12 (2025-06-14)
 
 ### New features
 
@@ -50,6 +50,8 @@
 
 - Revised `iplotMap()` so that the marker search box works within
   Jupyter notebooks. (Issue #85)
+
+- `iplotCorr()` didn't work if the input matrix lacked column names
 
 
 ## qtlcharts 0.20 (2025-05-22)

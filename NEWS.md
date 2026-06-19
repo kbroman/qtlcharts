@@ -18,9 +18,8 @@
 
 ### Bug fixes
 
-- Updated d3panels to 1.8.9 (subtle fix in cichart; placement of
-  tooltip in iplotMap) (Issue #79), and then to 1.9.0 (for
-  `itimeplot`), 1.9.1, 1.9.2, and 1.9.4.
+- Updated d3panels to 1.9.5 (subtle fix in cichart; placement of
+  tooltip in iplotMap (Issue #79); and `itimeplot`).
 
 - No longer using babel to transpile the javascript that coffeescript
   produces (using `coffee -c` rather than `coffee -ct`) because babel

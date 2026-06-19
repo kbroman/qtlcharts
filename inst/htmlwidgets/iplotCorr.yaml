@@ -12,7 +12,7 @@ dependencies:
     style: d3panels.min.css
   - name: qtlcharts_iplotCorr
     src: htmlwidgets/lib/qtlcharts
-    version: 0.21-10
+    version: 0.22
     script:
       - iplotCorr.js
       - iplotCorr_noscat.js

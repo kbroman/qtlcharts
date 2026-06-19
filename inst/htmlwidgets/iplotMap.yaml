@@ -23,6 +23,6 @@ dependencies:
     style: d3panels.min.css
   - name: qtlcharts_iplotMap
     src: htmlwidgets/lib/qtlcharts
-    version: 0.21-10
+    version: 0.22
     script:
       - iplotMap.js

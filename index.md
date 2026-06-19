@@ -40,7 +40,7 @@ To cite R/qtlcharts in publications, please use
 - [User guide](assets/vignettes/userGuide.html)
 - [Developer guide](assets/vignettes/develGuide.html)
 - [d3panels](https://kbroman.org/d3panels/): reusable graphic panels
-- [Use with R Markdown](assets/vignettes/Rmarkdown.html) [[Rmd source](https://github.com/kbroman/qtlcharts/blob/main/vignettes/Rmarkdown.Rmd)]
+- [Use with R Markdown](assets/vignettes/Rmarkdown.html) ([Rmd source](https://github.com/kbroman/qtlcharts/blob/gh-pages/assets/vignettes/Rmarkdown.Rmd))
 - [List of chart customization options](assets/vignettes/chartOpts.html)
 - [Examples of use with Shiny](https://github.com/kbroman/shiny_qtlcharts)
 - [Examples of use with Jupyter notebooks](https://github.com/kbroman/jupyter_qtlcharts)

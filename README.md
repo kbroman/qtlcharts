@@ -71,7 +71,7 @@ genotype at a QTL:
 ```r
 library(qtlcharts)
 data(geneExpr)
-iplotCorr(geneExpr$expr, geneExpr$genotype)
+iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE)
 ```
 
 Finally, try `iboxplot`, a plot of the quantiles of many

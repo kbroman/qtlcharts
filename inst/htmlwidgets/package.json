@@ -4,7 +4,7 @@
   "description": "Interactive Graphics for QTL Experiments",
   "author": "Karl Broman <broman@wisc.edu> (https://kbroman.org)",
   "repository": "github:kbroman/qtlcharts",
-  "homepage": "https://kbroman.org/qtlcharts",
+  "homepage": "https://kbroman.org/qtlcharts/",
   "license": "MIT",
   "private": true
 }

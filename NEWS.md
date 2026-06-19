@@ -1,4 +1,4 @@
- ## qtlcharts 0.22 (2025-06-19)
+ ## qtlcharts 0.22 (2026-06-19)
 
 ### New features
 
@@ -56,7 +56,7 @@
   `iplotMap()` (and give a warning).
 
 
-## qtlcharts 0.20 (2025-05-22)
+## qtlcharts 0.20 (2026-05-22)
 
 - Update d3panels to 1.8.7 (fix of d3panels.formatAxis, for Issue #78)
 

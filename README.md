@@ -1,11 +1,9 @@
-### R/qtlcharts: Interactive graphics for QTL experiments <a href="https://kbroman.org/qtlcharts"><img src="assets/pics/qtlcharts_logo.png" align="right" height="138" alt="R/qtlcharts logo"/></a>
+### R/qtlcharts: Interactive graphics for QTL experiments <a href="https://kbroman.org/qtlcharts/"><img src="https://kbroman.org/qtlcharts/assets/pics/qtlcharts_logo.png" align="right" height="138" alt="R/qtlcharts logo"/></a>
 
 [![R-CMD-check](https://github.com/kbroman/qtlcharts/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbroman/qtlcharts/actions/workflows/R-CMD-check.yaml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qtlcharts)](https://cran.r-project.org/package=qtlcharts)
 [![r-universe badge](https://kbroman.r-universe.dev/qtlcharts/badges/version)](https://kbroman.r-universe.dev/qtlcharts)
 [![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4049918.svg)](https://doi.org/10.5281/zenodo.4049918)
-
-[Karl W Broman](https://kbroman.org)
 
 [R/qtlcharts](https://kbroman.org/qtlcharts/) is an [R](https://www.r-project.org) package to create
 interactive charts for QTL data, for use
@@ -73,7 +71,7 @@ genotype at a QTL:
 ```r
 library(qtlcharts)
 data(geneExpr)
-iplotCorr(geneExpr$expr, geneExpr$genotype)
+iplotCorr(geneExpr$expr, geneExpr$genotype, reorder=TRUE)
 ```
 
 Finally, try `iboxplot`, a plot of the quantiles of many

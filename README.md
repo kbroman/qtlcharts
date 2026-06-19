@@ -5,8 +5,6 @@
 [![r-universe badge](https://kbroman.r-universe.dev/qtlcharts/badges/version)](https://kbroman.r-universe.dev/qtlcharts)
 [![zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4049918.svg)](https://doi.org/10.5281/zenodo.4049918)
 
-[Karl W Broman](https://kbroman.org)
-
 [R/qtlcharts](https://kbroman.org/qtlcharts/) is an [R](https://www.r-project.org) package to create
 interactive charts for QTL data, for use
 with [R/qtl](https://rqtl.org).

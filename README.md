@@ -1,4 +1,4 @@
-### R/qtlcharts: Interactive graphics for QTL experiments <a href="https://kbroman.org/qtlcharts/"><img src="https://kbroman.org/qtlcharts/assets/pics/qtlcharts_logo.png" align="right" height="138" alt="R/qtlcharts logo"/></a>
+## R/qtlcharts: Interactive graphics for QTL experiments <a href="https://kbroman.org/qtlcharts/"><img src="https://kbroman.org/qtlcharts/assets/pics/qtlcharts_logo.png" align="right" height="138" alt="R/qtlcharts logo"/></a>
 
 [![R-CMD-check](https://github.com/kbroman/qtlcharts/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbroman/qtlcharts/actions/workflows/R-CMD-check.yaml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/qtlcharts)](https://cran.r-project.org/package=qtlcharts)
@@ -14,7 +14,9 @@ panels (also available separately, as [d3panels](https://kbroman.org/d3panels/))
 
 For example charts, see the [R/qtlcharts website](https://kbroman.org/qtlcharts/).
 
-#### Installation
+---
+
+### Installation
 
 Install R/qtlcharts from CRAN using
 
@@ -49,7 +51,9 @@ install_github("kbroman/qtlcharts")
 The packages [R/qtl](https://rqtl.org) and
 [htmlwidgets](https://www.htmlwidgets.org) will also be installed.
 
-#### Example use
+---
+
+### Example use
 
 Try the following example, which creates an interactive chart with LOD
 curves linked to estimated QTL effects.
@@ -89,7 +93,9 @@ dimnames(expr) <- list(paste0("ind", 1:n.ind),
 iboxplot(expr)
 ```
 
-#### Citation
+---
+
+### Citation
 
 To cite R/qtlcharts in publications, please use
 
@@ -98,7 +104,9 @@ To cite R/qtlcharts in publications, please use
 > [`doi:10.1534/genetics/114.172742`](https://doi.org/10.1534/genetics.114.172742)
 
 
-#### Licenses
+---
+
+### Licenses
 
 The R/qtlcharts package as a whole is distributed under
 GPL-3 (GNU General Public License version 3).
